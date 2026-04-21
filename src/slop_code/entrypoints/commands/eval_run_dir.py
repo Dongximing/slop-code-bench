@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated, Any
+from typing import Annotated
 
 import typer
 import yaml
@@ -56,105 +56,19 @@ def _is_evaluation_schema_current(checkpoint_dir: Path) -> bool:
         with eval_path.open() as f:
             data = json.load(f)
 
-        # Check schema version
         schema_version = data.get("schema_version")
         if schema_version is None or schema_version < EVALUATION_SCHEMA_VERSION:
             return False
 
-        # Check required fields exist
         if not all(field in data for field in REQUIRED_EVAL_FIELDS):
             return False
 
-        # Check evaluation/ directory has required files
         if not eval_dir.exists() or not eval_dir.is_dir():
             return False
 
         return all((eval_dir / f).exists() for f in REQUIRED_EVAL_DIR_FILES)
     except (OSError, json.JSONDecodeError):
         return False
-
-
-def _can_upgrade_evaluation_schema(checkpoint_dir: Path) -> bool:
-    """Check if evaluation.json can be upgraded by just adding schema_version.
-
-    Returns True if evaluation.json exists with all required fields but lacks
-    schema_version (or has an older version), and the evaluation/ directory
-    has all required files.
-    """
-    eval_path = checkpoint_dir / "evaluation.json"
-    eval_dir = checkpoint_dir / "evaluation"
-
-    if not eval_path.exists():
-        return False
-
-    try:
-        with eval_path.open() as f:
-            data = json.load(f)
-
-        # Check required fields exist (excluding schema_version)
-        if not all(field in data for field in REQUIRED_EVAL_FIELDS):
-            return False
-
-        # Check evaluation/ directory has required files
-        if not eval_dir.exists() or not eval_dir.is_dir():
-            return False
-
-        if not all((eval_dir / f).exists() for f in REQUIRED_EVAL_DIR_FILES):
-            return False
-
-        # Upgradeable if schema_version is missing or outdated
-        schema_version = data.get("schema_version")
-        return (
-            schema_version is None or schema_version < EVALUATION_SCHEMA_VERSION
-        )
-    except (OSError, json.JSONDecodeError):
-        return False
-
-
-def _upgrade_evaluation_schema(checkpoint_dir: Path) -> bool:
-    """Add or update schema_version in evaluation.json.
-
-    Returns True if successful, False otherwise.
-    """
-    eval_path = checkpoint_dir / "evaluation.json"
-
-    try:
-        with eval_path.open() as f:
-            data = json.load(f)
-
-        data["schema_version"] = EVALUATION_SCHEMA_VERSION
-
-        with eval_path.open("w") as f:
-            json.dump(data, f, indent=2)
-
-        return True
-    except (OSError, json.JSONDecodeError):
-        return False
-
-
-def _try_upgrade_problem_evaluations(problem_dir: Path) -> bool:
-    """Try to upgrade all checkpoint evaluations in a problem directory.
-
-    Returns True if all checkpoints were successfully upgraded, False otherwise.
-    """
-    checkpoint_dirs = [
-        d
-        for d in problem_dir.iterdir()
-        if d.is_dir() and d.name.startswith("checkpoint_")
-    ]
-    if not checkpoint_dirs:
-        return False
-
-    all_upgraded = True
-    for checkpoint_dir in checkpoint_dirs:
-        if _can_upgrade_evaluation_schema(checkpoint_dir):
-            if not _upgrade_evaluation_schema(checkpoint_dir):
-                all_upgraded = False
-        elif not _is_evaluation_schema_current(checkpoint_dir):
-            # Not upgradeable and not current - can't upgrade this problem
-            all_upgraded = False
-
-    return all_upgraded
 
 
 def _is_problem_fully_evaluated(problem_dir: Path) -> bool:
@@ -172,40 +86,10 @@ def _is_problem_fully_evaluated(problem_dir: Path) -> bool:
     )
 
 
-def _has_outdated_evaluation_schema(problem_dir: Path) -> bool:
-    """Check if problem has evaluation.json files that are outdated.
-
-    Returns True if at least one checkpoint has evaluation.json but with
-    outdated schema (missing version or older version number).
-    """
-    checkpoint_dirs = [
-        d
-        for d in problem_dir.iterdir()
-        if d.is_dir() and d.name.startswith("checkpoint_")
-    ]
-    if not checkpoint_dirs:
-        return False
-
-    for checkpoint_dir in checkpoint_dirs:
-        eval_path = checkpoint_dir / "evaluation.json"
-        if not eval_path.exists():
-            continue
-
-        # Has evaluation.json but check if schema is current
-        if not _is_evaluation_schema_current(checkpoint_dir):
-            return True
-
-    return False
-
-
 def _write_problem_and_checkpoint_configs(
     problem_dir: Path, source_config: ProblemConfig
 ) -> None:
-    """Write evaluation configs into the run directory.
-
-    This makes re-evaluation/resume self-contained and ensures future config
-    comparisons and report generation reflect the most recent source configs.
-    """
+    """Write evaluation configs into the run directory."""
     try:
         problem_payload = serialize_path_dict(
             source_config.model_dump(mode="json")
@@ -234,53 +118,6 @@ def _write_problem_and_checkpoint_configs(
                 problem_dir=str(problem_dir),
                 checkpoint_name=checkpoint_name,
             )
-
-
-def _extract_eval_relevant_fields(config: dict[str, Any]) -> dict[str, Any]:
-    """Extract fields from a problem config that affect evaluation."""
-    checkpoints_summary = {}
-    for name, chkpt in config.get("checkpoints", {}).items():
-        if isinstance(chkpt, dict):
-            checkpoints_summary[name] = {
-                "version": chkpt.get("version"),
-                "groups": sorted(chkpt.get("groups", {}).keys()),
-            }
-    return {
-        "version": config.get("version"),
-        "adapter": config.get("adapter"),
-        "static_assets": config.get("static_assets"),
-        "checkpoints": checkpoints_summary,
-    }
-
-
-def _has_evaluation_config_changed(
-    problem_dir: Path,
-    source_config: ProblemConfig,
-) -> bool:
-    """Check if evaluation-relevant config fields have changed.
-
-    Compares the saved problem.yaml in the agent run directory against
-    the current source problem config. Returns True if fields that affect
-    evaluation (adapter, static_assets, version, checkpoint groups) differ.
-    """
-    saved_config_path = problem_dir / PROBLEM_CONFIG_NAME
-    if not saved_config_path.exists():
-        # No saved config means we can't compare - treat as changed
-        return True
-
-    try:
-        with saved_config_path.open("r") as f:
-            saved_config = yaml.safe_load(f)
-    except (OSError, yaml.YAMLError):
-        # If we can't load the saved config, treat as changed
-        return True
-
-    saved_fields = _extract_eval_relevant_fields(saved_config)
-    source_fields = _extract_eval_relevant_fields(
-        source_config.model_dump(mode="json")
-    )
-
-    return saved_fields != source_fields
 
 
 def register(app: typer.Typer, name: str) -> None:
@@ -320,8 +157,8 @@ def evaluate_agent_run(
         "--env-config",
         help="Path to environment specification configuration",
     ),
-    live_progress: bool = typer.Option(
-        False,
+    live_progress: bool = typer.Option(  # noqa: FBT001
+        False,  # noqa: FBT003
         "--live-progress/--no-live-progress",
         help="Enable live progress display",
     ),
@@ -331,8 +168,8 @@ def evaluate_agent_run(
         "-proc",
         help="Number of parallel evaluation workers (1 for sequential)",
     ),
-    overwrite: bool = typer.Option(
-        False,
+    overwrite: bool = typer.Option(  # noqa: FBT001
+        False,  # noqa: FBT003
         "--overwrite",
         help="Re-evaluate problems even if they already have evaluation results",
     ),
@@ -377,77 +214,50 @@ def evaluate_agent_run(
         problem_names=problem_names,
         env_config=str(env_path),
         pass_policy=pass_policy.value,
+        overwrite=overwrite,
     )
 
     common.ensure_docker_ready(environment)
 
     valid_problems = get_available_problems(ctx.obj.problem_path)
     problems_to_eval = []
-    # Auto-skip evaluated problems unless overwrite requested
-    auto_skip_evaluated = not overwrite
     skipped_count = 0
-    for problem_name in problem_names or valid_problems.keys():
+    selected_problem_names = problem_names or list(valid_problems.keys())
+
+    for problem_name in selected_problem_names:
         if problem_name not in valid_problems:
             logger.warning(
                 "Problem not found in available problems",
                 problem_name=problem_name,
             )
             continue
+
         problem_dir = agent_run_dir / problem_name
-        if not problem_dir.exists():
+        if not problem_dir.exists() or not problem_dir.is_dir():
             logger.debug(
                 "Problem directory does not exist",
                 problem_dir=str(problem_dir),
             )
             continue
-        if auto_skip_evaluated:
-            # Check if fully evaluated with current schema
-            if _is_problem_fully_evaluated(problem_dir):
-                source_config = valid_problems[problem_name]
-                if _has_evaluation_config_changed(problem_dir, source_config):
-                    logger.info(
-                        "Re-evaluating due to config change",
-                        problem_name=problem_name,
-                    )
-                else:
-                    logger.info(
-                        "Skipping already-evaluated problem",
-                        problem_name=problem_name,
-                    )
-                    skipped_count += 1
-                    continue
-            # Try to upgrade schema if evaluation exists but is outdated
-            elif _has_outdated_evaluation_schema(problem_dir):
-                if _try_upgrade_problem_evaluations(problem_dir):
-                    # Successfully upgraded - now check if we can skip
-                    source_config = valid_problems[problem_name]
-                    if _has_evaluation_config_changed(
-                        problem_dir, source_config
-                    ):
-                        logger.info(
-                            "Re-evaluating due to config change",
-                            problem_name=problem_name,
-                        )
-                    else:
-                        logger.info(
-                            "Upgraded evaluation schema and skipping",
-                            problem_name=problem_name,
-                        )
-                        skipped_count += 1
-                        continue
-                else:
-                    logger.info(
-                        "Re-evaluating due to incompatible evaluation schema",
-                        problem_name=problem_name,
-                    )
+
+        if not overwrite and _is_problem_fully_evaluated(problem_dir):
+            skipped_count += 1
+            logger.info(
+                "Skipping problem evaluation",
+                problem_name=problem_name,
+                reason="already evaluated",
+            )
+            continue
+
+        source_problem = valid_problems[problem_name]
+        _write_problem_and_checkpoint_configs(problem_dir, source_problem)
+        problems_to_eval.append((source_problem, problem_dir))
         logger.info(
             "Adding problem to evaluation",
             problem_name=problem_name,
             problem_dir=str(problem_dir),
+            reason="overwrite requested" if overwrite else "needs evaluation",
         )
-        source_problem = valid_problems[problem_name]
-        _write_problem_and_checkpoint_configs(problem_dir, source_problem)
-        problems_to_eval.append((source_problem, problem_dir))
 
     if not problems_to_eval:
         if skipped_count > 0:
@@ -458,6 +268,7 @@ def evaluate_agent_run(
         else:
             logger.error("No problems to evaluate")
         raise typer.Exit(1)
+
     if skipped_count > 0:
         logger.info(
             f"Evaluating {len(problems_to_eval):,} problems "
@@ -499,7 +310,13 @@ def evaluate_agent_run(
             )
             report_errors.append((problem_name, "Problem config not found"))
             continue
-        except Exception as e:
+        except (
+            OSError,
+            TypeError,
+            ValueError,
+            KeyError,
+            yaml.YAMLError,
+        ) as e:
             logger.error(
                 "Error loading problem configuration",
                 problem_name=problem_name,
@@ -521,7 +338,6 @@ def evaluate_agent_run(
 
     typer.echo(f"Reports written to {report_file}")
 
-    # Display evaluation summary at end
     if eval_summary.failed > 0:
         typer.echo(
             typer.style(
@@ -552,5 +368,5 @@ def evaluate_agent_run(
         )
     with (agent_run_dir / CONFIG_FILENAME).open("r") as f:
         config = yaml.safe_load(f)
-    # Display and save summary statistics
+
     display_and_save_summary(report_file, agent_run_dir, config, console)

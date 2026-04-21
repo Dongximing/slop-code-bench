@@ -1,5 +1,7 @@
 """Evaluation orchestration package for running benchmark checkpoints."""
 
+from slop_code.evaluation.collection import collect_checkpoint_tc
+from slop_code.evaluation.collection import compute_tc_hash
 from slop_code.evaluation.config import CheckpointConfig
 from slop_code.evaluation.config import ConfigError
 from slop_code.evaluation.config import GroupConfig
@@ -18,6 +20,8 @@ run_checkpoint = run_checkpoint_pytest
 
 __all__ = [
     "CheckpointConfig",
+    "collect_checkpoint_tc",
+    "compute_tc_hash",
     "ConfigError",
     "CorrectnessResults",
     "EVALUATION_SCHEMA_VERSION",

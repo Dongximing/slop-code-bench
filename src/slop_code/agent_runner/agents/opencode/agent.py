@@ -1,4 +1,4 @@
-"""MiniSWE agent implementation."""
+"""OpenCode agent implementation."""
 
 from __future__ import annotations
 
@@ -29,6 +29,12 @@ from slop_code.execution import Session
 from slop_code.execution import StreamingRuntime
 
 STEP_FINISH_TYPE = "step_finish"
+THINKING_TO_VARIANT: dict[ThinkingPreset, str] = {
+    "low": "low",
+    "medium": "medium",
+    "high": "high",
+    "xhigh": "max",
+}
 
 
 class OpenCodeAgentConfig(AgentConfigBase):
@@ -46,10 +52,10 @@ class OpenCodeAgentConfig(AgentConfigBase):
 
 
 class OpenCodeAgent(Agent):
-    def __init__(
+    def __init__(  # noqa: FBT001
         self,
         problem_name: str,
-        verbose: bool,
+        verbose: bool,  # noqa: FBT001
         # From base config
         cost_limits: AgentCostLimits,
         pricing: APIPricing | None,
@@ -74,7 +80,7 @@ class OpenCodeAgent(Agent):
         self.env = env
         self.image = image
 
-        self.messages = []
+        self.messages: list[dict[str, Any]] = []
         self.continue_on_run = True
         self._runtime: StreamingRuntime | None = None
         self._tmp_dir: tempfile.TemporaryDirectory | None = None
@@ -85,13 +91,13 @@ class OpenCodeAgent(Agent):
         self.thinking: ThinkingPreset | None = thinking
 
     @classmethod
-    def _from_config(
+    def _from_config(  # noqa: FBT001
         cls,
         config: AgentConfigBase,
         model: ModelDefinition,
         credential: ProviderCredential,
         problem_name: str,
-        verbose: bool,
+        verbose: bool,  # noqa: FBT001
         image: str | None,
         thinking_preset: ThinkingPreset | None = None,
         thinking_max_tokens: int | None = None,
@@ -109,16 +115,21 @@ class OpenCodeAgent(Agent):
         # Use credential.provider (from CLI) to allow provider override
         endpoint = model.get_agent_endpoint("opencode", credential.provider)
 
-        # Get provider name from agent_specific (required)
-        provider = agent_settings.get("provider_name")
-        if provider is None:
-            raise AgentError(
-                "OpenCode requires 'provider_name' in model's "
-                "agent_specific.opencode settings"
-            )
+        provider_overrides = agent_settings.get("provider_name_overrides", {})
+        provider_override = None
+        if isinstance(provider_overrides, dict):
+            provider_override = provider_overrides.get(credential.provider)
+
+        # Provider resolution order:
+        # credential-specific override -> configured default -> model default.
+        provider = (
+            provider_override
+            or agent_settings.get("provider_name")
+            or model.provider
+        )
 
         # Get model slug for API calls
-        model_slug = model.get_model_slug(credential.provider)
+        model_slug = model.get_model_slug(provider)
 
         # Merge config (agent_specific base, YAML config overrides)
         opencode_config = dict(config.config)
@@ -134,9 +145,14 @@ class OpenCodeAgent(Agent):
                 opencode_config["provider"] = {}
             if provider not in opencode_config["provider"]:
                 opencode_config["provider"][provider] = {}
-            # Set base_url from endpoint if not already set
-            if "base_url" not in opencode_config["provider"][provider]:
-                opencode_config["provider"][provider]["base_url"] = (
+            if "options" not in opencode_config["provider"][provider]:
+                opencode_config["provider"][provider]["options"] = {}
+            # Set baseURL from endpoint if not already set
+            if (
+                "baseURL"
+                not in opencode_config["provider"][provider]["options"]
+            ):
+                opencode_config["provider"][provider]["options"]["baseURL"] = (
                     endpoint.api_base
                 )
 
@@ -184,17 +200,25 @@ class OpenCodeAgent(Agent):
         return Path(self._tmp_dir.name)
 
     def _build_opencode_command(self, task: str) -> str:
-        out = [
-            "opencode",
-            "run",
-            shlex.quote(task),
-            "--log-level DEBUG",
-            "--print-logs",
-            "--format json",
-            "--model",
-            shlex.quote(f"{self.provider}/{self.model_id}"),
-        ]
-        return " ".join(out)
+        quoted_task = shlex.quote(task)
+        quoted_model = shlex.quote(f"{self.provider}/{self.model_id}")
+        variant_flag = self._get_variant_flag()
+        maybe_variant = f" {variant_flag}" if variant_flag else ""
+        return (
+            f"opencode --model={quoted_model} run --format=json "
+            f"--thinking --dangerously-skip-permissions{maybe_variant} -- "
+            f"{quoted_task}"
+        )
+
+    def _get_variant_flag(self) -> str | None:
+        if self.thinking in (None, "none", "disabled"):
+            return None
+        variant = THINKING_TO_VARIANT.get(self.thinking)
+        if self.thinking == "xhigh" and self.provider == "openai":
+            variant = "xhigh"
+        if variant is None:
+            return None
+        return f"--variant={shlex.quote(variant)}"
 
     def _make_opencode_config(self) -> Path:
         opencode_config_path = self.tmp_dir / "opencode.json"
@@ -209,17 +233,48 @@ class OpenCodeAgent(Agent):
                 "$schema": "https://opencode.ai/config.json",
             }
 
-        if self.thinking:
-            self.open_code_config["agent"] = {
-                "build": {
-                    "reasonEffort": self.thinking,
-                }
-            }
+        if self._should_inject_thinking_config():
+            self._inject_thinking_config()
 
         with opencode_config_path.open("w") as f:
-            # TODO: Figure out a better way to do this. This IS BAD. But I am tired.
+            # Write config JSON that gets mounted into the runtime container.
             f.write(json.dumps(self.open_code_config))
         return opencode_config_path
+
+    def _should_inject_thinking_config(self) -> bool:
+        if self.thinking in (None, "none", "disabled"):
+            return False
+        return self.provider != "openai"
+
+    def _inject_thinking_config(self) -> None:
+        """Inject thinking/reasoning config as a compatibility fallback.
+
+        OpenAI flows should prefer ``--variant`` and let opencode handle
+        provider/model behavior. Non-OpenAI providers keep injection support.
+        """
+        if self.provider == "openrouter":
+            defaults: dict[str, Any] = {
+                "provider": {
+                    "openrouter": {
+                        "models": {
+                            self.model_id: {
+                                "options": {
+                                    "reasoningEffort": self.thinking,
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        else:
+            defaults = {
+                "agent": {
+                    "build": {
+                        "reasonEffort": self.thinking,
+                    }
+                }
+            }
+        self.open_code_config = _deep_merge(defaults, self.open_code_config)
 
     def _get_volumes(self) -> dict[str, dict[str, str]]:
         volumes = {}
@@ -254,19 +309,22 @@ class OpenCodeAgent(Agent):
         self._session = session
 
         # Build env vars: base defaults, then env overrides, then credential
-        env_vars = {"HOME": HOME_PATH}
+        env_vars = {
+            "HOME": HOME_PATH,
+            "OPENCODE_FAKE_VCS": "git",
+        }
 
         # Apply env overrides from config (YAML/catalog merged)
         env_vars.update(self.env)
 
         # Credential env var takes highest priority
-        if self.credential is not None:
-            if self.credential.credential_type == CredentialType.ENV_VAR:
-                # Use destination_key for the env var name
-                env_vars[self.credential.destination_key] = (
-                    self.credential.value
-                )
-            # File credentials are handled in _get_volumes()
+        if (
+            self.credential is not None
+            and self.credential.credential_type == CredentialType.ENV_VAR
+        ):
+            # Use destination_key for the env var name
+            env_vars[self.credential.destination_key] = self.credential.value
+        # File credentials are handled in _get_volumes()
 
         self._runtime = session.spawn(
             mounts=self._get_volumes(),
@@ -288,12 +346,11 @@ class OpenCodeAgent(Agent):
         self.continue_on_run = True
         buffer = ""
         result = None
-        limit_triggered = False
+        saw_step_finish = False
 
         for event in self.runtime.stream(
             command=command,
             env={},
-            stdin=None,
             timeout=None,
         ):
             if event.kind != "stdout":
@@ -332,30 +389,8 @@ class OpenCodeAgent(Agent):
                     )
                     continue
 
-                self.messages.append(message)
-                if not self.is_agent_message(message):
-                    continue
-                self.handle_step(message)
-
-                self.log.debug(
-                    "OpenCode agent parsed",
-                    message_type=message.get("type"),
-                    message_content=str(message)[:32],
-                    tokens=self.usage.current_tokens.total,
-                    cache_read=self.usage.current_tokens.cache_read,
-                    cache_write=self.usage.current_tokens.cache_write,
-                    generated=self.usage.net_tokens.output,
-                    reasoning=self.usage.net_tokens.reasoning,
-                    cost=self.usage.cost,
-                    steps=self.usage.steps,
-                )
-
-                if self.should_stop(message) or self._enforce_limits():
-                    self.log.debug(
-                        "OpenCode step finished with stop reason",
-                        message=message,
-                    )
-                    self.continue_on_run = False
+                saw_step = self._handle_message(message)
+                saw_step_finish = saw_step_finish or saw_step
         if buffer.strip():
             try:
                 message = json.loads(buffer.strip())
@@ -365,14 +400,10 @@ class OpenCodeAgent(Agent):
                     buffer=buffer,
                 )
             else:
-                self.messages.append(message)
-                if self.handle_step(message):
-                    limit_triggered = True
+                saw_step = self._handle_message(message)
+                saw_step_finish = saw_step_finish or saw_step
 
         if result is None:
-            if limit_triggered:
-                self.continue_on_run = False
-                return
             self.log.error(
                 "OpenCode runtime did not provide a finished event",
                 stderr=self._stderr,
@@ -380,14 +411,69 @@ class OpenCodeAgent(Agent):
             raise AgentError(
                 "OpenCode runtime did not provide a finished event"
             )
-        if not self.messages:
+        if not saw_step_finish:
             self.log.error(
-                "OpenCode runtime did not provide any messages",
+                "OpenCode runtime did not provide step_finish messages",
                 stderr=self._stderr,
             )
-            raise AgentError("OpenCode runtime did not provide any messages")
+            raise AgentError(
+                "OpenCode runtime did not provide any step_finish messages"
+            )
 
         self.continue_on_run = False
+
+    def _handle_message(
+        self,
+        message: dict[str, Any],
+    ) -> bool:
+        self.messages.append(message)
+        self._raise_on_opencode_error(message)
+        if not self.is_agent_message(message):
+            return False
+
+        self.handle_step(message)
+        self.log.debug(
+            "OpenCode agent parsed",
+            message_type=message.get("type"),
+            message_content=str(message)[:32],
+            tokens=self.usage.current_tokens.total,
+            cache_read=self.usage.current_tokens.cache_read,
+            cache_write=self.usage.current_tokens.cache_write,
+            generated=self.usage.net_tokens.output,
+            reasoning=self.usage.net_tokens.reasoning,
+            cost=self.usage.cost,
+            steps=self.usage.steps,
+        )
+
+        if self.should_stop(message) or self._enforce_limits():
+            self.log.debug(
+                "OpenCode step finished with stop reason",
+                message=message,
+            )
+            self.continue_on_run = False
+        return True
+
+    def _raise_on_opencode_error(self, message: dict[str, Any]) -> None:
+        if message.get("type") != "error":
+            return
+
+        error_payload = message.get("error")
+        error_message: str | None = None
+        if isinstance(error_payload, dict):
+            message_value = error_payload.get("message")
+            if isinstance(message_value, str):
+                error_message = message_value
+        elif isinstance(error_payload, str):
+            error_message = error_payload
+
+        if error_message is None:
+            error_message = "unknown OpenCode error"
+
+        self.log.error(
+            "OpenCode runtime reported an error",
+            error_message=error_message,
+        )
+        raise AgentError(f"OpenCode error: {error_message}")
 
     def save_artifacts(self, path: Path) -> None:
         with (path / "messages.jsonl").open("w") as f:
@@ -414,14 +500,33 @@ class OpenCodeAgent(Agent):
             cache_write=tokens["cache"].get("write", 0),
             reasoning=tokens["reasoning"],
         )
-        step_cost = msg_part["cost"]
-        if self.pricing is not None:
-            step_cost = self.pricing.get_cost(token_usage)
-
+        step_cost = self._resolve_step_cost(
+            reported_cost=msg_part.get("cost"),
+            token_usage=token_usage,
+        )
         self.usage.step(
             cost=step_cost,
             tokens=token_usage,
         )
+
+    def _resolve_step_cost(
+        self,
+        reported_cost: Any,
+        token_usage: TokenUsage,
+    ) -> float:
+        step_cost: float | None = None
+        if isinstance(reported_cost, int | float):
+            step_cost = float(reported_cost)
+        elif isinstance(reported_cost, str):
+            with contextlib.suppress(ValueError):
+                step_cost = float(reported_cost)
+
+        # Trust a positive reported cost; otherwise fall back to catalog pricing.
+        if step_cost is not None and step_cost > 0:
+            return step_cost
+        if self.pricing is not None:
+            return self.pricing.get_cost(token_usage)
+        return 0.0
 
     def reset(self) -> None:
         self.continue_on_run = False

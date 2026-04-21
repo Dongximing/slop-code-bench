@@ -17,6 +17,11 @@ from rich.console import Console
 
 from slop_code import evaluation
 from slop_code.agent_runner import AgentStateEnum
+from slop_code.agent_runner import runner
+from slop_code.agent_runner.models import UsageTracker
+from slop_code.agent_runner.reporting import MetricsTracker
+from slop_code.agent_runner.resume import _aggregate_prior_usage
+from slop_code.common.llms import TokenUsage
 from slop_code.entrypoints.live_progress import LiveProgressDisplay
 from slop_code.entrypoints.live_progress import maybe_live_progress
 from slop_code.entrypoints.problem_runner.models import RunTaskConfig
@@ -182,6 +187,8 @@ def _run_problems(
                     datetime.now() - metrics_tracker.started
                 ).total_seconds(),
                 cost=float(f"{net_cost:.5f}"),
+                steps=agent_usage.steps,
+                total_steps=metrics_tracker.usage.steps + agent_usage.steps,
             )
 
             if problem_states[problem_name].state == AgentStateEnum.ERROR:
@@ -205,11 +212,48 @@ def _run_problems(
         return [future.result() for future in futures]
 
 
+def _prepopulate_completed_states(
+    problem_states: ProblemStateTracker,
+    completed_problems: Sequence[str],
+    config: RunTaskConfig,
+    checkpoint_map: dict[str, Sequence[str]],
+) -> None:
+    """Seed ProblemState for fully-completed (skipped) problems from disk.
+
+    Reads prior usage and evaluation results from checkpoint artifacts so the
+    live-progress header reflects the whole run from frame 0, without paying
+    the cost of spawning a worker subprocess just to no-op.
+    """
+    for name in completed_problems:
+        output_path = config.run_dir / name
+        checkpoints = list(checkpoint_map.get(name, []))
+        now = datetime.now()
+        metrics = MetricsTracker(
+            state=AgentStateEnum.COMPLETED,
+            current_checkpoint=checkpoints[-1] if checkpoints else "",
+            usage=_aggregate_prior_usage(output_path, checkpoints),
+            started=now,
+            checkpoint_started=now,
+        )
+        for cp in checkpoints:
+            metrics.record_checkpoint_result(
+                cp, runner._load_eval_result(output_path / cp)
+            )
+        dummy_usage = UsageTracker(
+            cost=0.0,
+            steps=0,
+            current_tokens=TokenUsage(),
+            net_tokens=TokenUsage(),
+        )
+        problem_states.handle_update(name, dummy_usage, metrics)
+
+
 def run_problems(
     problem_names: Sequence[str],
     config: RunTaskConfig,
     num_workers: int = 1,
     console: Console = Console(),
+    completed_problems: Sequence[str] = (),
 ) -> list[TaskResult]:
     """Run problems either sequentially or in parallel.
 
@@ -221,6 +265,9 @@ def run_problems(
         config: Shared execution configuration for all problems
         num_workers: Number of parallel workers (1 for sequential)
         console: Rich console for output
+        completed_problems: Fully-completed problems from a prior run. Their
+            state is pre-populated from disk so header totals reflect the
+            whole run; no worker subprocess is spawned for them.
 
     Returns:
         List of TaskResult objects
@@ -228,8 +275,10 @@ def run_problems(
     manager = mp.Manager()
     progress_queue = manager.Queue()
 
+    all_problems = list(problem_names) + list(completed_problems)
+
     checkpoint_map: dict[str, Sequence[str]] = {}
-    for problem_name in problem_names:
+    for problem_name in all_problems:
         problem_path = config.problem_base_path / problem_name
         try:
             problem_config = evaluation.ProblemConfig.from_yaml(problem_path)
@@ -253,13 +302,17 @@ def run_problems(
     total_checkpoints = sum(len(cps) for cps in checkpoint_map.values())
 
     start_time = datetime.now()
-    states = ProblemStateTracker(problem_names, checkpoint_map)
+    states = ProblemStateTracker(all_problems, checkpoint_map)
     renderer = ProblemProgressRenderer(
         states,
         config.run_dir,
         start_time,
-        len(problem_names),
+        len(all_problems),
         total_checkpoints,
+    )
+
+    _prepopulate_completed_states(
+        states, completed_problems, config, checkpoint_map
     )
 
     with maybe_live_progress(

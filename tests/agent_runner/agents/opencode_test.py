@@ -5,13 +5,20 @@ from __future__ import annotations
 import json
 from collections.abc import Iterable
 from dataclasses import dataclass
+from pathlib import Path
 
 import pytest
 
 from slop_code.agent_runner.agents.opencode import OpenCodeAgent
+from slop_code.agent_runner.agents.opencode import OpenCodeAgentConfig
+from slop_code.agent_runner.agents.utils import HOME_PATH
+from slop_code.agent_runner.credentials import CredentialType
+from slop_code.agent_runner.credentials import ProviderCredential
 from slop_code.agent_runner.models import AgentCostLimits
 from slop_code.agent_runner.models import AgentError
 from slop_code.common.llms import APIPricing
+from slop_code.common.llms import ModelCatalog
+from slop_code.common.llms import ModelDefinition
 from slop_code.common.llms import TokenUsage
 from slop_code.execution.runtime import RuntimeEvent
 from slop_code.execution.runtime import RuntimeResult
@@ -30,10 +37,9 @@ class FakeRuntime:
         self,
         command: str,
         env: dict,
-        stdin: str | list[str] | None,
         timeout: float | None,
     ) -> Iterable[RuntimeEvent]:
-        self.last_stream_args = ((command, env, stdin, timeout), {})
+        self.last_stream_args = ((command, env, timeout), {})
         yield from self.events
 
     def cleanup(self) -> None:
@@ -49,8 +55,12 @@ class FakeSession:
     working_dir: str
 
     spec: object | None = None
+    spawn_kwargs: dict[str, object] | None = None
 
-    def spawn(self, **_: object) -> FakeRuntime:  # pragma: no cover - trivial
+    def spawn(
+        self, **kwargs: object
+    ) -> FakeRuntime:  # pragma: no cover - trivial
+        self.spawn_kwargs = kwargs
         return self.runtime
 
 
@@ -129,6 +139,161 @@ def _runtime_events_from_stdout_chunks(
     return events
 
 
+class TestOpenCodeConfigGeneration:
+    """Tests for _make_opencode_config behavior."""
+
+    def _make_bare_agent(self, tmp_path, **overrides):
+        defaults = dict(
+            problem_name="test",
+            verbose=False,
+            cost_limits=AgentCostLimits(
+                step_limit=0, cost_limit=100.0, net_cost_limit=200.0
+            ),
+            pricing=None,
+            credential=None,
+            model_id="some-org/some-model",
+            provider="openrouter",
+            opencode_config={},
+            env={},
+            thinking=None,
+        )
+        defaults.update(overrides)
+        agent = OpenCodeAgent(**defaults)
+        # Set up tmp_dir manually so _make_opencode_config works
+        import tempfile
+
+        agent._tmp_dir = tempfile.TemporaryDirectory(dir=str(tmp_path))
+        return agent
+
+    def test_empty_config_gets_schema_default(self, tmp_path):
+        agent = self._make_bare_agent(
+            tmp_path,
+            provider="openai",
+        )
+        config_path = agent._make_opencode_config()
+
+        cfg = json.loads(config_path.read_text())
+        assert cfg["$schema"] == "https://opencode.ai/config.json"
+
+    def test_existing_config_is_preserved(self, tmp_path):
+        agent = self._make_bare_agent(
+            tmp_path,
+            provider="openai",
+            opencode_config={
+                "agent": {"maxSteps": 123},
+                "provider": {"openai": {"options": {"baseURL": "https://x"}}},
+            },
+        )
+        config_path = agent._make_opencode_config()
+
+        cfg = json.loads(config_path.read_text())
+        assert cfg["agent"]["maxSteps"] == 123
+        assert cfg["provider"]["openai"]["options"]["baseURL"] == "https://x"
+
+    def test_thinking_does_not_mutate_config_file(self, tmp_path):
+        agent = self._make_bare_agent(
+            tmp_path,
+            provider="openai",
+            thinking="high",
+            opencode_config={
+                "agent": {"maxSteps": 111},
+            },
+        )
+        config_path = agent._make_opencode_config()
+
+        cfg = json.loads(config_path.read_text())
+        assert cfg["agent"]["maxSteps"] == 111
+        assert "build" not in cfg["agent"]
+
+    def test_non_openai_thinking_injects_agent_build_config(self, tmp_path):
+        agent = self._make_bare_agent(
+            tmp_path,
+            provider="anthropic",
+            thinking="high",
+            opencode_config={},
+        )
+        config_path = agent._make_opencode_config()
+
+        cfg = json.loads(config_path.read_text())
+        assert cfg["agent"]["build"]["reasonEffort"] == "high"
+
+    def test_moonshot_thinking_injects_agent_build_config(self, tmp_path):
+        agent = self._make_bare_agent(
+            tmp_path,
+            provider="moonshot",
+            thinking="medium",
+            opencode_config={},
+        )
+        config_path = agent._make_opencode_config()
+
+        cfg = json.loads(config_path.read_text())
+        assert cfg["agent"]["build"]["reasonEffort"] == "medium"
+
+
+@pytest.mark.parametrize("model_name", ["gpt-5.2-codex", "gpt-5.4-mini"])
+def test_from_config_with_opencode_auth_file_mounts_auth_without_base_url(
+    tmp_path,
+    model_name: str,
+):
+    auth_source = tmp_path / "auth.json"
+    auth_source.write_text(
+        json.dumps({"openai": {"type": "oauth", "access": "test-token"}})
+    )
+    credential = ProviderCredential(
+        provider="opencode_auth",
+        credential_type=CredentialType.FILE,
+        value=auth_source.read_text(),
+        source=str(auth_source),
+        destination_key="",
+    )
+    model = ModelCatalog.get(model_name)
+    assert model is not None
+
+    agent = OpenCodeAgent._from_config(
+        config=OpenCodeAgentConfig(
+            type="opencode",
+            version="1.0.134",
+            cost_limits=AgentCostLimits(
+                step_limit=0,
+                cost_limit=100.0,
+                net_cost_limit=200.0,
+            ),
+        ),
+        model=model,
+        credential=credential,
+        problem_name="sample-problem",
+        verbose=False,
+        image="test-image",
+    )
+    assert agent.provider == "openai"
+
+    runtime = FakeRuntime()
+    session = FakeSession(runtime=runtime, working_dir=str(tmp_path))
+    agent.setup(session)
+    assert session.spawn_kwargs is not None
+    mounts = session.spawn_kwargs["mounts"]
+    assert isinstance(mounts, dict)
+
+    assert any(
+        isinstance(mount, dict)
+        and mount.get("bind") == f"{HOME_PATH}/.local/share/opencode/auth.json"
+        for mount in mounts.values()
+    )
+    opencode_config_source = next(
+        source
+        for source, mount in mounts.items()
+        if isinstance(mount, dict)
+        and mount.get("bind") == f"{HOME_PATH}/.config/opencode/opencode.json"
+    )
+    opencode_config = json.loads(Path(opencode_config_source).read_text())
+    openai_options = (
+        opencode_config.get("provider", {}).get("openai", {}).get("options", {})
+    )
+    assert "baseURL" not in openai_options
+
+    agent.cleanup()
+
+
 def test_run_collects_messages_and_updates_usage(make_agent):
     agent, runtime = make_agent()
 
@@ -172,10 +337,7 @@ def test_run_collects_messages_and_updates_usage(make_agent):
     assert messages[2] == final_step
 
     assert agent.usage.steps == 2
-    expected_cost = sum(
-        agent.pricing.get_cost(_token_usage_from_part(step["part"]))
-        for step in (first_step, final_step)
-    )
+    expected_cost = first_step["part"]["cost"] + final_step["part"]["cost"]
     assert agent.usage.cost == pytest.approx(expected_cost)
     assert (
         agent.usage.current_tokens.input
@@ -191,6 +353,315 @@ def test_run_collects_messages_and_updates_usage(make_agent):
         == final_step["part"]["tokens"]["cache"]["read"]
     )
     assert agent.continue_on_run is False
+
+
+def test_run_falls_back_to_pricing_when_reported_cost_is_zero(make_agent):
+    agent, runtime = make_agent()
+
+    step = {
+        "type": "step_finish",
+        "part": {
+            "reason": "stop",
+            "cost": 0,
+            "tokens": {
+                "input": 1500,
+                "output": 600,
+                "reasoning": 0,
+                "cache": {"read": 300, "write": 0},
+            },
+        },
+    }
+    runtime.events = _runtime_events_from_stdout_chunks([json.dumps(step)])
+
+    agent.run("fallback-pricing")
+
+    expected_cost = agent.pricing.get_cost(_token_usage_from_part(step["part"]))
+    assert agent.usage.steps == 1
+    assert agent.usage.cost == pytest.approx(expected_cost)
+    assert agent.usage.cost > 0
+
+
+def test_build_command_matches_harbor_shape(make_agent):
+    agent, _ = make_agent()
+
+    command = agent._build_opencode_command("build something cool")
+
+    assert command == (
+        "opencode --model=zai-coding-plan/glm-4.6 run --format=json "
+        "--thinking --dangerously-skip-permissions -- "
+        "'build something cool'"
+    )
+
+
+def test_build_command_includes_variant_for_thinking_level(make_agent):
+    agent, _ = make_agent()
+    agent.provider = "openai"
+    agent.model_id = "gpt-5.4-mini"
+    agent.thinking = "high"
+
+    command = agent._build_opencode_command("build something cool")
+
+    assert "--variant=high" in command
+
+
+def test_build_command_keeps_xhigh_variant_for_openai(make_agent):
+    agent, _ = make_agent()
+    agent.provider = "openai"
+    agent.model_id = "gpt-5.4-mini"
+    agent.thinking = "xhigh"
+
+    command = agent._build_opencode_command("build something cool")
+
+    assert "--variant=xhigh" in command
+
+
+def test_build_command_maps_xhigh_to_max_variant_for_non_openai(make_agent):
+    agent, _ = make_agent()
+    agent.provider = "openrouter"
+    agent.model_id = "moonshotai/kimi-k2"
+    agent.thinking = "xhigh"
+
+    command = agent._build_opencode_command("build something cool")
+
+    assert "--variant=max" in command
+
+
+def test_build_command_omits_variant_for_none_thinking(make_agent):
+    agent, _ = make_agent()
+    agent.provider = "openai"
+    agent.model_id = "gpt-5.4-mini"
+    agent.thinking = "none"
+
+    command = agent._build_opencode_command("build something cool")
+
+    assert "--variant=" not in command
+
+
+def test_from_config_falls_back_to_model_provider_when_provider_name_missing(
+    tmp_path,
+):
+    auth_source = tmp_path / "auth.json"
+    auth_source.write_text(
+        json.dumps({"openai": {"type": "oauth", "access": "test-token"}})
+    )
+    credential = ProviderCredential(
+        provider="opencode_auth",
+        credential_type=CredentialType.FILE,
+        value=auth_source.read_text(),
+        source=str(auth_source),
+        destination_key="",
+    )
+    model = ModelDefinition(
+        internal_name="gpt-5.4-mini",
+        provider="openai",
+        pricing=APIPricing(
+            input=0.75,
+            output=4.5,
+            cache_read=0.075,
+            cache_write=0,
+        ),
+    )
+
+    agent = OpenCodeAgent._from_config(
+        config=OpenCodeAgentConfig(
+            type="opencode",
+            version="1.0.134",
+            cost_limits=AgentCostLimits(
+                step_limit=0,
+                cost_limit=100.0,
+                net_cost_limit=200.0,
+            ),
+        ),
+        model=model,
+        credential=credential,
+        problem_name="sample-problem",
+        verbose=False,
+        image="test-image",
+    )
+
+    assert agent.provider == "openai"
+
+
+def test_from_config_uses_provider_override_for_moonshot_kimi_model():
+    model = ModelCatalog.get("kimi-k2.5")
+    assert model is not None
+    credential = ProviderCredential(
+        provider="moonshot",
+        credential_type=CredentialType.ENV_VAR,
+        value="test-moonshot-key",
+        source="MOONSHOT_API_KEY",
+        destination_key="MOONSHOT_API_KEY",
+    )
+
+    agent = OpenCodeAgent._from_config(
+        config=OpenCodeAgentConfig(
+            type="opencode",
+            version="1.0.134",
+            cost_limits=AgentCostLimits(
+                step_limit=0,
+                cost_limit=100.0,
+                net_cost_limit=200.0,
+            ),
+        ),
+        model=model,
+        credential=credential,
+        problem_name="sample-problem",
+        verbose=False,
+        image="test-image",
+    )
+
+    assert agent.provider == "moonshot"
+    assert agent.model_id == "kimi-k2.5"
+
+
+def test_from_config_keeps_openrouter_default_for_kimi_model():
+    model = ModelCatalog.get("kimi-k2.5")
+    assert model is not None
+    credential = ProviderCredential(
+        provider="openrouter",
+        credential_type=CredentialType.ENV_VAR,
+        value="test-openrouter-key",
+        source="OPENROUTER_API_KEY",
+        destination_key="OPENROUTER_API_KEY",
+    )
+
+    agent = OpenCodeAgent._from_config(
+        config=OpenCodeAgentConfig(
+            type="opencode",
+            version="1.0.134",
+            cost_limits=AgentCostLimits(
+                step_limit=0,
+                cost_limit=100.0,
+                net_cost_limit=200.0,
+            ),
+        ),
+        model=model,
+        credential=credential,
+        problem_name="sample-problem",
+        verbose=False,
+        image="test-image",
+    )
+
+    assert agent.provider == "openrouter"
+    assert agent.model_id == "moonshotai/kimi-k2.5"
+
+
+def test_setup_exports_moonshot_api_key_for_moonshot_provider(tmp_path):
+    model = ModelCatalog.get("kimi-k2.5")
+    assert model is not None
+    credential = ProviderCredential(
+        provider="moonshot",
+        credential_type=CredentialType.ENV_VAR,
+        value="test-moonshot-key",
+        source="MOONSHOT_API_KEY",
+        destination_key="MOONSHOT_API_KEY",
+    )
+
+    agent = OpenCodeAgent._from_config(
+        config=OpenCodeAgentConfig(
+            type="opencode",
+            version="1.0.134",
+            cost_limits=AgentCostLimits(
+                step_limit=0,
+                cost_limit=100.0,
+                net_cost_limit=200.0,
+            ),
+        ),
+        model=model,
+        credential=credential,
+        problem_name="sample-problem",
+        verbose=False,
+        image="test-image",
+    )
+
+    runtime = FakeRuntime()
+    session = FakeSession(runtime=runtime, working_dir=str(tmp_path))
+    agent.setup(session)
+    assert session.spawn_kwargs is not None
+    env_vars = session.spawn_kwargs["env_vars"]
+    assert isinstance(env_vars, dict)
+    assert env_vars["MOONSHOT_API_KEY"] == "test-moonshot-key"
+    agent.cleanup()
+
+
+def test_provider_override_only_applies_when_model_opts_in():
+    model = ModelCatalog.get("glm-5.1")
+    assert model is not None
+    credential = ProviderCredential(
+        provider="zhipu",
+        credential_type=CredentialType.ENV_VAR,
+        value="test-zhipu-key",
+        source="ZHIPU_API_KEY",
+        destination_key="ZHIPU_API_KEY",
+    )
+
+    agent = OpenCodeAgent._from_config(
+        config=OpenCodeAgentConfig(
+            type="opencode",
+            version="1.0.134",
+            cost_limits=AgentCostLimits(
+                step_limit=0,
+                cost_limit=100.0,
+                net_cost_limit=200.0,
+            ),
+        ),
+        model=model,
+        credential=credential,
+        problem_name="sample-problem",
+        verbose=False,
+        image="test-image",
+    )
+
+    assert agent.provider == "openrouter"
+    assert agent.model_id == "z-ai/glm-5.1"
+
+
+def test_glm_5_1_openrouter_provider_order_is_preserved():
+    model = ModelCatalog.get("glm-5.1")
+    assert model is not None
+    credential = ProviderCredential(
+        provider="openrouter",
+        credential_type=CredentialType.ENV_VAR,
+        value="test-openrouter-key",
+        source="OPENROUTER_API_KEY",
+        destination_key="OPENROUTER_API_KEY",
+    )
+
+    agent = OpenCodeAgent._from_config(
+        config=OpenCodeAgentConfig(
+            type="opencode",
+            version="1.0.134",
+            cost_limits=AgentCostLimits(
+                step_limit=0,
+                cost_limit=100.0,
+                net_cost_limit=200.0,
+            ),
+        ),
+        model=model,
+        credential=credential,
+        problem_name="sample-problem",
+        verbose=False,
+        image="test-image",
+    )
+
+    provider_options = agent.open_code_config["provider"]["openrouter"][
+        "models"
+    ]["z-ai/glm-5.1"]["options"]["provider"]
+    assert provider_options["order"] == [
+        "z-ai",
+        "fireworks",
+        "friendli",
+        "inceptron/fp8",
+    ]
+    assert provider_options["allow_fallbacks"] is False
+
+
+def test_setup_sets_fake_vcs_env(make_agent):
+    agent, _ = make_agent()
+
+    assert isinstance(agent.session, FakeSession)
+    assert agent.session.spawn_kwargs is not None
+    assert agent.session.spawn_kwargs["env_vars"]["OPENCODE_FAKE_VCS"] == "git"
 
 
 def test_run_skips_invalid_json_lines(make_agent):
@@ -218,10 +689,7 @@ def test_run_skips_invalid_json_lines(make_agent):
 
     assert messages == [good_step]
     assert agent.usage.steps == 1
-    expected_cost = agent.pricing.get_cost(
-        _token_usage_from_part(good_step["part"])
-    )
-    assert agent.usage.cost == pytest.approx(expected_cost)
+    assert agent.usage.cost == pytest.approx(good_step["part"]["cost"])
 
 
 def test_run_raises_when_finished_event_missing(make_agent):
@@ -250,6 +718,36 @@ def test_run_raises_when_finished_event_missing(make_agent):
 
     with pytest.raises(AgentError):
         agent.run("no finished event")
+
+
+def test_run_raises_on_opencode_error_event(make_agent):
+    agent, runtime = make_agent()
+
+    error_message = {
+        "type": "error",
+        "error": {"message": "Model not found: zai-coding-plan/glm-5.1."},
+    }
+    runtime.events = _runtime_events_from_stdout_chunks(
+        [json.dumps(error_message)]
+    )
+
+    with pytest.raises(AgentError, match="Model not found"):
+        agent.run("trigger error")
+
+
+def test_run_raises_when_no_step_finish_messages(make_agent):
+    agent, runtime = make_agent()
+
+    non_step_message = {
+        "type": "tool_use",
+        "part": {"tool": "read_file"},
+    }
+    runtime.events = _runtime_events_from_stdout_chunks(
+        [json.dumps(non_step_message)]
+    )
+
+    with pytest.raises(AgentError, match="step_finish"):
+        agent.run("no step finish")
 
 
 def test_run_respects_step_limit(make_agent):
