@@ -19,6 +19,7 @@ from slop_code.common import SYMBOLS_QUALITY_SAVENAME
 from slop_code.entrypoints.commands import common
 from slop_code.entrypoints.evaluation.metrics import create_problem_reports
 from slop_code.entrypoints.evaluation.metrics import update_results_jsonl
+from slop_code.entrypoints.utils import count_expected_checkpoints
 from slop_code.entrypoints.utils import discover_run_directories
 from slop_code.entrypoints.utils import display_and_save_summary
 from slop_code.evaluation import ProblemConfig
@@ -812,8 +813,17 @@ def backfill_reports(
 
                 # Display and save summary for this specific run
                 console = Console()
+                with (single_run_dir / CONFIG_FILENAME).open("r") as f:
+                    config = yaml.safe_load(f)
+                expected_checkpoints = count_expected_checkpoints(
+                    config, ctx.obj.problem_path
+                )
                 display_and_save_summary(
-                    report_file, single_run_dir, config, console
+                    report_file,
+                    single_run_dir,
+                    config,
+                    console,
+                    expected_checkpoints,
                 )
 
                 total_runs_processed += 1
@@ -924,4 +934,11 @@ def backfill_reports(
 
     # Display and save summary statistics
     console = Console()
-    display_and_save_summary(report_file, results_dir, config, console)
+    with (results_dir / CONFIG_FILENAME).open("r") as f:
+        config = yaml.safe_load(f)
+    expected_checkpoints = count_expected_checkpoints(
+        config, ctx.obj.problem_path
+    )
+    display_and_save_summary(
+        report_file, results_dir, config, console, expected_checkpoints
+    )

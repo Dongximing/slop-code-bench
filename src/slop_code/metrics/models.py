@@ -782,6 +782,11 @@ class RunSummary(BaseModel):
     # Counts
     num_problems: int
     num_checkpoints: int
+    # Total checkpoints the run was configured to attempt (sum of
+    # checkpoint counts across the problem list). Used as the
+    # denominator for pct_checkpoints_* so agent crashes don't inflate
+    # rates by shrinking the denominator.
+    expected_checkpoints: int
 
     # Costs: {checkpoint, problem, total}
     costs: CostsStats = Field(default_factory=CostsStats)

@@ -79,7 +79,9 @@ def test_css_injection_uses_block_comments_and_is_idempotent() -> None:
     assert reinjected == injected
 
 
-def test_discover_eligible_files_collects_javascript_files(tmp_path: Path) -> None:
+def test_discover_eligible_files_collects_javascript_files(
+    tmp_path: Path,
+) -> None:
     problems_dir = tmp_path / "problems"
     problem_dir = problems_dir / "demo_problem"
     checkpoint_solution_dir = problem_dir / "solutions" / "checkpoint_1"

@@ -246,7 +246,9 @@ def get_evaluation_metrics(
         ),
         "core_pass_rate": (core_passed / core_total if core_total > 0 else 0.0),
         "isolated_pass_rate": (
-            checkpoint_passed / checkpoint_total if checkpoint_total > 0 else 0.0
+            checkpoint_passed / checkpoint_total
+            if checkpoint_total > 0
+            else 0.0
         ),
         # Flattened tests
         "total_tests": total_total,

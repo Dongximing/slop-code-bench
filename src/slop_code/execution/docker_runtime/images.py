@@ -138,9 +138,8 @@ def _base_image_is_current(
     environment_spec: DockerEnvironmentSpec,
 ) -> bool:
     labels = _get_image_labels(image)
-    return (
-        labels.get(BASE_IMAGE_HASH_LABEL)
-        == _get_base_image_hash(environment_spec)
+    return labels.get(BASE_IMAGE_HASH_LABEL) == _get_base_image_hash(
+        environment_spec
     )
 
 

@@ -19,6 +19,7 @@ from slop_code.entrypoints import evaluation as evaluation_entry
 from slop_code.entrypoints.commands import common
 from slop_code.entrypoints.config import loader as config_loader
 from slop_code.entrypoints.evaluation.metrics import update_results_jsonl
+from slop_code.entrypoints.utils import count_expected_checkpoints
 from slop_code.entrypoints.utils import display_and_save_summary
 from slop_code.evaluation import EVALUATION_SCHEMA_VERSION
 from slop_code.evaluation import ProblemConfig
@@ -368,5 +369,10 @@ def evaluate_agent_run(
         )
     with (agent_run_dir / CONFIG_FILENAME).open("r") as f:
         config = yaml.safe_load(f)
-
-    display_and_save_summary(report_file, agent_run_dir, config, console)
+    # Display and save summary statistics
+    expected_checkpoints = count_expected_checkpoints(
+        config, ctx.obj.problem_path
+    )
+    display_and_save_summary(
+        report_file, agent_run_dir, config, console, expected_checkpoints
+    )

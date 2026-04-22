@@ -69,10 +69,7 @@ class CursorCliParser(TrajectoryParser):
 
                 event_type = event.get("type")
 
-                if (
-                    event_type == "system"
-                    and event.get("subtype") == "init"
-                ):
+                if event_type == "system" and event.get("subtype") == "init":
                     metadata = {
                         "model": event.get("model"),
                         "session_id": event.get("session_id"),
@@ -155,4 +152,3 @@ class CursorCliParser(TrajectoryParser):
             return jsonl_files[0]
 
         return None
-

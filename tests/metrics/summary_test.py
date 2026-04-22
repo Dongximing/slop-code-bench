@@ -33,7 +33,11 @@ class TestRunSummaryDeltaRemoval:
             }
         ]
 
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         assert "delta" not in summary.model_dump()
 
@@ -48,14 +52,18 @@ class TestRunSummaryCounts:
             {"problem": "prob1", "idx": 2, "strict_pass_rate": 1.0},
             {"problem": "prob2", "idx": 1, "strict_pass_rate": 0.5},
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         assert summary.num_problems == 2
         assert summary.num_checkpoints == 3
 
     def test_empty_checkpoints_returns_empty_summary(self, mock_config):
         """Test that empty checkpoints returns empty summary."""
-        summary = compute_run_summary(mock_config, [])
+        summary = compute_run_summary(mock_config, [], expected_checkpoints=1)
 
         assert summary.num_problems == 0
         assert summary.num_checkpoints == 0
@@ -86,7 +94,11 @@ class TestRunSummaryCosts:
                 "strict_pass_rate": 1.0,
             },
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         assert abs(summary.costs.total - 0.45) < 0.001
         assert abs(summary.costs.checkpoint.mean - 0.15) < 0.001
@@ -125,7 +137,11 @@ class TestRunSummarySolveRates:
                 "isolated_pass_rate": 1.0,
             },
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         # 3 out of 4 checkpoints have pass_rate == 1.0
         assert summary.pct_checkpoints_solved == 75.0
@@ -158,7 +174,11 @@ class TestRunSummarySolveRates:
                 "isolated_pass_rate": 0.9,
             },  # not fully solved
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         # Only 1 problem fully solved
         assert summary.pct_problems_solved == 50.0
@@ -191,7 +211,11 @@ class TestRunSummarySolveRates:
                 "isolated_pass_rate": 0.9,
             },  # no 1.0
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         # Only prob1 has at least one pass_rate == 1.0
         assert summary.pct_problems_partial == 50.0
@@ -219,7 +243,11 @@ class TestRunSummaryPassRates:
                 "regression_passed": 0,
             },
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         assert summary.pass_rates.checkpoint.total == 0.8
         assert summary.pass_rates.checkpoint.core == 1.0
@@ -264,7 +292,11 @@ class TestRunSummaryPassRates:
                 "regression_passed": 5,  # 100% regression rate
             },
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         # Core: mean of (5/5, 4/5) = (1.0 + 0.8) / 2 = 0.9
         assert abs(summary.pass_rates.checkpoint.core - 0.9) < 0.01
@@ -320,7 +352,11 @@ class TestRunSummaryPassRates:
                 "regression_passed": 4,  # 80% regression rate
             },
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         # Error: only 1 checkpoint has error tests (4/5 = 0.8)
         # The 2 checkpoints with error_total=0 should be EXCLUDED
@@ -357,7 +393,11 @@ class TestRunSummaryPassRates:
                 "error_passed": 0,
             },
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         # When no checkpoints have error tests, the rate should be 0.0
         # (not NaN or an error)
@@ -387,7 +427,11 @@ class TestRunSummaryCcMetrics:
                 "cc_max": 24,
             },
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         assert summary.cc.high_count.mean == 4.0
         assert summary.cc.high_count.count == 2
@@ -413,7 +457,11 @@ class TestRunSummaryCompositeScores:
                 "mass.high_cc_pct": 0.01,
             }
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         assert summary.verbosity.mean == pytest.approx(0.95)
         assert summary.verbosity.count == 1
@@ -455,7 +503,11 @@ class TestRunSummaryCompositeScores:
                 "mass.high_cc_pct": 0.4,
             },
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         assert summary.erosion.count == 2
         assert summary.erosion.mean == pytest.approx(0.3)
@@ -476,7 +528,11 @@ class TestRunSummaryCompositeScores:
                 "isolated_pass_rate": 1.0,
             },
         ]
-        summary = compute_run_summary(mock_config, checkpoints)
+        summary = compute_run_summary(
+            mock_config,
+            checkpoints,
+            expected_checkpoints=max(len(checkpoints), 1),
+        )
 
         assert summary.erosion.count == 0
         assert summary.erosion.mean is None
@@ -486,6 +542,7 @@ class TestRunSummaryCompositeScores:
         summary = compute_run_summary(
             mock_config,
             [{"problem": "prob1", "idx": 1, "strict_pass_rate": 1.0}],
+            expected_checkpoints=1,
         )
 
         assert summary.time.checkpoint.mean is None

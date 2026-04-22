@@ -138,9 +138,23 @@ def test_backfill_reports_preserves_costs_for_all_agents(
     monkeypatch.setattr(
         backfill_reports_module,
         "display_and_save_summary",
-        lambda report_file, results_dir, config, console: None,
+        lambda report_file,
+        results_dir,
+        config,
+        console,
+        expected_checkpoints: None,
     )
-    ctx = cast("Any", SimpleNamespace(obj=SimpleNamespace(verbosity=0)))
+    monkeypatch.setattr(
+        backfill_reports_module,
+        "count_expected_checkpoints",
+        lambda config, problems_dir: 0,
+    )
+    ctx = cast(
+        "Any",
+        SimpleNamespace(
+            obj=SimpleNamespace(verbosity=0, problem_path=run_dir.parent)
+        ),
+    )
 
     backfill_reports_module.backfill_reports(ctx, run_dir)
 

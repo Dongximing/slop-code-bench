@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from slop_code.evaluation.adapters import api
-
 from slop_code.evaluation import CheckpointConfig
 from slop_code.evaluation import verifiers
+from slop_code.evaluation.adapters import api
 
 
 class Verifier:

@@ -95,14 +95,18 @@ def mock_credential() -> ProviderCredential:
 
 
 class TestCursorCliConfig:
-    def test_version_is_required(self, mock_cost_limits: AgentCostLimits) -> None:
+    def test_version_is_required(
+        self, mock_cost_limits: AgentCostLimits
+    ) -> None:
         with pytest.raises(Exception):  # Pydantic validation error
             CursorCliConfig(
                 type="cursor_cli",
                 cost_limits=mock_cost_limits,
             )
 
-    def test_get_docker_file_renders(self, mock_cost_limits: AgentCostLimits) -> None:
+    def test_get_docker_file_renders(
+        self, mock_cost_limits: AgentCostLimits
+    ) -> None:
         config = CursorCliConfig(
             type="cursor_cli",
             version="latest",
@@ -189,7 +193,10 @@ class TestCursorCliAgent:
         assert "bar" in command_text
 
     def test_run_requires_cursor_api_key(
-        self, tmp_path: Path, mock_cost_limits: AgentCostLimits, mock_pricing: APIPricing
+        self,
+        tmp_path: Path,
+        mock_cost_limits: AgentCostLimits,
+        mock_pricing: APIPricing,
     ) -> None:
         runtime = FakeRuntime()
         runtime.events = [
@@ -238,7 +245,10 @@ class TestCursorCliAgent:
             agent.run("do a task")
 
     def test_save_artifacts_writes_expected_files(
-        self, tmp_path: Path, mock_cost_limits: AgentCostLimits, mock_pricing: APIPricing
+        self,
+        tmp_path: Path,
+        mock_cost_limits: AgentCostLimits,
+        mock_pricing: APIPricing,
     ) -> None:
         runtime = FakeRuntime()
         session = FakeSession(
@@ -269,13 +279,22 @@ class TestCursorCliAgent:
         output_dir = tmp_path / "artifacts"
         agent.save_artifacts(output_dir)
 
-        assert (output_dir / "prompt.txt").read_text(encoding="utf-8") == "test prompt"
-        assert (output_dir / "command.txt").read_text(encoding="utf-8") == "cursor-agent --yolo --print"
+        assert (output_dir / "prompt.txt").read_text(
+            encoding="utf-8"
+        ) == "test prompt"
+        assert (output_dir / "command.txt").read_text(
+            encoding="utf-8"
+        ) == "cursor-agent --yolo --print"
         assert (output_dir / "stdout.jsonl").exists()
-        assert (output_dir / "stderr.log").read_text(encoding="utf-8") == "stderr text"
+        assert (output_dir / "stderr.log").read_text(
+            encoding="utf-8"
+        ) == "stderr text"
 
     def test_save_artifacts_writes_empty_stderr_file(
-        self, tmp_path: Path, mock_cost_limits: AgentCostLimits, mock_pricing: APIPricing
+        self,
+        tmp_path: Path,
+        mock_cost_limits: AgentCostLimits,
+        mock_pricing: APIPricing,
     ) -> None:
         runtime = FakeRuntime()
         session = FakeSession(
@@ -377,7 +396,9 @@ class TestCursorCliAgentParseLine:
             '{"type":"result","usage":{"inputTokens":1000,"outputTokens":50,'
             '"cacheReadTokens":100,"cacheWriteTokens":20}}'
         )
-        cost, tokens, payload = CursorCliAgent.parse_line(line, pricing=mock_pricing)
+        cost, tokens, payload = CursorCliAgent.parse_line(
+            line, pricing=mock_pricing
+        )
 
         assert cost is not None
         assert tokens is not None
@@ -387,9 +408,13 @@ class TestCursorCliAgentParseLine:
         assert tokens.cache_read == 100
         assert tokens.cache_write == 20
 
-    def test_parse_line_non_result_event(self, mock_pricing: APIPricing) -> None:
+    def test_parse_line_non_result_event(
+        self, mock_pricing: APIPricing
+    ) -> None:
         line = '{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"Hi"}]}}'
-        cost, tokens, payload = CursorCliAgent.parse_line(line, pricing=mock_pricing)
+        cost, tokens, payload = CursorCliAgent.parse_line(
+            line, pricing=mock_pricing
+        )
 
         assert cost is None
         assert tokens is None

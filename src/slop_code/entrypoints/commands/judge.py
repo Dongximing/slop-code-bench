@@ -455,7 +455,10 @@ def judge_evaluate(
     with (run_dir / CONFIG_FILENAME).open("r") as f:
         config = yaml.safe_load(f)
     # Display and save summary statistics (updates result.json)
-    summary = display_and_save_summary(results_file, run_dir, config, console)
+    expected_checkpoints = sum(len(p.checkpoints) for p in problems_to_eval)
+    summary = display_and_save_summary(
+        results_file, run_dir, config, console, expected_checkpoints
+    )
     if summary is None:
         console.print(
             f"[yellow]No checkpoint data available; {SUMMARY_FILENAME} not created.[/yellow]"

@@ -58,9 +58,7 @@ def _write_checkpoint_artifacts(
             GroupType.ERROR.value: 0,
         },
         "pytest_exit_code": 0,
-        "pytest_collected": core_total
-        + functionality_total
-        + regression_total,
+        "pytest_collected": core_total + functionality_total + regression_total,
         "infrastructure_failure": False,
     }
     with (checkpoint_dir / EVALUATION_FILENAME).open("w") as f:
@@ -146,9 +144,9 @@ def test_prepopulate_handles_missing_evaluation(tmp_path: Path) -> None:
     problem = "p"
     problem_dir = tmp_path / problem
     (problem_dir / "checkpoint_1").mkdir(parents=True)
-    with (
-        problem_dir / "checkpoint_1" / INFERENCE_RESULT_FILENAME
-    ).open("w") as f:
+    with (problem_dir / "checkpoint_1" / INFERENCE_RESULT_FILENAME).open(
+        "w"
+    ) as f:
         json.dump({"usage": {"cost": 0.5, "steps": 1}}, f)
 
     checkpoint_map = {problem: ["checkpoint_1"]}

@@ -36,7 +36,9 @@ def test_build_base_image_reuses_current_image(
             "slop_code.execution.docker_runtime.images._find_image",
             return_value=current_image,
         ),
-        patch("slop_code.execution.docker_runtime.images._build_image") as build,
+        patch(
+            "slop_code.execution.docker_runtime.images._build_image"
+        ) as build,
     ):
         result = build_base_image(client, docker_spec)
 
@@ -110,7 +112,9 @@ def test_build_submission_image_rebuilds_stale_base_image(
     )
 
 
-def test_build_image_falls_back_to_tag_lookup_after_sdk_image_not_found() -> None:
+def test_build_image_falls_back_to_tag_lookup_after_sdk_image_not_found() -> (
+    None
+):
     client = MagicMock()
     tagged_image = MagicMock()
     client.images.build.side_effect = ImageNotFound("missing")

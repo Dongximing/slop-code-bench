@@ -128,12 +128,31 @@ def compute_steps_stats(
 def compute_solve_rates(
     checkpoints: list[dict[str, Any]],
     problems: dict[str, list[dict[str, Any]]],
+    expected_checkpoints: int,
 ) -> dict[str, float | None]:
-    """Compute solve rate percentages.
+    """Compute solve rate percentages normalized to the benchmark total.
+
+    The pct_checkpoints_* fields use ``expected_checkpoints`` as the
+    denominator, which is the total count the run was configured to
+    attempt (sum of checkpoint counts across the problem list). Using
+    ``len(checkpoints)`` instead would let agent crashes shrink the
+    denominator and inflate the percentage; callers must pass the
+    configured total so missing checkpoints correctly count as
+    unsolved.
+
+    Args:
+        checkpoints: Checkpoint records actually produced by the run.
+        problems: Checkpoints grouped by problem (for problem-level stats).
+        expected_checkpoints: Total checkpoints configured for the run.
 
     Returns:
-        Dict with pct_checkpoints_solved, pct_problems_solved, pct_problems_partial.
+        Dict with raw counts and percentages.
     """
+    if expected_checkpoints <= 0:
+        raise ValueError(
+            f"expected_checkpoints must be positive, got {expected_checkpoints}"
+        )
+
     pass_rates_list = extract_metric_values(checkpoints, "strict_pass_rate")
     iso_pass_rates_list = extract_metric_values(
         checkpoints, "isolated_pass_rate"
@@ -165,12 +184,13 @@ def compute_solve_rates(
     )
 
     num_problems = len(problems)
-    num_checkpoints = len(checkpoints)
 
     return {
-        "pct_checkpoints_solved": (checkpoints_solved / num_checkpoints) * 100,
-        "pct_checkpoints_iso_solved": (iso_solved / num_checkpoints) * 100,
-        "pct_checkpoints_core_solved": (core_solved / num_checkpoints) * 100,
+        "pct_checkpoints_solved": (checkpoints_solved / expected_checkpoints)
+        * 100,
+        "pct_checkpoints_iso_solved": (iso_solved / expected_checkpoints) * 100,
+        "pct_checkpoints_core_solved": (core_solved / expected_checkpoints)
+        * 100,
         "pct_problems_solved": (fully_solved / num_problems) * 100,
         "pct_problems_partial": (partially_solved / num_problems) * 100,
         "problem_solved": fully_solved,

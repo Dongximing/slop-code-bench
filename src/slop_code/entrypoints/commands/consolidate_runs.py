@@ -325,6 +325,7 @@ def consolidate_runs(
     # Write runs.csv
     if all_runs:
         runs_df = pd.DataFrame(all_runs)
+        runs_df = _normalize_solve_rates(runs_df)
         runs_df.to_csv(output_dir / "runs.csv", index=False)
         typer.echo(f"  runs.csv: {len(runs_df)} rows")
 
@@ -411,6 +412,49 @@ def consolidate_runs(
             bold=True,
         )
     )
+
+
+def _normalize_solve_rates(runs_df: pd.DataFrame) -> pd.DataFrame:
+    """Recompute pct_checkpoints_* with a benchmark-wide denominator.
+
+    For runs produced by current scb-private, ``expected_checkpoints``
+    comes from the run's configured problem list and pct_* is already
+    correct. For legacy runs whose result.json was written before that
+    fix, pct_checkpoints_* was divided by the agent-produced count;
+    agent crashes inflated those rates. This normalizer:
+
+    1. Fills missing ``expected_checkpoints`` with ``max(num_checkpoints)``
+       across consolidated runs as the best available expected total.
+    2. Recomputes pct_checkpoints_* from raw counts divided by
+       ``expected_checkpoints`` so every row uses the same denominator.
+
+    Raw counts are untouched.
+    """
+    if "num_checkpoints" not in runs_df.columns:
+        return runs_df
+
+    runs_df = runs_df.copy()
+    fallback = int(runs_df["num_checkpoints"].max())
+    if fallback <= 0:
+        return runs_df
+
+    if "expected_checkpoints" in runs_df.columns:
+        runs_df["expected_checkpoints"] = (
+            runs_df["expected_checkpoints"].fillna(fallback).astype(int)
+        )
+    else:
+        runs_df["expected_checkpoints"] = fallback
+
+    for count_col, pct_col in [
+        ("checkpoints_solved", "pct_checkpoints_solved"),
+        ("checkpoints_iso_solved", "pct_checkpoints_iso_solved"),
+        ("checkpoints_core_solved", "pct_checkpoints_core_solved"),
+    ]:
+        if count_col in runs_df.columns:
+            runs_df[pct_col] = (
+                runs_df[count_col] / runs_df["expected_checkpoints"] * 100
+            )
+    return runs_df
 
 
 def discover_runs(runs_dir: Path) -> Iterator[tuple[Path, dict[str, Any]]]:
@@ -510,6 +554,7 @@ def flatten_result(
         "prompt": result.get("prompt"),
         "num_problems": result.get("num_problems"),
         "num_checkpoints": result.get("num_checkpoints"),
+        "expected_checkpoints": result.get("expected_checkpoints"),
     }
 
     # Flatten nested cost stats

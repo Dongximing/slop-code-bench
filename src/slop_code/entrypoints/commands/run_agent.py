@@ -29,6 +29,7 @@ from slop_code.entrypoints.config import load_run_config
 from slop_code.entrypoints.config import loader as config_loader
 from slop_code.entrypoints.config.loader import load_config_from_run_dir
 from slop_code.entrypoints.evaluation.metrics import update_results_jsonl
+from slop_code.entrypoints.utils import count_expected_checkpoints
 from slop_code.entrypoints.utils import display_and_save_summary
 from slop_code.evaluation import ProblemConfig
 from slop_code.execution import EnvironmentSpecType
@@ -1049,7 +1050,12 @@ def _create_checkpoint_results_and_summary(
 
     with (run_dir / CONFIG_FILENAME).open("r") as f:
         config = yaml.safe_load(f)
-    display_and_save_summary(results_file, run_dir, config, console)
+    expected_checkpoints = count_expected_checkpoints(
+        config, problems_base_path
+    )
+    display_and_save_summary(
+        results_file, run_dir, config, console, expected_checkpoints
+    )
 
 
 def run_agent(
@@ -1278,7 +1284,6 @@ def run_agent(
 
     # 9. Handle pre-existing run directory
     requested = list(problem_names_resolved)
-    skipped: list[str] = []
     if run_dir_preexisted:
         if ctx.obj.overwrite:
             typer.echo(
@@ -1386,7 +1391,6 @@ def run_agent(
         config=task_config,
         num_workers=num_workers,
         console=console,
-        completed_problems=skipped,
     )
 
     # 15. Report results

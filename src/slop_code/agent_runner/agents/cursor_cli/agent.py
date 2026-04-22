@@ -200,19 +200,25 @@ class CursorCliAgent(Agent):
     @property
     def session(self) -> Session:
         if self._session is None:
-            raise AgentError("CursorCliAgent has not been set up with a session")
+            raise AgentError(
+                "CursorCliAgent has not been set up with a session"
+            )
         return self._session
 
     @property
     def spec(self) -> EnvironmentSpec:
         if self._environment is None:
-            raise AgentError("CursorCliAgent has not been set up with a session")
+            raise AgentError(
+                "CursorCliAgent has not been set up with a session"
+            )
         return self._environment
 
     @property
     def runtime(self) -> StreamingRuntime:
         if self._runtime is None:
-            raise AgentError("CursorCliAgent has not been set up with a runtime")
+            raise AgentError(
+                "CursorCliAgent has not been set up with a runtime"
+            )
         return self._runtime
 
     def setup(self, session: Session) -> None:
@@ -271,13 +277,9 @@ class CursorCliAgent(Agent):
             raise AgentError(message)
 
         if runtime_result.exit_code != 0:
-            message = (
-                f"Cursor process failed with exit code {runtime_result.exit_code}"
-            )
+            message = f"Cursor process failed with exit code {runtime_result.exit_code}"
             if runtime_result.stderr:
-                message = (
-                    f"{message}\n--- Stderr ---\n{runtime_result.stderr.strip()}"
-                )
+                message = f"{message}\n--- Stderr ---\n{runtime_result.stderr.strip()}"
             self.log.error(
                 "agent.cursor_cli.exit",
                 exit_code=runtime_result.exit_code,
@@ -288,7 +290,9 @@ class CursorCliAgent(Agent):
         """Execute a Cursor CLI invocation and return results."""
         command, env_overrides = self._prepare_runtime_execution(task)
         if self._session is None:
-            raise AgentError("CursorCliAgent has not been set up with a session")
+            raise AgentError(
+                "CursorCliAgent has not been set up with a session"
+            )
         command_text = " ".join(command)
         self._last_command_text = command_text
         parser = functools.partial(self.parse_line, pricing=self.pricing)

@@ -15,13 +15,20 @@ from slop_code.metrics.summary.stats import group_by_problem
 
 
 def compute_run_summary(
-    config: dict, checkpoints: list[dict[str, Any]]
+    config: dict,
+    checkpoints: list[dict[str, Any]],
+    expected_checkpoints: int,
 ) -> RunSummary:
     """Compute complete summary statistics from checkpoint data.
 
     Args:
         config: Run configuration dictionary.
         checkpoints: List of checkpoint data dictionaries.
+        expected_checkpoints: Total checkpoints the run was configured
+            to attempt (sum across the problem list). Used as the
+            pct_checkpoints_* denominator; if the agent crashed, the
+            produced count is less than this and missing checkpoints
+            count as unsolved.
 
     Returns:
         RunSummary with all computed statistics.
@@ -36,11 +43,14 @@ def compute_run_summary(
         agent_version=config["agent"].get("version"),
         num_problems=len(problems),
         num_checkpoints=len(checkpoints),
+        expected_checkpoints=expected_checkpoints,
         costs=aggregators.compute_costs_stats(checkpoints, problems),
         time=aggregators.compute_time_stats(checkpoints, problems),
         tokens=aggregators.compute_tokens_stats(checkpoints, problems),
         steps=aggregators.compute_steps_stats(checkpoints, problems),
-        **aggregators.compute_solve_rates(checkpoints, problems),
+        **aggregators.compute_solve_rates(
+            checkpoints, problems, expected_checkpoints
+        ),
         pass_rates=aggregators.compute_pass_rates_stats(checkpoints, problems),
         cc=aggregators.compute_cc_stats(checkpoints),
         ratios=aggregators.compute_ratios_stats(checkpoints),

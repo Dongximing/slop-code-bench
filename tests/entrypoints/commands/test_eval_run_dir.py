@@ -168,7 +168,12 @@ def _stub_eval_dependencies(
     monkeypatch.setattr(
         eval_run_dir,
         "display_and_save_summary",
-        lambda _report_file, _agent_run_dir, _config, _console: None,
+        lambda _report_file, _agent_run_dir, _config, _console, _expected: None,
+    )
+    monkeypatch.setattr(
+        eval_run_dir,
+        "count_expected_checkpoints",
+        lambda _config, _problems_dir: 0,
     )
     monkeypatch.setattr(
         eval_run_dir.evaluation_entry,
@@ -400,7 +405,16 @@ class TestEvaluateSelectionBehavior:
         monkeypatch.setattr(
             eval_run_dir,
             "display_and_save_summary",
-            lambda _report_file, _agent_run_dir, _config, _console: None,
+            lambda _report_file,
+            _agent_run_dir,
+            _config,
+            _console,
+            _expected: None,
+        )
+        monkeypatch.setattr(
+            eval_run_dir,
+            "count_expected_checkpoints",
+            lambda _config, _problems_dir: 0,
         )
         monkeypatch.setattr(
             eval_run_dir.evaluation_entry,

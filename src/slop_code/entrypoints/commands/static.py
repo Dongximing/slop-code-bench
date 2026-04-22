@@ -22,6 +22,7 @@ from slop_code.common import SUMMARY_FILENAME
 from slop_code.entrypoints.commands import common
 from slop_code.entrypoints.evaluation.metrics import create_problem_reports
 from slop_code.entrypoints.evaluation.metrics import update_results_jsonl
+from slop_code.entrypoints.utils import count_expected_checkpoints
 from slop_code.entrypoints.utils import discover_checkpoints
 from slop_code.entrypoints.utils import discover_problems
 from slop_code.entrypoints.utils import discover_run_directories
@@ -488,8 +489,15 @@ def static_metrics(
                 try:
                     with (single_run_dir / CONFIG_FILENAME).open("r") as f:
                         config = yaml.safe_load(f)
+                    expected_checkpoints = count_expected_checkpoints(
+                        config, ctx.obj.problem_path
+                    )
                     summary = display_and_save_summary(
-                        report_file, single_run_dir, config, console
+                        report_file,
+                        single_run_dir,
+                        config,
+                        console,
+                        expected_checkpoints,
                     )
                     if summary is None:
                         console.print(
@@ -564,7 +572,12 @@ def static_metrics(
 
     with (run_dir / CONFIG_FILENAME).open("r") as f:
         config = yaml.safe_load(f)
-    summary = display_and_save_summary(report_file, run_dir, config, console)
+    expected_checkpoints = count_expected_checkpoints(
+        config, ctx.obj.problem_path
+    )
+    summary = display_and_save_summary(
+        report_file, run_dir, config, console, expected_checkpoints
+    )
     if summary is None:
         console.print(
             f"[yellow]No checkpoint data available; {SUMMARY_FILENAME} not created."
