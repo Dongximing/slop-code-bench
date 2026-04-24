@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -13,6 +14,7 @@ from slop_code.common import QUALITY_DIR
 from slop_code.common import QUALITY_METRIC_SAVENAME
 from slop_code.common import SYMBOLS_QUALITY_SAVENAME
 from slop_code.metrics.checkpoint import compute_checkpoint_delta
+from slop_code.metrics.checkpoint import driver as checkpoint_driver
 from slop_code.metrics.checkpoint import get_checkpoint_metrics
 from slop_code.metrics.checkpoint import get_evaluation_metrics
 from slop_code.metrics.checkpoint import get_quality_metrics
@@ -819,6 +821,114 @@ class TestGetCheckpointMetrics:
         assert result["is_last"] is False
         # May also include erosion metrics with default values
         assert "erosion_velocity" in result or len(result) == 2
+
+    def test_uses_scb_check_report_for_composite_quality_numbers(
+        self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ):
+        (tmp_path / "snapshot").mkdir()
+        monkeypatch.setattr(
+            checkpoint_driver,
+            "get_evaluation_metrics",
+            lambda checkpoint_dir: {},
+        )
+        monkeypatch.setattr(
+            checkpoint_driver,
+            "get_inference_metrics",
+            lambda checkpoint_dir: {},
+        )
+        monkeypatch.setattr(
+            checkpoint_driver,
+            "get_quality_metrics",
+            lambda checkpoint_dir: {
+                "loc": 100,
+                "verbosity_flagged_pct": 0.01,
+                "mass.high_cc_pct": 0.99,
+                "cloned_pct": 0.01,
+            },
+        )
+        monkeypatch.setattr(
+            checkpoint_driver,
+            "get_rubric_metrics",
+            lambda checkpoint_dir: {},
+        )
+
+        commands: list[list[str]] = []
+
+        def fake_run(command, **kwargs):
+            commands.append(command)
+            return SimpleNamespace(
+                stdout=json.dumps(
+                    {
+                        "verbosity": 0.5,
+                        "erosion": 0.2,
+                        "total_loc": 40,
+                        "clone_loc": 10,
+                        "verbosity_flagged_loc": 12,
+                    }
+                )
+            )
+
+        monkeypatch.setattr(checkpoint_driver.subprocess, "run", fake_run)
+
+        result = get_checkpoint_metrics(tmp_path)
+
+        assert commands == [
+            [
+                "uvx",
+                "scb-check",
+                "check",
+                "--report",
+                "--include-all",
+                str(tmp_path / "snapshot"),
+            ]
+        ]
+        assert result["verbosity"] == pytest.approx(0.5)
+        assert result["erosion"] == pytest.approx(0.2)
+        assert result["cloned_sloc_lines"] == 10
+        assert result["cloned_pct"] == pytest.approx(0.25)
+        assert result["verbosity_flagged_sloc_lines"] == 12
+        assert result["verbosity_flagged_pct"] == pytest.approx(0.3)
+
+    def test_scb_check_failure_does_not_drop_other_checkpoint_metrics(
+        self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ):
+        (tmp_path / "snapshot").mkdir()
+        monkeypatch.setattr(
+            checkpoint_driver,
+            "get_evaluation_metrics",
+            lambda checkpoint_dir: {"total_tests": 1},
+        )
+        monkeypatch.setattr(
+            checkpoint_driver,
+            "get_inference_metrics",
+            lambda checkpoint_dir: {},
+        )
+        monkeypatch.setattr(
+            checkpoint_driver,
+            "get_quality_metrics",
+            lambda checkpoint_dir: {},
+        )
+        monkeypatch.setattr(
+            checkpoint_driver,
+            "get_rubric_metrics",
+            lambda checkpoint_dir: {},
+        )
+
+        def fake_run(command, **kwargs):
+            raise checkpoint_driver.subprocess.CalledProcessError(
+                returncode=2,
+                cmd=command,
+                stderr="no Python files found",
+            )
+
+        monkeypatch.setattr(checkpoint_driver.subprocess, "run", fake_run)
+
+        result = get_checkpoint_metrics(tmp_path)
+
+        assert result["total_tests"] == 1
+        assert "verbosity" not in result
+        assert "erosion" not in result
+        assert "cloned_pct" not in result
 
 
 class TestComputeCheckpointDelta:
