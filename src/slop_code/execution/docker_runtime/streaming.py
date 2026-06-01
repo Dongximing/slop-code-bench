@@ -272,6 +272,10 @@ class DockerStreamingRuntime(StreamingRuntime):
         if container is None:
             raise SolutionRuntimeError("Failed to create container")
         container.start()
+        container.exec_run(
+            "sh -c 'echo \"{}\" > $HOME/.claude.json && chmod 777 $HOME/.claude.json'",
+            user="0:0",
+        )
         self._container = container
         logger.debug(
             "Started Docker container",

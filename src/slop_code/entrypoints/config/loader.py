@@ -14,6 +14,7 @@ from slop_code.common import CONFIG_FILENAME
 from slop_code.entrypoints.config.resolvers import register_resolvers
 from slop_code.entrypoints.config.run_config import ModelConfig
 from slop_code.entrypoints.config.run_config import OneShotConfig
+from slop_code.entrypoints.config.run_config import PostCheckpointSkillConfig
 from slop_code.entrypoints.config.run_config import ResolvedRunConfig
 from slop_code.entrypoints.config.run_config import ThinkingConfig
 from slop_code.entrypoints.config.run_config import ThinkingPresetType
@@ -541,6 +542,22 @@ def load_run_config(
         one_shot=one_shot.enabled,
     )
 
+    # 15. Handle post_checkpoint_skill (deslop 等)
+    # 支持三种写法：
+    #   post_checkpoint_skill: null                    → None（不跑）
+    #   post_checkpoint_skill: "prompt text"           → 简写，等价于 {prompt: "...", run_on: "all", eval_after: true}
+    #   post_checkpoint_skill: {prompt: "...", ...}    → 完整配置
+    pcs_raw = cfg_dict.get("post_checkpoint_skill", None)
+    post_checkpoint_skill: PostCheckpointSkillConfig | None = None
+    if isinstance(pcs_raw, str):
+        post_checkpoint_skill = PostCheckpointSkillConfig(prompt=pcs_raw)
+    elif isinstance(pcs_raw, dict):
+        post_checkpoint_skill = PostCheckpointSkillConfig(**pcs_raw)
+    elif pcs_raw is not None:
+        raise ValueError(
+            f"Invalid post_checkpoint_skill type: {type(pcs_raw).__name__}"
+        )
+
     return ResolvedRunConfig(
         agent_config_path=agent_path,
         agent=agent_data,
@@ -557,6 +574,7 @@ def load_run_config(
         save_template=save_template,
         output_path=output_path,
         one_shot=one_shot,
+        post_checkpoint_skill=post_checkpoint_skill,
     )
 
 

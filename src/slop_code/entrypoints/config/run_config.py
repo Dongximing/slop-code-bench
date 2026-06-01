@@ -10,11 +10,15 @@ from pydantic import ConfigDict
 from pydantic import Field
 from pydantic import model_validator
 
+from slop_code.agent_runner.models import PostCheckpointSkillConfig
 from slop_code.evaluation import PassPolicy
 
 ThinkingPresetType = Literal[
     "none", "disabled", "low", "medium", "high", "xhigh"
 ]
+
+# Re-export so existing imports from this module keep working.
+__all__ = ["PostCheckpointSkillConfig"]
 
 
 class OneShotConfig(BaseModel):
@@ -112,6 +116,8 @@ class RunConfig(BaseModel):
 
     one_shot: OneShotConfig = Field(default_factory=OneShotConfig)
 
+    post_checkpoint_skill: PostCheckpointSkillConfig | None = None
+
     # Output path configuration with interpolation support
     # Available variables: ${model.name}, ${model.provider}, ${agent.type},
     # ${agent.version}, ${prompt}, ${thinking}, ${env.name}, ${now:FORMAT}
@@ -174,3 +180,4 @@ class ResolvedRunConfig(BaseModel):
     save_template: str
     output_path: str
     one_shot: OneShotConfig = Field(default_factory=OneShotConfig)
+    post_checkpoint_skill: PostCheckpointSkillConfig | None = None

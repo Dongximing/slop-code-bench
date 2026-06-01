@@ -80,11 +80,7 @@ class DockerEnvironmentSpec(EnvironmentSpec):
         """Resolve the user to run as outside evaluation contexts."""
         if self.docker.user:
             return self.docker.user
-        uid = os.getenv("HUID")
-        gid = os.getenv("HGID")
-        if uid and gid:
-            return f"{uid}:{gid}"
-        return "0:0"
+        return "1000:1000"
 
     def get_effective_address(self, address: str) -> str:
         """Get the address to pass to commands inside the container.

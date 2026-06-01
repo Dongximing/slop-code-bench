@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from typing import Annotated
+from typing import Annotated, Literal
 
 from pydantic import BaseModel
 from pydantic import ConfigDict
 from pydantic import Field
+from pydantic import field_validator
 
 from slop_code.common.llms import TokenUsage
 from slop_code.evaluation import PassPolicy
@@ -133,6 +134,56 @@ class AgentCostLimits(BaseModel):
         )
 
 
+class PostCheckpointSkillConfig(BaseModel):
+    """Config for running a skill (e.g. deslop) after checkpoint completion.
+
+    YAML examples::
+
+        # Every checkpoint, with eval
+        post_checkpoint_skill:
+          prompt: "Review code and remove AI slop..."
+
+        # Last checkpoint only, no eval
+        post_checkpoint_skill:
+          prompt: "Review code and remove AI slop..."
+          run_on: last
+          eval_after: false
+
+        # Specific checkpoints
+        post_checkpoint_skill:
+          prompt: "Review code and remove AI slop..."
+          run_on: [checkpoint_1, checkpoint_3]
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    prompt: str
+    run_on: Literal["all", "last"] | list[str] = "all"
+    eval_after: bool = True
+
+    @field_validator("run_on", mode="before")
+    @classmethod
+    def _validate_run_on(cls, v: object) -> str | list[str]:
+        if isinstance(v, list):
+            if not v:
+                raise ValueError("run_on list must not be empty")
+            for item in v:
+                if not isinstance(item, str):
+                    raise TypeError(
+                        f"run_on list items must be strings, got {type(item).__name__}"
+                    )
+            return v
+        if isinstance(v, str):
+            if v not in ("all", "last"):
+                raise ValueError(
+                    f"run_on must be 'all', 'last', or a list of checkpoint names, got '{v}'"
+                )
+            return v
+        raise TypeError(
+            f"run_on must be a string or list, got {type(v).__name__}"
+        )
+
+
 class AgentRunSpec(BaseModel):
     """Complete specification for running an agent on a problem.
 
@@ -194,4 +245,12 @@ class AgentRunSpec(BaseModel):
     model_name: Annotated[
         str | None,
         Field(default=None, description="Model name for prompt templates"),
+    ] = None
+
+    post_checkpoint_skill: Annotated[
+        PostCheckpointSkillConfig | None,
+        Field(
+            default=None,
+            description="Skill to run after checkpoint completes (e.g. deslop).",
+        ),
     ] = None

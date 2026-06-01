@@ -1,0 +1,25 @@
+agent: claude_code
+environment: docker-python3.12-uv
+prompt: just-solve
+thinking: low
+
+model:
+  provider: anthropic
+  name: sonnet-4.5
+
+post_checkpoint_skill:
+  prompt: |
+    Review all the code you just wrote in this workspace.
+    Remove AI-generated slop:
+    - Extra comments that a human wouldn't add
+    - Extra defensive checks or try/catch blocks that are abnormal
+    - Inline imports in Python (move to top of file)
+    - range(len(x)) - use enumerate
+    - if cond: return True else: return False - simplify
+    - Any style inconsistent with the file
+    Do NOT change any behavior. Do NOT break any existing functionality.
+  run_on: all
+  eval_after: true
+
+problems:
+  - file_backup

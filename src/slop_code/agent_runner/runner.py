@@ -707,6 +707,83 @@ class AgentRunner:
             return True
         return False
 
+    def _run_post_checkpoint_skill(
+        self,
+        checkpoint: CheckpointConfig,
+        checkpoint_save_dir: Path,
+        *,
+        eval_after: bool = True,
+    ) -> None:
+        """Run a skill on the current workspace after a checkpoint completes.
+
+        The agent edits the existing code in-place (not a rewrite), then we
+        snapshot and optionally evaluate the result.
+
+        Output layout::
+
+            checkpoint_N/
+            ├── snapshot/              # original code
+            ├── evaluation.json        # original eval
+            ├── quality_analysis/      # original quality
+            └── after_skill/
+                ├── snapshot/          # code after skill
+                ├── evaluation.json    # (eval_after only)
+                └── quality_analysis/  # (eval_after only)
+
+        The workspace keeps the skill-modified code so the next checkpoint
+        builds on top of it.
+        """
+        skill_cfg = self.run_spec.post_checkpoint_skill
+        skill_prompt = skill_cfg.prompt
+        logger.info(
+            "Running post-checkpoint skill",
+            checkpoint=checkpoint.name,
+            eval_after=eval_after,
+            skill_prompt_preview=skill_prompt[:120],
+        )
+
+        try:
+            self.agent.run(skill_prompt)
+        except Exception:
+            logger.warning(
+                "Post-checkpoint skill failed, skipping",
+                checkpoint=checkpoint.name,
+                error=traceback.format_exc(),
+            )
+            return
+
+        after_skill_dir = checkpoint_save_dir / "after_skill"
+        after_skill_dir.mkdir(parents=True, exist_ok=True)
+        skill_snapshot_dir = after_skill_dir / common.SNAPSHOT_DIR_NAME
+        self.session.finish_checkpoint(skill_snapshot_dir)
+
+        if not eval_after:
+            logger.info(
+                "Skipping eval after skill (eval_after=False)",
+                checkpoint=checkpoint.name,
+            )
+            return
+
+        try:
+            evaluate_agent_snapshot(
+                checkpoint=checkpoint,
+                save_dir=after_skill_dir,
+                snapshot_dir=skill_snapshot_dir,
+                problem=self.run_spec.problem,
+                environment=self.run_spec.environment,
+            )
+            logger.info(
+                "Post-checkpoint skill eval completed",
+                checkpoint=checkpoint.name,
+                results_dir=str(after_skill_dir),
+            )
+        except Exception:
+            logger.warning(
+                "Post-checkpoint skill eval failed",
+                checkpoint=checkpoint.name,
+                error=traceback.format_exc(),
+            )
+
     def _run_checkpoint(
         self,
         checkpoint: CheckpointConfig,
@@ -975,6 +1052,33 @@ class AgentRunner:
                 idx == 0,
             )
             results.append(summary)
+
+            # ====== post-checkpoint skill（deslop）======
+            # 根据配置决定这个 checkpoint 后要不要跑 skill。
+            # skill 配置里的 run_on 字段控制：
+            #   "all"  → 每个 checkpoint 都跑
+            #   "last" → 只在最后一个 checkpoint 跑
+            #   ["checkpoint_1", "checkpoint_3"] → 只在指定的 checkpoint 跑
+            skill_cfg = self.run_spec.post_checkpoint_skill
+            if skill_cfg and not summary.had_error:
+                total_checkpoints = len(self.run_spec.problem.checkpoints)
+                is_last = (idx == total_checkpoints - 1)
+                should_run = False
+
+                if skill_cfg.run_on == "all":
+                    should_run = True
+                elif skill_cfg.run_on == "last":
+                    should_run = is_last
+                elif isinstance(skill_cfg.run_on, list):
+                    should_run = checkpoint.name in skill_cfg.run_on
+
+                if should_run:
+                    self._run_post_checkpoint_skill(
+                        checkpoint=checkpoint,
+                        checkpoint_save_dir=checkpoint_save_dir,
+                        eval_after=skill_cfg.eval_after,
+                    )
+
             self.metrics_tracker.finish_checkpoint(self.agent.usage)
 
             logger.info(

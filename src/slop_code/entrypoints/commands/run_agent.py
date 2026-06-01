@@ -925,6 +925,7 @@ def _create_task_config(
         image=image_name,
         resume=resume,
         one_shot=run_cfg.one_shot,
+        post_checkpoint_skill=run_cfg.post_checkpoint_skill,
     )
 
 

@@ -305,7 +305,8 @@ class Workspace:
         if self._temp_dir is not None:
             raise WorkspaceError("Workspace already prepared")
         logger.debug("Preparing workspace", verbose=True)
-        self._temp_dir = tempfile.TemporaryDirectory()
+        self._temp_dir = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
+        Path(self._temp_dir.name).chmod(0o777)
         self._prepare_initial_snapshot()
         logger.debug(
             "Workspace prepared",
@@ -330,8 +331,10 @@ class Workspace:
             working_dir=self.working_dir,
             verbose=True,
         )
-        self._temp_dir.cleanup()
+        import shutil
+        tmp_name = self._temp_dir.name
         self._temp_dir = None
+        shutil.rmtree(tmp_name, ignore_errors=True)
 
     def reset(self) -> None:
         """Reset the workspace to its initial state."""

@@ -20,6 +20,7 @@ from slop_code.agent_runner import AgentStateEnum
 from slop_code.agent_runner import MetricsTracker
 from slop_code.agent_runner import UsageTracker
 from slop_code.entrypoints.config.run_config import OneShotConfig
+from slop_code.entrypoints.config.run_config import PostCheckpointSkillConfig
 
 _TERMINAL_STATES = frozenset(
     {
@@ -87,6 +88,8 @@ class RunTaskConfig:
     resume: bool = False
     dry_run: bool = False
     one_shot: OneShotConfig = field(default_factory=OneShotConfig)
+    # 每个 checkpoint 完成后要跑的 skill 配置。设为 None 则不跑。
+    post_checkpoint_skill: PostCheckpointSkillConfig | None = None
 
 
 class ProblemState(BaseModel):

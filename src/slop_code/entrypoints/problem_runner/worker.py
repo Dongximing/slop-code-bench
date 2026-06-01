@@ -180,6 +180,9 @@ def run_agent_on_problem(
         agent_type=config.agent_config.type,
         agent_version=config.agent_config.version,
         model_name=config.model_def.name,
+        # 把 skill prompt 传递给 AgentRunSpec，
+        # runner 会在每个 checkpoint 完成后用它来跑 deslop。
+        post_checkpoint_skill=config.post_checkpoint_skill,
     )
 
     return runner.run_agent(

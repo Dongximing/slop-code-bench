@@ -680,7 +680,7 @@ class ClaudeCodeAgent(Agent):
                 "HOME": HOME_PATH,
             },
             image=self._image,
-            user="1000:1000",
+            user=f"{os.getuid()}:{os.getgid()}",
             disable_setup=True,
         )
         self.log.debug(
@@ -843,6 +843,7 @@ class ClaudeCodeAgent(Agent):
         env_overrides["CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"] = "1"
         env_overrides["DISABLE_AUTOUPDATER"] = "1"
         env_overrides["DISABLE_NON_ESSENTIAL_MODEL_CALLS"] = "1"
+        env_overrides["CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC"] = "1"
 
         # Set thinking tokens from preset or explicit value
         thinking_tokens: int | None = None
@@ -951,17 +952,28 @@ class ClaudeCodeAgent(Agent):
         trace_root = self._trace_dir / _CLAUDE_WORKSPACE_PROJECT
         dest = output_dir / "workspace"
         copied = 0
-        for item in trace_root.rglob("*"):
-            if not item.is_file():
+        try:
+            entries = list(trace_root.rglob("*"))
+        except PermissionError:
+            self.log.warning(
+                "agent.claude_code.traces.permission_denied",
+                trace_root=str(trace_root),
+            )
+            return
+        for item in entries:
+            try:
+                if not item.is_file():
+                    continue
+                rel = item.relative_to(self._trace_dir)
+                if rel in self._saved_trace_paths:
+                    continue
+                target = dest / rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(item.read_bytes())
+                self._saved_trace_paths.add(rel)
+                copied += 1
+            except PermissionError:
                 continue
-            rel = item.relative_to(self._trace_dir)
-            if rel in self._saved_trace_paths:
-                continue
-            target = dest / rel
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(item.read_bytes())
-            self._saved_trace_paths.add(rel)
-            copied += 1
         self.log.debug(
             "agent.claude_code.traces.saved",
             output_dir=str(output_dir),
