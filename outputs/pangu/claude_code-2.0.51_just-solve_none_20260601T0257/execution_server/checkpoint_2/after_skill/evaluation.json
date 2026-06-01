@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "problem_name": "execution_server",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_2",
+  "checkpoint_version": 1,
+  "duration": 6.473652601242065,
+  "entrypoint": "uv run execution_server.py",
+  "tests": {
+    "checkpoint_1-Regression": {
+      "passed": [
+        "TestCore::test_execute_core[echo]",
+        "TestCore::test_execute_core[time_out]",
+        "TestCore::test_execute_core[with_env]",
+        "TestCore::test_execute_core[with_files]",
+        "TestCore::test_execute_core[with_stdin]",
+        "TestCore::test_final_stats",
+        "TestCore::test_initial_stats",
+        "TestEdgeCases::test_error_does_not_increment_stats",
+        "TestEdgeCases::test_execute_duration_is_rounded",
+        "TestEdgeCases::test_execute_edge_errors[env_is_null]",
+        "TestEdgeCases::test_execute_edge_errors[files_is_null]",
+        "TestEdgeCases::test_invalid_json_returns_json_error",
+        "TestEdgeCases::test_stats_duration_is_rounded",
+        "TestError::test_execute_errors[command_type_not_string]",
+        "TestError::test_execute_errors[empty_command_string]",
+        "TestError::test_execute_errors[env_values_not_strings]",
+        "TestError::test_execute_errors[invalid_env_type]",
+        "TestError::test_execute_errors[invalid_files_type]",
+        "TestError::test_execute_errors[invalid_stdin_type]",
+        "TestError::test_execute_errors[invalid_timeout_negative]",
+        "TestError::test_execute_errors[invalid_timeout_type]",
+        "TestError::test_execute_errors[invalid_timeout_zero]",
+        "TestError::test_execute_errors[missing_command_field]",
+        "TestHidden::test_execute_hidden[all_features_combined]",
+        "TestHidden::test_execute_hidden[command_with_shell_metacharacters]",
+        "TestHidden::test_execute_hidden[default_timeout_and_empty_stdin]",
+        "TestHidden::test_execute_hidden[env_and_files_together]",
+        "TestHidden::test_execute_hidden[env_and_stdin_together]",
+        "TestHidden::test_execute_hidden[env_multiline_values]",
+        "TestHidden::test_execute_hidden[env_override_system]",
+        "TestHidden::test_execute_hidden[exit_code_variations]",
+        "TestHidden::test_execute_hidden[files_and_stdin_together]",
+        "TestHidden::test_execute_hidden[multiple_env_vars_multiple_files]",
+        "TestHidden::test_execute_hidden[nonzero_exit_with_stderr]",
+        "TestHidden::test_execute_hidden[stdin_string_stream]",
+        "TestHidden::test_execute_hidden[stdout_without_newline]",
+        "TestHidden::test_execute_hidden[timeout_with_env_and_files]",
+        "TestHidden::test_execute_hidden[unicode_in_output]",
+        "TestHidden::test_execute_hidden[very_long_stdout]",
+        "TestHidden::test_execute_hidden[very_small_timeout]",
+        "TestHidden::test_final_stats",
+        "TestHidden::test_initial_stats"
+      ],
+      "failed": [
+        "TestEdgeCases::test_execute_edge_errors[stdin_array_with_non_string]",
+        "TestHidden::test_execute_hidden[nested_file_execution]",
+        "TestHidden::test_execute_hidden[stdin_array_with_files]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_2-Core": {
+      "passed": [
+        "TestCore::test_execute_with_track[not_recursive]",
+        "TestCore::test_execute_with_track[recursive_glob]",
+        "TestCore::test_execute_with_track[touch_file_glob]",
+        "TestCore::test_execute_with_track[touch_file_glob_mismatch]",
+        "TestCore::test_execute_with_track[touch_file_no_glob]",
+        "TestCore::test_initial_stats"
+      ],
+      "failed": [],
+      "skipped": []
+    },
+    "checkpoint_2-Functionality": {
+      "passed": [
+        "TestCore::test_final_stats"
+      ],
+      "failed": [],
+      "skipped": []
+    },
+    "checkpoint_2-Error": {
+      "passed": [
+        "TestError::test_track_validation_errors[invalid_track_element_null]",
+        "TestError::test_track_validation_errors[invalid_track_element_number]",
+        "TestError::test_track_validation_errors[invalid_track_element_object]",
+        "TestError::test_track_validation_errors[invalid_track_type_number]",
+        "TestError::test_track_validation_errors[invalid_track_type_object]",
+        "TestError::test_track_validation_errors[invalid_track_type_string]"
+      ],
+      "failed": [],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 6,
+    "Functionality": 1,
+    "Regression": 42,
+    "Error": 6
+  },
+  "total_counts": {
+    "Core": 6,
+    "Functionality": 1,
+    "Regression": 45,
+    "Error": 6
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 58,
+  "test_collection_hash": "80530fed3579984965ee18c474ebb6441d67324e00ad2dd92ca27af45f6dc33e",
+  "infrastructure_failure": false
+}

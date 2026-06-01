@@ -1,0 +1,917 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/xiNjGdM3Glya2btd/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 300.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 101 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_initial_stats PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_execute_core[echo] PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_execute_core[time_out] PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_execute_core[with_files] PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_execute_core[with_stdin] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_execute_core[with_env] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_final_stats PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_initial_stats PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[stdin_string_stream] PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[nonzero_exit_with_stderr] PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[nested_file_execution] FAILED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[env_multiline_values] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[stdout_without_newline] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[default_timeout_and_empty_stdin] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[env_and_files_together] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[env_and_stdin_together] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[files_and_stdin_together] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[timeout_with_env_and_files] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[all_features_combined] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[multiple_env_vars_multiple_files] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[stdin_array_with_files] FAILED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[env_override_system] PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[very_small_timeout] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[unicode_in_output] PASSED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[very_long_stdout] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[exit_code_variations] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[command_with_shell_metacharacters] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_final_stats PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[missing_command_field] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_timeout_negative] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_timeout_zero] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_timeout_type] PASSED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_env_type] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_files_type] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_stdin_type] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[empty_command_string] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[command_type_not_string] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[env_values_not_strings] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_execute_duration_is_rounded PASSED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_stats_duration_is_rounded PASSED [ 39%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_error_does_not_increment_stats PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_invalid_json_returns_json_error PASSED [ 41%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_execute_edge_errors[stdin_array_with_non_string] FAILED [ 42%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_execute_edge_errors[env_is_null] PASSED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_execute_edge_errors[files_is_null] PASSED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_initial_stats PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_execute_with_track[touch_file_glob] PASSED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_execute_with_track[touch_file_glob_mismatch] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_execute_with_track[touch_file_no_glob] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_execute_with_track[not_recursive] PASSED [ 49%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_execute_with_track[recursive_glob] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_final_stats PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_track_validation_errors[invalid_track_type_string] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_track_validation_errors[invalid_track_type_object] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_track_validation_errors[invalid_track_type_number] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_track_validation_errors[invalid_track_element_number] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_track_validation_errors[invalid_track_element_null] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_track_validation_errors[invalid_track_element_object] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_initial_stats PASSED [ 58%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[bz2_compression] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[gz_compression] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[csv_columns] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[csv_list_objects] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[csv_cell_types] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[csv_quoting] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[csv_sorted_headers] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[jsonl_list] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[jsonl_columns] FAILED [ 67%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[tsv_basic] FAILED [ 68%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[json_object] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[json_array] PASSED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[yaml_data] FAILED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[unknown_extension] PASSED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_final_stats PASSED [ 73%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[csv_column_many_columns] PASSED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[csv_decimals_preserved] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[csv_empty_array] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[csv_empty_strings] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[csv_gz_compression] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[csv_single_column] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[fallback_no_extension] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[fallback_unknown_with_string] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[json_boolean] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[json_empty_array] PASSED [ 83%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[json_empty_object] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[json_null] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[json_number] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[json_string] PASSED [ 87%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[jsonl_gz_compression] PASSED [ 88%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[multiple_structured_files] FAILED [ 89%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[ndjson_columns] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[ndjson_list] PASSED [ 91%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[track_with_structured_files] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[tsv_bz2_compression] FAILED [ 93%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[tsv_columns] FAILED [ 94%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[tsv_mixed_types] FAILED [ 95%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[tsv_quoting_with_tabs] FAILED [ 96%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[yaml_array] FAILED [ 97%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[yaml_gz_compression] FAILED [ 98%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[yml_extension] FAILED [ 99%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_error_cases[multiple_compression_extensions] PASSED [100%]
+
+=================================== FAILURES ===================================
+____________ TestHidden.test_execute_hidden[nested_file_execution] _____________
+
+self = <test_checkpoint_1.TestHidden object at 0x79f4ab626d80>
+client = <httpx.Client object at 0x79f4ab37cef0>
+case = ExecuteCase(name='nested_file_execution', body={'command': 'sh scripts/run.sh', 'env': {}, 'files': {'inputs/city.txt'...out='Madison\nWisconsin\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0)
+
+    @pytest.mark.parametrize(
+        "case",
+        HIDDEN_EXECUTE_CASES,
+        ids=[case.name for case in HIDDEN_EXECUTE_CASES],
+    )
+    def test_execute_hidden(
+        self, client: httpx.Client, case: ExecuteCase
+    ) -> None:
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_1.py:704: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.002, 'exit_code': 2, 'id': '5004250b-26d6-485a-8b1d-23b89684c52e', 'stderr': 'sh: 0: cannot open scripts/run.sh: No such file\n', ...}
+case = ExecuteCase(name='nested_file_execution', body={'command': 'sh scripts/run.sh', 'env': {}, 'files': {'inputs/city.txt'...out='Madison\nWisconsin\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0)
+
+    def _assert_execute_payload(payload: dict[str, Any], case: ExecuteCase) -> None:
+>       assert payload["exit_code"] == case.expected_exit_code
+E       AssertionError: assert 2 == 0
+E        +  where 0 = ExecuteCase(name='nested_file_execution', body={'command': 'sh scripts/run.sh', 'env': {}, 'files': {'inputs/city.txt': 'Madison\n', 'inputs/state.txt': 'Wisconsin\n', 'scripts/run.sh': 'cat inputs/city.txt\ncat inputs/state.txt\n'}, 'stdin': [], 'timeout': 10}, expected_stdout='Madison\nWisconsin\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0).expected_exit_code
+
+.evaluation_tests/test_checkpoint_1.py:124: AssertionError
+____________ TestHidden.test_execute_hidden[stdin_array_with_files] ____________
+
+self = <test_checkpoint_1.TestHidden object at 0x79f4ab627680>
+client = <httpx.Client object at 0x79f4ab37cef0>
+case = ExecuteCase(name='stdin_array_with_files', body={'command': 'cat header.txt && awk \'{print "- " $0}\'', 'env': {}, 'f...ple\n- banana\n- cherry\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0)
+
+    @pytest.mark.parametrize(
+        "case",
+        HIDDEN_EXECUTE_CASES,
+        ids=[case.name for case in HIDDEN_EXECUTE_CASES],
+    )
+    def test_execute_hidden(
+        self, client: httpx.Client, case: ExecuteCase
+    ) -> None:
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_1.py:704: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.003, 'exit_code': 0, 'id': 'd962eb4d-e842-4c58-897e-0df6ff92949b', 'stderr': '', ...}
+case = ExecuteCase(name='stdin_array_with_files', body={'command': 'cat header.txt && awk \'{print "- " $0}\'', 'env': {}, 'f...ple\n- banana\n- cherry\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0)
+
+    def _assert_execute_payload(payload: dict[str, Any], case: ExecuteCase) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+>       assert _normalize_text(payload["stdout"]) == _normalize_text(
+            case.expected_stdout
+        )
+E       AssertionError: assert 'items:-applebananacherry' == 'items:-apple-banana-cherry'
+E         
+E         - items:-apple-banana-cherry
+E         ?             -      -
+E         + items:-applebananacherry
+
+.evaluation_tests/test_checkpoint_1.py:127: AssertionError
+_____ TestEdgeCases.test_execute_edge_errors[stdin_array_with_non_string] ______
+
+self = <test_checkpoint_1.TestEdgeCases object at 0x79f4ab679970>
+client = <httpx.Client object at 0x79f4ab691700>
+case = ErrorCase(name='stdin_array_with_non_string', body={'command': 'echo test', 'stdin': ['ok', 123]}, expected_code=None, expected_status=400)
+
+    @pytest.mark.parametrize(
+        "case",
+        EDGE_ERROR_CASES,
+        ids=[case.name for case in EDGE_ERROR_CASES],
+    )
+    def test_execute_edge_errors(
+        self, client: httpx.Client, case: ErrorCase
+    ) -> None:
+        response = client.post("/v1/execute", json=case.body)
+>       assert response.status_code == case.expected_status
+E       AssertionError: assert 500 == 400
+E        +  where 500 = <Response [500 Internal Server Error]>.status_code
+E        +  and   400 = ErrorCase(name='stdin_array_with_non_string', body={'command': 'echo test', 'stdin': ['ok', 123]}, expected_code=None, expected_status=400).expected_status
+
+.evaluation_tests/test_checkpoint_1.py:821: AssertionError
+________________ TestCore.test_structured_files[jsonl_columns] _________________
+
+self = <test_checkpoint_3.TestCore object at 0x79f4ab66b740>
+client = <httpx.Client object at 0x79f4aaeff170>
+case = StructuredFileCase(name='jsonl_columns', body={'command': 'cat data.jsonl', 'env': {}, 'files': {'data.jsonl': {'id': ..."}\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.parametrize(
+        "case",
+        CORE_EXECUTE_CASES,
+        ids=[case.name for case in CORE_EXECUTE_CASES],
+    )
+    def test_structured_files(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test structured file serialization."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:746: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.002, 'exit_code': 0, 'id': '5187c7ef-58b8-4fb2-b5a1-27f7d79c5745', 'stderr': '', ...}
+case = StructuredFileCase(name='jsonl_columns', body={'command': 'cat data.jsonl', 'env': {}, 'files': {'data.jsonl': {'id': ..."}\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: '{"id": [1, 2, 3], "name": ["alice", "bob", "charlie"]}\n'
+E         expected: '{"id":1,"name":"alice"}\n{"id":2,"name":"bob"}\n{"id":3,"name":"charlie"}\n'
+E       assert '{"id":[1,2,3],"name":["alice","bob","charlie"]}' == '{"id":1,"name":"alice"}{"id":2,"name":"bob"}{"id":3,"name":"charlie"}'
+E         
+E         - {"id":1,"name":"alice"}{"id":2,"name":"bob"}{"id":3,"name":"charlie"}
+E         + {"id":[1,2,3],"name":["alice","bob","charlie"]}
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+__________________ TestCore.test_structured_files[tsv_basic] ___________________
+
+self = <test_checkpoint_3.TestCore object at 0x79f4ab66bbc0>
+client = <httpx.Client object at 0x79f4aaeff170>
+case = StructuredFileCase(name='tsv_basic', body={'command': 'cat data.tsv', 'env': {}, 'files': {'data.tsv': [{'id': 1, 'nam...ob\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.parametrize(
+        "case",
+        CORE_EXECUTE_CASES,
+        ids=[case.name for case in CORE_EXECUTE_CASES],
+    )
+    def test_structured_files(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test structured file serialization."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:746: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.002, 'exit_code': 0, 'id': '52bde5be-de8a-427d-bfc0-8f1f68f1e6d1', 'stderr': '', ...}
+case = StructuredFileCase(name='tsv_basic', body={'command': 'cat data.tsv', 'env': {}, 'files': {'data.tsv': [{'id': 1, 'nam...ob\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: 'id,name\n1,alice\n2,bob\n'
+E         expected: 'id\tname\n1\talice\n2\tbob\n'
+E       assert 'id,name1,alice2,bob' == 'id\tname1\talice2\tbob'
+E         
+E         - id	name1	alice2	bob
+E         ?   ^     ^      ^
+E         + id,name1,alice2,bob
+E         ?   ^     ^      ^
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+__________________ TestCore.test_structured_files[yaml_data] ___________________
+
+self = <test_checkpoint_3.TestCore object at 0x79f4ab668380>
+client = <httpx.Client object at 0x79f4aaeff170>
+case = StructuredFileCase(name='yaml_data', body={'command': 'cat config.yaml', 'env': {}, 'files': {'config.yaml': {'count':...st\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.parametrize(
+        "case",
+        CORE_EXECUTE_CASES,
+        ids=[case.name for case in CORE_EXECUTE_CASES],
+    )
+    def test_structured_files(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test structured file serialization."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:746: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.002, 'exit_code': 0, 'id': '69e0b286-4cf9-45ce-a551-12095fa4fcde', 'stderr': '', ...}
+case = StructuredFileCase(name='yaml_data', body={'command': 'cat config.yaml', 'env': {}, 'files': {'config.yaml': {'count':...st\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: '{"count": 42, "enabled": true, "name": "test"}'
+E         expected: 'count: 42\nenabled: true\nname: test\n'
+E       assert '{"count":42,"enabled":true,"name":"test"}' == 'count:42enabled:truename:test'
+E         
+E         - count:42enabled:truename:test
+E         + {"count":42,"enabled":true,"name":"test"}
+E         ? ++     +   ++       +     ++    + +    ++
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+_ TestFunctionality.test_structured_files_extended[multiple_structured_files] __
+
+self = <test_checkpoint_3.TestFunctionality object at 0x79f4ab669d00>
+client = <httpx.Client object at 0x79f4aadde930>
+case = StructuredFileCase(name='multiple_structured_files', body={'command': 'cat a.json && cat b.csv && cat c.yaml', 'env': ...ue\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        FUNCTIONALITY_CASES,
+        ids=[case.name for case in FUNCTIONALITY_CASES],
+    )
+    def test_structured_files_extended(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test extended structured file features."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.004, 'exit_code': 0, 'id': 'be67ee1b-e5bf-42ba-8a3a-928132a3af75', 'stderr': '', ...}
+case = StructuredFileCase(name='multiple_structured_files', body={'command': 'cat a.json && cat b.csv && cat c.yaml', 'env': ...ue\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: '{"x": 1}id,name\n1,test\n{"key": "value"}'
+E         expected: '{"x":1}\nid,name\n1,test\nkey: value\n'
+E       assert '{"x":1}id,name1,test{"key":"value"}' == '{"x":1}id,name1,testkey:value'
+E         
+E         - {"x":1}id,name1,testkey:value
+E         + {"x":1}id,name1,test{"key":"value"}
+E         ?                     ++   + +     ++
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+_______ TestFunctionality.test_structured_files_extended[ndjson_columns] _______
+
+self = <test_checkpoint_3.TestFunctionality object at 0x79f4ab669e80>
+client = <httpx.Client object at 0x79f4aadde930>
+case = StructuredFileCase(name='ndjson_columns', body={'command': 'cat data.ndjson', 'env': {}, 'files': {'data.ndjson': {'x'...0}\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        FUNCTIONALITY_CASES,
+        ids=[case.name for case in FUNCTIONALITY_CASES],
+    )
+    def test_structured_files_extended(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test extended structured file features."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.002, 'exit_code': 0, 'id': 'e1e2c511-3bfd-4088-843b-af7af3ba5f7f', 'stderr': '', ...}
+case = StructuredFileCase(name='ndjson_columns', body={'command': 'cat data.ndjson', 'env': {}, 'files': {'data.ndjson': {'x'...0}\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: '{"x": [1, 2, 3], "y": [10, 20, 30]}\n'
+E         expected: '{"x":1,"y":10}\n{"x":2,"y":20}\n{"x":3,"y":30}\n'
+E       assert '{"x":[1,2,3],"y":[10,20,30]}' == '{"x":1,"y":10}{"x":2,"y":20}{"x":3,"y":30}'
+E         
+E         - {"x":1,"y":10}{"x":2,"y":20}{"x":3,"y":30}
+E         + {"x":[1,2,3],"y":[10,20,30]}
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+____ TestFunctionality.test_structured_files_extended[tsv_bz2_compression] _____
+
+self = <test_checkpoint_3.TestFunctionality object at 0x79f4ab66a1e0>
+client = <httpx.Client object at 0x79f4aadde930>
+case = StructuredFileCase(name='tsv_bz2_compression', body={'command': 'bzcat data.tsv.bz2', 'env': {}, 'files': {'data.tsv.b...l2\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        FUNCTIONALITY_CASES,
+        ids=[case.name for case in FUNCTIONALITY_CASES],
+    )
+    def test_structured_files_extended(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test extended structured file features."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.002, 'exit_code': 0, 'id': '1c34f14a-e90e-45bc-ac0b-b5eca7cfa52f', 'stderr': '', ...}
+case = StructuredFileCase(name='tsv_bz2_compression', body={'command': 'bzcat data.tsv.bz2', 'env': {}, 'files': {'data.tsv.b...l2\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: 'col1,col2\nval1,val2\n'
+E         expected: 'col1\tcol2\nval1\tval2\n'
+E       assert 'col1,col2val1,val2' == 'col1\tcol2val1\tval2'
+E         
+E         - col1	col2val1	val2
+E         ?     ^        ^
+E         + col1,col2val1,val2
+E         ?     ^        ^
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+________ TestFunctionality.test_structured_files_extended[tsv_columns] _________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x79f4ab66a360>
+client = <httpx.Client object at 0x79f4aadde930>
+case = StructuredFileCase(name='tsv_columns', body={'command': 'cat data.tsv', 'env': {}, 'files': {'data.tsv': {'id': [1, 2,...tc\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        FUNCTIONALITY_CASES,
+        ids=[case.name for case in FUNCTIONALITY_CASES],
+    )
+    def test_structured_files_extended(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test extended structured file features."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.002, 'exit_code': 0, 'id': 'bda31ea1-97fd-4481-aed3-8d39ec3a91cc', 'stderr': '', ...}
+case = StructuredFileCase(name='tsv_columns', body={'command': 'cat data.tsv', 'env': {}, 'files': {'data.tsv': {'id': [1, 2,...tc\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: 'id,value\n1,a\n2,b\n3,c\n'
+E         expected: 'id\tvalue\n1\ta\n2\tb\n3\tc\n'
+E       assert 'id,value1,a2,b3,c' == 'id\tvalue1\ta2\tb3\tc'
+E         
+E         - id	value1	a2	b3	c
+E         ?   ^      ^  ^  ^
+E         + id,value1,a2,b3,c
+E         ?   ^      ^  ^  ^
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+______ TestFunctionality.test_structured_files_extended[tsv_mixed_types] _______
+
+self = <test_checkpoint_3.TestFunctionality object at 0x79f4ab66a4b0>
+client = <httpx.Client object at 0x79f4aadde930>
+case = StructuredFileCase(name='tsv_mixed_types', body={'command': 'cat mixed.tsv', 'env': {}, 'files': {'mixed.tsv': [{'str'...ld\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        FUNCTIONALITY_CASES,
+        ids=[case.name for case in FUNCTIONALITY_CASES],
+    )
+    def test_structured_files_extended(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test extended structured file features."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.002, 'exit_code': 0, 'id': '2e48ee64-844e-4378-90da-b002428fe555', 'stderr': '', ...}
+case = StructuredFileCase(name='tsv_mixed_types', body={'command': 'cat mixed.tsv', 'env': {}, 'files': {'mixed.tsv': [{'str'...ld\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: 'bool,num,str\nFalse,3.14,hello\nTrue,42,world\n'
+E         expected: 'bool\tnum\tstr\nfalse\t3.14\thello\ntrue\t42\tworld\n'
+E       assert 'bool,num,strfalse,3.14,hellotrue,42,world' == 'bool\tnum\tstrfalse\t3.14\thellotrue\t42\tworld'
+E         
+E         - bool	num	strfalse	3.14	hellotrue	42	world
+E         ?     ^   ^        ^    ^         ^  ^
+E         + bool,num,strfalse,3.14,hellotrue,42,world
+E         ?     ^   ^        ^    ^         ^  ^
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+___ TestFunctionality.test_structured_files_extended[tsv_quoting_with_tabs] ____
+
+self = <test_checkpoint_3.TestFunctionality object at 0x79f4ab66a5a0>
+client = <httpx.Client object at 0x79f4aadde930>
+case = StructuredFileCase(name='tsv_quoting_with_tabs', body={'command': 'cat special.tsv', 'env': {}, 'files': {'special.tsv...e"\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        FUNCTIONALITY_CASES,
+        ids=[case.name for case in FUNCTIONALITY_CASES],
+    )
+    def test_structured_files_extended(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test extended structured file features."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.002, 'exit_code': 0, 'id': '902972db-c292-44a7-8c92-94f385148ebc', 'stderr': '', ...}
+case = StructuredFileCase(name='tsv_quoting_with_tabs', body={'command': 'cat special.tsv', 'env': {}, 'files': {'special.tsv...e"\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: 'text\nhas\ttab\n"has\nnewline"\n'
+E         expected: 'text\n"has\ttab"\n"has\nnewline"\n'
+E       assert 'texthas\ttab"hasnewline"' == 'text"has\ttab""hasnewline"'
+E         
+E         - text"has	tab""hasnewline"
+E         ?     -   	   -
+E         + texthas	tab"hasnewline"
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+_________ TestFunctionality.test_structured_files_extended[yaml_array] _________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x79f4ab66a690>
+client = <httpx.Client object at 0x79f4aadde930>
+case = StructuredFileCase(name='yaml_array', body={'command': 'cat list.yaml', 'env': {}, 'files': {'list.yaml': ['item1', 'i...m3\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        FUNCTIONALITY_CASES,
+        ids=[case.name for case in FUNCTIONALITY_CASES],
+    )
+    def test_structured_files_extended(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test extended structured file features."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.003, 'exit_code': 0, 'id': '7cc6be43-fec0-49ff-af74-8d8b74f11b1b', 'stderr': '', ...}
+case = StructuredFileCase(name='yaml_array', body={'command': 'cat list.yaml', 'env': {}, 'files': {'list.yaml': ['item1', 'i...m3\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: '["item1", "item2", "item3"]'
+E         expected: '- item1\n- item2\n- item3\n'
+E       assert '["item1","item2","item3"]' == '-item1-item2-item3'
+E         
+E         - -item1-item2-item3
+E         + ["item1","item2","item3"]
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+____ TestFunctionality.test_structured_files_extended[yaml_gz_compression] _____
+
+self = <test_checkpoint_3.TestFunctionality object at 0x79f4ab66a840>
+client = <httpx.Client object at 0x79f4aadde930>
+case = StructuredFileCase(name='yaml_gz_compression', body={'command': 'zcat config.yaml.gz', 'env': {}, 'files': {'config.ya...ue\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        FUNCTIONALITY_CASES,
+        ids=[case.name for case in FUNCTIONALITY_CASES],
+    )
+    def test_structured_files_extended(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test extended structured file features."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.003, 'exit_code': 0, 'id': '34a48113-6c02-4670-8aaf-0f7ddd7f2479', 'stderr': '', ...}
+case = StructuredFileCase(name='yaml_gz_compression', body={'command': 'zcat config.yaml.gz', 'env': {}, 'files': {'config.ya...ue\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: '{"key": "value"}'
+E         expected: 'key: value\n'
+E       assert '{"key":"value"}' == 'key:value'
+E         
+E         - key:value
+E         + {"key":"value"}
+E         ? ++   + +     ++
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+_______ TestFunctionality.test_structured_files_extended[yml_extension] ________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x79f4ab66a990>
+client = <httpx.Client object at 0x79f4aadde930>
+case = StructuredFileCase(name='yml_extension', body={'command': 'cat config.yml', 'env': {}, 'files': {'config.yml': {'enabl...80\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        FUNCTIONALITY_CASES,
+        ids=[case.name for case in FUNCTIONALITY_CASES],
+    )
+    def test_structured_files_extended(
+        self, client: httpx.Client, case: StructuredFileCase
+    ) -> None:
+        """Test extended structured file features."""
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_3.py:779: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.002, 'exit_code': 0, 'id': '3088ad10-128c-42aa-b2f9-306b7783f91e', 'stderr': '', ...}
+case = StructuredFileCase(name='yml_extension', body={'command': 'cat config.yml', 'env': {}, 'files': {'config.yml': {'enabl...80\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0, expected_files=None)
+
+    def _assert_execute_payload(
+        payload: dict[str, Any], case: StructuredFileCase
+    ) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+        # Normalize stdout for comparison
+        actual_stdout = _normalize_stdout(payload["stdout"])
+        expected_stdout = _normalize_stdout(case.expected_stdout)
+>       assert actual_stdout == expected_stdout, (
+            f"stdout mismatch:\nactual: {payload['stdout']!r}\n"
+            f"expected: {case.expected_stdout!r}"
+        )
+E       AssertionError: stdout mismatch:
+E         actual: '{"enabled": false, "port": 8080}'
+E         expected: 'enabled: false\nport: 8080\n'
+E       assert '{"enabled":false,"port":8080}' == 'enabled:falseport:8080'
+E         
+E         - enabled:falseport:8080
+E         + {"enabled":false,"port":8080}
+E         ? ++       +      ++    +     +
+
+.evaluation_tests/test_checkpoint_3.py:137: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[nested_file_execution] - AssertionError: assert 2 == 0
+ +  where 0 = ExecuteCase(name='nested_file_execution', body={'command': 'sh scripts/run.sh', 'env': {}, 'files': {'inputs/city.txt': 'Madison\n', 'inputs/state.txt': 'Wisconsin\n', 'scripts/run.sh': 'cat inputs/city.txt\ncat inputs/state.txt\n'}, 'stdin': [], 'timeout': 10}, expected_stdout='Madison\nWisconsin\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0).expected_exit_code
+FAILED .evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[stdin_array_with_files] - AssertionError: assert 'items:-applebananacherry' == 'items:-apple-banana-cherry'
+  
+  - items:-apple-banana-cherry
+  ?             -      -
+  + items:-applebananacherry
+FAILED .evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_execute_edge_errors[stdin_array_with_non_string] - AssertionError: assert 500 == 400
+ +  where 500 = <Response [500 Internal Server Error]>.status_code
+ +  and   400 = ErrorCase(name='stdin_array_with_non_string', body={'command': 'echo test', 'stdin': ['ok', 123]}, expected_code=None, expected_status=400).expected_status
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[jsonl_columns] - AssertionError: stdout mismatch:
+  actual: '{"id": [1, 2, 3], "name": ["alice", "bob", "charlie"]}\n'
+  expected: '{"id":1,"name":"alice"}\n{"id":2,"name":"bob"}\n{"id":3,"name":"charlie"}\n'
+assert '{"id":[1,2,3],"name":["alice","bob","charlie"]}' == '{"id":1,"name":"alice"}{"id":2,"name":"bob"}{"id":3,"name":"charlie"}'
+  
+  - {"id":1,"name":"alice"}{"id":2,"name":"bob"}{"id":3,"name":"charlie"}
+  + {"id":[1,2,3],"name":["alice","bob","charlie"]}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[tsv_basic] - AssertionError: stdout mismatch:
+  actual: 'id,name\n1,alice\n2,bob\n'
+  expected: 'id\tname\n1\talice\n2\tbob\n'
+assert 'id,name1,alice2,bob' == 'id\tname1\talice2\tbob'
+  
+  - id	name1	alice2	bob
+  ?   ^     ^      ^
+  + id,name1,alice2,bob
+  ?   ^     ^      ^
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_structured_files[yaml_data] - AssertionError: stdout mismatch:
+  actual: '{"count": 42, "enabled": true, "name": "test"}'
+  expected: 'count: 42\nenabled: true\nname: test\n'
+assert '{"count":42,"enabled":true,"name":"test"}' == 'count:42enabled:truename:test'
+  
+  - count:42enabled:truename:test
+  + {"count":42,"enabled":true,"name":"test"}
+  ? ++     +   ++       +     ++    + +    ++
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[multiple_structured_files] - AssertionError: stdout mismatch:
+  actual: '{"x": 1}id,name\n1,test\n{"key": "value"}'
+  expected: '{"x":1}\nid,name\n1,test\nkey: value\n'
+assert '{"x":1}id,name1,test{"key":"value"}' == '{"x":1}id,name1,testkey:value'
+  
+  - {"x":1}id,name1,testkey:value
+  + {"x":1}id,name1,test{"key":"value"}
+  ?                     ++   + +     ++
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[ndjson_columns] - AssertionError: stdout mismatch:
+  actual: '{"x": [1, 2, 3], "y": [10, 20, 30]}\n'
+  expected: '{"x":1,"y":10}\n{"x":2,"y":20}\n{"x":3,"y":30}\n'
+assert '{"x":[1,2,3],"y":[10,20,30]}' == '{"x":1,"y":10}{"x":2,"y":20}{"x":3,"y":30}'
+  
+  - {"x":1,"y":10}{"x":2,"y":20}{"x":3,"y":30}
+  + {"x":[1,2,3],"y":[10,20,30]}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[tsv_bz2_compression] - AssertionError: stdout mismatch:
+  actual: 'col1,col2\nval1,val2\n'
+  expected: 'col1\tcol2\nval1\tval2\n'
+assert 'col1,col2val1,val2' == 'col1\tcol2val1\tval2'
+  
+  - col1	col2val1	val2
+  ?     ^        ^
+  + col1,col2val1,val2
+  ?     ^        ^
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[tsv_columns] - AssertionError: stdout mismatch:
+  actual: 'id,value\n1,a\n2,b\n3,c\n'
+  expected: 'id\tvalue\n1\ta\n2\tb\n3\tc\n'
+assert 'id,value1,a2,b3,c' == 'id\tvalue1\ta2\tb3\tc'
+  
+  - id	value1	a2	b3	c
+  ?   ^      ^  ^  ^
+  + id,value1,a2,b3,c
+  ?   ^      ^  ^  ^
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[tsv_mixed_types] - AssertionError: stdout mismatch:
+  actual: 'bool,num,str\nFalse,3.14,hello\nTrue,42,world\n'
+  expected: 'bool\tnum\tstr\nfalse\t3.14\thello\ntrue\t42\tworld\n'
+assert 'bool,num,strfalse,3.14,hellotrue,42,world' == 'bool\tnum\tstrfalse\t3.14\thellotrue\t42\tworld'
+  
+  - bool	num	strfalse	3.14	hellotrue	42	world
+  ?     ^   ^        ^    ^         ^  ^
+  + bool,num,strfalse,3.14,hellotrue,42,world
+  ?     ^   ^        ^    ^         ^  ^
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[tsv_quoting_with_tabs] - AssertionError: stdout mismatch:
+  actual: 'text\nhas\ttab\n"has\nnewline"\n'
+  expected: 'text\n"has\ttab"\n"has\nnewline"\n'
+assert 'texthas\ttab"hasnewline"' == 'text"has\ttab""hasnewline"'
+  
+  - text"has	tab""hasnewline"
+  ?     -   	   -
+  + texthas	tab"hasnewline"
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[yaml_array] - AssertionError: stdout mismatch:
+  actual: '["item1", "item2", "item3"]'
+  expected: '- item1\n- item2\n- item3\n'
+assert '["item1","item2","item3"]' == '-item1-item2-item3'
+  
+  - -item1-item2-item3
+  + ["item1","item2","item3"]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[yaml_gz_compression] - AssertionError: stdout mismatch:
+  actual: '{"key": "value"}'
+  expected: 'key: value\n'
+assert '{"key":"value"}' == 'key:value'
+  
+  - key:value
+  + {"key":"value"}
+  ? ++   + +     ++
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_structured_files_extended[yml_extension] - AssertionError: stdout mismatch:
+  actual: '{"enabled": false, "port": 8080}'
+  expected: 'enabled: false\nport: 8080\n'
+assert '{"enabled":false,"port":8080}' == 'enabled:falseport:8080'
+  
+  - enabled:falseport:8080
+  + {"enabled":false,"port":8080}
+  ? ++       +      ++    +     +
+======================== 15 failed, 86 passed in 5.07s =========================

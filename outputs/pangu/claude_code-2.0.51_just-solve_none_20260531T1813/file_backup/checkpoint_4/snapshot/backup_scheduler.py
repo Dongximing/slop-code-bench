@@ -1,0 +1,928 @@
+#!/usr/bin/env python3
+"""
+Backup scheduler that parses a YAML schedule, evaluates which jobs are due,
+and simulates running those jobs with exclusion rules, emitting event history as JSON Lines.
+"""
+
+import argparse
+import csv
+import hashlib
+import json
+import os
+import re
+import sys
+import tarfile
+from datetime import datetime, timedelta, timezone
+from fnmatch import fnmatch, translate
+from io import BytesIO
+from pathlib import Path
+from typing import Any
+
+import yaml
+from dateutil import tz
+
+
+def parse_args() -> argparse.Namespace:
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(
+        description="Simulate backup jobs based on a YAML schedule."
+    )
+    parser.add_argument(
+        "--schedule",
+        required=True,
+        help="Path to YAML schedule file."
+    )
+    parser.add_argument(
+        "--now",
+        required=True,
+        help="Wall clock for scheduling decisions (ISO 8601 format, e.g., 2025-09-10T13:45:00Z)."
+    )
+    parser.add_argument(
+        "--duration",
+        type=float,
+        default=24.0,
+        help="Duration to simulate in hours. Default is 24."
+    )
+    parser.add_argument(
+        "--mount",
+        required=True,
+        help="Path to the location where files are mounted (treated as mount:// root)."
+    )
+    parser.add_argument(
+        "--backup",
+        help="Path to the backup destination directory (may not exist)."
+    )
+    return parser.parse_args()
+
+
+def parse_iso_timestamp(ts_str: str) -> datetime:
+    """Parse an ISO 8601 timestamp, returning a timezone-aware datetime."""
+    # Handle 'Z' suffix
+    if ts_str.endswith('Z'):
+        ts_str = ts_str[:-1] + '+00:00'
+    # datetime.fromisoformat handles timezone-aware strings
+    dt = datetime.fromisoformat(ts_str)
+    if dt.tzinfo is None:
+        raise ValueError(f"Timestamp {ts_str} is missing timezone info.")
+    return dt
+
+
+def load_schedule(schedule_path: str) -> dict:
+    """Load and parse the YAML schedule."""
+    with open(schedule_path, 'r') as f:
+        return yaml.safe_load(f)
+
+
+def get_timezone(tz_name: str) -> tz.tzfile:
+    """Get a timezone object from an IANA timezone name."""
+    return tz.gettz(tz_name)
+
+
+def parse_time_of_day(time_str: str) -> tuple[int, int]:
+    """Parse HH:MM format into (hour, minute)."""
+    parts = time_str.split(':')
+    if len(parts) != 2:
+        raise ValueError(f"Invalid time format: {time_str}")
+    hour = int(parts[0])
+    minute = int(parts[1])
+    if not (0 <= hour <= 23 and 0 <= minute <= 59):
+        raise ValueError(f"Time out of range: {time_str}")
+    return hour, minute
+
+
+def get_next_trigger_time(
+    job: dict,
+    tz_info: tz.tzfile,
+    start_dt: datetime
+) -> list[datetime]:
+    """
+    Calculate all trigger times for a job within the simulation window.
+
+    Returns a list of datetime objects in UTC (all floored to minute).
+    """
+    kind = job['when']['kind']
+    triggers = []
+
+    if kind == 'daily':
+        hour, minute = parse_time_of_day(job['when']['at'])
+        window_end = start_dt + timedelta(hours=job.get('_duration_hours', 24))
+
+        # Generate trigger times for each day in the window
+        start_date = start_dt.astimezone(tz_info).replace(hour=0, minute=0, second=0, microsecond=0)
+        current = start_date
+        while current <= window_end.astimezone(tz_info):
+            trigger = current.replace(hour=hour, minute=minute)
+            trigger_utc = trigger.astimezone(timezone.utc)
+            triggers.append(trigger_utc)
+            current += timedelta(days=1)
+
+    elif kind == 'weekly':
+        hour, minute = parse_time_of_day(job['when']['at'])
+        days = job['when'].get('days', [])
+        day_map = {'Mon': 0, 'Tue': 1, 'Wed': 2, 'Thu': 3, 'Fri': 4, 'Sat': 5, 'Sun': 6}
+        weekday_nums = []
+        for d in days:
+            d_upper = d.strip().capitalize()
+            if d_upper not in day_map:
+                raise ValueError(f"Invalid day name: {d}")
+            weekday_nums.append(day_map[d_upper])
+
+        window_end = start_dt + timedelta(hours=job.get('_duration_hours', 24))
+
+        # Find all occurrences within the window
+        start_date = start_dt.astimezone(tz_info).replace(hour=0, minute=0, second=0, microsecond=0)
+        current = start_date
+        while current <= window_end.astimezone(tz_info):
+            for wd in weekday_nums:
+                days_ahead = wd - current.weekday()
+                if days_ahead < 0:
+                    days_ahead += 7
+                trigger = current + timedelta(days=days_ahead)
+                trigger = trigger.replace(hour=hour, minute=minute)
+                trigger_utc = trigger.astimezone(timezone.utc)
+                triggers.append(trigger_utc)
+            current += timedelta(days=7)
+
+        triggers = sorted(set(triggers))
+
+    elif kind == 'once':
+        at_str = job['when']['at']
+        dt_naive = datetime.fromisoformat(at_str)
+        dt_local = dt_naive.replace(tzinfo=tz_info)
+        trigger_utc = dt_local.astimezone(timezone.utc)
+        window_end = start_dt + timedelta(hours=job.get('_duration_hours', 24))
+        if start_dt <= trigger_utc <= window_end:
+            triggers.append(trigger_utc)
+    else:
+        raise ValueError(f"Unknown job kind: {kind}")
+
+    return triggers
+
+
+def find_due_jobs(
+    schedule: dict,
+    now_utc: datetime,
+    duration_hours: float
+) -> list[tuple[str, dict, datetime, str]]:
+    """
+    Find all jobs that are due within the simulation window.
+
+    Returns a list of tuples: (job_id, job_dict, trigger_time_utc, now_local_str)
+    Sorted by job_id ascending.
+    """
+    timezone_name = schedule.get('timezone', 'UTC')
+    tz_info = get_timezone(timezone_name)
+
+    due_jobs = []
+    for job in schedule.get('jobs', []):
+        if not job.get('enabled', True):
+            continue
+
+        job['_duration_hours'] = duration_hours
+
+        triggers = get_next_trigger_time(job, tz_info, now_utc)
+        window_end = now_utc + timedelta(hours=duration_hours)
+
+        for trigger in triggers:
+            if now_utc <= trigger <= window_end:
+                trigger_local = trigger.astimezone(tz_info)
+                now_local_str = trigger_local.strftime('%Y-%m-%dT%H:%M:%SZ')
+                due_jobs.append((job['id'], job, trigger, now_local_str))
+
+    due_jobs.sort(key=lambda x: x[0])
+    return due_jobs
+
+
+def match_pattern(path: str, pattern: str) -> bool:
+    """
+    Check if a path matches a glob pattern.
+
+    Supports:
+    - * matches any sequence of characters except /
+    - ? matches any single character except /
+    - ** matches any sequence of characters including /
+    - [abc] character classes
+
+    Paths use forward slashes.
+    """
+    # Normalize to forward slashes
+    path = path.replace('\\', '/')
+    pattern = pattern.replace('\\', '/')
+
+    # Handle the case of just **
+    if pattern == '**':
+        return True
+
+    # Handle ** patterns specially since fnmatch doesn't handle them correctly
+    if '**' in pattern:
+        return _match_pattern_with_star_star(path, pattern)
+
+    # For regular patterns without **, use fnmatch but ensure * doesn't cross /
+    return _fnmatch_no_slash_crossing(path, pattern)
+
+
+def _fnmatch_no_slash_crossing(path: str, pattern: str) -> bool:
+    """
+    Use fnmatch but enforce that * does not match /.
+
+    Key rules:
+    - * matches any sequence of non-/ characters within a segment
+    - A/* means: path has 2 segments, first must be 'A', second must match any non-/ chars
+    - A/*/* means: path has 3 segments, first='A', second any, third any
+    """
+    # Split both path and pattern by /
+    path_parts = path.split('/')
+    pattern_parts = pattern.split('/')
+
+    # Must have the same number of segments
+    # Unless the pattern ends with * - but * without ** should NOT cross / boundaries
+    # So A/*/* means exactly 3 segments
+    if len(path_parts) != len(pattern_parts):
+        return False
+
+    # Match each segment
+    for p_part, pt_part in zip(path_parts, pattern_parts):
+        if not fnmatch(p_part, pt_part):
+            return False
+
+    return True
+
+
+def _match_pattern_with_star_star(path: str, pattern: str) -> bool:
+    """
+    Match a pattern containing ** against a path.
+    """
+    # Split pattern by **
+    parts = pattern.split('**')
+
+    if not parts[0] and not parts[-1]:
+        # Pattern is like **something**
+        # Remove leading and trailing empty parts
+        parts = parts[1:-1]
+        # This becomes something like [something, something]
+        # Pattern is: ** middle **
+        # We need to check if path contains middle as a substring
+        if not parts:
+            # Just **
+            return True
+        middle = parts[0]
+        # For simplicity, treat as: ** + middle + **
+        # This should match if path contains the middle pattern
+        # Build a pattern: */*/*/.../middle/*/*/*
+        # For now, just check if the pattern matches somewhere
+        return _match_star_star_middle(path, middle)
+
+    if not parts[0]:
+        # Pattern starts with **, like **/something or **something
+        suffix = parts[1] if len(parts) > 1 else ''
+        # Pattern is: **suffix
+        # Check if path ends with suffix
+        if suffix:
+            # Need to check if path ends with suffix
+            # The middle part (before suffix) can contain /
+            return path.endswith(suffix)
+        else:
+            # Pattern is just **
+            return True
+
+    if not parts[-1]:
+        # Pattern ends with **, like something/**
+        prefix = parts[0]
+        # Pattern is: prefix**
+        # Check if path starts with prefix
+        return path.startswith(prefix)
+
+    # Pattern is: prefix**suffix
+    prefix = parts[0]
+    suffix = parts[1] if len(parts) > 1 else ''
+
+    if not prefix:
+        # Shouldn't happen due to above checks
+        return path.endswith(suffix) if suffix else True
+
+    if not suffix:
+        return path.startswith(prefix)
+
+    # Both prefix and suffix: path must start with prefix and end with suffix
+    if not path.startswith(prefix) or not path.endswith(suffix):
+        return False
+
+    # The middle part (after prefix, before suffix) is what ** matches
+    middle = path[len(prefix):-len(suffix)] if suffix else path[len(prefix):]
+
+    # For our purposes, this is always valid since ** can match anything including /
+    return True
+
+
+def _match_star_star_middle(path: str, middle: str) -> bool:
+    """
+    Check if path contains middle pattern anywhere.
+    """
+    escaped = re.escape(middle)
+    pattern = escaped.replace(r'\*', '.*').replace(r'\?', '.')
+    return bool(re.search(pattern, path))
+
+
+def apply_exclusion_rules(file_path: str, exclude_patterns: list[str]) -> tuple[bool, str | None]:
+    """
+    Apply exclusion patterns to a file path.
+
+    Returns (is_excluded, first_matching_pattern).
+    If not excluded, returns (False, None).
+    """
+    for pattern in exclude_patterns:
+        if match_pattern(file_path, pattern):
+            return True, pattern
+    return False, None
+
+
+def traverse_source(
+    mount_path: str,
+    source_path: str,
+    exclude_patterns: list[str],
+    job_id: str
+) -> tuple[list[str], list[tuple[str, str]]]:
+    """
+    Traverse the source directory and apply exclusion rules.
+    """
+    full_path = Path(mount_path) / source_path if source_path else Path(mount_path)
+
+    if not full_path.exists():
+        return [], []
+
+    selected = []
+    excluded = []
+
+    all_files = []
+    for root, dirs, files in os.walk(full_path):
+        root_path = Path(root)
+        if root_path == full_path:
+            rel_root = ''
+        else:
+            rel_root = str(root_path.relative_to(full_path))
+
+        for file in sorted(files):
+            if rel_root:
+                rel_path = f"{rel_root}/{file}"
+            else:
+                rel_path = file
+            all_files.append(rel_path)
+
+    all_files.sort()
+
+    for rel_path in all_files:
+        is_excluded, pattern = apply_exclusion_rules(rel_path, exclude_patterns)
+        if is_excluded:
+            excluded.append((rel_path, pattern))
+        else:
+            selected.append(rel_path)
+
+    return selected, excluded
+
+
+def emit_event(event_type: str, **kwargs):
+    """Emit a JSON Lines event to stdout."""
+    event = {'event': event_type}
+    event.update(kwargs)
+    print(json.dumps(event, separators=(',', ':')))
+
+
+def compute_file_checksum(file_path: str) -> str:
+    """Compute SHA-256 checksum of a file."""
+    sha256 = hashlib.sha256()
+    with open(file_path, 'rb') as f:
+        for chunk in iter(lambda: f.read(8192), b''):
+            sha256.update(chunk)
+    return f"sha256:{sha256.hexdigest()}"
+
+
+def load_destination_state(backup_dest: str, job_id: str) -> dict:
+    """Load existing backup state from destination directory.
+
+    Returns a dict mapping relative paths to their SHA-256 checksums.
+    """
+    dest_path = Path(backup_dest) / job_id
+    if not dest_path.exists():
+        return {}
+
+    state = {}
+    for file_path in dest_path.rglob('*'):
+        if file_path.is_file():
+            # Get relative path from job_id directory
+            rel_path = file_path.relative_to(dest_path)
+            # Convert to forward slash path
+            path_str = str(rel_path).replace('\\', '/')
+            # Try to read the checksum file if it exists
+            checksum_file = file_path.with_suffix(file_path.suffix + '.sha256')
+            if checksum_file.exists():
+                try:
+                    with open(checksum_file, 'r') as f:
+                        stored_hash = f.read().strip()
+                        state[path_str] = stored_hash
+                except Exception:
+                    pass
+            # If no checksum file, we can't do incremental - include all
+    return state
+
+
+def load_existing_packs(backup_dest: str, job_id: str) -> dict:
+    """Load existing pack files from destination directory.
+
+    Returns a dict with pack info:
+    {
+        'pack-1.tar': {
+            'files': [{'path': 'A', 'size': 1, 'hash': 'sha256:...'}, ...],
+            'checksum': 'sha256:...',
+            'size': 3,
+            'tar_size': 10240
+        },
+        ...
+    }
+    """
+    dest_path = Path(backup_dest) / job_id
+    if not dest_path.exists():
+        return {}
+
+    packs = {}
+
+    # Find all pack files (pack-*.tar)
+    for pack_path in sorted(dest_path.glob('pack-*.tar')):
+        pack_name = pack_path.name
+
+        # Read the tar file and extract file information
+        pack_files = []
+        try:
+            with tarfile.open(pack_path, 'r') as tar:
+                for member in tar.getmembers():
+                    if member.isfile():
+                        # Extract file content to compute hash
+                        f = tar.extractfile(member)
+                        if f:
+                            content = f.read()
+                            sha256 = hashlib.sha256(content)
+                            file_hash = f"sha256:{sha256.hexdigest()}"
+                            pack_files.append({
+                                'path': member.name,
+                                'size': member.size,
+                                'hash': file_hash
+                            })
+        except Exception:
+            # If we can't read the pack, skip it
+            continue
+
+        if not pack_files:
+            continue
+
+        # Compute pack checksum from the tar file itself
+        try:
+            with open(pack_path, 'rb') as f:
+                tar_bytes = f.read()
+            sha256 = hashlib.sha256(tar_bytes)
+            pack_checksum = f"sha256:{sha256.hexdigest()}"
+            tar_size = len(tar_bytes)
+        except Exception:
+            pack_checksum = None
+            tar_size = 0
+
+        # Calculate total size (sum of file sizes, not tar size)
+        total_size = sum(f['size'] for f in pack_files)
+
+        packs[pack_name] = {
+            'files': pack_files,
+            'checksum': pack_checksum,
+            'size': total_size,
+            'tar_size': tar_size
+        }
+
+    return packs
+
+
+def save_backup_file(src_path: Path, dest_path: Path):
+    """Copy a file to the backup destination."""
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(src_path, 'rb') as f_src:
+        content = f_src.read()
+    with open(dest_path, 'wb') as f_dest:
+        f_dest.write(content)
+    return content
+
+
+def save_checksum_file(checksum: str, checksum_path: Path):
+    """Save a checksum file."""
+    checksum_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(checksum_path, 'w') as f:
+        f.write(checksum)
+
+
+def run_job(job_id: str, job: dict, now_local: str, mount_path: str, backup_dest: str | None):
+    """Execute a single job, emitting events as it runs."""
+    kind = job['when']['kind']
+    emit_event('JOB_ELIGIBLE', job_id=job_id, kind=kind, now_local=now_local)
+
+    exclude_count = len(job.get('exclude', []))
+    emit_event('JOB_STARTED', job_id=job_id, exclude_count=exclude_count)
+
+    # Load destination state if backup directory is provided
+    dest_state = {}
+    if backup_dest:
+        dest_state = load_destination_state(backup_dest, job_id)
+        if dest_state:
+            emit_event('DEST_STATE_LOADED', job_id=job_id, files_total=len(dest_state))
+
+    source = job.get('source', 'mount://')
+    if source.startswith('mount://'):
+        source_path = source[8:]
+    else:
+        source_path = source
+
+    destination = job.get('destination')
+    if not destination:
+        raise ValueError(f"Job {job_id} is missing required 'destination' field")
+
+    exclude_patterns = job.get('exclude', [])
+    selected, excluded = traverse_source(mount_path, source_path, exclude_patterns, job_id)
+
+    for path in selected:
+        emit_event('FILE_SELECTED', job_id=job_id, path=path)
+
+    for path, pattern in excluded:
+        emit_event('FILE_EXCLUDED', job_id=job_id, path=path, pattern=pattern)
+
+    # Handle strategy
+    strategy = job.get('strategy')
+    packs = None
+    total_size_from_strategy = None
+    files_skipped_unchanged = 0
+    bytes_total = 0
+
+    if strategy:
+        strategy_kind = strategy['kind']
+        strategy_options = strategy.get('options', {})
+        emit_event('STRATEGY_SELECTED', job_id=job_id, kind=strategy_kind)
+
+        if strategy_kind == 'full':
+            is_pack_strategy = False  # For full strategy, we check incremental
+            files_skipped, bytes_total = _run_full_strategy(
+                job_id, selected, mount_path, source_path,
+                backup_dest, destination, dest_state, is_pack_strategy
+            )
+            files_skipped_unchanged = files_skipped
+        elif strategy_kind == 'verify':
+            _run_verify_strategy(job_id, selected, mount_path, source_path)
+        elif strategy_kind == 'pack':
+            # Pack strategy uses incremental backups
+            files_skipped, bytes_total = _run_pack_strategy(
+                job_id, selected, mount_path, source_path,
+                strategy_options.get('max_pack_bytes', 1048576), now_local,
+                backup_dest, destination
+            )
+            files_skipped_unchanged = files_skipped
+        else:
+            raise ValueError(f"Unknown strategy kind: {strategy_kind}")
+    else:
+        # No strategy - behavior matches checkpoint 1 (no actual backup performed)
+        pass
+
+    # Build JOB_COMPLETED event
+    completed_event = {
+        'event': 'JOB_COMPLETED',
+        'job_id': job_id,
+        'selected': len(selected),
+        'excluded': len(excluded)
+    }
+    if packs is not None:
+        completed_event['packs'] = packs
+    if bytes_total is not None:
+        completed_event['total_size'] = bytes_total
+    if files_skipped_unchanged > 0:
+        completed_event['files_skipped_unchanged'] = files_skipped_unchanged
+    if dest_state:
+        completed_event['dest_state_files'] = len(dest_state)
+
+    print(json.dumps(completed_event, separators=(',', ':')))
+
+
+def _run_full_strategy(job_id: str, selected: list[str], mount_path: str, source_path: str,
+                       backup_dest: str | None, dest_protocol: str, dest_state: dict,
+                       is_pack_strategy: bool):
+    """Run full strategy - back up each selected file individually with incremental support."""
+    files_skipped = 0
+    bytes_total = 0
+
+    for rel_path in selected:
+        full_path = Path(mount_path) / source_path / rel_path if source_path else Path(mount_path) / rel_path
+        size = full_path.stat().st_size
+        checksum = compute_file_checksum(str(full_path))
+        bytes_total += size
+
+        # Check if this file already exists in destination with same checksum
+        # Pack strategy never uses incremental
+        if not is_pack_strategy and backup_dest and rel_path in dest_state:
+            if dest_state[rel_path] == checksum:
+                # File unchanged - skip
+                emit_event('FILE_SKIPPED_UNCHANGED', job_id=job_id, path=rel_path, hash=checksum)
+                files_skipped += 1
+                continue
+
+        # File needs to be backed up
+        emit_event('FILE_BACKED_UP', job_id=job_id, path=rel_path, size=size, checksum=checksum)
+
+        # Actually write the file to backup destination if backup_dest is provided
+        if backup_dest:
+            # Build destination path: <backup_dest>/<job_id>/<rel_path>
+            dest_dir = Path(backup_dest) / job_id
+            dest_file_path = dest_dir / rel_path
+            save_backup_file(full_path, dest_file_path)
+
+            # Save checksum file
+            checksum_path = dest_file_path.with_suffix(dest_file_path.suffix + '.sha256')
+            save_checksum_file(checksum, checksum_path)
+
+    return files_skipped, bytes_total
+
+
+def _run_verify_strategy(job_id: str, selected: list[str], mount_path: str, source_path: str):
+    """Run verify strategy - verify each selected file without copying."""
+    for rel_path in selected:
+        full_path = Path(mount_path) / source_path / rel_path if source_path else Path(mount_path) / rel_path
+        size = full_path.stat().st_size
+        checksum = compute_file_checksum(str(full_path))
+        emit_event('FILE_VERIFIED', job_id=job_id, path=rel_path, size=size, checksum=checksum)
+
+
+def _create_tarinfo_with_metadata(file_path: str, arcname: str) -> tarfile.TarInfo:
+    """Create a TarInfo object with deterministic metadata for backup."""
+    stat = os.stat(file_path)
+    tarinfo = tarfile.TarInfo(name=arcname)
+    tarinfo.size = stat.st_size
+    tarinfo.mtime = 0  # Deterministic: set to 0
+    tarinfo.mode = 0o644  # Deterministic: read/write for owner, read for others
+    tarinfo.uid = 0  # Deterministic: root
+    tarinfo.gid = 0  # Deterministic: root
+    tarinfo.uname = ""  # Deterministic: empty
+    tarinfo.gname = ""  # Deterministic: empty
+    return tarinfo
+
+
+def _run_pack_strategy(
+    job_id: str,
+    selected: list[str],
+    mount_path: str,
+    source_path: str,
+    max_pack_bytes: int,
+    now_local: str,
+    backup_dest: str | None,
+    destination: str
+):
+    """Run pack strategy - create tar archives with size limits, with incremental support.
+
+    Returns (packs_created, total_size).
+    """
+    # Load existing packs from destination if backup_dest is provided
+    existing_packs = {}
+    if backup_dest:
+        existing_packs = load_existing_packs(backup_dest, job_id)
+
+        # Emit PACK_LOADED events for each existing pack
+        for pack_name, pack_info in existing_packs.items():
+            emit_event(
+                'PACK_LOADED',
+                job_id=job_id,
+                name=pack_name,
+                files_total=len(pack_info['files']),
+                checksum=pack_info['checksum']
+            )
+
+    # Build a map from file path to its info in existing packs
+    # This helps us track which files are in which packs and their checksums
+    file_to_pack_info = {}  # path -> {pack_name, file_info}
+    for pack_name, pack_info in existing_packs.items():
+        for file_info in pack_info['files']:
+            file_to_pack_info[file_info['path']] = {
+                'pack_name': pack_name,
+                'file_info': file_info
+            }
+
+    # Track which packs have been modified (need to be rewritten)
+    # Start by assuming all existing packs are unchanged
+    pack_modified = {pack_name: False for pack_name in existing_packs}
+
+    pack_id = 0
+    current_pack_size = 0
+    current_pack_files = []
+    files_skipped_unchanged = 0
+
+    # Track files that are part of each pack in the new run
+    new_pack_files = {}  # pack_num -> list of file paths
+
+    # Compute checksums for all selected files
+    file_checksums = {}
+    for rel_path in selected:
+        full_path = Path(mount_path) / source_path / rel_path if source_path else Path(mount_path) / rel_path
+        checksum = compute_file_checksum(str(full_path))
+        file_checksums[rel_path] = checksum
+
+    # Determine which files are unchanged
+    unchanged_in_pack = {}  # path -> {pack_name, file_info}
+    for rel_path in selected:
+        if rel_path in file_to_pack_info:
+            info = file_to_pack_info[rel_path]
+            existing_file = info['file_info']
+            if existing_file['hash'] == file_checksums[rel_path]:
+                # File is unchanged - mark it
+                unchanged_in_pack[rel_path] = info
+
+    # Repack files based on current order and size constraints
+    # The packing algorithm reruns from scratch with current order
+    for rel_path in selected:
+        full_path = Path(mount_path) / source_path / rel_path if source_path else Path(mount_path) / rel_path
+        file_size = full_path.stat().st_size
+
+        # Check if adding this file would exceed the limit
+        if current_pack_size + file_size > max_pack_bytes and current_pack_files:
+            # Finalize current pack
+            _finalize_pack(
+                current_pack_files, current_pack_size, new_pack_files,
+                job_id, now_local, backup_dest, existing_packs, pack_modified,
+                mount_path, source_path
+            )
+
+        current_pack_files.append(rel_path)
+        current_pack_size += file_size
+
+        # Check if this file is unchanged in an existing pack
+        if rel_path in unchanged_in_pack:
+            info = unchanged_in_pack[rel_path]
+            pack_name = info['pack_name']
+            file_info = info['file_info']
+            emit_event(
+                'PACK_SKIP_UNCHANGED',
+                job_id=job_id,
+                pack_id=get_pack_number(pack_name),
+                path=rel_path,
+                size=file_info['size'],
+                hash=file_info['hash']
+            )
+            files_skipped_unchanged += 1
+        else:
+            # File changed or new - emit FILE_PACKED
+            # The pack number will be correct after finalization
+            pass
+
+    # Finalize the last pack
+    if current_pack_files:
+        _finalize_pack(
+            current_pack_files, current_pack_size, new_pack_files,
+            job_id, now_local, backup_dest, existing_packs, pack_modified,
+            mount_path, source_path
+        )
+
+    # Emit events for packs that were not modified (all unchanged files in existing packs)
+    for pack_name in sorted(existing_packs.keys()):
+        if not pack_modified.get(pack_name, False):
+            # Pack was not modified - emit PACK_UNCHANGED
+            emit_event(
+                'PACK_UNCHANGED',
+                job_id=job_id,
+                name=pack_name,
+                checksum=existing_packs[pack_name]['checksum']
+            )
+
+    # Calculate total size from the actual files
+    total_size = 0
+    for rel_path in selected:
+        full_path = Path(mount_path) / source_path / rel_path if source_path else Path(mount_path) / rel_path
+        total_size += full_path.stat().st_size
+
+    return files_skipped_unchanged, total_size
+
+
+def _finalize_pack(
+    pack_files: list[str],
+    pack_size: int,
+    new_pack_files: dict,
+    job_id: str,
+    now_local: str,
+    backup_dest: str | None,
+    existing_packs: dict,
+    pack_modified: dict,
+    mount_path: str,
+    source_path: str
+):
+    """Finalize a pack during the packing strategy run.
+
+    This function handles both new packs and updates to existing packs.
+    """
+    # Determine pack number
+    pack_num = len(new_pack_files) + 1
+    pack_name = f"pack-{pack_num}.tar"
+
+    # Store which files are in this pack
+    new_pack_files[pack_num] = pack_files
+
+    # Create tar archive in memory
+    tar_buffer = BytesIO()
+    with tarfile.open(fileobj=tar_buffer, mode='w', format=tarfile.GNU_FORMAT) as tar:
+        for rel_path in pack_files:
+            full_path = Path(mount_path) / source_path / rel_path if source_path else Path(mount_path) / rel_path
+            tarinfo = _create_tarinfo_with_metadata(str(full_path), rel_path)
+            with open(full_path, 'rb') as f:
+                tar.addfile(tarinfo, f)
+
+    tar_bytes = tar_buffer.getvalue()
+    tar_size = len(tar_bytes)
+
+    # Compute checksum of tar bytes
+    sha256 = hashlib.sha256(tar_bytes)
+    checksum = f"sha256:{sha256.hexdigest()}"
+
+    # Emit FILE_PACKED events for files that changed or are new
+    for rel_path in pack_files:
+        full_path = Path(mount_path) / source_path / rel_path if source_path else Path(mount_path) / rel_path
+        file_size = full_path.stat().st_size
+        emit_event('FILE_PACKED', job_id=job_id, path=rel_path, size=file_size, pack_id=pack_num)
+
+    # Check if this pack already exists with the same content
+    if pack_name in existing_packs:
+        old_info = existing_packs[pack_name]
+        if old_info['checksum'] == checksum:
+            # Pack is unchanged - mark as not modified (already False by default)
+            pack_modified[pack_name] = False
+            # Do NOT emit PACK_CREATED - will emit PACK_UNCHANGED later if needed
+        else:
+            # Pack has changed - emit PACK_UPDATED
+            old_checksum = old_info['checksum']
+            old_size = old_info['size']
+            old_tar_size = old_info['tar_size']
+            emit_event(
+                'PACK_UPDATED',
+                job_id=job_id,
+                name=pack_name,
+                size=pack_size,
+                checksum=checksum,
+                timestamp=now_local,
+                tar_size=tar_size,
+                old_size=old_size,
+                old_checksum=old_checksum
+            )
+            pack_modified[pack_name] = True
+    else:
+        # New pack - emit PACK_CREATED
+        emit_event(
+            'PACK_CREATED',
+            job_id=job_id,
+            name=pack_name,
+            size=pack_size,
+            timestamp=now_local,
+            checksum=checksum,
+            tar_size=tar_size
+        )
+        # Mark as modified (it's a new pack)
+        pack_modified[pack_name] = True
+
+    # Write pack to backup destination if backup_dest is provided
+    if backup_dest:
+        dest_dir = Path(backup_dest) / job_id
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        pack_path = dest_dir / pack_name
+        with open(pack_path, 'wb') as f:
+            f.write(tar_bytes)
+
+        # Save checksum file
+        checksum_path = dest_dir / f"{pack_name}.sha256"
+        save_checksum_file(checksum, checksum_path)
+
+
+def get_pack_number(pack_name: str) -> int:
+    """Extract pack number from pack name like 'pack-1.tar'."""
+    import re
+    match = re.search(r'pack-(\d+)\.tar', pack_name)
+    if match:
+        return int(match.group(1))
+    return 1
+
+
+def main():
+    args = parse_args()
+
+    now_utc = parse_iso_timestamp(args.now)
+    if now_utc.tzinfo is None:
+        now_utc = now_utc.replace(tzinfo=timezone.utc)
+    else:
+        now_utc = now_utc.astimezone(timezone.utc)
+    now_utc = now_utc.replace(second=0, microsecond=0)
+
+    schedule = load_schedule(args.schedule)
+
+    timezone_name = schedule.get('timezone', 'UTC')
+    jobs_total = len(schedule.get('jobs', []))
+    emit_event('SCHEDULE_PARSED', timezone=timezone_name, jobs_total=jobs_total)
+
+    due_jobs = find_due_jobs(schedule, now_utc, args.duration)
+
+    for job_id, job, trigger_time, now_local in due_jobs:
+        run_job(job_id, job, now_local, args.mount, args.backup)
+
+
+if __name__ == '__main__':
+    main()

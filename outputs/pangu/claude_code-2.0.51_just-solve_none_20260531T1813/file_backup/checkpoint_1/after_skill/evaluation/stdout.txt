@@ -1,0 +1,1921 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/vvs5iCGQCtFh7mxV/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 32 items
+
+.evaluation_tests/test_checkpoint_1.py::test_core_cases[daily_due_simple] FAILED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_extended_core_cases[daily_due_within_duration_no_select] FAILED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_extended_core_cases[daily_not_due] PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_extended_core_cases[disabled_job] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_extended_core_cases[multiple_jobs_sorting] FAILED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_extended_core_cases[rel_mount] FAILED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[complex_globs] FAILED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[daily_multi_trigger] FAILED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[default_enabled] FAILED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[default_timezone] FAILED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[duration_zero_exact] FAILED [ 34%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[exact_duration_boundary] FAILED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[exact_now_time] FAILED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[first_pattern_wins] FAILED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[glob_case_sensitive] FAILED [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[glob_character_class] FAILED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[glob_doublestar_crosses_dirs] FAILED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[glob_question_mark] FAILED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[mixed_enabled_disabled] FAILED [ 59%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[no_exclusions] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[once_due] FAILED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[once_future] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[timestamp_floored] FAILED [ 71%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[timezone_non_utc] FAILED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[weekly_multi_trigger] FAILED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[weekly_multiple_days] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[weekly_single_day] FAILED [ 84%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[weekly_wrong_day] FAILED [ 87%]
+.evaluation_tests/test_checkpoint_1.py::test_error_cases[error_schema_daily_missing_at] PASSED [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_error_cases[error_schema_once_missing_when] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_1.py::test_error_cases[error_schema_timezone] FAILED [ 96%]
+.evaluation_tests/test_checkpoint_1.py::test_error_cases[error_yaml_parse] PASSED [100%]
+
+=================================== FAILURES ===================================
+______________________ test_core_cases[daily_due_simple] _______________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}}', 'i...b_id': 'daily-home', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...], 'expected_status': 0, 'id': 'daily_due_simple'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_core_cases_daily_due_simp0')
+
+    @pytest.mark.parametrize("case", CORE_CASES, ids=[c["id"] for c in CORE_CASES])
+    def test_core_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'daily-home', '..._id': 'daily-home', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'daily-home', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'daily-home', '...ern': '**/*.bin'}, {'event': 'FILE_EXCLUDED', 'job_id': 'daily-home', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'daily-home', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'daily-home', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'daily-home', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'daily-home', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E             
+E             Common items:
+E             {'job_id': 'daily-home', 'path': 'A/B/E.bin'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*.bin'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'daily-home',
+E                   'path': 'A/B/E.bin',
+E             -     'pattern': '**/*.bin',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+________ test_extended_core_cases[daily_due_within_duration_no_select] _________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T02:00:00Z --schedule schedule.yaml --duration 2 --mount {{static:files}}', 'i...job', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...], 'expected_status': 0, 'id': 'daily_due_within_duration_no_select'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_extended_core_cases_daily0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", EXTENDED_CORE_CASES, ids=[c["id"] for c in EXTENDED_CORE_CASES]
+    )
+    def test_extended_core_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:111: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'daily-job', 'k...ob_id': 'daily-job', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'daily-job', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'daily-job', 'k...n', 'pattern': '**/*'}, {'event': 'FILE_EXCLUDED', 'job_id': 'daily-job', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'daily-job', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'daily-job', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'daily-job', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'daily-job', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E             
+E             Common items:
+E             {'job_id': 'daily-job', 'path': 'A/B/C/D.py'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'daily-job',
+E                   'path': 'A/B/C/D.py',
+E             -     'pattern': '**/*',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+_______________ test_extended_core_cases[multiple_jobs_sorting] ________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}}', 'i...b_id': 'alpha-job', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...], 'expected_status': 0, 'id': 'multiple_jobs_sorting'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_extended_core_cases_multi0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", EXTENDED_CORE_CASES, ids=[c["id"] for c in EXTENDED_CORE_CASES]
+    )
+    def test_extended_core_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:111: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 3, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'alpha-job', 'k...ob_id': 'alpha-job', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'alpha-job', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 3, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'alpha-job', 'k...n', 'pattern': '**/*'}, {'event': 'FILE_EXCLUDED', 'job_id': 'alpha-job', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'alpha-job', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'alpha-job', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'alpha-job', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'alpha-job', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E             
+E             Common items:
+E             {'job_id': 'alpha-job', 'path': 'A/B/C/D.py'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'alpha-job',
+E                   'path': 'A/B/C/D.py',
+E             -     'pattern': '**/*',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+_____________________ test_extended_core_cases[rel_mount] ______________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}}', 'i...ent': 'JOB_COMPLETED', 'excluded': 1, 'job_id': 'daily-home', 'selected': 1}], 'expected_status': 0, 'id': 'rel_mount'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_extended_core_cases_rel_m0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", EXTENDED_CORE_CASES, ids=[c["id"] for c in EXTENDED_CORE_CASES]
+    )
+    def test_extended_core_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:111: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'daily-home', '..._id': 'daily-home', 'path': 'E.bin'}, {'event': 'JOB_COMPLETED', 'excluded': 0, 'job_id': 'daily-home', 'selected': 2}]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'daily-home', '...th': 'E.bin', 'pattern': '**/*.bin'}, {'event': 'JOB_COMPLETED', 'excluded': 1, 'job_id': 'daily-home', 'selected': 1}]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'daily-home', 'path': 'E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'daily-home', 'path': 'E.bin', 'pattern': '**/*.bin'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'daily-home', 'path': 'E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'daily-home', 'path': 'E.bin', 'pattern': '**/*.bin'}
+E             
+E             Common items:
+E             {'job_id': 'daily-home', 'path': 'E.bin'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*.bin'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'daily-home',
+E                   'path': 'E.bin',
+E             -     'pattern': '**/*.bin',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+_______________________ test_hidden_cases[complex_globs] _______________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}}', 'i...': 'complex-patterns', 'path': 'A/F/G.bin', 'pattern': 'A/[BF]/**'}, ...], 'expected_status': 0, 'id': 'complex_globs'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_complex_glob0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'complex-patter...ex-patterns', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'complex-patterns', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'complex-patter.../[BF]/**'}, {'event': 'FILE_EXCLUDED', 'job_id': 'complex-patterns', 'path': 'A/F/G.bin', 'pattern': 'A/[BF]/**'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'complex-patterns', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'complex-patterns', 'path': 'A/B/C/D.py', 'pattern': 'A/[BF]/**'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'complex-patterns', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'complex-patterns', 'path': 'A/B/C/D.py', 'pattern': 'A/[BF]/**'}
+E             
+E             Common items:
+E             {'job_id': 'complex-patterns', 'path': 'A/B/C/D.py'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': 'A/[BF]/**'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'complex-patterns',
+E                   'path': 'A/B/C/D.py',
+E             -     'pattern': 'A/[BF]/**',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+____________________ test_hidden_cases[daily_multi_trigger] ____________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-08T03:30:00Z --schedule schedule.yaml --duration 48 --mount {{static:files}}', '..._id': 'daily-backup', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...], 'expected_status': 0, 'id': 'daily_multi_trigger'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_daily_multi_0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'daily-backup',...: 'daily-backup', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'daily-backup', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'daily-backup',... 'pattern': '**/*'}, {'event': 'FILE_EXCLUDED', 'job_id': 'daily-backup', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'daily-backup', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'daily-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'daily-backup', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'daily-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E             
+E             Common items:
+E             {'job_id': 'daily-backup', 'path': 'A/B/C/D.py'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'daily-backup',
+E                   'path': 'A/B/C/D.py',
+E             -     'pattern': '**/*',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+______________________ test_hidden_cases[default_enabled] ______________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}}', 'i...default-enabled-job', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...], 'expected_status': 0, 'id': 'default_enabled'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_default_enab0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'default-enable...bled-job', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'default-enabled-job', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'default-enable.../*.bin'}, {'event': 'FILE_EXCLUDED', 'job_id': 'default-enabled-job', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'default-enabled-job', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'default-enabled-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'default-enabled-job', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'default-enabled-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E             
+E             Common items:
+E             {'job_id': 'default-enabled-job', 'path': 'A/B/E.bin'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*.bin'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'default-enabled-job',
+E                   'path': 'A/B/E.bin',
+E             -     'pattern': '**/*.bin',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+_____________________ test_hidden_cases[default_timezone] ______________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}}', 'i...': 'default-tz-job', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...], 'expected_status': 0, 'id': 'default_timezone'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_default_time0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'default-tz-job...efault-tz-job', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'default-tz-job', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'default-tz-job...: '**/*.bin'}, {'event': 'FILE_EXCLUDED', 'job_id': 'default-tz-job', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'default-tz-job', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'default-tz-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'default-tz-job', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'default-tz-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E             
+E             Common items:
+E             {'job_id': 'default-tz-job', 'path': 'A/B/E.bin'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*.bin'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'default-tz-job',
+E                   'path': 'A/B/E.bin',
+E             -     'pattern': '**/*.bin',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+____________________ test_hidden_cases[duration_zero_exact] ____________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 0 --mount {{static:files}}', 'i..._id': 'exact-backup', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...], 'expected_status': 0, 'id': 'duration_zero_exact'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_duration_zer0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'exact-backup',...: 'exact-backup', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'exact-backup', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'exact-backup',... 'pattern': '**/*'}, {'event': 'FILE_EXCLUDED', 'job_id': 'exact-backup', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'exact-backup', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'exact-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'exact-backup', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'exact-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E             
+E             Common items:
+E             {'job_id': 'exact-backup', 'path': 'A/B/C/D.py'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'exact-backup',
+E                   'path': 'A/B/C/D.py',
+E             -     'pattern': '**/*',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+__________________ test_hidden_cases[exact_duration_boundary] __________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T02:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}}', 'i...oundary-job', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...], 'expected_status': 0, 'id': 'exact_duration_boundary'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_exact_durati0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'boundary-job',...: 'boundary-job', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'boundary-job', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'boundary-job',...n': '**/*.bin'}, {'event': 'FILE_EXCLUDED', 'job_id': 'boundary-job', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'boundary-job', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'boundary-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'boundary-job', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'boundary-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E             
+E             Common items:
+E             {'job_id': 'boundary-job', 'path': 'A/B/E.bin'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*.bin'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'boundary-job',
+E                   'path': 'A/B/E.bin',
+E             -     'pattern': '**/*.bin',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+______________________ test_hidden_cases[exact_now_time] _______________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 0 --mount {{static:files}}', 'i...t': 'FILE_SELECTED', 'job_id': 'instant-job', 'path': 'A/F/G.bin'}, ...], 'expected_status': 0, 'id': 'exact_now_time'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_exact_now_ti0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'instant-job', ...d': 'instant-job', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'instant-job', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'instant-job', ...d': 'instant-job', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'instant-job', 'path': 'A/F/G.bin'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'instant-job', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'instant-job', 'path': 'A/B/C/D.py', 'pattern': '**/*.py'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'instant-job', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'instant-job', 'path': 'A/B/C/D.py', 'pattern': '**/*.py'}
+E             
+E             Common items:
+E             {'job_id': 'instant-job', 'path': 'A/B/C/D.py'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*.py'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'instant-job',
+E                   'path': 'A/B/C/D.py',
+E             -     'pattern': '**/*.py',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+____________________ test_hidden_cases[first_pattern_wins] _____________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}}', 'i...pattern-priority', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...], 'expected_status': 0, 'id': 'first_pattern_wins'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_first_patter0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'pattern-priori...rn-priority', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'pattern-priority', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'pattern-priori...'**/*.bin'}, {'event': 'FILE_EXCLUDED', 'job_id': 'pattern-priority', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'pattern-priority', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'pattern-priority', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'pattern-priority', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'pattern-priority', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E             
+E             Common items:
+E             {'job_id': 'pattern-priority', 'path': 'A/B/E.bin'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*.bin'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'pattern-priority',
+E                   'path': 'A/B/E.bin',
+E             -     'pattern': '**/*.bin',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+____________________ test_hidden_cases[glob_case_sensitive] ____________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount mount', 'input_files'...B_COMPLETED', 'excluded': 1, 'job_id': 'case-test', 'selected': 1}], 'expected_status': 0, 'id': 'glob_case_sensitive'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_glob_case_se0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'case-test', 'k...ude_count': 1, 'job_id': 'case-test'}, {'event': 'JOB_COMPLETED', 'excluded': 0, 'job_id': 'case-test', 'selected': 0}]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'case-test', 'k...id': 'case-test', 'path': 'file.txt'}, {'event': 'JOB_COMPLETED', 'excluded': 1, 'job_id': 'case-test', 'selected': 1}]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+>       assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+E       AssertionError: Event count mismatch: 4 != 6
+E       assert 4 == 6
+E        +  where 4 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'case-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'job_id': 'case-test', 'exclude_count': 1}, {'event': 'JOB_COMPLETED', 'job_id': 'case-test', 'selected': 0, 'excluded': 0}])
+E        +  and   6 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'case-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'exclude_count': 1, 'job_id': 'case-test'}, {'event': 'FILE_EXCLUDED', 'job_id': 'case-test', 'path': 'file.TXT', 'pattern': '*.TXT'}, {'event': 'FILE_SELECTED', 'job_id': 'case-test', 'path': 'file.txt'}, {'event': 'JOB_COMPLETED', 'job_id': 'case-test', 'selected': 1, 'excluded': 1}])
+
+.evaluation_tests/conftest.py:230: AssertionError
+___________________ test_hidden_cases[glob_character_class] ____________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount mount', 'input_files'...lass-test', 'path': 'file3.txt', 'pattern': 'file[123].txt'}, ...], 'expected_status': 0, 'id': 'glob_character_class'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_glob_charact0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'charclass-test...: 1, 'job_id': 'charclass-test'}, {'event': 'JOB_COMPLETED', 'excluded': 0, 'job_id': 'charclass-test', 'selected': 0}]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'charclass-test...3].txt'}, {'event': 'FILE_EXCLUDED', 'job_id': 'charclass-test', 'path': 'file3.txt', 'pattern': 'file[123].txt'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+>       assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+E       AssertionError: Event count mismatch: 4 != 8
+E       assert 4 == 8
+E        +  where 4 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'charclass-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'job_id': 'charclass-test', 'exclude_count': 1}, {'event': 'JOB_COMPLETED', 'job_id': 'charclass-test', 'selected': 0, 'excluded': 0}])
+E        +  and   8 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'charclass-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'exclude_count': 1, 'job_id': 'charclass-test'}, {'event': 'FILE_EXCLUDED', 'job_id': 'charclass-test', 'path': 'file1.txt', 'pattern': 'file[123].txt'}, {'event': 'FILE_EXCLUDED', 'job_id': 'charclass-test', 'path': 'file2.txt', 'pattern': 'file[123].txt'}, {'event': 'FILE_EXCLUDED', 'job_id': 'charclass-test', 'path': 'file3.txt', 'pattern': 'file[123].txt'}, {'event': 'FILE_SELECTED', 'job_id': 'charclass-test', 'path': 'file4.txt'}, {'event': 'JOB_COMPLETED', 'job_id': 'charclass-test', 'selected': 1, 'excluded': 3}])
+
+.evaluation_tests/conftest.py:230: AssertionError
+_______________ test_hidden_cases[glob_doublestar_crosses_dirs] ________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount mount', 'input_files'...st', 'path': 'dir/sub/c.log', 'pattern': '**/*.log'}, ...], 'expected_status': 0, 'id': 'glob_doublestar_crosses_dirs'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_glob_doubles0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'glob-test', 'k...ude_count': 1, 'job_id': 'glob-test'}, {'event': 'JOB_COMPLETED', 'excluded': 0, 'job_id': 'glob-test', 'selected': 0}]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'glob-test', 'k...': '**/*.log'}, {'event': 'FILE_EXCLUDED', 'job_id': 'glob-test', 'path': 'dir/sub/c.log', 'pattern': '**/*.log'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+>       assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+E       AssertionError: Event count mismatch: 4 != 8
+E       assert 4 == 8
+E        +  where 4 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'glob-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'job_id': 'glob-test', 'exclude_count': 1}, {'event': 'JOB_COMPLETED', 'job_id': 'glob-test', 'selected': 0, 'excluded': 0}])
+E        +  and   8 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'glob-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'exclude_count': 1, 'job_id': 'glob-test'}, {'event': 'FILE_EXCLUDED', 'job_id': 'glob-test', 'path': 'a.log', 'pattern': '**/*.log'}, {'event': 'FILE_EXCLUDED', 'job_id': 'glob-test', 'path': 'dir/b.log', 'pattern': '**/*.log'}, {'event': 'FILE_EXCLUDED', 'job_id': 'glob-test', 'path': 'dir/sub/c.log', 'pattern': '**/*.log'}, {'event': 'FILE_SELECTED', 'job_id': 'glob-test', 'path': 'keep.txt'}, {'event': 'JOB_COMPLETED', 'job_id': 'glob-test', 'selected': 1, 'excluded': 3}])
+
+.evaluation_tests/conftest.py:230: AssertionError
+____________________ test_hidden_cases[glob_question_mark] _____________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount mount', 'input_files'...'FILE_SELECTED', 'job_id': 'question-test', 'path': 'abc.txt'}, ...], 'expected_status': 0, 'id': 'glob_question_mark'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_glob_questio0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'question-test'...t': 1, 'job_id': 'question-test'}, {'event': 'JOB_COMPLETED', 'excluded': 0, 'job_id': 'question-test', 'selected': 0}]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'question-test'...id': 'question-test', 'path': 'ab.txt'}, {'event': 'FILE_SELECTED', 'job_id': 'question-test', 'path': 'abc.txt'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+>       assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+E       AssertionError: Event count mismatch: 4 != 7
+E       assert 4 == 7
+E        +  where 4 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'question-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'job_id': 'question-test', 'exclude_count': 1}, {'event': 'JOB_COMPLETED', 'job_id': 'question-test', 'selected': 0, 'excluded': 0}])
+E        +  and   7 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'question-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'exclude_count': 1, 'job_id': 'question-test'}, {'event': 'FILE_EXCLUDED', 'job_id': 'question-test', 'path': 'a.txt', 'pattern': '?.txt'}, {'event': 'FILE_SELECTED', 'job_id': 'question-test', 'path': 'ab.txt'}, {'event': 'FILE_SELECTED', 'job_id': 'question-test', 'path': 'abc.txt'}, {'event': 'JOB_COMPLETED', 'job_id': 'question-test', 'selected': 2, 'excluded': 1}])
+
+.evaluation_tests/conftest.py:230: AssertionError
+__________________ test_hidden_cases[mixed_enabled_disabled] ___________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}}', 'i...: 'bravo-enabled', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...], 'expected_status': 0, 'id': 'mixed_enabled_disabled'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_mixed_enable0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 3, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'bravo-enabled'...'bravo-enabled', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'bravo-enabled', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 3, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'bravo-enabled'...'pattern': '**/*'}, {'event': 'FILE_EXCLUDED', 'job_id': 'bravo-enabled', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'bravo-enabled', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'bravo-enabled', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'bravo-enabled', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'bravo-enabled', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E             
+E             Common items:
+E             {'job_id': 'bravo-enabled', 'path': 'A/B/C/D.py'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'bravo-enabled',
+E                   'path': 'A/B/C/D.py',
+E             -     'pattern': '**/*',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+_________________________ test_hidden_cases[once_due] __________________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}}', 'i...D', 'job_id': 'one-time-backup', 'path': 'A/F/G.bin', 'pattern': 'A/**'}, ...], 'expected_status': 0, 'id': 'once_due'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_once_due_0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'one-time-backu..._id': 'one-time-backup', 'path': 'N.py'}, {'event': 'FILE_SELECTED', 'job_id': 'one-time-backup', 'path': 'O.md'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'one-time-backu...attern': 'A/**'}, {'event': 'FILE_EXCLUDED', 'job_id': 'one-time-backup', 'path': 'A/F/G.bin', 'pattern': 'A/**'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'one-time-backup', 'path': 'M.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'one-time-backup', 'path': 'A/B/C/D.py', 'pattern': 'A/**'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'one-time-backup', 'path': 'M.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'one-time-backup', 'path': 'A/B/C/D.py', 'pattern': 'A/**'}
+E             
+E             Common items:
+E             {'job_id': 'one-time-backup'}
+E             Differing items:
+E             {'path': 'M.py'} != {'path': 'A/B/C/D.py'}
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': 'A/**'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'one-time-backup',
+E             -     'path': 'A/B/C/D.py',
+E             ?              ^^^^^^^
+E             +     'path': 'M.py',
+E             ?              ^
+E             -     'pattern': 'A/**',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+_____________________ test_hidden_cases[timestamp_floored] _____________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:59Z --schedule schedule.yaml --duration 0 --mount {{static:files}}', 'i..._id': 'floored-backup', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...], 'expected_status': 0, 'id': 'timestamp_floored'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_timestamp_fl0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'floored-backup...loored-backup', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'floored-backup', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'floored-backup...pattern': '**/*'}, {'event': 'FILE_EXCLUDED', 'job_id': 'floored-backup', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'floored-backup', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'floored-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'floored-backup', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'floored-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E             
+E             Common items:
+E             {'job_id': 'floored-backup', 'path': 'A/B/C/D.py'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'floored-backup',
+E                   'path': 'A/B/C/D.py',
+E             -     'pattern': '**/*',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+_____________________ test_hidden_cases[timezone_non_utc] ______________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T08:30:00Z --schedule schedule.yaml --duration 2 --mount {{static:files}}', 'i...t': 'FILE_SELECTED', 'job_id': 'ny-backup', 'path': 'A/F/G.bin'}, ...], 'expected_status': 0, 'id': 'timezone_non_utc'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_timezone_non0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'America/New_York'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'n...ob_id': 'ny-backup', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'ny-backup', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'America/New_York'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'n...ob_id': 'ny-backup', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'ny-backup', 'path': 'A/F/G.bin'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 1: {'event': 'JOB_ELIGIBLE', 'job_id': 'ny-backup', 'kind': 'daily', 'now_local': '2025-09-10T04:30:00Z'} != {'event': 'JOB_ELIGIBLE', 'job_id': 'ny-backup', 'kind': 'daily', 'now_local': '2025-09-10T04:30:00-04:00'}
+E           assert {'event': 'JOB_ELIGIBLE', 'job_id': 'ny-backup', 'kind': 'daily', 'now_local': '2025-09-10T04:30:00Z'} == {'event': 'JOB_ELIGIBLE', 'job_id': 'ny-backup', 'kind': 'daily', 'now_local': '2025-09-10T04:30:00-04:00'}
+E             
+E             Common items:
+E             {'event': 'JOB_ELIGIBLE', 'job_id': 'ny-backup', 'kind': 'daily'}
+E             Differing items:
+E             {'now_local': '2025-09-10T04:30:00Z'} != {'now_local': '2025-09-10T04:30:00-04:00'}
+E             
+E             Full diff:
+E               {
+E                   'event': 'JOB_ELIGIBLE',
+E                   'job_id': 'ny-backup',
+E                   'kind': 'daily',
+E             -     'now_local': '2025-09-10T04:30:00-04:00',
+E             ?                                      ^^^^^^
+E             +     'now_local': '2025-09-10T04:30:00Z',
+E             ?                                      ^
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+___________________ test_hidden_cases[weekly_multi_trigger] ____________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-08T15:30:00Z --schedule schedule.yaml --duration 48 --mount {{static:files}}', '...d': 'weekly-backup', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...], 'expected_status': 0, 'id': 'weekly_multi_trigger'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_weekly_multi0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'weekly-backup'...'weekly-backup', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'weekly-backup', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'weekly-backup'...'pattern': '**/*'}, {'event': 'FILE_EXCLUDED', 'job_id': 'weekly-backup', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'weekly-backup', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'weekly-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'weekly-backup', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'weekly-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E             
+E             Common items:
+E             {'job_id': 'weekly-backup', 'path': 'A/B/C/D.py'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'weekly-backup',
+E                   'path': 'A/B/C/D.py',
+E             -     'pattern': '**/*',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+_____________________ test_hidden_cases[weekly_single_day] _____________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 24 --mount {{static:files}}', '...': 'weekly-backup', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...], 'expected_status': 0, 'id': 'weekly_single_day'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_weekly_singl0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'weekly-backup'...'weekly-backup', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'weekly-backup', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'weekly-backup'...': '**/*.bin'}, {'event': 'FILE_EXCLUDED', 'job_id': 'weekly-backup', 'path': 'A/F/G.bin', 'pattern': '**/*.bin'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'weekly-backup', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'weekly-backup', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'weekly-backup', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'weekly-backup', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+E             
+E             Common items:
+E             {'job_id': 'weekly-backup', 'path': 'A/B/E.bin'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*.bin'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'weekly-backup',
+E                   'path': 'A/B/E.bin',
+E             -     'pattern': '**/*.bin',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+_____________________ test_hidden_cases[weekly_wrong_day] ______________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+checkpoint_name = 'checkpoint_1'
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 24 --mount {{static:files}}', '...ob_id': 'thursday-only', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...], 'expected_status': 0, 'id': 'weekly_wrong_day'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_weekly_wrong0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[c["id"] for c in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert result.returncode == case["expected_status"], result.stderr
+        actual_events = strip_regression_fields(
+            parse_jsonl(result.stdout),
+            checkpoint_name,
+        )
+        expected_events = case["expected_events"]
+        assert isinstance(expected_events, list)
+>       assert_events_match(actual_events, expected_events)
+
+.evaluation_tests/test_checkpoint_1.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'thursday-only'...'thursday-only', 'path': 'A/B/E.bin'}, {'event': 'FILE_SELECTED', 'job_id': 'thursday-only', 'path': 'A/F/G.bin'}, ...]
+expected = [{'event': 'SCHEDULE_PARSED', 'jobs_total': 1, 'timezone': 'UTC'}, {'event': 'JOB_ELIGIBLE', 'job_id': 'thursday-only'...'pattern': '**/*'}, {'event': 'FILE_EXCLUDED', 'job_id': 'thursday-only', 'path': 'A/F/G.bin', 'pattern': '**/*'}, ...]
+
+    def assert_events_match(
+        actual: list[dict[str, object]],
+        expected: list[dict[str, object]],
+    ) -> None:
+        assert len(actual) == len(expected), (
+            f"Event count mismatch: {len(actual)} != {len(expected)}"
+        )
+        for index, (act, exp) in enumerate(zip(actual, expected)):
+>           assert act == exp, f"Event mismatch at index {index}: {act} != {exp}"
+E           AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'thursday-only', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'thursday-only', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E           assert {'event': 'FILE_SELECTED', 'job_id': 'thursday-only', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'thursday-only', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+E             
+E             Common items:
+E             {'job_id': 'thursday-only', 'path': 'A/B/C/D.py'}
+E             Differing items:
+E             {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+E             Right contains 1 more item:
+E             {'pattern': '**/*'}
+E             
+E             Full diff:
+E               {
+E             -     'event': 'FILE_EXCLUDED',
+E             ?                     ^ ^^^
+E             +     'event': 'FILE_SELECTED',
+E             ?                    + ^^ ^
+E                   'job_id': 'thursday-only',
+E                   'path': 'A/B/C/D.py',
+E             -     'pattern': '**/*',
+E               }
+
+.evaluation_tests/conftest.py:234: AssertionError
+___________________ test_error_cases[error_schema_timezone] ____________________
+
+entrypoint_argv = ['uv', 'run', 'backup_scheduler.py']
+files_dir = PosixPath('/workspace/.evaluation_tests/assets/files')
+case = {'case': {'arguments': '--now 2025-09-10T03:30:00Z --schedule schedule.yaml --duration 1 --mount {{static:files}} --mo...ype': 'yaml', 'path': 'schedule.yaml'}]}, 'expected_events': None, 'expected_status': 4, 'id': 'error_schema_timezone'}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_error_cases_error_schema_2')
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "case", ERROR_CASES, ids=[c["id"] for c in ERROR_CASES]
+    )
+    def test_error_cases(
+        entrypoint_argv: list[str],
+        files_dir: Path,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        result = run_case(entrypoint_argv, files_dir, case, tmp_path)
+        assert case["expected_status"] != 0
+>       assert result.returncode != 0
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'backup_scheduler.py', '--now', '2025-09-10T03:30:00Z', '--schedule', '/tmp/pytest-of-agent/pytest-0/test_error_cases_error_schema_2/schedule.yaml', '--duration', '1', '--mount', '/workspace/.evaluation_tests/assets/files', '--mount', '/workspace/.evaluation_tests/assets/files'], returncode=0, stdout='{"event":"SCHEDULE_PARSED","timezone":"Invalid/Timezone","jobs_total":1}\n{"event":"JOB_ELIGIBLE","job_id":"test","kind":"daily","now_local":"2025-09-10T03:30:00Z"}\n{"event":"JOB_STARTED","job_id":"test","exclude_count":0}\n{"event":"JOB_COMPLETED","job_id":"test","selected":0,"excluded":0}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:148: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_core_cases[daily_due_simple] - AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'daily-home', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'daily-home', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'daily-home', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'daily-home', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+  
+  Common items:
+  {'job_id': 'daily-home', 'path': 'A/B/E.bin'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*.bin'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'daily-home',
+        'path': 'A/B/E.bin',
+  -     'pattern': '**/*.bin',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_extended_core_cases[daily_due_within_duration_no_select] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'daily-job', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'daily-job', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'daily-job', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'daily-job', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+  
+  Common items:
+  {'job_id': 'daily-job', 'path': 'A/B/C/D.py'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'daily-job',
+        'path': 'A/B/C/D.py',
+  -     'pattern': '**/*',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_extended_core_cases[multiple_jobs_sorting] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'alpha-job', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'alpha-job', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'alpha-job', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'alpha-job', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+  
+  Common items:
+  {'job_id': 'alpha-job', 'path': 'A/B/C/D.py'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'alpha-job',
+        'path': 'A/B/C/D.py',
+  -     'pattern': '**/*',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_extended_core_cases[rel_mount] - AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'daily-home', 'path': 'E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'daily-home', 'path': 'E.bin', 'pattern': '**/*.bin'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'daily-home', 'path': 'E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'daily-home', 'path': 'E.bin', 'pattern': '**/*.bin'}
+  
+  Common items:
+  {'job_id': 'daily-home', 'path': 'E.bin'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*.bin'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'daily-home',
+        'path': 'E.bin',
+  -     'pattern': '**/*.bin',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[complex_globs] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'complex-patterns', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'complex-patterns', 'path': 'A/B/C/D.py', 'pattern': 'A/[BF]/**'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'complex-patterns', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'complex-patterns', 'path': 'A/B/C/D.py', 'pattern': 'A/[BF]/**'}
+  
+  Common items:
+  {'job_id': 'complex-patterns', 'path': 'A/B/C/D.py'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': 'A/[BF]/**'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'complex-patterns',
+        'path': 'A/B/C/D.py',
+  -     'pattern': 'A/[BF]/**',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[daily_multi_trigger] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'daily-backup', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'daily-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'daily-backup', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'daily-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+  
+  Common items:
+  {'job_id': 'daily-backup', 'path': 'A/B/C/D.py'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'daily-backup',
+        'path': 'A/B/C/D.py',
+  -     'pattern': '**/*',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[default_enabled] - AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'default-enabled-job', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'default-enabled-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'default-enabled-job', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'default-enabled-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+  
+  Common items:
+  {'job_id': 'default-enabled-job', 'path': 'A/B/E.bin'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*.bin'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'default-enabled-job',
+        'path': 'A/B/E.bin',
+  -     'pattern': '**/*.bin',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[default_timezone] - AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'default-tz-job', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'default-tz-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'default-tz-job', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'default-tz-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+  
+  Common items:
+  {'job_id': 'default-tz-job', 'path': 'A/B/E.bin'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*.bin'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'default-tz-job',
+        'path': 'A/B/E.bin',
+  -     'pattern': '**/*.bin',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[duration_zero_exact] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'exact-backup', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'exact-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'exact-backup', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'exact-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+  
+  Common items:
+  {'job_id': 'exact-backup', 'path': 'A/B/C/D.py'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'exact-backup',
+        'path': 'A/B/C/D.py',
+  -     'pattern': '**/*',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[exact_duration_boundary] - AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'boundary-job', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'boundary-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'boundary-job', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'boundary-job', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+  
+  Common items:
+  {'job_id': 'boundary-job', 'path': 'A/B/E.bin'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*.bin'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'boundary-job',
+        'path': 'A/B/E.bin',
+  -     'pattern': '**/*.bin',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[exact_now_time] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'instant-job', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'instant-job', 'path': 'A/B/C/D.py', 'pattern': '**/*.py'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'instant-job', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'instant-job', 'path': 'A/B/C/D.py', 'pattern': '**/*.py'}
+  
+  Common items:
+  {'job_id': 'instant-job', 'path': 'A/B/C/D.py'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*.py'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'instant-job',
+        'path': 'A/B/C/D.py',
+  -     'pattern': '**/*.py',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[first_pattern_wins] - AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'pattern-priority', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'pattern-priority', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'pattern-priority', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'pattern-priority', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+  
+  Common items:
+  {'job_id': 'pattern-priority', 'path': 'A/B/E.bin'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*.bin'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'pattern-priority',
+        'path': 'A/B/E.bin',
+  -     'pattern': '**/*.bin',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[glob_case_sensitive] - AssertionError: Event count mismatch: 4 != 6
+assert 4 == 6
+ +  where 4 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'case-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'job_id': 'case-test', 'exclude_count': 1}, {'event': 'JOB_COMPLETED', 'job_id': 'case-test', 'selected': 0, 'excluded': 0}])
+ +  and   6 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'case-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'exclude_count': 1, 'job_id': 'case-test'}, {'event': 'FILE_EXCLUDED', 'job_id': 'case-test', 'path': 'file.TXT', 'pattern': '*.TXT'}, {'event': 'FILE_SELECTED', 'job_id': 'case-test', 'path': 'file.txt'}, {'event': 'JOB_COMPLETED', 'job_id': 'case-test', 'selected': 1, 'excluded': 1}])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[glob_character_class] - AssertionError: Event count mismatch: 4 != 8
+assert 4 == 8
+ +  where 4 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'charclass-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'job_id': 'charclass-test', 'exclude_count': 1}, {'event': 'JOB_COMPLETED', 'job_id': 'charclass-test', 'selected': 0, 'excluded': 0}])
+ +  and   8 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'charclass-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'exclude_count': 1, 'job_id': 'charclass-test'}, {'event': 'FILE_EXCLUDED', 'job_id': 'charclass-test', 'path': 'file1.txt', 'pattern': 'file[123].txt'}, {'event': 'FILE_EXCLUDED', 'job_id': 'charclass-test', 'path': 'file2.txt', 'pattern': 'file[123].txt'}, {'event': 'FILE_EXCLUDED', 'job_id': 'charclass-test', 'path': 'file3.txt', 'pattern': 'file[123].txt'}, {'event': 'FILE_SELECTED', 'job_id': 'charclass-test', 'path': 'file4.txt'}, {'event': 'JOB_COMPLETED', 'job_id': 'charclass-test', 'selected': 1, 'excluded': 3}])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[glob_doublestar_crosses_dirs] - AssertionError: Event count mismatch: 4 != 8
+assert 4 == 8
+ +  where 4 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'glob-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'job_id': 'glob-test', 'exclude_count': 1}, {'event': 'JOB_COMPLETED', 'job_id': 'glob-test', 'selected': 0, 'excluded': 0}])
+ +  and   8 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'glob-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'exclude_count': 1, 'job_id': 'glob-test'}, {'event': 'FILE_EXCLUDED', 'job_id': 'glob-test', 'path': 'a.log', 'pattern': '**/*.log'}, {'event': 'FILE_EXCLUDED', 'job_id': 'glob-test', 'path': 'dir/b.log', 'pattern': '**/*.log'}, {'event': 'FILE_EXCLUDED', 'job_id': 'glob-test', 'path': 'dir/sub/c.log', 'pattern': '**/*.log'}, {'event': 'FILE_SELECTED', 'job_id': 'glob-test', 'path': 'keep.txt'}, {'event': 'JOB_COMPLETED', 'job_id': 'glob-test', 'selected': 1, 'excluded': 3}])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[glob_question_mark] - AssertionError: Event count mismatch: 4 != 7
+assert 4 == 7
+ +  where 4 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'question-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'job_id': 'question-test', 'exclude_count': 1}, {'event': 'JOB_COMPLETED', 'job_id': 'question-test', 'selected': 0, 'excluded': 0}])
+ +  and   7 = len([{'event': 'SCHEDULE_PARSED', 'timezone': 'UTC', 'jobs_total': 1}, {'event': 'JOB_ELIGIBLE', 'job_id': 'question-test', 'kind': 'daily', 'now_local': '2025-09-10T03:30:00Z'}, {'event': 'JOB_STARTED', 'exclude_count': 1, 'job_id': 'question-test'}, {'event': 'FILE_EXCLUDED', 'job_id': 'question-test', 'path': 'a.txt', 'pattern': '?.txt'}, {'event': 'FILE_SELECTED', 'job_id': 'question-test', 'path': 'ab.txt'}, {'event': 'FILE_SELECTED', 'job_id': 'question-test', 'path': 'abc.txt'}, {'event': 'JOB_COMPLETED', 'job_id': 'question-test', 'selected': 2, 'excluded': 1}])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[mixed_enabled_disabled] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'bravo-enabled', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'bravo-enabled', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'bravo-enabled', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'bravo-enabled', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+  
+  Common items:
+  {'job_id': 'bravo-enabled', 'path': 'A/B/C/D.py'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'bravo-enabled',
+        'path': 'A/B/C/D.py',
+  -     'pattern': '**/*',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[once_due] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'one-time-backup', 'path': 'M.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'one-time-backup', 'path': 'A/B/C/D.py', 'pattern': 'A/**'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'one-time-backup', 'path': 'M.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'one-time-backup', 'path': 'A/B/C/D.py', 'pattern': 'A/**'}
+  
+  Common items:
+  {'job_id': 'one-time-backup'}
+  Differing items:
+  {'path': 'M.py'} != {'path': 'A/B/C/D.py'}
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': 'A/**'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'one-time-backup',
+  -     'path': 'A/B/C/D.py',
+  ?              ^^^^^^^
+  +     'path': 'M.py',
+  ?              ^
+  -     'pattern': 'A/**',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[timestamp_floored] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'floored-backup', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'floored-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'floored-backup', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'floored-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+  
+  Common items:
+  {'job_id': 'floored-backup', 'path': 'A/B/C/D.py'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'floored-backup',
+        'path': 'A/B/C/D.py',
+  -     'pattern': '**/*',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[timezone_non_utc] - AssertionError: Event mismatch at index 1: {'event': 'JOB_ELIGIBLE', 'job_id': 'ny-backup', 'kind': 'daily', 'now_local': '2025-09-10T04:30:00Z'} != {'event': 'JOB_ELIGIBLE', 'job_id': 'ny-backup', 'kind': 'daily', 'now_local': '2025-09-10T04:30:00-04:00'}
+assert {'event': 'JOB_ELIGIBLE', 'job_id': 'ny-backup', 'kind': 'daily', 'now_local': '2025-09-10T04:30:00Z'} == {'event': 'JOB_ELIGIBLE', 'job_id': 'ny-backup', 'kind': 'daily', 'now_local': '2025-09-10T04:30:00-04:00'}
+  
+  Common items:
+  {'event': 'JOB_ELIGIBLE', 'job_id': 'ny-backup', 'kind': 'daily'}
+  Differing items:
+  {'now_local': '2025-09-10T04:30:00Z'} != {'now_local': '2025-09-10T04:30:00-04:00'}
+  
+  Full diff:
+    {
+        'event': 'JOB_ELIGIBLE',
+        'job_id': 'ny-backup',
+        'kind': 'daily',
+  -     'now_local': '2025-09-10T04:30:00-04:00',
+  ?                                      ^^^^^^
+  +     'now_local': '2025-09-10T04:30:00Z',
+  ?                                      ^
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[weekly_multi_trigger] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'weekly-backup', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'weekly-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'weekly-backup', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'weekly-backup', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+  
+  Common items:
+  {'job_id': 'weekly-backup', 'path': 'A/B/C/D.py'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'weekly-backup',
+        'path': 'A/B/C/D.py',
+  -     'pattern': '**/*',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[weekly_single_day] - AssertionError: Event mismatch at index 4: {'event': 'FILE_SELECTED', 'job_id': 'weekly-backup', 'path': 'A/B/E.bin'} != {'event': 'FILE_EXCLUDED', 'job_id': 'weekly-backup', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'weekly-backup', 'path': 'A/B/E.bin'} == {'event': 'FILE_EXCLUDED', 'job_id': 'weekly-backup', 'path': 'A/B/E.bin', 'pattern': '**/*.bin'}
+  
+  Common items:
+  {'job_id': 'weekly-backup', 'path': 'A/B/E.bin'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*.bin'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'weekly-backup',
+        'path': 'A/B/E.bin',
+  -     'pattern': '**/*.bin',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[weekly_wrong_day] - AssertionError: Event mismatch at index 3: {'event': 'FILE_SELECTED', 'job_id': 'thursday-only', 'path': 'A/B/C/D.py'} != {'event': 'FILE_EXCLUDED', 'job_id': 'thursday-only', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+assert {'event': 'FILE_SELECTED', 'job_id': 'thursday-only', 'path': 'A/B/C/D.py'} == {'event': 'FILE_EXCLUDED', 'job_id': 'thursday-only', 'path': 'A/B/C/D.py', 'pattern': '**/*'}
+  
+  Common items:
+  {'job_id': 'thursday-only', 'path': 'A/B/C/D.py'}
+  Differing items:
+  {'event': 'FILE_SELECTED'} != {'event': 'FILE_EXCLUDED'}
+  Right contains 1 more item:
+  {'pattern': '**/*'}
+  
+  Full diff:
+    {
+  -     'event': 'FILE_EXCLUDED',
+  ?                     ^ ^^^
+  +     'event': 'FILE_SELECTED',
+  ?                    + ^^ ^
+        'job_id': 'thursday-only',
+        'path': 'A/B/C/D.py',
+  -     'pattern': '**/*',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_error_cases[error_schema_timezone] - assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'backup_scheduler.py', '--now', '2025-09-10T03:30:00Z', '--schedule', '/tmp/pytest-of-agent/pytest-0/test_error_cases_error_schema_2/schedule.yaml', '--duration', '1', '--mount', '/workspace/.evaluation_tests/assets/files', '--mount', '/workspace/.evaluation_tests/assets/files'], returncode=0, stdout='{"event":"SCHEDULE_PARSED","timezone":"Invalid/Timezone","jobs_total":1}\n{"event":"JOB_ELIGIBLE","job_id":"test","kind":"daily","now_local":"2025-09-10T03:30:00Z"}\n{"event":"JOB_STARTED","job_id":"test","exclude_count":0}\n{"event":"JOB_COMPLETED","job_id":"test","selected":0,"excluded":0}\n', stderr='').returncode
+========================= 24 failed, 8 passed in 6.03s =========================

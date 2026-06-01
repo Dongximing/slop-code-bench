@@ -1,0 +1,13 @@
+version: 1
+timezone: UTC
+jobs:
+  - id: "test-incr"
+    enabled: true
+    when:
+      kind: daily
+      at: "02:00"
+    source: mount://
+    destination: backup://store
+    exclude: []
+    strategy:
+      kind: full

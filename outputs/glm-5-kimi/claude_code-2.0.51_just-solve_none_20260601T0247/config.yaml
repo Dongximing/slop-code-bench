@@ -1,0 +1,98 @@
+agent:
+  base_url: http://1.95.77.23:3000
+  binary: claude
+  cost_limits:
+    cost_limit: 0
+    net_cost_limit: 0
+    step_limit: 100
+  permission_mode: bypassPermissions
+  type: claude_code
+  version: 2.0.51
+agent_config_path: /shared_workspace_mfs/ximing/slop-code-bench/configs/agents/claude_code_kimi.yaml
+environment:
+  commands:
+    agent_command: python
+    command: uv run
+    entry_file: '{entry_file}.py'
+  docker:
+    image: ghcr.io/astral-sh/uv:python3.12-trixie-slim
+    mount_workspace: true
+    workdir: /workspace
+  environment:
+    env:
+      PIP_CACHE_DIR: /tmp/pip-cache-dir
+      PIP_CONFIG_FILE: /tmp/pip-conf
+      UV_CACHE_DIR: /tmp/uv-cache
+  name: python3.12
+  setup:
+    eval_commands:
+    - uv init
+    - uv add -r requirements.txt
+    resume_commands:
+    - python -m venv .venv || true
+    - .venv/bin/pip install -r requirements.txt 2>/dev/null || true
+  type: docker
+environment_config_path: /shared_workspace_mfs/ximing/slop-code-bench/configs/environments/docker-python3.12-uv.yaml
+model:
+  name: glm-5-kimi
+  provider: zhipu
+one_shot:
+  enabled: false
+  include_first_prefix: false
+  prefix: ''
+output_path: outputs/glm-5-kimi/claude_code-2.0.51_just-solve_none_20260601T0247
+pass_policy: any
+post_checkpoint_skill:
+  eval_after: true
+  prompt: 'Review all the code you just wrote in this workspace.
+
+    Remove AI-generated slop:
+
+    - Extra comments that a human wouldn''t add
+
+    - Extra defensive checks or try/catch blocks that are abnormal
+
+    - Inline imports in Python (move to top of file)
+
+    - range(len(x)) - use enumerate
+
+    - if cond: return True else: return False - simplify
+
+    - Any style inconsistent with the file
+
+    Do NOT change any behavior. Do NOT break any existing functionality.
+
+    '
+  run_on: all
+problems:
+- file_backup
+- execution_server
+- file_merger
+- log_query
+- env_manager
+prompt_content: 'Implement a program that 100% solves the specification. That is all
+  you need to do.
+
+  {% if not is_continuation -%}
+
+  Use a virtual environment and ensure that a `requirements.txt` is present with any
+  dependencies you need to solve the problem.
+
+  {% else -%}
+
+  Keep using the same virtual environment you started with, update `requirements.txt`
+  with any new dependencies you need.
+
+  {% endif -%}
+
+
+  Your task is:
+
+  {{ spec.strip() }}
+
+  '
+prompt_path: /shared_workspace_mfs/ximing/slop-code-bench/configs/prompts/just-solve.jinja
+save_dir: outputs
+save_template: glm-5-kimi/claude_code-2.0.51_just-solve_none_20260601T0247
+thinking: none
+thinking_max_tokens: null

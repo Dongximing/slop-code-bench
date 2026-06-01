@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "problem_name": "execution_server",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_6",
+  "checkpoint_version": 1,
+  "duration": 5.722280979156494,
+  "entrypoint": "uv run execution_server.py",
+  "tests": {
+    "checkpoint_6-Core": {
+      "passed": [],
+      "failed": [
+        "TestCore::test_01_create_environment_never",
+        "TestCore::test_02_create_environment_fork",
+        "TestCore::test_03_create_environment_base",
+        "TestCore::test_04_execute_never_mode",
+        "TestCore::test_05_execute_fork_mode",
+        "TestCore::test_06_execute_base_mode",
+        "TestCore::test_07_execute_base_mode_isolated",
+        "TestCore::test_08_missing_environment_field",
+        "TestCore::test_09_unknown_environment",
+        "TestCore::test_10_verify_never_persistence",
+        "TestCore::test_11_create_duplicate_environment",
+        "TestCore::test_12_environment_with_overlay_files",
+        "TestCore::test_13_create_environment_default_mode",
+        "TestCore::test_14_create_environment_no_files"
+      ],
+      "skipped": []
+    },
+    "checkpoint_6-Error": {
+      "passed": [
+        "TestError::test_06_duplicate_environment_name"
+      ],
+      "failed": [
+        "TestError::test_01_missing_environment_field",
+        "TestError::test_02_empty_environment_field",
+        "TestError::test_03_invalid_environment_path",
+        "TestError::test_04_unknown_environment",
+        "TestError::test_05_setup_duplicate_environment",
+        "TestError::test_07_invalid_concurrency_type",
+        "TestError::test_08_invalid_concurrency_value",
+        "TestError::test_09_invalid_environment_name"
+      ],
+      "skipped": []
+    },
+    "checkpoint_6-Functionality": {
+      "passed": [],
+      "failed": [
+        "TestHidden::test_01_create_never_environment",
+        "TestHidden::test_02_create_fork_environment",
+        "TestHidden::test_03_create_base_environment",
+        "TestHidden::test_04_create_default_environment",
+        "TestHidden::test_05_create_empty_environment",
+        "TestHidden::test_06_execute_never_initial_write",
+        "TestHidden::test_07_execute_never_persistence",
+        "TestHidden::test_08_execute_fork_counter_update",
+        "TestHidden::test_09_execute_base_create_state",
+        "TestHidden::test_10_execute_base_clean_snapshot",
+        "TestHidden::test_11_execute_overlay_files"
+      ],
+      "skipped": []
+    },
+    "checkpoint_6-Regression": {
+      "passed": [
+        "TestRegression::test_12_env_stdin_shell_injection",
+        "TestRegression::test_13_env_stdin_unicode",
+        "TestRegression::test_14_env_stdin_long",
+        "TestRegression::test_15_env_stdin_empty_string",
+        "TestRegression::test_17_env_chain_with_required",
+        "TestRegression::test_19_env_chain_timeout",
+        "TestRegression::test_20_env_overlay_basic",
+        "TestRegression::test_21_env_overlay_overwrite",
+        "TestRegression::test_22_env_overlay_plus_stdin",
+        "TestRegression::test_23_env_overlay_structured",
+        "TestRegression::test_25_env_fork_stdin",
+        "TestRegression::test_28_env_cache_setup",
+        "TestRegression::test_29_env_cache_hit",
+        "TestRegression::test_30_env_cache_stdin_miss",
+        "TestRegression::test_32_env_empty_overlay",
+        "TestRegression::test_34_env_stdin_quotes_escapes",
+        "TestRegression::test_35_env_chain_continue_on_error"
+      ],
+      "failed": [
+        "TestRegression::test_01_create_environment",
+        "TestRegression::test_02_stdin_execution",
+        "TestRegression::test_03_csv_structured_file",
+        "TestRegression::test_04_track_glob_no_match",
+        "TestRegression::test_05_create_env_fork",
+        "TestRegression::test_06_create_env_base",
+        "TestRegression::test_07_create_env_many_files",
+        "TestRegression::test_08_create_env_nested_dirs",
+        "TestRegression::test_09_create_env_structured",
+        "TestRegression::test_10_create_env_long_name",
+        "TestRegression::test_11_create_env_numeric_name",
+        "TestRegression::test_16_env_chain_basic",
+        "TestRegression::test_18_env_chain_file_tracking",
+        "TestRegression::test_24_env_overlay_nested_path",
+        "TestRegression::test_26_env_base_stdin",
+        "TestRegression::test_27_env_kitchen_sink",
+        "TestRegression::test_31_env_whitespace_stdin",
+        "TestRegression::test_33_env_nested_read",
+        "TestRegression::test_36_env_many_files_count"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 0,
+    "Functionality": 0,
+    "Regression": 17,
+    "Error": 1
+  },
+  "total_counts": {
+    "Core": 14,
+    "Functionality": 11,
+    "Regression": 36,
+    "Error": 9
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 70,
+  "test_collection_hash": "043e1fc39a8b80e80508558207ab7f92358c9eaf325c52efc52fbfcff119fcf0",
+  "infrastructure_failure": false
+}

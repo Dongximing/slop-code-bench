@@ -1,0 +1,109 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/xRlyv7WhTBDub_5v/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 300.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 45 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_initial_stats PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_execute_core[echo] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_execute_core[time_out] PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_execute_core[with_files] PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_execute_core[with_stdin] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_execute_core[with_env] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_final_stats PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_initial_stats PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[stdin_string_stream] PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[nonzero_exit_with_stderr] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[nested_file_execution] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[env_multiline_values] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[stdout_without_newline] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[default_timeout_and_empty_stdin] PASSED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[env_and_files_together] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[env_and_stdin_together] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[files_and_stdin_together] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[timeout_with_env_and_files] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[all_features_combined] PASSED [ 42%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[multiple_env_vars_multiple_files] PASSED [ 44%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[stdin_array_with_files] FAILED [ 46%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[env_override_system] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[very_small_timeout] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[unicode_in_output] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[very_long_stdout] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[exit_code_variations] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[command_with_shell_metacharacters] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_1.py::TestHidden::test_final_stats PASSED [ 62%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[missing_command_field] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_timeout_negative] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_timeout_zero] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_timeout_type] PASSED [ 71%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_env_type] PASSED [ 73%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_files_type] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[invalid_stdin_type] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[empty_command_string] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[command_type_not_string] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_execute_errors[env_values_not_strings] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_execute_duration_is_rounded PASSED [ 86%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_stats_duration_is_rounded PASSED [ 88%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_error_does_not_increment_stats PASSED [ 91%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_invalid_json_returns_json_error PASSED [ 93%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_execute_edge_errors[stdin_array_with_non_string] PASSED [ 95%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_execute_edge_errors[env_is_null] PASSED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::TestEdgeCases::test_execute_edge_errors[files_is_null] PASSED [100%]
+
+=================================== FAILURES ===================================
+____________ TestHidden.test_execute_hidden[stdin_array_with_files] ____________
+
+self = <test_checkpoint_1.TestHidden object at 0x7241e6b66f30>
+client = <httpx.Client object at 0x7241e6abb9e0>
+case = ExecuteCase(name='stdin_array_with_files', body={'command': 'cat header.txt && awk \'{print "- " $0}\'', 'env': {}, 'f...ple\n- banana\n- cherry\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0)
+
+    @pytest.mark.parametrize(
+        "case",
+        HIDDEN_EXECUTE_CASES,
+        ids=[case.name for case in HIDDEN_EXECUTE_CASES],
+    )
+    def test_execute_hidden(
+        self, client: httpx.Client, case: ExecuteCase
+    ) -> None:
+        response = client.post("/v1/execute", json=case.body)
+        assert response.status_code == 201
+        payload = response.json()
+>       _assert_execute_payload(payload, case)
+
+.evaluation_tests/test_checkpoint_1.py:704: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'duration': 0.003, 'exit_code': 0, 'id': 'b731b9bb-0626-4538-8b12-1cd8e2e71c5f', 'stderr': '', ...}
+case = ExecuteCase(name='stdin_array_with_files', body={'command': 'cat header.txt && awk \'{print "- " $0}\'', 'env': {}, 'f...ple\n- banana\n- cherry\n', expected_stderr='', expected_exit_code=0, expected_timed_out=False, expected_duration=10.0)
+
+    def _assert_execute_payload(payload: dict[str, Any], case: ExecuteCase) -> None:
+        assert payload["exit_code"] == case.expected_exit_code
+        assert payload["timed_out"] == case.expected_timed_out
+        assert payload["stderr"] == case.expected_stderr
+>       assert _normalize_text(payload["stdout"]) == _normalize_text(
+            case.expected_stdout
+        )
+E       AssertionError: assert 'items:-applebananacherry' == 'items:-apple-banana-cherry'
+E         
+E         - items:-apple-banana-cherry
+E         ?             -      -
+E         + items:-applebananacherry
+
+.evaluation_tests/test_checkpoint_1.py:127: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::TestHidden::test_execute_hidden[stdin_array_with_files] - AssertionError: assert 'items:-applebananacherry' == 'items:-apple-banana-cherry'
+  
+  - items:-apple-banana-cherry
+  ?             -      -
+  + items:-applebananacherry
+========================= 1 failed, 44 passed in 2.91s =========================

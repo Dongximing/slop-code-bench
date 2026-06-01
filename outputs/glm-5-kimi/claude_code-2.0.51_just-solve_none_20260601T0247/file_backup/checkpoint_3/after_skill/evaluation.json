@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "problem_name": "file_backup",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_3",
+  "checkpoint_version": 1,
+  "duration": 15.454976797103882,
+  "entrypoint": "uv run backup_scheduler.py",
+  "tests": {
+    "checkpoint_1-Regression": {
+      "passed": [
+        "test_core_cases[daily_due_simple]",
+        "test_error_cases[error_schema_timezone]",
+        "test_error_cases[error_yaml_parse]",
+        "test_extended_core_cases[daily_due_within_duration_no_select]",
+        "test_extended_core_cases[daily_not_due]",
+        "test_extended_core_cases[disabled_job]",
+        "test_extended_core_cases[multiple_jobs_sorting]",
+        "test_extended_core_cases[rel_mount]",
+        "test_hidden_cases[complex_globs]",
+        "test_hidden_cases[daily_multi_trigger]",
+        "test_hidden_cases[default_enabled]",
+        "test_hidden_cases[default_timezone]",
+        "test_hidden_cases[duration_zero_exact]",
+        "test_hidden_cases[exact_duration_boundary]",
+        "test_hidden_cases[exact_now_time]",
+        "test_hidden_cases[first_pattern_wins]",
+        "test_hidden_cases[mixed_enabled_disabled]",
+        "test_hidden_cases[no_exclusions]",
+        "test_hidden_cases[once_due]",
+        "test_hidden_cases[once_future]",
+        "test_hidden_cases[timestamp_floored]",
+        "test_hidden_cases[timezone_non_utc]",
+        "test_hidden_cases[weekly_multi_trigger]",
+        "test_hidden_cases[weekly_multiple_days]",
+        "test_hidden_cases[weekly_single_day]",
+        "test_hidden_cases[weekly_wrong_day]"
+      ],
+      "failed": [
+        "test_error_cases[error_schema_daily_missing_at]",
+        "test_error_cases[error_schema_once_missing_when]",
+        "test_hidden_cases[glob_case_sensitive]",
+        "test_hidden_cases[glob_character_class]",
+        "test_hidden_cases[glob_doublestar_crosses_dirs]",
+        "test_hidden_cases[glob_question_mark]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_2-Regression": {
+      "passed": [
+        "test_core_cases[full]",
+        "test_extended_core_cases[pack]",
+        "test_hidden_cases[full_no_exclusions]",
+        "test_hidden_cases[full_rel_mount]",
+        "test_hidden_cases[full_with_exclusions]",
+        "test_hidden_cases[no_strategy]",
+        "test_hidden_cases[pack_default_max]",
+        "test_hidden_cases[pack_exact_fit]",
+        "test_hidden_cases[pack_no_files]",
+        "test_hidden_cases[pack_no_incremental]",
+        "test_hidden_cases[pack_single_large_file]",
+        "test_hidden_cases[pack_tiny_max]",
+        "test_jsonl_output_is_compact_and_newline_terminated"
+      ],
+      "failed": [
+        "test_extended_core_cases[verify]",
+        "test_hidden_cases[multi_strategy_jobs]",
+        "test_hidden_cases[strategy_sorting]",
+        "test_hidden_cases[verify_complex_globs]",
+        "test_hidden_cases[verify_no_files]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_3-Functionality": {
+      "passed": [
+        "test_backup_dir_missing_is_allowed",
+        "test_extended_core_cases[some_destination]",
+        "test_hidden_cases[all_new_files]",
+        "test_hidden_cases[changed_subset]",
+        "test_hidden_cases[dest_extra_files]",
+        "test_hidden_cases[full_single_changed]",
+        "test_hidden_cases[full_subdirectory]",
+        "test_hidden_cases[nested_dest_path]",
+        "test_hidden_cases[no_backup_flag]",
+        "test_hidden_cases[partial_unchanged]",
+        "test_other_job_backups_ignored_for_dest_state"
+      ],
+      "failed": [
+        "test_extended_core_cases[full_desto]",
+        "test_hidden_cases[all_excluded_with_dest]",
+        "test_hidden_cases[multi_jobs_different_dest]",
+        "test_hidden_cases[verify_all_new]",
+        "test_hidden_cases[verify_partial_unchanged]",
+        "test_missing_destination_is_rejected"
+      ],
+      "skipped": []
+    },
+    "checkpoint_3-Core": {
+      "passed": [
+        "test_core_cases[empy_destination]"
+      ],
+      "failed": [],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 1,
+    "Functionality": 11,
+    "Regression": 39,
+    "Error": 0
+  },
+  "total_counts": {
+    "Core": 1,
+    "Functionality": 17,
+    "Regression": 50,
+    "Error": 0
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 68,
+  "test_collection_hash": "28d861cf945bd4caff2dffe306ee8e5c497f3b2026b8ff337069b355733582cb",
+  "infrastructure_failure": false
+}

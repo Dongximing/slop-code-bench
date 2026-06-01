@@ -1,0 +1,93 @@
+agent_dir: agent
+agent_tar: agent.tar.gz
+agent_type: claude_code
+agent_version: 2.0.51
+checkpoint_file: checkpoint.yaml
+compress_artifacts: false
+debug: false
+environment_file: environment.yaml
+image: slop-code:claude_code-2.0.51-python3.12
+inference_result_file: inference_result.json
+model_name: glm-5-kimi
+pass_policy: any
+post_checkpoint_skill:
+  eval_after: true
+  prompt: 'Review all the code you just wrote in this workspace.
+
+    Remove AI-generated slop:
+
+    - Extra comments that a human wouldn''t add
+
+    - Extra defensive checks or try/catch blocks that are abnormal
+
+    - Inline imports in Python (move to top of file)
+
+    - range(len(x)) - use enumerate
+
+    - if cond: return True else: return False - simplify
+
+    - Any style inconsistent with the file
+
+    Do NOT change any behavior. Do NOT break any existing functionality.
+
+    '
+  run_on: all
+problem_file: problem.yaml
+prompt_file: prompt.txt
+run_info_file: run_info.yaml
+seed: 42
+skip_evaluation: false
+snapshot_dir: snapshot
+summary:
+  checkpoints:
+    checkpoint_1: ran
+    checkpoint_2: ran
+    checkpoint_3: ran
+    checkpoint_4: ran
+  duration_seconds: 7600.21364
+  ended: '2026-06-01T10:49:13.993810'
+  error_message: null
+  error_traceback: null
+  error_type: null
+  passed_policy: true
+  started: '2026-06-01T08:42:33.780170'
+  state: completed
+  total_cost: 22.6583052
+  total_steps: 326
+  total_usage:
+    cost: 22.6583052
+    current_tokens:
+      cache_read: 192704
+      cache_write: 0
+      input: 7374811
+      output: 23640
+      reasoning: 0
+    net_tokens:
+      cache_read: 192704
+      cache_write: 0
+      input: 7374811
+      output: 23640
+      reasoning: 0
+    steps: 326
+template: 'Implement a program that 100% solves the specification. That is all you
+  need to do.
+
+  {% if not is_continuation -%}
+
+  Use a virtual environment and ensure that a `requirements.txt` is present with any
+  dependencies you need to solve the problem.
+
+  {% else -%}
+
+  Keep using the same virtual environment you started with, update `requirements.txt`
+  with any new dependencies you need.
+
+  {% endif -%}
+
+
+  Your task is:
+
+  {{ spec.strip() }}
+
+  '
+verbose: false

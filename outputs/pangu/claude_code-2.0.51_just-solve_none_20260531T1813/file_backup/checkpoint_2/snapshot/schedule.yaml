@@ -1,0 +1,26 @@
+version: 1
+timezone: UTC
+jobs:
+  - id: job-root
+    enabled: true
+    when:
+      kind: daily
+      at: "03:30"
+    source: mount://
+    exclude:
+      - "A/*"
+      - "*.py"
+      - "**/*.bin"
+    tags: ["home", "critical"]
+    destination: ignored://sink
+  - id: job-subdir
+    enabled: true
+    when:
+      kind: daily
+      at: "03:30"
+    source: mount://A/B
+    exclude:
+      - "*.py"
+      - "**/*.bin"
+    tags: ["home", "critical"]
+    destination: ignored://sink
