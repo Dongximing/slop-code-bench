@@ -1,0 +1,17 @@
+{
+  "version": 4,
+  "description": "Add slug and migrate data",
+  "operations": [
+    {
+      "type": "add_column",
+      "table": "users",
+      "column": {"name": "slug", "type": "TEXT"}
+    },
+    {
+      "type": "migrate_column_data",
+      "table": "users",
+      "from_column": "name",
+      "to_column": "slug"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "description": "Create posts with FK and index",
+  "operations": [
+    {
+      "type": "create_table",
+      "table": "posts",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true},
+        {"name": "title", "type": "TEXT", "not_null": true},
+        {"name": "user_id", "type": "INTEGER"},
+        {"name": "status", "type": "TEXT", "default": "'draft'"}
+      ]
+    },
+    {
+      "type": "add_foreign_key",
+      "table": "posts",
+      "name": "fk_posts_user",
+      "columns": ["user_id"],
+      "references": {"table": "users", "columns": ["id"]},
+      "on_delete": "CASCADE"
+    },
+    {
+      "type": "create_index",
+      "name": "idx_posts_title",
+      "table": "posts",
+      "columns": ["title"]
+    }
+  ]
+}

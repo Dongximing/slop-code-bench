@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "problem_name": "database_migration",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_5",
+  "checkpoint_version": 1,
+  "duration": 24.99414300918579,
+  "entrypoint": "uv run migration_tool.py",
+  "tests": {
+    "checkpoint_1-Regression": {
+      "passed": [
+        "test_add_column_rejects_invalid_identifier",
+        "test_auto_increment_requires_integer_primary_key",
+        "test_column_already_exists",
+        "test_column_missing_for_drop",
+        "test_create_table_multiple_primary_keys_rejected",
+        "test_drop_column_missing_table",
+        "test_drop_column_removes_unique_index_on_dropped_column",
+        "test_drop_only_column",
+        "test_drop_primary_key_column",
+        "test_invalid_column_type_rejected",
+        "test_invalid_identifier_rejected",
+        "test_invalid_json",
+        "test_invalid_schema_missing_operations",
+        "test_missing_migration_file",
+        "test_table_exists",
+        "test_table_missing_for_add_column",
+        "test_unique_constraint_prevents_duplicates",
+        "test_version_negative_rejected",
+        "test_version_string_rejected",
+        "test_version_zero_rejected"
+      ],
+      "failed": [
+        "test_add_column",
+        "test_add_column_with_default_to_populated_table",
+        "test_add_not_null_with_default",
+        "test_auto_increment_primary_key",
+        "test_complex_data_preservation",
+        "test_create_multiple_tables",
+        "test_create_table",
+        "test_default_values_various_types",
+        "test_drop_column_preserve_data",
+        "test_drop_column_preserves_existing_data",
+        "test_drop_single_column",
+        "test_mixed_operations_all_types",
+        "test_multiple_drop_columns",
+        "test_multiple_operations",
+        "test_non_sequential_versions",
+        "test_reserved_word_identifiers_are_quoted",
+        "test_skip_already_applied",
+        "test_unique_and_not_null_constraints"
+      ],
+      "skipped": [
+        "test_foreign_keys_disabled_during_drop_column"
+      ]
+    },
+    "checkpoint_2-Regression": {
+      "passed": [
+        "test_backfill_invalid_where_clause",
+        "test_backfill_table_not_exists",
+        "test_backfill_with_numeric_constant",
+        "test_column_not_exists",
+        "test_invalid_expression",
+        "test_migrate_column_missing_from_column",
+        "test_migrate_column_missing_to_column",
+        "test_migrate_table_not_exists",
+        "test_migration_rolls_back_on_failure",
+        "test_transform_table_not_exists",
+        "test_transform_target_column_not_exists",
+        "test_transform_then_backfill_uses_transformed_values"
+      ],
+      "failed": [
+        "test_backfill_data",
+        "test_backfill_data_without_where_updates_all",
+        "test_backfill_value_expression",
+        "test_backfill_where_filters_rows",
+        "test_complete_column_migration",
+        "test_migrate_column_data",
+        "test_migrate_column_data_default_value_for_null",
+        "test_migrate_column_data_null_without_default",
+        "test_migrate_column_data_overwrites_existing_values",
+        "test_transform_data",
+        "test_transformations_applied_in_order"
+      ],
+      "skipped": []
+    },
+    "checkpoint_3-Regression": {
+      "passed": [
+        "test_check_constraint_violation_on_add",
+        "test_circular_foreign_key_dependencies",
+        "test_drop_check_constraint_missing",
+        "test_drop_foreign_key_missing",
+        "test_drop_index_missing",
+        "test_duplicate_index_name",
+        "test_duplicate_index_name_other_table",
+        "test_foreign_key_column_count_mismatch",
+        "test_foreign_key_referencing_column_missing",
+        "test_foreign_key_violation_existing_data",
+        "test_invalid_foreign_key_action",
+        "test_invalid_foreign_key_reference_column",
+        "test_invalid_foreign_key_reference_table",
+        "test_transactional_rollback_on_failure"
+      ],
+      "failed": [
+        "test_add_check_constraint",
+        "test_add_foreign_key",
+        "test_add_foreign_key_on_empty_table_enforces_future_writes",
+        "test_complex_migration",
+        "test_create_index",
+        "test_create_unique_index",
+        "test_drop_check_constraint",
+        "test_drop_foreign_key",
+        "test_drop_index",
+        "test_foreign_key_on_delete_set_null",
+        "test_foreign_key_with_restrict"
+      ],
+      "skipped": []
+    },
+    "checkpoint_4-Regression": {
+      "passed": [
+        "test_backfill_data_no_rollback_ops",
+        "test_migrations_store_operations",
+        "test_no_migrations",
+        "test_rollback_fails_with_dependent_index",
+        "test_rollback_transactional_on_failure",
+        "test_transform_data_no_rollback_ops",
+        "test_version_not_found"
+      ],
+      "failed": [
+        "test_explicit_rollback",
+        "test_explicit_rollback_operations_override_automatic_rollback",
+        "test_non_sequential_versions",
+        "test_rollback_add_check_constraint",
+        "test_rollback_add_column_drops_column_and_loses_data",
+        "test_rollback_add_foreign_key",
+        "test_rollback_create_index",
+        "test_rollback_data_migration",
+        "test_rollback_drop_check_constraint",
+        "test_rollback_drop_check_constraint_restores_expression",
+        "test_rollback_drop_column",
+        "test_rollback_drop_column_restores_default_and_not_null",
+        "test_rollback_drop_column_restores_unique_constraint",
+        "test_rollback_drop_foreign_key",
+        "test_rollback_drop_foreign_key_restores_actions",
+        "test_rollback_drop_index",
+        "test_rollback_drop_index_restores_unique_definition",
+        "test_rollback_multiple",
+        "test_rollback_multiple_ops_one_migration",
+        "test_rollback_only_one_migration",
+        "test_rollback_removes_migration_records",
+        "test_rollback_to_version",
+        "test_simple_rollback"
+      ],
+      "skipped": []
+    },
+    "checkpoint_5-Error": {
+      "passed": [
+        "test_duplicate_version_numbers",
+        "test_forward_dependency",
+        "test_migrate_all_circular_dependency",
+        "test_migrate_all_future_dependency",
+        "test_migrate_all_invalid_json",
+        "test_self_dependency"
+      ],
+      "failed": [
+        "test_circular_dependency",
+        "test_migrate_missing_dependency",
+        "test_missing_dependency",
+        "test_validate_duplicate_versions"
+      ],
+      "skipped": []
+    },
+    "checkpoint_5-Functionality": {
+      "passed": [
+        "test_empty_depends_on_array",
+        "test_validate_without_migrations_dir"
+      ],
+      "failed": [
+        "test_complex_dependency",
+        "test_migrate_all_skips_applied",
+        "test_migrate_skips_already_applied_dependencies",
+        "test_migrate_transitive_dependencies",
+        "test_parallel_dependencies"
+      ],
+      "skipped": []
+    },
+    "checkpoint_5-Core": {
+      "passed": [],
+      "failed": [
+        "test_migrate_all",
+        "test_simple_dependency",
+        "test_validate_command"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 0,
+    "Functionality": 2,
+    "Regression": 53,
+    "Error": 6
+  },
+  "total_counts": {
+    "Core": 3,
+    "Functionality": 7,
+    "Regression": 117,
+    "Error": 10
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 137,
+  "test_collection_hash": "b6520d11c3f9d6b39deff8eaa9ab827b2a030e3d9f1f623ce58049e7f0056050",
+  "infrastructure_failure": false
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "problem_name": "circuit_eval",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_1",
+  "checkpoint_version": 1,
+  "duration": 3.585841417312622,
+  "entrypoint": "uv run circopt.py",
+  "tests": {
+    "checkpoint_1-Functionality": {
+      "passed": [],
+      "failed": [
+        "test_check_accepts_all_operators",
+        "test_check_arity_errors[arity_and_too_few-a-AND(a)]",
+        "test_check_arity_errors[arity_nand_too_few-a-NAND(a)]",
+        "test_check_arity_errors[arity_nor_too_few-a-NOR(a)]",
+        "test_check_arity_errors[arity_or_too_few-a-OR(a)]",
+        "test_check_arity_errors[arity_xnor_too_few-a-XNOR(a)]",
+        "test_check_arity_errors[arity_xor_too_few-a-XOR(a)]",
+        "test_check_comparator_2bit_circuit",
+        "test_check_decoder_circuit",
+        "test_check_identifiers_are_case_sensitive",
+        "test_check_majority_vote_circuit",
+        "test_check_parity_generator_circuit",
+        "test_check_shared_scalar_circuit",
+        "test_check_arity_errors[arity_not_too_many-a-NOT(a, a)]",
+        "test_check_arity_errors[arity_buf_too_many-a b-BUF(a, b)]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Core": {
+      "passed": [],
+      "failed": [
+        "test_check_cycle_error_message",
+        "test_check_file_not_found",
+        "test_check_valid_circuit_reports_interface",
+        "test_cli_unknown_command",
+        "test_cli_usage_error_no_args",
+        "test_cli_usage_error_without_command",
+        "test_help_ignores_json_flag",
+        "test_version_json",
+        "test_version_plain_text"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Error": {
+      "passed": [],
+      "failed": [
+        "test_check_parse_errors_have_location[bad_syntax-            input a b\\n            output y\\n            y = AND(a, b\\n            ]",
+        "test_check_parse_errors_have_location[literal_x-            input a\\n            output y\\n            y = X\\n            ]",
+        "test_check_parse_errors_have_location[brackets-            input a[0]\\n            output y\\n            y = a\\n            ]",
+        "test_check_validation_errors[declaration_after_assignment-            input a\\n            output y\\n            y = a\\n            wire t1\\n            t1 = a\\n            -DeclarationAfterAssignmentError]",
+        "test_check_validation_errors[duplicate_name-            input a a\\n            output y\\n            y = a\\n            -DuplicateNameError]",
+        "test_check_validation_errors[undefined_name-            input a\\n            output y\\n            y = z\\n            -UndefinedNameError]",
+        "test_check_validation_errors[input_assignment-            input a\\n            output y\\n            y = a\\n            a = 1\\n            -InputAssignmentError]",
+        "test_check_validation_errors[multiple_assignment-            input a\\n            output y\\n            y = a\\n            y = NOT(a)\\n            -MultipleAssignmentError]",
+        "test_check_validation_errors[unassigned_signal-            input a\\n            output y\\n            -UnassignedSignalError]",
+        "test_check_validation_errors[duplicate_name_across_lines-            input a\\n            input a\\n            output y\\n            y = a\\n            -DuplicateNameError]",
+        "test_check_validation_errors[unassigned_wire-            input a\\n            output y\\n            wire t1\\n            y = a\\n            -UnassignedSignalError]",
+        "test_check_validation_errors[undeclared_lhs-            input a\\n            output y\\n            t1 = a\\n            y = a\\n            -UndefinedNameError]"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 0,
+    "Functionality": 0,
+    "Regression": 0,
+    "Error": 0
+  },
+  "total_counts": {
+    "Core": 9,
+    "Functionality": 15,
+    "Regression": 0,
+    "Error": 12
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 22,
+  "test_collection_hash": "46a898e5ca98098b14725e27e2cb0eb70ab9b68c25e9efe8829bf5984471e8a9",
+  "infrastructure_failure": false
+}

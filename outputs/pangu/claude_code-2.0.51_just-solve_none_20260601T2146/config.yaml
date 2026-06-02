@@ -1,0 +1,125 @@
+agent:
+  base_url: http://api-cn-southwest-2.modelarts-infer.com/v2/infer/79c3b4c1-0a59-4bf3-95df-cbaf0729deac
+  binary: claude
+  cost_limits:
+    cost_limit: 0
+    net_cost_limit: 0
+    step_limit: 100
+  permission_mode: bypassPermissions
+  type: claude_code
+  version: 2.0.51
+agent_config_path: /shared_workspace_mfs/ximing/slop-code-bench/configs/agents/claude_code_pangu.yaml
+environment:
+  commands:
+    agent_command: python
+    command: uv run
+    entry_file: '{entry_file}.py'
+  docker:
+    image: ghcr.io/astral-sh/uv:python3.12-trixie-slim
+    mount_workspace: true
+    workdir: /workspace
+  environment:
+    env:
+      PIP_CACHE_DIR: /tmp/pip-cache-dir
+      PIP_CONFIG_FILE: /tmp/pip-conf
+      UV_CACHE_DIR: /tmp/uv-cache
+  name: python3.12
+  setup:
+    eval_commands:
+    - uv init
+    - uv add -r requirements.txt
+    resume_commands:
+    - python -m venv .venv || true
+    - .venv/bin/pip install -r requirements.txt 2>/dev/null || true
+  type: docker
+environment_config_path: /shared_workspace_mfs/ximing/slop-code-bench/configs/environments/docker-python3.12-uv.yaml
+model:
+  name: pangu
+  provider: pangu
+one_shot:
+  enabled: false
+  include_first_prefix: false
+  prefix: ''
+output_path: outputs/pangu/claude_code-2.0.51_just-solve_none_20260601T2146
+pass_policy: any
+post_checkpoint_skill:
+  eval_after: true
+  prompt: "Perform a deep code quality audit on ONLY the Python files you created\
+    \ in /workspace root.\nDo NOT touch files under /workspace/files/, /workspace/tests/,\
+    \ /workspace/venv/, or any test data directories.\nDo NOT touch requirements.txt.\n\
+    \nRethink how to structure the implementation to meaningfully improve code quality\
+    \ without impacting behavior.\nBe ambitious \u2014 actively search for restructurings\
+    \ that preserve behavior while making the code dramatically simpler, smaller,\
+    \ and more direct.\n\nApply these rules and directly edit the code to fix any\
+    \ violations:\n\n1. STRUCTURAL SIMPLIFICATION\n   - Delete whole layers of unnecessary\
+    \ indirection, wrappers, or pass-through helpers\n   - Reframe state models so\
+    \ conditionals disappear rather than getting centralized\n   - Collapse duplicate\
+    \ branches into a single clearer flow\n   - Replace condition chains with a typed\
+    \ model or explicit dispatcher\n   - If independent work is serialized for no\
+    \ reason, restructure it\n\n2. SPAGHETTI PREVENTION\n   - Remove ad-hoc conditionals\
+    \ and scattered special cases inserted into unrelated flows\n   - Push one-off\
+    \ logic into dedicated helpers or separate functions\n   - Extract narrow edge-case\
+    \ handling out of busy functions into their own functions\n   - Remove one-off\
+    \ booleans or flags that complicate existing control flow\n\n3. ABSTRACTION QUALITY\n\
+    \   - Delete thin wrappers or identity abstractions that add indirection without\
+    \ simplifying anything\n   - Remove unnecessary casts, Any types, or optional\
+    \ params that muddy the real contract\n   - Replace copy-pasted logic with extracted\
+    \ helpers\n   - Reuse existing utilities instead of bespoke near-duplicates\n\n\
+    4. SLOP REMOVAL\n   - Delete comments that repeat what the code already says\n\
+    \   - Remove multi-line docstrings that just restate the function name\n   - Move\
+    \ inline imports to top of file\n   - Simplify: range(len(x)) -> enumerate, if\
+    \ cond: return True else: return False -> return cond\n   - Remove unnecessary\
+    \ else/elif after return\n   - Remove dead code, unused imports, unused variables\n\
+    \   - Remove excessive blank lines\n\n5. FILE ORGANIZATION\n   - If a file exceeds\
+    \ ~500 lines, split into focused modules\n   - Separate orchestration from business\
+    \ logic\n   - Move feature-specific logic behind dedicated abstractions\n\nPriority:\
+    \ structural simplifications (1-3) over cosmetic cleanup (4).\nDo NOT change any\
+    \ behavior. All existing functionality must be preserved.\n"
+  run_on: all
+problems:
+- cfgpipe
+- circuit_eval
+- code_search
+- dag_execution
+- database_migration
+- datagate
+- dynamic_buffer
+- dynamic_config_service_api
+- etl_pipeline
+- eve_industry
+- eve_jump_planner
+- eve_market_tools
+- eve_route_planner
+- file_query_tool
+- forge
+- l2m
+- layered_config_synthesizer
+- meshctl
+- metric_transform_lang
+- migrate_configs
+prompt_content: 'Implement a program that 100% solves the specification. That is all
+  you need to do.
+
+  {% if not is_continuation -%}
+
+  Use a virtual environment and ensure that a `requirements.txt` is present with any
+  dependencies you need to solve the problem.
+
+  {% else -%}
+
+  Keep using the same virtual environment you started with, update `requirements.txt`
+  with any new dependencies you need.
+
+  {% endif -%}
+
+
+  Your task is:
+
+  {{ spec.strip() }}
+
+  '
+prompt_path: /shared_workspace_mfs/ximing/slop-code-bench/configs/prompts/just-solve.jinja
+save_dir: outputs
+save_template: pangu/claude_code-2.0.51_just-solve_none_20260601T2146
+thinking: none
+thinking_max_tokens: null

@@ -1,0 +1,620 @@
+{
+  "created": 1780375484.0308368,
+  "duration": 4.94066309928894,
+  "exitcode": 1,
+  "root": "/workspace",
+  "environment": {},
+  "summary": {
+    "failed": 11,
+    "total": 11,
+    "collected": 11
+  },
+  "collectors": [
+    {
+      "nodeid": "",
+      "outcome": "passed",
+      "result": [
+        {
+          "nodeid": ".evaluation_tests",
+          "type": "Dir"
+        }
+      ]
+    },
+    {
+      "nodeid": ".evaluation_tests/assets/sde_dir",
+      "outcome": "passed",
+      "result": []
+    },
+    {
+      "nodeid": ".evaluation_tests/assets",
+      "outcome": "passed",
+      "result": [
+        {
+          "nodeid": ".evaluation_tests/assets/sde_dir",
+          "type": "Dir"
+        }
+      ]
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py",
+      "outcome": "passed",
+      "result": [
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_turnur_ahb[default]",
+          "type": "Function",
+          "lineno": 73
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_turnur_isbra[default]",
+          "type": "Function",
+          "lineno": 101
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_fatigue_caps[default]",
+          "type": "Function",
+          "lineno": 167
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_jita_ama[default]",
+          "type": "Function",
+          "lineno": 238
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_jita_ama[reduction=0]",
+          "type": "Function",
+          "lineno": 238
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_jita_ama[range=6]",
+          "type": "Function",
+          "lineno": 238
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_jita_serp_prime[default]",
+          "type": "Function",
+          "lineno": 281
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=90]",
+          "type": "Function",
+          "lineno": 388
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0]",
+          "type": "Function",
+          "lineno": 388
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0_fuel=5000]",
+          "type": "Function",
+          "lineno": 388
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[reduction=90]",
+          "type": "Function",
+          "lineno": 388
+        }
+      ]
+    },
+    {
+      "nodeid": ".evaluation_tests",
+      "outcome": "passed",
+      "result": [
+        {
+          "nodeid": ".evaluation_tests/assets",
+          "type": "Dir"
+        },
+        {
+          "nodeid": ".evaluation_tests/test_checkpoint_1.py",
+          "type": "Module"
+        }
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_turnur_ahb[default]",
+      "lineno": 73,
+      "outcome": "failed",
+      "keywords": [
+        "test_turnur_ahb[default]",
+        "parametrize",
+        "pytestmark",
+        "default",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.0004900489002466202,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.5549882594496012,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: Traceback (most recent call last):\n    File \"/workspace/did_he_say_jump.py\", line 515, in <module>\n      exit(main())\n           ^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 454, in main\n      result = find_path(\n               ^^^^^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 292, in find_path\n      priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ValueError: not enough values to unpack (expected 8, got 2)\n  \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Turnur III - Moon 18 - Freedom Extension Storage', '--end', 'Ahbazon VI - Imperial Shipment Storage', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 77,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: Turnur III - Moon 18 - Freedom Extension Storage\\nUNDOCK\\nJUMP 3.07 LY: Egghelende (31K isotopes)...UMMARY:\\n  End Cooldown: 00:02\\n  End Fatigue: 00:21\\n  Isotopes Used: 103K\\n  Time Waiting: 00:02\\n  Total LY: 10.22'}\n\n    @pytest.mark.parametrize(\"case\", TURNUR_AHB[\"cases\"], ids=[\"default\"])\n    def test_turnur_ahb(entrypoint_argv, sde_dir, case):\n        \"\"\"Core: Plan route from Turnur to Ahbazon.\"\"\"\n>       run_and_check(\n            entrypoint_argv, sde_dir, TURNUR_AHB[\"start\"], TURNUR_AHB[\"end\"], case\n        )\n\n.evaluation_tests/test_checkpoint_1.py:77: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = 'Turnur III - Moon 18 - Freedom Extension Storage'\nend = 'Ahbazon VI - Imperial Shipment Storage'\ncase = {'expected': 'START: Turnur III - Moon 18 - Freedom Extension Storage\\nUNDOCK\\nJUMP 3.07 LY: Egghelende (31K isotopes)...UMMARY:\\n  End Cooldown: 00:02\\n  End Fatigue: 00:21\\n  Isotopes Used: 103K\\n  Time Waiting: 00:02\\n  Total LY: 10.22'}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: Traceback (most recent call last):\nE           File \"/workspace/did_he_say_jump.py\", line 515, in <module>\nE             exit(main())\nE                  ^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 454, in main\nE             result = find_path(\nE                      ^^^^^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 292, in find_path\nE             priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\nE             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE         ValueError: not enough values to unpack (expected 8, got 2)\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Turnur III - Moon 18 - Freedom Extension Storage', '--end', 'Ahbazon VI - Imperial Shipment Storage', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.00016744062304496765,
+        "outcome": "passed"
+      }
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_turnur_isbra[default]",
+      "lineno": 101,
+      "outcome": "failed",
+      "keywords": [
+        "test_turnur_isbra[default]",
+        "parametrize",
+        "pytestmark",
+        "default",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.000255802646279335,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.4308844059705734,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: Traceback (most recent call last):\n    File \"/workspace/did_he_say_jump.py\", line 515, in <module>\n      exit(main())\n           ^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 454, in main\n      result = find_path(\n               ^^^^^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 292, in find_path\n      priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ValueError: not enough values to unpack (expected 8, got 2)\n  \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Turnur III - Moon 18 - Freedom Extension Storage', '--end', 'Isbrabata VII - Boundless Creation Factory', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 105,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: Turnur III - Moon 18 - Freedom Extension Storage\\nUNDOCK\\nJUMP 0.95 LY: Isbrabata (10K isotopes)\\...nSUMMARY:\\n  End Cooldown: 00:02\\n  End Fatigue: 00:11\\n  Isotopes Used: 10K\\n  Time Waiting: 00:00\\n  Total LY: 0.95'}\n\n    @pytest.mark.parametrize(\"case\", TURNUR_ISBRA[\"cases\"], ids=[\"default\"])\n    def test_turnur_isbra(entrypoint_argv, sde_dir, case):\n        \"\"\"Core: Plan route from Turnur to Isbrabata.\"\"\"\n>       run_and_check(\n            entrypoint_argv,\n            sde_dir,\n            TURNUR_ISBRA[\"start\"],\n            TURNUR_ISBRA[\"end\"],\n            case,\n        )\n\n.evaluation_tests/test_checkpoint_1.py:105: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = 'Turnur III - Moon 18 - Freedom Extension Storage'\nend = 'Isbrabata VII - Boundless Creation Factory'\ncase = {'expected': 'START: Turnur III - Moon 18 - Freedom Extension Storage\\nUNDOCK\\nJUMP 0.95 LY: Isbrabata (10K isotopes)\\...nSUMMARY:\\n  End Cooldown: 00:02\\n  End Fatigue: 00:11\\n  Isotopes Used: 10K\\n  Time Waiting: 00:00\\n  Total LY: 0.95'}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: Traceback (most recent call last):\nE           File \"/workspace/did_he_say_jump.py\", line 515, in <module>\nE             exit(main())\nE                  ^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 454, in main\nE             result = find_path(\nE                      ^^^^^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 292, in find_path\nE             priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\nE             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE         ValueError: not enough values to unpack (expected 8, got 2)\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Turnur III - Moon 18 - Freedom Extension Storage', '--end', 'Isbrabata VII - Boundless Creation Factory', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.00016401149332523346,
+        "outcome": "passed"
+      }
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_fatigue_caps[default]",
+      "lineno": 167,
+      "outcome": "failed",
+      "keywords": [
+        "test_fatigue_caps[default]",
+        "parametrize",
+        "functionality",
+        "pytestmark",
+        "default",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.0002533532679080963,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.42680211178958416,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', '3-CE1R VIII - Moon 5 - Prosper Vault', '--end', 'B-G1LG VI - Moon 3 - True Power Mining Outpost', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout=\"Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nError: End station 'B-G1LG VI - Moon 3 - True Power Mining Outpost' is not valid (must be in low-sec/Null-sec, not pochven/zarzakh)\\n\", stderr='').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 172,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: 3-CE1R VIII - Moon 5 - Prosper Vault\\nUNDOCK\\nJUMP 8.11 LY: 2RV-06 (82K isotopes)\\nDOCK: 2RV-06 V...UMMARY:\\n  End Cooldown: 00:28\\n  End Fatigue: 05:00\\n  Isotopes Used: 877K\\n  Time Waiting: 02:20\\n  Total LY: 87.67'}\n\n    @pytest.mark.functionality\n    @pytest.mark.parametrize(\"case\", FATIGUE_CAPS[\"cases\"], ids=[\"default\"])\n    def test_fatigue_caps(entrypoint_argv, sde_dir, case):\n        \"\"\"Functionality: Long route that hits fatigue caps.\"\"\"\n>       run_and_check(\n            entrypoint_argv,\n            sde_dir,\n            FATIGUE_CAPS[\"start\"],\n            FATIGUE_CAPS[\"end\"],\n            case,\n        )\n\n.evaluation_tests/test_checkpoint_1.py:172: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = '3-CE1R VIII - Moon 5 - Prosper Vault'\nend = 'B-G1LG VI - Moon 3 - True Power Mining Outpost'\ncase = {'expected': 'START: 3-CE1R VIII - Moon 5 - Prosper Vault\\nUNDOCK\\nJUMP 8.11 LY: 2RV-06 (82K isotopes)\\nDOCK: 2RV-06 V...UMMARY:\\n  End Cooldown: 00:28\\n  End Fatigue: 05:00\\n  Isotopes Used: 877K\\n  Time Waiting: 02:20\\n  Total LY: 87.67'}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', '3-CE1R VIII - Moon 5 - Prosper Vault', '--end', 'B-G1LG VI - Moon 3 - True Power Mining Outpost', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout=\"Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nError: End station 'B-G1LG VI - Moon 3 - True Power Mining Outpost' is not valid (must be in low-sec/Null-sec, not pochven/zarzakh)\\n\", stderr='').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.00015827268362045288,
+        "outcome": "passed"
+      }
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_jita_ama[default]",
+      "lineno": 238,
+      "outcome": "failed",
+      "keywords": [
+        "test_jita_ama[default]",
+        "parametrize",
+        "functionality",
+        "pytestmark",
+        "default",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.0002697017043828964,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.4309610463678837,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: Traceback (most recent call last):\n    File \"/workspace/did_he_say_jump.py\", line 515, in <module>\n      exit(main())\n           ^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 454, in main\n      result = find_path(\n               ^^^^^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 292, in find_path\n      priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ValueError: not enough values to unpack (expected 8, got 2)\n  \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 245,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\\nUNDOCK\\nJUMP 8.43 LY: Resbroko (85K isotopes)\\nDO...UMMARY:\\n  End Cooldown: 00:02\\n  End Fatigue: 00:24\\n  Isotopes Used: 128K\\n  Time Waiting: 00:02\\n  Total LY: 12.75'}\n\n    @pytest.mark.functionality\n    @pytest.mark.parametrize(\n        \"case\", JITA_AMA[\"cases\"], ids=[\"default\", \"reduction=0\", \"range=6\"]\n    )\n    def test_jita_ama(entrypoint_argv, sde_dir, case):\n        \"\"\"Functionality: Plan route from Jita to Amamake.\"\"\"\n>       run_and_check(\n            entrypoint_argv, sde_dir, JITA_AMA[\"start\"], JITA_AMA[\"end\"], case\n        )\n\n.evaluation_tests/test_checkpoint_1.py:245: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'\nend = 'Amamake VI - Moon 2 - Nurtura Food Packaging'\ncase = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\\nUNDOCK\\nJUMP 8.43 LY: Resbroko (85K isotopes)\\nDO...UMMARY:\\n  End Cooldown: 00:02\\n  End Fatigue: 00:24\\n  Isotopes Used: 128K\\n  Time Waiting: 00:02\\n  Total LY: 12.75'}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: Traceback (most recent call last):\nE           File \"/workspace/did_he_say_jump.py\", line 515, in <module>\nE             exit(main())\nE                  ^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 454, in main\nE             result = find_path(\nE                      ^^^^^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 292, in find_path\nE             priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\nE             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE         ValueError: not enough values to unpack (expected 8, got 2)\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.0001504216343164444,
+        "outcome": "passed"
+      }
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_jita_ama[reduction=0]",
+      "lineno": 238,
+      "outcome": "failed",
+      "keywords": [
+        "test_jita_ama[reduction=0]",
+        "parametrize",
+        "functionality",
+        "pytestmark",
+        "reduction=0",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.00025962479412555695,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.4336630906909704,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: Traceback (most recent call last):\n    File \"/workspace/did_he_say_jump.py\", line 515, in <module>\n      exit(main())\n           ^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 454, in main\n      result = find_path(\n               ^^^^^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 292, in find_path\n      priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ValueError: not enough values to unpack (expected 8, got 2)\n  \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--reduction', '0'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 245,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\\nUNDOCK\\nJUMP 8.43 LY: Resbroko (85K isotopes)\\nDO...ooldown: 00:09\\n  End Fatigue: 05:00\\n  Isotopes Used: 128K\\n  Time Waiting: 00:10\\n  Total LY: 12.75', 'reduction': 0}\n\n    @pytest.mark.functionality\n    @pytest.mark.parametrize(\n        \"case\", JITA_AMA[\"cases\"], ids=[\"default\", \"reduction=0\", \"range=6\"]\n    )\n    def test_jita_ama(entrypoint_argv, sde_dir, case):\n        \"\"\"Functionality: Plan route from Jita to Amamake.\"\"\"\n>       run_and_check(\n            entrypoint_argv, sde_dir, JITA_AMA[\"start\"], JITA_AMA[\"end\"], case\n        )\n\n.evaluation_tests/test_checkpoint_1.py:245: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'\nend = 'Amamake VI - Moon 2 - Nurtura Food Packaging'\ncase = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\\nUNDOCK\\nJUMP 8.43 LY: Resbroko (85K isotopes)\\nDO...ooldown: 00:09\\n  End Fatigue: 05:00\\n  Isotopes Used: 128K\\n  Time Waiting: 00:10\\n  Total LY: 12.75', 'reduction': 0}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: Traceback (most recent call last):\nE           File \"/workspace/did_he_say_jump.py\", line 515, in <module>\nE             exit(main())\nE                  ^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 454, in main\nE             result = find_path(\nE                      ^^^^^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 292, in find_path\nE             priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\nE             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE         ValueError: not enough values to unpack (expected 8, got 2)\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--reduction', '0'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.00015003234148025513,
+        "outcome": "passed"
+      }
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_jita_ama[range=6]",
+      "lineno": 238,
+      "outcome": "failed",
+      "keywords": [
+        "test_jita_ama[range=6]",
+        "parametrize",
+        "functionality",
+        "pytestmark",
+        "range=6",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.0002492014318704605,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.43194702081382275,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: Traceback (most recent call last):\n    File \"/workspace/did_he_say_jump.py\", line 515, in <module>\n      exit(main())\n           ^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 454, in main\n      result = find_path(\n               ^^^^^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 292, in find_path\n      priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ValueError: not enough values to unpack (expected 8, got 2)\n  \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '6'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 245,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\\nUNDOCK\\nJUMP 5.58 LY: Carrou (56K isotopes)\\nDOCK...nd Cooldown: 00:02\\n  End Fatigue: 00:28\\n  Isotopes Used: 147K\\n  Time Waiting: 00:03\\n  Total LY: 14.62', 'range': 6}\n\n    @pytest.mark.functionality\n    @pytest.mark.parametrize(\n        \"case\", JITA_AMA[\"cases\"], ids=[\"default\", \"reduction=0\", \"range=6\"]\n    )\n    def test_jita_ama(entrypoint_argv, sde_dir, case):\n        \"\"\"Functionality: Plan route from Jita to Amamake.\"\"\"\n>       run_and_check(\n            entrypoint_argv, sde_dir, JITA_AMA[\"start\"], JITA_AMA[\"end\"], case\n        )\n\n.evaluation_tests/test_checkpoint_1.py:245: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'\nend = 'Amamake VI - Moon 2 - Nurtura Food Packaging'\ncase = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\\nUNDOCK\\nJUMP 5.58 LY: Carrou (56K isotopes)\\nDOCK...nd Cooldown: 00:02\\n  End Fatigue: 00:28\\n  Isotopes Used: 147K\\n  Time Waiting: 00:03\\n  Total LY: 14.62', 'range': 6}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: Traceback (most recent call last):\nE           File \"/workspace/did_he_say_jump.py\", line 515, in <module>\nE             exit(main())\nE                  ^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 454, in main\nE             result = find_path(\nE                      ^^^^^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 292, in find_path\nE             priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\nE             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE         ValueError: not enough values to unpack (expected 8, got 2)\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '6'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.00015131384134292603,
+        "outcome": "passed"
+      }
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_jita_serp_prime[default]",
+      "lineno": 281,
+      "outcome": "failed",
+      "keywords": [
+        "test_jita_serp_prime[default]",
+        "parametrize",
+        "functionality",
+        "pytestmark",
+        "default",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.000251254066824913,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.4251993205398321,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Serpentis Prime II - Archangels Testing Facilities', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout=\"Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nError: End station 'Serpentis Prime II - Archangels Testing Facilities' is not valid (must be in low-sec/Null-sec, not pochven/zarzakh)\\n\", stderr='').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 286,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\\nUNDOCK\\nJUMP 9.48 LY: Yvangier (95K isotopes)\\nDO...UMMARY:\\n  End Cooldown: 00:11\\n  End Fatigue: 03:10\\n  Isotopes Used: 451K\\n  Time Waiting: 00:13\\n  Total LY: 45.08'}\n\n    @pytest.mark.functionality\n    @pytest.mark.parametrize(\"case\", JITA_SERP_PRIME[\"cases\"], ids=[\"default\"])\n    def test_jita_serp_prime(entrypoint_argv, sde_dir, case):\n        \"\"\"Functionality: Plan route from Jita to Serpentis Prime.\"\"\"\n>       run_and_check(\n            entrypoint_argv,\n            sde_dir,\n            JITA_SERP_PRIME[\"start\"],\n            JITA_SERP_PRIME[\"end\"],\n            case,\n        )\n\n.evaluation_tests/test_checkpoint_1.py:286: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'\nend = 'Serpentis Prime II - Archangels Testing Facilities'\ncase = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\\nUNDOCK\\nJUMP 9.48 LY: Yvangier (95K isotopes)\\nDO...UMMARY:\\n  End Cooldown: 00:11\\n  End Fatigue: 03:10\\n  Isotopes Used: 451K\\n  Time Waiting: 00:13\\n  Total LY: 45.08'}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Serpentis Prime II - Archangels Testing Facilities', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout=\"Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nError: End station 'Serpentis Prime II - Archangels Testing Facilities' is not valid (must be in low-sec/Null-sec, not pochven/zarzakh)\\n\", stderr='').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.00015167146921157837,
+        "outcome": "passed"
+      }
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=90]",
+      "lineno": 388,
+      "outcome": "failed",
+      "keywords": [
+        "test_mesy_siseide[range=5_reduction=90]",
+        "parametrize",
+        "functionality",
+        "pytestmark",
+        "range=5_reduction=90",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.0002645142376422882,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.432206891477108,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: Traceback (most recent call last):\n    File \"/workspace/did_he_say_jump.py\", line 515, in <module>\n      exit(main())\n           ^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 454, in main\n      result = find_path(\n               ^^^^^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 292, in find_path\n      priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ValueError: not enough values to unpack (expected 8, got 2)\n  \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--reduction', '90'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 402,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\\nUNDOCK\\nJUMP 2.73 LY: Fliet (28K isotopes)\\nDOCK: Fl...3\\n  End Fatigue: 00:31\\n  Isotopes Used: 164K\\n  Time Waiting: 00:05\\n  Total LY: 16.38', 'range': 5, 'reduction': 90}\n\n    @pytest.mark.functionality\n    @pytest.mark.parametrize(\n        \"case\",\n        MESY_SISEIDE[\"cases\"],\n        ids=[\n            \"range=5_reduction=90\",\n            \"range=5_reduction=0\",\n            \"range=5_reduction=0_fuel=5000\",\n            \"reduction=90\",\n        ],\n    )\n    def test_mesy_siseide(entrypoint_argv, sde_dir, case):\n        \"\"\"Functionality: Plan route from Mesybier to Siseide with various params.\"\"\"\n>       run_and_check(\n            entrypoint_argv,\n            sde_dir,\n            MESY_SISEIDE[\"start\"],\n            MESY_SISEIDE[\"end\"],\n            case,\n        )\n\n.evaluation_tests/test_checkpoint_1.py:402: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = 'Mesybier II - TransStellar Shipping Storage'\nend = 'Siseide VIII - Expert Distribution Warehouse'\ncase = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\\nUNDOCK\\nJUMP 2.73 LY: Fliet (28K isotopes)\\nDOCK: Fl...3\\n  End Fatigue: 00:31\\n  Isotopes Used: 164K\\n  Time Waiting: 00:05\\n  Total LY: 16.38', 'range': 5, 'reduction': 90}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: Traceback (most recent call last):\nE           File \"/workspace/did_he_say_jump.py\", line 515, in <module>\nE             exit(main())\nE                  ^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 454, in main\nE             result = find_path(\nE                      ^^^^^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 292, in find_path\nE             priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\nE             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE         ValueError: not enough values to unpack (expected 8, got 2)\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--reduction', '90'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.00016218051314353943,
+        "outcome": "passed"
+      }
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0]",
+      "lineno": 388,
+      "outcome": "failed",
+      "keywords": [
+        "test_mesy_siseide[range=5_reduction=0]",
+        "parametrize",
+        "functionality",
+        "pytestmark",
+        "range=5_reduction=0",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.00026700459420681,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.4314254820346832,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: Traceback (most recent call last):\n    File \"/workspace/did_he_say_jump.py\", line 515, in <module>\n      exit(main())\n           ^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 454, in main\n      result = find_path(\n               ^^^^^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 292, in find_path\n      priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ValueError: not enough values to unpack (expected 8, got 2)\n  \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--reduction', '0'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 402,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\\nUNDOCK\\nJUMP 2.73 LY: Fliet (28K isotopes)\\nDOCK: Fl...29\\n  End Fatigue: 05:00\\n  Isotopes Used: 164K\\n  Time Waiting: 00:27\\n  Total LY: 16.38', 'range': 5, 'reduction': 0}\n\n    @pytest.mark.functionality\n    @pytest.mark.parametrize(\n        \"case\",\n        MESY_SISEIDE[\"cases\"],\n        ids=[\n            \"range=5_reduction=90\",\n            \"range=5_reduction=0\",\n            \"range=5_reduction=0_fuel=5000\",\n            \"reduction=90\",\n        ],\n    )\n    def test_mesy_siseide(entrypoint_argv, sde_dir, case):\n        \"\"\"Functionality: Plan route from Mesybier to Siseide with various params.\"\"\"\n>       run_and_check(\n            entrypoint_argv,\n            sde_dir,\n            MESY_SISEIDE[\"start\"],\n            MESY_SISEIDE[\"end\"],\n            case,\n        )\n\n.evaluation_tests/test_checkpoint_1.py:402: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = 'Mesybier II - TransStellar Shipping Storage'\nend = 'Siseide VIII - Expert Distribution Warehouse'\ncase = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\\nUNDOCK\\nJUMP 2.73 LY: Fliet (28K isotopes)\\nDOCK: Fl...29\\n  End Fatigue: 05:00\\n  Isotopes Used: 164K\\n  Time Waiting: 00:27\\n  Total LY: 16.38', 'range': 5, 'reduction': 0}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: Traceback (most recent call last):\nE           File \"/workspace/did_he_say_jump.py\", line 515, in <module>\nE             exit(main())\nE                  ^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 454, in main\nE             result = find_path(\nE                      ^^^^^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 292, in find_path\nE             priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\nE             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE         ValueError: not enough values to unpack (expected 8, got 2)\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--reduction', '0'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.00016309134662151337,
+        "outcome": "passed"
+      }
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0_fuel=5000]",
+      "lineno": 388,
+      "outcome": "failed",
+      "keywords": [
+        "test_mesy_siseide[range=5_reduction=0_fuel=5000]",
+        "parametrize",
+        "functionality",
+        "pytestmark",
+        "range=5_reduction=0_fuel=5000",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.00026618316769599915,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.4293623138219118,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: Traceback (most recent call last):\n    File \"/workspace/did_he_say_jump.py\", line 515, in <module>\n      exit(main())\n           ^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 454, in main\n      result = find_path(\n               ^^^^^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 292, in find_path\n      priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ValueError: not enough values to unpack (expected 8, got 2)\n  \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--fuel', '5000', '--reduction', '0'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 402,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\\nUNDOCK\\nJUMP 2.73 LY: Fliet (14K isotopes)\\nDOCK: Fl...igue: 05:00\\n  Isotopes Used: 82K\\n  Time Waiting: 00:27\\n  Total LY: 16.38', 'fuel': 5000, 'range': 5, 'reduction': 0}\n\n    @pytest.mark.functionality\n    @pytest.mark.parametrize(\n        \"case\",\n        MESY_SISEIDE[\"cases\"],\n        ids=[\n            \"range=5_reduction=90\",\n            \"range=5_reduction=0\",\n            \"range=5_reduction=0_fuel=5000\",\n            \"reduction=90\",\n        ],\n    )\n    def test_mesy_siseide(entrypoint_argv, sde_dir, case):\n        \"\"\"Functionality: Plan route from Mesybier to Siseide with various params.\"\"\"\n>       run_and_check(\n            entrypoint_argv,\n            sde_dir,\n            MESY_SISEIDE[\"start\"],\n            MESY_SISEIDE[\"end\"],\n            case,\n        )\n\n.evaluation_tests/test_checkpoint_1.py:402: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = 'Mesybier II - TransStellar Shipping Storage'\nend = 'Siseide VIII - Expert Distribution Warehouse'\ncase = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\\nUNDOCK\\nJUMP 2.73 LY: Fliet (14K isotopes)\\nDOCK: Fl...igue: 05:00\\n  Isotopes Used: 82K\\n  Time Waiting: 00:27\\n  Total LY: 16.38', 'fuel': 5000, 'range': 5, 'reduction': 0}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: Traceback (most recent call last):\nE           File \"/workspace/did_he_say_jump.py\", line 515, in <module>\nE             exit(main())\nE                  ^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 454, in main\nE             result = find_path(\nE                      ^^^^^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 292, in find_path\nE             priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\nE             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE         ValueError: not enough values to unpack (expected 8, got 2)\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--fuel', '5000', '--reduction', '0'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.00014715269207954407,
+        "outcome": "passed"
+      }
+    },
+    {
+      "nodeid": ".evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[reduction=90]",
+      "lineno": 388,
+      "outcome": "failed",
+      "keywords": [
+        "test_mesy_siseide[reduction=90]",
+        "parametrize",
+        "functionality",
+        "pytestmark",
+        "reduction=90",
+        "test_checkpoint_1.py",
+        ".evaluation_tests",
+        "workspace",
+        ""
+      ],
+      "setup": {
+        "duration": 0.0002622324973344803,
+        "outcome": "passed"
+      },
+      "call": {
+        "duration": 0.4336496517062187,
+        "outcome": "failed",
+        "crash": {
+          "path": "/workspace/.evaluation_tests/test_checkpoint_1.py",
+          "lineno": 43,
+          "message": "AssertionError: Command failed: Traceback (most recent call last):\n    File \"/workspace/did_he_say_jump.py\", line 515, in <module>\n      exit(main())\n           ^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 454, in main\n      result = find_path(\n               ^^^^^^^^^^\n    File \"/workspace/did_he_say_jump.py\", line 292, in find_path\n      priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ValueError: not enough values to unpack (expected 8, got 2)\n  \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--reduction', '90'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode"
+        },
+        "traceback": [
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 402,
+            "message": ""
+          },
+          {
+            "path": ".evaluation_tests/test_checkpoint_1.py",
+            "lineno": 43,
+            "message": "AssertionError"
+          }
+        ],
+        "longrepr": "entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\ncase = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\\nUNDOCK\\nJUMP 9.27 LY: Vimeini (93K isotopes)\\nDOCK: ...oldown: 00:02\\n  End Fatigue: 00:21\\n  Isotopes Used: 112K\\n  Time Waiting: 00:02\\n  Total LY: 11.13', 'reduction': 90}\n\n    @pytest.mark.functionality\n    @pytest.mark.parametrize(\n        \"case\",\n        MESY_SISEIDE[\"cases\"],\n        ids=[\n            \"range=5_reduction=90\",\n            \"range=5_reduction=0\",\n            \"range=5_reduction=0_fuel=5000\",\n            \"reduction=90\",\n        ],\n    )\n    def test_mesy_siseide(entrypoint_argv, sde_dir, case):\n        \"\"\"Functionality: Plan route from Mesybier to Siseide with various params.\"\"\"\n>       run_and_check(\n            entrypoint_argv,\n            sde_dir,\n            MESY_SISEIDE[\"start\"],\n            MESY_SISEIDE[\"end\"],\n            case,\n        )\n\n.evaluation_tests/test_checkpoint_1.py:402: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nentrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']\nsde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')\nstart = 'Mesybier II - TransStellar Shipping Storage'\nend = 'Siseide VIII - Expert Distribution Warehouse'\ncase = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\\nUNDOCK\\nJUMP 9.27 LY: Vimeini (93K isotopes)\\nDOCK: ...oldown: 00:02\\n  End Fatigue: 00:21\\n  Isotopes Used: 112K\\n  Time Waiting: 00:02\\n  Total LY: 11.13', 'reduction': 90}\n\n    def run_and_check(entrypoint_argv, sde_dir, start, end, case):\n        \"\"\"Run command and check output.\"\"\"\n        cmd = build_command(\n            entrypoint_argv,\n            sde_dir,\n            start,\n            end,\n            **{k: v for k, v in case.items() if k != \"expected\"},\n        )\n        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)\n>       assert result.returncode == 0, f\"Command failed: {result.stderr}\"\nE       AssertionError: Command failed: Traceback (most recent call last):\nE           File \"/workspace/did_he_say_jump.py\", line 515, in <module>\nE             exit(main())\nE                  ^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 454, in main\nE             result = find_path(\nE                      ^^^^^^^^^^\nE           File \"/workspace/did_he_say_jump.py\", line 292, in find_path\nE             priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\nE             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE         ValueError: not enough values to unpack (expected 8, got 2)\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--reduction', '90'], returncode=1, stdout='Loading SDE data...\\nLoaded 8437 systems and 5154 stations\\nCalculating optimal path...\\n', stderr='Traceback (most recent call last):\\n  File \"/workspace/did_he_say_jump.py\", line 515, in <module>\\n    exit(main())\\n         ^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 454, in main\\n    result = find_path(\\n             ^^^^^^^^^^\\n  File \"/workspace/did_he_say_jump.py\", line 292, in find_path\\n    priority_tuple, current_sys_id, fatigue, cooldown, waiting, total_ly, path, num_jumps = heapq.heappop(pq)\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nValueError: not enough values to unpack (expected 8, got 2)\\n').returncode\n\n.evaluation_tests/test_checkpoint_1.py:43: AssertionError"
+      },
+      "teardown": {
+        "duration": 0.00018860399723052979,
+        "outcome": "passed"
+      }
+    }
+  ]
+}

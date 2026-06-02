@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "problem_name": "migrate_configs",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_1",
+  "checkpoint_version": 1,
+  "duration": 6.368436098098755,
+  "entrypoint": "uv run migrate.py",
+  "tests": {
+    "checkpoint_1-Core": {
+      "passed": [],
+      "failed": [
+        "test_checkpoint_1_core[basic_replace_and_rename]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Functionality": {
+      "passed": [
+        "test_checkpoint_1_hidden[array_merge_behavior]",
+        "test_checkpoint_1_hidden[deep_rename_key]",
+        "test_checkpoint_1_hidden[ignore_unsupported_extensions]",
+        "test_checkpoint_1_hidden[multiple_rules_same_key]",
+        "test_checkpoint_1_hidden[unicode_special_chars]",
+        "test_checkpoint_1_hidden[very_deep_nesting]"
+      ],
+      "failed": [
+        "test_checkpoint_1_core_extended[deep_merge_yaml]",
+        "test_checkpoint_1_core_extended[multi_format_timeout]",
+        "test_checkpoint_1_core_extended[recursive_multi_file]",
+        "test_checkpoint_1_hidden[deep_merge_nested]",
+        "test_checkpoint_1_hidden[empty_config_files]",
+        "test_checkpoint_1_hidden[mixed_formats_and_unsupported]",
+        "test_checkpoint_1_hidden[no_change_silence]",
+        "test_checkpoint_1_hidden[relative_subdirs]",
+        "test_checkpoint_1_hidden[rule_order_dependency]",
+        "test_checkpoint_1_hidden[scoped_merge_glob]",
+        "test_checkpoint_1_hidden[skip_missing_rule_in_file]",
+        "test_checkpoint_1_hidden[type_conversion_replace]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Error": {
+      "passed": [
+        "test_checkpoint_1_errors[bad_config_parse]",
+        "test_checkpoint_1_errors[invalid_rules_json]",
+        "test_checkpoint_1_errors[missing_rules_file]",
+        "test_checkpoint_1_errors[missing_target_dir]"
+      ],
+      "failed": [],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 0,
+    "Functionality": 6,
+    "Regression": 0,
+    "Error": 4
+  },
+  "total_counts": {
+    "Core": 1,
+    "Functionality": 18,
+    "Regression": 0,
+    "Error": 4
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 23,
+  "test_collection_hash": "f89fb0acfe38974b659c57259b3da52c08a0a1064bb6299fed9f094635d05821",
+  "infrastructure_failure": false
+}

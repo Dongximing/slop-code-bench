@@ -1,0 +1,112 @@
+agent_dir: agent
+agent_tar: agent.tar.gz
+agent_type: claude_code
+agent_version: 2.0.51
+checkpoint_file: checkpoint.yaml
+compress_artifacts: false
+debug: false
+environment_file: environment.yaml
+image: slop-code:claude_code-2.0.51-python3.12
+inference_result_file: inference_result.json
+model_name: pangu
+pass_policy: any
+post_checkpoint_skill:
+  eval_after: true
+  prompt: "Perform a deep code quality audit on ONLY the Python files you created\
+    \ in /workspace root.\nDo NOT touch files under /workspace/files/, /workspace/tests/,\
+    \ /workspace/venv/, or any test data directories.\nDo NOT touch requirements.txt.\n\
+    \nRethink how to structure the implementation to meaningfully improve code quality\
+    \ without impacting behavior.\nBe ambitious \u2014 actively search for restructurings\
+    \ that preserve behavior while making the code dramatically simpler, smaller,\
+    \ and more direct.\n\nApply these rules and directly edit the code to fix any\
+    \ violations:\n\n1. STRUCTURAL SIMPLIFICATION\n   - Delete whole layers of unnecessary\
+    \ indirection, wrappers, or pass-through helpers\n   - Reframe state models so\
+    \ conditionals disappear rather than getting centralized\n   - Collapse duplicate\
+    \ branches into a single clearer flow\n   - Replace condition chains with a typed\
+    \ model or explicit dispatcher\n   - If independent work is serialized for no\
+    \ reason, restructure it\n\n2. SPAGHETTI PREVENTION\n   - Remove ad-hoc conditionals\
+    \ and scattered special cases inserted into unrelated flows\n   - Push one-off\
+    \ logic into dedicated helpers or separate functions\n   - Extract narrow edge-case\
+    \ handling out of busy functions into their own functions\n   - Remove one-off\
+    \ booleans or flags that complicate existing control flow\n\n3. ABSTRACTION QUALITY\n\
+    \   - Delete thin wrappers or identity abstractions that add indirection without\
+    \ simplifying anything\n   - Remove unnecessary casts, Any types, or optional\
+    \ params that muddy the real contract\n   - Replace copy-pasted logic with extracted\
+    \ helpers\n   - Reuse existing utilities instead of bespoke near-duplicates\n\n\
+    4. SLOP REMOVAL\n   - Delete comments that repeat what the code already says\n\
+    \   - Remove multi-line docstrings that just restate the function name\n   - Move\
+    \ inline imports to top of file\n   - Simplify: range(len(x)) -> enumerate, if\
+    \ cond: return True else: return False -> return cond\n   - Remove unnecessary\
+    \ else/elif after return\n   - Remove dead code, unused imports, unused variables\n\
+    \   - Remove excessive blank lines\n\n5. FILE ORGANIZATION\n   - If a file exceeds\
+    \ ~500 lines, split into focused modules\n   - Separate orchestration from business\
+    \ logic\n   - Move feature-specific logic behind dedicated abstractions\n\nPriority:\
+    \ structural simplifications (1-3) over cosmetic cleanup (4).\nDo NOT change any\
+    \ behavior. All existing functionality must be preserved.\n"
+  run_on: all
+problem_file: problem.yaml
+prompt_file: prompt.txt
+run_info_file: run_info.yaml
+seed: 42
+skip_evaluation: false
+snapshot_dir: snapshot
+summary:
+  checkpoints:
+    checkpoint_1: ran
+    checkpoint_2: ran
+    checkpoint_3: ran
+    checkpoint_4: ran
+    checkpoint_5: error
+  duration_seconds: 19967.321635
+  ended: '2026-06-02T09:34:35.582928'
+  error_message: "Traceback (most recent call last):\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agent.py\"\
+    , line 413, in run_checkpoint\n    self.retry()\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agents/claude_code/agent.py\"\
+    , line 826, in retry\n    raise AgentError(message)\nslop_code.agent_runner.models.AgentError:\
+    \ Claude Code retry process had an error\n"
+  error_traceback: "Traceback (most recent call last):\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agent.py\"\
+    , line 413, in run_checkpoint\n    self.retry()\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agents/claude_code/agent.py\"\
+    , line 826, in retry\n    raise AgentError(message)\nslop_code.agent_runner.models.AgentError:\
+    \ Claude Code retry process had an error\n"
+  error_type: AgentRunnerError
+  passed_policy: false
+  started: '2026-06-02T04:01:48.261293'
+  state: error
+  total_cost: 12.747024
+  total_steps: 6
+  total_usage:
+    cost: 12.747024
+    current_tokens:
+      cache_read: 0
+      cache_write: 0
+      input: 3944963
+      output: 60809
+      reasoning: 0
+    net_tokens:
+      cache_read: 0
+      cache_write: 0
+      input: 3944963
+      output: 60809
+      reasoning: 0
+    steps: 6
+template: 'Implement a program that 100% solves the specification. That is all you
+  need to do.
+
+  {% if not is_continuation -%}
+
+  Use a virtual environment and ensure that a `requirements.txt` is present with any
+  dependencies you need to solve the problem.
+
+  {% else -%}
+
+  Keep using the same virtual environment you started with, update `requirements.txt`
+  with any new dependencies you need.
+
+  {% endif -%}
+
+
+  Your task is:
+
+  {{ spec.strip() }}
+
+  '
+verbose: false

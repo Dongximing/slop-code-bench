@@ -1,0 +1,191 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/0U4EBTqjnjkUWOD0/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 62 items
+
+.evaluation_tests/test_checkpoint_1.py::test_create_table PASSED         [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column PASSED           [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_operations PASSED  [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_skip_already_applied PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_single_column PASSED   [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_preserve_data PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_drop_columns PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_preserves_existing_data PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_foreign_keys_disabled_during_drop_column PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_auto_increment_primary_key PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_unique_and_not_null_constraints PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_default_values_various_types PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column_with_default_to_populated_table PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_complex_data_preservation PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_add_not_null_with_default PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_create_multiple_tables PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_reserved_word_identifiers_are_quoted PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_mixed_operations_all_types PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_non_sequential_versions PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_create_table_multiple_primary_keys_rejected PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_auto_increment_requires_integer_primary_key PASSED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column_rejects_invalid_identifier PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_missing_table PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_table_exists PASSED         [ 38%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_migration_file PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_json PASSED         [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_schema_missing_operations PASSED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_table_missing_for_add_column PASSED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_column_already_exists PASSED [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_column_missing_for_drop PASSED [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_only_column PASSED     [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_primary_key_column PASSED [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_identifier_rejected PASSED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_column_type_rejected PASSED [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_unique_constraint_prevents_duplicates PASSED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_version_zero_rejected PASSED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_version_negative_rejected PASSED [ 59%]
+.evaluation_tests/test_checkpoint_1.py::test_version_string_rejected PASSED [ 61%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_removes_unique_index_on_dropped_column PASSED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data PASSED  [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_data PASSED        [ 66%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_data PASSED       [ 67%]
+.evaluation_tests/test_checkpoint_2.py::test_complete_column_migration PASSED [ 69%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_overwrites_existing_values PASSED [ 70%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_default_value_for_null PASSED [ 72%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_data_without_where_updates_all PASSED [ 74%]
+.evaluation_tests/test_checkpoint_2.py::test_transformations_applied_in_order PASSED [ 75%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_then_backfill_uses_transformed_values PASSED [ 77%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_where_filters_rows PASSED [ 79%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_value_expression PASSED [ 80%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_null_without_default PASSED [ 82%]
+.evaluation_tests/test_checkpoint_2.py::test_column_not_exists PASSED    [ 83%]
+.evaluation_tests/test_checkpoint_2.py::test_invalid_expression PASSED   [ 85%]
+.evaluation_tests/test_checkpoint_2.py::test_migration_rolls_back_on_failure FAILED [ 87%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_missing_from_column PASSED [ 88%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_missing_to_column PASSED [ 90%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_with_numeric_constant FAILED [ 91%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_target_column_not_exists PASSED [ 93%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_table_not_exists PASSED [ 95%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_table_not_exists PASSED [ 96%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_invalid_where_clause PASSED [ 98%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_table_not_exists PASSED [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_migration_rolls_back_on_failure _____________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_migration_rolls_back_on_f0')
+
+    @pytest.mark.error
+    def test_migration_rolls_back_on_failure(entrypoint_argv, seeds_dir, tmp_path):
+        """Error: Failed migration should roll back all operations."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_2_users.db", db_file)
+    
+        migration = {
+            "version": 2,
+            "description": "Fail after partial updates",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "status", "type": "TEXT", "not_null": False},
+                },
+                {
+                    "type": "backfill_data",
+                    "table": "users",
+                    "column": "status",
+                    "value": "'active'",
+                },
+                {
+                    "type": "transform_data",
+                    "table": "users",
+                    "transformations": [
+                        {"column": "status", "expression": "nonexistent_column"}
+                    ],
+                },
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 1, "Expected command to fail with exit code 1"
+    
+        with sqlite3.connect(db_file) as conn:
+            columns = [
+                row[1] for row in conn.execute("PRAGMA table_info(users)")
+            ]
+            applied = conn.execute(
+                "SELECT COUNT(*) FROM _migrations WHERE version = 2"
+            ).fetchone()[0]
+>       assert "status" not in columns
+E       AssertionError: assert 'status' not in ['id', 'first_name', 'last_name', 'old_email', 'email', 'name', 'status']
+
+.evaluation_tests/test_checkpoint_2.py:786: AssertionError
+_____________________ test_backfill_with_numeric_constant ______________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0')
+
+    @pytest.mark.functionality
+    def test_backfill_with_numeric_constant(entrypoint_argv, tmp_path):
+        """Functionality: Backfill with numeric constant (spec: 'value can be a constant')."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "CREATE TABLE users (id INTEGER PRIMARY KEY, score INTEGER)"
+            )
+            conn.executemany(
+                "INSERT INTO users (id, score) VALUES (?, ?)",
+                [(1, None), (2, None)],
+            )
+            conn.commit()
+    
+        migration = {
+            "version": 2,
+            "description": "Backfill with numeric constant",
+            "operations": [
+                {
+                    "type": "backfill_data",
+                    "table": "users",
+                    "column": "score",
+                    "value": 42,  # Numeric constant
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: invalid migration schema: 'value' must be a string
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/app.db'], returncode=1, stdout='', stderr="Error: invalid migration schema: 'value' must be a string\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:888: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_2.py::test_migration_rolls_back_on_failure - AssertionError: assert 'status' not in ['id', 'first_name', 'last_name', 'old_email', 'email', 'name', 'status']
+FAILED .evaluation_tests/test_checkpoint_2.py::test_backfill_with_numeric_constant - AssertionError: Command failed: Error: invalid migration schema: 'value' must be a string
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/app.db'], returncode=1, stdout='', stderr="Error: invalid migration schema: 'value' must be a string\n").returncode
+========================= 2 failed, 60 passed in 8.70s =========================

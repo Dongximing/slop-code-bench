@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "problem_name": "dynamic_config_service_api",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_1",
+  "checkpoint_version": 1,
+  "duration": 3.1811585426330566,
+  "entrypoint": "uv run config_server.py",
+  "tests": {
+    "checkpoint_1-Core": {
+      "passed": [],
+      "failed": [
+        "TestCore::test_00_healthz",
+        "TestCore::test_01_create_base_v1",
+        "TestCore::test_02_create_billing_v1_including_base",
+        "TestCore::test_03_list_versions_billing",
+        "TestCore::test_04_get_active_billing",
+        "TestCore::test_05_resolve_billing_active"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Functionality": {
+      "passed": [],
+      "failed": [
+        "TestCore::test_06_create_billing_v2_override_pool",
+        "TestCore::test_07_resolve_billing_explicit_version",
+        "TestCore::test_08_list_versions_after_second",
+        "TestCore::test_09_resolve_billing_active_after_second",
+        "TestCore::test_10_rollback_billing_to_v1",
+        "TestCore::test_11_get_active_billing_after_rollback",
+        "TestCore::test_12_resolve_inactive_version_dry_run",
+        "TestFunctionality::test_01_setup_array_base",
+        "TestFunctionality::test_02_setup_type_conflict_base",
+        "TestFunctionality::test_03_get_specific_version",
+        "TestFunctionality::test_04_get_specific_version_not_found",
+        "TestFunctionality::test_05_activate_specific_version",
+        "TestFunctionality::test_06_activate_specific_version_conflict",
+        "TestFunctionality::test_07_idempotent_create",
+        "TestFunctionality::test_08_idempotent_activate",
+        "TestFunctionality::test_09_idempotent_rollback",
+        "TestFunctionality::test_10_include_null_version",
+        "TestFunctionality::test_11_deep_merge_arrays",
+        "TestFunctionality::test_12_resolve_array_merge",
+        "TestFunctionality::test_13_idempotent_resolve",
+        "TestFunctionality::test_14_empty_scope",
+        "TestFunctionality::test_15_case_sensitive_scope",
+        "TestFunctionality::test_16_rollback_to_future_version",
+        "TestFunctionality::test_17_rollback_to_same_active",
+        "TestFunctionality::test_18_canonical_json_response",
+        "TestFunctionality::test_19_max_versions_per_scope"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Error": {
+      "passed": [],
+      "failed": [
+        "TestError::test_01_missing_pair_get_active",
+        "TestError::test_02_invalid_input_create_missing_scope",
+        "TestError::test_03_setup_cycle_create_a",
+        "TestError::test_04_setup_cycle_create_b",
+        "TestError::test_05_resolve_cycle_expect_conflict",
+        "TestError::test_06_setup_conflict_create_base",
+        "TestError::test_07_setup_conflict_create_billing_conflict",
+        "TestError::test_08_resolve_billing2_type_conflict",
+        "TestError::test_09_request_too_large",
+        "TestError::test_10_type_conflict_base",
+        "TestError::test_11_deep_merge_type_conflict",
+        "TestError::test_12_resolve_type_conflict",
+        "TestError::test_13_invalid_scope_key_type",
+        "TestError::test_14_resolve_missing_include_reference",
+        "TestError::test_15_include_chain_max_depth"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 0,
+    "Functionality": 0,
+    "Regression": 0,
+    "Error": 0
+  },
+  "total_counts": {
+    "Core": 6,
+    "Functionality": 26,
+    "Regression": 0,
+    "Error": 15
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 47,
+  "test_collection_hash": "3f86d6a021bcee56a428832a70624c0bfcb05100124b3470071ad4617fffbaac",
+  "infrastructure_failure": false
+}

@@ -8,20 +8,71 @@ model:
 
 post_checkpoint_skill:
   prompt: |
-    Review all the code you just wrote in this workspace.
-    Remove AI-generated slop:
-    - Extra comments that a human wouldn't add
-    - Extra defensive checks or try/catch blocks that are abnormal
-    - Inline imports in Python (move to top of file)
-    - range(len(x)) - use enumerate
-    - if cond: return True else: return False - simplify
-    - Any style inconsistent with the file
-    Do NOT change any behavior. Do NOT break any existing functionality.
+    Perform a deep code quality audit on ONLY the Python files you created in /workspace root.
+    Do NOT touch files under /workspace/files/, /workspace/tests/, /workspace/venv/, or any test data directories.
+    Do NOT touch requirements.txt.
+
+    Rethink how to structure the implementation to meaningfully improve code quality without impacting behavior.
+    Be ambitious — actively search for restructurings that preserve behavior while making the code dramatically simpler, smaller, and more direct.
+
+    Apply these rules and directly edit the code to fix any violations:
+
+    1. STRUCTURAL SIMPLIFICATION
+       - Delete whole layers of unnecessary indirection, wrappers, or pass-through helpers
+       - Reframe state models so conditionals disappear rather than getting centralized
+       - Collapse duplicate branches into a single clearer flow
+       - Replace condition chains with a typed model or explicit dispatcher
+       - If independent work is serialized for no reason, restructure it
+
+    2. SPAGHETTI PREVENTION
+       - Remove ad-hoc conditionals and scattered special cases inserted into unrelated flows
+       - Push one-off logic into dedicated helpers or separate functions
+       - Extract narrow edge-case handling out of busy functions into their own functions
+       - Remove one-off booleans or flags that complicate existing control flow
+
+    3. ABSTRACTION QUALITY
+       - Delete thin wrappers or identity abstractions that add indirection without simplifying anything
+       - Remove unnecessary casts, Any types, or optional params that muddy the real contract
+       - Replace copy-pasted logic with extracted helpers
+       - Reuse existing utilities instead of bespoke near-duplicates
+
+    4. SLOP REMOVAL
+       - Delete comments that repeat what the code already says
+       - Remove multi-line docstrings that just restate the function name
+       - Move inline imports to top of file
+       - Simplify: range(len(x)) -> enumerate, if cond: return True else: return False -> return cond
+       - Remove unnecessary else/elif after return
+       - Remove dead code, unused imports, unused variables
+       - Remove excessive blank lines
+
+    5. FILE ORGANIZATION
+       - If a file exceeds ~500 lines, split into focused modules
+       - Separate orchestration from business logic
+       - Move feature-specific logic behind dedicated abstractions
+
+    Priority: structural simplifications (1-3) over cosmetic cleanup (4).
+    Do NOT change any behavior. All existing functionality must be preserved.
   run_on: all
   eval_after: true
 
 problems:
-  - execution_server
-  - file_merger
-  - log_query
-  - env_manager
+  - cfgpipe
+  - circuit_eval
+  - code_search
+  - dag_execution
+  - database_migration
+  - datagate
+  - dynamic_buffer
+  - dynamic_config_service_api
+  - etl_pipeline
+  - eve_industry
+  - eve_jump_planner
+  - eve_market_tools
+  - eve_route_planner
+  - file_query_tool
+  - forge
+  - l2m
+  - layered_config_synthesizer
+  - meshctl
+  - metric_transform_lang
+  - migrate_configs

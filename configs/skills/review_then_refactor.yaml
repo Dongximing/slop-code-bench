@@ -1,0 +1,93 @@
+name: review-then-refactor
+description: |
+  Three-phase code quality skill: Review → Plan → Execute.
+  Designed for behavior-preserving refactoring with safety checks.
+
+prompt: |
+  You will improve the code quality of the solution files in /workspace root.
+  Do NOT touch files under /workspace/files/, /workspace/tests/, /workspace/venv/, or any subdirectories.
+  Do NOT touch requirements.txt.
+
+  Follow these 3 phases IN ORDER. Do not skip any phase.
+
+  ═══════════════════════════════════════════
+  PHASE 1: AUDIT
+  ═══════════════════════════════════════════
+
+  Run `ls /workspace/*.py` to identify solution files.
+  Read each file end-to-end. For each file, produce a numbered list of findings.
+
+  Look for these categories (in priority order):
+
+  A. DEAD CODE
+     - Unused imports
+     - Unused variables or assignments
+     - Unreachable branches (code after return/raise/sys.exit)
+     - Functions/methods that are defined but never called from anywhere
+
+  B. COMMENT SLOP
+     - Comments that restate what the next line does ("# increment counter" before counter += 1)
+     - Multi-line docstrings that add nothing beyond the function name
+     - Commented-out code blocks
+     - "TODO" or "FIXME" comments with no actionable content
+
+  C. STYLE SIMPLIFICATIONS
+     - `range(len(x))` → `enumerate(x)`
+     - `if cond: return True` / `else: return False` → `return cond`
+     - `elif` or `else` immediately after a `return` / `raise` / `continue` / `break`
+     - `x = foo(); y = bar(x)` where x is used only once → `y = bar(foo())`
+     - Bare `except:` → `except Exception:`
+     - Inline imports that belong at top of file
+
+  D. DUPLICATION
+     - Three or more nearly identical code blocks that differ only in a name or constant
+     - Copy-pasted validation/parsing logic
+
+  E. STRUCTURAL (review only — be very cautious before acting on these)
+     - Long condition chains that could be a dict dispatch
+     - Functions over 80 lines that have clear separation points
+     - Deeply nested if/else (4+ levels) that could be early returns
+
+  For each finding, note:
+  - File and line number(s)
+  - Category (A/B/C/D/E)
+  - What you would change
+
+  ═══════════════════════════════════════════
+  PHASE 2: SAFETY CHECK
+  ═══════════════════════════════════════════
+
+  Review your findings list. For EACH one, answer:
+  "Can this change produce different output for ANY input?"
+
+  DROP any finding where:
+  - You are merging two functions that might have different behavior
+  - You are removing a check/validation that might matter for edge cases
+  - You are changing error messages, exit codes, return values, or output format
+  - You are changing the order of operations in a way that could affect output
+  - You are changing default parameter values or function signatures
+  - You are changing data structures (dict↔list, class↔tuple, etc.)
+  - You are not 100% certain the change is safe
+  - The finding is category E (structural) — only act on these if trivially safe
+
+  Mark each surviving finding as APPROVED or DROPPED with a one-line reason.
+
+  ═══════════════════════════════════════════
+  PHASE 3: APPLY
+  ═══════════════════════════════════════════
+
+  Apply ONLY the APPROVED changes. Go file by file, top to bottom.
+
+  After completing all edits for a file:
+  1. Re-read the file to verify it still makes sense
+  2. If the file has a shebang or main block, run it with `--help` or a trivial input to sanity-check
+
+  Rules:
+  - One edit at a time. Do not batch multiple unrelated changes into one Edit call.
+  - If an edit fails or looks wrong, revert it immediately.
+  - Keep a mental count: if you have applied more than 30 edits to a single file, STOP and move on.
+
+  ═══════════════════════════════════════════
+
+  Remember: a missed cleanup opportunity is acceptable.
+  A broken test is not. When in doubt, skip it.

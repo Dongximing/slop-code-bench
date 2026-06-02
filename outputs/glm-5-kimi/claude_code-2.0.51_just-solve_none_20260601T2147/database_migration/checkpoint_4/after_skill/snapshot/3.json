@@ -1,0 +1,31 @@
+{
+  "version": 3,
+  "description": "Add check constraint and backfill",
+  "operations": [
+    {
+      "type": "add_check_constraint",
+      "table": "users",
+      "name": "chk_name_not_empty",
+      "expression": "length(name) > 0"
+    },
+    {
+      "type": "backfill_data",
+      "table": "posts",
+      "column": "status",
+      "value": "'published'"
+    }
+  ],
+  "rollback_operations": [
+    {
+      "type": "drop_check_constraint",
+      "table": "users",
+      "name": "chk_name_not_empty"
+    },
+    {
+      "type": "backfill_data",
+      "table": "posts",
+      "column": "status",
+      "value": "'draft'"
+    }
+  ]
+}

@@ -1,0 +1,2511 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/kq0TRCw4APQ8dRTd/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 47 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_00_healthz ERROR  [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_01_create_base_v1 ERROR [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_02_create_billing_v1_including_base ERROR [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_03_list_versions_billing ERROR [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_04_get_active_billing ERROR [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_05_resolve_billing_active ERROR [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_06_create_billing_v2_override_pool ERROR [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_07_resolve_billing_explicit_version ERROR [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_08_list_versions_after_second ERROR [ 19%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_09_resolve_billing_active_after_second ERROR [ 21%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_10_rollback_billing_to_v1 ERROR [ 23%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_11_get_active_billing_after_rollback ERROR [ 25%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_12_resolve_inactive_version_dry_run ERROR [ 27%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_01_missing_pair_get_active ERROR [ 29%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_02_invalid_input_create_missing_scope ERROR [ 31%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_03_setup_cycle_create_a ERROR [ 34%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_04_setup_cycle_create_b ERROR [ 36%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_05_resolve_cycle_expect_conflict ERROR [ 38%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_06_setup_conflict_create_base ERROR [ 40%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_07_setup_conflict_create_billing_conflict ERROR [ 42%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_08_resolve_billing2_type_conflict ERROR [ 44%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_09_request_too_large ERROR [ 46%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_10_type_conflict_base ERROR [ 48%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_11_deep_merge_type_conflict ERROR [ 51%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_12_resolve_type_conflict ERROR [ 53%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_13_invalid_scope_key_type ERROR [ 55%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_14_resolve_missing_include_reference ERROR [ 57%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_15_include_chain_max_depth ERROR [ 59%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_01_setup_array_base ERROR [ 61%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_02_setup_type_conflict_base ERROR [ 63%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_03_get_specific_version ERROR [ 65%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_04_get_specific_version_not_found ERROR [ 68%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_05_activate_specific_version ERROR [ 70%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_06_activate_specific_version_conflict ERROR [ 72%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_07_idempotent_create ERROR [ 74%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_08_idempotent_activate ERROR [ 76%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_09_idempotent_rollback ERROR [ 78%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_10_include_null_version ERROR [ 80%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_11_deep_merge_arrays ERROR [ 82%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_12_resolve_array_merge ERROR [ 85%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_13_idempotent_resolve ERROR [ 87%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_14_empty_scope ERROR [ 89%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_15_case_sensitive_scope ERROR [ 91%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_16_rollback_to_future_version ERROR [ 93%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_17_rollback_to_same_active ERROR [ 95%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_18_canonical_json_response ERROR [ 97%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_19_max_versions_per_scope ERROR [100%]
+
+==================================== ERRORS ====================================
+__________________ ERROR at setup of TestCore.test_00_healthz __________________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+______________ ERROR at setup of TestCore.test_01_create_base_v1 _______________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_____ ERROR at setup of TestCore.test_02_create_billing_v1_including_base ______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+___________ ERROR at setup of TestCore.test_03_list_versions_billing ___________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+____________ ERROR at setup of TestCore.test_04_get_active_billing _____________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+__________ ERROR at setup of TestCore.test_05_resolve_billing_active ___________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+______ ERROR at setup of TestCore.test_06_create_billing_v2_override_pool ______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_____ ERROR at setup of TestCore.test_07_resolve_billing_explicit_version ______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+________ ERROR at setup of TestCore.test_08_list_versions_after_second _________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+____ ERROR at setup of TestCore.test_09_resolve_billing_active_after_second ____
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+__________ ERROR at setup of TestCore.test_10_rollback_billing_to_v1 ___________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_____ ERROR at setup of TestCore.test_11_get_active_billing_after_rollback _____
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_____ ERROR at setup of TestCore.test_12_resolve_inactive_version_dry_run ______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_________ ERROR at setup of TestError.test_01_missing_pair_get_active __________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+____ ERROR at setup of TestError.test_02_invalid_input_create_missing_scope ____
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+___________ ERROR at setup of TestError.test_03_setup_cycle_create_a ___________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+___________ ERROR at setup of TestError.test_04_setup_cycle_create_b ___________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+______ ERROR at setup of TestError.test_05_resolve_cycle_expect_conflict _______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+________ ERROR at setup of TestError.test_06_setup_conflict_create_base ________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+__ ERROR at setup of TestError.test_07_setup_conflict_create_billing_conflict __
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+______ ERROR at setup of TestError.test_08_resolve_billing2_type_conflict ______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+____________ ERROR at setup of TestError.test_09_request_too_large _____________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+____________ ERROR at setup of TestError.test_10_type_conflict_base ____________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_________ ERROR at setup of TestError.test_11_deep_merge_type_conflict _________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+__________ ERROR at setup of TestError.test_12_resolve_type_conflict ___________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+__________ ERROR at setup of TestError.test_13_invalid_scope_key_type __________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+____ ERROR at setup of TestError.test_14_resolve_missing_include_reference _____
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_________ ERROR at setup of TestError.test_15_include_chain_max_depth __________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_________ ERROR at setup of TestFunctionality.test_01_setup_array_base _________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_____ ERROR at setup of TestFunctionality.test_02_setup_type_conflict_base _____
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_______ ERROR at setup of TestFunctionality.test_03_get_specific_version _______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+__ ERROR at setup of TestFunctionality.test_04_get_specific_version_not_found __
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+____ ERROR at setup of TestFunctionality.test_05_activate_specific_version _____
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_ ERROR at setup of TestFunctionality.test_06_activate_specific_version_conflict _
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+________ ERROR at setup of TestFunctionality.test_07_idempotent_create _________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_______ ERROR at setup of TestFunctionality.test_08_idempotent_activate ________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_______ ERROR at setup of TestFunctionality.test_09_idempotent_rollback ________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_______ ERROR at setup of TestFunctionality.test_10_include_null_version _______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+________ ERROR at setup of TestFunctionality.test_11_deep_merge_arrays _________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_______ ERROR at setup of TestFunctionality.test_12_resolve_array_merge ________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+________ ERROR at setup of TestFunctionality.test_13_idempotent_resolve ________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+___________ ERROR at setup of TestFunctionality.test_14_empty_scope ____________
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_______ ERROR at setup of TestFunctionality.test_15_case_sensitive_scope _______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+____ ERROR at setup of TestFunctionality.test_16_rollback_to_future_version ____
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_____ ERROR at setup of TestFunctionality.test_17_rollback_to_same_active ______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+_____ ERROR at setup of TestFunctionality.test_18_canonical_json_response ______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+______ ERROR at setup of TestFunctionality.test_19_max_versions_per_scope ______
+
+entrypoint_argv = ['uv', 'run', 'config_server.py']
+
+    @pytest.fixture(scope="module")
+    def server_url(entrypoint_argv: list[str]) -> Generator[str, None, None]:
+        """Start API server and yield base URL."""
+        port = _get_free_port()
+        cmd = entrypoint_argv + ["--port", str(port), "--address", "127.0.0.1"]
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        base_url = f"http://127.0.0.1:{port}"
+        try:
+>           _wait_for_server(proc, base_url)
+
+.evaluation_tests/conftest.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['uv', 'run', 'config_server.py', '--port', '542...>
+base_url = 'http://127.0.0.1:54229', timeout = 10.0
+
+    def _wait_for_server(
+        proc: subprocess.Popen[str], base_url: str, timeout: float = 10.0
+    ) -> None:
+        """Wait for server to be ready."""
+        deadline = time.monotonic() + timeout
+        last_error: Exception | None = None
+        while time.monotonic() < deadline:
+            if proc.poll() is not None:
+                stdout, stderr = proc.communicate(timeout=1)
+>               raise RuntimeError(
+                    f"Server exited early with code {proc.returncode}.\n"
+                    f"stdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: Server exited early with code 2.
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `config_server.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:70: RuntimeError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_00_healthz - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_01_create_base_v1 - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_02_create_billing_v1_including_base - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_03_list_versions_billing - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_04_get_active_billing - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_05_resolve_billing_active - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_06_create_billing_v2_override_pool - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_07_resolve_billing_explicit_version - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_08_list_versions_after_second - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_09_resolve_billing_active_after_second - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_10_rollback_billing_to_v1 - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_11_get_active_billing_after_rollback - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestCore::test_12_resolve_inactive_version_dry_run - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_01_missing_pair_get_active - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_02_invalid_input_create_missing_scope - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_03_setup_cycle_create_a - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_04_setup_cycle_create_b - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_05_resolve_cycle_expect_conflict - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_06_setup_conflict_create_base - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_07_setup_conflict_create_billing_conflict - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_08_resolve_billing2_type_conflict - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_09_request_too_large - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_10_type_conflict_base - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_11_deep_merge_type_conflict - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_12_resolve_type_conflict - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_13_invalid_scope_key_type - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_14_resolve_missing_include_reference - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestError::test_15_include_chain_max_depth - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_01_setup_array_base - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_02_setup_type_conflict_base - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_03_get_specific_version - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_04_get_specific_version_not_found - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_05_activate_specific_version - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_06_activate_specific_version_conflict - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_07_idempotent_create - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_08_idempotent_activate - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_09_idempotent_rollback - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_10_include_null_version - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_11_deep_merge_arrays - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_12_resolve_array_merge - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_13_idempotent_resolve - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_14_empty_scope - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_15_case_sensitive_scope - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_16_rollback_to_future_version - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_17_rollback_to_same_active - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_18_canonical_json_response - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_19_max_versions_per_scope - RuntimeError: Server exited early with code 2.
+stdout:
+
+stderr:
+error: Failed to spawn: `config_server.py`
+  Caused by: No such file or directory (os error 2)
+============================== 47 errors in 0.52s ==============================

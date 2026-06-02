@@ -1,0 +1,1954 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/OU5-iIdnGi-pChrk/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 70 items
+
+.evaluation_tests/test_checkpoint_1.py::test_create_blueprint_returns_persisted_resource PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_requirement_set_order_preserved_non_lexicographic PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_orders_by_created_at_name_uuid PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_name_tiebreak_when_created_at_collides PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_and_delete_single_uuid PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_delete_missing_uuid_returns_not_found PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_invalid_json_input PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_unique_sorted_messages FAILED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_deduplicates_messages_across_requirement_sets FAILED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_duplicate_name_with_conflict PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_is_atomic_and_reports_sorted_unresolved FAILED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_rejects_blank_csv_members_atomically FAILED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_empty_returns_empty_array PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_unknown_top_level_keys PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_caller_supplied_uuid PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_boolean_resource_count PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_success_returns_deleted_count PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_duplicate_members_count_unique_deletions PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_create_output_is_compact_sorted_json_without_trailing_newline PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_create_missing_required_fields_reports_sorted_unique_messages PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_failure_is_atomic PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_caller_supplied_created_at PASSED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_create_preserves_empty_capabilities_array PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_name_string FAILED [ 34%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_requirement_sets FAILED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_set_missing_required_keys PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_object_json_payload PASSED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_top_level_and_nested_failures PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_create_generates_valid_uuid_v4_format PASSED [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_float_resource_count PASSED [ 42%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_string_name_type PASSED [ 44%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_array_requirement_sets PASSED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_sets_with_non_object_elements PASSED [ 47%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_single_name_succeeds PASSED [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_uuid_tiebreak_when_created_at_and_name_collide PASSED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_nonexistent_uuid_returns_not_found PASSED [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_unsupported_key_as_sole_violation FAILED [ 52%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_capabilities_with_non_string_elements PASSED [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_returns_all_stored_fields PASSED [ 55%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_multiple_unsupported_keys FAILED [ 57%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_expands_requirement_sets FAILED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::test_blueprint_name_across_create_list_get FAILED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_ordering FAILED [ 61%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_returns_single_resource FAILED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_generated_uuid_is_canonical_v4 FAILED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_create_utc_second_precision FAILED [ 65%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_unknown_blueprint_not_found FAILED [ 67%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[non_object_payload] FAILED [ 68%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[missing_blueprint_name] FAILED [ 70%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_wrong_type] FAILED [ 71%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_empty] FAILED [ 72%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_unknown_uuid_not_found FAILED [ 74%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_empty_returns_empty_array FAILED [ 75%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_match_is_exact_and_case_sensitive FAILED [ 77%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_filters_compose_conjunctively FAILED [ 78%]
+.evaluation_tests/test_checkpoint_2.py::test_expansion_order_places_multiplied_entries_consecutively FAILED [ 80%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_breaks_created_at_ties_by_uuid FAILED [ 81%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_once_per_set_duplicate_caps FAILED [ 82%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_requires_exact_capability_match FAILED [ 84%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_adversarial_mix_preserves_order FAILED [ 85%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_output_is_scoped_to_current_batch FAILED [ 87%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_returns_complete_dataset FAILED [ 88%]
+.evaluation_tests/test_checkpoint_2.py::test_list_negative_filter_empty[status-filter] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_2.py::test_list_negative_filter_empty[assignment-filter] FAILED [ 91%]
+.evaluation_tests/test_checkpoint_2.py::test_type_a_multiplier_rows_match_except_for_uuid FAILED [ 92%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_returns_complete_field_set FAILED [ 94%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_round_trip_preserves_all_fields FAILED [ 95%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_same_blueprint_twice_distinct_uuids FAILED [ 97%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_status_filter_positive_match FAILED [ 98%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_malformed_uuid_returns_not_found FAILED [100%]
+
+=================================== FAILURES ===================================
+___________ test_create_validation_aggregates_unique_sorted_messages ___________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_validation_aggrega0/data')
+
+    @pytest.mark.error
+    def test_create_validation_aggregates_unique_sorted_messages(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "bad",
+                "requirement_sets": [
+                    {
+                        "resource_type": 42,
+                        "resource_count": -1,
+                        "priority": "high",
+                        "capabilities": [1, "ok"],
+                    }
+                ],
+            },
+        )
+        payload = assert_error(result, category="validation_error")
+        for expected in ("capabilities", "priority", "resource_count", "resource_type"):
+>           assert_detail_contains(payload["detail"], expected)
+
+.evaluation_tests/test_checkpoint_1.py:225: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = {'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[0]: 'resource_count' must be a positive integer", 'requirement_sets[0]: capabilities[0] must be a string'], 'field': 'blueprint'}
+expected = 'priority'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'priority'; actual detail={'field': 'blueprint', 'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[0]: 'resource_count' must be a positive integer", 'requirement_sets[0]: capabilities[0] must be a string']}
+
+.evaluation_tests/_helpers.py:141: AssertionError
+_____ test_create_validation_deduplicates_messages_across_requirement_sets _____
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_validation_dedupli0/data')
+
+    @pytest.mark.error
+    def test_create_validation_deduplicates_messages_across_requirement_sets(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "bad-many",
+                "requirement_sets": [
+                    {
+                        "resource_type": 42,
+                        "resource_count": 1,
+                        "priority": "high",
+                    },
+                    {
+                        "resource_type": 11,
+                        "resource_count": 2,
+                        "priority": "low",
+                    },
+                ],
+            },
+        )
+        payload = assert_error(result, category="validation_error")
+        for expected in ("priority", "resource_type"):
+>           assert_detail_contains(payload["detail"], expected)
+
+.evaluation_tests/test_checkpoint_1.py:254: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = {'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[1]: 'resource_type' must be a string"], 'field': 'blueprint'}
+expected = 'priority'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'priority'; actual detail={'field': 'blueprint', 'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[1]: 'resource_type' must be a string"]}
+
+.evaluation_tests/_helpers.py:141: AssertionError
+__________ test_delete_names_is_atomic_and_reports_sorted_unresolved ___________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_names_is_atomic_an0/data')
+
+    @pytest.mark.error
+    def test_delete_names_is_atomic_and_reports_sorted_unresolved(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="alpha",
+            requirement_sets=[{"resource_type": "CPU", "resource_count": 1}],
+        )
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="beta",
+            requirement_sets=[{"resource_type": "GPU", "resource_count": 1}],
+        )
+    
+        failed_delete = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "delete", "--names", "alpha,gamma,delta"],
+        )
+        payload = assert_error(failed_delete, category="not_found")
+        assert_detail_contains(payload["detail"], "gamma")
+        assert_detail_contains(payload["detail"], "delta")
+    
+        listing = run_forge(entrypoint_argv, data_dir, ["blueprint", "list"])
+        listed = unwrap_collection(assert_success(listing), key="blueprints")
+>       assert {item["name"] for item in listed} == {"alpha", "beta"}
+E       AssertionError: assert {'beta'} == {'alpha', 'beta'}
+E         
+E         Extra items in the right set:
+E         'alpha'
+E         
+E         Full diff:
+E           {
+E         -     'alpha',
+E               'beta',
+E           }
+
+.evaluation_tests/test_checkpoint_1.py:307: AssertionError
+____________ test_delete_names_rejects_blank_csv_members_atomically ____________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_names_rejects_blan0/data')
+
+    @pytest.mark.error
+    def test_delete_names_rejects_blank_csv_members_atomically(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="alpha",
+            requirement_sets=[{"resource_type": "CPU", "resource_count": 1}],
+        )
+    
+        failed_delete = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "delete", "--names", "alpha,"],
+        )
+        assert_error(failed_delete, category="not_found")
+    
+        listing = run_forge(entrypoint_argv, data_dir, ["blueprint", "list"])
+        payload = unwrap_collection(assert_success(listing), key="blueprints")
+>       assert [item["name"] for item in payload] == ["alpha"]
+E       AssertionError: assert [] == ['alpha']
+E         
+E         Right contains one more item: 'alpha'
+E         
+E         Full diff:
+E         + []
+E         - [
+E         -     'alpha',
+E         - ]
+
+.evaluation_tests/test_checkpoint_1.py:330: AssertionError
+____________________ test_create_rejects_empty_name_string _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_empty_name0/data')
+
+    @pytest.mark.error
+    def test_create_rejects_empty_name_string(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "",
+                "requirement_sets": [{"resource_type": "GPU", "resource_count": 1}],
+            },
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="name must be a non-empty string",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:568: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:183: in assert_error
+    assert_detail_contains(actual_detail, detail_contains)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = {'errors': ["'name' must be a non-empty string"], 'field': 'blueprint'}
+expected = 'name must be a non-empty string'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'name must be a non-empty string'; actual detail={'field': 'blueprint', 'errors': ["'name' must be a non-empty string"]}
+
+.evaluation_tests/_helpers.py:141: AssertionError
+__________________ test_create_rejects_empty_requirement_sets __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_empty_requ0/data')
+
+    @pytest.mark.error
+    def test_create_rejects_empty_requirement_sets(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={"name": "empty-sets", "requirement_sets": []},
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="requirement_sets must be a non-empty array",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:588: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:183: in assert_error
+    assert_detail_contains(actual_detail, detail_contains)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = {'errors': ["'requirement_sets' must be a non-empty array"], 'field': 'blueprint'}
+expected = 'requirement_sets must be a non-empty array'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'requirement_sets must be a non-empty array'; actual detail={'field': 'blueprint', 'errors': ["'requirement_sets' must be a non-empty array"]}
+
+.evaluation_tests/_helpers.py:141: AssertionError
+____________ test_create_rejects_unsupported_key_as_sole_violation _____________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_unsupporte0/data')
+
+    @pytest.mark.functionality
+    def test_create_rejects_unsupported_key_as_sole_violation(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """An unsupported key in an otherwise valid requirement set is rejected."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "unsupported-key-only",
+                "requirement_sets": [
+                    {
+                        "resource_type": "CPU",
+                        "resource_count": 1,
+                        "priority": "high",
+                    }
+                ],
+            },
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="priority",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:838: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...equirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T05:14:26Z"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"uuid": "006624cb-8c1a-46b0-9487-083a99f2d5fd", "name": "unsupported-key-only", "requirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T05:14:26Z"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+________________ test_create_rejects_multiple_unsupported_keys _________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_multiple_u0/data')
+
+    @pytest.mark.functionality
+    def test_create_rejects_multiple_unsupported_keys(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Multiple unsupported keys in a requirement set are reported together."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "multi-unsupported",
+                "requirement_sets": [
+                    {
+                        "resource_type": "CPU",
+                        "resource_count": 1,
+                        "priority": "high",
+                        "tier": "gold",
+                    }
+                ],
+            },
+        )
+>       payload = assert_error(result, category="validation_error")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:918: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...equirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T05:14:27Z"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"uuid": "4e73a1d5-0214-426c-80df-083827d88d63", "name": "multi-unsupported", "requirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T05:14:27Z"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+_______________ test_allocation_create_expands_requirement_sets ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_expands0/data')
+
+    def test_allocation_create_expands_requirement_sets(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create expands each requirement set and multiplies TYPE_A sets into two allocations."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="mixed",
+            requirement_sets=[
+                {"resource_type": "gpu", "resource_count": 1},
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 2,
+                    "capabilities": ["category=TYPE_A", "vendor=acme"],
+                },
+            ],
+        )
+    
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "mixed"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+__________________ test_blueprint_name_across_create_list_get __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_blueprint_name_across_cre0/data')
+
+    def test_blueprint_name_across_create_list_get(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create, list, and get all preserve blueprint_name on the source blueprint."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="name-source",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+    
+        created = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "name-source"},
+        )
+        create_payload = unwrap_collection(
+>           assert_success(created), key="allocations"
+            ^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+.evaluation_tests/test_checkpoint_2.py:82: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+________________________ test_allocation_list_ordering _________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_ordering0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_ordering(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List returns allocations sorted by created_at and uuid in ascending order."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="batch-a",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="batch-b",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "batch-a"},
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "batch-b"},
+        )
+    
+        listed = run_forge(entrypoint_argv, data_dir, ["allocation", "list"])
+>       payload = unwrap_collection(assert_success(listed), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_________________ test_allocation_get_returns_single_resource __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_get_returns_si0/data')
+
+    def test_allocation_get_returns_single_resource(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Get returns a single allocation record when queried by UUID."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="single-get",
+            requirement_sets=[{"resource_type": "cpu", "resource_count": 1}],
+        )
+        created = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "single-get"},
+        )
+>       allocations = unwrap_collection(assert_success(created), key="allocations")
+                                        ^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+____________ test_allocation_create_generated_uuid_is_canonical_v4 _____________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_generat0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_create_generated_uuid_is_canonical_v4(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Created allocation UUIDs must be canonical lowercase UUID v4 values."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="uuid-format",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                }
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "uuid-format"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_______________________ test_create_utc_second_precision _______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_utc_second_precisi0/data')
+
+    @pytest.mark.functionality
+    def test_create_utc_second_precision(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create emits shared created_at timestamps with ISO-8601 second precision."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="timestamp-format",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "timestamp-format"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+______________ test_allocation_create_unknown_blueprint_not_found ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_unknown0/data')
+
+    @pytest.mark.error
+    def test_allocation_create_unknown_blueprint_not_found(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create returns not_found when the blueprint_name does not exist."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "missing-blueprint"},
+        )
+>       assert_error(
+            result, category="not_found", detail_contains="missing-blueprint"
+        )
+
+.evaluation_tests/test_checkpoint_2.py:226: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:176: in assert_error
+    payload = parse_stdout_json(result)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def parse_stdout_json(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.stdout != "", (
+               ^^^^^^^^^^^^^^^^^^^
+            f"expected JSON on stdout, got empty output; stderr={result.stderr!r}"
+        )
+E       AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+
+.evaluation_tests/_helpers.py:122: AssertionError
+__ test_allocation_create_rejects_invalid_payload_shapes[non_object_payload] ___
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_rejects0/data')
+stdin_text = '[]'
+
+    @pytest.mark.parametrize(
+        "stdin_text",
+        [
+            "[]",
+            "{}",
+            '{"blueprint_name": 1}',
+            '{"blueprint_name": ""}',
+        ],
+        ids=[
+            "non_object_payload",
+            "missing_blueprint_name",
+            "blueprint_name_wrong_type",
+            "blueprint_name_empty",
+        ],
+    )
+    @pytest.mark.error
+    def test_allocation_create_rejects_invalid_payload_shapes(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        stdin_text: str,
+    ) -> None:
+        """Invalid create payloads are rejected with validation_error."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_text=stdin_text,
+        )
+>       assert_error(result, category="validation_error")
+
+.evaluation_tests/test_checkpoint_2.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:176: in assert_error
+    payload = parse_stdout_json(result)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def parse_stdout_json(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.stdout != "", (
+               ^^^^^^^^^^^^^^^^^^^
+            f"expected JSON on stdout, got empty output; stderr={result.stderr!r}"
+        )
+E       AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+
+.evaluation_tests/_helpers.py:122: AssertionError
+_ test_allocation_create_rejects_invalid_payload_shapes[missing_blueprint_name] _
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_rejects1/data')
+stdin_text = '{}'
+
+    @pytest.mark.parametrize(
+        "stdin_text",
+        [
+            "[]",
+            "{}",
+            '{"blueprint_name": 1}',
+            '{"blueprint_name": ""}',
+        ],
+        ids=[
+            "non_object_payload",
+            "missing_blueprint_name",
+            "blueprint_name_wrong_type",
+            "blueprint_name_empty",
+        ],
+    )
+    @pytest.mark.error
+    def test_allocation_create_rejects_invalid_payload_shapes(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        stdin_text: str,
+    ) -> None:
+        """Invalid create payloads are rejected with validation_error."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_text=stdin_text,
+        )
+>       assert_error(result, category="validation_error")
+
+.evaluation_tests/test_checkpoint_2.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:176: in assert_error
+    payload = parse_stdout_json(result)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def parse_stdout_json(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.stdout != "", (
+               ^^^^^^^^^^^^^^^^^^^
+            f"expected JSON on stdout, got empty output; stderr={result.stderr!r}"
+        )
+E       AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+
+.evaluation_tests/_helpers.py:122: AssertionError
+_ test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_wrong_type] _
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_rejects2/data')
+stdin_text = '{"blueprint_name": 1}'
+
+    @pytest.mark.parametrize(
+        "stdin_text",
+        [
+            "[]",
+            "{}",
+            '{"blueprint_name": 1}',
+            '{"blueprint_name": ""}',
+        ],
+        ids=[
+            "non_object_payload",
+            "missing_blueprint_name",
+            "blueprint_name_wrong_type",
+            "blueprint_name_empty",
+        ],
+    )
+    @pytest.mark.error
+    def test_allocation_create_rejects_invalid_payload_shapes(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        stdin_text: str,
+    ) -> None:
+        """Invalid create payloads are rejected with validation_error."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_text=stdin_text,
+        )
+>       assert_error(result, category="validation_error")
+
+.evaluation_tests/test_checkpoint_2.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:176: in assert_error
+    payload = parse_stdout_json(result)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def parse_stdout_json(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.stdout != "", (
+               ^^^^^^^^^^^^^^^^^^^
+            f"expected JSON on stdout, got empty output; stderr={result.stderr!r}"
+        )
+E       AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+
+.evaluation_tests/_helpers.py:122: AssertionError
+_ test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_empty] __
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_rejects3/data')
+stdin_text = '{"blueprint_name": ""}'
+
+    @pytest.mark.parametrize(
+        "stdin_text",
+        [
+            "[]",
+            "{}",
+            '{"blueprint_name": 1}',
+            '{"blueprint_name": ""}',
+        ],
+        ids=[
+            "non_object_payload",
+            "missing_blueprint_name",
+            "blueprint_name_wrong_type",
+            "blueprint_name_empty",
+        ],
+    )
+    @pytest.mark.error
+    def test_allocation_create_rejects_invalid_payload_shapes(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        stdin_text: str,
+    ) -> None:
+        """Invalid create payloads are rejected with validation_error."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_text=stdin_text,
+        )
+>       assert_error(result, category="validation_error")
+
+.evaluation_tests/test_checkpoint_2.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:176: in assert_error
+    payload = parse_stdout_json(result)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def parse_stdout_json(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.stdout != "", (
+               ^^^^^^^^^^^^^^^^^^^
+            f"expected JSON on stdout, got empty output; stderr={result.stderr!r}"
+        )
+E       AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+
+.evaluation_tests/_helpers.py:122: AssertionError
+__________________ test_allocation_get_unknown_uuid_not_found __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_get_unknown_uu0/data')
+
+    @pytest.mark.error
+    def test_allocation_get_unknown_uuid_not_found(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Get returns not_found when the allocation UUID does not exist."""
+        missing = "00000000-0000-0000-0000-000000000000"
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "get", missing],
+        )
+>       assert_error(result, category="not_found", detail_contains=missing)
+
+.evaluation_tests/test_checkpoint_2.py:273: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:176: in assert_error
+    payload = parse_stdout_json(result)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def parse_stdout_json(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.stdout != "", (
+               ^^^^^^^^^^^^^^^^^^^
+            f"expected JSON on stdout, got empty output; stderr={result.stderr!r}"
+        )
+E       AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+
+.evaluation_tests/_helpers.py:122: AssertionError
+________________ test_allocation_list_empty_returns_empty_array ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_empty_ret0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_empty_returns_empty_array(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List returns an empty array when no allocations are stored."""
+        result = run_forge(entrypoint_argv, data_dir, ["allocation", "list"])
+>       assert unwrap_collection(assert_success(result), key="allocations") == []
+                                 ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:282: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+______________ test_multiplier_match_is_exact_and_case_sensitive _______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multiplier_match_is_exact0/data')
+
+    @pytest.mark.functionality
+    def test_multiplier_match_is_exact_and_case_sensitive(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Only exact category=TYPE_A (case-sensitive) triggers a multiplier."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="case-sensitive",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 2,
+                    "capabilities": ["category=type_a"],
+                }
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "case-sensitive"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:308: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+______________ test_allocation_list_filters_compose_conjunctively ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_filters_c0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_filters_compose_conjunctively(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List filters combine with AND semantics when status and assignment are both set."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="filters",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "filters"},
+        )
+    
+        by_status = run_forge(
+            entrypoint_argv, data_dir, ["allocation", "list", "--status", "unbound"]
+        )
+        status_payload = unwrap_collection(
+>           assert_success(by_status), key="allocations"
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+.evaluation_tests/test_checkpoint_2.py:334: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_________ test_expansion_order_places_multiplied_entries_consecutively _________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_expansion_order_places_mu0/data')
+
+    @pytest.mark.functionality
+    def test_expansion_order_places_multiplied_entries_consecutively(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create preserves requirement index order and keeps multiplied rows consecutive."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="ordering",
+            requirement_sets=[
+                {"resource_type": "gpu", "resource_count": 1},
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                },
+                {"resource_type": "nic", "resource_count": 1},
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "ordering"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:378: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_____________ test_allocation_list_breaks_created_at_ties_by_uuid ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_breaks_cr0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_breaks_created_at_ties_by_uuid(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List breaks created_at ties using ascending UUID order."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="uuid-tie",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                }
+            ],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "uuid-tie"},
+        )
+    
+        listed = run_forge(entrypoint_argv, data_dir, ["allocation", "list"])
+>       payload = unwrap_collection(assert_success(listed), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:407: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_________________ test_multiplier_once_per_set_duplicate_caps __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multiplier_once_per_set_d0/data')
+
+    @pytest.mark.functionality
+    def test_multiplier_once_per_set_duplicate_caps(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """A single requirement set with duplicate TYPE_A markers still creates exactly two rows."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="duplicate-marker",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A", "category=TYPE_A"],
+                }
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "duplicate-marker"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:438: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_______________ test_multiplier_requires_exact_capability_match ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multiplier_requires_exact0/data')
+
+    @pytest.mark.functionality
+    def test_multiplier_requires_exact_capability_match(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Only requirement sets with exact category=TYPE_A are multiplied."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="exact-match-only",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A "],
+                },
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["prefix:category=TYPE_A"],
+                },
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                },
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "exact-match-only"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:476: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_______________ test_multiplier_adversarial_mix_preserves_order ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multiplier_adversarial_mi0/data')
+
+    @pytest.mark.functionality
+    def test_multiplier_adversarial_mix_preserves_order(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Adversarial capability mixes preserve expansion order and share one created_at batch."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="adversarial-mix",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": [
+                        "category=TYPE_A",
+                        "category=TYPE_A",
+                        "vendor=acme",
+                    ],
+                },
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A "],
+                },
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["prefix:category=TYPE_A"],
+                },
+                {
+                    "resource_type": "gpu",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                },
+            ],
+        )
+    
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "adversarial-mix"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:523: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+___________ test_allocation_create_output_is_scoped_to_current_batch ___________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_output_0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_create_output_is_scoped_to_current_batch(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create returns only the allocations produced by the current create call."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="batch-a-only",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="batch-b-only",
+            requirement_sets=[{"resource_type": "nic", "resource_count": 1}],
+        )
+    
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "batch-a-only"},
+        )
+        second = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "batch-b-only"},
+        )
+>       payload = unwrap_collection(assert_success(second), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:565: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+________________ test_allocation_list_returns_complete_dataset _________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_returns_c0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_returns_complete_dataset(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List includes allocations from multiple prior create commands."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="complete-a",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="complete-b",
+            requirement_sets=[{"resource_type": "cpu", "resource_count": 1}],
+        )
+        created_a = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "complete-a"},
+        )
+>       payload_a = unwrap_collection(assert_success(created_a), key="allocations")
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:593: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+________________ test_list_negative_filter_empty[status-filter] ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_list_negative_filter_empt0/data')
+filter_args = ['--status', 'bound'], blueprint_name = 'status-negative'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("filter_args", "blueprint_name"),
+        [
+            (["--status", "bound"], "status-negative"),
+            (["--assignment", "assignment-1"], "assignment-negative"),
+        ],
+        ids=["status-filter", "assignment-filter"],
+    )
+    def test_list_negative_filter_empty(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        filter_args: list[str],
+        blueprint_name: str,
+    ) -> None:
+        """Unmatched list status/assignment filters return an empty array."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name=blueprint_name,
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": blueprint_name},
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "list"] + filter_args,
+        )
+>       assert unwrap_collection(assert_success(result), key="allocations") == []
+                                 ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:643: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+______________ test_list_negative_filter_empty[assignment-filter] ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_list_negative_filter_empt1/data')
+filter_args = ['--assignment', 'assignment-1']
+blueprint_name = 'assignment-negative'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("filter_args", "blueprint_name"),
+        [
+            (["--status", "bound"], "status-negative"),
+            (["--assignment", "assignment-1"], "assignment-negative"),
+        ],
+        ids=["status-filter", "assignment-filter"],
+    )
+    def test_list_negative_filter_empty(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        filter_args: list[str],
+        blueprint_name: str,
+    ) -> None:
+        """Unmatched list status/assignment filters return an empty array."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name=blueprint_name,
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": blueprint_name},
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "list"] + filter_args,
+        )
+>       assert unwrap_collection(assert_success(result), key="allocations") == []
+                                 ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:643: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+______________ test_type_a_multiplier_rows_match_except_for_uuid _______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_type_a_multiplier_rows_ma0/data')
+
+    @pytest.mark.functionality
+    def test_type_a_multiplier_rows_match_except_for_uuid(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Type-A multiplier creates matching pairs differing only by UUID."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="type-a-pair",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A", "vendor=acme"],
+                }
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "type-a-pair"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:669: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+______________ test_allocation_create_returns_complete_field_set _______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_returns0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_create_returns_complete_field_set(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create output objects contain exactly the six specified allocation fields."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="field-check",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "field-check"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_____________ test_allocation_get_round_trip_preserves_all_fields ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_get_round_trip0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_get_round_trip_preserves_all_fields(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Get returns all six fields with values matching the original create output."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="get-roundtrip",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        created = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "get-roundtrip"},
+        )
+>       created_row = unwrap_collection(assert_success(created), key="allocations")[0]
+                                        ^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:727: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+__________ test_allocation_create_same_blueprint_twice_distinct_uuids __________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_same_bl0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_create_same_blueprint_twice_distinct_uuids(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Two create calls against the same blueprint produce independent allocations with unique UUIDs."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="reusable",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        first = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "reusable"},
+        )
+        second = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "reusable"},
+        )
+        first_uuids = {
+            row["uuid"]
+>           for row in unwrap_collection(assert_success(first), key="allocations")
+                                         ^^^^^^^^^^^^^^^^^^^^^
+        }
+
+.evaluation_tests/test_checkpoint_2.py:774: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+______________ test_allocation_list_status_filter_positive_match _______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_status_fi0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_status_filter_positive_match(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List with --status unbound returns all newly created unbound allocations."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="status-pos",
+            requirement_sets=[
+                {"resource_type": "gpu", "resource_count": 1},
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                },
+            ],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "status-pos"},
+        )
+        result = run_forge(
+            entrypoint_argv, data_dir, ["allocation", "list", "--status", "unbound"]
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:810: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_____________ test_allocation_get_malformed_uuid_returns_not_found _____________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_get_malformed_0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_get_malformed_uuid_returns_not_found(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Get returns not_found when given a malformed non-UUID string."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "get", "not-a-valid-uuid"],
+        )
+>       assert_error(
+            result, category="not_found", detail_contains="not-a-valid-uuid"
+        )
+
+.evaluation_tests/test_checkpoint_2.py:825: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:176: in assert_error
+    payload = parse_stdout_json(result)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...eate\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n')
+
+    def parse_stdout_json(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.stdout != "", (
+               ^^^^^^^^^^^^^^^^^^^
+            f"expected JSON on stdout, got empty output; stderr={result.stderr!r}"
+        )
+E       AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+
+.evaluation_tests/_helpers.py:122: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_unique_sorted_messages - AssertionError: expected detail to contain 'priority'; actual detail={'field': 'blueprint', 'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[0]: 'resource_count' must be a positive integer", 'requirement_sets[0]: capabilities[0] must be a string']}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_validation_deduplicates_messages_across_requirement_sets - AssertionError: expected detail to contain 'priority'; actual detail={'field': 'blueprint', 'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[1]: 'resource_type' must be a string"]}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_delete_names_is_atomic_and_reports_sorted_unresolved - AssertionError: assert {'beta'} == {'alpha', 'beta'}
+  
+  Extra items in the right set:
+  'alpha'
+  
+  Full diff:
+    {
+  -     'alpha',
+        'beta',
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::test_delete_names_rejects_blank_csv_members_atomically - AssertionError: assert [] == ['alpha']
+  
+  Right contains one more item: 'alpha'
+  
+  Full diff:
+  + []
+  - [
+  -     'alpha',
+  - ]
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_name_string - AssertionError: expected detail to contain 'name must be a non-empty string'; actual detail={'field': 'blueprint', 'errors': ["'name' must be a non-empty string"]}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_requirement_sets - AssertionError: expected detail to contain 'requirement_sets must be a non-empty array'; actual detail={'field': 'blueprint', 'errors': ["'requirement_sets' must be a non-empty array"]}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_unsupported_key_as_sole_violation - AssertionError: expected error exit code 1; stdout='{"uuid": "006624cb-8c1a-46b0-9487-083a99f2d5fd", "name": "unsupported-key-only", "requirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T05:14:26Z"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_multiple_unsupported_keys - AssertionError: expected error exit code 1; stdout='{"uuid": "4e73a1d5-0214-426c-80df-083827d88d63", "name": "multi-unsupported", "requirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T05:14:27Z"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_expands_requirement_sets - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_blueprint_name_across_create_list_get - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_ordering - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_get_returns_single_resource - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_generated_uuid_is_canonical_v4 - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_create_utc_second_precision - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_unknown_blueprint_not_found - AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[non_object_payload] - AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[missing_blueprint_name] - AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_wrong_type] - AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_empty] - AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_get_unknown_uuid_not_found - AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_empty_returns_empty_array - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_multiplier_match_is_exact_and_case_sensitive - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_filters_compose_conjunctively - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_expansion_order_places_multiplied_entries_consecutively - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_breaks_created_at_ties_by_uuid - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_multiplier_once_per_set_duplicate_caps - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_multiplier_requires_exact_capability_match - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_multiplier_adversarial_mix_preserves_order - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_output_is_scoped_to_current_batch - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_returns_complete_dataset - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_list_negative_filter_empty[status-filter] - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_list_negative_filter_empty[assignment-filter] - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_type_a_multiplier_rows_match_except_for_uuid - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_returns_complete_field_set - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_get_round_trip_preserves_all_fields - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_same_blueprint_twice_distinct_uuids - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_status_filter_positive_match - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_get_malformed_uuid_returns_not_found - AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 337, in <module>\n    main()\n  File "/workspace/forge.py", line 235, in main\n    if args.blueprint_command == \'create\':\n       ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: \'Namespace\' object has no attribute \'blueprint_command\'\n'
+======================== 38 failed, 32 passed in 20.58s ========================

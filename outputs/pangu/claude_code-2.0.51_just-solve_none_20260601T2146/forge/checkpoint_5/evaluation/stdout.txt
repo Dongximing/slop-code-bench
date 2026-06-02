@@ -1,0 +1,887 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/pUwQfhFmBGIesFVM/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 166 items
+
+.evaluation_tests/test_checkpoint_1.py::test_create_blueprint_returns_persisted_resource PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::test_requirement_set_order_preserved_non_lexicographic PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_orders_by_created_at_name_uuid PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_name_tiebreak_when_created_at_collides PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_and_delete_single_uuid PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_delete_missing_uuid_returns_not_found PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_invalid_json_input PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_unique_sorted_messages FAILED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_deduplicates_messages_across_requirement_sets FAILED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_duplicate_name_with_conflict PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_is_atomic_and_reports_sorted_unresolved FAILED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_rejects_blank_csv_members_atomically FAILED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_empty_returns_empty_array PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_unknown_top_level_keys PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_caller_supplied_uuid PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_boolean_resource_count FAILED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_success_returns_deleted_count PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_duplicate_members_count_unique_deletions PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_create_output_is_compact_sorted_json_without_trailing_newline PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_create_missing_required_fields_reports_sorted_unique_messages PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_failure_is_atomic PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_caller_supplied_created_at PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_create_preserves_empty_capabilities_array PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_name_string FAILED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_requirement_sets FAILED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_set_missing_required_keys PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_object_json_payload PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_top_level_and_nested_failures PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_create_generates_valid_uuid_v4_format PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_float_resource_count PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_string_name_type PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_array_requirement_sets PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_sets_with_non_object_elements PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_single_name_succeeds PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_uuid_tiebreak_when_created_at_and_name_collide PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_nonexistent_uuid_returns_not_found PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_unsupported_key_as_sole_violation FAILED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_capabilities_with_non_string_elements PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_returns_all_stored_fields PASSED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_multiple_unsupported_keys FAILED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_expands_requirement_sets PASSED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::test_blueprint_name_across_create_list_get PASSED [ 25%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_ordering PASSED [ 25%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_returns_single_resource PASSED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_generated_uuid_is_canonical_v4 PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::test_create_utc_second_precision PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_unknown_blueprint_not_found PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[non_object_payload] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[missing_blueprint_name] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_wrong_type] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_empty] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_unknown_uuid_not_found PASSED [ 31%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_empty_returns_empty_array PASSED [ 31%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_match_is_exact_and_case_sensitive PASSED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_filters_compose_conjunctively PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::test_expansion_order_places_multiplied_entries_consecutively PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_breaks_created_at_ties_by_uuid PASSED [ 34%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_once_per_set_duplicate_caps PASSED [ 34%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_requires_exact_capability_match PASSED [ 35%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_adversarial_mix_preserves_order PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_output_is_scoped_to_current_batch PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_returns_complete_dataset PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::test_list_negative_filter_empty[status-filter] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::test_list_negative_filter_empty[assignment-filter] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_2.py::test_type_a_multiplier_rows_match_except_for_uuid PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_returns_complete_field_set PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_round_trip_preserves_all_fields PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_same_blueprint_twice_distinct_uuids PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_status_filter_positive_match PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_malformed_uuid_returns_not_found PASSED [ 42%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_add_updates_state_and_returns_ack PASSED [ 42%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_remove_is_idempotent PASSED [ 43%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_by_assignment_is_idempotent PASSED [ 43%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_by_assignment_spares_nonmatching PASSED [ 44%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_missing_assignment_id PASSED [ 45%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_rejects_empty_allocations[missing_allocations] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_rejects_empty_allocations[empty_allocations] PASSED [ 46%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_invalid_op_reports_bad_value PASSED [ 46%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_not_found_lists_sorted_ids FAILED [ 47%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_duplicate_assignment_guard FAILED [ 48%]
+.evaluation_tests/test_checkpoint_3.py::test_duplicate_guard_blocks_mixed_ops FAILED [ 48%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_invalid_op_precedes_not_found PASSED [ 49%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_requires_exactly_one_mode_flag[no_flag] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_requires_exactly_one_mode_flag[both_flags] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_ids_rejects_partial_matches FAILED [ 51%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_ids_rejects_blank_csv PASSED [ 51%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_atomic_on_missing_ids PASSED [ 52%]
+.evaluation_tests/test_checkpoint_3.py::test_invalid_op_no_remove_side_effects PASSED [ 53%]
+.evaluation_tests/test_checkpoint_3.py::test_remove_only_bypasses_duplicate_guard PASSED [ 53%]
+.evaluation_tests/test_checkpoint_3.py::test_remove_unbinds_ignoring_assignment PASSED [ 54%]
+.evaluation_tests/test_checkpoint_3.py::test_validation_precedes_op_and_not_found PASSED [ 54%]
+.evaluation_tests/test_checkpoint_3.py::test_not_found_precedes_duplicate PASSED [ 55%]
+.evaluation_tests/test_checkpoint_3.py::test_invalid_op_precedes_duplicate PASSED [ 56%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_ids_reports_missing_uuids FAILED [ 56%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_mixed_ops_success PASSED [ 57%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_add_records_assignment_id PASSED [ 57%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_remove_clears_assignment_id_to_null PASSED [ 58%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_by_ids_succeeds_and_returns_count PASSED [ 59%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_by_ids_duplicate_members_count_unique_deletions PASSED [ 59%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_add_rebinds_to_new_assignment FAILED [ 60%]
+.evaluation_tests/test_checkpoint_3.py::test_not_found_mixed_ops_atomic_vs_duplicate PASSED [ 60%]
+.evaluation_tests/test_checkpoint_4.py::test_create_defaults PASSED      [ 61%]
+.evaluation_tests/test_checkpoint_4.py::test_create_child_ref_parent PASSED [ 62%]
+.evaluation_tests/test_checkpoint_4.py::test_list_get_ordering PASSED    [ 62%]
+.evaluation_tests/test_checkpoint_4.py::test_create_empty_required_field PASSED [ 63%]
+.evaluation_tests/test_checkpoint_4.py::test_create_negative_capacity PASSED [ 63%]
+.evaluation_tests/test_checkpoint_4.py::test_create_reports_all_invalid PASSED [ 64%]
+.evaluation_tests/test_checkpoint_4.py::test_create_rejects_all_system_fields PASSED [ 65%]
+.evaluation_tests/test_checkpoint_4.py::test_create_parent_not_found PASSED [ 65%]
+.evaluation_tests/test_checkpoint_4.py::test_create_uuid_parent_not_found[11111111-1111-1111-1111-111111111111] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_4.py::test_create_uuid_parent_not_found[aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_4.py::test_list_invalid_filter_format PASSED [ 67%]
+.evaluation_tests/test_checkpoint_4.py::test_create_invalid_parent_uuid[123] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_4.py::test_create_invalid_parent_uuid[] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_4.py::test_get_missing_not_found PASSED [ 69%]
+.evaluation_tests/test_checkpoint_4.py::test_get_not_found_exact_detail PASSED [ 69%]
+.evaluation_tests/test_checkpoint_4.py::test_create_zero_capacity PASSED [ 70%]
+.evaluation_tests/test_checkpoint_4.py::test_filters_conjunctive PASSED  [ 71%]
+.evaluation_tests/test_checkpoint_4.py::test_filter_no_match[unknown_field] PASSED [ 71%]
+.evaluation_tests/test_checkpoint_4.py::test_filter_no_match[array_field] PASSED [ 72%]
+.evaluation_tests/test_checkpoint_4.py::test_filter_splits_first_equals PASSED [ 72%]
+.evaluation_tests/test_checkpoint_4.py::test_filter_int_decimal_only PASSED [ 73%]
+.evaluation_tests/test_checkpoint_4.py::test_filter_by_parent_uuid PASSED [ 74%]
+.evaluation_tests/test_checkpoint_4.py::test_parent_null_excludes_children PASSED [ 74%]
+.evaluation_tests/test_checkpoint_4.py::test_list_order_tiebreaks PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::test_create_uuid_timestamp_format PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::test_string_filters_case_sensitive PASSED [ 76%]
+.evaluation_tests/test_checkpoint_4.py::test_create_bool_capacity[True] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_4.py::test_create_bool_capacity[False] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_4.py::test_get_list_flat_hierarchy PASSED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::test_create_rejects_system_field[uuid-00000000-0000-0000-0000-000000000000] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::test_create_rejects_system_field[status-inactive] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_4.py::test_create_rejects_system_field[module_uuids-field_value2] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_4.py::test_create_rejects_system_field[created_at-2020-01-01T00:00:00Z] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_4.py::test_create_rejects_wrong_types[category-123] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_4.py::test_create_rejects_wrong_types[manufacturer-True] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_4.py::test_create_rejects_wrong_types[host-field_value2] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_4.py::test_create_missing_all_required_fields PASSED [ 83%]
+.evaluation_tests/test_checkpoint_4.py::test_create_float_capacity PASSED [ 83%]
+.evaluation_tests/test_checkpoint_4.py::test_create_string_capacity PASSED [ 84%]
+.evaluation_tests/test_checkpoint_4.py::test_list_empty_returns_empty_array PASSED [ 84%]
+.evaluation_tests/test_checkpoint_4.py::test_list_order_created_at_ascending PASSED [ 85%]
+.evaluation_tests/test_checkpoint_5.py::test_deactivate_sets_reserved_capacity_and_inactive PASSED [ 86%]
+.evaluation_tests/test_checkpoint_5.py::test_activate_sets_zero_reserved_and_active PASSED [ 86%]
+.evaluation_tests/test_checkpoint_5.py::test_activate_restores_capabilities_in_ledger PASSED [ 87%]
+.evaluation_tests/test_checkpoint_5.py::test_ledger_capabilities_tracks_active_units_only PASSED [ 87%]
+.evaluation_tests/test_checkpoint_5.py::test_invalid_transition[deactivate-inactive] PASSED [ 88%]
+.evaluation_tests/test_checkpoint_5.py::test_invalid_transition[activate-active] PASSED [ 89%]
+.evaluation_tests/test_checkpoint_5.py::test_transition_unknown_unit_not_found PASSED [ 89%]
+.evaluation_tests/test_checkpoint_5.py::test_get_sorted_capabilities PASSED [ 90%]
+.evaluation_tests/test_checkpoint_5.py::test_list_sorted_capabilities PASSED [ 90%]
+.evaluation_tests/test_checkpoint_5.py::test_transitions_return_sorted_capabilities PASSED [ 91%]
+.evaluation_tests/test_checkpoint_5.py::test_reserved_capacity_in_list_and_get[deactivated] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_5.py::test_reserved_capacity_in_list_and_get[active] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_5.py::test_unit_create_empty_capabilities[default] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_5.py::test_unit_create_empty_capabilities[explicit_empty] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_5.py::test_create_rejects_non_string_capabilities PASSED [ 94%]
+.evaluation_tests/test_checkpoint_5.py::test_create_rejects_non_array_capabilities PASSED [ 95%]
+.evaluation_tests/test_checkpoint_5.py::test_ledger_empty_when_no_capabilities PASSED [ 95%]
+.evaluation_tests/test_checkpoint_5.py::test_list_includes_empty_capabilities_field PASSED [ 96%]
+.evaluation_tests/test_checkpoint_5.py::test_transitions_include_empty_capabilities PASSED [ 96%]
+.evaluation_tests/test_checkpoint_5.py::test_deactivate_zero_capacity_unit PASSED [ 97%]
+.evaluation_tests/test_checkpoint_5.py::test_reactivation_no_duplicate_in_ledger PASSED [ 98%]
+.evaluation_tests/test_checkpoint_5.py::test_ledger_overlap_preserves_capabilities PASSED [ 98%]
+.evaluation_tests/test_checkpoint_5.py::test_ledger_capabilities_sorted_lexicographic PASSED [ 99%]
+.evaluation_tests/test_checkpoint_5.py::test_create_sorts_capabilities_even_with_duplicates PASSED [100%]
+
+=================================== FAILURES ===================================
+___________ test_create_validation_aggregates_unique_sorted_messages ___________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_validation_aggrega0/data')
+
+    @pytest.mark.error
+    def test_create_validation_aggregates_unique_sorted_messages(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "bad",
+                "requirement_sets": [
+                    {
+                        "resource_type": 42,
+                        "resource_count": -1,
+                        "priority": "high",
+                        "capabilities": [1, "ok"],
+                    }
+                ],
+            },
+        )
+        payload = assert_error(result, category="validation_error")
+        for expected in ("capabilities", "priority", "resource_count", "resource_type"):
+>           assert_detail_contains(payload["detail"], expected)
+
+.evaluation_tests/test_checkpoint_1.py:225: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = {'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[0]: 'resource_count' must be a positive integer", 'requirement_sets[0]: capabilities[0] must be a string'], 'field': 'blueprint'}
+expected = 'priority'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'priority'; actual detail={'field': 'blueprint', 'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[0]: 'resource_count' must be a positive integer", 'requirement_sets[0]: capabilities[0] must be a string']}
+
+.evaluation_tests/_helpers.py:141: AssertionError
+_____ test_create_validation_deduplicates_messages_across_requirement_sets _____
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_validation_dedupli0/data')
+
+    @pytest.mark.error
+    def test_create_validation_deduplicates_messages_across_requirement_sets(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "bad-many",
+                "requirement_sets": [
+                    {
+                        "resource_type": 42,
+                        "resource_count": 1,
+                        "priority": "high",
+                    },
+                    {
+                        "resource_type": 11,
+                        "resource_count": 2,
+                        "priority": "low",
+                    },
+                ],
+            },
+        )
+        payload = assert_error(result, category="validation_error")
+        for expected in ("priority", "resource_type"):
+>           assert_detail_contains(payload["detail"], expected)
+
+.evaluation_tests/test_checkpoint_1.py:254: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = {'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[1]: 'resource_type' must be a string"], 'field': 'blueprint'}
+expected = 'priority'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'priority'; actual detail={'field': 'blueprint', 'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[1]: 'resource_type' must be a string"]}
+
+.evaluation_tests/_helpers.py:141: AssertionError
+__________ test_delete_names_is_atomic_and_reports_sorted_unresolved ___________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_names_is_atomic_an0/data')
+
+    @pytest.mark.error
+    def test_delete_names_is_atomic_and_reports_sorted_unresolved(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="alpha",
+            requirement_sets=[{"resource_type": "CPU", "resource_count": 1}],
+        )
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="beta",
+            requirement_sets=[{"resource_type": "GPU", "resource_count": 1}],
+        )
+    
+        failed_delete = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "delete", "--names", "alpha,gamma,delta"],
+        )
+>       payload = assert_error(failed_delete, category="not_found")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:301: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag..._an0/data', 'blueprint', 'delete', '--names', 'alpha,gamma,delta'], returncode=0, stdout='{"deleted": 1}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"deleted": 1}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+____________ test_delete_names_rejects_blank_csv_members_atomically ____________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_names_rejects_blan0/data')
+
+    @pytest.mark.error
+    def test_delete_names_rejects_blank_csv_members_atomically(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="alpha",
+            requirement_sets=[{"resource_type": "CPU", "resource_count": 1}],
+        )
+    
+        failed_delete = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "delete", "--names", "alpha,"],
+        )
+>       assert_error(failed_delete, category="not_found")
+
+.evaluation_tests/test_checkpoint_1.py:326: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...s_rejects_blan0/data', 'blueprint', 'delete', '--names', 'alpha,'], returncode=0, stdout='{"deleted": 1}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"deleted": 1}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+__________________ test_create_rejects_boolean_resource_count __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_boolean_re0/data')
+
+    @pytest.mark.error
+    def test_create_rejects_boolean_resource_count(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "bool-count",
+                "requirement_sets": [
+                    {"resource_type": "CPU", "resource_count": True}
+                ],
+            },
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="resource_count",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:396: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...irement_sets": [{"resource_type": "CPU", "resource_count": true}], "created_at": "2026-06-02T09:37:59Z"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"uuid": "44d86f35-b5a5-4ebb-b03d-b21c120ed461", "name": "bool-count", "requirement_sets": [{"resource_type": "CPU", "resource_count": true}], "created_at": "2026-06-02T09:37:59Z"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+____________________ test_create_rejects_empty_name_string _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_empty_name0/data')
+
+    @pytest.mark.error
+    def test_create_rejects_empty_name_string(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "",
+                "requirement_sets": [{"resource_type": "GPU", "resource_count": 1}],
+            },
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="name must be a non-empty string",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:568: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:183: in assert_error
+    assert_detail_contains(actual_detail, detail_contains)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = {'errors': ["'name' must be a non-empty string"], 'field': 'blueprint'}
+expected = 'name must be a non-empty string'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'name must be a non-empty string'; actual detail={'field': 'blueprint', 'errors': ["'name' must be a non-empty string"]}
+
+.evaluation_tests/_helpers.py:141: AssertionError
+__________________ test_create_rejects_empty_requirement_sets __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_empty_requ0/data')
+
+    @pytest.mark.error
+    def test_create_rejects_empty_requirement_sets(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={"name": "empty-sets", "requirement_sets": []},
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="requirement_sets must be a non-empty array",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:588: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:183: in assert_error
+    assert_detail_contains(actual_detail, detail_contains)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = {'errors': ["'requirement_sets' must be a non-empty array"], 'field': 'blueprint'}
+expected = 'requirement_sets must be a non-empty array'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'requirement_sets must be a non-empty array'; actual detail={'field': 'blueprint', 'errors': ["'requirement_sets' must be a non-empty array"]}
+
+.evaluation_tests/_helpers.py:141: AssertionError
+____________ test_create_rejects_unsupported_key_as_sole_violation _____________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_unsupporte0/data')
+
+    @pytest.mark.functionality
+    def test_create_rejects_unsupported_key_as_sole_violation(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """An unsupported key in an otherwise valid requirement set is rejected."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "unsupported-key-only",
+                "requirement_sets": [
+                    {
+                        "resource_type": "CPU",
+                        "resource_count": 1,
+                        "priority": "high",
+                    }
+                ],
+            },
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="priority",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:838: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...equirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T09:38:04Z"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"uuid": "1163f283-0cbc-46f2-9faa-5f580f3618b1", "name": "unsupported-key-only", "requirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T09:38:04Z"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+________________ test_create_rejects_multiple_unsupported_keys _________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_multiple_u0/data')
+
+    @pytest.mark.functionality
+    def test_create_rejects_multiple_unsupported_keys(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Multiple unsupported keys in a requirement set are reported together."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "multi-unsupported",
+                "requirement_sets": [
+                    {
+                        "resource_type": "CPU",
+                        "resource_count": 1,
+                        "priority": "high",
+                        "tier": "gold",
+                    }
+                ],
+            },
+        )
+>       payload = assert_error(result, category="validation_error")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:918: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...equirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T09:38:05Z"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"uuid": "a8b3c916-e128-45e4-9dbc-f2e133531147", "name": "multi-unsupported", "requirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T09:38:05Z"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+_____________________ test_bind_not_found_lists_sorted_ids _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_not_found_lists_sort0/data')
+
+    @pytest.mark.error
+    def test_bind_not_found_lists_sorted_ids(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Bind not_found errors include missing allocation IDs in sorted order."""
+        _seed_allocation_ids(entrypoint_argv, data_dir)
+        missing_a = "ff000000-0000-0000-0000-000000000002"
+        missing_b = "ff000000-0000-0000-0000-000000000001"
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "bind"],
+            stdin_json={
+                "assignment_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "allocations": {missing_a: "add", missing_b: "remove"},
+            },
+        )
+        payload = assert_error(result, category="not_found")
+        assert_detail_contains(payload["detail"], missing_a)
+>       assert_detail_contains(payload["detail"], missing_b)
+
+.evaluation_tests/test_checkpoint_3.py:291: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = "allocation with uuid 'ff000000-0000-0000-0000-000000000002' not found"
+expected = 'ff000000-0000-0000-0000-000000000001'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'ff000000-0000-0000-0000-000000000001'; actual detail="allocation with uuid 'ff000000-0000-0000-0000-000000000002' not found"
+
+.evaluation_tests/_helpers.py:141: AssertionError
+_____________________ test_bind_duplicate_assignment_guard _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_duplicate_assignment0/data')
+
+    @pytest.mark.error
+    def test_bind_duplicate_assignment_guard(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Duplicate-assignment guard rejects add operations when assignment already has bound allocations."""
+        alloc_a, alloc_b, assignment_id = _seed_and_bind_a(entrypoint_argv, data_dir)
+    
+        duplicate = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "bind"],
+            stdin_json={
+                "assignment_id": assignment_id,
+                "allocations": {alloc_b: "add"},
+            },
+        )
+>       assert_error(
+            duplicate,
+            category="duplicate_assignment",
+            detail_contains=assignment_id,
+        )
+
+.evaluation_tests/test_checkpoint_3.py:310: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...st_bind_duplicate_assignment0/data', 'allocation', 'bind'], returncode=0, stdout='{"status": "accepted"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"status": "accepted"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+____________________ test_duplicate_guard_blocks_mixed_ops _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_duplicate_guard_blocks_mi0/data')
+
+    @pytest.mark.error
+    def test_duplicate_guard_blocks_mixed_ops(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Duplicate guard blocks mixed bind ops when any add is requested for a duplicate assignment."""
+        alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+        assignment_id = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+        initial_bind = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "bind"],
+            stdin_json={
+                "assignment_id": assignment_id,
+                "allocations": {alloc_a: "add"},
+            },
+        )
+        assert unwrap_object(assert_success(initial_bind)) == {"status": "accepted"}
+    
+        mixed = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "bind"],
+            stdin_json={
+                "assignment_id": assignment_id,
+                "allocations": {alloc_a: "remove", alloc_b: "add"},
+            },
+        )
+>       assert_error(
+            mixed,
+            category="duplicate_assignment",
+            detail_contains=assignment_id,
+        )
+
+.evaluation_tests/test_checkpoint_3.py:344: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...st_duplicate_guard_blocks_mi0/data', 'allocation', 'bind'], returncode=0, stdout='{"status": "accepted"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"status": "accepted"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+___________________ test_delete_ids_rejects_partial_matches ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_ids_rejects_partia0/data')
+
+    @pytest.mark.error
+    def test_delete_ids_rejects_partial_matches(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """ID-list delete is all-or-nothing and fails with not_found if any UUID is missing."""
+        alloc_a, _ = _seed_allocation_ids(entrypoint_argv, data_dir)
+        missing = "ff000000-0000-0000-0000-000000000001"
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "delete", "--ids", f"{alloc_a},{missing}"],
+        )
+>       assert_error(result, category="not_found", detail_contains=missing)
+
+.evaluation_tests/test_checkpoint_3.py:424: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:183: in assert_error
+    assert_detail_contains(actual_detail, detail_contains)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = 'one or more UUIDs could not be resolved'
+expected = 'ff000000-0000-0000-0000-000000000001'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'ff000000-0000-0000-0000-000000000001'; actual detail='one or more UUIDs could not be resolved'
+
+.evaluation_tests/_helpers.py:141: AssertionError
+____________________ test_delete_ids_reports_missing_uuids _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_ids_reports_missin0/data')
+
+    @pytest.mark.functionality
+    def test_delete_ids_reports_missing_uuids(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """ID-list delete reports all missing UUIDs and does not delete any existing allocations."""
+        alloc_a, _ = _seed_allocation_ids(entrypoint_argv, data_dir)
+        missing_a = "ff000000-0000-0000-0000-000000000002"
+        missing_b = "ff000000-0000-0000-0000-000000000001"
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "delete", "--ids", f"{alloc_a},{missing_a},{missing_b}"],
+        )
+        payload = assert_error(result, category="not_found")
+>       assert_detail_contains(payload["detail"], missing_a)
+
+.evaluation_tests/test_checkpoint_3.py:648: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = 'one or more UUIDs could not be resolved'
+expected = 'ff000000-0000-0000-0000-000000000002'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'ff000000-0000-0000-0000-000000000002'; actual detail='one or more UUIDs could not be resolved'
+
+.evaluation_tests/_helpers.py:141: AssertionError
+___________________ test_bind_add_rebinds_to_new_assignment ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_add_rebinds_to_new_a0/data')
+
+    @pytest.mark.functionality
+    def test_bind_add_rebinds_to_new_assignment(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Bind add on an already-bound allocation changes it to the new assignment_id."""
+        alloc_a, _, old_assignment = _seed_and_bind_a(entrypoint_argv, data_dir)
+        new_assignment = "ffffffff-1111-2222-3333-444444444444"
+    
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "bind"],
+            stdin_json={
+                "assignment_id": new_assignment,
+                "allocations": {alloc_a: "add"},
+            },
+        )
+>       assert unwrap_object(assert_success(result)) == {"status": "accepted"}
+                             ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:800: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...duplicate_assignment", "detail": "allocation \'dce8681f-c97e-48a4-8c70-458c740a271a\' is already bound"}\n', stderr='')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='' stdout='{"error": "duplicate_assignment", "detail": "allocation \'dce8681f-c97e-48a4-8c70-458c740a271a\' is already bound"}\n'
+
+.evaluation_tests/_helpers.py:131: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_unique_sorted_messages - AssertionError: expected detail to contain 'priority'; actual detail={'field': 'blueprint', 'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[0]: 'resource_count' must be a positive integer", 'requirement_sets[0]: capabilities[0] must be a string']}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_validation_deduplicates_messages_across_requirement_sets - AssertionError: expected detail to contain 'priority'; actual detail={'field': 'blueprint', 'errors': ["requirement_sets[0]: 'resource_type' must be a string", "requirement_sets[1]: 'resource_type' must be a string"]}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_delete_names_is_atomic_and_reports_sorted_unresolved - AssertionError: expected error exit code 1; stdout='{"deleted": 1}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_1.py::test_delete_names_rejects_blank_csv_members_atomically - AssertionError: expected error exit code 1; stdout='{"deleted": 1}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_boolean_resource_count - AssertionError: expected error exit code 1; stdout='{"uuid": "44d86f35-b5a5-4ebb-b03d-b21c120ed461", "name": "bool-count", "requirement_sets": [{"resource_type": "CPU", "resource_count": true}], "created_at": "2026-06-02T09:37:59Z"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_name_string - AssertionError: expected detail to contain 'name must be a non-empty string'; actual detail={'field': 'blueprint', 'errors': ["'name' must be a non-empty string"]}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_requirement_sets - AssertionError: expected detail to contain 'requirement_sets must be a non-empty array'; actual detail={'field': 'blueprint', 'errors': ["'requirement_sets' must be a non-empty array"]}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_unsupported_key_as_sole_violation - AssertionError: expected error exit code 1; stdout='{"uuid": "1163f283-0cbc-46f2-9faa-5f580f3618b1", "name": "unsupported-key-only", "requirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T09:38:04Z"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_multiple_unsupported_keys - AssertionError: expected error exit code 1; stdout='{"uuid": "a8b3c916-e128-45e4-9dbc-f2e133531147", "name": "multi-unsupported", "requirement_sets": [{"resource_type": "CPU", "resource_count": 1}], "created_at": "2026-06-02T09:38:05Z"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_not_found_lists_sorted_ids - AssertionError: expected detail to contain 'ff000000-0000-0000-0000-000000000001'; actual detail="allocation with uuid 'ff000000-0000-0000-0000-000000000002' not found"
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_duplicate_assignment_guard - AssertionError: expected error exit code 1; stdout='{"status": "accepted"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_3.py::test_duplicate_guard_blocks_mixed_ops - AssertionError: expected error exit code 1; stdout='{"status": "accepted"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_3.py::test_delete_ids_rejects_partial_matches - AssertionError: expected detail to contain 'ff000000-0000-0000-0000-000000000001'; actual detail='one or more UUIDs could not be resolved'
+FAILED .evaluation_tests/test_checkpoint_3.py::test_delete_ids_reports_missing_uuids - AssertionError: expected detail to contain 'ff000000-0000-0000-0000-000000000002'; actual detail='one or more UUIDs could not be resolved'
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_add_rebinds_to_new_assignment - AssertionError: expected success exit code; stderr='' stdout='{"error": "duplicate_assignment", "detail": "allocation \'dce8681f-c97e-48a4-8c70-458c740a271a\' is already bound"}\n'
+================== 15 failed, 151 passed in 64.65s (0:01:04) ===================

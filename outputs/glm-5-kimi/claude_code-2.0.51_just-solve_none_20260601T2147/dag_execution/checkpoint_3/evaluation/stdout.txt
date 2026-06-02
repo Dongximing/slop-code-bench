@@ -1,0 +1,1512 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/VtOcwVMD26JgVJNM/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 51 items
+
+.evaluation_tests/test_checkpoint_1.py::test_basic FAILED                [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_arrays FAILED               [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_bool_params FAILED          [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_string_concat FAILED        [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_if FAILED            [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_elif FAILED          [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_else FAILED          [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_array_indexing FAILED       [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_for_requires FAILED         [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_while_requires FAILED       [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_working_dirs FAILED         [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_existing_dir FAILED         [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops FAILED       [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_exists_function FAILED      [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_float_params FAILED         [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_nested_loops FAILED         [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_stderr_validation FAILED    [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_string_params FAILED        [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_timeout FAILED              [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_circular_dependency FAILED  [ 39%]
+.evaluation_tests/test_checkpoint_1.py::test_default_param_order FAILED  [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_required_arg FAILED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_multiline_success_no_return FAILED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_no_main FAILED              [ 47%]
+.evaluation_tests/test_checkpoint_1.py::test_recursive_call FAILED       [ 49%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params FAILED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false FAILED [ 52%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool FAILED [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_requires_failure_stops FAILED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe FAILED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe FAILED [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_bad_toml_syntax FAILED [ 62%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block FAILED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_basic_cache FAILED          [ 66%]
+.evaluation_tests/test_checkpoint_2.py::test_file_change FAILED          [ 68%]
+.evaluation_tests/test_checkpoint_2.py::test_cache_exclude FAILED        [ 70%]
+.evaluation_tests/test_checkpoint_2.py::test_ttl_strategy FAILED         [ 72%]
+.evaluation_tests/test_checkpoint_2.py::test_cascade_invalidation FAILED [ 74%]
+.evaluation_tests/test_checkpoint_2.py::test_global_cache_disabled FAILED [ 76%]
+.evaluation_tests/test_checkpoint_2.py::test_force_refresh_skips_cache FAILED [ 78%]
+.evaluation_tests/test_checkpoint_2.py::test_always_strategy_ignores_input_change FAILED [ 80%]
+.evaluation_tests/test_checkpoint_3.py::test_ttl_override_basic FAILED   [ 82%]
+.evaluation_tests/test_checkpoint_3.py::test_strategy_override FAILED    [ 84%]
+.evaluation_tests/test_checkpoint_3.py::test_full_object_replacement FAILED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::test_noop_override FAILED        [ 88%]
+.evaluation_tests/test_checkpoint_3.py::test_disable_cache_override FAILED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::test_partial_override_preserves_defaults FAILED [ 92%]
+.evaluation_tests/test_checkpoint_3.py::test_multiple_overrides_same_task FAILED [ 94%]
+.evaluation_tests/test_checkpoint_3.py::test_multiple_param_override FAILED [ 96%]
+.evaluation_tests/test_checkpoint_3.py::test_ttl_object_replacement_drops_base FAILED [ 98%]
+.evaluation_tests/test_checkpoint_3.py::test_invalid_cached_param_cache_error FAILED [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_basic __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic(entrypoint_argv):
+        """Core: Basic pipeline with requires, fail(), and task chaining."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_PIPELINE, BASIC_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmppgoqal7i/pipeline.pipe', '--workspace', '/tmp/tmppgoqal7i/working', '--output', '/tmp/tmppgoqal7i/output', '--config', '/tmp/tmppgoqal7i/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:296: AssertionError
+_________________________________ test_arrays __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_arrays(entrypoint_argv):
+        """Core: Array parameters and len() function."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAYS_PIPELINE, ARRAYS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6ql9ii0c/pipeline.pipe', '--workspace', '/tmp/tmp6ql9ii0c/working', '--output', '/tmp/tmp6ql9ii0c/output', '--config', '/tmp/tmp6ql9ii0c/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:358: AssertionError
+_______________________________ test_bool_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_bool_params(entrypoint_argv):
+        """Core: Boolean parameters with TRUE/FALSE literals."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BOOL_PARAMS_PIPELINE, BOOL_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmptjp6ypi4/pipeline.pipe', '--workspace', '/tmp/tmptjp6ypi4/working', '--output', '/tmp/tmptjp6ypi4/output', '--config', '/tmp/tmptjp6ypi4/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:415: AssertionError
+______________________________ test_string_concat ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_string_concat(entrypoint_argv):
+        """Core: String concatenation with % operator in for loops."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_CONCAT_PIPELINE, STRING_CONCAT_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjrqqmigc/pipeline.pipe', '--workspace', '/tmp/tmpjrqqmigc/working', '--output', '/tmp/tmpjrqqmigc/output', '--config', '/tmp/tmpjrqqmigc/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:478: AssertionError
+________________________________ test_branch_if ________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_if(entrypoint_argv):
+        """Core: If conditional branching - true branch taken."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_IF_PIPELINE, BRANCH_IF_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpl72xx24h/pipeline.pipe', '--workspace', '/tmp/tmpl72xx24h/working', '--output', '/tmp/tmpl72xx24h/output', '--config', '/tmp/tmpl72xx24h/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:557: AssertionError
+_______________________________ test_branch_elif _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_elif(entrypoint_argv):
+        """Core: Elif branch - first fails, elif succeeds."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELIF_PIPELINE, BRANCH_ELIF_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6qg3anw6/pipeline.pipe', '--workspace', '/tmp/tmp6qg3anw6/working', '--output', '/tmp/tmp6qg3anw6/output', '--config', '/tmp/tmp6qg3anw6/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:632: AssertionError
+_______________________________ test_branch_else _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_else(entrypoint_argv):
+        """Core: Else branch - if and elif both fail."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELSE_PIPELINE, BRANCH_ELSE_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpqjtg4y7t/pipeline.pipe', '--workspace', '/tmp/tmpqjtg4y7t/working', '--output', '/tmp/tmpqjtg4y7t/output', '--config', '/tmp/tmpqjtg4y7t/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:708: AssertionError
+_____________________________ test_array_indexing ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_array_indexing(entrypoint_argv):
+        """Core: Array subscript access with [i] notation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAY_INDEXING_PIPELINE, ARRAY_INDEXING_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpryri82zg/pipeline.pipe', '--workspace', '/tmp/tmpryri82zg/working', '--output', '/tmp/tmpryri82zg/output', '--config', '/tmp/tmpryri82zg/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:766: AssertionError
+______________________________ test_for_requires _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_for_requires(entrypoint_argv):
+        """Core: For loop in requires clause."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FOR_REQUIRES_PIPELINE, FOR_REQUIRES_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpudd7hv0k/pipeline.pipe', '--workspace', '/tmp/tmpudd7hv0k/working', '--output', '/tmp/tmpudd7hv0k/output', '--config', '/tmp/tmpudd7hv0k/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:818: AssertionError
+_____________________________ test_while_requires ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_while_requires(entrypoint_argv):
+        """Core: While loop with break/continue in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WHILE_REQUIRES_PIPELINE, WHILE_REQUIRES_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpmduolqgw/pipeline.pipe', '--workspace', '/tmp/tmpmduolqgw/working', '--output', '/tmp/tmpmduolqgw/output', '--config', '/tmp/tmpmduolqgw/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:874: AssertionError
+______________________________ test_working_dirs _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_working_dirs(entrypoint_argv):
+        """Core: Working directory isolation for nested task calls."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WORKING_DIRS_PIPELINE, WORKING_DIRS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpcmagegml/pipeline.pipe', '--workspace', '/tmp/tmpcmagegml/working', '--output', '/tmp/tmpcmagegml/output', '--config', '/tmp/tmpcmagegml/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:937: AssertionError
+______________________________ test_existing_dir _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_existing_dir(entrypoint_argv):
+        """Core: Pre-existing workspace files (clean_cwd=false)."""
+        existing_files = {"run.sh": 'echo "Hello"'}
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            EXISTING_DIR_PIPELINE,
+            EXISTING_DIR_CONFIG,
+            existing_files=existing_files,
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp4e90ebcq/pipeline.pipe', '--workspace', '/tmp/tmp4e90ebcq/working', '--output', '/tmp/tmp4e90ebcq/output', '--config', '/tmp/tmp4e90ebcq/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:980: AssertionError
+_____________________________ test_arithmetic_ops ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_arithmetic_ops(entrypoint_argv):
+        """Functionality: Integer arithmetic operations in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARITHMETIC_OPS_PIPELINE, ARITHMETIC_OPS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpifgzlj1o/pipeline.pipe', '--workspace', '/tmp/tmpifgzlj1o/working', '--output', '/tmp/tmpifgzlj1o/output', '--config', '/tmp/tmpifgzlj1o/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1038: AssertionError
+_____________________________ test_exists_function _____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_exists_function(entrypoint_argv):
+        """Functionality: exists() and !exists() functions in success checks."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, EXISTS_FUNCTION_PIPELINE, EXISTS_FUNCTION_CONFIG
+        )
+    
+        # This test expects exit code 1 because CheckMultiple fails
+        # (nested file doesn't exist when CheckMultiple runs)
+>       assert result.returncode == 1, f"Expected exit 1, got {result.returncode}"
+E       AssertionError: Expected exit 1, got 2
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpaxc6pdx7/pipeline.pipe', '--workspace', '/tmp/tmpaxc6pdx7/working', '--output', '/tmp/tmpaxc6pdx7/output', '--config', '/tmp/tmpaxc6pdx7/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1103: AssertionError
+______________________________ test_float_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_float_params(entrypoint_argv):
+        """Functionality: Float parameters and Python integration."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FLOAT_PARAMS_PIPELINE, FLOAT_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpwe9tboo6/pipeline.pipe', '--workspace', '/tmp/tmpwe9tboo6/working', '--output', '/tmp/tmpwe9tboo6/output', '--config', '/tmp/tmpwe9tboo6/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1152: AssertionError
+______________________________ test_nested_loops _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_nested_loops(entrypoint_argv):
+        """Functionality: Nested loops with break statements."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, NESTED_LOOPS_PIPELINE, NESTED_LOOPS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8gy1g45k/pipeline.pipe', '--workspace', '/tmp/tmp8gy1g45k/working', '--output', '/tmp/tmp8gy1g45k/output', '--config', '/tmp/tmp8gy1g45k/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1211: AssertionError
+____________________________ test_stderr_validation ____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_stderr_validation(entrypoint_argv):
+        """Functionality: stderr contains() and equals() validation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STDERR_VALIDATION_PIPELINE, STDERR_VALIDATION_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp39727_5/pipeline.pipe', '--workspace', '/tmp/tmpp39727_5/working', '--output', '/tmp/tmpp39727_5/output', '--config', '/tmp/tmpp39727_5/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1271: AssertionError
+______________________________ test_string_params ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_string_params(entrypoint_argv):
+        """Functionality: String parameter interpolation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_PARAMS_PIPELINE, STRING_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp4o682ek_/pipeline.pipe', '--workspace', '/tmp/tmp4o682ek_/working', '--output', '/tmp/tmp4o682ek_/output', '--config', '/tmp/tmp4o682ek_/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1327: AssertionError
+_________________________________ test_timeout _________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_timeout(entrypoint_argv):
+        """Functionality: Task timeout handling with exit code 124."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TIMEOUT_TEST_PIPELINE, TIMEOUT_TEST_CONFIG, timeout=30
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpkvophzz3/pipeline.pipe', '--workspace', '/tmp/tmpkvophzz3/working', '--output', '/tmp/tmpkvophzz3/output', '--config', '/tmp/tmpkvophzz3/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1392: AssertionError
+___________________________ test_circular_dependency ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_circular_dependency(entrypoint_argv):
+        """Error: Circular dependency detection (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        run: {
+            echo "A"
+        }
+        requires {
+            B()
+        }
+    }
+    
+    task B {
+        run: {
+            echo "B"
+        }
+        requires {
+            C()
+        }
+    }
+    task C {
+        run: {
+            echo "C"
+        }
+        requires: {
+            A()
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            C()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8by48uia/pipeline.pipe', '--workspace', '/tmp/tmp8by48uia/working', '--output', '/tmp/tmp8by48uia/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1458: AssertionError
+___________________________ test_default_param_order ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_default_param_order(entrypoint_argv):
+        """Error: Default param before required param (exit 2, SYNTAX_ERROR)."""
+        pipeline = '''task A {
+        params: {
+            x: int = 1
+            y: int
+        }
+        run: {
+            echo "A"
+        }
+    }
+    
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            A()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+        assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+>       assert re.search(r"SYNTAX_ERROR:.*", result.stderr), f"Expected SYNTAX_ERROR in stderr: {result.stderr}"
+E       AssertionError: Expected SYNTAX_ERROR in stderr: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert None
+E        +  where None = <function search at 0x78c07620bb00>('SYNTAX_ERROR:.*', 'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n')
+E        +    where <function search at 0x78c07620bb00> = re.search
+E        +    and   'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpn_ah4umd/pipeline.pipe', '--workspace', '/tmp/tmpn_ah4umd/working', '--output', '/tmp/tmpn_ah4umd/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+
+.evaluation_tests/test_checkpoint_1.py:1488: AssertionError
+__________________________ test_missing_required_arg ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_missing_required_arg(entrypoint_argv):
+        """Error: Missing required argument (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        params: {
+            x: int
+            y: int = 1
+        }
+        run: {
+            echo "A"
+        }
+    }
+    
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            A(y=2)
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpo7_gmhwk/pipeline.pipe', '--workspace', '/tmp/tmpo7_gmhwk/working', '--output', '/tmp/tmpo7_gmhwk/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1516: AssertionError
+_______________________ test_multiline_success_no_return _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_multiline_success_no_return(entrypoint_argv):
+        """Error: Multiline success block without return (exit 2, SYNTAX_ERROR)."""
+        pipeline = '''task ProcessItem {
+        params: {
+            item: string
+            index: int
+        }
+        run: {
+            echo "Item ${params.index}: ${params.item}" >> ${workspace}/items.txt
+        }
+    }
+    
+    task main {
+        params: {
+            items: list[string] = ["apple", "banana", "cherry", "date"];
+        }
+        run: {
+            cat items.txt
+        }
+        requires: {
+            for (int i = 0; i < len(${params.items}); i++) {
+                ProcessItem(${params.items}[i], i);
+            }
+        }
+        success: {
+            check_items: {
+                for (int i = 0; i < len(${params.items}); i++) {
+                    if (!contains("${workspace}/items.txt", ${params.items}[i])) {
+                        FALSE;
+                    }
+                }
+            }
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+        assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+>       assert re.search(r"SYNTAX_ERROR:.*", result.stderr), f"Expected SYNTAX_ERROR in stderr: {result.stderr}"
+E       AssertionError: Expected SYNTAX_ERROR in stderr: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert None
+E        +  where None = <function search at 0x78c07620bb00>('SYNTAX_ERROR:.*', 'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n')
+E        +    where <function search at 0x78c07620bb00> = re.search
+E        +    and   'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp9qhifpes/pipeline.pipe', '--workspace', '/tmp/tmp9qhifpes/working', '--output', '/tmp/tmp9qhifpes/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+
+.evaluation_tests/test_checkpoint_1.py:1559: AssertionError
+_________________________________ test_no_main _________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_no_main(entrypoint_argv):
+        """Error: Pipeline without main task (exit 3, INVALID_PIPE)."""
+        pipeline = '''task Task {
+        run {
+            echo "I should not run"
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmptgycezci/pipeline.pipe', '--workspace', '/tmp/tmptgycezci/working', '--output', '/tmp/tmptgycezci/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1573: AssertionError
+_____________________________ test_recursive_call ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_recursive_call(entrypoint_argv):
+        """Error: Recursive task call (exit 3, INVALID_PIPE)."""
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            main()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpmhyqr0cd/pipeline.pipe', '--workspace', '/tmp/tmpmhyqr0cd/working', '--output', '/tmp/tmpmhyqr0cd/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1591: AssertionError
+_______________________ test_edge_entry_call_with_params _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_entry_call_with_params(entrypoint_argv):
+        """Edge case: entry can be a task invocation with params.
+    
+        Spec says: "entry=<task invocation ... can be just its name `A` or a call
+        with params `A(1, x=2)`"
+        """
+        pipeline = '''task Start {
+        params: {
+            x: int
+            y: int
+        }
+        run: {
+            echo "${params.x}_${params.y}"
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Ignored"
+        }
+    }'''
+        config = '''entry = "Start(1, y=2)"
+    clean_cwd = true'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1ufktxba/pipeline.pipe', '--workspace', '/tmp/tmp1ufktxba/working', '--output', '/tmp/tmp1ufktxba/output', '--config', '/tmp/tmp1ufktxba/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1624: AssertionError
+______________________ test_edge_clean_cwd_default_false _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_clean_cwd_default_false(entrypoint_argv):
+        """Edge case: clean_cwd defaults to false when omitted.
+    
+        Spec says: "clean_cwd = <bool ... Default false.>"
+        """
+        pipeline = '''task main {
+        run: {
+            cat existing.txt
+        }
+    }'''
+        existing_files = {"existing.txt": "hello"}
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            pipeline,
+            existing_files=existing_files,
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpsfc2_rzk/pipeline.pipe', '--workspace', '/tmp/tmpsfc2_rzk/working', '--output', '/tmp/tmpsfc2_rzk/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1650: AssertionError
+_____________________ test_edge_env_default_type_cast_bool _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_env_default_type_cast_bool(entrypoint_argv):
+        """Edge case: env default values are dynamically type cast (bool).
+    
+        Spec says: "Environment variables can be used as default values ... dynamic
+        type casting ... (i.e. 1 would convert to a bool of TRUE)"
+        """
+        pipeline = '''task CheckFlag {
+        params: {
+            flag: bool = $FLAG
+        }
+        run: {
+            echo "${params.flag}"
+        }
+    }
+    
+    task main {
+        requires: {
+            CheckFlag()
+        }
+    }'''
+        config = '''clean_cwd = true
+    [env]
+    FLAG = "1"'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp4wka8fdl/pipeline.pipe', '--workspace', '/tmp/tmp4wka8fdl/working', '--output', '/tmp/tmp4wka8fdl/output', '--config', '/tmp/tmp4wka8fdl/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1685: AssertionError
+_______________________ test_edge_requires_failure_stops _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_requires_failure_stops(entrypoint_argv):
+        """Edge case: requires stops on failure and task fails.
+    
+        Spec says: "If one requires fails ... we stop executing and the task fails."
+        """
+        pipeline = '''task FailTask {
+        run: {
+            exit 1
+        }
+    }
+    
+    task AfterTask {
+        run: {
+            echo "should not run"
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Finished."
+        }
+        requires: {
+            FailTask();
+            AfterTask();
+        }
+    }'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 1, f"Expected exit 1, got {result.returncode}"
+E       AssertionError: Expected exit 1, got 2
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_yfw5fm9/pipeline.pipe', '--workspace', '/tmp/tmp_yfw5fm9/working', '--output', '/tmp/tmp_yfw5fm9/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1722: AssertionError
+_____________________ test_edge_type_mismatch_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_type_mismatch_invalid_pipe(entrypoint_argv):
+        """Edge case: type mismatch should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... type mismatch"
+        """
+        pipeline = '''task A {
+        params: {
+            x: int
+        }
+        run: {
+            echo "${params.x}"
+        }
+    }
+    
+    task main {
+        requires: {
+            A("not-int");
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpaubtck87/pipeline.pipe', '--workspace', '/tmp/tmpaubtck87/working', '--output', '/tmp/tmpaubtck87/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1752: AssertionError
+____________________ test_edge_undefined_task_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_undefined_task_invalid_pipe(entrypoint_argv):
+        """Edge case: undefined task call should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... undefined tasks"
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            MissingTask();
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpqskwqtqj/pipeline.pipe', '--workspace', '/tmp/tmpqskwqtqj/working', '--output', '/tmp/tmpqskwqtqj/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1772: AssertionError
+__________________________ test_edge_bad_toml_syntax ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_bad_toml_syntax(entrypoint_argv):
+        """Edge case: bad TOML config should be SYNTAX_ERROR.
+    
+        Spec says: "Exit 2: SYNTAX_ERROR:<msg> ... bad TOML/.pipe syntax"
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+    }'''
+        config = "entry = ["
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline, config)
+    
+        assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+>       assert re.search(r"SYNTAX_ERROR:.*", result.stderr), f"Expected SYNTAX_ERROR in stderr: {result.stderr}"
+E       AssertionError: Expected SYNTAX_ERROR in stderr: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert None
+E        +  where None = <function search at 0x78c07620bb00>('SYNTAX_ERROR:.*', 'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n')
+E        +    where <function search at 0x78c07620bb00> = re.search
+E        +    and   'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpecddlfz8/pipeline.pipe', '--workspace', '/tmp/tmpecddlfz8/working', '--output', '/tmp/tmpecddlfz8/output', '--config', '/tmp/tmpecddlfz8/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+
+.evaluation_tests/test_checkpoint_1.py:1791: AssertionError
+________________________ test_edge_empty_success_block _________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_empty_success_block(entrypoint_argv):
+        """Edge case: empty success block is allowed.
+    
+        Spec says: "Success can be empty."
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        success: {
+        }
+    }'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpwhcqts4f/pipeline.pipe', '--workspace', '/tmp/tmpwhcqts4f/working', '--output', '/tmp/tmpwhcqts4f/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1809: AssertionError
+_______________________________ test_basic_cache _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic_cache(entrypoint_argv):
+        """Core: Basic cache hit/miss - same params should cache."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_CACHE_PIPELINE, BASIC_CACHE_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpr6_040eb/pipeline.pipe', '--workspace', '/tmp/tmpr6_040eb/working', '--output', '/tmp/tmpr6_040eb/output', '--config', '/tmp/tmpr6_040eb/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:192: AssertionError
+_______________________________ test_file_change _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_file_change(entrypoint_argv):
+        """Core: Content-based cache - different files should have different cache keys."""
+        # Create existing input files
+        existing_files = {
+            "file1": "this is file 1",
+            "file2": "this is file 2 with different content",
+        }
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv, FILE_CHANGE_PIPELINE, FILE_CHANGE_CONFIG,
+            existing_files=existing_files
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpvjoz6mp9/pipeline.pipe', '--workspace', '/tmp/tmpvjoz6mp9/working', '--output', '/tmp/tmpvjoz6mp9/output', '--config', '/tmp/tmpvjoz6mp9/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:284: AssertionError
+______________________________ test_cache_exclude ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_cache_exclude(entrypoint_argv):
+        """Core: Excluded params don't affect cache key."""
+        # Create input file
+        existing_files = {
+            "data/sales.csv": "id,value\n1,100\n2,200\n",
+        }
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv, CACHE_EXCLUDE_PIPELINE, CACHE_EXCLUDE_CONFIG,
+            existing_files=existing_files
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpljs_j23e/pipeline.pipe', '--workspace', '/tmp/tmpljs_j23e/working', '--output', '/tmp/tmpljs_j23e/output', '--config', '/tmp/tmpljs_j23e/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:383: AssertionError
+______________________________ test_ttl_strategy _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_ttl_strategy(entrypoint_argv):
+        """Core: Stale strategy with TTL - cache expires after TTL."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TTL_STRATEGY_PIPELINE, TTL_STRATEGY_CONFIG,
+            timeout=30
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmph81suprp/pipeline.pipe', '--workspace', '/tmp/tmph81suprp/working', '--output', '/tmp/tmph81suprp/output', '--config', '/tmp/tmph81suprp/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:529: AssertionError
+__________________________ test_cascade_invalidation ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_cascade_invalidation(entrypoint_argv):
+        """Core: Cascade invalidation - upstream change invalidates downstream caches."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, CASCADE_INVALIDATION_PIPELINE, CASCADE_INVALIDATION_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpfm6gxldp/pipeline.pipe', '--workspace', '/tmp/tmpfm6gxldp/working', '--output', '/tmp/tmpfm6gxldp/output', '--config', '/tmp/tmpfm6gxldp/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:655: AssertionError
+__________________________ test_global_cache_disabled __________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_global_cache_disabled(entrypoint_argv):
+        """Edge case: Global cache disable ignores task cache settings."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, CACHE_DISABLED_PIPELINE, CACHE_DISABLED_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_as2wy7r/pipeline.pipe', '--workspace', '/tmp/tmp_as2wy7r/working', '--output', '/tmp/tmp_as2wy7r/output', '--config', '/tmp/tmp_as2wy7r/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:729: AssertionError
+________________________ test_force_refresh_skips_cache ________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_force_refresh_skips_cache(entrypoint_argv):
+        """Edge case: force_refresh treats the task as not cacheable."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FORCE_REFRESH_PIPELINE, FORCE_REFRESH_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp78ep0wkn/pipeline.pipe', '--workspace', '/tmp/tmp78ep0wkn/working', '--output', '/tmp/tmp78ep0wkn/output', '--config', '/tmp/tmp78ep0wkn/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:789: AssertionError
+__________________ test_always_strategy_ignores_input_change ___________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_always_strategy_ignores_input_change(entrypoint_argv):
+        """Edge case: Always strategy uses cache even when inputs change."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ALWAYS_STRATEGY_PIPELINE, ALWAYS_STRATEGY_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpdn3765ub/pipeline.pipe', '--workspace', '/tmp/tmpdn3765ub/working', '--output', '/tmp/tmpdn3765ub/output', '--config', '/tmp/tmpdn3765ub/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:862: AssertionError
+___________________________ test_ttl_override_basic ____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_ttl_override_basic(entrypoint_argv):
+        """Core: TTL override via CachedTask(ttl.seconds=10) - partial override preserves defaults."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TTL_OVERRIDE_BASIC_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp99folcrs/pipeline.pipe', '--workspace', '/tmp/tmp99folcrs/working', '--output', '/tmp/tmp99folcrs/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:175: AssertionError
+____________________________ test_strategy_override ____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_strategy_override(entrypoint_argv):
+        """Core: Strategy override via CachedTask(strategy="always")."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRATEGY_OVERRIDE_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmppekchwlu/pipeline.pipe', '--workspace', '/tmp/tmppekchwlu/working', '--output', '/tmp/tmppekchwlu/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:239: AssertionError
+_________________________ test_full_object_replacement _________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_full_object_replacement(entrypoint_argv):
+        """Core: Full object replacement ttl={seconds:2} vs partial ttl.hours=1."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FULL_OBJECT_REPLACEMENT_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpaja6d3_l/pipeline.pipe', '--workspace', '/tmp/tmpaja6d3_l/working', '--output', '/tmp/tmpaja6d3_l/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:324: AssertionError
+______________________________ test_noop_override ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_noop_override(entrypoint_argv):
+        """Functionality: No-op override with same values should cache correctly."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, NOOP_OVERRIDE_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp49_6b808/pipeline.pipe', '--workspace', '/tmp/tmp49_6b808/working', '--output', '/tmp/tmp49_6b808/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:401: AssertionError
+_________________________ test_disable_cache_override __________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_disable_cache_override(entrypoint_argv):
+        """Functionality: Disable cache via CachedTask(enabled=false)."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, DISABLE_CACHE_OVERRIDE_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpk7vx7cvj/pipeline.pipe', '--workspace', '/tmp/tmpk7vx7cvj/working', '--output', '/tmp/tmpk7vx7cvj/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:464: AssertionError
+___________________ test_partial_override_preserves_defaults ___________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_partial_override_preserves_defaults(entrypoint_argv):
+        """Functionality: Partial override preserves non-overridden fields."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, PARTIAL_OVERRIDE_PRESERVES_DEFAULTS_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6ppvcfm_/pipeline.pipe', '--workspace', '/tmp/tmp6ppvcfm_/working', '--output', '/tmp/tmp6ppvcfm_/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:537: AssertionError
+______________________ test_multiple_overrides_same_task _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_multiple_overrides_same_task(entrypoint_argv):
+        """Functionality: Multiple different cached variants of same task."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, MULTIPLE_OVERRIDES_SAME_TASK_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6wh_9zf_/pipeline.pipe', '--workspace', '/tmp/tmp6wh_9zf_/working', '--output', '/tmp/tmp6wh_9zf_/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:620: AssertionError
+_________________________ test_multiple_param_override _________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_multiple_param_override(entrypoint_argv):
+        """Functionality: Override both strategy and TTL in same invocation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, MULTIPLE_PARAM_OVERRIDE_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6fbieuxs/pipeline.pipe', '--workspace', '/tmp/tmp6fbieuxs/working', '--output', '/tmp/tmp6fbieuxs/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:686: AssertionError
+____________________ test_ttl_object_replacement_drops_base ____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_ttl_object_replacement_drops_base(entrypoint_argv):
+        """Functionality: ttl={...} replaces base TTL fields."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TTL_OBJECT_REPLACEMENT_PIPELINE
+        )
+    
+>       assert result.returncode == 0, (
+            "Expected exit 0, got "
+            f"{result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpai_oa3hn/pipeline.pipe', '--workspace', '/tmp/tmpai_oa3hn/working', '--output', '/tmp/tmpai_oa3hn/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:750: AssertionError
+____________________ test_invalid_cached_param_cache_error _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_invalid_cached_param_cache_error(entrypoint_argv):
+        """Functionality: Invalid CachedTask parameters should cause CACHE_ERROR."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, INVALID_TTL_FIELD_PIPELINE
+        )
+    
+>       assert result.returncode == 5, (
+            "Expected CACHE_ERROR exit code 5, "
+            f"got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected CACHE_ERROR exit code 5, got 2: error: Failed to spawn: `launch.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 5
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp9ti1r3a2/pipeline.pipe', '--workspace', '/tmp/tmp9ti1r3a2/working', '--output', '/tmp/tmp9ti1r3a2/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:804: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_basic - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmppgoqal7i/pipeline.pipe', '--workspace', '/tmp/tmppgoqal7i/working', '--output', '/tmp/tmppgoqal7i/output', '--config', '/tmp/tmppgoqal7i/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arrays - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6ql9ii0c/pipeline.pipe', '--workspace', '/tmp/tmp6ql9ii0c/working', '--output', '/tmp/tmp6ql9ii0c/output', '--config', '/tmp/tmp6ql9ii0c/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_bool_params - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmptjp6ypi4/pipeline.pipe', '--workspace', '/tmp/tmptjp6ypi4/working', '--output', '/tmp/tmptjp6ypi4/output', '--config', '/tmp/tmptjp6ypi4/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_concat - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjrqqmigc/pipeline.pipe', '--workspace', '/tmp/tmpjrqqmigc/working', '--output', '/tmp/tmpjrqqmigc/output', '--config', '/tmp/tmpjrqqmigc/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_if - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpl72xx24h/pipeline.pipe', '--workspace', '/tmp/tmpl72xx24h/working', '--output', '/tmp/tmpl72xx24h/output', '--config', '/tmp/tmpl72xx24h/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_elif - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6qg3anw6/pipeline.pipe', '--workspace', '/tmp/tmp6qg3anw6/working', '--output', '/tmp/tmp6qg3anw6/output', '--config', '/tmp/tmp6qg3anw6/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_else - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpqjtg4y7t/pipeline.pipe', '--workspace', '/tmp/tmpqjtg4y7t/working', '--output', '/tmp/tmpqjtg4y7t/output', '--config', '/tmp/tmpqjtg4y7t/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_array_indexing - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpryri82zg/pipeline.pipe', '--workspace', '/tmp/tmpryri82zg/working', '--output', '/tmp/tmpryri82zg/output', '--config', '/tmp/tmpryri82zg/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_for_requires - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpudd7hv0k/pipeline.pipe', '--workspace', '/tmp/tmpudd7hv0k/working', '--output', '/tmp/tmpudd7hv0k/output', '--config', '/tmp/tmpudd7hv0k/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_while_requires - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpmduolqgw/pipeline.pipe', '--workspace', '/tmp/tmpmduolqgw/working', '--output', '/tmp/tmpmduolqgw/output', '--config', '/tmp/tmpmduolqgw/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_working_dirs - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpcmagegml/pipeline.pipe', '--workspace', '/tmp/tmpcmagegml/working', '--output', '/tmp/tmpcmagegml/output', '--config', '/tmp/tmpcmagegml/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_existing_dir - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp4e90ebcq/pipeline.pipe', '--workspace', '/tmp/tmp4e90ebcq/working', '--output', '/tmp/tmp4e90ebcq/output', '--config', '/tmp/tmp4e90ebcq/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpifgzlj1o/pipeline.pipe', '--workspace', '/tmp/tmpifgzlj1o/working', '--output', '/tmp/tmpifgzlj1o/output', '--config', '/tmp/tmpifgzlj1o/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_exists_function - AssertionError: Expected exit 1, got 2
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpaxc6pdx7/pipeline.pipe', '--workspace', '/tmp/tmpaxc6pdx7/working', '--output', '/tmp/tmpaxc6pdx7/output', '--config', '/tmp/tmpaxc6pdx7/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_float_params - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpwe9tboo6/pipeline.pipe', '--workspace', '/tmp/tmpwe9tboo6/working', '--output', '/tmp/tmpwe9tboo6/output', '--config', '/tmp/tmpwe9tboo6/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_nested_loops - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8gy1g45k/pipeline.pipe', '--workspace', '/tmp/tmp8gy1g45k/working', '--output', '/tmp/tmp8gy1g45k/output', '--config', '/tmp/tmp8gy1g45k/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_stderr_validation - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp39727_5/pipeline.pipe', '--workspace', '/tmp/tmpp39727_5/working', '--output', '/tmp/tmpp39727_5/output', '--config', '/tmp/tmpp39727_5/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_params - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp4o682ek_/pipeline.pipe', '--workspace', '/tmp/tmp4o682ek_/working', '--output', '/tmp/tmp4o682ek_/output', '--config', '/tmp/tmp4o682ek_/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_timeout - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpkvophzz3/pipeline.pipe', '--workspace', '/tmp/tmpkvophzz3/working', '--output', '/tmp/tmpkvophzz3/output', '--config', '/tmp/tmpkvophzz3/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_circular_dependency - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8by48uia/pipeline.pipe', '--workspace', '/tmp/tmp8by48uia/working', '--output', '/tmp/tmp8by48uia/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_default_param_order - AssertionError: Expected SYNTAX_ERROR in stderr: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert None
+ +  where None = <function search at 0x78c07620bb00>('SYNTAX_ERROR:.*', 'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n')
+ +    where <function search at 0x78c07620bb00> = re.search
+ +    and   'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpn_ah4umd/pipeline.pipe', '--workspace', '/tmp/tmpn_ah4umd/working', '--output', '/tmp/tmpn_ah4umd/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+FAILED .evaluation_tests/test_checkpoint_1.py::test_missing_required_arg - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpo7_gmhwk/pipeline.pipe', '--workspace', '/tmp/tmpo7_gmhwk/working', '--output', '/tmp/tmpo7_gmhwk/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_multiline_success_no_return - AssertionError: Expected SYNTAX_ERROR in stderr: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert None
+ +  where None = <function search at 0x78c07620bb00>('SYNTAX_ERROR:.*', 'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n')
+ +    where <function search at 0x78c07620bb00> = re.search
+ +    and   'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp9qhifpes/pipeline.pipe', '--workspace', '/tmp/tmp9qhifpes/working', '--output', '/tmp/tmp9qhifpes/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+FAILED .evaluation_tests/test_checkpoint_1.py::test_no_main - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmptgycezci/pipeline.pipe', '--workspace', '/tmp/tmptgycezci/working', '--output', '/tmp/tmptgycezci/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recursive_call - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpmhyqr0cd/pipeline.pipe', '--workspace', '/tmp/tmpmhyqr0cd/working', '--output', '/tmp/tmpmhyqr0cd/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1ufktxba/pipeline.pipe', '--workspace', '/tmp/tmp1ufktxba/working', '--output', '/tmp/tmp1ufktxba/output', '--config', '/tmp/tmp1ufktxba/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpsfc2_rzk/pipeline.pipe', '--workspace', '/tmp/tmpsfc2_rzk/working', '--output', '/tmp/tmpsfc2_rzk/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp4wka8fdl/pipeline.pipe', '--workspace', '/tmp/tmp4wka8fdl/working', '--output', '/tmp/tmp4wka8fdl/output', '--config', '/tmp/tmp4wka8fdl/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_requires_failure_stops - AssertionError: Expected exit 1, got 2
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_yfw5fm9/pipeline.pipe', '--workspace', '/tmp/tmp_yfw5fm9/working', '--output', '/tmp/tmp_yfw5fm9/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpaubtck87/pipeline.pipe', '--workspace', '/tmp/tmpaubtck87/working', '--output', '/tmp/tmpaubtck87/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpqskwqtqj/pipeline.pipe', '--workspace', '/tmp/tmpqskwqtqj/working', '--output', '/tmp/tmpqskwqtqj/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_bad_toml_syntax - AssertionError: Expected SYNTAX_ERROR in stderr: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert None
+ +  where None = <function search at 0x78c07620bb00>('SYNTAX_ERROR:.*', 'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n')
+ +    where <function search at 0x78c07620bb00> = re.search
+ +    and   'error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpecddlfz8/pipeline.pipe', '--workspace', '/tmp/tmpecddlfz8/working', '--output', '/tmp/tmpecddlfz8/output', '--config', '/tmp/tmpecddlfz8/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block - AssertionError: Expected exit 0: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpwhcqts4f/pipeline.pipe', '--workspace', '/tmp/tmpwhcqts4f/working', '--output', '/tmp/tmpwhcqts4f/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_basic_cache - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpr6_040eb/pipeline.pipe', '--workspace', '/tmp/tmpr6_040eb/working', '--output', '/tmp/tmpr6_040eb/output', '--config', '/tmp/tmpr6_040eb/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_file_change - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpvjoz6mp9/pipeline.pipe', '--workspace', '/tmp/tmpvjoz6mp9/working', '--output', '/tmp/tmpvjoz6mp9/output', '--config', '/tmp/tmpvjoz6mp9/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_cache_exclude - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpljs_j23e/pipeline.pipe', '--workspace', '/tmp/tmpljs_j23e/working', '--output', '/tmp/tmpljs_j23e/output', '--config', '/tmp/tmpljs_j23e/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_ttl_strategy - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmph81suprp/pipeline.pipe', '--workspace', '/tmp/tmph81suprp/working', '--output', '/tmp/tmph81suprp/output', '--config', '/tmp/tmph81suprp/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_cascade_invalidation - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpfm6gxldp/pipeline.pipe', '--workspace', '/tmp/tmpfm6gxldp/working', '--output', '/tmp/tmpfm6gxldp/output', '--config', '/tmp/tmpfm6gxldp/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_global_cache_disabled - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_as2wy7r/pipeline.pipe', '--workspace', '/tmp/tmp_as2wy7r/working', '--output', '/tmp/tmp_as2wy7r/output', '--config', '/tmp/tmp_as2wy7r/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_force_refresh_skips_cache - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp78ep0wkn/pipeline.pipe', '--workspace', '/tmp/tmp78ep0wkn/working', '--output', '/tmp/tmp78ep0wkn/output', '--config', '/tmp/tmp78ep0wkn/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_always_strategy_ignores_input_change - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpdn3765ub/pipeline.pipe', '--workspace', '/tmp/tmpdn3765ub/working', '--output', '/tmp/tmpdn3765ub/output', '--config', '/tmp/tmpdn3765ub/config.toml'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_ttl_override_basic - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp99folcrs/pipeline.pipe', '--workspace', '/tmp/tmp99folcrs/working', '--output', '/tmp/tmp99folcrs/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_strategy_override - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmppekchwlu/pipeline.pipe', '--workspace', '/tmp/tmppekchwlu/working', '--output', '/tmp/tmppekchwlu/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_full_object_replacement - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpaja6d3_l/pipeline.pipe', '--workspace', '/tmp/tmpaja6d3_l/working', '--output', '/tmp/tmpaja6d3_l/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_noop_override - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp49_6b808/pipeline.pipe', '--workspace', '/tmp/tmp49_6b808/working', '--output', '/tmp/tmp49_6b808/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_disable_cache_override - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpk7vx7cvj/pipeline.pipe', '--workspace', '/tmp/tmpk7vx7cvj/working', '--output', '/tmp/tmpk7vx7cvj/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_partial_override_preserves_defaults - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6ppvcfm_/pipeline.pipe', '--workspace', '/tmp/tmp6ppvcfm_/working', '--output', '/tmp/tmp6ppvcfm_/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_multiple_overrides_same_task - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6wh_9zf_/pipeline.pipe', '--workspace', '/tmp/tmp6wh_9zf_/working', '--output', '/tmp/tmp6wh_9zf_/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_multiple_param_override - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6fbieuxs/pipeline.pipe', '--workspace', '/tmp/tmp6fbieuxs/working', '--output', '/tmp/tmp6fbieuxs/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_ttl_object_replacement_drops_base - AssertionError: Expected exit 0, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpai_oa3hn/pipeline.pipe', '--workspace', '/tmp/tmpai_oa3hn/working', '--output', '/tmp/tmpai_oa3hn/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_invalid_cached_param_cache_error - AssertionError: Expected CACHE_ERROR exit code 5, got 2: error: Failed to spawn: `launch.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 5
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp9ti1r3a2/pipeline.pipe', '--workspace', '/tmp/tmp9ti1r3a2/working', '--output', '/tmp/tmp9ti1r3a2/output'], returncode=2, stdout='', stderr='error: Failed to spawn: `launch.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+============================== 51 failed in 1.50s ==============================

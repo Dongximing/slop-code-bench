@@ -1,0 +1,136 @@
+agent_dir: agent
+agent_tar: agent.tar.gz
+agent_type: claude_code
+agent_version: 2.0.51
+checkpoint_file: checkpoint.yaml
+compress_artifacts: false
+debug: false
+environment_file: environment.yaml
+image: slop-code:claude_code-2.0.51-python3.12
+inference_result_file: inference_result.json
+model_name: pangu
+pass_policy: any
+post_checkpoint_skill:
+  eval_after: true
+  prompt: "You will improve the code quality of the solution files in /workspace root.\n\
+    Do NOT touch files under /workspace/files/, /workspace/tests/, /workspace/venv/,\
+    \ or any subdirectories.\nDo NOT touch requirements.txt.\n\nFollow these 3 phases\
+    \ IN ORDER. Do not skip any phase.\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nPHASE 1: AUDIT\n\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\n\nRun `ls /workspace/*.py` to identify solution files.\n\
+    Read each file end-to-end. For each file, produce a numbered list of findings.\n\
+    \nLook for these categories (in priority order):\n\nA. DEAD CODE\n   - Unused\
+    \ imports\n   - Unused variables or assignments\n   - Unreachable branches (code\
+    \ after return/raise/sys.exit)\n   - Functions/methods that are defined but never\
+    \ called from anywhere\n\nB. COMMENT SLOP\n   - Comments that restate what the\
+    \ next line does\n   - Multi-line docstrings that add nothing beyond the function\
+    \ name\n   - Commented-out code blocks\n\nC. STYLE SIMPLIFICATIONS\n   - range(len(x))\
+    \ -> enumerate(x)\n   - if cond: return True / else: return False -> return cond\n\
+    \   - elif/else immediately after return/raise/continue/break\n   - x = foo();\
+    \ y = bar(x) where x is used once -> y = bar(foo())\n   - Bare except: -> except\
+    \ Exception:\n   - Inline imports that belong at top of file\n\nD. DUPLICATION\n\
+    \   - Three or more nearly identical code blocks\n   - Copy-pasted validation/parsing\
+    \ logic\n\nE. STRUCTURAL (review only, be very cautious)\n   - Long condition\
+    \ chains that could be a dict dispatch\n   - Functions over 80 lines with clear\
+    \ separation points\n\nFor each finding, note file, line number(s), category,\
+    \ and what you would change.\n\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\nPHASE 2: SAFETY CHECK\n\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\n\nReview your findings list. For EACH one, answer:\n\
+    \"Can this change produce different output for ANY input?\"\n\nDROP any finding\
+    \ where:\n- You are merging two functions that might have different behavior\n\
+    - You are removing a check/validation that might matter for edge cases\n- You\
+    \ are changing error messages, exit codes, return values, or output format\n-\
+    \ You are changing the order of operations that could affect output\n- You are\
+    \ changing default parameter values or function signatures\n- You are changing\
+    \ data structures (dict to list, class to tuple, etc.)\n- You are not 100% certain\
+    \ the change is safe\n- The finding is category E and not trivially safe\n\nMark\
+    \ each finding as APPROVED or DROPPED with a one-line reason.\n\n\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\nPHASE 3: APPLY\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\
+    \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\nApply ONLY the APPROVED changes.\
+    \ One edit at a time.\n\nAfter completing all edits for a file:\n1. Re-read the\
+    \ file to verify it still makes sense\n2. If the file has a main block, run a\
+    \ quick sanity check\n\nRules:\n- If an edit fails or looks wrong, revert it immediately\n\
+    - If you have applied more than 30 edits to a single file, STOP\n\nA missed cleanup\
+    \ opportunity is acceptable. A broken test is not.\nWhen in doubt, skip it.\n"
+  run_on: all
+problem_file: problem.yaml
+prompt_file: prompt.txt
+run_info_file: run_info.yaml
+seed: 42
+skip_evaluation: false
+snapshot_dir: snapshot
+summary:
+  checkpoints:
+    checkpoint_1: ran
+    checkpoint_2: ran
+    checkpoint_3: ran
+    checkpoint_4: error
+    checkpoint_5: skipped
+  duration_seconds: 10866.622614
+  ended: '2026-06-02T09:37:59.026629'
+  error_message: "Traceback (most recent call last):\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agent.py\"\
+    , line 413, in run_checkpoint\n    self.retry()\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agents/claude_code/agent.py\"\
+    , line 826, in retry\n    raise AgentError(message)\nslop_code.agent_runner.models.AgentError:\
+    \ Claude Code retry process had an error\n"
+  error_traceback: "Traceback (most recent call last):\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agent.py\"\
+    , line 413, in run_checkpoint\n    self.retry()\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agents/claude_code/agent.py\"\
+    , line 826, in retry\n    raise AgentError(message)\nslop_code.agent_runner.models.AgentError:\
+    \ Claude Code retry process had an error\n"
+  error_type: AgentRunnerError
+  passed_policy: false
+  started: '2026-06-02T06:36:52.404015'
+  state: error
+  total_cost: 2.143008
+  total_steps: 5
+  total_usage:
+    cost: 2.143008
+    current_tokens:
+      cache_read: 0
+      cache_write: 0
+      input: 642506
+      output: 14366
+      reasoning: 0
+    net_tokens:
+      cache_read: 0
+      cache_write: 0
+      input: 642506
+      output: 14366
+      reasoning: 0
+    steps: 5
+template: 'Implement a program that 100% solves the specification. That is all you
+  need to do.
+
+  {% if not is_continuation -%}
+
+  Use a virtual environment and ensure that a `requirements.txt` is present with any
+  dependencies you need to solve the problem.
+
+  {% else -%}
+
+  Keep using the same virtual environment you started with, update `requirements.txt`
+  with any new dependencies you need.
+
+  {% endif -%}
+
+
+  Your task is:
+
+  {{ spec.strip() }}
+
+  '
+verbose: false

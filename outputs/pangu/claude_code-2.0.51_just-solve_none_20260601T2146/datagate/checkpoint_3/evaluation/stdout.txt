@@ -1,0 +1,637 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/qcppN6xYSphwQzbz/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 174 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_convert_bad_params[missing-source] PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_convert_bad_params[invalid-url] PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unreachable_source PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_non_tabular_payload PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_success_returns_id PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_single_column_csv PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_query_envelope PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_order_preserved PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_default_limit_100 PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_charset_latin1 PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_autodetect_latin1 PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_upstream_500_to_404 PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_decimals_as_numbers PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_semicolon_delimiter PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_time_values_as_text PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unknown_route_404 PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_relative_endpoint PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[,] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[;] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[\t] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[name,emoji-alice,smile\nbob,wave\n] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[name,note-alice,naive\nbob,cafe\n] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[k,v-left,  space\nright,space  \n] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[id,text-1,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_query_stable PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_limit_exactly_100 PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_whitespace FAILED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_negative_values_as_numbers PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_routes[/convert] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_routes[/not-found] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_dataset_query PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_options_preflight_cors[/convert] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_options_preflight_cors[/datasets/does-not-exist] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_same_url_same_id PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_different_urls_different_ids PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_empty_file_rejected PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_time_boundary_values_are_text PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_large_dataset_limit_order PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_id_from_url_not_charset PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_header_and_time_whitespace FAILED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_trailing_empty_line_excluded FAILED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_extra_columns_trimmed PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_multiple_datasets_independent PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_unknown_dataset_404 PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_malformed_charset PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_convert_bad_url[bad-scheme] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_convert_bad_url[missing-scheme] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_header_only_rejected PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_empty_source_parameter PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_upstream_403_to_404 PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_total_before_pagination PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_size_and_offset_apply PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_ascending_is_stable PASSED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_paginate PASSED [ 31%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_precedence PASSED [ 31%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_shape_objects_includes_rowid FAILED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_ignores_sort FAILED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_hide_removes_rowid PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_total_hide_removes_total PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_invalid_param_400[invalid_size] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_invalid_param_400[invalid_shape] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[1-1] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[2-2] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[5-5] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[20-5] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[0-Alice] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[1-Bob] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[4-Eve] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[10-None] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[name] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[age] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[city] PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[name] PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[age] PASSED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[city] PASSED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_name_and_city_order_values PASSED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params0] PASSED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params1] PASSED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params2] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_columns_exclude_rowid PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sorted_requests_stable PASSED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_hide_noop_lists PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_hide_noop_default PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_total_ignores_offset_size PASSED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_composed_controls PASSED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shapes_consistent_values PASSED [ 49%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_tie_stability PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_precedence_different_columns PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_sequential_all_rows FAILED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_total_default_bare_request PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_at_dataset_length PASSED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_empty_toggle_value_400[_rowid] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_empty_toggle_value_400[_total] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_large_size_returns_all_rows PASSED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_unknown_sort_column_400 PASSED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort] FAILED [ 55%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort_desc] FAILED [ 55%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_rowid-show] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_rowid-false] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_total-show] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_total-0] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_total_default_shape PASSED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_size=1&_size=2] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort=age&_sort=name] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_rowid=hide&_rowid=hide] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_offset=1&_offset=2] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_shape=lists&_shape=objects] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort_desc=age&_sort_desc=name] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_total=hide&_total=hide] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_rowid_list_or_default[params0] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_rowid_list_or_default[params1] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_both_params_400[_sort=age&_sort_desc=] FAILED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[shape] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[size] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[offset] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[0] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[-1] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[3.1] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[abc] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[-1] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[oops] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[2.5] PASSED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_exact_filter PASSED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_contains_filter PASSED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_less_filter PASSED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_greater_strict PASSED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_multi_filter_and PASSED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_same_col_filters_and PASSED [ 73%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_filter_sort_paginate PASSED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_original_header_filter PASSED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_rejects_non_numeric_value PASSED [ 75%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_total_post_filter PASSED [ 75%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_excludes_non_numeric_cell PASSED [ 76%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params0-3] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params1-2] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params2-2] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params3-3] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params4-1] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params5-1] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params0] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params1] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params2] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params3] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_case_sensitive PASSED [ 82%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_bounds_strict PASSED [ 83%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[no_match] PASSED [ 83%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_case] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_whitespace] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[contains_whitespace] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exposed_col_filter PASSED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_header_no_trim PASSED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_paginate_shape PASSED [ 87%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_scientific_notation PASSED [ 87%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_ties_stable PASSED [ 88%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_signed_bounds PASSED [ 89%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_string_cmp_numeric_cells PASSED [ 89%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_plain_param_ignored PASSED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_whitespace_value_match FAILED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_whitespace_value_match PASSED [ 91%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_like_cells_preserve_whitespace_for_string_filters FAILED [ 91%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_empty_value_matches_all PASSED [ 92%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_empty_value_matches_empty_cells PASSED [ 93%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_abc] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_1,2] PASSED [ 94%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_none] PASSED [ 94%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_abc] PASSED [ 95%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_1,2] PASSED [ 95%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_none] PASSED [ 96%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_comparator_400 PASSED [ 97%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_column_400 PASSED [ 97%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_key_400 PASSED [ 98%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_identical_key_400 PASSED [ 98%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_must_match_header PASSED [ 99%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_case_mismatch_400 PASSED [100%]
+
+=================================== FAILURES ===================================
+_________________ TestFunctionality.test_preserves_whitespace __________________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x72b818c40c50>
+client = <httpx.Client object at 0x72b818d9b320>
+local_source_server = <conftest.SourceServer object at 0x72b818c53140>
+
+    @pytest.mark.functionality
+    def test_preserves_whitespace(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Leading and trailing spaces in CSV field values are preserved."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/space_text.csv",
+            body=b"side,value\nleft,  space\nright,space  \n",
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+>       assert payload["rows"] == [["left", "  space"], ["right", "space  "]]
+E       AssertionError: assert [['left', 'space'], ['right', 'space']] == [['left', '  space'], ['right', 'space  ']]
+E         
+E         At index 0 diff: ['left', 'space'] != ['left', '  space']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'left',
+E         -         '  space',
+E         ?          --
+E         +         'space',
+E               ],
+E               [
+E                   'right',
+E         -         'space  ',
+E         ?               --
+E         +         'space',
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_1.py:439: AssertionError
+_________ TestFunctionality.test_preserves_header_and_time_whitespace __________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x72b818da1280>
+client = <httpx.Client object at 0x72b818d9b320>
+local_source_server = <conftest.SourceServer object at 0x72b818c594c0>
+
+    @pytest.mark.functionality
+    def test_preserves_header_and_time_whitespace(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Headers and time-like text preserve significant surrounding whitespace."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/header_time_whitespace.csv",
+            body=(b" name ,time\nAlice, 08:30 \nBob,09:15\n"),
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+        assert payload["columns"] == [" name ", "time"]
+>       assert payload["rows"] == [["Alice", " 08:30 "], ["Bob", "09:15"]]
+E       AssertionError: assert [['Alice', '08:30'], ['Bob', '09:15']] == [['Alice', ' 08:30 '], ['Bob', '09:15']]
+E         
+E         At index 0 diff: ['Alice', '08:30'] != ['Alice', ' 08:30 ']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'Alice',
+E         -         ' 08:30 ',
+E         ?          -     -
+E         +         '08:30',
+E               ],
+E               [
+E                   'Bob',
+E                   '09:15',
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_1.py:627: AssertionError
+_____________ TestFunctionality.test_trailing_empty_line_excluded ______________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x72b818da19a0>
+client = <httpx.Client object at 0x72b818d9b320>
+local_source_server = <conftest.SourceServer object at 0x72b818d45670>
+
+    @pytest.mark.functionality
+    def test_trailing_empty_line_excluded(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Trailing empty lines in CSV do not produce extra data rows."""
+>       dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/trailing_empty.csv",
+            body=b"name,val\na,1\nb,2\n\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:636: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:53: in _ingest_source
+    payload = assert_ok_envelope(response)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"error":"Non-tabular content - inconsistent column counts","ok":false}
+
+.evaluation_tests/_helpers.py:27: AssertionError
+__________________ TestCore.test_shape_objects_includes_rowid __________________
+
+self = <test_checkpoint_2.TestCore object at 0x72b818d9a540>
+client = <httpx.Client object at 0x72b818c62ae0>
+cp2_dataset_id = '7460779c11d64e991b40e4b7e2347ba4'
+
+    def test_shape_objects_includes_rowid(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """_shape=objects includes each row's source-file rowid."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_shape": "objects"})
+        )
+        first = payload["rows"][0]
+>       assert first["rowid"] == 2
+E       assert 1 == 2
+
+.evaluation_tests/test_checkpoint_2.py:126: AssertionError
+_______________________ TestCore.test_rowid_ignores_sort _______________________
+
+self = <test_checkpoint_2.TestCore object at 0x72b818d9a0c0>
+client = <httpx.Client object at 0x72b818c62ae0>
+cp2_dataset_id = '09d4b50754114494dfc4b06c1f0aa86a'
+
+    def test_rowid_ignores_sort(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Object rows report original source rowid values under sorted pagination."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp2_dataset_id,
+                params={"_shape": "objects", "_sort": "age", "_size": "2"},
+            )
+        )
+        assert payload["rows"][0]["name"] == "Bob"
+>       assert payload["rows"][0]["rowid"] == 3
+E       assert 2 == 3
+
+.evaluation_tests/test_checkpoint_2.py:143: AssertionError
+_______________ TestFunctionality.test_rowid_sequential_all_rows _______________
+
+self = <test_checkpoint_2.TestFunctionality object at 0x72b818d6fd70>
+client = <httpx.Client object at 0x72b818c62ae0>
+cp2_dataset_id = '612f83ebf48f4fcf157c24fbc5c8aed0'
+
+    @pytest.mark.functionality
+    def test_rowid_sequential_all_rows(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Object-shaped rows have sequential 1-based rowid values for all rows."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_shape": "objects"})
+        )
+>       assert [row["rowid"] for row in payload["rows"]] == [2, 3, 4, 5, 6]
+E       assert [1, 2, 3, 4, 5] == [2, 3, 4, 5, 6]
+E         
+E         At index 0 diff: 1 != 2
+E         
+E         Full diff:
+E           [
+E         +     1,
+E               2,
+E               3,
+E               4,
+E               5,
+E         -     6,
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:486: AssertionError
+__________________ TestError.test_empty_sort_value_400[_sort] __________________
+
+self = <test_checkpoint_2.TestError object at 0x72b818df9640>
+client = <httpx.Client object at 0x72b818c62ae0>
+cp2_dataset_id = 'a73fa35e4f3520c8aef2afaba09b0f83', param_name = '_sort'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize("param_name", ["_sort", "_sort_desc"])
+    def test_empty_sort_value_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        param_name: str,
+    ) -> None:
+        """Empty _sort or _sort_desc values are rejected with 400."""
+        response = dataset_request(client, cp2_dataset_id, params={param_name: ""})
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:566: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["name","age","city"],"ok":true,"query_ms":0.03266334533691406,"rows":[["Alice",30,"Portland"],["Bob",25,"Seattle"],["Charlie",35,"Portland"],["Diana",25,"Austin"],["Eve",30,"Seattle"]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______________ TestError.test_empty_sort_value_400[_sort_desc] ________________
+
+self = <test_checkpoint_2.TestError object at 0x72b818c2a780>
+client = <httpx.Client object at 0x72b818c62ae0>
+cp2_dataset_id = '95402a4d7c385b8375115a1e6decf96a', param_name = '_sort_desc'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize("param_name", ["_sort", "_sort_desc"])
+    def test_empty_sort_value_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        param_name: str,
+    ) -> None:
+        """Empty _sort or _sort_desc values are rejected with 400."""
+        response = dataset_request(client, cp2_dataset_id, params={param_name: ""})
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:566: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["name","age","city"],"ok":true,"query_ms":0.04124641418457031,"rows":[["Alice",30,"Portland"],["Bob",25,"Seattle"],["Charlie",35,"Portland"],["Diana",25,"Austin"],["Eve",30,"Seattle"]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______ TestError.test_empty_sort_both_params_400[_sort=age&_sort_desc=] _______
+
+self = <test_checkpoint_2.TestError object at 0x72b818dfaf90>
+client = <httpx.Client object at 0x72b818c62ae0>
+cp2_dataset_id = '93027a88274b220a078163692f5a69cd'
+query = '_sort=age&_sort_desc='
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "query",
+        [
+            "_sort=age&_sort_desc=",
+        ],
+    )
+    def test_empty_sort_both_params_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        query: str,
+    ) -> None:
+        """Empty _sort_desc alongside _sort is treated as invalid and errors."""
+        response = client.get(f"/datasets/{cp2_dataset_id}?{query}")
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:659: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["name","age","city"],"ok":true,"query_ms":0.05173683166503906,"rows":[["Bob",25,"Seattle"],["Diana",25,"Austin"],["Alice",30,"Portland"],["Eve",30,"Seattle"],["Charlie",35,"Portland"]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_____________ TestFunctionality.test_exact_whitespace_value_match ______________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x72b818cf1460>
+client = <httpx.Client object at 0x72b819908a40>
+local_source_server = <conftest.SourceServer object at 0x72b818c1a510>
+
+    @pytest.mark.functionality
+    def test_exact_whitespace_value_match(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Exact comparator matches when filter value includes significant whitespace."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/ws_exact_pos.csv",
+            b"name,label\nAlpha, hello \nBeta,world\nGamma, hello \n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"label__exact": " hello "},
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 0 == 2
+
+.evaluation_tests/test_checkpoint_3.py:567: AssertionError
+_ TestFunctionality.test_numeric_like_cells_preserve_whitespace_for_string_filters _
+
+self = <test_checkpoint_3.TestFunctionality object at 0x72b818cf1b50>
+client = <httpx.Client object at 0x72b819908a40>
+local_source_server = <conftest.SourceServer object at 0x72b818c6f830>
+
+    @pytest.mark.functionality
+    def test_numeric_like_cells_preserve_whitespace_for_string_filters(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """String filters preserve significant whitespace in textual cells."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/textual_whitespace.csv",
+            b"code,label\n A10 ,padded\nA10,plain\nB210,other\n",
+        )
+        exact = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"code__exact": " A10 "},
+            )
+        )
+        contains = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"code__contains": "10 "},
+            )
+        )
+>       assert [row[1] for row in exact["rows"]] == ["padded"]
+E       AssertionError: assert [] == ['padded']
+E         
+E         Right contains one more item: 'padded'
+E         
+E         Full diff:
+E         + []
+E         - [
+E         -     'padded',
+E         - ]
+
+.evaluation_tests/test_checkpoint_3.py:620: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_whitespace - AssertionError: assert [['left', 'space'], ['right', 'space']] == [['left', '  space'], ['right', 'space  ']]
+  
+  At index 0 diff: ['left', 'space'] != ['left', '  space']
+  
+  Full diff:
+    [
+        [
+            'left',
+  -         '  space',
+  ?          --
+  +         'space',
+        ],
+        [
+            'right',
+  -         'space  ',
+  ?               --
+  +         'space',
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_header_and_time_whitespace - AssertionError: assert [['Alice', '08:30'], ['Bob', '09:15']] == [['Alice', ' 08:30 '], ['Bob', '09:15']]
+  
+  At index 0 diff: ['Alice', '08:30'] != ['Alice', ' 08:30 ']
+  
+  Full diff:
+    [
+        [
+            'Alice',
+  -         ' 08:30 ',
+  ?          -     -
+  +         '08:30',
+        ],
+        [
+            'Bob',
+            '09:15',
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_trailing_empty_line_excluded - AssertionError: {"error":"Non-tabular content - inconsistent column counts","ok":false}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_shape_objects_includes_rowid - assert 1 == 2
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_ignores_sort - assert 2 == 3
+FAILED .evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_sequential_all_rows - assert [1, 2, 3, 4, 5] == [2, 3, 4, 5, 6]
+  
+  At index 0 diff: 1 != 2
+  
+  Full diff:
+    [
+  +     1,
+        2,
+        3,
+        4,
+        5,
+  -     6,
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort] - AssertionError: {"columns":["name","age","city"],"ok":true,"query_ms":0.03266334533691406,"rows":[["Alice",30,"Portland"],["Bob",25,"Seattle"],["Charlie",35,"Portland"],["Diana",25,"Austin"],["Eve",30,"Seattle"]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort_desc] - AssertionError: {"columns":["name","age","city"],"ok":true,"query_ms":0.04124641418457031,"rows":[["Alice",30,"Portland"],["Bob",25,"Seattle"],["Charlie",35,"Portland"],["Diana",25,"Austin"],["Eve",30,"Seattle"]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_both_params_400[_sort=age&_sort_desc=] - AssertionError: {"columns":["name","age","city"],"ok":true,"query_ms":0.05173683166503906,"rows":[["Bob",25,"Seattle"],["Diana",25,"Austin"],["Alice",30,"Portland"],["Eve",30,"Seattle"],["Charlie",35,"Portland"]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_whitespace_value_match - assert 0 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_like_cells_preserve_whitespace_for_string_filters - AssertionError: assert [] == ['padded']
+  
+  Right contains one more item: 'padded'
+  
+  Full diff:
+  + []
+  - [
+  -     'padded',
+  - ]
+================== 11 failed, 163 passed in 84.01s (0:01:24) ===================

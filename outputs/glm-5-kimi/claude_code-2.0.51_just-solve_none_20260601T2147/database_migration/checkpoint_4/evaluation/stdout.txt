@@ -1,0 +1,1198 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/U92RuSECxRLVTAp7/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 117 items
+
+.evaluation_tests/test_checkpoint_1.py::test_create_table PASSED         [  0%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column PASSED           [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_operations PASSED  [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_skip_already_applied PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_single_column PASSED   [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_preserve_data PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_drop_columns PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_preserves_existing_data PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_foreign_keys_disabled_during_drop_column SKIPPED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_auto_increment_primary_key PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_unique_and_not_null_constraints PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_default_values_various_types PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column_with_default_to_populated_table PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_complex_data_preservation PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_add_not_null_with_default PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_create_multiple_tables PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_reserved_word_identifiers_are_quoted PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_mixed_operations_all_types PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_non_sequential_versions PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_create_table_multiple_primary_keys_rejected PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_auto_increment_requires_integer_primary_key PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column_rejects_invalid_identifier PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_missing_table PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_table_exists PASSED         [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_migration_file PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_json PASSED         [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_schema_missing_operations PASSED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_table_missing_for_add_column PASSED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_column_already_exists PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_column_missing_for_drop PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_only_column PASSED     [ 26%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_primary_key_column PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_identifier_rejected PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_column_type_rejected PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_unique_constraint_prevents_duplicates PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_version_zero_rejected PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_version_negative_rejected PASSED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_version_string_rejected PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_removes_unique_index_on_dropped_column PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data PASSED  [ 34%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_data PASSED        [ 35%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_data PASSED       [ 35%]
+.evaluation_tests/test_checkpoint_2.py::test_complete_column_migration PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_overwrites_existing_values PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_default_value_for_null PASSED [ 38%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_data_without_where_updates_all PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::test_transformations_applied_in_order PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_then_backfill_uses_transformed_values PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_where_filters_rows PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_value_expression PASSED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_null_without_default PASSED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::test_column_not_exists PASSED    [ 44%]
+.evaluation_tests/test_checkpoint_2.py::test_invalid_expression PASSED   [ 45%]
+.evaluation_tests/test_checkpoint_2.py::test_migration_rolls_back_on_failure FAILED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_missing_from_column PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_missing_to_column PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_with_numeric_constant FAILED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_target_column_not_exists PASSED [ 49%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_table_not_exists PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_table_not_exists PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_invalid_where_clause PASSED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_table_not_exists PASSED [ 52%]
+.evaluation_tests/test_checkpoint_3.py::test_add_foreign_key PASSED      [ 53%]
+.evaluation_tests/test_checkpoint_3.py::test_create_index PASSED         [ 54%]
+.evaluation_tests/test_checkpoint_3.py::test_add_check_constraint PASSED [ 55%]
+.evaluation_tests/test_checkpoint_3.py::test_complex_migration PASSED    [ 56%]
+.evaluation_tests/test_checkpoint_3.py::test_create_unique_index PASSED  [ 57%]
+.evaluation_tests/test_checkpoint_3.py::test_drop_index PASSED           [ 58%]
+.evaluation_tests/test_checkpoint_3.py::test_drop_foreign_key PASSED     [ 58%]
+.evaluation_tests/test_checkpoint_3.py::test_drop_check_constraint PASSED [ 59%]
+.evaluation_tests/test_checkpoint_3.py::test_foreign_key_on_delete_set_null PASSED [ 60%]
+.evaluation_tests/test_checkpoint_3.py::test_add_foreign_key_on_empty_table_enforces_future_writes PASSED [ 61%]
+.evaluation_tests/test_checkpoint_3.py::test_invalid_foreign_key_action PASSED [ 62%]
+.evaluation_tests/test_checkpoint_3.py::test_duplicate_index_name_other_table PASSED [ 63%]
+.evaluation_tests/test_checkpoint_3.py::test_drop_foreign_key_missing PASSED [ 64%]
+.evaluation_tests/test_checkpoint_3.py::test_drop_check_constraint_missing PASSED [ 64%]
+.evaluation_tests/test_checkpoint_3.py::test_foreign_key_with_restrict PASSED [ 65%]
+.evaluation_tests/test_checkpoint_3.py::test_foreign_key_violation_existing_data FAILED [ 66%]
+.evaluation_tests/test_checkpoint_3.py::test_invalid_foreign_key_reference_table PASSED [ 67%]
+.evaluation_tests/test_checkpoint_3.py::test_invalid_foreign_key_reference_column PASSED [ 68%]
+.evaluation_tests/test_checkpoint_3.py::test_foreign_key_referencing_column_missing PASSED [ 69%]
+.evaluation_tests/test_checkpoint_3.py::test_foreign_key_column_count_mismatch PASSED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::test_circular_foreign_key_dependencies FAILED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::test_duplicate_index_name PASSED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::test_drop_index_missing PASSED   [ 72%]
+.evaluation_tests/test_checkpoint_3.py::test_check_constraint_violation_on_add PASSED [ 73%]
+.evaluation_tests/test_checkpoint_3.py::test_transactional_rollback_on_failure FAILED [ 74%]
+.evaluation_tests/test_checkpoint_4.py::test_simple_rollback PASSED      [ 75%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_multiple FAILED    [ 76%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_to_version FAILED  [ 76%]
+.evaluation_tests/test_checkpoint_4.py::test_explicit_rollback FAILED    [ 77%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_data_migration FAILED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_drop_column PASSED [ 79%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_create_index PASSED [ 80%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_drop_index FAILED  [ 81%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_add_check_constraint PASSED [ 82%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_drop_check_constraint FAILED [ 82%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_add_foreign_key PASSED [ 83%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_drop_foreign_key FAILED [ 84%]
+.evaluation_tests/test_checkpoint_4.py::test_migrations_store_operations PASSED [ 85%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_multiple_ops_one_migration PASSED [ 86%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_only_one_migration PASSED [ 87%]
+.evaluation_tests/test_checkpoint_4.py::test_non_sequential_versions FAILED [ 88%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_add_column_drops_column_and_loses_data PASSED [ 88%]
+.evaluation_tests/test_checkpoint_4.py::test_explicit_rollback_operations_override_automatic_rollback FAILED [ 89%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_drop_column_restores_default_and_not_null PASSED [ 90%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_drop_column_restores_unique_constraint FAILED [ 91%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_drop_index_restores_unique_definition PASSED [ 92%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_drop_foreign_key_restores_actions FAILED [ 93%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_drop_check_constraint_restores_expression FAILED [ 94%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_removes_migration_records PASSED [ 94%]
+.evaluation_tests/test_checkpoint_4.py::test_no_migrations PASSED        [ 95%]
+.evaluation_tests/test_checkpoint_4.py::test_version_not_found PASSED    [ 96%]
+.evaluation_tests/test_checkpoint_4.py::test_transform_data_no_rollback_ops PASSED [ 97%]
+.evaluation_tests/test_checkpoint_4.py::test_backfill_data_no_rollback_ops PASSED [ 98%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_transactional_on_failure FAILED [ 99%]
+.evaluation_tests/test_checkpoint_4.py::test_rollback_fails_with_dependent_index PASSED [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_migration_rolls_back_on_failure _____________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_migration_rolls_back_on_f0')
+
+    @pytest.mark.error
+    def test_migration_rolls_back_on_failure(entrypoint_argv, seeds_dir, tmp_path):
+        """Error: Failed migration should roll back all operations."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_2_users.db", db_file)
+    
+        migration = {
+            "version": 2,
+            "description": "Fail after partial updates",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "status", "type": "TEXT", "not_null": False},
+                },
+                {
+                    "type": "backfill_data",
+                    "table": "users",
+                    "column": "status",
+                    "value": "'active'",
+                },
+                {
+                    "type": "transform_data",
+                    "table": "users",
+                    "transformations": [
+                        {"column": "status", "expression": "nonexistent_column"}
+                    ],
+                },
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 1, "Expected command to fail with exit code 1"
+    
+        with sqlite3.connect(db_file) as conn:
+            columns = [
+                row[1] for row in conn.execute("PRAGMA table_info(users)")
+            ]
+            applied = conn.execute(
+                "SELECT COUNT(*) FROM _migrations WHERE version = 2"
+            ).fetchone()[0]
+>       assert "status" not in columns
+E       AssertionError: assert 'status' not in ['id', 'first_name', 'last_name', 'old_email', 'email', 'name', 'status']
+
+.evaluation_tests/test_checkpoint_2.py:786: AssertionError
+_____________________ test_backfill_with_numeric_constant ______________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0')
+
+    @pytest.mark.functionality
+    def test_backfill_with_numeric_constant(entrypoint_argv, tmp_path):
+        """Functionality: Backfill with numeric constant (spec: 'value can be a constant')."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "CREATE TABLE users (id INTEGER PRIMARY KEY, score INTEGER)"
+            )
+            conn.executemany(
+                "INSERT INTO users (id, score) VALUES (?, ?)",
+                [(1, None), (2, None)],
+            )
+            conn.commit()
+    
+        migration = {
+            "version": 2,
+            "description": "Backfill with numeric constant",
+            "operations": [
+                {
+                    "type": "backfill_data",
+                    "table": "users",
+                    "column": "score",
+                    "value": 42,  # Numeric constant
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: invalid migration schema: 'value' must be a string
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/app.db'], returncode=1, stdout='', stderr="Error: invalid migration schema: 'value' must be a string\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:888: AssertionError
+___________________ test_foreign_key_violation_existing_data ___________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_foreign_key_violation_exi0')
+
+    @pytest.mark.error
+    def test_foreign_key_violation_existing_data(entrypoint_argv, tmp_path):
+        """Error: Adding FK with invalid existing data should fail."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY)")
+            conn.execute(
+                "CREATE TABLE posts (id INTEGER PRIMARY KEY, user_id INTEGER)"
+            )
+            conn.execute(
+                "INSERT INTO posts (id, user_id) VALUES (?, ?)", (1, 999)
+            )
+            conn.commit()
+    
+        migration = {
+            "version": 1,
+            "description": "Add FK with invalid data",
+            "operations": [
+                {
+                    "type": "add_foreign_key",
+                    "table": "posts",
+                    "name": "fk_posts_user_id",
+                    "columns": ["user_id"],
+                    "references": {"table": "users", "columns": ["id"]},
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 0 == 1
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_foreign_key_violation_exi0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_foreign_key_violation_exi0/app.db'], returncode=0, stdout='{"event":"operation_applied","type":"add_foreign_key","table":"posts","name":"fk_posts_user_id","version":1}\n{"event":"migration_complete","version":1,"operations_count":1}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_3.py:877: AssertionError
+____________________ test_circular_foreign_key_dependencies ____________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_circular_foreign_key_depe0')
+
+    @pytest.mark.error
+    def test_circular_foreign_key_dependencies(entrypoint_argv, tmp_path):
+        """Error: Circular foreign key dependencies should fail."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        migration = {
+            "version": 1,
+            "description": "Create circular foreign keys",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "table_a",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True},
+                        {"name": "b_id", "type": "INTEGER", "not_null": True},
+                    ],
+                },
+                {
+                    "type": "create_table",
+                    "table": "table_b",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True},
+                        {"name": "a_id", "type": "INTEGER", "not_null": True},
+                    ],
+                },
+                {
+                    "type": "add_foreign_key",
+                    "table": "table_a",
+                    "name": "fk_table_a_b_id",
+                    "columns": ["b_id"],
+                    "references": {"table": "table_b", "columns": ["id"]},
+                },
+                {
+                    "type": "add_foreign_key",
+                    "table": "table_b",
+                    "name": "fk_table_b_a_id",
+                    "columns": ["a_id"],
+                    "references": {"table": "table_a", "columns": ["id"]},
+                },
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 0 == 1
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_circular_foreign_key_depe0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_circular_foreign_key_depe0/app.db'], returncode=0, stdout='{"event":"operation_applied","type":"create_table","table":"table_a","version":1}\n{"event":"operation_applied","type":"create_table","table":"table_b","version":1}\n{"event":"operation_applied","type":"add_foreign_key","table":"table_a","name":"fk_table_a_b_id","version":1}\n{"event":"operation_applied","type":"add_foreign_key","table":"table_b","name":"fk_table_b_a_id","version":1}\n{"event":"migration_complete","version":1,"operations_count":4}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_3.py:1083: AssertionError
+____________________ test_transactional_rollback_on_failure ____________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_transactional_rollback_on0')
+
+    @pytest.mark.error
+    def test_transactional_rollback_on_failure(entrypoint_argv, tmp_path):
+        """Error: Failed op should roll back prior operations."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "CREATE TABLE posts (id INTEGER PRIMARY KEY, user_id INTEGER)"
+            )
+            conn.commit()
+    
+        migration = {
+            "version": 1,
+            "description": "Create index then fail",
+            "operations": [
+                {
+                    "type": "create_index",
+                    "name": "idx_posts_user_id",
+                    "table": "posts",
+                    "columns": ["user_id"],
+                    "unique": False,
+                },
+                {
+                    "type": "add_foreign_key",
+                    "table": "posts",
+                    "name": "fk_posts_user_id",
+                    "columns": ["user_id"],
+                    "references": {"table": "users", "columns": ["id"]},
+                },
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 1, "Expected command to fail with exit code 1"
+    
+        with sqlite3.connect(db_file) as conn:
+            indexes = conn.execute("PRAGMA index_list(posts)").fetchall()
+            try:
+                applied = conn.execute(
+                    "SELECT COUNT(*) FROM _migrations WHERE version = 1"
+                ).fetchone()[0]
+            except sqlite3.OperationalError:
+                applied = 0
+>       assert all(idx[1] != "idx_posts_user_id" for idx in indexes)
+E       assert False
+E        +  where False = all(<generator object test_transactional_rollback_on_failure.<locals>.<genexpr> at 0x7d413ab1e9b0>)
+
+.evaluation_tests/test_checkpoint_3.py:1264: AssertionError
+____________________________ test_rollback_multiple ____________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_rollback_multiple0')
+
+    def test_rollback_multiple(entrypoint_argv, seeds_dir, tmp_path):
+        """Core: Rollback multiple migrations using --count."""
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_4_rollback_multiple.db", db_file)
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file), "--count", "2")
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: invalid operation: column 'status' does not exist in table 'posts'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_multiple0/app.db', '--count', '2'], returncode=1, stdout='{"event":"rollback_started","version":4,"description":"Add foreign key"}\n{"event":"operation_rolled_back","type":"add_foreign_key","table":"posts","name":"fk_posts_user_id","version":4}\n{"event":"rollback_complete","version":4}\n{"event":"rollback_started","version":3,"description":"Create posts table"}\n', stderr="Error: invalid operation: column 'status' does not exist in table 'posts'\n").returncode
+
+.evaluation_tests/test_checkpoint_4.py:61: AssertionError
+___________________________ test_rollback_to_version ___________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_rollback_to_version0')
+
+    def test_rollback_to_version(entrypoint_argv, seeds_dir, tmp_path):
+        """Core: Rollback to a specific version using --to-version."""
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_4_rollback_to_version.db", db_file)
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file), "--to-version", "2")
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: invalid operation: column 'status' does not exist in table 'posts'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_to_version0/app.db', '--to-version', '2'], returncode=1, stdout='{"event":"rollback_started","version":4,"description":"Add foreign key"}\n{"event":"operation_rolled_back","type":"add_foreign_key","table":"posts","name":"fk_posts_user_id","version":4}\n{"event":"rollback_complete","version":4}\n{"event":"rollback_started","version":3,"description":"Create posts table"}\n', stderr="Error: invalid operation: column 'status' does not exist in table 'posts'\n").returncode
+
+.evaluation_tests/test_checkpoint_4.py:81: AssertionError
+____________________________ test_explicit_rollback ____________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_explicit_rollback0')
+
+    def test_explicit_rollback(entrypoint_argv, seeds_dir, tmp_path):
+        """Core: Rollback uses explicit rollback_operations when provided."""
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_4_explicit_rollback.db", db_file)
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file))
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/migration_tool.py", line 1586, in <module>
+E             main()
+E           File "/workspace/migration_tool.py", line 1577, in main
+E             run_rollback(args.database, args.to_version, args.count)
+E           File "/workspace/migration_tool.py", line 1470, in run_rollback
+E             if op["type"] in NON_REVERSIBLE_OPS:
+E                ~~^^^^^^^^
+E         TypeError: string indices must be integers, not 'str'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_explicit_rollback0/app.db'], returncode=1, stdout='{"event":"rollback_started","version":2,"description":"Add and compute full_name"}\n', stderr='Traceback (most recent call last):\n  File "/workspace/migration_tool.py", line 1586, in <module>\n    main()\n  File "/workspace/migration_tool.py", line 1577, in main\n    run_rollback(args.database, args.to_version, args.count)\n  File "/workspace/migration_tool.py", line 1470, in run_rollback\n    if op["type"] in NON_REVERSIBLE_OPS:\n       ~~^^^^^^^^\nTypeError: string indices must be integers, not \'str\'\n').returncode
+
+.evaluation_tests/test_checkpoint_4.py:101: AssertionError
+_________________________ test_rollback_data_migration _________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_rollback_data_migration0')
+
+    def test_rollback_data_migration(entrypoint_argv, seeds_dir, tmp_path):
+        """Core: Rollback data migration reverses operations in reverse order."""
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_4_rollback_data_migration.db", db_file)
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file))
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "rollback_started", "version": 2, "description": "Migrate email to email_address"},
+            {"event": "operation_rolled_back", "type": "drop_column", "table": "users", "column": "email", "version": 2},
+            {"event": "operation_rolled_back", "type": "migrate_column_data", "table": "users", "from_column": "email_address", "to_column": "email", "version": 2},
+            {"event": "operation_rolled_back", "type": "add_column", "table": "users", "column": "email_address", "version": 2},
+            {"event": "rollback_complete", "version": 2},
+            {"event": "rollback_finished", "versions_rolled_back": [2], "final_version": 1},
+        ]
+E       AssertionError: assert [{'event': 'rollback_started', 'version': 2, 'description': 'Migrate email to email_address'}, {'event': 'operation_rolled_back', 'type': 'drop_column', 'table': 'users', 'column': 'email', 'version': 2}, {'event': 'operation_rolled_back', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email', 'to_column': 'email_address', 'version': 2}, {'event': 'operation_rolled_back', 'type': 'add_column', 'table': 'users', 'column': 'email_address', 'version': 2}, {'event': 'rollback_complete', 'version': 2}, {'event': 'rollback_finished', 'versions_rolled_back': [2], 'final_version': 1}] == [{'event': 'rollback_started', 'version': 2, 'description': 'Migrate email to email_address'}, {'event': 'operation_rolled_back', 'type': 'drop_column', 'table': 'users', 'column': 'email', 'version': 2}, {'event': 'operation_rolled_back', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email_address', 'to_column': 'email', 'version': 2}, {'event': 'operation_rolled_back', 'type': 'add_column', 'table': 'users', 'column': 'email_address', 'version': 2}, {'event': 'rollback_complete', 'version': 2}, {'event': 'rollback_finished', 'versions_rolled_back': [2], 'final_version': 1}]
+E         
+E         At index 2 diff: {'event': 'operation_rolled_back', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email', 'to_column': 'email_address', 'version': 2} != {'event': 'operation_rolled_back', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email_address', 'to_column': 'email', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E                   'description': 'Migrate email to email_address',
+E                   'event': 'rollback_started',
+E                   'version': 2,
+E               },
+E               {
+E                   'column': 'email',
+E                   'event': 'operation_rolled_back',
+E                   'table': 'users',
+E                   'type': 'drop_column',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'operation_rolled_back',
+E         -         'from_column': 'email_address',
+E         ?                              --------
+E         +         'from_column': 'email',
+E                   'table': 'users',
+E         -         'to_column': 'email',
+E         +         'to_column': 'email_address',
+E         ?                            ++++++++
+E                   'type': 'migrate_column_data',
+E                   'version': 2,
+E               },
+E               {
+E                   'column': 'email_address',
+E                   'event': 'operation_rolled_back',
+E                   'table': 'users',
+E                   'type': 'add_column',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'rollback_complete',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'rollback_finished',
+E                   'final_version': 1,
+E                   'versions_rolled_back': [
+E                       2,
+E                   ],
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_4.py:120: AssertionError
+___________________________ test_rollback_drop_index ___________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_rollback_drop_index0')
+
+    @pytest.mark.functionality
+    def test_rollback_drop_index(entrypoint_argv, seeds_dir, tmp_path):
+        """Functionality: Rollback drop_index recreates the index."""
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_4_rollback_drop_index.db", db_file)
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file))
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "rollback_started", "version": 2, "description": "Drop email index"},
+            {"event": "operation_rolled_back", "type": "drop_index", "name": "idx_users_email", "table": "users", "version": 2},
+            {"event": "rollback_complete", "version": 2},
+            {"event": "rollback_finished", "versions_rolled_back": [2], "final_version": 1},
+        ]
+E       AssertionError: assert [{'event': 'rollback_started', 'version': 2, 'description': 'Drop email index'}, {'event': 'operation_rolled_back', 'type': 'drop_index', 'name': 'idx_users_email', 'version': 2}, {'event': 'rollback_complete', 'version': 2}, {'event': 'rollback_finished', 'versions_rolled_back': [2], 'final_version': 1}] == [{'event': 'rollback_started', 'version': 2, 'description': 'Drop email index'}, {'event': 'operation_rolled_back', 'type': 'drop_index', 'name': 'idx_users_email', 'table': 'users', 'version': 2}, {'event': 'rollback_complete', 'version': 2}, {'event': 'rollback_finished', 'versions_rolled_back': [2], 'final_version': 1}]
+E         
+E         At index 1 diff: {'event': 'operation_rolled_back', 'type': 'drop_index', 'name': 'idx_users_email', 'version': 2} != {'event': 'operation_rolled_back', 'type': 'drop_index', 'name': 'idx_users_email', 'table': 'users', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E                   'description': 'Drop email index',
+E                   'event': 'rollback_started',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'operation_rolled_back',
+E                   'name': 'idx_users_email',
+E         -         'table': 'users',
+E                   'type': 'drop_index',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'rollback_complete',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'rollback_finished',
+E                   'final_version': 1,
+E                   'versions_rolled_back': [
+E                       2,
+E                   ],
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_4.py:194: AssertionError
+_____________________ test_rollback_drop_check_constraint ______________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_rollback_drop_check_const0')
+
+    @pytest.mark.functionality
+    def test_rollback_drop_check_constraint(
+        entrypoint_argv, seeds_dir, tmp_path
+    ):
+        """Functionality: Rollback drop_check_constraint recreates the constraint."""
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_4_rollback_drop_check.db", db_file)
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file))
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: invalid operation: table 'posts' does not exist
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_drop_check_const0/app.db'], returncode=1, stdout='{"event":"rollback_started","version":3,"description":"Drop age constraint"}\n', stderr="Error: invalid operation: table 'posts' does not exist\n").returncode
+
+.evaluation_tests/test_checkpoint_4.py:234: AssertionError
+________________________ test_rollback_drop_foreign_key ________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_rollback_drop_foreign_key0')
+
+    @pytest.mark.functionality
+    def test_rollback_drop_foreign_key(entrypoint_argv, seeds_dir, tmp_path):
+        """Functionality: Rollback drop_foreign_key recreates the foreign key."""
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_4_rollback_drop_fk.db", db_file)
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file))
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/migration_tool.py", line 1586, in <module>
+E             main()
+E           File "/workspace/migration_tool.py", line 1577, in main
+E             run_rollback(args.database, args.to_version, args.count)
+E           File "/workspace/migration_tool.py", line 1478, in run_rollback
+E             rollback_fn(cursor, op, version)
+E           File "/workspace/migration_tool.py", line 1152, in rollback_drop_foreign_key
+E             "name": orig_def["name"],
+E                     ~~~~~~~~^^^^^^^^
+E         TypeError: string indices must be integers, not 'str'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_drop_foreign_key0/app.db'], returncode=1, stdout='{"event":"rollback_started","version":4,"description":"Drop foreign key"}\n{"event":"operation_rolled_back","type":"drop_foreign_key","table":"posts","name":"fk_posts_user_id","version":4}\n', stderr='Traceback (most recent call last):\n  File "/workspace/migration_tool.py", line 1586, in <module>\n    main()\n  File "/workspace/migration_tool.py", line 1577, in main\n    run_rollback(args.database, args.to_version, args.count)\n  File "/workspace/migration_tool.py", line 1478, in run_rollback\n    rollback_fn(cursor, op, version)\n  File "/workspace/migration_tool.py", line 1152, in rollback_drop_foreign_key\n    "name": orig_def["name"],\n            ~~~~~~~~^^^^^^^^\nTypeError: string indices must be integers, not \'str\'\n').returncode
+
+.evaluation_tests/test_checkpoint_4.py:276: AssertionError
+_________________________ test_non_sequential_versions _________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_non_sequential_versions1')
+
+    @pytest.mark.functionality
+    def test_non_sequential_versions(entrypoint_argv, seeds_dir, tmp_path):
+        """Functionality: Rollback works with non-sequential version numbers (1, 3, 7)."""
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_4_non_sequential.db", db_file)
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file), "--count", "2")
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: invalid operation: table 'posts' does not exist
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_non_sequential_versions1/app.db', '--count', '2'], returncode=1, stdout='{"event":"rollback_started","version":7,"description":"Create posts table"}\n{"event":"operation_rolled_back","type":"create_table","table":"posts","version":7}\n{"event":"rollback_complete","version":7}\n{"event":"rollback_started","version":3,"description":"Add email column"}\n', stderr="Error: invalid operation: table 'posts' does not exist\n").returncode
+
+.evaluation_tests/test_checkpoint_4.py:379: AssertionError
+________ test_explicit_rollback_operations_override_automatic_rollback _________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_explicit_rollback_operati0')
+
+    @pytest.mark.functionality
+    def test_explicit_rollback_operations_override_automatic_rollback(
+        entrypoint_argv, tmp_path
+    ):
+        """Functionality: Explicit rollback ops take precedence over automatic ones."""
+        migration_v1_file = tmp_path / "migration_v1.json"
+        migration_v2_file = tmp_path / "migration_v2.json"
+        db_file = tmp_path / "app.db"
+    
+        migration_v1 = {
+            "version": 1,
+            "description": "Create users table",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "users",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True},
+                        {"name": "email", "type": "TEXT"},
+                    ],
+                }
+            ],
+        }
+    
+        migration_v2 = {
+            "version": 2,
+            "description": "Add new_email column with explicit rollback",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "new_email", "type": "TEXT"},
+                },
+                {
+                    "type": "migrate_column_data",
+                    "table": "users",
+                    "from_column": "email",
+                    "to_column": "new_email",
+                }
+            ],
+            "rollback_operations": [
+                {
+                    "type": "migrate_column_data",
+                    "table": "users",
+                    "from_column": "new_email",
+                    "to_column": "email",
+                }
+            ],
+        }
+    
+        migration_v1_file.write_text(json.dumps(migration_v1))
+        migration_v2_file.write_text(json.dumps(migration_v2))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_v1_file), str(db_file)
+        )
+        assert result.returncode == 0, f"Setup failed: {result.stderr}"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "INSERT INTO users (id, email) VALUES (?, ?)",
+                (1, "alice@example.com"),
+            )
+            conn.commit()
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_v2_file), str(db_file)
+        )
+        assert result.returncode == 0, f"Setup failed: {result.stderr}"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "UPDATE users SET email = 'stale@example.com' WHERE id = 1"
+            )
+            conn.commit()
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file))
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        with sqlite3.connect(db_file) as conn:
+            columns = [row[1] for row in conn.execute("PRAGMA table_info(users)")]
+>           row = conn.execute(
+                "SELECT email, new_email FROM users WHERE id = 1"
+            ).fetchone()
+E           sqlite3.OperationalError: no such column: new_email
+
+.evaluation_tests/test_checkpoint_4.py:540: OperationalError
+_____________ test_rollback_drop_column_restores_unique_constraint _____________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_rollback_drop_column_rest1')
+
+    @pytest.mark.functionality
+    def test_rollback_drop_column_restores_unique_constraint(
+        entrypoint_argv, tmp_path
+    ):
+        """Functionality: Restores UNIQUE when rolling back drop_column."""
+        migration_v1_file = tmp_path / "migration_v1.json"
+        migration_v2_file = tmp_path / "migration_v2.json"
+        db_file = tmp_path / "app.db"
+    
+        migration_v1 = {
+            "version": 1,
+            "description": "Create users with unique email",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "users",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True},
+                        {"name": "email", "type": "TEXT", "unique": True},
+                    ],
+                }
+            ],
+        }
+    
+        migration_v2 = {
+            "version": 2,
+            "description": "Drop email column",
+            "operations": [
+                {"type": "drop_column", "table": "users", "column": "email"}
+            ],
+        }
+    
+        migration_v1_file.write_text(json.dumps(migration_v1))
+        migration_v2_file.write_text(json.dumps(migration_v2))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_v1_file), str(db_file)
+        )
+        assert result.returncode == 0, f"Setup failed: {result.stderr}"
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_v2_file), str(db_file)
+        )
+        assert result.returncode == 0, f"Setup failed: {result.stderr}"
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file))
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "INSERT INTO users (id, email) VALUES (?, ?)",
+                (1, "dup@example.com"),
+            )
+            conn.commit()
+>           with pytest.raises(sqlite3.IntegrityError):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE <class 'sqlite3.IntegrityError'>
+
+.evaluation_tests/test_checkpoint_4.py:665: Failed
+_______________ test_rollback_drop_foreign_key_restores_actions ________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_rollback_drop_foreign_key1')
+
+    @pytest.mark.functionality
+    def test_rollback_drop_foreign_key_restores_actions(
+        entrypoint_argv, tmp_path
+    ):
+        """Functionality: Restores foreign key actions on rollback."""
+        migration_v1_file = tmp_path / "migration_v1.json"
+        migration_v2_file = tmp_path / "migration_v2.json"
+        db_file = tmp_path / "app.db"
+    
+        migration_v1 = {
+            "version": 1,
+            "description": "Create posts with FK actions",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "users",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True}
+                    ],
+                },
+                {
+                    "type": "create_table",
+                    "table": "posts",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True},
+                        {"name": "user_id", "type": "INTEGER"},
+                    ],
+                },
+                {
+                    "type": "add_foreign_key",
+                    "table": "posts",
+                    "name": "fk_posts_user_id",
+                    "columns": ["user_id"],
+                    "references": {"table": "users", "columns": ["id"]},
+                    "on_delete": "SET NULL",
+                    "on_update": "CASCADE",
+                },
+            ],
+        }
+    
+        migration_v2 = {
+            "version": 2,
+            "description": "Drop posts foreign key",
+            "operations": [
+                {
+                    "type": "drop_foreign_key",
+                    "table": "posts",
+                    "name": "fk_posts_user_id",
+                }
+            ],
+        }
+    
+        migration_v1_file.write_text(json.dumps(migration_v1))
+        migration_v2_file.write_text(json.dumps(migration_v2))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_v1_file), str(db_file)
+        )
+        assert result.returncode == 0, f"Setup failed: {result.stderr}"
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_v2_file), str(db_file)
+        )
+        assert result.returncode == 0, f"Setup failed: {result.stderr}"
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file))
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: rollback failed: near ")": syntax error
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_drop_foreign_key1/app.db'], returncode=1, stdout='{"event":"rollback_started","version":2,"description":"Drop posts foreign key"}\n{"event":"operation_rolled_back","type":"drop_foreign_key","table":"posts","name":"fk_posts_user_id","version":2}\n', stderr='Error: rollback failed: near ")": syntax error\n').returncode
+
+.evaluation_tests/test_checkpoint_4.py:799: AssertionError
+___________ test_rollback_drop_check_constraint_restores_expression ____________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_rollback_drop_check_const1')
+
+    @pytest.mark.functionality
+    def test_rollback_drop_check_constraint_restores_expression(
+        entrypoint_argv, tmp_path
+    ):
+        """Functionality: Restores check constraint expression on rollback."""
+        migration_v1_file = tmp_path / "migration_v1.json"
+        migration_v2_file = tmp_path / "migration_v2.json"
+        migration_v3_file = tmp_path / "migration_v3.json"
+        db_file = tmp_path / "app.db"
+    
+        migration_v1 = {
+            "version": 1,
+            "description": "Create users table",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "users",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True},
+                        {"name": "age", "type": "INTEGER"},
+                    ],
+                }
+            ],
+        }
+    
+        migration_v2 = {
+            "version": 2,
+            "description": "Add age constraint",
+            "operations": [
+                {
+                    "type": "add_check_constraint",
+                    "table": "users",
+                    "name": "chk_users_age",
+                    "expression": "age >= 0 AND age <= 150",
+                }
+            ],
+        }
+    
+        migration_v3 = {
+            "version": 3,
+            "description": "Drop age constraint",
+            "operations": [
+                {
+                    "type": "drop_check_constraint",
+                    "table": "users",
+                    "name": "chk_users_age",
+                }
+            ],
+        }
+    
+        migration_v1_file.write_text(json.dumps(migration_v1))
+        migration_v2_file.write_text(json.dumps(migration_v2))
+        migration_v3_file.write_text(json.dumps(migration_v3))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_v1_file), str(db_file)
+        )
+        assert result.returncode == 0, f"Setup failed: {result.stderr}"
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_v2_file), str(db_file)
+        )
+        assert result.returncode == 0, f"Setup failed: {result.stderr}"
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_v3_file), str(db_file)
+        )
+        assert result.returncode == 0, f"Setup failed: {result.stderr}"
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file))
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: invalid operation: table 'posts' does not exist
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_drop_check_const1/app.db'], returncode=1, stdout='{"event":"rollback_started","version":3,"description":"Drop age constraint"}\n', stderr="Error: invalid operation: table 'posts' does not exist\n").returncode
+
+.evaluation_tests/test_checkpoint_4.py:878: AssertionError
+____________________ test_rollback_transactional_on_failure ____________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_rollback_transactional_on0')
+
+    @pytest.mark.error
+    def test_rollback_transactional_on_failure(entrypoint_argv, tmp_path):
+        """Error: Failed rollback should not partially apply changes."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        migration = {
+            "version": 1,
+            "description": "Create parents with index",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "parents",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True},
+                    ],
+                },
+                {
+                    "type": "create_index",
+                    "name": "idx_parents_id",
+                    "table": "parents",
+                    "columns": ["id"],
+                    "unique": False,
+                },
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(entrypoint_argv, "migrate", str(migration_file), str(db_file))
+        assert result.returncode == 0, f"Setup failed: {result.stderr}"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute("PRAGMA foreign_keys = ON")
+            conn.execute(
+                "CREATE TABLE children (id INTEGER PRIMARY KEY, parent_id INTEGER, "
+                "FOREIGN KEY(parent_id) REFERENCES parents(id))"
+            )
+            conn.execute("INSERT INTO parents (id) VALUES (?)", (1,))
+            conn.execute(
+                "INSERT INTO children (id, parent_id) VALUES (?, ?)", (1, 1)
+            )
+            conn.commit()
+    
+        result = run_command(entrypoint_argv, "rollback", str(db_file))
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 0 == 1
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_transactional_on0/app.db'], returncode=0, stdout='{"event":"rollback_started","version":1,"description":"Create parents with index"}\n{"event":"operation_rolled_back","type":"create_index","name":"idx_parents_id","table":"parents","version":1}\n{"event":"operation_rolled_back","type":"create_table","table":"parents","version":1}\n{"event":"rollback_complete","version":1}\n{"event":"rollback_finished","versions_rolled_back":[1],"final_version":0}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_4.py:1047: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_2.py::test_migration_rolls_back_on_failure - AssertionError: assert 'status' not in ['id', 'first_name', 'last_name', 'old_email', 'email', 'name', 'status']
+FAILED .evaluation_tests/test_checkpoint_2.py::test_backfill_with_numeric_constant - AssertionError: Command failed: Error: invalid migration schema: 'value' must be a string
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/app.db'], returncode=1, stdout='', stderr="Error: invalid migration schema: 'value' must be a string\n").returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_foreign_key_violation_existing_data - AssertionError: Expected command to fail with exit code 1
+assert 0 == 1
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_foreign_key_violation_exi0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_foreign_key_violation_exi0/app.db'], returncode=0, stdout='{"event":"operation_applied","type":"add_foreign_key","table":"posts","name":"fk_posts_user_id","version":1}\n{"event":"migration_complete","version":1,"operations_count":1}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_circular_foreign_key_dependencies - AssertionError: Expected command to fail with exit code 1
+assert 0 == 1
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_circular_foreign_key_depe0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_circular_foreign_key_depe0/app.db'], returncode=0, stdout='{"event":"operation_applied","type":"create_table","table":"table_a","version":1}\n{"event":"operation_applied","type":"create_table","table":"table_b","version":1}\n{"event":"operation_applied","type":"add_foreign_key","table":"table_a","name":"fk_table_a_b_id","version":1}\n{"event":"operation_applied","type":"add_foreign_key","table":"table_b","name":"fk_table_b_a_id","version":1}\n{"event":"migration_complete","version":1,"operations_count":4}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_transactional_rollback_on_failure - assert False
+ +  where False = all(<generator object test_transactional_rollback_on_failure.<locals>.<genexpr> at 0x7d413ab1e9b0>)
+FAILED .evaluation_tests/test_checkpoint_4.py::test_rollback_multiple - AssertionError: Command failed: Error: invalid operation: column 'status' does not exist in table 'posts'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_multiple0/app.db', '--count', '2'], returncode=1, stdout='{"event":"rollback_started","version":4,"description":"Add foreign key"}\n{"event":"operation_rolled_back","type":"add_foreign_key","table":"posts","name":"fk_posts_user_id","version":4}\n{"event":"rollback_complete","version":4}\n{"event":"rollback_started","version":3,"description":"Create posts table"}\n', stderr="Error: invalid operation: column 'status' does not exist in table 'posts'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_4.py::test_rollback_to_version - AssertionError: Command failed: Error: invalid operation: column 'status' does not exist in table 'posts'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_to_version0/app.db', '--to-version', '2'], returncode=1, stdout='{"event":"rollback_started","version":4,"description":"Add foreign key"}\n{"event":"operation_rolled_back","type":"add_foreign_key","table":"posts","name":"fk_posts_user_id","version":4}\n{"event":"rollback_complete","version":4}\n{"event":"rollback_started","version":3,"description":"Create posts table"}\n', stderr="Error: invalid operation: column 'status' does not exist in table 'posts'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_4.py::test_explicit_rollback - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/migration_tool.py", line 1586, in <module>
+      main()
+    File "/workspace/migration_tool.py", line 1577, in main
+      run_rollback(args.database, args.to_version, args.count)
+    File "/workspace/migration_tool.py", line 1470, in run_rollback
+      if op["type"] in NON_REVERSIBLE_OPS:
+         ~~^^^^^^^^
+  TypeError: string indices must be integers, not 'str'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_explicit_rollback0/app.db'], returncode=1, stdout='{"event":"rollback_started","version":2,"description":"Add and compute full_name"}\n', stderr='Traceback (most recent call last):\n  File "/workspace/migration_tool.py", line 1586, in <module>\n    main()\n  File "/workspace/migration_tool.py", line 1577, in main\n    run_rollback(args.database, args.to_version, args.count)\n  File "/workspace/migration_tool.py", line 1470, in run_rollback\n    if op["type"] in NON_REVERSIBLE_OPS:\n       ~~^^^^^^^^\nTypeError: string indices must be integers, not \'str\'\n').returncode
+FAILED .evaluation_tests/test_checkpoint_4.py::test_rollback_data_migration - AssertionError: assert [{'event': 'rollback_started', 'version': 2, 'description': 'Migrate email to email_address'}, {'event': 'operation_rolled_back', 'type': 'drop_column', 'table': 'users', 'column': 'email', 'version': 2}, {'event': 'operation_rolled_back', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email', 'to_column': 'email_address', 'version': 2}, {'event': 'operation_rolled_back', 'type': 'add_column', 'table': 'users', 'column': 'email_address', 'version': 2}, {'event': 'rollback_complete', 'version': 2}, {'event': 'rollback_finished', 'versions_rolled_back': [2], 'final_version': 1}] == [{'event': 'rollback_started', 'version': 2, 'description': 'Migrate email to email_address'}, {'event': 'operation_rolled_back', 'type': 'drop_column', 'table': 'users', 'column': 'email', 'version': 2}, {'event': 'operation_rolled_back', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email_address', 'to_column': 'email', 'version': 2}, {'event': 'operation_rolled_back', 'type': 'add_column', 'table': 'users', 'column': 'email_address', 'version': 2}, {'event': 'rollback_complete', 'version': 2}, {'event': 'rollback_finished', 'versions_rolled_back': [2], 'final_version': 1}]
+  
+  At index 2 diff: {'event': 'operation_rolled_back', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email', 'to_column': 'email_address', 'version': 2} != {'event': 'operation_rolled_back', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email_address', 'to_column': 'email', 'version': 2}
+  
+  Full diff:
+    [
+        {
+            'description': 'Migrate email to email_address',
+            'event': 'rollback_started',
+            'version': 2,
+        },
+        {
+            'column': 'email',
+            'event': 'operation_rolled_back',
+            'table': 'users',
+            'type': 'drop_column',
+            'version': 2,
+        },
+        {
+            'event': 'operation_rolled_back',
+  -         'from_column': 'email_address',
+  ?                              --------
+  +         'from_column': 'email',
+            'table': 'users',
+  -         'to_column': 'email',
+  +         'to_column': 'email_address',
+  ?                            ++++++++
+            'type': 'migrate_column_data',
+            'version': 2,
+        },
+        {
+            'column': 'email_address',
+            'event': 'operation_rolled_back',
+            'table': 'users',
+            'type': 'add_column',
+            'version': 2,
+        },
+        {
+            'event': 'rollback_complete',
+            'version': 2,
+        },
+        {
+            'event': 'rollback_finished',
+            'final_version': 1,
+            'versions_rolled_back': [
+                2,
+            ],
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_4.py::test_rollback_drop_index - AssertionError: assert [{'event': 'rollback_started', 'version': 2, 'description': 'Drop email index'}, {'event': 'operation_rolled_back', 'type': 'drop_index', 'name': 'idx_users_email', 'version': 2}, {'event': 'rollback_complete', 'version': 2}, {'event': 'rollback_finished', 'versions_rolled_back': [2], 'final_version': 1}] == [{'event': 'rollback_started', 'version': 2, 'description': 'Drop email index'}, {'event': 'operation_rolled_back', 'type': 'drop_index', 'name': 'idx_users_email', 'table': 'users', 'version': 2}, {'event': 'rollback_complete', 'version': 2}, {'event': 'rollback_finished', 'versions_rolled_back': [2], 'final_version': 1}]
+  
+  At index 1 diff: {'event': 'operation_rolled_back', 'type': 'drop_index', 'name': 'idx_users_email', 'version': 2} != {'event': 'operation_rolled_back', 'type': 'drop_index', 'name': 'idx_users_email', 'table': 'users', 'version': 2}
+  
+  Full diff:
+    [
+        {
+            'description': 'Drop email index',
+            'event': 'rollback_started',
+            'version': 2,
+        },
+        {
+            'event': 'operation_rolled_back',
+            'name': 'idx_users_email',
+  -         'table': 'users',
+            'type': 'drop_index',
+            'version': 2,
+        },
+        {
+            'event': 'rollback_complete',
+            'version': 2,
+        },
+        {
+            'event': 'rollback_finished',
+            'final_version': 1,
+            'versions_rolled_back': [
+                2,
+            ],
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_4.py::test_rollback_drop_check_constraint - AssertionError: Command failed: Error: invalid operation: table 'posts' does not exist
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_drop_check_const0/app.db'], returncode=1, stdout='{"event":"rollback_started","version":3,"description":"Drop age constraint"}\n', stderr="Error: invalid operation: table 'posts' does not exist\n").returncode
+FAILED .evaluation_tests/test_checkpoint_4.py::test_rollback_drop_foreign_key - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/migration_tool.py", line 1586, in <module>
+      main()
+    File "/workspace/migration_tool.py", line 1577, in main
+      run_rollback(args.database, args.to_version, args.count)
+    File "/workspace/migration_tool.py", line 1478, in run_rollback
+      rollback_fn(cursor, op, version)
+    File "/workspace/migration_tool.py", line 1152, in rollback_drop_foreign_key
+      "name": orig_def["name"],
+              ~~~~~~~~^^^^^^^^
+  TypeError: string indices must be integers, not 'str'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_drop_foreign_key0/app.db'], returncode=1, stdout='{"event":"rollback_started","version":4,"description":"Drop foreign key"}\n{"event":"operation_rolled_back","type":"drop_foreign_key","table":"posts","name":"fk_posts_user_id","version":4}\n', stderr='Traceback (most recent call last):\n  File "/workspace/migration_tool.py", line 1586, in <module>\n    main()\n  File "/workspace/migration_tool.py", line 1577, in main\n    run_rollback(args.database, args.to_version, args.count)\n  File "/workspace/migration_tool.py", line 1478, in run_rollback\n    rollback_fn(cursor, op, version)\n  File "/workspace/migration_tool.py", line 1152, in rollback_drop_foreign_key\n    "name": orig_def["name"],\n            ~~~~~~~~^^^^^^^^\nTypeError: string indices must be integers, not \'str\'\n').returncode
+FAILED .evaluation_tests/test_checkpoint_4.py::test_non_sequential_versions - AssertionError: Command failed: Error: invalid operation: table 'posts' does not exist
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_non_sequential_versions1/app.db', '--count', '2'], returncode=1, stdout='{"event":"rollback_started","version":7,"description":"Create posts table"}\n{"event":"operation_rolled_back","type":"create_table","table":"posts","version":7}\n{"event":"rollback_complete","version":7}\n{"event":"rollback_started","version":3,"description":"Add email column"}\n', stderr="Error: invalid operation: table 'posts' does not exist\n").returncode
+FAILED .evaluation_tests/test_checkpoint_4.py::test_explicit_rollback_operations_override_automatic_rollback - sqlite3.OperationalError: no such column: new_email
+FAILED .evaluation_tests/test_checkpoint_4.py::test_rollback_drop_column_restores_unique_constraint - Failed: DID NOT RAISE <class 'sqlite3.IntegrityError'>
+FAILED .evaluation_tests/test_checkpoint_4.py::test_rollback_drop_foreign_key_restores_actions - AssertionError: Command failed: Error: rollback failed: near ")": syntax error
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_drop_foreign_key1/app.db'], returncode=1, stdout='{"event":"rollback_started","version":2,"description":"Drop posts foreign key"}\n{"event":"operation_rolled_back","type":"drop_foreign_key","table":"posts","name":"fk_posts_user_id","version":2}\n', stderr='Error: rollback failed: near ")": syntax error\n').returncode
+FAILED .evaluation_tests/test_checkpoint_4.py::test_rollback_drop_check_constraint_restores_expression - AssertionError: Command failed: Error: invalid operation: table 'posts' does not exist
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_drop_check_const1/app.db'], returncode=1, stdout='{"event":"rollback_started","version":3,"description":"Drop age constraint"}\n', stderr="Error: invalid operation: table 'posts' does not exist\n").returncode
+FAILED .evaluation_tests/test_checkpoint_4.py::test_rollback_transactional_on_failure - AssertionError: Expected command to fail with exit code 1
+assert 0 == 1
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'rollback', '/tmp/pytest-of-agent/pytest-0/test_rollback_transactional_on0/app.db'], returncode=0, stdout='{"event":"rollback_started","version":1,"description":"Create parents with index"}\n{"event":"operation_rolled_back","type":"create_index","name":"idx_parents_id","table":"parents","version":1}\n{"event":"operation_rolled_back","type":"create_table","table":"parents","version":1}\n{"event":"rollback_complete","version":1}\n{"event":"rollback_finished","versions_rolled_back":[1],"final_version":0}\n', stderr='').returncode
+================== 18 failed, 98 passed, 1 skipped in 20.37s ===================

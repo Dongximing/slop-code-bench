@@ -1,0 +1,2928 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/rIuXZaV9f6rhFOKY/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 233 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_convert_bad_params[missing-source] PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_convert_bad_params[invalid-url] PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unreachable_source PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_non_tabular_payload PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_success_returns_id PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_single_column_csv PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_query_envelope PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_order_preserved PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_default_limit_100 PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_charset_latin1 PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_autodetect_latin1 PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_upstream_500_to_404 PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_decimals_as_numbers PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_semicolon_delimiter PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_time_values_as_text PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unknown_route_404 PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_relative_endpoint PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[,] PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[;] PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[\t] PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[name,emoji-alice,smile\nbob,wave\n] PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[name,note-alice,naive\nbob,cafe\n] PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[k,v-left,  space\nright,space  \n] PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[id,text-1,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_query_stable PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_limit_exactly_100 PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_whitespace FAILED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_negative_values_as_numbers PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_routes[/convert] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_routes[/not-found] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_dataset_query PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_options_preflight_cors[/convert] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_options_preflight_cors[/datasets/does-not-exist] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_same_url_same_id PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_different_urls_different_ids PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_empty_file_rejected PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_time_boundary_values_are_text PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_large_dataset_limit_order PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_id_from_url_not_charset PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_header_and_time_whitespace FAILED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_trailing_empty_line_excluded FAILED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_extra_columns_trimmed PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_multiple_datasets_independent PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_unknown_dataset_404 PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_malformed_charset PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_convert_bad_url[bad-scheme] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_convert_bad_url[missing-scheme] PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_header_only_rejected PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_empty_source_parameter PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_upstream_403_to_404 PASSED [ 21%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_total_before_pagination PASSED [ 21%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_size_and_offset_apply PASSED [ 22%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_ascending_is_stable FAILED [ 22%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_paginate PASSED [ 23%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_precedence PASSED [ 23%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_shape_objects_includes_rowid FAILED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_ignores_sort FAILED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_hide_removes_rowid PASSED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_total_hide_removes_total PASSED [ 25%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_invalid_param_400[invalid_size] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_invalid_param_400[invalid_shape] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[1-1] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[2-2] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[5-5] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[20-5] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[0-Alice] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[1-Bob] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[4-Eve] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[10-None] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[name] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[age] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[city] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[name] PASSED [ 31%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[age] PASSED [ 31%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[city] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_name_and_city_order_values PASSED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params0] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params1] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params2] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_columns_exclude_rowid PASSED [ 34%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sorted_requests_stable PASSED [ 34%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_hide_noop_lists PASSED [ 35%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_hide_noop_default PASSED [ 35%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_total_ignores_offset_size PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_composed_controls PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shapes_consistent_values PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_tie_stability PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_precedence_different_columns PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_sequential_all_rows FAILED [ 38%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_total_default_bare_request PASSED [ 38%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_at_dataset_length PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_empty_toggle_value_400[_rowid] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_empty_toggle_value_400[_total] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_large_size_returns_all_rows PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_unknown_sort_column_400 FAILED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort] FAILED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort_desc] PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_rowid-show] PASSED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_rowid-false] PASSED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_total-show] PASSED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_total-0] PASSED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_total_default_shape PASSED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_size=1&_size=2] PASSED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort=age&_sort=name] PASSED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_rowid=hide&_rowid=hide] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_offset=1&_offset=2] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_shape=lists&_shape=objects] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort_desc=age&_sort_desc=name] PASSED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_total=hide&_total=hide] PASSED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_rowid_list_or_default[params0] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_rowid_list_or_default[params1] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_both_params_400[_sort=age&_sort_desc=] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[shape] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[size] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[offset] PASSED [ 49%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[0] PASSED [ 49%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[-1] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[3.1] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[abc] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[-1] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[oops] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[2.5] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_exact_filter PASSED [ 52%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_contains_filter PASSED [ 53%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_less_filter PASSED [ 53%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_greater_strict PASSED [ 54%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_multi_filter_and PASSED [ 54%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_same_col_filters_and PASSED [ 54%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_filter_sort_paginate FAILED [ 55%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_original_header_filter PASSED [ 55%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_rejects_non_numeric_value PASSED [ 56%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_total_post_filter PASSED [ 56%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_excludes_non_numeric_cell PASSED [ 57%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params0-3] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params1-2] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params2-2] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params3-3] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params4-1] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params5-1] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params0] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params1] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params2] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params3] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_case_sensitive PASSED [ 61%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_bounds_strict PASSED [ 62%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[no_match] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_case] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_whitespace] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[contains_whitespace] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exposed_col_filter PASSED [ 64%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_header_no_trim PASSED [ 64%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_paginate_shape PASSED [ 65%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_scientific_notation PASSED [ 65%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_ties_stable FAILED [ 66%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_signed_bounds PASSED [ 66%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_string_cmp_numeric_cells PASSED [ 66%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_plain_param_ignored PASSED [ 67%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_whitespace_value_match FAILED [ 67%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_whitespace_value_match PASSED [ 68%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_like_cells_preserve_whitespace_for_string_filters FAILED [ 68%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_empty_value_matches_all PASSED [ 69%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_empty_value_matches_empty_cells PASSED [ 69%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_abc] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_1,2] PASSED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_none] PASSED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_abc] PASSED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_1,2] PASSED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_none] PASSED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_comparator_400 PASSED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_column_400 PASSED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_key_400 FAILED [ 73%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_identical_key_400 FAILED [ 73%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_must_match_header PASSED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_case_mismatch_400 PASSED [ 74%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_csv_headers PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_content_disposition PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_rows PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_filter_sort_page FAILED [ 76%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_sort_without_filter PASSED [ 76%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_shape_controls PASSED [ 77%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_csv_charset_honored PASSED [ 77%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_file_field FAILED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_attachment_field FAILED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_missing_file_400 FAILED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_same_content_deterministic FAILED [ 79%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_spreadsheet[xlsx] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_spreadsheet[xls] FAILED [ 80%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_spreadsheet_query_controls FAILED [ 80%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_multisheet_first_only PASSED [ 81%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_multisheet_first_only FAILED [ 81%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_empty_first_sheet_rejected PASSED [ 81%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_xlsx_attachment FAILED [ 82%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_xls_attachment FAILED [ 82%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_spreadsheet_charset_ignored PASSED [ 83%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_csv_charset_honored FAILED [ 83%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_spreadsheet_invalid_charset_ignored[xlsx] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_spreadsheet_invalid_charset_ignored[xls] FAILED [ 84%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_spreadsheet_invalid_charset_ignored[xlsx] FAILED [ 84%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_spreadsheet_invalid_charset_ignored[xls] FAILED [ 85%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_unrecognized_format_400 PASSED [ 85%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_sort_desc_filter FAILED [ 86%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_special_csv_chars PASSED [ 86%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_empty_result_header PASSED [ 87%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_convert_parity FAILED [ 87%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_field_matrix[file] FAILED [ 87%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_field_matrix[attachment] FAILED [ 88%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_xlsx_exportable FAILED [ 88%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_numeric_cells_preserved PASSED [ 89%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_charset_upload FAILED [ 89%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_convert_rejects_corrupt_spreadsheet[xlsx] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_convert_rejects_corrupt_spreadsheet[xls] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_rejects_corrupt_spreadsheet[xlsx] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_rejects_corrupt_spreadsheet[xls] FAILED [ 91%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_header_only_first_sheet_rejected PASSED [ 91%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_support_matrix[xls] FAILED [ 92%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_support_matrix[xlsx] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_diff_name_deterministic FAILED [ 93%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_upload_same_bytes_are_deterministic[same.xls-xls-application/vnd.ms-excel] FAILED [ 93%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_upload_same_bytes_are_deterministic[same.xlsx-xlsx-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet] FAILED [ 93%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_unrecognized_format_400 FAILED [ 94%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_matches_query_params FAILED [ 94%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_uploaded_export_params FAILED [ 95%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_empty_file_400 FAILED [ 95%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_spreadsheet_column_order PASSED [ 96%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_field_name_interchangeable_deterministic FAILED [ 96%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_single_row PASSED [ 96%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_content_disposition_quoted_filename PASSED [ 97%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_header_only_csv FAILED [ 97%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_invalid_first_sheet_rejected[empty-first-sheet] FAILED [ 98%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_invalid_first_sheet_rejected[header-only-first-sheet] FAILED [ 98%]
+.evaluation_tests/test_checkpoint_4.py::TestError::test_export_unknown_dataset_404 PASSED [ 99%]
+.evaluation_tests/test_checkpoint_4.py::TestError::test_upload_invalid_body_400 FAILED [ 99%]
+.evaluation_tests/test_checkpoint_4.py::TestError::test_upload_json_rejected FAILED [100%]
+
+=================================== FAILURES ===================================
+_________________ TestFunctionality.test_preserves_whitespace __________________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x72fc4ab8c200>
+client = <httpx.Client object at 0x72fc4ab63dd0>
+local_source_server = <conftest.SourceServer object at 0x72fc4ab3cec0>
+
+    @pytest.mark.functionality
+    def test_preserves_whitespace(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Leading and trailing spaces in CSV field values are preserved."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/space_text.csv",
+            body=b"side,value\nleft,  space\nright,space  \n",
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+>       assert payload["rows"] == [["left", "  space"], ["right", "space  "]]
+E       AssertionError: assert [['left', 'space'], ['right', 'space']] == [['left', '  space'], ['right', 'space  ']]
+E         
+E         At index 0 diff: ['left', 'space'] != ['left', '  space']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'left',
+E         -         '  space',
+E         ?          --
+E         +         'space',
+E               ],
+E               [
+E                   'right',
+E         -         'space  ',
+E         ?               --
+E         +         'space',
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_1.py:439: AssertionError
+_________ TestFunctionality.test_preserves_header_and_time_whitespace __________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x72fc4acb93d0>
+client = <httpx.Client object at 0x72fc4ab63dd0>
+local_source_server = <conftest.SourceServer object at 0x72fc4aa62030>
+
+    @pytest.mark.functionality
+    def test_preserves_header_and_time_whitespace(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Headers and time-like text preserve significant surrounding whitespace."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/header_time_whitespace.csv",
+            body=(b" name ,time\nAlice, 08:30 \nBob,09:15\n"),
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+        assert payload["columns"] == [" name ", "time"]
+>       assert payload["rows"] == [["Alice", " 08:30 "], ["Bob", "09:15"]]
+E       AssertionError: assert [['Alice', '08:30'], ['Bob', '09:15']] == [['Alice', ' 08:30 '], ['Bob', '09:15']]
+E         
+E         At index 0 diff: ['Alice', '08:30'] != ['Alice', ' 08:30 ']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'Alice',
+E         -         ' 08:30 ',
+E         ?          -     -
+E         +         '08:30',
+E               ],
+E               [
+E                   'Bob',
+E                   '09:15',
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_1.py:627: AssertionError
+_____________ TestFunctionality.test_trailing_empty_line_excluded ______________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x72fc4acb9bb0>
+client = <httpx.Client object at 0x72fc4ab63dd0>
+local_source_server = <conftest.SourceServer object at 0x72fc4aba6930>
+
+    @pytest.mark.functionality
+    def test_trailing_empty_line_excluded(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Trailing empty lines in CSV do not produce extra data rows."""
+>       dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/trailing_empty.csv",
+            body=b"name,val\na,1\nb,2\n\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:636: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:53: in _ingest_source
+    payload = assert_ok_envelope(response)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"error":"Non-tabular content - inconsistent column counts","ok":false}
+
+.evaluation_tests/_helpers.py:27: AssertionError
+____________________ TestCore.test_sort_ascending_is_stable ____________________
+
+self = <test_checkpoint_2.TestCore object at 0x72fc4ab77560>
+client = <httpx.Client object at 0x72fc4aaa2960>
+cp2_dataset_id = '15972b9b017461d821e29d8378c317a2'
+
+    def test_sort_ascending_is_stable(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """_sort orders rows ascending and preserves tie order from source."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_sort": "age"})
+        )
+>       assert payload["rows"][0] == ["Bob", 25, "Seattle"]
+E       AssertionError: assert ['Alice', 30, 'Portland'] == ['Bob', 25, 'Seattle']
+E         
+E         At index 0 diff: 'Alice' != 'Bob'
+E         
+E         Full diff:
+E           [
+E         -     'Bob',
+E         -     25,
+E         -     'Seattle',
+E         +     'Alice',
+E         +     30,
+E         +     'Portland',
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:82: AssertionError
+__________________ TestCore.test_shape_objects_includes_rowid __________________
+
+self = <test_checkpoint_2.TestCore object at 0x72fc4acee720>
+client = <httpx.Client object at 0x72fc4aaa2960>
+cp2_dataset_id = 'a6442b99d5373531321272a27956d521'
+
+    def test_shape_objects_includes_rowid(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """_shape=objects includes each row's source-file rowid."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_shape": "objects"})
+        )
+        first = payload["rows"][0]
+>       assert first["rowid"] == 2
+E       assert 1 == 2
+
+.evaluation_tests/test_checkpoint_2.py:126: AssertionError
+_______________________ TestCore.test_rowid_ignores_sort _______________________
+
+self = <test_checkpoint_2.TestCore object at 0x72fc4acee270>
+client = <httpx.Client object at 0x72fc4aaa2960>
+cp2_dataset_id = '598b84e4efc281235ee66b228b8f04ea'
+
+    def test_rowid_ignores_sort(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Object rows report original source rowid values under sorted pagination."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp2_dataset_id,
+                params={"_shape": "objects", "_sort": "age", "_size": "2"},
+            )
+        )
+>       assert payload["rows"][0]["name"] == "Bob"
+E       AssertionError: assert 'Alice' == 'Bob'
+E         
+E         - Bob
+E         + Alice
+
+.evaluation_tests/test_checkpoint_2.py:142: AssertionError
+_______________ TestFunctionality.test_rowid_sequential_all_rows _______________
+
+self = <test_checkpoint_2.TestFunctionality object at 0x72fc4acdfef0>
+client = <httpx.Client object at 0x72fc4aaa2960>
+cp2_dataset_id = '75aa77b13d1b0c61ddcb52ea4efb8dcc'
+
+    @pytest.mark.functionality
+    def test_rowid_sequential_all_rows(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Object-shaped rows have sequential 1-based rowid values for all rows."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_shape": "objects"})
+        )
+>       assert [row["rowid"] for row in payload["rows"]] == [2, 3, 4, 5, 6]
+E       assert [1, 2, 3, 4, 5] == [2, 3, 4, 5, 6]
+E         
+E         At index 0 diff: 1 != 2
+E         
+E         Full diff:
+E           [
+E         +     1,
+E               2,
+E               3,
+E               4,
+E               5,
+E         -     6,
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:486: AssertionError
+____________________ TestError.test_unknown_sort_column_400 ____________________
+
+self = <test_checkpoint_2.TestError object at 0x72fc4ad4d100>
+client = <httpx.Client object at 0x72fc4aaa2960>
+cp2_dataset_id = 'd5cab930d56ff3e9f04b873cb2c10c48'
+
+    @pytest.mark.error
+    def test_unknown_sort_column_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Unknown _sort or _sort_desc columns return HTTP 400."""
+        response = dataset_request(client, cp2_dataset_id, params={"_sort": "nope"})
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:547: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["name","age","city"],"ok":true,"query_ms":0.08225440979003906,"rows":[["Alice",30,"Portland"],["Bob",25,"Seattle"],["Charlie",35,"Portland"],["Diana",25,"Austin"],["Eve",30,"Seattle"]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+__________________ TestError.test_empty_sort_value_400[_sort] __________________
+
+self = <test_checkpoint_2.TestError object at 0x72fc4ad4d7c0>
+client = <httpx.Client object at 0x72fc4aaa2960>
+cp2_dataset_id = '48639b1777939acc2670d9a8d553fbe1', param_name = '_sort'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize("param_name", ["_sort", "_sort_desc"])
+    def test_empty_sort_value_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        param_name: str,
+    ) -> None:
+        """Empty _sort or _sort_desc values are rejected with 400."""
+        response = dataset_request(client, cp2_dataset_id, params={param_name: ""})
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:566: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["name","age","city"],"ok":true,"query_ms":0.07724761962890625,"rows":[["Alice",30,"Portland"],["Bob",25,"Seattle"],["Charlie",35,"Portland"],["Diana",25,"Austin"],["Eve",30,"Seattle"]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+______________________ TestCore.test_filter_sort_paginate ______________________
+
+self = <test_checkpoint_3.TestCore object at 0x72fc4ab81550>
+client = <httpx.Client object at 0x72fc4acef0e0>
+cp3_dataset_id = 'b631d62da543392d05ca59d5ddd9ecce'
+
+    @pytest.mark.functionality
+    def test_filter_sort_paginate(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Filtering is applied before sorting and pagination."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={
+                    "price__greater": "9.99",
+                    "_sort": "price",
+                    "_size": "2",
+                },
+            )
+        )
+        assert payload["total"] == 3
+>       assert [row[0] for row in payload["rows"]] == ["Gadget E", "Widget B"]
+E       AssertionError: assert ['Widget B', 'Gadget D'] == ['Gadget E', 'Widget B']
+E         
+E         At index 0 diff: 'Widget B' != 'Gadget E'
+E         
+E         Full diff:
+E           [
+E         -     'Gadget E',
+E               'Widget B',
+E         +     'Gadget D',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:172: AssertionError
+________________ TestFunctionality.test_filter_sort_ties_stable ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x72fc4ac3a390>
+client = <httpx.Client object at 0x72fc4acef0e0>
+local_source_server = <conftest.SourceServer object at 0x72fc4aa87350>
+
+    @pytest.mark.functionality
+    def test_filter_sort_ties_stable(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Sorting retains source-file order for equal sort-key values."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/filter_tie.csv",
+            b"name,price,category\n"
+            b"first,10,tools\n"
+            b"second,10,tools\n"
+            b"third,9,tools\n"
+            b"fourth,10,other\n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"category__exact": "tools", "_sort": "price"},
+            )
+        )
+>       assert [row[0] for row in payload["rows"]] == [
+            "third",
+            "first",
+            "second",
+        ]
+E       AssertionError: assert ['first', 'second', 'third'] == ['third', 'first', 'second']
+E         
+E         At index 0 diff: 'first' != 'third'
+E         
+E         Full diff:
+E           [
+E         -     'third',
+E               'first',
+E               'second',
+E         +     'third',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:481: AssertionError
+_____________ TestFunctionality.test_exact_whitespace_value_match ______________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x72fc4ac39520>
+client = <httpx.Client object at 0x72fc4acef0e0>
+local_source_server = <conftest.SourceServer object at 0x72fc4aba6c90>
+
+    @pytest.mark.functionality
+    def test_exact_whitespace_value_match(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Exact comparator matches when filter value includes significant whitespace."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/ws_exact_pos.csv",
+            b"name,label\nAlpha, hello \nBeta,world\nGamma, hello \n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"label__exact": " hello "},
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 0 == 2
+
+.evaluation_tests/test_checkpoint_3.py:567: AssertionError
+_ TestFunctionality.test_numeric_like_cells_preserve_whitespace_for_string_filters _
+
+self = <test_checkpoint_3.TestFunctionality object at 0x72fc4ac3a840>
+client = <httpx.Client object at 0x72fc4acef0e0>
+local_source_server = <conftest.SourceServer object at 0x72fc4ab05550>
+
+    @pytest.mark.functionality
+    def test_numeric_like_cells_preserve_whitespace_for_string_filters(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """String filters preserve significant whitespace in textual cells."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/textual_whitespace.csv",
+            b"code,label\n A10 ,padded\nA10,plain\nB210,other\n",
+        )
+        exact = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"code__exact": " A10 "},
+            )
+        )
+        contains = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"code__contains": "10 "},
+            )
+        )
+>       assert [row[1] for row in exact["rows"]] == ["padded"]
+E       AssertionError: assert [] == ['padded']
+E         
+E         Right contains one more item: 'padded'
+E         
+E         Full diff:
+E         + []
+E         - [
+E         -     'padded',
+E         - ]
+
+.evaluation_tests/test_checkpoint_3.py:620: AssertionError
+_______________________ TestError.test_duplicate_key_400 _______________________
+
+self = <test_checkpoint_3.TestError object at 0x72fc4abc4110>
+client = <httpx.Client object at 0x72fc4acef0e0>
+cp3_dataset_id = '23dbf8c9ca75b858d7127a70416d3055'
+
+    @pytest.mark.error
+    def test_duplicate_key_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Duplicate filter keys in one request return HTTP 400."""
+        response = client.get(
+            f"/datasets/{cp3_dataset_id}"
+            "?category__exact=tools&category__exact=electronics"
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:734: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0762939453125,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget E",10.0,"tools",45]],"total":3}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+__________________ TestError.test_duplicate_identical_key_400 __________________
+
+self = <test_checkpoint_3.TestError object at 0x72fc4ac3b650>
+client = <httpx.Client object at 0x72fc4acef0e0>
+cp3_dataset_id = 'd0248be05ef3b15086784f166fa4789a'
+
+    @pytest.mark.error
+    def test_duplicate_identical_key_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Repeated identical filter key returns HTTP 400."""
+        response = client.get(
+            f"/datasets/{cp3_dataset_id}"
+            "?category__exact=tools&category__exact=tools"
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:747: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.06413459777832031,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget E",10.0,"tools",45]],"total":3}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+____________________ TestCore.test_export_filter_sort_page _____________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abc5df0>
+client = <httpx.Client object at 0x72fc4acef500>
+cp4_csv_dataset_id = 'e57448c2700ca3ede0d96a2d836ff903'
+
+    def test_export_filter_sort_page(
+        self,
+        client: httpx.Client,
+        cp4_csv_dataset_id: str,
+    ) -> None:
+        """Export applies filter, sort, and pagination parameters consistently."""
+        response = export_request(
+            client,
+            cp4_csv_dataset_id,
+            params={
+                "category__exact": "books",
+                "_sort": "price",
+                "_size": "1",
+            },
+        )
+        rows = parse_csv_response_bytes(response.content)
+>       assert rows == [
+            ["name", "price", "category"],
+            ["Paperback", "5.99", "books"],
+        ]
+E       AssertionError: assert [['name', 'price', 'category'], ['Paperback', '5.99', 'books'], ['Hardcover', '12.99', 'books']] == [['name', 'price', 'category'], ['Paperback', '5.99', 'books']]
+E         
+E         Left contains one more item: ['Hardcover', '12.99', 'books']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'name',
+E                   'price',
+E                   'category',
+E               ],
+E               [
+E                   'Paperback',
+E                   '5.99',
+E                   'books',
+E               ],
+E         +     [
+E         +         'Hardcover',
+E         +         '12.99',
+E         +         'books',
+E         +     ],
+E           ]
+
+.evaluation_tests/test_checkpoint_4.py:197: AssertionError
+_______________________ TestCore.test_upload_file_field ________________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abc9280>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    def test_upload_file_field(self, client: httpx.Client) -> None:
+        """Upload accepts multipart file field and stores queryable dataset."""
+        response = upload_request(
+            client,
+            field_name="file",
+            filename="upload.csv",
+            content=b"name,score\na,1\nb,2\n",
+            content_type="text/csv",
+        )
+>       payload = assert_ok_envelope(response)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_4.py:273: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+____________________ TestCore.test_upload_attachment_field _____________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abc8230>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.functionality
+    def test_upload_attachment_field(self, client: httpx.Client) -> None:
+        """Upload accepts multipart attachment field and stores queryable dataset."""
+        response = upload_request(
+            client,
+            field_name="attachment",
+            filename="upload.csv",
+            content=b"name,score\na,1\n",
+            content_type="text/csv",
+        )
+>       payload = assert_ok_envelope(response)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_4.py:288: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+____________________ TestCore.test_upload_missing_file_400 _____________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abc8530>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.error
+    def test_upload_missing_file_400(self, client: httpx.Client) -> None:
+        """Upload without file or attachment returns HTTP 400 error envelope."""
+        response = client.post("/upload", files={"description": (None, "meta")})
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:297: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______________ TestCore.test_upload_same_content_deterministic ________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abc4bc0>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    def test_upload_same_content_deterministic(
+        self, client: httpx.Client
+    ) -> None:
+        """Re-uploading identical CSV bytes returns the same dataset id."""
+        content = b"name,score\na,1\n"
+>       first = assert_ok_envelope(
+            upload_request(
+                client,
+                field_name="file",
+                filename="a.csv",
+                content=content,
+                content_type="text/csv",
+            )
+        )
+
+.evaluation_tests/test_checkpoint_4.py:304: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+____________________ TestCore.test_convert_spreadsheet[xls] ____________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abc52e0>
+client = <httpx.Client object at 0x72fc4acef500>
+local_source_server = <conftest.SourceServer object at 0x72fc4ab3fd70>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+ext = 'xls', content_type = 'application/vnd.ms-excel'
+
+    @pytest.mark.parametrize(
+        ("ext", "content_type"),
+        _SPREADSHEET_TYPES,
+        ids=["xlsx", "xls"],
+    )
+    def test_convert_spreadsheet(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        spreadsheet_samples,
+        ext: str,
+        content_type: str,
+    ) -> None:
+        """Convert ingests .xls and .xlsx and exposes spreadsheet query semantics."""
+        local_source_server.set_route(
+            f"/sample.{ext}",
+            body=spreadsheet_samples[ext],
+            headers={"Content-Type": content_type},
+        )
+>       payload = assert_ok_envelope(
+            convert_request(client, local_source_server.url(f"/sample.{ext}"))
+        )
+
+.evaluation_tests/test_checkpoint_4.py:343: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+___________________ TestCore.test_spreadsheet_query_controls ___________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abc84d0>
+client = <httpx.Client object at 0x72fc4acef500>
+local_source_server = <conftest.SourceServer object at 0x72fc4aba6510>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+
+    def test_spreadsheet_query_controls(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        spreadsheet_samples,
+    ) -> None:
+        """Spreadsheet datasets support data endpoint query controls."""
+        local_source_server.set_route(
+            "/parity.xlsx", body=spreadsheet_samples["xlsx"]
+        )
+        dataset_id = extract_dataset_id(
+            assert_ok_envelope(
+                convert_request(client, local_source_server.url("/parity.xlsx"))
+            )["endpoint"]
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={
+                    "_sort": "col c",
+                    "_offset": "1",
+                    "_size": "1",
+                    "_shape": "objects",
+                },
+            )
+        )
+        assert payload["total"] == 2
+>       assert payload["rows"] == [
+            {"rowid": 2, "col a": "a1", "col b": "b1", "col c": "z"}
+        ]
+E       AssertionError: assert [{'col a': 'a2', 'col b': 'b2', 'col c': 'a', 'rowid': 2}] == [{'rowid': 2, 'col a': 'a1', 'col b': 'b1', 'col c': 'z'}]
+E         
+E         At index 0 diff: {'col a': 'a2', 'col b': 'b2', 'col c': 'a', 'rowid': 2} != {'rowid': 2, 'col a': 'a1', 'col b': 'b1', 'col c': 'z'}
+E         
+E         Full diff:
+E           [
+E               {
+E         -         'col a': 'a1',
+E         ?                    ^
+E         +         'col a': 'a2',
+E         ?                    ^
+E         -         'col b': 'b1',
+E         ?                    ^
+E         +         'col b': 'b2',
+E         ?                    ^
+E         -         'col c': 'z',
+E         ?                   ^
+E         +         'col c': 'a',
+E         ?                   ^
+E                   'rowid': 2,
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_4.py:379: AssertionError
+__________________ TestCore.test_upload_multisheet_first_only __________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abc89e0>
+client = <httpx.Client object at 0x72fc4acef500>
+multisheet_first_only = b'PK\x03\x04\x14\x00\x00\x00\x08\x00.\x8dc\\f\xaa\x82\xb7\xe0\x00\x00\x00;\x02\x00\x00\x0b\x00\x00\x00_rels/.rels\xad\...x01\x0e\x10\x00\x00xl/worksheets/sheet2.xmlPK\x05\x06\x00\x00\x00\x00\n\x00\n\x00\x85\x02\x00\x00(\x11\x00\x00\x00\x00'
+
+    def test_upload_multisheet_first_only(
+        self,
+        client: httpx.Client,
+        multisheet_first_only: bytes,
+    ) -> None:
+        """Uploaded multi-sheet workbooks ingest only the first worksheet."""
+        response = upload_request(
+            client,
+            field_name="file",
+            filename="multisheet.xlsx",
+            content=multisheet_first_only,
+            content_type=(
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            ),
+        )
+        dataset_id = extract_dataset_id(
+>           assert_ok_envelope(response)["endpoint"]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+.evaluation_tests/test_checkpoint_4.py:421: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_____________________ TestCore.test_upload_xlsx_attachment _____________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abc9550>
+client = <httpx.Client object at 0x72fc4acef500>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+
+    @pytest.mark.functionality
+    def test_upload_xlsx_attachment(
+        self, client: httpx.Client, spreadsheet_samples
+    ) -> None:
+        """Upload accepts an xlsx attachment and returns spreadsheet rows."""
+        response = upload_request(
+            client,
+            field_name="attachment",
+            filename="sample.xlsx",
+            content=spreadsheet_samples["xlsx"],
+            content_type=(
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            ),
+        )
+>       payload = assert_ok_envelope(response)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_4.py:459: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_____________________ TestCore.test_upload_xls_attachment ______________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abc9a90>
+client = <httpx.Client object at 0x72fc4acef500>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+
+    @pytest.mark.functionality
+    def test_upload_xls_attachment(
+        self,
+        client: httpx.Client,
+        spreadsheet_samples,
+    ) -> None:
+        """Upload accepts an xls attachment and returns spreadsheet rows."""
+        response = upload_request(
+            client,
+            field_name="attachment",
+            filename="sample.xls",
+            content=spreadsheet_samples["xls"],
+            content_type="application/vnd.ms-excel",
+        )
+>       payload = assert_ok_envelope(response)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_4.py:479: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+___________________ TestCore.test_upload_csv_charset_honored ___________________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abca3f0>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.functionality
+    def test_upload_csv_charset_honored(
+        self,
+        client: httpx.Client,
+    ) -> None:
+        """Upload uses explicit charset for text CSV payloads."""
+        response = client.post(
+            "/upload",
+            params={"charset": "iso-8859-1"},
+            files={
+                "file": (
+                    "latin1.csv",
+                    "name\ncafé\n".encode("iso-8859-1"),
+                    "text/csv",
+                )
+            },
+        )
+        dataset_id = extract_dataset_id(
+>           assert_ok_envelope(response)["endpoint"]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+.evaluation_tests/test_checkpoint_4.py:524: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+________ TestCore.test_convert_spreadsheet_invalid_charset_ignored[xls] ________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abcad20>
+client = <httpx.Client object at 0x72fc4acef500>
+local_source_server = <conftest.SourceServer object at 0x72fc4a55a4e0>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+ext = 'xls', content_type = 'application/vnd.ms-excel'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("ext", "content_type"),
+        _SPREADSHEET_TYPES,
+        ids=["xlsx", "xls"],
+    )
+    def test_convert_spreadsheet_invalid_charset_ignored(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        spreadsheet_samples,
+        ext: str,
+        content_type: str,
+    ) -> None:
+        """Spreadsheet convert ignores invalid charset values."""
+        local_source_server.set_route(
+            f"/charset_invalid.{ext}",
+            body=spreadsheet_samples[ext],
+            headers={"Content-Type": content_type},
+        )
+        response = convert_request(
+            client,
+            local_source_server.url(f"/charset_invalid.{ext}"),
+            params={"charset": "bad-charset-name"},
+        )
+        dataset_id = extract_dataset_id(
+>           assert_ok_envelope(response)["endpoint"]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+.evaluation_tests/test_checkpoint_4.py:555: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+________ TestCore.test_upload_spreadsheet_invalid_charset_ignored[xlsx] ________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abcb1d0>
+client = <httpx.Client object at 0x72fc4acef500>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+ext = 'xlsx'
+content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("ext", "content_type"),
+        _SPREADSHEET_TYPES,
+        ids=["xlsx", "xls"],
+    )
+    def test_upload_spreadsheet_invalid_charset_ignored(
+        self,
+        client: httpx.Client,
+        spreadsheet_samples,
+        ext: str,
+        content_type: str,
+    ) -> None:
+        """Spreadsheet upload ignores invalid charset values."""
+        response = client.post(
+            "/upload",
+            params={"charset": "bad-charset-name"},
+            files={
+                "file": (
+                    f"upload.{ext}",
+                    spreadsheet_samples[ext],
+                    content_type,
+                )
+            },
+        )
+        dataset_id = extract_dataset_id(
+>           assert_ok_envelope(response)["endpoint"]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+.evaluation_tests/test_checkpoint_4.py:586: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+________ TestCore.test_upload_spreadsheet_invalid_charset_ignored[xls] _________
+
+self = <test_checkpoint_4.TestCore object at 0x72fc4abcb500>
+client = <httpx.Client object at 0x72fc4acef500>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+ext = 'xls', content_type = 'application/vnd.ms-excel'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("ext", "content_type"),
+        _SPREADSHEET_TYPES,
+        ids=["xlsx", "xls"],
+    )
+    def test_upload_spreadsheet_invalid_charset_ignored(
+        self,
+        client: httpx.Client,
+        spreadsheet_samples,
+        ext: str,
+        content_type: str,
+    ) -> None:
+        """Spreadsheet upload ignores invalid charset values."""
+        response = client.post(
+            "/upload",
+            params={"charset": "bad-charset-name"},
+            files={
+                "file": (
+                    f"upload.{ext}",
+                    spreadsheet_samples[ext],
+                    content_type,
+                )
+            },
+        )
+        dataset_id = extract_dataset_id(
+>           assert_ok_envelope(response)["endpoint"]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+.evaluation_tests/test_checkpoint_4.py:586: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+________________ TestFunctionality.test_export_sort_desc_filter ________________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4abcaa50>
+client = <httpx.Client object at 0x72fc4acef500>
+cp4_csv_dataset_id = '334548d4ce5b47ea91aa9a0c44d0c255'
+
+    @pytest.mark.functionality
+    def test_export_sort_desc_filter(
+        self,
+        client: httpx.Client,
+        cp4_csv_dataset_id: str,
+    ) -> None:
+        """CSV export honors descending sort and filter parameters."""
+        response = export_request(
+            client,
+            cp4_csv_dataset_id,
+            params={
+                "category__exact": "books",
+                "_sort_desc": "price",
+                "_size": "1",
+            },
+        )
+        _assert_export_headers(response, cp4_csv_dataset_id)
+        rows = parse_csv_response_bytes(response.content)
+>       assert rows == [
+            ["name", "price", "category"],
+            ["Hardcover", "12.99", "books"],
+        ]
+E       AssertionError: assert [['name', 'price', 'category'], ['Hardcover', '12.99', 'books'], ['Paperback', '5.99', 'books']] == [['name', 'price', 'category'], ['Hardcover', '12.99', 'books']]
+E         
+E         Left contains one more item: ['Paperback', '5.99', 'books']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'name',
+E                   'price',
+E                   'category',
+E               ],
+E               [
+E                   'Hardcover',
+E                   '12.99',
+E                   'books',
+E               ],
+E         +     [
+E         +         'Paperback',
+E         +         '5.99',
+E         +         'books',
+E         +     ],
+E           ]
+
+.evaluation_tests/test_checkpoint_4.py:622: AssertionError
+_________________ TestFunctionality.test_upload_convert_parity _________________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4abc98b0>
+client = <httpx.Client object at 0x72fc4acef500>
+local_source_server = <conftest.SourceServer object at 0x72fc4a55d250>
+
+    @pytest.mark.functionality
+    def test_upload_convert_parity(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Upload and convert produce the same columns and rows for identical CSV."""
+        content = b"name,qty\nBolt,5\nNut,7\n"
+        local_source_server.set_route("/parity.csv", body=content)
+    
+        convert_dataset_id = extract_dataset_id(
+            assert_ok_envelope(
+                convert_request(client, local_source_server.url("/parity.csv"))
+            )["endpoint"]
+        )
+        upload_dataset_id = extract_dataset_id(
+>           assert_ok_envelope(
+                upload_request(
+                    client,
+                    field_name="file",
+                    filename="parity.csv",
+                    content=content,
+                    content_type="text/csv",
+                )
+            )["endpoint"]
+        )
+
+.evaluation_tests/test_checkpoint_4.py:680: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_______________ TestFunctionality.test_upload_field_matrix[file] _______________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4abc4530>
+client = <httpx.Client object at 0x72fc4acef500>, field_name = 'file'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("field_name", ["file", "attachment"])
+    def test_upload_field_matrix(
+        self,
+        client: httpx.Client,
+        field_name: str,
+    ) -> None:
+        """Upload accepts both file and attachment multipart field names."""
+        response = upload_request(
+            client,
+            field_name=field_name,
+            filename="matrix.csv",
+            content=b"a,b\n1,2\n",
+            content_type="text/csv",
+        )
+>       payload = assert_ok_envelope(response)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_4.py:715: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+____________ TestFunctionality.test_upload_field_matrix[attachment] ____________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4abc6ae0>
+client = <httpx.Client object at 0x72fc4acef500>, field_name = 'attachment'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("field_name", ["file", "attachment"])
+    def test_upload_field_matrix(
+        self,
+        client: httpx.Client,
+        field_name: str,
+    ) -> None:
+        """Upload accepts both file and attachment multipart field names."""
+        response = upload_request(
+            client,
+            field_name=field_name,
+            filename="matrix.csv",
+            content=b"a,b\n1,2\n",
+            content_type="text/csv",
+        )
+>       payload = assert_ok_envelope(response)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_4.py:715: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+________________ TestFunctionality.test_upload_xlsx_exportable _________________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab63890>
+client = <httpx.Client object at 0x72fc4acef500>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+
+    @pytest.mark.functionality
+    def test_upload_xlsx_exportable(
+        self,
+        client: httpx.Client,
+        spreadsheet_samples,
+    ) -> None:
+        """Uploaded XLSX datasets are exportable through the export endpoint."""
+>       payload = assert_ok_envelope(
+            upload_request(
+                client,
+                field_name="file",
+                filename="exportable.xlsx",
+                content=spreadsheet_samples["xlsx"],
+                content_type=(
+                    "application/vnd.openxmlformats-officedocument."
+                    "spreadsheetml.sheet"
+                ),
+            )
+        )
+
+.evaluation_tests/test_checkpoint_4.py:725: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_________________ TestFunctionality.test_export_charset_upload _________________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab60350>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.functionality
+    def test_export_charset_upload(
+        self,
+        client: httpx.Client,
+    ) -> None:
+        """Export of charset-encoded upload produces correct UTF-8 CSV output."""
+        response = client.post(
+            "/upload",
+            params={"charset": "iso-8859-1"},
+            files={
+                "file": (
+                    "latin1.csv",
+                    "name\ncafé\n".encode("iso-8859-1"),
+                    "text/csv",
+                )
+            },
+        )
+        dataset_id = extract_dataset_id(
+>           assert_ok_envelope(response)["endpoint"]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+.evaluation_tests/test_checkpoint_4.py:785: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_______ TestFunctionality.test_convert_rejects_corrupt_spreadsheet[xlsx] _______
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab611f0>
+client = <httpx.Client object at 0x72fc4acef500>
+local_source_server = <conftest.SourceServer object at 0x72fc4aaa1fd0>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+ext = 'xlsx'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("ext",),
+        [("xlsx",), ("xls",)],
+        ids=["xlsx", "xls"],
+    )
+    def test_convert_rejects_corrupt_spreadsheet(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        spreadsheet_samples,
+        ext: str,
+    ) -> None:
+        """Corrupt spreadsheet data is rejected by conversion with HTTP 400."""
+        local_source_server.set_route(
+            f"/corrupt.{ext}",
+            body=spreadsheet_samples[ext][:100],
+        )
+        response = convert_request(
+            client, local_source_server.url(f"/corrupt.{ext}")
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:812: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______ TestFunctionality.test_convert_rejects_corrupt_spreadsheet[xls] ________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab61520>
+client = <httpx.Client object at 0x72fc4acef500>
+local_source_server = <conftest.SourceServer object at 0x72fc4aaa12e0>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+ext = 'xls'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("ext",),
+        [("xlsx",), ("xls",)],
+        ids=["xlsx", "xls"],
+    )
+    def test_convert_rejects_corrupt_spreadsheet(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        spreadsheet_samples,
+        ext: str,
+    ) -> None:
+        """Corrupt spreadsheet data is rejected by conversion with HTTP 400."""
+        local_source_server.set_route(
+            f"/corrupt.{ext}",
+            body=spreadsheet_samples[ext][:100],
+        )
+        response = convert_request(
+            client, local_source_server.url(f"/corrupt.{ext}")
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:812: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______ TestFunctionality.test_upload_rejects_corrupt_spreadsheet[xlsx] ________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab61a00>
+client = <httpx.Client object at 0x72fc4acef500>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+ext = 'xlsx'
+content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("ext", "content_type"),
+        _SPREADSHEET_TYPES,
+        ids=["xlsx", "xls"],
+    )
+    def test_upload_rejects_corrupt_spreadsheet(
+        self,
+        client: httpx.Client,
+        spreadsheet_samples,
+        ext: str,
+        content_type: str,
+    ) -> None:
+        """Corrupt spreadsheet uploads are rejected with HTTP 400."""
+        response = upload_request(
+            client,
+            field_name="file",
+            filename=f"corrupt.{ext}",
+            content=spreadsheet_samples[ext][:100],
+            content_type=content_type,
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:835: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+________ TestFunctionality.test_upload_rejects_corrupt_spreadsheet[xls] ________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab61ca0>
+client = <httpx.Client object at 0x72fc4acef500>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+ext = 'xls', content_type = 'application/vnd.ms-excel'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("ext", "content_type"),
+        _SPREADSHEET_TYPES,
+        ids=["xlsx", "xls"],
+    )
+    def test_upload_rejects_corrupt_spreadsheet(
+        self,
+        client: httpx.Client,
+        spreadsheet_samples,
+        ext: str,
+        content_type: str,
+    ) -> None:
+        """Corrupt spreadsheet uploads are rejected with HTTP 400."""
+        response = upload_request(
+            client,
+            field_name="file",
+            filename=f"corrupt.{ext}",
+            content=spreadsheet_samples[ext][:100],
+            content_type=content_type,
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:835: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+____________ TestFunctionality.test_spreadsheet_support_matrix[xls] ____________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab626c0>
+client = <httpx.Client object at 0x72fc4acef500>
+local_source_server = <conftest.SourceServer object at 0x72fc4aa87f20>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+extension = 'xls'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("extension", ["xls", "xlsx"])
+    def test_spreadsheet_support_matrix(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        spreadsheet_samples,
+        extension: str,
+    ) -> None:
+        """Conversion supports both xls and xlsx spreadsheet formats."""
+        route = f"/matrix.{extension}"
+        local_source_server.set_route(
+            route, body=spreadsheet_samples[extension]
+        )
+        dataset_id = extract_dataset_id(
+>           assert_ok_envelope(
+                convert_request(client, local_source_server.url(route))
+            )["endpoint"]
+        )
+
+.evaluation_tests/test_checkpoint_4.py:870: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+____________ TestFunctionality.test_upload_diff_name_deterministic _____________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab62cf0>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.functionality
+    def test_upload_diff_name_deterministic(self, client: httpx.Client) -> None:
+        """Re-uploading same bytes with a different CSV filename preserves dataset id."""
+        content = b"x,y\n1,2\n"
+>       first = assert_ok_envelope(
+            upload_request(
+                client,
+                field_name="file",
+                filename="one.csv",
+                content=content,
+                content_type="text/csv",
+            )
+        )
+
+.evaluation_tests/test_checkpoint_4.py:882: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_ TestFunctionality.test_spreadsheet_upload_same_bytes_are_deterministic[same.xls-xls-application/vnd.ms-excel] _
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4abc9100>
+client = <httpx.Client object at 0x72fc4acef500>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+filename = 'same.xls', extension = 'xls'
+content_type = 'application/vnd.ms-excel'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("filename", "extension", "content_type"),
+        [
+            ("same.xls", "xls", "application/vnd.ms-excel"),
+            (
+                "same.xlsx",
+                "xlsx",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ),
+        ],
+    )
+    def test_spreadsheet_upload_same_bytes_are_deterministic(
+        self,
+        client: httpx.Client,
+        spreadsheet_samples,
+        filename: str,
+        extension: str,
+        content_type: str,
+    ) -> None:
+        """Spreadsheet re-uploads of identical bytes return the same dataset id."""
+>       first = assert_ok_envelope(
+            upload_request(
+                client,
+                field_name="file",
+                filename=filename,
+                content=spreadsheet_samples[extension],
+                content_type=content_type,
+            )
+        )
+
+.evaluation_tests/test_checkpoint_4.py:923: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_ TestFunctionality.test_spreadsheet_upload_same_bytes_are_deterministic[same.xlsx-xlsx-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet] _
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4abc8710>
+client = <httpx.Client object at 0x72fc4acef500>
+spreadsheet_samples = {'xls': b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00;\x00\x03\x0...00\x00\x00\x04\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00?\x02\x00\x00y\x10\x00\x00\x00\x00'}
+filename = 'same.xlsx', extension = 'xlsx'
+content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("filename", "extension", "content_type"),
+        [
+            ("same.xls", "xls", "application/vnd.ms-excel"),
+            (
+                "same.xlsx",
+                "xlsx",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ),
+        ],
+    )
+    def test_spreadsheet_upload_same_bytes_are_deterministic(
+        self,
+        client: httpx.Client,
+        spreadsheet_samples,
+        filename: str,
+        extension: str,
+        content_type: str,
+    ) -> None:
+        """Spreadsheet re-uploads of identical bytes return the same dataset id."""
+>       first = assert_ok_envelope(
+            upload_request(
+                client,
+                field_name="file",
+                filename=filename,
+                content=spreadsheet_samples[extension],
+                content_type=content_type,
+            )
+        )
+
+.evaluation_tests/test_checkpoint_4.py:923: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+____________ TestFunctionality.test_upload_unrecognized_format_400 _____________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4abc9d30>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.error
+    def test_upload_unrecognized_format_400(
+        self,
+        client: httpx.Client,
+    ) -> None:
+        """Upload of an unsupported file type returns HTTP 400."""
+        response = upload_request(
+            client,
+            field_name="file",
+            filename="opaque.bin",
+            content=b"\x00\x01\x02\x03",
+            content_type="application/octet-stream",
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:956: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+______________ TestFunctionality.test_export_matches_query_params ______________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab62b70>
+client = <httpx.Client object at 0x72fc4acef500>
+local_source_server = <conftest.SourceServer object at 0x72fc4aa62030>
+
+    @pytest.mark.functionality
+    def test_export_matches_query_params(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Export applies filter, sort, offset, size, and shape same as data query."""
+        local_source_server.set_route(
+            "/parity_export.csv",
+            body=(
+                b"name,category,city\n"
+                b"Paperback,books,Paris\n"
+                b"Hardcover,books,Lyon\n"
+                b"Lamp,home,Rome\n"
+                b"Notebook,books,Berlin\n"
+            ),
+        )
+        dataset_id = extract_dataset_id(
+            assert_ok_envelope(
+                convert_request(
+                    client, local_source_server.url("/parity_export.csv")
+                )
+            )["endpoint"]
+        )
+        params = {
+            "category__exact": "books",
+            "_sort_desc": "name",
+            "_offset": "1",
+            "_size": "2",
+            "_shape": "objects",
+            "_rowid": "hide",
+            "_total": "hide",
+        }
+        query_payload = assert_ok_envelope(
+            dataset_request(client, dataset_id, params=params)
+        )
+        export_rows = parse_csv_response_bytes(
+            export_request(client, dataset_id, params=params).content
+        )
+    
+        assert export_rows[0] == query_payload["columns"]
+        query_rows_as_text = [
+            [str(row[column]) for column in query_payload["columns"]]
+            for row in query_payload["rows"]
+        ]
+>       assert export_rows[1:] == query_rows_as_text
+E       AssertionError: assert [['Paperback', 'books', 'Paris'], ['Notebook', 'books', 'Berlin'], ['Hardcover', 'books', 'Lyon']] == [['Notebook', 'books', 'Berlin'], ['Hardcover', 'books', 'Lyon']]
+E         
+E         At index 0 diff: ['Paperback', 'books', 'Paris'] != ['Notebook', 'books', 'Berlin']
+E         Left contains one more item: ['Hardcover', 'books', 'Lyon']
+E         
+E         Full diff:
+E           [
+E         +     [
+E         +         'Paperback',
+E         +         'books',
+E         +         'Paris',
+E         +     ],
+E               [
+E                   'Notebook',
+E                   'books',
+E                   'Berlin',
+E               ],
+E               [
+E                   'Hardcover',
+E                   'books',
+E                   'Lyon',
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_4.py:1003: AssertionError
+________________ TestFunctionality.test_uploaded_export_params _________________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab61fa0>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.functionality
+    def test_uploaded_export_params(
+        self,
+        client: httpx.Client,
+    ) -> None:
+        """Uploaded datasets preserve query params when exporting to CSV."""
+>       payload = assert_ok_envelope(
+            upload_request(
+                client,
+                field_name="file",
+                filename="uploaded_parity.csv",
+                content=(
+                    b"name,category,city\n"
+                    b"Paperback,books,Paris\n"
+                    b"Hardcover,books,Lyon\n"
+                    b"Lamp,home,Rome\n"
+                    b"Notebook,books,Berlin\n"
+                ),
+                content_type="text/csv",
+            )
+        )
+
+.evaluation_tests/test_checkpoint_4.py:1011: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_________________ TestFunctionality.test_upload_empty_file_400 _________________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab61640>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.functionality
+    def test_upload_empty_file_400(self, client: httpx.Client) -> None:
+        """Upload of a zero-byte file returns HTTP 400 as unparseable."""
+        response = upload_request(
+            client,
+            field_name="file",
+            filename="empty.csv",
+            content=b"",
+            content_type="text/csv",
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:1049: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+____ TestFunctionality.test_upload_field_name_interchangeable_deterministic ____
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab63290>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.functionality
+    def test_upload_field_name_interchangeable_deterministic(
+        self,
+        client: httpx.Client,
+    ) -> None:
+        """Uploading identical bytes under different field names returns the same dataset id."""
+        content = b"x,y\n1,2\n"
+>       first = assert_ok_envelope(
+            upload_request(
+                client,
+                field_name="file",
+                filename="interchange.csv",
+                content=content,
+                content_type="text/csv",
+            )
+        )
+
+.evaluation_tests/test_checkpoint_4.py:1082: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:27: AssertionError
+________________ TestFunctionality.test_upload_header_only_csv _________________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab9da90>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.error
+    def test_upload_header_only_csv(self, client: httpx.Client) -> None:
+        """Upload of a header-only CSV with no data rows returns HTTP 400."""
+        response = upload_request(
+            client,
+            field_name="file",
+            filename="header_only.csv",
+            content=b"alpha,beta,gamma\n",
+            content_type="text/csv",
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:1144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_ TestFunctionality.test_upload_invalid_first_sheet_rejected[empty-first-sheet] _
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab9fe90>
+client = <httpx.Client object at 0x72fc4acef500>
+multisheet_first_only = b'PK\x03\x04\x14\x00\x00\x00\x08\x00.\x8dc\\f\xaa\x82\xb7\xe0\x00\x00\x00;\x02\x00\x00\x0b\x00\x00\x00_rels/.rels\xad\...x01\x0e\x10\x00\x00xl/worksheets/sheet2.xmlPK\x05\x06\x00\x00\x00\x00\n\x00\n\x00\x85\x02\x00\x00(\x11\x00\x00\x00\x00'
+filename = 'multisheet_empty_first.xlsx'
+builder = <function _xlsx_with_empty_first_sheet at 0x72fc4a9a00e0>
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("filename", "builder"),
+        [
+            (
+                "multisheet_empty_first.xlsx",
+                _xlsx_with_empty_first_sheet,
+            ),
+            (
+                "multisheet_header_only_first.xlsx",
+                _xlsx_with_header_only_first_sheet,
+            ),
+        ],
+        ids=["empty-first-sheet", "header-only-first-sheet"],
+    )
+    def test_upload_invalid_first_sheet_rejected(
+        self,
+        client: httpx.Client,
+        multisheet_first_only: bytes,
+        filename: str,
+        builder,
+    ) -> None:
+        """Upload rejects workbooks whose first sheet is not tabular."""
+        response = upload_request(
+            client,
+            field_name="file",
+            filename=filename,
+            content=builder(multisheet_first_only),
+            content_type=(
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            ),
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:1178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_ TestFunctionality.test_upload_invalid_first_sheet_rejected[header-only-first-sheet] _
+
+self = <test_checkpoint_4.TestFunctionality object at 0x72fc4ab9c080>
+client = <httpx.Client object at 0x72fc4acef500>
+multisheet_first_only = b'PK\x03\x04\x14\x00\x00\x00\x08\x00.\x8dc\\f\xaa\x82\xb7\xe0\x00\x00\x00;\x02\x00\x00\x0b\x00\x00\x00_rels/.rels\xad\...x01\x0e\x10\x00\x00xl/worksheets/sheet2.xmlPK\x05\x06\x00\x00\x00\x00\n\x00\n\x00\x85\x02\x00\x00(\x11\x00\x00\x00\x00'
+filename = 'multisheet_header_only_first.xlsx'
+builder = <function _xlsx_with_header_only_first_sheet at 0x72fc4a9a0180>
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("filename", "builder"),
+        [
+            (
+                "multisheet_empty_first.xlsx",
+                _xlsx_with_empty_first_sheet,
+            ),
+            (
+                "multisheet_header_only_first.xlsx",
+                _xlsx_with_header_only_first_sheet,
+            ),
+        ],
+        ids=["empty-first-sheet", "header-only-first-sheet"],
+    )
+    def test_upload_invalid_first_sheet_rejected(
+        self,
+        client: httpx.Client,
+        multisheet_first_only: bytes,
+        filename: str,
+        builder,
+    ) -> None:
+        """Upload rejects workbooks whose first sheet is not tabular."""
+        response = upload_request(
+            client,
+            field_name="file",
+            filename=filename,
+            content=builder(multisheet_first_only),
+            content_type=(
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            ),
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:1178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+____________________ TestError.test_upload_invalid_body_400 ____________________
+
+self = <test_checkpoint_4.TestError object at 0x72fc4ab9ca10>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.error
+    def test_upload_invalid_body_400(self, client: httpx.Client) -> None:
+        """Malformed multipart upload body returns HTTP 400 standard error."""
+        response = client.post(
+            "/upload",
+            headers={"Content-Type": "multipart/form-data"},
+            content=b"garbage",
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_4.py:1196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_____________________ TestError.test_upload_json_rejected ______________________
+
+self = <test_checkpoint_4.TestError object at 0x72fc4ab9ce30>
+client = <httpx.Client object at 0x72fc4acef500>
+
+    @pytest.mark.error
+    def test_upload_json_rejected(self, client: httpx.Client) -> None:
+        """Non-multipart JSON upload requests return HTTP 415."""
+        response = client.post("/upload", json={"file": "abc"})
+>       assert_error_envelope(response, status_code=415)
+
+.evaluation_tests/test_checkpoint_4.py:1202: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: <!doctype html>
+E       <html lang=en>
+E       <title>500 Internal Server Error</title>
+E       <h1>Internal Server Error</h1>
+E       <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+
+.evaluation_tests/_helpers.py:39: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_whitespace - AssertionError: assert [['left', 'space'], ['right', 'space']] == [['left', '  space'], ['right', 'space  ']]
+  
+  At index 0 diff: ['left', 'space'] != ['left', '  space']
+  
+  Full diff:
+    [
+        [
+            'left',
+  -         '  space',
+  ?          --
+  +         'space',
+        ],
+        [
+            'right',
+  -         'space  ',
+  ?               --
+  +         'space',
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_header_and_time_whitespace - AssertionError: assert [['Alice', '08:30'], ['Bob', '09:15']] == [['Alice', ' 08:30 '], ['Bob', '09:15']]
+  
+  At index 0 diff: ['Alice', '08:30'] != ['Alice', ' 08:30 ']
+  
+  Full diff:
+    [
+        [
+            'Alice',
+  -         ' 08:30 ',
+  ?          -     -
+  +         '08:30',
+        ],
+        [
+            'Bob',
+            '09:15',
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_trailing_empty_line_excluded - AssertionError: {"error":"Non-tabular content - inconsistent column counts","ok":false}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_ascending_is_stable - AssertionError: assert ['Alice', 30, 'Portland'] == ['Bob', 25, 'Seattle']
+  
+  At index 0 diff: 'Alice' != 'Bob'
+  
+  Full diff:
+    [
+  -     'Bob',
+  -     25,
+  -     'Seattle',
+  +     'Alice',
+  +     30,
+  +     'Portland',
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_shape_objects_includes_rowid - assert 1 == 2
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_ignores_sort - AssertionError: assert 'Alice' == 'Bob'
+  
+  - Bob
+  + Alice
+FAILED .evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_sequential_all_rows - assert [1, 2, 3, 4, 5] == [2, 3, 4, 5, 6]
+  
+  At index 0 diff: 1 != 2
+  
+  Full diff:
+    [
+  +     1,
+        2,
+        3,
+        4,
+        5,
+  -     6,
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_unknown_sort_column_400 - AssertionError: {"columns":["name","age","city"],"ok":true,"query_ms":0.08225440979003906,"rows":[["Alice",30,"Portland"],["Bob",25,"Seattle"],["Charlie",35,"Portland"],["Diana",25,"Austin"],["Eve",30,"Seattle"]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort] - AssertionError: {"columns":["name","age","city"],"ok":true,"query_ms":0.07724761962890625,"rows":[["Alice",30,"Portland"],["Bob",25,"Seattle"],["Charlie",35,"Portland"],["Diana",25,"Austin"],["Eve",30,"Seattle"]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_filter_sort_paginate - AssertionError: assert ['Widget B', 'Gadget D'] == ['Gadget E', 'Widget B']
+  
+  At index 0 diff: 'Widget B' != 'Gadget E'
+  
+  Full diff:
+    [
+  -     'Gadget E',
+        'Widget B',
+  +     'Gadget D',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_ties_stable - AssertionError: assert ['first', 'second', 'third'] == ['third', 'first', 'second']
+  
+  At index 0 diff: 'first' != 'third'
+  
+  Full diff:
+    [
+  -     'third',
+        'first',
+        'second',
+  +     'third',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_whitespace_value_match - assert 0 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_like_cells_preserve_whitespace_for_string_filters - AssertionError: assert [] == ['padded']
+  
+  Right contains one more item: 'padded'
+  
+  Full diff:
+  + []
+  - [
+  -     'padded',
+  - ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_key_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0762939453125,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget E",10.0,"tools",45]],"total":3}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_identical_key_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.06413459777832031,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget E",10.0,"tools",45]],"total":3}
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_export_filter_sort_page - AssertionError: assert [['name', 'price', 'category'], ['Paperback', '5.99', 'books'], ['Hardcover', '12.99', 'books']] == [['name', 'price', 'category'], ['Paperback', '5.99', 'books']]
+  
+  Left contains one more item: ['Hardcover', '12.99', 'books']
+  
+  Full diff:
+    [
+        [
+            'name',
+            'price',
+            'category',
+        ],
+        [
+            'Paperback',
+            '5.99',
+            'books',
+        ],
+  +     [
+  +         'Hardcover',
+  +         '12.99',
+  +         'books',
+  +     ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_file_field - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_attachment_field - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_missing_file_400 - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_same_content_deterministic - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_spreadsheet[xls] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_spreadsheet_query_controls - AssertionError: assert [{'col a': 'a2', 'col b': 'b2', 'col c': 'a', 'rowid': 2}] == [{'rowid': 2, 'col a': 'a1', 'col b': 'b1', 'col c': 'z'}]
+  
+  At index 0 diff: {'col a': 'a2', 'col b': 'b2', 'col c': 'a', 'rowid': 2} != {'rowid': 2, 'col a': 'a1', 'col b': 'b1', 'col c': 'z'}
+  
+  Full diff:
+    [
+        {
+  -         'col a': 'a1',
+  ?                    ^
+  +         'col a': 'a2',
+  ?                    ^
+  -         'col b': 'b1',
+  ?                    ^
+  +         'col b': 'b2',
+  ?                    ^
+  -         'col c': 'z',
+  ?                   ^
+  +         'col c': 'a',
+  ?                   ^
+            'rowid': 2,
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_multisheet_first_only - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_xlsx_attachment - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_xls_attachment - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_csv_charset_honored - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_spreadsheet_invalid_charset_ignored[xls] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_spreadsheet_invalid_charset_ignored[xlsx] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_spreadsheet_invalid_charset_ignored[xls] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_sort_desc_filter - AssertionError: assert [['name', 'price', 'category'], ['Hardcover', '12.99', 'books'], ['Paperback', '5.99', 'books']] == [['name', 'price', 'category'], ['Hardcover', '12.99', 'books']]
+  
+  Left contains one more item: ['Paperback', '5.99', 'books']
+  
+  Full diff:
+    [
+        [
+            'name',
+            'price',
+            'category',
+        ],
+        [
+            'Hardcover',
+            '12.99',
+            'books',
+        ],
+  +     [
+  +         'Paperback',
+  +         '5.99',
+  +         'books',
+  +     ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_convert_parity - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_field_matrix[file] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_field_matrix[attachment] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_xlsx_exportable - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_charset_upload - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_convert_rejects_corrupt_spreadsheet[xlsx] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_convert_rejects_corrupt_spreadsheet[xls] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_rejects_corrupt_spreadsheet[xlsx] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_rejects_corrupt_spreadsheet[xls] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_support_matrix[xls] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_diff_name_deterministic - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_upload_same_bytes_are_deterministic[same.xls-xls-application/vnd.ms-excel] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_upload_same_bytes_are_deterministic[same.xlsx-xlsx-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_unrecognized_format_400 - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_matches_query_params - AssertionError: assert [['Paperback', 'books', 'Paris'], ['Notebook', 'books', 'Berlin'], ['Hardcover', 'books', 'Lyon']] == [['Notebook', 'books', 'Berlin'], ['Hardcover', 'books', 'Lyon']]
+  
+  At index 0 diff: ['Paperback', 'books', 'Paris'] != ['Notebook', 'books', 'Berlin']
+  Left contains one more item: ['Hardcover', 'books', 'Lyon']
+  
+  Full diff:
+    [
+  +     [
+  +         'Paperback',
+  +         'books',
+  +         'Paris',
+  +     ],
+        [
+            'Notebook',
+            'books',
+            'Berlin',
+        ],
+        [
+            'Hardcover',
+            'books',
+            'Lyon',
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_uploaded_export_params - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_empty_file_400 - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_field_name_interchangeable_deterministic - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_header_only_csv - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_invalid_first_sheet_rejected[empty-first-sheet] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_invalid_first_sheet_rejected[header-only-first-sheet] - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestError::test_upload_invalid_body_400 - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+FAILED .evaluation_tests/test_checkpoint_4.py::TestError::test_upload_json_rejected - AssertionError: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+================== 53 failed, 180 passed in 100.23s (0:01:40) ==================

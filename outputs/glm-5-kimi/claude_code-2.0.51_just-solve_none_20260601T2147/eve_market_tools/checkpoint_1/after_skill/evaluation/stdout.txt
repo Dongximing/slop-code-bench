@@ -1,0 +1,531 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/LeRdOSGY_IWO0RF0/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 10 items
+
+.evaluation_tests/test_checkpoint_1.py::test_hub_compare_error_no_data PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_get_market_stats FAILED     [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_get_market_stats_with_type_ids FAILED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_tritanium FAILED            [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_hubs FAILED                 [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_domain_stats FAILED         [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_placid_stats FAILED         [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_rhea_orders FAILED          [ 80%]
+.evaluation_tests/test_checkpoint_1.py::test_domain_vargur FAILED        [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_hub_compare PASSED          [100%]
+
+=================================== FAILURES ===================================
+____________________________ test_get_market_stats _____________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    def test_get_market_stats(uploaded_data):
+        """Core: Get regional market statistics for The Forge."""
+        resp = httpx.get(f"{uploaded_data}/v1/market/10000002", timeout=60)
+        assert resp.status_code == 200
+        body = resp.json()
+>       assert_dict_equal(
+            body,
+            {
+                "name": "The Forge",
+                "sell_orders": 196990,
+                "buy_orders": 80242,
+                "sell_value": 138168.48,
+                "buy_value": 168450.26,
+                "unique_items": 8709,
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'buy_orders': 40, 'buy_value': 1400.63, 'name': 'The Forge', 'sell_orders': 1, ...}
+expected = {'buy_orders': 80242, 'buy_value': 168450.26, 'name': 'The Forge', 'sell_orders': 196990, ...}
+msg = '', tolerance = 0.01
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.01):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.01)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}}}
+E       assert not {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}}}
+
+.evaluation_tests/conftest.py:39: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_____________________ test_get_market_stats_with_type_ids ______________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_get_market_stats_with_type_ids(uploaded_data):
+        """Functionality: Get market stats with specific type IDs."""
+        resp = httpx.get(
+            f"{uploaded_data}/v1/market/10000002?type_ids=34,35,85392", timeout=60
+        )
+        assert resp.status_code == 200
+        body = resp.json()
+>       assert_dict_equal(
+            body,
+            {
+                "name": "The Forge",
+                "sell_orders": 196990,
+                "buy_orders": 80242,
+                "sell_value": 138168.48,
+                "buy_value": 168450.26,
+                "unique_items": 8709,
+                "types": {
+                    "Tritanium": {
+                        "buy": 3.81,
+                        "sell": 4.03,
+                        "split": 3.92,
+                        "buy_orders": 56,
+                        "sell_orders": 137,
+                    },
+                    "Pyerite": {
+                        "buy": 24.3,
+                        "sell": 25.5,
+                        "split": 24.9,
+                        "buy_orders": 48,
+                        "sell_orders": 220,
+                    },
+                    "Damage Control Mutaplasmid Residue": {
+                        "buy": 12280.0,
+                        "sell": 59140.0,
+                        "split": 35710.0,
+                        "buy_orders": 8,
+                        "sell_orders": 21,
+                    },
+                },
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:98: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'buy_orders': 40, 'buy_value': 1400.63, 'name': 'The Forge', 'sell_orders': 1, ...}
+expected = {'buy_orders': 80242, 'buy_value': 168450.26, 'name': 'The Forge', 'sell_orders': 196990, ...}
+msg = '', tolerance = 0.01
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.01):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.01)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['types']['Tritanium']['buy_orders']": {'new_value': 56, 'old_value': 37}, "root['types']['Tritanium']['sell_orders']": {'new_value': 137, 'old_value': 69}, "root['types']['Pyerite']['buy_orders']": {'new_value': 48, 'old_value': 27}, "root['types']['Pyerite']['sell_orders']": {'new_value': 220, 'old_value': 156}}}
+E       assert not {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['types']['Tritanium']['buy_orders']": {'new_value': 56, 'old_value': 37}, "root['types']['Tritanium']['sell_orders']": {'new_value': 137, 'old_value': 69}, "root['types']['Pyerite']['buy_orders']": {'new_value': 48, 'old_value': 27}, "root['types']['Pyerite']['sell_orders']": {'new_value': 220, 'old_value': 156}}}
+
+.evaluation_tests/conftest.py:39: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+________________________________ test_tritanium ________________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+orders_df =           order_id  duration  ...  volume_remain volume_total
+0       7183066786        90  ...          24000        ....              2            2
+895786  7200369348        90  ...              1            1
+
+[895787 rows x 12 columns]
+sde_data = {'materials':        typeID  materialTypeID  quantity
+0          18              34       175
+1          18           ...330, 30000331, ...}, ...}, 'type_to_name': {0: '#System', 2: 'Corporation', 3: 'Region', 4: 'Constellation', ...}, ...}
+
+    def test_tritanium(uploaded_data, orders_df, sde_data):
+        """Core: Get detailed type statistics for Tritanium."""
+        resp = httpx.get(f"{uploaded_data}/v1/market/10000002/34", timeout=60)
+        assert resp.status_code == 200
+        body = resp.json()
+    
+        # Verify static fields
+        assert body["name"] == "Tritanium"
+>       assert body["buy_orders"] == 56
+E       assert 54 == 56
+
+.evaluation_tests/test_checkpoint_1.py:142: AssertionError
+__________________________________ test_hubs ___________________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_hubs(uploaded_data):
+        """Functionality: Get market stats with top 10 trading hubs."""
+        resp = httpx.get(f"{uploaded_data}/v1/market/10000002?hubs=10", timeout=60)
+        assert resp.status_code == 200
+        body = resp.json()
+>       assert_dict_equal(
+            body,
+            {
+                "name": "The Forge",
+                "sell_orders": 196990,
+                "buy_orders": 80242,
+                "sell_value": 138168.48,
+                "buy_value": 168450.26,
+                "unique_items": 8709,
+                "hubs": [
+                    {
+                        "station": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+                        "orders": 185937,
+                        "sell_value": 75371.94,
+                    },
+                    {
+                        "station": "Uitra VI - Moon 4 - State War Academy",
+                        "orders": 1029,
+                        "sell_value": 51.88,
+                    },
+                    {
+                        "station": "Osmon II - Moon 1 - Sisters of EVE Bureau",
+                        "orders": 823,
+                        "sell_value": 34.71,
+                    },
+                    {
+                        "station": "Oijanen - LowSec Free Hub",
+                        "orders": 805,
+                        "sell_value": 254.58,
+                    },
+                    {
+                        "station": "Perimeter - 0.0% Neutral States Market HQ",
+                        "orders": 568,
+                        "sell_value": 407.9,
+                    },
+                    {
+                        "station": "Perimeter - Tranquility Trading Tower",
+                        "orders": 301,
+                        "sell_value": 193.73,
+                    },
+                    {
+                        "station": "Jita VI - Paragon Fulfillment Center",
+                        "orders": 290,
+                        "sell_value": 49.27,
+                    },
+                    {
+                        "station": "Vattuolen X - Moon 14 - Peace and Order Unit Assembly Plant",
+                        "orders": 262,
+                        "sell_value": 4.59,
+                    },
+                    {
+                        "station": "Ikami X - CreoDron Factory",
+                        "orders": 256,
+                        "sell_value": 9.1,
+                    },
+                    {
+                        "station": "Akora IX - Moon 19 - CreoDron Factory",
+                        "orders": 199,
+                        "sell_value": 6.4,
+                    },
+                ],
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:197: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'buy_orders': 40, 'buy_value': 1400.63, 'hubs': [{'orders': 192112, 'sell_value': 81473.62, 'station': 'Jita IV - Moo...ket HQ'}, {'orders': 307, 'sell_value': 9.65, 'station': 'Ikami X - CreoDron Factory'}, ...], 'name': 'The Forge', ...}
+expected = {'buy_orders': 80242, 'buy_value': 168450.26, 'hubs': [{'orders': 185937, 'sell_value': 75371.94, 'station': 'Jita IV ...rders': 301, 'sell_value': 193.73, 'station': 'Perimeter - Tranquility Trading Tower'}, ...], 'name': 'The Forge', ...}
+msg = '', tolerance = 0.01
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.01):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.01)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['hubs'][8]": {'new_value': {'station': 'Ikami X - CreoDron Factory', 'orders': 256, 'sell_value': 9.1}, 'old_value': {'station': 'Akora IX - Moon 19 - CreoDron Factory', 'orders': 271, 'sell_value': 7.66}}, "root['hubs'][0]": {'new_value': {'station': 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', 'orders': 185937, 'sell_value': 75371.94}, 'old_value': {'station': 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', 'orders': 192112, 'sell_value': 81473.62}}, "root['hubs'][6]": {'new_value': {'station': 'Jita VI - Paragon Fulfillment Center', 'orders': 290, 'sell_value': 49.27}, 'old_value': {'station': 'Perimeter - Tranquility Trading Tower', 'orders': 305, 'sell_value': 193.83}}, "root['hubs'][4]": {'new_value': {'station': 'Perimeter - 0.0% Neutral States Market HQ', 'orders': 568, 'sell_value': 407.9}, 'old_value': {'station': 'Perimeter - 0.0% Neutral States Market HQ', 'orders': 583, 'sell_value': 456.47}}, "root['hubs'][2]": {'new_value': {'station': 'Osmon II - Moon 1 - Sisters of EVE Bureau', 'orders': 823, 'sell_value': 34.71}, 'old_value': {'station': 'Osmon II - Moon 1 - Sisters of EVE Bureau', 'orders': 846, 'sell_value': 70.7}}, "root['hubs'][5]": {'new_value': {'station': 'Perimeter - Tranquility Trading Tower', 'orders': 301, 'sell_value': 193.73}, 'old_value': {'station': 'Ikami X - CreoDron Factory', 'orders': 307, 'sell_value': 9.65}}, "root['hubs'][3]": {'new_value': {'station': 'Oijanen - LowSec Free Hub', 'orders': 805, 'sell_value': 254.58}, 'old_value': {'station': 'Oijanen - LowSec Free Hub', 'orders': 821, 'sell_value': 255.16}}, "root['hubs'][1]": {'new_value': {'station': 'Uitra VI - Moon 4 - State War Academy', 'orders': 1029, 'sell_value': 51.88}, 'old_value': {'station': 'Uitra VI - Moon 4 - State War Academy', 'orders': 1095, 'sell_value': 53.41}}}, 'iterable_item_added': {"root['hubs'][9]": {'station': 'Akora IX - Moon 19 - CreoDron Factory', 'orders': 199, 'sell_value': 6.4}}, 'iterable_item_removed': {"root['hubs'][7]": {'station': 'Jita VI - Paragon Fulfillment Center', 'orders': 300, 'sell_value': 49.82}}}
+E       assert not {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['hubs'][8]": {'new_value': {'station': 'Ikami X - CreoDron Factory', 'orders': 256, 'sell_value': 9.1}, 'old_value': {'station': 'Akora IX - Moon 19 - CreoDron Factory', 'orders': 271, 'sell_value': 7.66}}, "root['hubs'][0]": {'new_value': {'station': 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', 'orders': 185937, 'sell_value': 75371.94}, 'old_value': {'station': 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', 'orders': 192112, 'sell_value': 81473.62}}, "root['hubs'][6]": {'new_value': {'station': 'Jita VI - Paragon Fulfillment Center', 'orders': 290, 'sell_value': 49.27}, 'old_value': {'station': 'Perimeter - Tranquility Trading Tower', 'orders': 305, 'sell_value': 193.83}}, "root['hubs'][4]": {'new_value': {'station': 'Perimeter - 0.0% Neutral States Market HQ', 'orders': 568, 'sell_value': 407.9}, 'old_value': {'station': 'Perimeter - 0.0% Neutral States Market HQ', 'orders': 583, 'sell_value': 456.47}}, "root['hubs'][2]": {'new_value': {'station': 'Osmon II - Moon 1 - Sisters of EVE Bureau', 'orders': 823, 'sell_value': 34.71}, 'old_value': {'station': 'Osmon II - Moon 1 - Sisters of EVE Bureau', 'orders': 846, 'sell_value': 70.7}}, "root['hubs'][5]": {'new_value': {'station': 'Perimeter - Tranquility Trading Tower', 'orders': 301, 'sell_value': 193.73}, 'old_value': {'station': 'Ikami X - CreoDron Factory', 'orders': 307, 'sell_value': 9.65}}, "root['hubs'][3]": {'new_value': {'station': 'Oijanen - LowSec Free Hub', 'orders': 805, 'sell_value': 254.58}, 'old_value': {'station': 'Oijanen - LowSec Free Hub', 'orders': 821, 'sell_value': 255.16}}, "root['hubs'][1]": {'new_value': {'station': 'Uitra VI - Moon 4 - State War Academy', 'orders': 1029, 'sell_value': 51.88}, 'old_value': {'station': 'Uitra VI - Moon 4 - State War Academy', 'orders': 1095, 'sell_value': 53.41}}}, 'iterable_item_added': {"root['hubs'][9]": {'station': 'Akora IX - Moon 19 - CreoDron Factory', 'orders': 199, 'sell_value': 6.4}}, 'iterable_item_removed': {"root['hubs'][7]": {'station': 'Jita VI - Paragon Fulfillment Center', 'orders': 300, 'sell_value': 49.82}}}
+
+.evaluation_tests/conftest.py:39: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+______________________________ test_domain_stats _______________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_domain_stats(uploaded_data):
+        """Functionality: Get Domain region stats with top 3 hubs."""
+        resp = httpx.get(f"{uploaded_data}/v1/market/10000043?hubs=3", timeout=60)
+        assert resp.status_code == 200
+        body = resp.json()
+>       assert_dict_equal(
+            body,
+            {
+                "name": "Domain",
+                "sell_orders": 70109,
+                "buy_orders": 36685,
+                "sell_value": 35467.85,
+                "buy_value": 178646.9,
+                "unique_items": 8247,
+                "hubs": [
+                    {
+                        "station": "Amarr VIII (Oris) - Emperor Family Academy",
+                        "orders": 64016,
+                        "sell_value": 12476.36,
+                    },
+                    {
+                        "station": "Misaba V - Moon 3 - Zoar and Sons Factory",
+                        "orders": 975,
+                        "sell_value": 414.93,
+                    },
+                    {
+                        "station": "Deepari II - Imperial Academy",
+                        "orders": 638,
+                        "sell_value": 35.72,
+                    },
+                ],
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:273: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'buy_orders': 272, 'buy_value': 31212.45, 'hubs': [{'orders': 66107, 'sell_value': 13508.19, 'station': 'Amarr VIII (...ns Factory'}, {'orders': 695, 'sell_value': 37.41, 'station': 'Deepari II - Imperial Academy'}], 'name': 'Domain', ...}
+expected = {'buy_orders': 36685, 'buy_value': 178646.9, 'hubs': [{'orders': 64016, 'sell_value': 12476.36, 'station': 'Amarr VIII...ns Factory'}, {'orders': 638, 'sell_value': 35.72, 'station': 'Deepari II - Imperial Academy'}], 'name': 'Domain', ...}
+msg = '', tolerance = 0.01
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.01):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.01)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['sell_orders']": {'new_value': 70109, 'old_value': 330}, "root['buy_orders']": {'new_value': 36685, 'old_value': 272}, "root['sell_value']": {'new_value': 35467.85, 'old_value': 33.41}, "root['buy_value']": {'new_value': 178646.9, 'old_value': 31212.45}, "root['unique_items']": {'new_value': 8247, 'old_value': 81}, "root['hubs'][1]": {'new_value': {'station': 'Misaba V - Moon 3 - Zoar and Sons Factory', 'orders': 975, 'sell_value': 414.93}, 'old_value': {'station': 'Misaba V - Moon 3 - Zoar and Sons Factory', 'orders': 991, 'sell_value': 415.75}}, "root['hubs'][0]": {'new_value': {'station': 'Amarr VIII (Oris) - Emperor Family Academy', 'orders': 64016, 'sell_value': 12476.36}, 'old_value': {'station': 'Amarr VIII (Oris) - Emperor Family Academy', 'orders': 66107, 'sell_value': 13508.19}}, "root['hubs'][2]": {'new_value': {'station': 'Deepari II - Imperial Academy', 'orders': 638, 'sell_value': 35.72}, 'old_value': {'station': 'Deepari II - Imperial Academy', 'orders': 695, 'sell_value': 37.41}}}}
+E       assert not {'values_changed': {"root['sell_orders']": {'new_value': 70109, 'old_value': 330}, "root['buy_orders']": {'new_value': 36685, 'old_value': 272}, "root['sell_value']": {'new_value': 35467.85, 'old_value': 33.41}, "root['buy_value']": {'new_value': 178646.9, 'old_value': 31212.45}, "root['unique_items']": {'new_value': 8247, 'old_value': 81}, "root['hubs'][1]": {'new_value': {'station': 'Misaba V - Moon 3 - Zoar and Sons Factory', 'orders': 975, 'sell_value': 414.93}, 'old_value': {'station': 'Misaba V - Moon 3 - Zoar and Sons Factory', 'orders': 991, 'sell_value': 415.75}}, "root['hubs'][0]": {'new_value': {'station': 'Amarr VIII (Oris) - Emperor Family Academy', 'orders': 64016, 'sell_value': 12476.36}, 'old_value': {'station': 'Amarr VIII (Oris) - Emperor Family Academy', 'orders': 66107, 'sell_value': 13508.19}}, "root['hubs'][2]": {'new_value': {'station': 'Deepari II - Imperial Academy', 'orders': 638, 'sell_value': 35.72}, 'old_value': {'station': 'Deepari II - Imperial Academy', 'orders': 695, 'sell_value': 37.41}}}}
+
+.evaluation_tests/conftest.py:39: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+______________________________ test_placid_stats _______________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_placid_stats(uploaded_data):
+        """Functionality: Get Placid region stats with types and hubs."""
+        resp = httpx.get(
+            f"{uploaded_data}/v1/market/10000048?hubs=3&type_ids=33076,3756",
+            timeout=60,
+        )
+        assert resp.status_code == 200
+        body = resp.json()
+    
+        # Verify region-level stats
+        assert body["name"] == "Placid"
+>       assert body["sell_orders"] == 11956
+E       assert 48 == 11956
+
+.evaluation_tests/test_checkpoint_1.py:315: AssertionError
+_______________________________ test_rhea_orders _______________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_rhea_orders(uploaded_data):
+        """Functionality: Get market stats for Rhea and related ships."""
+        resp = httpx.get(
+            f"{uploaded_data}/v1/market/10000002?type_ids=28844,28845,20185",
+            timeout=60,
+        )
+        assert resp.status_code == 200
+        body = resp.json()
+>       assert_dict_equal(
+            body,
+            {
+                "name": "The Forge",
+                "sell_orders": 196990,
+                "buy_orders": 80242,
+                "sell_value": 138168.48,
+                "buy_value": 168450.26,
+                "unique_items": 8709,
+                "types": {
+                    "Rhea": {
+                        "buy": 8570000000.0,
+                        "sell": 8799000000.0,
+                        "split": 8684500000.0,
+                        "buy_orders": 9,
+                        "sell_orders": 18,
+                    },
+                    "Rhea Blueprint": {
+                        "buy": None,
+                        "sell": None,
+                        "split": None,
+                        "buy_orders": 0,
+                        "sell_orders": 0,
+                    },
+                    "Charon": {
+                        "buy": 1673000000.0,
+                        "sell": 1818000000.0,
+                        "split": 1745500000.0,
+                        "buy_orders": 18,
+                        "sell_orders": 45,
+                    },
+                },
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:363: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'buy_orders': 40, 'buy_value': 1400.63, 'name': 'The Forge', 'sell_orders': 1, ...}
+expected = {'buy_orders': 80242, 'buy_value': 168450.26, 'name': 'The Forge', 'sell_orders': 196990, ...}
+msg = '', tolerance = 0.01
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.01):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.01)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['types']['Rhea']['buy_orders']": {'new_value': 9, 'old_value': 14}, "root['types']['Charon']['buy_orders']": {'new_value': 18, 'old_value': 10}, "root['types']['Charon']['sell_orders']": {'new_value': 45, 'old_value': 42}}}
+E       assert not {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['types']['Rhea']['buy_orders']": {'new_value': 9, 'old_value': 14}, "root['types']['Charon']['buy_orders']": {'new_value': 18, 'old_value': 10}, "root['types']['Charon']['sell_orders']": {'new_value': 45, 'old_value': 42}}}
+
+.evaluation_tests/conftest.py:39: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+______________________________ test_domain_vargur ______________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_domain_vargur(uploaded_data):
+        """Functionality: Get detailed type statistics for Vargur in Domain."""
+        resp = httpx.get(f"{uploaded_data}/v1/market/10000043/28665", timeout=60)
+        assert resp.status_code == 200
+        body = resp.json()
+>       assert_dict_equal(
+            body,
+            {
+                "name": "Vargur",
+                "buy": 1000000000.0,
+                "sell": 1138000000.0,
+                "buy_5pct": 1000000000.0,
+                "sell_5pct": 1138000000.0,
+                "buy_orders": 19,
+                "sell_orders": 15,
+                "buy_threshold": 100000000.0,
+                "sell_threshold": 11380000000.0,
+                "buy_volume": 26,
+                "sell_volume": 20,
+                "total_value": 22.76,
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:405: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'buy': 1000000000.0, 'buy_5pct': 1000000000.0, 'buy_orders': 19, 'buy_threshold': 100000000.0, ...}
+expected = {'buy': 1000000000.0, 'buy_5pct': 1000000000.0, 'buy_orders': 19, 'buy_threshold': 100000000.0, ...}
+msg = '', tolerance = 0.01
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.01):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.01)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['total_value']": {'new_value': 22.76, 'old_value': 22760000000.0}}}
+E       assert not {'values_changed': {"root['total_value']": {'new_value': 22.76, 'old_value': 22760000000.0}}}
+
+.evaluation_tests/conftest.py:39: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_get_market_stats - AssertionError: 
+  Diff: {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}}}
+assert not {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_get_market_stats_with_type_ids - AssertionError: 
+  Diff: {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['types']['Tritanium']['buy_orders']": {'new_value': 56, 'old_value': 37}, "root['types']['Tritanium']['sell_orders']": {'new_value': 137, 'old_value': 69}, "root['types']['Pyerite']['buy_orders']": {'new_value': 48, 'old_value': 27}, "root['types']['Pyerite']['sell_orders']": {'new_value': 220, 'old_value': 156}}}
+assert not {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['types']['Tritanium']['buy_orders']": {'new_value': 56, 'old_value': 37}, "root['types']['Tritanium']['sell_orders']": {'new_value': 137, 'old_value': 69}, "root['types']['Pyerite']['buy_orders']": {'new_value': 48, 'old_value': 27}, "root['types']['Pyerite']['sell_orders']": {'new_value': 220, 'old_value': 156}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_tritanium - assert 54 == 56
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hubs - AssertionError: 
+  Diff: {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['hubs'][8]": {'new_value': {'station': 'Ikami X - CreoDron Factory', 'orders': 256, 'sell_value': 9.1}, 'old_value': {'station': 'Akora IX - Moon 19 - CreoDron Factory', 'orders': 271, 'sell_value': 7.66}}, "root['hubs'][0]": {'new_value': {'station': 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', 'orders': 185937, 'sell_value': 75371.94}, 'old_value': {'station': 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', 'orders': 192112, 'sell_value': 81473.62}}, "root['hubs'][6]": {'new_value': {'station': 'Jita VI - Paragon Fulfillment Center', 'orders': 290, 'sell_value': 49.27}, 'old_value': {'station': 'Perimeter - Tranquility Trading Tower', 'orders': 305, 'sell_value': 193.83}}, "root['hubs'][4]": {'new_value': {'station': 'Perimeter - 0.0% Neutral States Market HQ', 'orders': 568, 'sell_value': 407.9}, 'old_value': {'station': 'Perimeter - 0.0% Neutral States Market HQ', 'orders': 583, 'sell_value': 456.47}}, "root['hubs'][2]": {'new_value': {'station': 'Osmon II - Moon 1 - Sisters of EVE Bureau', 'orders': 823, 'sell_value': 34.71}, 'old_value': {'station': 'Osmon II - Moon 1 - Sisters of EVE Bureau', 'orders': 846, 'sell_value': 70.7}}, "root['hubs'][5]": {'new_value': {'station': 'Perimeter - Tranquility Trading Tower', 'orders': 301, 'sell_value': 193.73}, 'old_value': {'station': 'Ikami X - CreoDron Factory', 'orders': 307, 'sell_value': 9.65}}, "root['hubs'][3]": {'new_value': {'station': 'Oijanen - LowSec Free Hub', 'orders': 805, 'sell_value': 254.58}, 'old_value': {'station': 'Oijanen - LowSec Free Hub', 'orders': 821, 'sell_value': 255.16}}, "root['hubs'][1]": {'new_value': {'station': 'Uitra VI - Moon 4 - State War Academy', 'orders': 1029, 'sell_value': 51.88}, 'old_value': {'station': 'Uitra VI - Moon 4 - State War Academy', 'orders': 1095, 'sell_value': 53.41}}}, 'iterable_item_added': {"root['hubs'][9]": {'station': 'Akora IX - Moon 19 - CreoDron Factory', 'orders': 199, 'sell_value': 6.4}}, 'iterable_item_removed': {"root['hubs'][7]": {'station': 'Jita VI - Paragon Fulfillment Center', 'orders': 300, 'sell_value': 49.82}}}
+assert not {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['hubs'][8]": {'new_value': {'station': 'Ikami X - CreoDron Factory', 'orders': 256, 'sell_value': 9.1}, 'old_value': {'station': 'Akora IX - Moon 19 - CreoDron Factory', 'orders': 271, 'sell_value': 7.66}}, "root['hubs'][0]": {'new_value': {'station': 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', 'orders': 185937, 'sell_value': 75371.94}, 'old_value': {'station': 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', 'orders': 192112, 'sell_value': 81473.62}}, "root['hubs'][6]": {'new_value': {'station': 'Jita VI - Paragon Fulfillment Center', 'orders': 290, 'sell_value': 49.27}, 'old_value': {'station': 'Perimeter - Tranquility Trading Tower', 'orders': 305, 'sell_value': 193.83}}, "root['hubs'][4]": {'new_value': {'station': 'Perimeter - 0.0% Neutral States Market HQ', 'orders': 568, 'sell_value': 407.9}, 'old_value': {'station': 'Perimeter - 0.0% Neutral States Market HQ', 'orders': 583, 'sell_value': 456.47}}, "root['hubs'][2]": {'new_value': {'station': 'Osmon II - Moon 1 - Sisters of EVE Bureau', 'orders': 823, 'sell_value': 34.71}, 'old_value': {'station': 'Osmon II - Moon 1 - Sisters of EVE Bureau', 'orders': 846, 'sell_value': 70.7}}, "root['hubs'][5]": {'new_value': {'station': 'Perimeter - Tranquility Trading Tower', 'orders': 301, 'sell_value': 193.73}, 'old_value': {'station': 'Ikami X - CreoDron Factory', 'orders': 307, 'sell_value': 9.65}}, "root['hubs'][3]": {'new_value': {'station': 'Oijanen - LowSec Free Hub', 'orders': 805, 'sell_value': 254.58}, 'old_value': {'station': 'Oijanen - LowSec Free Hub', 'orders': 821, 'sell_value': 255.16}}, "root['hubs'][1]": {'new_value': {'station': 'Uitra VI - Moon 4 - State War Academy', 'orders': 1029, 'sell_value': 51.88}, 'old_value': {'station': 'Uitra VI - Moon 4 - State War Academy', 'orders': 1095, 'sell_value': 53.41}}}, 'iterable_item_added': {"root['hubs'][9]": {'station': 'Akora IX - Moon 19 - CreoDron Factory', 'orders': 199, 'sell_value': 6.4}}, 'iterable_item_removed': {"root['hubs'][7]": {'station': 'Jita VI - Paragon Fulfillment Center', 'orders': 300, 'sell_value': 49.82}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_domain_stats - AssertionError: 
+  Diff: {'values_changed': {"root['sell_orders']": {'new_value': 70109, 'old_value': 330}, "root['buy_orders']": {'new_value': 36685, 'old_value': 272}, "root['sell_value']": {'new_value': 35467.85, 'old_value': 33.41}, "root['buy_value']": {'new_value': 178646.9, 'old_value': 31212.45}, "root['unique_items']": {'new_value': 8247, 'old_value': 81}, "root['hubs'][1]": {'new_value': {'station': 'Misaba V - Moon 3 - Zoar and Sons Factory', 'orders': 975, 'sell_value': 414.93}, 'old_value': {'station': 'Misaba V - Moon 3 - Zoar and Sons Factory', 'orders': 991, 'sell_value': 415.75}}, "root['hubs'][0]": {'new_value': {'station': 'Amarr VIII (Oris) - Emperor Family Academy', 'orders': 64016, 'sell_value': 12476.36}, 'old_value': {'station': 'Amarr VIII (Oris) - Emperor Family Academy', 'orders': 66107, 'sell_value': 13508.19}}, "root['hubs'][2]": {'new_value': {'station': 'Deepari II - Imperial Academy', 'orders': 638, 'sell_value': 35.72}, 'old_value': {'station': 'Deepari II - Imperial Academy', 'orders': 695, 'sell_value': 37.41}}}}
+assert not {'values_changed': {"root['sell_orders']": {'new_value': 70109, 'old_value': 330}, "root['buy_orders']": {'new_value': 36685, 'old_value': 272}, "root['sell_value']": {'new_value': 35467.85, 'old_value': 33.41}, "root['buy_value']": {'new_value': 178646.9, 'old_value': 31212.45}, "root['unique_items']": {'new_value': 8247, 'old_value': 81}, "root['hubs'][1]": {'new_value': {'station': 'Misaba V - Moon 3 - Zoar and Sons Factory', 'orders': 975, 'sell_value': 414.93}, 'old_value': {'station': 'Misaba V - Moon 3 - Zoar and Sons Factory', 'orders': 991, 'sell_value': 415.75}}, "root['hubs'][0]": {'new_value': {'station': 'Amarr VIII (Oris) - Emperor Family Academy', 'orders': 64016, 'sell_value': 12476.36}, 'old_value': {'station': 'Amarr VIII (Oris) - Emperor Family Academy', 'orders': 66107, 'sell_value': 13508.19}}, "root['hubs'][2]": {'new_value': {'station': 'Deepari II - Imperial Academy', 'orders': 638, 'sell_value': 35.72}, 'old_value': {'station': 'Deepari II - Imperial Academy', 'orders': 695, 'sell_value': 37.41}}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_placid_stats - assert 48 == 11956
+FAILED .evaluation_tests/test_checkpoint_1.py::test_rhea_orders - AssertionError: 
+  Diff: {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['types']['Rhea']['buy_orders']": {'new_value': 9, 'old_value': 14}, "root['types']['Charon']['buy_orders']": {'new_value': 18, 'old_value': 10}, "root['types']['Charon']['sell_orders']": {'new_value': 45, 'old_value': 42}}}
+assert not {'values_changed': {"root['sell_orders']": {'new_value': 196990, 'old_value': 1}, "root['buy_orders']": {'new_value': 80242, 'old_value': 40}, "root['sell_value']": {'new_value': 138168.48, 'old_value': 0.0}, "root['buy_value']": {'new_value': 168450.26, 'old_value': 1400.63}, "root['unique_items']": {'new_value': 8709, 'old_value': 21}, "root['types']['Rhea']['buy_orders']": {'new_value': 9, 'old_value': 14}, "root['types']['Charon']['buy_orders']": {'new_value': 18, 'old_value': 10}, "root['types']['Charon']['sell_orders']": {'new_value': 45, 'old_value': 42}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_domain_vargur - AssertionError: 
+  Diff: {'values_changed': {"root['total_value']": {'new_value': 22.76, 'old_value': 22760000000.0}}}
+assert not {'values_changed': {"root['total_value']": {'new_value': 22.76, 'old_value': 22760000000.0}}}
+========================= 8 failed, 2 passed in 14.63s =========================

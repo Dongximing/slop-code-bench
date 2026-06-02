@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "problem_name": "migrate_configs",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_3",
+  "checkpoint_version": 1,
+  "duration": 15.757478713989258,
+  "entrypoint": "uv run migrate.py",
+  "tests": {
+    "checkpoint_1-Regression": {
+      "passed": [
+        "test_checkpoint_1_errors[bad_config_parse]",
+        "test_checkpoint_1_errors[invalid_rules_json]",
+        "test_checkpoint_1_errors[missing_rules_file]",
+        "test_checkpoint_1_errors[missing_target_dir]",
+        "test_checkpoint_1_hidden[array_merge_behavior]",
+        "test_checkpoint_1_hidden[deep_rename_key]",
+        "test_checkpoint_1_hidden[ignore_unsupported_extensions]",
+        "test_checkpoint_1_hidden[multiple_rules_same_key]",
+        "test_checkpoint_1_hidden[unicode_special_chars]",
+        "test_checkpoint_1_hidden[very_deep_nesting]"
+      ],
+      "failed": [
+        "test_checkpoint_1_core[basic_replace_and_rename]",
+        "test_checkpoint_1_core_extended[deep_merge_yaml]",
+        "test_checkpoint_1_core_extended[multi_format_timeout]",
+        "test_checkpoint_1_core_extended[recursive_multi_file]",
+        "test_checkpoint_1_hidden[deep_merge_nested]",
+        "test_checkpoint_1_hidden[empty_config_files]",
+        "test_checkpoint_1_hidden[mixed_formats_and_unsupported]",
+        "test_checkpoint_1_hidden[no_change_silence]",
+        "test_checkpoint_1_hidden[relative_subdirs]",
+        "test_checkpoint_1_hidden[rule_order_dependency]",
+        "test_checkpoint_1_hidden[scoped_merge_glob]",
+        "test_checkpoint_1_hidden[skip_missing_rule_in_file]",
+        "test_checkpoint_1_hidden[type_conversion_replace]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_2-Regression": {
+      "passed": [
+        "test_checkpoint_2_core[normalize_service_hosts]",
+        "test_checkpoint_2_core_extended[template_bucket_name]",
+        "test_checkpoint_2_errors[bad_config_parse]",
+        "test_checkpoint_2_errors[condition_invalid_regex]",
+        "test_checkpoint_2_errors[conditional_missing_condition]",
+        "test_checkpoint_2_errors[invalid_rules_json]",
+        "test_checkpoint_2_errors[missing_rules_file]",
+        "test_checkpoint_2_errors[pattern_missing_key_pattern]",
+        "test_checkpoint_2_errors[template_invalid_template_type]",
+        "test_checkpoint_2_errors[template_invalid_variable_path]",
+        "test_checkpoint_2_hidden[conditional_equals_non_string]",
+        "test_checkpoint_2_hidden[conditional_missing_key_noop]",
+        "test_checkpoint_2_hidden[conditional_not_equals_profile]",
+        "test_checkpoint_2_hidden[conditional_regex_numeric]",
+        "test_checkpoint_2_hidden[conditional_regex_partial]",
+        "test_checkpoint_2_hidden[legacy_rule_regression_combo]",
+        "test_checkpoint_2_hidden[lexicographic_rule_order]",
+        "test_checkpoint_2_hidden[pattern_depth_and_literals]",
+        "test_checkpoint_2_hidden[pattern_multi_variable_clusters]",
+        "test_checkpoint_2_hidden[template_missing_target_key]",
+        "test_checkpoint_2_hidden[template_missing_variable_noop]",
+        "test_checkpoint_2_hidden[template_non_string_target]",
+        "test_checkpoint_2_hidden[template_string_after_type_conversion]"
+      ],
+      "failed": [
+        "test_checkpoint_2_core_extended[combined_defaults]",
+        "test_checkpoint_2_hidden[pattern_array_wildcard_hosts]",
+        "test_checkpoint_2_hidden[pattern_numeric_indices]",
+        "test_checkpoint_2_hidden[pattern_overlap_priority]",
+        "test_checkpoint_2_hidden[pattern_wildcard_multi_files]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_3-Core": {
+      "passed": [],
+      "failed": [
+        "test_checkpoint_3_core[array_wildcard_ports]",
+        "test_checkpoint_3_core[inheritance_basic_yaml]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_3-Functionality": {
+      "passed": [
+        "test_checkpoint_3_hidden[array_condition_no_match_noop]",
+        "test_checkpoint_3_hidden[template_array_missing_variable]"
+      ],
+      "failed": [
+        "test_checkpoint_3_core_extended[array_filter_active_roles]",
+        "test_checkpoint_3_core_extended[array_index_primary_host]",
+        "test_checkpoint_3_core_extended[array_multi_condition_replicas]",
+        "test_checkpoint_3_core_extended[inheritance_arrays_with_rules]",
+        "test_checkpoint_3_core_extended[inheritance_nested_chain]",
+        "test_checkpoint_3_core_extended[inheritance_toml_import]",
+        "test_checkpoint_3_core_extended[inheritance_with_rules_json]",
+        "test_checkpoint_3_core_extended[template_primary_endpoint]",
+        "test_checkpoint_3_hidden[array_boolean_filter]",
+        "test_checkpoint_3_hidden[array_filter_numeric_null]",
+        "test_checkpoint_3_hidden[array_filter_template_combo]",
+        "test_checkpoint_3_hidden[array_nested_multi_depth]",
+        "test_checkpoint_3_hidden[conditional_array_regex]",
+        "test_checkpoint_3_hidden[inheritance_deep_merge_override]",
+        "test_checkpoint_3_hidden[inheritance_keep_metadata]",
+        "test_checkpoint_3_hidden[inheritance_missing_parent_nonfatal]",
+        "test_checkpoint_3_hidden[inheritance_parent_outside_target]",
+        "test_checkpoint_3_hidden[inheritance_relative_paths]",
+        "test_checkpoint_3_hidden[inheritance_remove_empty_metadata]",
+        "test_checkpoint_3_hidden[legacy_rule_after_inheritance]",
+        "test_checkpoint_3_hidden[rule_order_with_inheritance]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_3-Error": {
+      "passed": [],
+      "failed": [
+        "test_checkpoint_3_errors[circular_inheritance]",
+        "test_checkpoint_3_errors[invalid_inheritance_config_format]",
+        "test_checkpoint_3_errors[invalid_inheritance_config_schema]",
+        "test_checkpoint_3_errors[missing_inheritance_file]",
+        "test_checkpoint_3_errors[parent_parse_failure]"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 0,
+    "Functionality": 2,
+    "Regression": 33,
+    "Error": 0
+  },
+  "total_counts": {
+    "Core": 2,
+    "Functionality": 23,
+    "Regression": 51,
+    "Error": 5
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 81,
+  "test_collection_hash": "d4d8df58101e8b3ac0cc6eb0c78e105cda77b20919c9083ecfe659aa56a711df",
+  "infrastructure_failure": false
+}

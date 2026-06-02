@@ -1,0 +1,106 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/hpix0nmjKIxJFfjC/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 11 items
+
+.evaluation_tests/test_checkpoint_1.py::test_core_cases[jita_tama] PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[error_align_negative] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[error_align_zero] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[error_unknown_end] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[error_unknown_start] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[error_warp_speed_zero] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[jita_amarr_prowler] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[rairomon_sivala] PASSED [ 72%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[same_system_as_system] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[same_system_slow_aligner] PASSED [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_hidden_cases[zz_wait] FAILED [100%]
+
+=================================== FAILURES ===================================
+__________________________ test_hidden_cases[zz_wait] __________________________
+
+entrypoint_argv = ['uv', 'run', 'hauling.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+checkpoint_name = 'checkpoint_1'
+case = {'args': ['Turnur', 'Alsavoinon', '--align', '60', '--top-speed', '100', ...], 'expected_output': 'START: Turnur\nGO: Turnur (0.4) -> Zarzakh (-1.0) -> Alsavoinon (0.3)\nDONE: 08:03', 'id': 'zz_wait', 'status_code': 0}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_zz_wait_0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", HIDDEN_CASES, ids=[case["id"] for case in HIDDEN_CASES]
+    )
+    def test_hidden_cases(
+        entrypoint_argv: list[str],
+        sde_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+>       run_case(entrypoint_argv, sde_dir, checkpoint_name, case, tmp_path)
+
+.evaluation_tests/test_checkpoint_1.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'hauling.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+checkpoint_name = 'checkpoint_1'
+case = {'args': ['Turnur', 'Alsavoinon', '--align', '60', '--top-speed', '100', ...], 'expected_output': 'START: Turnur\nGO: Turnur (0.4) -> Zarzakh (-1.0) -> Alsavoinon (0.3)\nDONE: 08:03', 'id': 'zz_wait', 'status_code': 0}
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_hidden_cases_zz_wait_0')
+
+    def run_case(
+        entrypoint_argv: list[str],
+        sde_dir: Path,
+        checkpoint_name: str,
+        case: dict[str, object],
+        tmp_path: Path,
+    ) -> None:
+        cmd = build_command(
+            entrypoint_argv, sde_dir, checkpoint_name, case, tmp_path
+        )
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        # Loose exit code checking: spec doesn't specify exact codes
+        # Just check success (0) vs failure (non-zero)
+        expected_success = case["status_code"] == 0
+        actual_success = result.returncode == 0
+        assert expected_success == actual_success, (
+            f"Expected {'success' if expected_success else 'failure'}, "
+            f"got returncode {result.returncode}: {result.stderr}"
+        )
+>       assert result.stdout.strip() == case["expected_output"]
+E       AssertionError: assert 'START: Turnur\nGO: Turnur (0.4) -> Aset (0.4) -> Avenod (0.4) -> Audaerne (0.5) -> Augnais (0.5) -> Deltole (0.5) -> Aufay (0.5) -> Balle (0.5) -> Du Annes (0.6) -> Erme (0.8) -> Villore (0.9) -> Pemene (0.5) -> Mesybier (0.5) -> Orvolle (0.7) -> Oulley (0.3) -> Aubenall (0.4) -> Renarelle (0.3) -> Vlillirier (0.3) -> Alsavoinon (0.3)\nDONE: 18:36' == 'START: Turnur\nGO: Turnur (0.4) -> Zarzakh (-1.0) -> Alsavoinon (0.3)\nDONE: 08:03'
+E         
+E           START: Turnur
+E         - GO: Turnur (0.4) -> Zarzakh (-1.0) -> Alsavoinon (0.3)
+E         + GO: Turnur (0.4) -> Aset (0.4) -> Avenod (0.4) -> Audaerne (0.5) -> Augnais (0.5) -> Deltole (0.5) -> Aufay (0.5) -> Balle (0.5) -> Du Annes (0.6) -> Erme (0.8) -> Villore (0.9) -> Pemene (0.5) -> Mesybier (0.5) -> Orvolle (0.7) -> Oulley (0.3) -> Aubenall (0.4) -> Renarelle (0.3) -> Vlillirier (0.3) -> Alsavoinon (0.3)
+E         - DONE: 08:03
+E         ?       ^  -
+E         + DONE: 18:36
+E         ?       ^   +
+
+.evaluation_tests/test_checkpoint_1.py:136: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hidden_cases[zz_wait] - AssertionError: assert 'START: Turnur\nGO: Turnur (0.4) -> Aset (0.4) -> Avenod (0.4) -> Audaerne (0.5) -> Augnais (0.5) -> Deltole (0.5) -> Aufay (0.5) -> Balle (0.5) -> Du Annes (0.6) -> Erme (0.8) -> Villore (0.9) -> Pemene (0.5) -> Mesybier (0.5) -> Orvolle (0.7) -> Oulley (0.3) -> Aubenall (0.4) -> Renarelle (0.3) -> Vlillirier (0.3) -> Alsavoinon (0.3)\nDONE: 18:36' == 'START: Turnur\nGO: Turnur (0.4) -> Zarzakh (-1.0) -> Alsavoinon (0.3)\nDONE: 08:03'
+  
+    START: Turnur
+  - GO: Turnur (0.4) -> Zarzakh (-1.0) -> Alsavoinon (0.3)
+  + GO: Turnur (0.4) -> Aset (0.4) -> Avenod (0.4) -> Audaerne (0.5) -> Augnais (0.5) -> Deltole (0.5) -> Aufay (0.5) -> Balle (0.5) -> Du Annes (0.6) -> Erme (0.8) -> Villore (0.9) -> Pemene (0.5) -> Mesybier (0.5) -> Orvolle (0.7) -> Oulley (0.3) -> Aubenall (0.4) -> Renarelle (0.3) -> Vlillirier (0.3) -> Alsavoinon (0.3)
+  - DONE: 08:03
+  ?       ^  -
+  + DONE: 18:36
+  ?       ^   +
+======================== 1 failed, 10 passed in 29.10s =========================

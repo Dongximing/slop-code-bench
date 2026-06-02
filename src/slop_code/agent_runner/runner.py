@@ -20,6 +20,8 @@ from slop_code.agent_runner.models import AgentRunSpec
 from slop_code.agent_runner.models import UsageTracker
 from slop_code.agent_runner.reporting import AgentCheckpointSummary
 from slop_code.agent_runner.reporting import MetricsTracker
+from slop_code.agent_runner.reporting import extract_trajectory_stats
+from slop_code.agent_runner.reporting import save_trajectory_stats
 from slop_code.agent_runner.resume import ResumeInfo
 from slop_code.agent_runner.state import AgentStateEnum
 from slop_code.evaluation import CheckpointConfig
@@ -742,6 +744,16 @@ class AgentRunner:
             skill_prompt_preview=skill_prompt[:120],
         )
 
+        before_stats = extract_trajectory_stats(self.agent.steps)
+        before_stats["cost"] = self.agent.usage.cost
+        before_stats["skill_prompt_preview"] = skill_prompt[:200]
+        save_trajectory_stats(
+            checkpoint_save_dir, before_stats, "trajectory_stats_before.json"
+        )
+
+        steps_before = len(self.agent.steps)
+        cost_before = self.agent.usage.cost
+
         try:
             self.agent.run(skill_prompt)
         except Exception:
@@ -752,8 +764,25 @@ class AgentRunner:
             )
             return
 
+        skill_steps = self.agent.steps[steps_before:]
+        after_stats = extract_trajectory_stats(skill_steps)
+        skill_cost = self.agent.usage.cost - cost_before
+        after_stats["cost"] = max(skill_cost, 0.0)
+        after_stats["skill_prompt_preview"] = skill_prompt[:200]
+
         after_skill_dir = checkpoint_save_dir / "after_skill"
         after_skill_dir.mkdir(parents=True, exist_ok=True)
+
+        save_trajectory_stats(
+            after_skill_dir, after_stats, "trajectory_stats_after.json"
+        )
+
+        reporting.save_agent_artifacts(
+            after_skill_dir,
+            self.agent,
+            compress_artifacts=self.run_spec.compress_artifacts,
+        )
+
         skill_snapshot_dir = after_skill_dir / common.SNAPSHOT_DIR_NAME
         self.session.finish_checkpoint(skill_snapshot_dir)
 

@@ -1,0 +1,957 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/aHyVf1Sce0vaMwiu/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 41 items
+
+.evaluation_tests/test_checkpoint_1.py::test_basic FAILED                [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_arrays FAILED               [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_bool_params FAILED          [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_string_concat FAILED        [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_if FAILED            [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_elif FAILED          [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_else FAILED          [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_array_indexing FAILED       [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_for_requires FAILED         [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_while_requires FAILED       [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_working_dirs FAILED         [ 26%]
+.evaluation_tests/test_checkpoint_1.py::test_existing_dir FAILED         [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops FAILED       [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_exists_function FAILED      [ 34%]
+.evaluation_tests/test_checkpoint_1.py::test_float_params FAILED         [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_nested_loops FAILED         [ 39%]
+.evaluation_tests/test_checkpoint_1.py::test_stderr_validation FAILED    [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_string_params FAILED        [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_timeout FAILED              [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_circular_dependency FAILED  [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_default_param_order PASSED  [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_required_arg FAILED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_multiline_success_no_return PASSED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_no_main PASSED              [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_recursive_call PASSED       [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params FAILED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false FAILED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool FAILED [ 68%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_requires_failure_stops PASSED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe FAILED [ 73%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe FAILED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_bad_toml_syntax PASSED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block FAILED [ 80%]
+.evaluation_tests/test_checkpoint_2.py::test_basic_cache FAILED          [ 82%]
+.evaluation_tests/test_checkpoint_2.py::test_file_change FAILED          [ 85%]
+.evaluation_tests/test_checkpoint_2.py::test_cache_exclude FAILED        [ 87%]
+.evaluation_tests/test_checkpoint_2.py::test_ttl_strategy FAILED         [ 90%]
+.evaluation_tests/test_checkpoint_2.py::test_cascade_invalidation FAILED [ 92%]
+.evaluation_tests/test_checkpoint_2.py::test_global_cache_disabled FAILED [ 95%]
+.evaluation_tests/test_checkpoint_2.py::test_force_refresh_skips_cache FAILED [ 97%]
+.evaluation_tests/test_checkpoint_2.py::test_always_strategy_ignores_input_change FAILED [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_basic __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic(entrypoint_argv):
+        """Core: Basic pipeline with requires, fail(), and task chaining."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_PIPELINE, BASIC_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '/' at line 7, col 43
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp62ab7ap/pipeline.pipe', '--workspace', '/tmp/tmpp62ab7ap/working', '--output', '/tmp/tmpp62ab7ap/output', '--config', '/tmp/tmpp62ab7ap/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 7, col 43\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:296: AssertionError
+_________________________________ test_arrays __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_arrays(entrypoint_argv):
+        """Core: Array parameters and len() function."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAYS_PIPELINE, ARRAYS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpz0we3i5f/pipeline.pipe', '--workspace', '/tmp/tmpz0we3i5f/working', '--output', '/tmp/tmpz0we3i5f/output', '--config', '/tmp/tmpz0we3i5f/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:358: AssertionError
+_______________________________ test_bool_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_bool_params(entrypoint_argv):
+        """Core: Boolean parameters with TRUE/FALSE literals."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BOOL_PARAMS_PIPELINE, BOOL_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '*' at line 18, col 12
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp8s3ylq0/pipeline.pipe', '--workspace', '/tmp/tmpp8s3ylq0/working', '--output', '/tmp/tmpp8s3ylq0/output', '--config', '/tmp/tmpp8s3ylq0/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '*' at line 18, col 12\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:415: AssertionError
+______________________________ test_string_concat ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_string_concat(entrypoint_argv):
+        """Core: String concatenation with % operator in for loops."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_CONCAT_PIPELINE, STRING_CONCAT_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpxil2e41q/pipeline.pipe', '--workspace', '/tmp/tmpxil2e41q/working', '--output', '/tmp/tmpxil2e41q/output', '--config', '/tmp/tmpxil2e41q/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:478: AssertionError
+________________________________ test_branch_if ________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_if(entrypoint_argv):
+        """Core: If conditional branching - true branch taken."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_IF_PIPELINE, BRANCH_IF_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=40, col=5) in task definition
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp19n_el2z/pipeline.pipe', '--workspace', '/tmp/tmp19n_el2z/working', '--output', '/tmp/tmp19n_el2z/output', '--config', '/tmp/tmp19n_el2z/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=40, col=5) in task definition\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:557: AssertionError
+_______________________________ test_branch_elif _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_elif(entrypoint_argv):
+        """Core: Elif branch - first fails, elif succeeds."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELIF_PIPELINE, BRANCH_ELIF_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=40, col=5) in task definition
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp59qmm3b3/pipeline.pipe', '--workspace', '/tmp/tmp59qmm3b3/working', '--output', '/tmp/tmp59qmm3b3/output', '--config', '/tmp/tmp59qmm3b3/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=40, col=5) in task definition\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:632: AssertionError
+_______________________________ test_branch_else _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_else(entrypoint_argv):
+        """Core: Else branch - if and elif both fail."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELSE_PIPELINE, BRANCH_ELSE_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=41, col=5) in task definition
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp7t5oh_ez/pipeline.pipe', '--workspace', '/tmp/tmp7t5oh_ez/working', '--output', '/tmp/tmp7t5oh_ez/output', '--config', '/tmp/tmp7t5oh_ez/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=41, col=5) in task definition\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:708: AssertionError
+_____________________________ test_array_indexing ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_array_indexing(entrypoint_argv):
+        """Core: Array subscript access with [i] notation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAY_INDEXING_PIPELINE, ARRAY_INDEXING_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '/' at line 7, col 68
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmppqiarrlm/pipeline.pipe', '--workspace', '/tmp/tmppqiarrlm/working', '--output', '/tmp/tmppqiarrlm/output', '--config', '/tmp/tmppqiarrlm/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 7, col 68\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:766: AssertionError
+______________________________ test_for_requires _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_for_requires(entrypoint_argv):
+        """Core: For loop in requires clause."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FOR_REQUIRES_PIPELINE, FOR_REQUIRES_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 9, col 5
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpdnurvuvy/pipeline.pipe', '--workspace', '/tmp/tmpdnurvuvy/working', '--output', '/tmp/tmpdnurvuvy/output', '--config', '/tmp/tmpdnurvuvy/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 9, col 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:818: AssertionError
+_____________________________ test_while_requires ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_while_requires(entrypoint_argv):
+        """Core: While loop with break/continue in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WHILE_REQUIRES_PIPELINE, WHILE_REQUIRES_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 8, col 5
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpnaewwlii/pipeline.pipe', '--workspace', '/tmp/tmpnaewwlii/working', '--output', '/tmp/tmpnaewwlii/output', '--config', '/tmp/tmpnaewwlii/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 8, col 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:874: AssertionError
+______________________________ test_working_dirs _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_working_dirs(entrypoint_argv):
+        """Core: Working directory isolation for nested task calls."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WORKING_DIRS_PIPELINE, WORKING_DIRS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=11, col=5) in task definition
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpamec6r7n/pipeline.pipe', '--workspace', '/tmp/tmpamec6r7n/working', '--output', '/tmp/tmpamec6r7n/output', '--config', '/tmp/tmpamec6r7n/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=11, col=5) in task definition\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:937: AssertionError
+______________________________ test_existing_dir _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_existing_dir(entrypoint_argv):
+        """Core: Pre-existing workspace files (clean_cwd=false)."""
+        existing_files = {"run.sh": 'echo "Hello"'}
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            EXISTING_DIR_PIPELINE,
+            EXISTING_DIR_CONFIG,
+            existing_files=existing_files,
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: 
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmphxsw1yzd/pipeline.pipe', '--workspace', '/tmp/tmphxsw1yzd/working', '--output', '/tmp/tmphxsw1yzd/output', '--config', '/tmp/tmphxsw1yzd/config.toml'], returncode=1, stdout='{"event": "TASK_STARTED", "job_id": 1}\n{"event": "TASK_RUNNING", "job_id": 1}\n{"event": "TASK_FAILED", "job_id": 1}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:980: AssertionError
+_____________________________ test_arithmetic_ops ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_arithmetic_ops(entrypoint_argv):
+        """Functionality: Integer arithmetic operations in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARITHMETIC_OPS_PIPELINE, ARITHMETIC_OPS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '*' at line 18, col 18
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpy2fiiwx3/pipeline.pipe', '--workspace', '/tmp/tmpy2fiiwx3/working', '--output', '/tmp/tmpy2fiiwx3/output', '--config', '/tmp/tmpy2fiiwx3/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '*' at line 18, col 18\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1038: AssertionError
+_____________________________ test_exists_function _____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_exists_function(entrypoint_argv):
+        """Functionality: exists() and !exists() functions in success checks."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, EXISTS_FUNCTION_PIPELINE, EXISTS_FUNCTION_CONFIG
+        )
+    
+        # This test expects exit code 1 because CheckMultiple fails
+        # (nested file doesn't exist when CheckMultiple runs)
+>       assert result.returncode == 1, f"Expected exit 1, got {result.returncode}"
+E       AssertionError: Expected exit 1, got 2
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpadwizc2m/pipeline.pipe', '--workspace', '/tmp/tmpadwizc2m/working', '--output', '/tmp/tmpadwizc2m/output', '--config', '/tmp/tmpadwizc2m/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '-' at line 28, col 15\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1103: AssertionError
+______________________________ test_float_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_float_params(entrypoint_argv):
+        """Functionality: Float parameters and Python integration."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FLOAT_PARAMS_PIPELINE, FLOAT_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '/' at line 8, col 59
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpu61bas2y/pipeline.pipe', '--workspace', '/tmp/tmpu61bas2y/working', '--output', '/tmp/tmpu61bas2y/output', '--config', '/tmp/tmpu61bas2y/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 8, col 59\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1152: AssertionError
+______________________________ test_nested_loops _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_nested_loops(entrypoint_argv):
+        """Functionality: Nested loops with break statements."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, NESTED_LOOPS_PIPELINE, NESTED_LOOPS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '/' at line 7, col 68
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp61_ohsxo/pipeline.pipe', '--workspace', '/tmp/tmp61_ohsxo/working', '--output', '/tmp/tmp61_ohsxo/output', '--config', '/tmp/tmp61_ohsxo/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 7, col 68\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1211: AssertionError
+____________________________ test_stderr_validation ____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_stderr_validation(entrypoint_argv):
+        """Functionality: stderr contains() and equals() validation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STDERR_VALIDATION_PIPELINE, STDERR_VALIDATION_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '&' at line 6, col 37
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpxrnwqpg6/pipeline.pipe', '--workspace', '/tmp/tmpxrnwqpg6/working', '--output', '/tmp/tmpxrnwqpg6/output', '--config', '/tmp/tmpxrnwqpg6/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '&' at line 6, col 37\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1271: AssertionError
+______________________________ test_string_params ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_string_params(entrypoint_argv):
+        """Functionality: String parameter interpolation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_PARAMS_PIPELINE, STRING_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpdq1y6au_/pipeline.pipe', '--workspace', '/tmp/tmpdq1y6au_/working', '--output', '/tmp/tmpdq1y6au_/output', '--config', '/tmp/tmpdq1y6au_/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1327: AssertionError
+_________________________________ test_timeout _________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_timeout(entrypoint_argv):
+        """Functionality: Task timeout handling with exit code 124."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TIMEOUT_TEST_PIPELINE, TIMEOUT_TEST_CONFIG, timeout=30
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '/' at line 3, col 51
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp9stganko/pipeline.pipe', '--workspace', '/tmp/tmp9stganko/working', '--output', '/tmp/tmp9stganko/output', '--config', '/tmp/tmp9stganko/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 3, col 51\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1392: AssertionError
+___________________________ test_circular_dependency ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_circular_dependency(entrypoint_argv):
+        """Error: Circular dependency detection (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        run: {
+            echo "A"
+        }
+        requires {
+            B()
+        }
+    }
+    
+    task B {
+        run: {
+            echo "B"
+        }
+        requires {
+            C()
+        }
+    }
+    task C {
+        run: {
+            echo "C"
+        }
+        requires: {
+            A()
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            C()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpmnnl4wvv/pipeline.pipe', '--workspace', '/tmp/tmpmnnl4wvv/working', '--output', '/tmp/tmpmnnl4wvv/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=5, col=5) in task definition\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1458: AssertionError
+__________________________ test_missing_required_arg ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_missing_required_arg(entrypoint_argv):
+        """Error: Missing required argument (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        params: {
+            x: int
+            y: int = 1
+        }
+        run: {
+            echo "A"
+        }
+    }
+    
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            A(y=2)
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpeo8b0tjp/pipeline.pipe', '--workspace', '/tmp/tmpeo8b0tjp/working', '--output', '/tmp/tmpeo8b0tjp/output'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1516: AssertionError
+_______________________ test_edge_entry_call_with_params _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_entry_call_with_params(entrypoint_argv):
+        """Edge case: entry can be a task invocation with params.
+    
+        Spec says: "entry=<task invocation ... can be just its name `A` or a call
+        with params `A(1, x=2)`"
+        """
+        pipeline = '''task Start {
+        params: {
+            x: int
+            y: int
+        }
+        run: {
+            echo "${params.x}_${params.y}"
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Ignored"
+        }
+    }'''
+        config = '''entry = "Start(1, y=2)"
+    clean_cwd = true'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpi9yafpqr/pipeline.pipe', '--workspace', '/tmp/tmpi9yafpqr/working', '--output', '/tmp/tmpi9yafpqr/output', '--config', '/tmp/tmpi9yafpqr/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1624: AssertionError
+______________________ test_edge_clean_cwd_default_false _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_clean_cwd_default_false(entrypoint_argv):
+        """Edge case: clean_cwd defaults to false when omitted.
+    
+        Spec says: "clean_cwd = <bool ... Default false.>"
+        """
+        pipeline = '''task main {
+        run: {
+            cat existing.txt
+        }
+    }'''
+        existing_files = {"existing.txt": "hello"}
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            pipeline,
+            existing_files=existing_files,
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: 
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpt0rf32m2/pipeline.pipe', '--workspace', '/tmp/tmpt0rf32m2/working', '--output', '/tmp/tmpt0rf32m2/output'], returncode=1, stdout='{"event": "TASK_STARTED", "job_id": 1}\n{"event": "TASK_RUNNING", "job_id": 1}\n{"event": "TASK_FAILED", "job_id": 1}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1650: AssertionError
+_____________________ test_edge_env_default_type_cast_bool _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_env_default_type_cast_bool(entrypoint_argv):
+        """Edge case: env default values are dynamically type cast (bool).
+    
+        Spec says: "Environment variables can be used as default values ... dynamic
+        type casting ... (i.e. 1 would convert to a bool of TRUE)"
+        """
+        pipeline = '''task CheckFlag {
+        params: {
+            flag: bool = $FLAG
+        }
+        run: {
+            echo "${params.flag}"
+        }
+    }
+    
+    task main {
+        requires: {
+            CheckFlag()
+        }
+    }'''
+        config = '''clean_cwd = true
+    [env]
+    FLAG = "1"'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp9xplav2_/pipeline.pipe', '--workspace', '/tmp/tmp9xplav2_/working', '--output', '/tmp/tmp9xplav2_/output', '--config', '/tmp/tmp9xplav2_/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1685: AssertionError
+_____________________ test_edge_type_mismatch_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_type_mismatch_invalid_pipe(entrypoint_argv):
+        """Edge case: type mismatch should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... type mismatch"
+        """
+        pipeline = '''task A {
+        params: {
+            x: int
+        }
+        run: {
+            echo "${params.x}"
+        }
+    }
+    
+    task main {
+        requires: {
+            A("not-int");
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8ri2fum6/pipeline.pipe', '--workspace', '/tmp/tmp8ri2fum6/working', '--output', '/tmp/tmp8ri2fum6/output'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1752: AssertionError
+____________________ test_edge_undefined_task_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_undefined_task_invalid_pipe(entrypoint_argv):
+        """Edge case: undefined task call should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... undefined tasks"
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            MissingTask();
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 1
+E       assert 1 == 3
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjbegtacq/pipeline.pipe', '--workspace', '/tmp/tmpjbegtacq/working', '--output', '/tmp/tmpjbegtacq/output'], returncode=1, stdout='{"event": "TASK_STARTED", "job_id": 1}\n{"event": "TASK_RUNNING", "job_id": 1}\n{"event": "TASK_FAILED", "job_id": 1}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1772: AssertionError
+________________________ test_edge_empty_success_block _________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_empty_success_block(entrypoint_argv):
+        """Edge case: empty success block is allowed.
+    
+        Spec says: "Success can be empty."
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        success: {
+        }
+    }'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: 
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpcqp7e3b9/pipeline.pipe', '--workspace', '/tmp/tmpcqp7e3b9/working', '--output', '/tmp/tmpcqp7e3b9/output'], returncode=1, stdout='{"event": "TASK_STARTED", "job_id": 1}\n{"event": "TASK_RUNNING", "job_id": 1}\n{"event": "TASK_FAILED", "job_id": 1}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1809: AssertionError
+_______________________________ test_basic_cache _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic_cache(entrypoint_argv):
+        """Core: Basic cache hit/miss - same params should cache."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_CACHE_PIPELINE, BASIC_CACHE_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '*' at line 12, col 33
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjv4writa/pipeline.pipe', '--workspace', '/tmp/tmpjv4writa/working', '--output', '/tmp/tmpjv4writa/output', '--config', '/tmp/tmpjv4writa/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '*' at line 12, col 33\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:192: AssertionError
+_______________________________ test_file_change _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_file_change(entrypoint_argv):
+        """Core: Content-based cache - different files should have different cache keys."""
+        # Create existing input files
+        existing_files = {
+            "file1": "this is file 1",
+            "file2": "this is file 2 with different content",
+        }
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv, FILE_CHANGE_PIPELINE, FILE_CHANGE_CONFIG,
+            existing_files=existing_files
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '/' at line 38, col 28
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_momwszh/pipeline.pipe', '--workspace', '/tmp/tmp_momwszh/working', '--output', '/tmp/tmp_momwszh/output', '--config', '/tmp/tmp_momwszh/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 38, col 28\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:284: AssertionError
+______________________________ test_cache_exclude ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_cache_exclude(entrypoint_argv):
+        """Core: Excluded params don't affect cache key."""
+        # Create input file
+        existing_files = {
+            "data/sales.csv": "id,value\n1,100\n2,200\n",
+        }
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv, CACHE_EXCLUDE_PIPELINE, CACHE_EXCLUDE_CONFIG,
+            existing_files=existing_files
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '*' at line 48, col 19
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_wgoaiqu/pipeline.pipe', '--workspace', '/tmp/tmp_wgoaiqu/working', '--output', '/tmp/tmp_wgoaiqu/output', '--config', '/tmp/tmp_wgoaiqu/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '*' at line 48, col 19\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:383: AssertionError
+______________________________ test_ttl_strategy _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_ttl_strategy(entrypoint_argv):
+        """Core: Stale strategy with TTL - cache expires after TTL."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TTL_STRATEGY_PIPELINE, TTL_STRATEGY_CONFIG,
+            timeout=30
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Expected COLON, got PARAMS at line 3, col 5
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp2f5mfvtp/pipeline.pipe', '--workspace', '/tmp/tmp2f5mfvtp/working', '--output', '/tmp/tmp2f5mfvtp/output', '--config', '/tmp/tmp2f5mfvtp/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 3, col 5\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:529: AssertionError
+__________________________ test_cascade_invalidation ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_cascade_invalidation(entrypoint_argv):
+        """Core: Cascade invalidation - upstream change invalidates downstream caches."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, CASCADE_INVALIDATION_PIPELINE, CASCADE_INVALIDATION_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '*' at line 12, col 32
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6vhc7q9u/pipeline.pipe', '--workspace', '/tmp/tmp6vhc7q9u/working', '--output', '/tmp/tmp6vhc7q9u/output', '--config', '/tmp/tmp6vhc7q9u/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '*' at line 12, col 32\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:655: AssertionError
+__________________________ test_global_cache_disabled __________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_global_cache_disabled(entrypoint_argv):
+        """Edge case: Global cache disable ignores task cache settings."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, CACHE_DISABLED_PIPELINE, CACHE_DISABLED_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '/' at line 11, col 47
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmputw_f4cy/pipeline.pipe', '--workspace', '/tmp/tmputw_f4cy/working', '--output', '/tmp/tmputw_f4cy/output', '--config', '/tmp/tmputw_f4cy/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 11, col 47\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:729: AssertionError
+________________________ test_force_refresh_skips_cache ________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_force_refresh_skips_cache(entrypoint_argv):
+        """Edge case: force_refresh treats the task as not cacheable."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FORCE_REFRESH_PIPELINE, FORCE_REFRESH_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '/' at line 11, col 47
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_d9_cxwb/pipeline.pipe', '--workspace', '/tmp/tmp_d9_cxwb/working', '--output', '/tmp/tmp_d9_cxwb/output', '--config', '/tmp/tmp_d9_cxwb/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 11, col 47\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:789: AssertionError
+__________________ test_always_strategy_ignores_input_change ___________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_always_strategy_ignores_input_change(entrypoint_argv):
+        """Edge case: Always strategy uses cache even when inputs change."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ALWAYS_STRATEGY_PIPELINE, ALWAYS_STRATEGY_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '/' at line 8, col 46
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1593lu4h/pipeline.pipe', '--workspace', '/tmp/tmp1593lu4h/working', '--output', '/tmp/tmp1593lu4h/output', '--config', '/tmp/tmp1593lu4h/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 8, col 46\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:862: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_basic - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '/' at line 7, col 43
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp62ab7ap/pipeline.pipe', '--workspace', '/tmp/tmpp62ab7ap/working', '--output', '/tmp/tmpp62ab7ap/output', '--config', '/tmp/tmpp62ab7ap/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 7, col 43\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arrays - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpz0we3i5f/pipeline.pipe', '--workspace', '/tmp/tmpz0we3i5f/working', '--output', '/tmp/tmpz0we3i5f/output', '--config', '/tmp/tmpz0we3i5f/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_bool_params - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '*' at line 18, col 12
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp8s3ylq0/pipeline.pipe', '--workspace', '/tmp/tmpp8s3ylq0/working', '--output', '/tmp/tmpp8s3ylq0/output', '--config', '/tmp/tmpp8s3ylq0/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '*' at line 18, col 12\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_concat - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpxil2e41q/pipeline.pipe', '--workspace', '/tmp/tmpxil2e41q/working', '--output', '/tmp/tmpxil2e41q/output', '--config', '/tmp/tmpxil2e41q/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_if - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=40, col=5) in task definition
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp19n_el2z/pipeline.pipe', '--workspace', '/tmp/tmp19n_el2z/working', '--output', '/tmp/tmp19n_el2z/output', '--config', '/tmp/tmp19n_el2z/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=40, col=5) in task definition\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_elif - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=40, col=5) in task definition
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp59qmm3b3/pipeline.pipe', '--workspace', '/tmp/tmp59qmm3b3/working', '--output', '/tmp/tmp59qmm3b3/output', '--config', '/tmp/tmp59qmm3b3/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=40, col=5) in task definition\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_else - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=41, col=5) in task definition
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp7t5oh_ez/pipeline.pipe', '--workspace', '/tmp/tmp7t5oh_ez/working', '--output', '/tmp/tmp7t5oh_ez/output', '--config', '/tmp/tmp7t5oh_ez/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=41, col=5) in task definition\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_array_indexing - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '/' at line 7, col 68
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmppqiarrlm/pipeline.pipe', '--workspace', '/tmp/tmppqiarrlm/working', '--output', '/tmp/tmppqiarrlm/output', '--config', '/tmp/tmppqiarrlm/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 7, col 68\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_for_requires - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 9, col 5
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpdnurvuvy/pipeline.pipe', '--workspace', '/tmp/tmpdnurvuvy/working', '--output', '/tmp/tmpdnurvuvy/output', '--config', '/tmp/tmpdnurvuvy/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 9, col 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_while_requires - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 8, col 5
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpnaewwlii/pipeline.pipe', '--workspace', '/tmp/tmpnaewwlii/working', '--output', '/tmp/tmpnaewwlii/output', '--config', '/tmp/tmpnaewwlii/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 8, col 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_working_dirs - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=11, col=5) in task definition
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpamec6r7n/pipeline.pipe', '--workspace', '/tmp/tmpamec6r7n/working', '--output', '/tmp/tmpamec6r7n/output', '--config', '/tmp/tmpamec6r7n/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=11, col=5) in task definition\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_existing_dir - AssertionError: Expected exit 0: 
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmphxsw1yzd/pipeline.pipe', '--workspace', '/tmp/tmphxsw1yzd/working', '--output', '/tmp/tmphxsw1yzd/output', '--config', '/tmp/tmphxsw1yzd/config.toml'], returncode=1, stdout='{"event": "TASK_STARTED", "job_id": 1}\n{"event": "TASK_RUNNING", "job_id": 1}\n{"event": "TASK_FAILED", "job_id": 1}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '*' at line 18, col 18
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpy2fiiwx3/pipeline.pipe', '--workspace', '/tmp/tmpy2fiiwx3/working', '--output', '/tmp/tmpy2fiiwx3/output', '--config', '/tmp/tmpy2fiiwx3/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '*' at line 18, col 18\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_exists_function - AssertionError: Expected exit 1, got 2
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpadwizc2m/pipeline.pipe', '--workspace', '/tmp/tmpadwizc2m/working', '--output', '/tmp/tmpadwizc2m/output', '--config', '/tmp/tmpadwizc2m/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '-' at line 28, col 15\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_float_params - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '/' at line 8, col 59
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpu61bas2y/pipeline.pipe', '--workspace', '/tmp/tmpu61bas2y/working', '--output', '/tmp/tmpu61bas2y/output', '--config', '/tmp/tmpu61bas2y/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 8, col 59\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_nested_loops - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '/' at line 7, col 68
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp61_ohsxo/pipeline.pipe', '--workspace', '/tmp/tmp61_ohsxo/working', '--output', '/tmp/tmp61_ohsxo/output', '--config', '/tmp/tmp61_ohsxo/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 7, col 68\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_stderr_validation - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '&' at line 6, col 37
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpxrnwqpg6/pipeline.pipe', '--workspace', '/tmp/tmpxrnwqpg6/working', '--output', '/tmp/tmpxrnwqpg6/output', '--config', '/tmp/tmpxrnwqpg6/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '&' at line 6, col 37\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_params - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpdq1y6au_/pipeline.pipe', '--workspace', '/tmp/tmpdq1y6au_/working', '--output', '/tmp/tmpdq1y6au_/output', '--config', '/tmp/tmpdq1y6au_/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_timeout - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '/' at line 3, col 51
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp9stganko/pipeline.pipe', '--workspace', '/tmp/tmp9stganko/working', '--output', '/tmp/tmp9stganko/output', '--config', '/tmp/tmp9stganko/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 3, col 51\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_circular_dependency - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpmnnl4wvv/pipeline.pipe', '--workspace', '/tmp/tmpmnnl4wvv/working', '--output', '/tmp/tmpmnnl4wvv/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected token Token(ID, 'requires', line=5, col=5) in task definition\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_missing_required_arg - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpeo8b0tjp/pipeline.pipe', '--workspace', '/tmp/tmpeo8b0tjp/working', '--output', '/tmp/tmpeo8b0tjp/output'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpi9yafpqr/pipeline.pipe', '--workspace', '/tmp/tmpi9yafpqr/working', '--output', '/tmp/tmpi9yafpqr/output', '--config', '/tmp/tmpi9yafpqr/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false - AssertionError: Expected exit 0: 
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpt0rf32m2/pipeline.pipe', '--workspace', '/tmp/tmpt0rf32m2/working', '--output', '/tmp/tmpt0rf32m2/output'], returncode=1, stdout='{"event": "TASK_STARTED", "job_id": 1}\n{"event": "TASK_RUNNING", "job_id": 1}\n{"event": "TASK_FAILED", "job_id": 1}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp9xplav2_/pipeline.pipe', '--workspace', '/tmp/tmp9xplav2_/working', '--output', '/tmp/tmp9xplav2_/output', '--config', '/tmp/tmp9xplav2_/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8ri2fum6/pipeline.pipe', '--workspace', '/tmp/tmp8ri2fum6/working', '--output', '/tmp/tmp8ri2fum6/output'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 2, col 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe - AssertionError: Expected exit 3, got 1
+assert 1 == 3
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjbegtacq/pipeline.pipe', '--workspace', '/tmp/tmpjbegtacq/working', '--output', '/tmp/tmpjbegtacq/output'], returncode=1, stdout='{"event": "TASK_STARTED", "job_id": 1}\n{"event": "TASK_RUNNING", "job_id": 1}\n{"event": "TASK_FAILED", "job_id": 1}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block - AssertionError: Expected exit 0: 
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpcqp7e3b9/pipeline.pipe', '--workspace', '/tmp/tmpcqp7e3b9/working', '--output', '/tmp/tmpcqp7e3b9/output'], returncode=1, stdout='{"event": "TASK_STARTED", "job_id": 1}\n{"event": "TASK_RUNNING", "job_id": 1}\n{"event": "TASK_FAILED", "job_id": 1}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_basic_cache - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '*' at line 12, col 33
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjv4writa/pipeline.pipe', '--workspace', '/tmp/tmpjv4writa/working', '--output', '/tmp/tmpjv4writa/output', '--config', '/tmp/tmpjv4writa/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '*' at line 12, col 33\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_file_change - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '/' at line 38, col 28
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_momwszh/pipeline.pipe', '--workspace', '/tmp/tmp_momwszh/working', '--output', '/tmp/tmp_momwszh/output', '--config', '/tmp/tmp_momwszh/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 38, col 28\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_cache_exclude - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '*' at line 48, col 19
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_wgoaiqu/pipeline.pipe', '--workspace', '/tmp/tmp_wgoaiqu/working', '--output', '/tmp/tmp_wgoaiqu/output', '--config', '/tmp/tmp_wgoaiqu/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '*' at line 48, col 19\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_ttl_strategy - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Expected COLON, got PARAMS at line 3, col 5
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp2f5mfvtp/pipeline.pipe', '--workspace', '/tmp/tmp2f5mfvtp/working', '--output', '/tmp/tmp2f5mfvtp/output', '--config', '/tmp/tmp2f5mfvtp/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected COLON, got PARAMS at line 3, col 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_cascade_invalidation - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '*' at line 12, col 32
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp6vhc7q9u/pipeline.pipe', '--workspace', '/tmp/tmp6vhc7q9u/working', '--output', '/tmp/tmp6vhc7q9u/output', '--config', '/tmp/tmp6vhc7q9u/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '*' at line 12, col 32\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_global_cache_disabled - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '/' at line 11, col 47
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmputw_f4cy/pipeline.pipe', '--workspace', '/tmp/tmputw_f4cy/working', '--output', '/tmp/tmputw_f4cy/output', '--config', '/tmp/tmputw_f4cy/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 11, col 47\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_force_refresh_skips_cache - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '/' at line 11, col 47
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_d9_cxwb/pipeline.pipe', '--workspace', '/tmp/tmp_d9_cxwb/working', '--output', '/tmp/tmp_d9_cxwb/output', '--config', '/tmp/tmp_d9_cxwb/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 11, col 47\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_always_strategy_ignores_input_change - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected character '/' at line 8, col 46
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1593lu4h/pipeline.pipe', '--workspace', '/tmp/tmp1593lu4h/working', '--output', '/tmp/tmp1593lu4h/output', '--config', '/tmp/tmp1593lu4h/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '/' at line 8, col 46\n").returncode
+========================= 35 failed, 6 passed in 9.68s =========================

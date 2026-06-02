@@ -1,0 +1,30 @@
+task simple_cached {
+    inputs: []
+    cache: {
+        enabled: true
+        strategy: "stale"
+        ttl: {
+            seconds: 1
+        }
+    }
+    run: {
+        echo "Running simple_cached task";
+        echo "output" > result.txt;
+    }
+    output: "simple_out"
+}
+
+task test_cached_task {
+    inputs: []
+    requires: {
+        simple_cached();
+        simple_cached cached_1h = CachedTask(ttl.hours=1);
+        simple_cached cached_overwrite = CachedTask(ttl={hours: 2, seconds: 0});
+        simple_cached cached_strategy = CachedTask(strategy="always");
+        simple_cached cached_enabled = CachedTask(enabled=false);
+    }
+    run: {
+        echo "All cached tasks completed";
+    }
+    output: "test_out"
+}

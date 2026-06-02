@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "problem_name": "datagate",
+  "problem_version": 2,
+  "checkpoint_name": "checkpoint_1",
+  "checkpoint_version": 2,
+  "duration": 3.4571821689605713,
+  "entrypoint": "uv run datagate.py",
+  "tests": {
+    "checkpoint_1-Functionality": {
+      "passed": [],
+      "failed": [
+        "TestCore::test_autodetect_latin1",
+        "TestCore::test_charset_latin1",
+        "TestCore::test_decimals_as_numbers",
+        "TestCore::test_default_limit_100",
+        "TestCore::test_semicolon_delimiter",
+        "TestCore::test_time_values_as_text",
+        "TestError::test_empty_source_parameter",
+        "TestError::test_upstream_403_to_404",
+        "TestFunctionality::test_common_delimiters[,]",
+        "TestFunctionality::test_common_delimiters[;]",
+        "TestFunctionality::test_common_delimiters[\\t]",
+        "TestFunctionality::test_cors_on_dataset_query",
+        "TestFunctionality::test_cors_on_routes[/convert]",
+        "TestFunctionality::test_cors_on_routes[/not-found]",
+        "TestFunctionality::test_different_urls_different_ids",
+        "TestFunctionality::test_extra_columns_trimmed",
+        "TestFunctionality::test_id_from_url_not_charset",
+        "TestFunctionality::test_ingest_varied_text_payloads[id,text-1,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\n]",
+        "TestFunctionality::test_ingest_varied_text_payloads[name,emoji-alice,smile\\nbob,wave\\n]",
+        "TestFunctionality::test_ingest_varied_text_payloads[name,note-alice,naive\\nbob,cafe\\n]",
+        "TestFunctionality::test_large_dataset_limit_order",
+        "TestFunctionality::test_limit_exactly_100",
+        "TestFunctionality::test_multiple_datasets_independent",
+        "TestFunctionality::test_negative_values_as_numbers",
+        "TestFunctionality::test_options_preflight_cors[/convert]",
+        "TestFunctionality::test_options_preflight_cors[/datasets/does-not-exist]",
+        "TestFunctionality::test_preserves_header_and_time_whitespace",
+        "TestFunctionality::test_preserves_whitespace",
+        "TestFunctionality::test_query_stable",
+        "TestFunctionality::test_relative_endpoint",
+        "TestFunctionality::test_same_url_same_id",
+        "TestFunctionality::test_time_boundary_values_are_text",
+        "TestFunctionality::test_trailing_empty_line_excluded",
+        "TestFunctionality::test_ingest_varied_text_payloads[k,v-left,  space\\nright,space  \\n]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Error": {
+      "passed": [],
+      "failed": [
+        "TestCore::test_convert_bad_params[invalid-url]",
+        "TestCore::test_convert_bad_params[missing-source]",
+        "TestCore::test_non_tabular_payload",
+        "TestCore::test_unknown_route_404",
+        "TestCore::test_unreachable_source",
+        "TestCore::test_upstream_500_to_404",
+        "TestError::test_convert_bad_url[bad-scheme]",
+        "TestError::test_convert_bad_url[missing-scheme]",
+        "TestError::test_header_only_rejected",
+        "TestError::test_malformed_charset",
+        "TestError::test_unknown_dataset_404",
+        "TestFunctionality::test_empty_file_rejected"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Core": {
+      "passed": [],
+      "failed": [
+        "TestCore::test_order_preserved",
+        "TestCore::test_query_envelope",
+        "TestCore::test_single_column_csv",
+        "TestCore::test_success_returns_id"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 0,
+    "Functionality": 0,
+    "Regression": 0,
+    "Error": 0
+  },
+  "total_counts": {
+    "Core": 4,
+    "Functionality": 34,
+    "Regression": 0,
+    "Error": 12
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 49,
+  "test_collection_hash": "2c9f0721ff56ef545909c2bdb707200d0e11a60b040dbe9b4245f6bab5fe921e",
+  "infrastructure_failure": false
+}

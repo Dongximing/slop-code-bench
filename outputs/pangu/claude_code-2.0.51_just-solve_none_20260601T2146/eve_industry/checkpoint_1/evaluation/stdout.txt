@@ -1,0 +1,396 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/2Ql75V4l-yPrepR6/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 180.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 12 items
+
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[naga] PASSED    [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[barrage_l] FAILED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[fernite_carbide] FAILED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[athanor] FAILED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[azariel] FAILED [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[proteus] FAILED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_materials_sorted_case_insensitive PASSED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_run_time_rounds_up PASSED   [ 66%]
+.evaluation_tests/test_checkpoint_1.py::test_buildable_column_accuracy FAILED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_unpublished_item_error FAILED [ 83%]
+.evaluation_tests/test_checkpoint_1.py::test_case_sensitive_item_name FAILED [ 91%]
+.evaluation_tests/test_checkpoint_1.py::test_nonexistent_item_error FAILED [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_recipe_core[barrage_l] __________________________
+
+case_name = 'barrage_l', entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name", CORE_CASES)
+    def test_recipe_core(case_name, entrypoint_argv, sde_dir):
+        """Core: Recipe lookup tests."""
+        case = load_json_case(1, case_name)
+        result = run_command(
+            entrypoint_argv,
+            case["input"]["command"],
+            *case["input"]["args"],
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_1.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Manufacturing', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', 'market_group': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', ...}
+expected = {'activity': 'Manufacturing', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', 'market_group': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['materials']['Fernite Carbide']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fullerides']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['R.A.M.- Ammunition Tech']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+E       assert not {'values_changed': {"root['materials']['Fernite Carbide']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fullerides']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['R.A.M.- Ammunition Tech']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+______________________ test_recipe_core[fernite_carbide] _______________________
+
+case_name = 'fernite_carbide', entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name", CORE_CASES)
+    def test_recipe_core(case_name, entrypoint_argv, sde_dir):
+        """Core: Recipe lookup tests."""
+        case = load_json_case(1, case_name)
+        result = run_command(
+            entrypoint_argv,
+            case["input"]["command"],
+            *case["input"]["args"],
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_1.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Reactions', 'group': 'Material > Composite', 'item': 'Fernite Carbide (16673)', 'market_group': 'Manufacture & Research > Materials > Reaction Materials > Advanced Moon Materials', ...}
+expected = {'activity': 'Reactions', 'group': 'Material > Composite', 'item': 'Fernite Carbide (16673)', 'market_group': 'Manufacture & Research > Materials > Reaction Materials > Advanced Moon Materials', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['materials']['Ceramic Powder']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fernite Alloy']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Hydrogen Fuel Block']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+E       assert not {'values_changed': {"root['materials']['Ceramic Powder']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fernite Alloy']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Hydrogen Fuel Block']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+______________________ test_recipe_functionality[athanor] ______________________
+
+case_name = 'athanor', entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name", FUNCTIONALITY_CASES)
+    def test_recipe_functionality(case_name, entrypoint_argv, sde_dir):
+        """Functionality: Extended recipe lookup tests."""
+        case = load_json_case(1, case_name)
+        result = run_command(
+            entrypoint_argv,
+            case["input"]["command"],
+            *case["input"]["args"],
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Manufacturing', 'group': 'Structure > Refinery', 'item': 'Athanor (35835)', 'market_group': 'Structures > Refineries', ...}
+expected = {'activity': 'Manufacturing', 'group': 'Structure > Refinery', 'item': 'Athanor (35835)', 'market_group': 'Structures > Refineries', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['materials']['Structure Acceleration Coils']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Construction Parts']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Docking Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Electromagnetic Sensor']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Hangar Array']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Repair Facility']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Reprocessing Plant']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Storage Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+E       assert not {'values_changed': {"root['materials']['Structure Acceleration Coils']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Construction Parts']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Docking Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Electromagnetic Sensor']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Hangar Array']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Repair Facility']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Reprocessing Plant']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Storage Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+______________________ test_recipe_functionality[azariel] ______________________
+
+case_name = 'azariel', entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name", FUNCTIONALITY_CASES)
+    def test_recipe_functionality(case_name, entrypoint_argv, sde_dir):
+        """Functionality: Extended recipe lookup tests."""
+        case = load_json_case(1, case_name)
+        result = run_command(
+            entrypoint_argv,
+            case["input"]["command"],
+            *case["input"]["args"],
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Manufacturing', 'group': 'Ship > Titan', 'item': 'Azariel (78576)', 'market_group': 'Ships > Capital Ships > Titans > Faction Titans', ...}
+expected = {'activity': 'Manufacturing', 'group': 'Ship > Titan', 'item': 'Azariel (78576)', 'market_group': 'Ships > Capital Ships > Titans > Faction Titans', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['materials']['Auto-Integrity Preservation Seal']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Armor Plates']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Capacitor Battery']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Clone Vat Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Computer System']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Construction Parts']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Core Temperature Regulator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Corporate Hangar Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Doomsday Weapon Mount']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Jump Bridge Array']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Jump Drive']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Power Generator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Propulsion Engine']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Sensor Cluster']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Shield Emitter']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Ship Maintenance Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Turret Hardpoint']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Enhanced Neurolink Protection Cell']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['G-O Trigger Neurolink Conduit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Ladar-FTL Interlink Communicator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Life Support Backup Unit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Magnetometric-FTL Interlink Communicator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['S-R Trigger Neurolink Conduit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+E       assert not {'values_changed': {"root['materials']['Auto-Integrity Preservation Seal']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Armor Plates']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Capacitor Battery']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Clone Vat Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Computer System']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Construction Parts']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Core Temperature Regulator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Corporate Hangar Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Doomsday Weapon Mount']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Jump Bridge Array']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Jump Drive']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Power Generator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Propulsion Engine']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Sensor Cluster']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Shield Emitter']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Ship Maintenance Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Turret Hardpoint']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Enhanced Neurolink Protection Cell']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['G-O Trigger Neurolink Conduit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Ladar-FTL Interlink Communicator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Life Support Backup Unit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Magnetometric-FTL Interlink Communicator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['S-R Trigger Neurolink Conduit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+______________________ test_recipe_functionality[proteus] ______________________
+
+case_name = 'proteus', entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name", FUNCTIONALITY_CASES)
+    def test_recipe_functionality(case_name, entrypoint_argv, sde_dir):
+        """Functionality: Extended recipe lookup tests."""
+        case = load_json_case(1, case_name)
+        result = run_command(
+            entrypoint_argv,
+            case["input"]["command"],
+            *case["input"]["args"],
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Manufacturing', 'group': 'Ship > Strategic Cruiser', 'item': 'Proteus (29988)', 'market_group': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', ...}
+expected = {'activity': 'Manufacturing', 'group': 'Ship > Strategic Cruiser', 'item': 'Proteus (29988)', 'market_group': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['materials']['Electromechanical Interface Nexus']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Emergent Neurovisual Interface']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fullerene Intercalated Sheets']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fulleroferrocene Power Conduits']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Metallofullerene Plating']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Nanowire Composites']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Neurovisual Output Analyzer']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['R.A.M.- Starship Tech']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Superconducting Magnetometric Amplifier']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+E       assert not {'values_changed': {"root['materials']['Electromechanical Interface Nexus']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Emergent Neurovisual Interface']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fullerene Intercalated Sheets']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fulleroferrocene Power Conduits']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Metallofullerene Plating']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Nanowire Composites']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Neurovisual Output Analyzer']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['R.A.M.- Starship Tech']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Superconducting Magnetometric Amplifier']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+________________________ test_buildable_column_accuracy ________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_buildable_column_accuracy(entrypoint_argv, sde_dir):
+        """Functionality: Buildable column correctly identifies items with blueprints."""
+        result = run_command(
+            entrypoint_argv, "recipe", "Barrage L Blueprint", "--sde", str(sde_dir)
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+        # Morphite has no blueprint (raw material) - should be "No"
+        assert actual["materials"]["Morphite"]["Buildable"] == "No"
+        # Fernite Carbide has a reaction formula - should be "Yes"
+>       assert actual["materials"]["Fernite Carbide"]["Buildable"] == "Yes"
+E       AssertionError: assert 'No' == 'Yes'
+E         
+E         - Yes
+E         + No
+
+.evaluation_tests/test_checkpoint_1.py:122: AssertionError
+_________________________ test_unpublished_item_error __________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.error
+    def test_unpublished_item_error(entrypoint_argv, sde_dir):
+        """Error: Unpublished items (published=0 in SDE) should fail with clear error."""
+        result = run_command(
+            entrypoint_argv, "recipe", "Python Mine", "--sde", str(sde_dir)
+        )
+>       assert result.returncode != 0, "Expected error for unpublished item"
+E       AssertionError: Expected error for unpublished item
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Python Mine', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Python Mine' not found or not published.\n", stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:136: AssertionError
+________________________ test_case_sensitive_item_name _________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.error
+    def test_case_sensitive_item_name(entrypoint_argv, sde_dir):
+        """Error: Item names must match exact case."""
+        result = run_command(
+            entrypoint_argv, "recipe", "naga", "--sde", str(sde_dir)
+        )
+>       assert result.returncode != 0, "Expected error for wrong case item name"
+E       AssertionError: Expected error for wrong case item name
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'naga', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'naga' not found or not published.\n", stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:145: AssertionError
+_________________________ test_nonexistent_item_error __________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.error
+    def test_nonexistent_item_error(entrypoint_argv, sde_dir):
+        """Error: Nonexistent item should fail with clear error."""
+        result = run_command(
+            entrypoint_argv,
+            "recipe",
+            "Totally Fake Item That Does Not Exist",
+            "--sde",
+            str(sde_dir),
+        )
+>       assert result.returncode != 0, "Expected error for nonexistent item"
+E       AssertionError: Expected error for nonexistent item
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Totally Fake Item That Does Not Exist', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Totally Fake Item That Does Not Exist' not found or not published.\n", stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:158: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recipe_core[barrage_l] - AssertionError: 
+  Diff: {'values_changed': {"root['materials']['Fernite Carbide']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fullerides']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['R.A.M.- Ammunition Tech']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+assert not {'values_changed': {"root['materials']['Fernite Carbide']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fullerides']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['R.A.M.- Ammunition Tech']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recipe_core[fernite_carbide] - AssertionError: 
+  Diff: {'values_changed': {"root['materials']['Ceramic Powder']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fernite Alloy']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Hydrogen Fuel Block']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+assert not {'values_changed': {"root['materials']['Ceramic Powder']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fernite Alloy']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Hydrogen Fuel Block']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[athanor] - AssertionError: 
+  Diff: {'values_changed': {"root['materials']['Structure Acceleration Coils']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Construction Parts']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Docking Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Electromagnetic Sensor']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Hangar Array']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Repair Facility']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Reprocessing Plant']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Storage Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+assert not {'values_changed': {"root['materials']['Structure Acceleration Coils']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Construction Parts']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Docking Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Electromagnetic Sensor']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Hangar Array']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Repair Facility']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Reprocessing Plant']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Structure Storage Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[azariel] - AssertionError: 
+  Diff: {'values_changed': {"root['materials']['Auto-Integrity Preservation Seal']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Armor Plates']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Capacitor Battery']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Clone Vat Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Computer System']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Construction Parts']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Core Temperature Regulator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Corporate Hangar Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Doomsday Weapon Mount']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Jump Bridge Array']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Jump Drive']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Power Generator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Propulsion Engine']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Sensor Cluster']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Shield Emitter']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Ship Maintenance Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Turret Hardpoint']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Enhanced Neurolink Protection Cell']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['G-O Trigger Neurolink Conduit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Ladar-FTL Interlink Communicator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Life Support Backup Unit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Magnetometric-FTL Interlink Communicator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['S-R Trigger Neurolink Conduit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+assert not {'values_changed': {"root['materials']['Auto-Integrity Preservation Seal']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Armor Plates']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Capacitor Battery']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Clone Vat Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Computer System']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Construction Parts']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Core Temperature Regulator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Corporate Hangar Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Doomsday Weapon Mount']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Jump Bridge Array']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Jump Drive']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Power Generator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Propulsion Engine']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Sensor Cluster']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Shield Emitter']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Ship Maintenance Bay']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Capital Turret Hardpoint']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Enhanced Neurolink Protection Cell']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['G-O Trigger Neurolink Conduit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Ladar-FTL Interlink Communicator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Life Support Backup Unit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Magnetometric-FTL Interlink Communicator']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['S-R Trigger Neurolink Conduit']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[proteus] - AssertionError: 
+  Diff: {'values_changed': {"root['materials']['Electromechanical Interface Nexus']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Emergent Neurovisual Interface']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fullerene Intercalated Sheets']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fulleroferrocene Power Conduits']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Metallofullerene Plating']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Nanowire Composites']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Neurovisual Output Analyzer']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['R.A.M.- Starship Tech']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Superconducting Magnetometric Amplifier']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+assert not {'values_changed': {"root['materials']['Electromechanical Interface Nexus']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Emergent Neurovisual Interface']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fullerene Intercalated Sheets']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Fulleroferrocene Power Conduits']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Metallofullerene Plating']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Nanowire Composites']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Neurovisual Output Analyzer']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['R.A.M.- Starship Tech']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}, "root['materials']['Superconducting Magnetometric Amplifier']['Buildable']": {'new_value': 'Yes', 'old_value': 'No'}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_buildable_column_accuracy - AssertionError: assert 'No' == 'Yes'
+  
+  - Yes
+  + No
+FAILED .evaluation_tests/test_checkpoint_1.py::test_unpublished_item_error - AssertionError: Expected error for unpublished item
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Python Mine', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Python Mine' not found or not published.\n", stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_case_sensitive_item_name - AssertionError: Expected error for wrong case item name
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'naga', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'naga' not found or not published.\n", stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_nonexistent_item_error - AssertionError: Expected error for nonexistent item
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Totally Fake Item That Does Not Exist', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Totally Fake Item That Does Not Exist' not found or not published.\n", stderr='').returncode
+========================= 9 failed, 3 passed in 11.28s =========================

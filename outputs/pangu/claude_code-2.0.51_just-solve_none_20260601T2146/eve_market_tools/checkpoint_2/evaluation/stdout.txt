@@ -1,0 +1,2736 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/hBfv9wOR8g71sc1h/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 28 items
+
+.evaluation_tests/test_checkpoint_1.py::test_hub_compare_error_no_data ERROR [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_get_market_stats ERROR      [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_get_market_stats_with_type_ids ERROR [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_tritanium ERROR             [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_hubs ERROR                  [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_domain_stats ERROR          [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_placid_stats ERROR          [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_rhea_orders ERROR           [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_domain_vargur ERROR         [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_hub_compare ERROR           [ 35%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[create_config] ERROR [ 39%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[drill_down_base] ERROR [ 42%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reproc_base] ERROR [ 46%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[upload_structures] ERROR [ 50%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reprocess_with_config] ERROR [ 53%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[scrap_perfect] ERROR [ 57%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[drill_down_perfect] ERROR [ 60%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[multiple_items] ERROR [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[upload_prices] ERROR [ 67%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reproc_with_price] ERROR [ 71%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[gas_eff_perfect] ERROR [ 75%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[upload_structures] ERROR [ 78%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[gas_eff_base] ERROR [ 82%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[skill_config_ice] ERROR [ 85%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[ice_eff] ERROR [ 89%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[upload_prices] ERROR [ 92%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[scrap_drill_with_config] ERROR [ 96%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[scrap_with_config] ERROR [100%]
+
+==================================== ERRORS ====================================
+_______________ ERROR at setup of test_hub_compare_error_no_data _______________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+___________________ ERROR at setup of test_get_market_stats ____________________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+____________ ERROR at setup of test_get_market_stats_with_type_ids _____________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_______________________ ERROR at setup of test_tritanium _______________________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_________________________ ERROR at setup of test_hubs __________________________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_____________________ ERROR at setup of test_domain_stats ______________________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_____________________ ERROR at setup of test_placid_stats ______________________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+______________________ ERROR at setup of test_rhea_orders ______________________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_____________________ ERROR at setup of test_domain_vargur _____________________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+______________________ ERROR at setup of test_hub_compare ______________________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+___________ ERROR at setup of test_checkpoint_2_core[create_config] ____________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+__________ ERROR at setup of test_checkpoint_2_core[drill_down_base] ___________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+____________ ERROR at setup of test_checkpoint_2_core[reproc_base] _____________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_________ ERROR at setup of test_checkpoint_2_core[upload_structures] __________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_______ ERROR at setup of test_checkpoint_2_core[reprocess_with_config] ________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+___________ ERROR at setup of test_checkpoint_2_core[scrap_perfect] ____________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_________ ERROR at setup of test_checkpoint_2_core[drill_down_perfect] _________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+___________ ERROR at setup of test_checkpoint_2_core[multiple_items] ___________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+___________ ERROR at setup of test_checkpoint_2_core[upload_prices] ____________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_________ ERROR at setup of test_checkpoint_2_core[reproc_with_price] __________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_________ ERROR at setup of test_checkpoint_2_hidden[gas_eff_perfect] __________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+________ ERROR at setup of test_checkpoint_2_hidden[upload_structures] _________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+___________ ERROR at setup of test_checkpoint_2_hidden[gas_eff_base] ___________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_________ ERROR at setup of test_checkpoint_2_hidden[skill_config_ice] _________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_____________ ERROR at setup of test_checkpoint_2_hidden[ice_eff] ______________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+__________ ERROR at setup of test_checkpoint_2_hidden[upload_prices] ___________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+_____ ERROR at setup of test_checkpoint_2_hidden[scrap_drill_with_config] ______
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+________ ERROR at setup of test_checkpoint_2_hidden[scrap_with_config] _________
+
+entrypoint_argv = ['uv', 'run', 'market_tools.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.fixture(scope="session")
+    def api_server(entrypoint_argv, sde_dir):
+        """Start API server and yield base URL."""
+        process = subprocess.Popen(
+            entrypoint_argv
+            + ["--sde", str(sde_dir), "--port", "8000", "--address", "127.0.0.1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        base_url = "http://127.0.0.1:8000"
+    
+        for _ in range(100):
+            try:
+                httpx.get(f"{base_url}/healthz", timeout=0.5)
+                break
+            except httpx.RequestError:
+                time.sleep(0.1)
+        else:
+            process.terminate()
+            stdout, stderr = process.communicate(timeout=5)
+>           raise RuntimeError(
+                f"Server failed to start.\nstdout: {stdout.decode()}\nstderr: {stderr.decode()}"
+            )
+E           RuntimeError: Server failed to start.
+E           stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+E           Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+E           Loading from CSV files...
+E           
+E           stderr: Traceback (most recent call last):
+E             File "/workspace/market_tools.py", line 672, in <module>
+E               main()
+E             File "/workspace/market_tools.py", line 665, in main
+E               load_sde(args.sde)
+E             File "/workspace/market_tools.py", line 154, in load_sde
+E               for row in reader:
+E                          ^^^^^^
+E             File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+E               self.fieldnames
+E             File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+E               self._fieldnames = next(self.reader)
+E                                  ^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+E               return self._buffer.read1(size)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+E               data = self.read(len(byte_view))
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+E               if not self._read_gzip_header():
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+E               last_mtime = _read_gzip_header(self._fp)
+E                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+E               raise BadGzipFile('Not a gzipped file (%r)' % magic)
+E           gzip.BadGzipFile: Not a gzipped file (b'BZ')
+
+.evaluation_tests/conftest.py:114: RuntimeError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+ERROR .evaluation_tests/test_checkpoint_1.py::test_hub_compare_error_no_data - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_1.py::test_get_market_stats - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_1.py::test_get_market_stats_with_type_ids - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_1.py::test_tritanium - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_1.py::test_hubs - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_1.py::test_domain_stats - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_1.py::test_placid_stats - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_1.py::test_rhea_orders - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_1.py::test_domain_vargur - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_1.py::test_hub_compare - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[create_config] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[drill_down_base] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reproc_base] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[upload_structures] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reprocess_with_config] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[scrap_perfect] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[drill_down_perfect] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[multiple_items] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[upload_prices] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reproc_with_price] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[gas_eff_perfect] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[upload_structures] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[gas_eff_base] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[skill_config_ice] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[ice_eff] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[upload_prices] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[scrap_drill_with_config] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+ERROR .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[scrap_with_config] - RuntimeError: Server failed to start.
+stdout: Loading SDE from /workspace/.evaluation_tests/assets/sde_dir...
+Could not load JSON cache: [Errno 2] No such file or directory: '/workspace/.evaluation_tests/assets/sde_dir/sde_cache.json'
+Loading from CSV files...
+
+stderr: Traceback (most recent call last):
+  File "/workspace/market_tools.py", line 672, in <module>
+    main()
+  File "/workspace/market_tools.py", line 665, in main
+    load_sde(args.sde)
+  File "/workspace/market_tools.py", line 154, in load_sde
+    for row in reader:
+               ^^^^^^
+  File "/usr/local/lib/python3.12/csv.py", line 115, in __next__
+    self.fieldnames
+  File "/usr/local/lib/python3.12/csv.py", line 102, in fieldnames
+    self._fieldnames = next(self.reader)
+                       ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 351, in read1
+    return self._buffer.read1(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/_compression.py", line 68, in readinto
+    data = self.read(len(byte_view))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 544, in read
+    if not self._read_gzip_header():
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 513, in _read_gzip_header
+    last_mtime = _read_gzip_header(self._fp)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/gzip.py", line 473, in _read_gzip_header
+    raise BadGzipFile('Not a gzipped file (%r)' % magic)
+gzip.BadGzipFile: Not a gzipped file (b'BZ')
+============================= 28 errors in 11.03s ==============================

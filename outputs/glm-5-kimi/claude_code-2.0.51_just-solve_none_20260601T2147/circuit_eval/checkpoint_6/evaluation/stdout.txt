@@ -1,0 +1,3119 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/olW0jRMVVYD-CZvc/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 508 items
+
+.evaluation_tests/test_checkpoint_1.py::test_help_ignores_json_flag PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::test_version_plain_text PASSED   [  0%]
+.evaluation_tests/test_checkpoint_1.py::test_version_json PASSED         [  0%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_usage_error_no_args PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_usage_error_without_command PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_unknown_command PASSED  [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_check_valid_circuit_reports_interface PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_check_file_not_found PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[bad_syntax-            input a b\n            output y\n            y = AND(a, b\n            ] PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[literal_x-            input a\n            output y\n            y = X\n            ] FAILED [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[brackets-            input a[0]\n            output y\n            y = a\n            ] PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[declaration_after_assignment-            input a\n            output y\n            y = a\n            wire t1\n            t1 = a\n            -DeclarationAfterAssignmentError] PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[duplicate_name-            input a a\n            output y\n            y = a\n            -DuplicateNameError] PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[undefined_name-            input a\n            output y\n            y = z\n            -UndefinedNameError] PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[input_assignment-            input a\n            output y\n            y = a\n            a = 1\n            -InputAssignmentError] PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[multiple_assignment-            input a\n            output y\n            y = a\n            y = NOT(a)\n            -MultipleAssignmentError] PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[unassigned_signal-            input a\n            output y\n            -UnassignedSignalError] PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[duplicate_name_across_lines-            input a\n            input a\n            output y\n            y = a\n            -DuplicateNameError] PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[unassigned_wire-            input a\n            output y\n            wire t1\n            y = a\n            -UnassignedSignalError] PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[undeclared_lhs-            input a\n            output y\n            t1 = a\n            y = a\n            -UndefinedNameError] PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_check_cycle_error_message PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_check_accepts_all_operators PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_not_too_many-a-NOT(a, a)] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_buf_too_many-a b-BUF(a, b)] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_and_too_few-a-AND(a)] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_or_too_few-a-OR(a)] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_xor_too_few-a-XOR(a)] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_nand_too_few-a-NAND(a)] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_nor_too_few-a-NOR(a)] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_xnor_too_few-a-XNOR(a)] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_check_identifiers_are_case_sensitive PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_check_majority_vote_circuit PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parity_generator_circuit PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_check_comparator_2bit_circuit PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_check_decoder_circuit PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_check_shared_scalar_circuit PASSED [  7%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_text_outputs_sorted PASSED [  7%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_json_outputs_fields PASSED [  7%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_input_error_reports_payload[args0-MissingInputError] PASSED [  7%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_input_error_reports_payload[args1-UnknownInputError] PASSED [  7%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_unknown_input_with_allow_extra PASSED [  8%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_default_value_applied[0-expected0] PASSED [  8%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_default_value_applied[1-expected1] PASSED [  8%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_invalid_input_value[X] FAILED [  8%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_invalid_input_value[2] PASSED [  8%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments0-expected0] PASSED [  9%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments1-expected1] PASSED [  9%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments2-expected2] PASSED [  9%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments3-expected3] PASSED [  9%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments4-expected4] PASSED [  9%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments5-expected5] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments6-expected6] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments7-expected7] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_default_applies_to_unspecified_inputs PASSED [ 10%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[0-0-0-0] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[0-0-1-0] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[0-1-0-0] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[0-1-1-1] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[1-0-0-0] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[1-0-1-1] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[1-1-0-1] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[1-1-1-1] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-0-0-0-0] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-0-0-1-1] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-0-1-0-1] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-0-1-1-0] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-1-0-0-1] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-1-0-1-0] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-1-1-0-0] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-1-1-1-1] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-0-0-0-1] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-0-0-1-0] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-0-1-0-0] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-0-1-1-1] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-1-0-0-0] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-1-0-1-1] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-1-1-0-1] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-1-1-1-0] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-0-0-0-1-0-0] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-0-0-1-0-0-1] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-0-1-0-0-0-1] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-0-1-1-0-0-1] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-1-0-0-0-1-0] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-1-0-1-1-0-0] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-1-1-0-0-0-1] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-1-1-1-0-0-1] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-0-0-0-0-1-0] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-0-0-1-0-1-0] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-0-1-0-1-0-0] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-0-1-1-0-0-1] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-1-0-0-0-1-0] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-1-0-1-0-1-0] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-1-1-0-0-1-0] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-1-1-1-1-0-0] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::test_decoder_exhaustive[0-0-0-0] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::test_decoder_exhaustive[0-1-1-0] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::test_decoder_exhaustive[1-0-0-0] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_2.py::test_decoder_exhaustive[1-1-0-1] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_2.py::test_shared_scalar_eval_cases PASSED [ 19%]
+.evaluation_tests/test_checkpoint_3.py::test_check_vector_declaration_reports_width PASSED [ 19%]
+.evaluation_tests/test_checkpoint_3.py::test_check_mixed_scalar_vector_declarations PASSED [ 19%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_bit_index_extracts_single_bit PASSED [ 20%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_bit_slice_extracts_range PASSED [ 20%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_concatenation_joins_expressions PASSED [ 20%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_slice_concat_swaps_halves PASSED [ 20%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_unsized_binary_literal PASSED [ 20%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_unsized_hex_literal PASSED [ 21%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_sized_binary_literal PASSED [ 21%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_sized_hex_literal PASSED [ 21%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_sized_decimal_literal PASSED [ 21%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_eq_returns_expected[0x2a-0x2a-1] PASSED [ 21%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_eq_returns_expected[0x2a-0x2b-0] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_formats[bin-a=0x0f-y=0b00001111] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_formats[hex-a=0b00001111-y=0x0f] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_formats[dec-a=0x0f-y=15] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_formats[None-a=0x0f-y=0b00001111] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_json_includes_radix_field PASSED [ 23%]
+.evaluation_tests/test_checkpoint_3.py::test_check_width_mismatch_error PASSED [ 23%]
+.evaluation_tests/test_checkpoint_3.py::test_check_index_out_of_bounds_error PASSED [ 23%]
+.evaluation_tests/test_checkpoint_3.py::test_check_slice_out_of_bounds_error PASSED [ 23%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_input_width_mismatch_error PASSED [ 23%]
+.evaluation_tests/test_checkpoint_3.py::test_check_literal_width_mismatch_error PASSED [ 24%]
+.evaluation_tests/test_checkpoint_3.py::test_check_concat_width_mismatch_error PASSED [ 24%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_mux_ite_semantics[0-0b1110-MUX] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_mux_ite_semantics[0-0b1110-ITE] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_mux_ite_semantics[1-0b0001-MUX] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_mux_ite_semantics[1-0b0001-ITE] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_AND-0b1111-1] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_AND-0b1110-0] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_OR-0b0000-0] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_OR-0b0001-1] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_XOR-0b1100-0] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_XOR-0b1101-1] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[AND] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[OR] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[XOR] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[NAND] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[NOR] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[XNOR] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_literal_with_underscores PASSED [ 27%]
+.evaluation_tests/test_checkpoint_3.py::test_check_sized_decimal_overflow_parse_error PASSED [ 27%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_scalar_literal[0-0] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_scalar_literal[1-1] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_3.py::test_check_unary_preserves_vector_width[NOT] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_3.py::test_check_unary_preserves_vector_width[BUF] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_3.py::test_check_mux_selector_must_be_width_one PASSED [ 28%]
+.evaluation_tests/test_checkpoint_3.py::test_check_mux_operands_must_match_width PASSED [ 28%]
+.evaluation_tests/test_checkpoint_3.py::test_check_eq_operands_must_match_width PASSED [ 29%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_scalar_output_ignores_radix PASSED [ 29%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_hex_padding PASSED [ 29%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_chained_operations PASSED [ 29%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_slice_full_range PASSED [ 29%]
+.evaluation_tests/test_checkpoint_3.py::test_check_single_bit_vector_declaration PASSED [ 30%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduce_on_width_one PASSED [ 30%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_concat_mixed_widths PASSED [ 30%]
+.evaluation_tests/test_checkpoint_3.py::test_check_index_at_exact_boundary PASSED [ 30%]
+.evaluation_tests/test_checkpoint_3.py::test_check_index_one_past_boundary_error PASSED [ 30%]
+.evaluation_tests/test_checkpoint_3.py::test_check_slice_hi_equals_lo_valid PASSED [ 31%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_hex_odd_width PASSED [ 31%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_bin_preserves_leading_zeros PASSED [ 31%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_mux_with_complex_operands PASSED [ 31%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_eq_with_literal PASSED [ 31%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_all_new_operators_combined PASSED [ 32%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[0-0b0000] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[1-0b1000] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[2-0b0100] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[4-0b0010] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[8-0b0001] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[10-0b0101] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[15-0b1111] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[12-0b0011] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[3-0b1100] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[0-0-0-0b00] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[0-0-1-0b01] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[0-1-0-0b01] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[0-1-1-0b10] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[1-0-0-0b01] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[1-0-1-0b10] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[1-1-0-0b10] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[1-1-1-0b11] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bit_reversal_circuit PASSED [ 35%]
+.evaluation_tests/test_checkpoint_3.py::test_check_popcount_circuit PASSED [ 35%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-0-0-0-1-0-0] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-0-0-1-0-0-1] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-0-1-0-0-0-1] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-0-1-1-0-0-1] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-1-0-0-0-1-0] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-1-0-1-1-0-0] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-1-1-0-0-0-1] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-1-1-1-0-0-1] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-0-0-0-0-1-0] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-0-0-1-0-1-0] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-0-1-0-1-0-0] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-0-1-1-0-0-1] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-1-0-0-0-1-0] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-1-0-1-0-1-0] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-1-1-0-0-1-0] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-1-1-1-1-0-0] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_3.py::test_decoder_exhaustive[0-0-0-0] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_3.py::test_decoder_exhaustive[0-1-1-0] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_3.py::test_decoder_exhaustive[1-0-0-0] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_3.py::test_decoder_exhaustive[1-1-0-1] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_radix_hex PASSED   [ 39%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_radix_hex PASSED [ 40%]
+.evaluation_tests/test_checkpoint_3.py::test_shared_vector_pipeline_eval PASSED [ 40%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_mode_2val_explicit PASSED [ 40%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_mode_3val_basic_x_input PASSED [ 40%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_radix_bin_allowed PASSED [ 40%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_radix_hex_error PASSED [ 41%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_radix_dec_error PASSED [ 41%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_scalar_x_uppercase PASSED [ 41%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_scalar_x_lowercase PASSED [ 41%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_binary_with_x PASSED [ 41%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_sized_binary_with_x PASSED [ 42%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_not_x PASSED      [ 42%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_buf_x PASSED      [ 42%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_controlling_zero PASSED [ 42%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_non_controlling PASSED [ 42%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_controlling_one PASSED [ 43%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_non_controlling PASSED [ 43%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xor_propagates_x PASSED [ 43%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_x_sel_equal_operands PASSED [ 43%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_x_sel_diff_operands PASSED [ 43%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_vector_per_bit PASSED [ 44%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_definite_match PASSED [ 44%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_definite_mismatch PASSED [ 44%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_possible_match PASSED [ 44%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_and_controlling_zero PASSED [ 44%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_and_no_controlling PASSED [ 45%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_or_controlling_one PASSED [ 45%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_or_no_controlling PASSED [ 45%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_xor_any_x PASSED [ 45%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_scalar_output_x PASSED [ 45%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_vector_output_with_x PASSED [ 46%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_json_includes_mode PASSED [ 46%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_json_radix_bin PASSED [ 46%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_truth_table[0-0-0] PASSED [ 46%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_truth_table[0-1-0] PASSED [ 46%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_truth_table[0-X-0] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_truth_table[1-0-0] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_truth_table[1-1-1] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_truth_table[1-X-X] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_truth_table[X-0-0] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_truth_table[X-1-X] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_and_truth_table[X-X-X] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_truth_table[0-0-0] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_truth_table[0-1-1] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_truth_table[0-X-X] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_truth_table[1-0-1] PASSED [ 49%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_truth_table[1-1-1] PASSED [ 49%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_truth_table[1-X-1] PASSED [ 49%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_truth_table[X-0-X] PASSED [ 49%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_truth_table[X-1-1] PASSED [ 49%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_or_truth_table[X-X-X] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xor_truth_table[0-0-0] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xor_truth_table[0-1-1] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xor_truth_table[0-X-X] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xor_truth_table[1-0-1] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xor_truth_table[1-1-0] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xor_truth_table[1-X-X] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xor_truth_table[X-0-X] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xor_truth_table[X-1-X] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xor_truth_table[X-X-X] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nand_truth_table[0-0-1] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nand_truth_table[0-1-1] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nand_truth_table[0-X-1] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nand_truth_table[1-0-1] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nand_truth_table[1-1-0] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nand_truth_table[1-X-X] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nand_truth_table[X-0-1] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nand_truth_table[X-1-X] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nand_truth_table[X-X-X] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nor_truth_table[0-0-1] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nor_truth_table[0-1-0] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nor_truth_table[0-X-X] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nor_truth_table[1-0-0] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nor_truth_table[1-1-0] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nor_truth_table[1-X-0] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nor_truth_table[X-0-X] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nor_truth_table[X-1-0] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nor_truth_table[X-X-X] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xnor_truth_table[0-0-1] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xnor_truth_table[0-1-0] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xnor_truth_table[0-X-X] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xnor_truth_table[1-0-0] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xnor_truth_table[1-1-1] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xnor_truth_table[1-X-X] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xnor_truth_table[X-0-X] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xnor_truth_table[X-1-X] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_xnor_truth_table[X-X-X] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[AND-0-X-1-0] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[AND-1-X-1-X] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[AND-1-1-1-1] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[AND-X-X-X-X] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[OR-1-X-0-1] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[OR-0-X-0-X] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[OR-0-0-0-0] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[OR-X-X-X-X] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[XOR-0-X-0-X] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[XOR-1-1-X-X] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[XOR-1-1-0-0] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_variadic_operators[XOR-1-0-1-0] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[0-1-0-0] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[1-1-0-1] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[X-0-0-0] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[X-1-1-1] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[X-0-1-X] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[X-1-0-X] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[0-X-1-1] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[0-X-0-0] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[1-X-0-X] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[1-0-X-0] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[X-X-X-X] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[X-X-0-X] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_scalar_cases[X-0-X-X] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_vector_cases[0-0b1111-0b0000-0b0000] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_vector_cases[1-0b1111-0b0000-0b1111] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_vector_cases[X-0b1100-0b1100-0b1100] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_vector_cases[X-0b1100-0b0011-0bXXXX] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_vector_cases[X-0b1010-0b1001-0b10XX] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_vector_cases[X-0bXXXX-0b1111-0bXXXX] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mux_vector_cases[X-0b0000-0bXXXX-0bXXXX] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_cases[0b1010-0b1010-1] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_cases[0b1010-0b1011-0] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_cases[0b10X0-0b1010-X] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_cases[0b10X0-0b1110-0] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_cases[0bXXXX-0bXXXX-X] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_cases[0b0000-0bXXXX-X] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_cases[0b0001-0bXXX0-0] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_cases[0bX000-0b1000-X] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_cases[0b1XX1-0b1001-X] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_eq_cases[0b1XX1-0b0001-0] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_and_cases[0b1111-1] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_and_cases[0b1110-0] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_and_cases[0b11X1-X] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_and_cases[0b10X1-0] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_and_cases[0bXXXX-X] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_and_cases[0b0XXX-0] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_and_cases[0bX111-X] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_and_cases[0b0000-0] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_or_cases[0b0000-0] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_or_cases[0b0001-1] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_or_cases[0b00X0-X] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_or_cases[0b01X0-1] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_or_cases[0bXXXX-X] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_or_cases[0b1XXX-1] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_or_cases[0bX000-X] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_or_cases[0b1111-1] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_xor_cases[0b0000-0] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_xor_cases[0b0001-1] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_xor_cases[0b1100-0] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_xor_cases[0b1101-1] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_xor_cases[0b00X0-X] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_xor_cases[0b11X0-X] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_xor_cases[0bXXXX-X] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_xor_cases[0b0X00-X] PASSED [ 70%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_not_vector_with_x PASSED [ 70%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_concat_with_x PASSED [ 70%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_slice_with_x PASSED [ 70%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_index_with_x PASSED [ 70%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_binary_with_underscores PASSED [ 71%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_sized_all_x PASSED [ 71%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_mixed_case_x PASSED [ 71%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_wide_vector_x_at_msb PASSED [ 71%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_wide_vector_x_at_lsb PASSED [ 71%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_wide_vector_alternating_x PASSED [ 72%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_nested_not_and PASSED [ 72%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_complex_chain PASSED [ 72%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_deep_nesting PASSED [ 72%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_width_one_vector_x PASSED [ 72%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_reduce_width_one PASSED [ 73%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_json_vector_value_with_x PASSED [ 73%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_json_multiple_outputs PASSED [ 73%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_2val_vs_3val_same_circuit PASSED [ 73%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_ite_with_x PASSED [ 73%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_hex_input_no_x_ok PASSED [ 74%]
+.evaluation_tests/test_checkpoint_4.py::test_eval_3val_decimal_input_no_x_ok PASSED [ 74%]
+.evaluation_tests/test_checkpoint_4.py::test_majority_vote_3val[0-0-X-0] PASSED [ 74%]
+.evaluation_tests/test_checkpoint_4.py::test_majority_vote_3val[1-X-0-X] PASSED [ 74%]
+.evaluation_tests/test_checkpoint_4.py::test_majority_vote_3val[X-1-0-X] PASSED [ 74%]
+.evaluation_tests/test_checkpoint_4.py::test_majority_vote_3val[1-1-X-1] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::test_majority_vote_3val[X-X-0-X] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::test_majority_vote_3val[X-X-X-X] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::test_majority_vote_3val[0-1-X-X] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::test_majority_vote_3val[1-0-X-X] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::test_majority_vote_3val[X-1-1-1] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[X-0-0-0-X] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[0-X-0-0-X] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[0-0-X-0-X] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[0-0-0-X-X] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[X-X-0-0-X] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[X-0-X-0-X] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[X-0-0-X-X] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[1-1-X-X-X] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[X-X-X-X-X] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[1-1-0-0-0] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_4.py::test_parity_generator_3val[1-0-1-0-0] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[1-1-0-0-0-1-0] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[0-0-1-1-0-0-1] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[1-0-1-0-1-0-0] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[X-0-0-0-X-X-X] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[X-0-1-1-0-0-1] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[1-1-X-0-0-X-X] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[0-0-X-1-0-0-1] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[0-X-0-1-X-0-X] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[1-X-0-0-0-1-0] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[X-X-0-0-X-X-X] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_4.py::test_comparator_2bit_3val[X-X-X-X-X-X-X] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_4.py::test_decoder_3val[0-1-1-0] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_4.py::test_decoder_3val[1-1-0-1] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_4.py::test_decoder_3val[0-0-0-0] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_4.py::test_decoder_3val[1-0-0-0] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_4.py::test_decoder_3val[0-X-X-0] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_4.py::test_decoder_3val[1-X-0-X] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_4.py::test_decoder_3val[X-1-X-X] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_4.py::test_decoder_3val[X-0-0-0] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_4.py::test_decoder_3val[X-X-X-X] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_4.py::test_popcount_3val[0-0-0-0b00] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_4.py::test_popcount_3val[1-0-0-0b01] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_4.py::test_popcount_3val[0-1-1-0b10] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_4.py::test_popcount_3val[1-1-1-0b11] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_4.py::test_popcount_3val[X-0-0-0b0X] PASSED [ 83%]
+.evaluation_tests/test_checkpoint_4.py::test_popcount_3val[X-1-1-0b1X] PASSED [ 83%]
+.evaluation_tests/test_checkpoint_4.py::test_popcount_3val[0-X-1-0bXX] PASSED [ 83%]
+.evaluation_tests/test_checkpoint_4.py::test_popcount_3val[X-X-0-0bXX] PASSED [ 83%]
+.evaluation_tests/test_checkpoint_4.py::test_popcount_3val[X-X-X-0bXX] PASSED [ 83%]
+.evaluation_tests/test_checkpoint_4.py::test_bit_reversal_3val PASSED    [ 84%]
+.evaluation_tests/test_checkpoint_4.py::test_shared_scalar_3val_eval PASSED [ 84%]
+.evaluation_tests/test_checkpoint_4.py::test_shared_vector_3val_eval PASSED [ 84%]
+.evaluation_tests/test_checkpoint_4.py::test_bit_reversal_3val_all_x PASSED [ 84%]
+.evaluation_tests/test_checkpoint_5.py::test_format_auto_detect[circ-input_names0-output_names0-False] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_5.py::test_format_auto_detect[json-input_names1-output_names1-True] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_5.py::test_format_auto_detect[bench-input_names2-output_names2-False] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_5.py::test_format_auto_detect_unknown_extension PASSED [ 85%]
+.evaluation_tests/test_checkpoint_5.py::test_format_explicit_override[circ] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_5.py::test_format_explicit_override[json] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_5.py::test_format_explicit_override[bench] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_5.py::test_cross_format_eval_smoke[0-0-0-expected0] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_5.py::test_cross_format_eval_smoke[1-0-0-expected1] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_5.py::test_cross_format_eval_smoke[0-1-0-expected2] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_5.py::test_cross_format_eval_smoke[0-1-1-expected3] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_5.py::test_cross_format_eval_smoke[1-0-1-expected4] PASSED [ 87%]
+.evaluation_tests/test_checkpoint_5.py::test_cross_format_eval_smoke[1-1-0-expected5] PASSED [ 87%]
+.evaluation_tests/test_checkpoint_5.py::test_cross_format_eval_smoke[1-1-1-expected6] PASSED [ 87%]
+.evaluation_tests/test_checkpoint_5.py::test_json_vector_eval_cases[0b1010-0b0011-0-0b1001-1-0] PASSED [ 87%]
+.evaluation_tests/test_checkpoint_5.py::test_json_vector_eval_cases[0b0111-0b0101-1-0b1110-0-1] PASSED [ 87%]
+.evaluation_tests/test_checkpoint_5.py::test_json_vector_eval_cases[0b1100-0b1100-1-0b0000-1-0] PASSED [ 87%]
+.evaluation_tests/test_checkpoint_5.py::test_json_vector_eval_3val_cases[0b10X1-0b1001-1-0bX101-X-X] PASSED [ 88%]
+.evaluation_tests/test_checkpoint_5.py::test_json_vector_eval_3val_cases[0b1100-0b0011-X-0b0000-X-0] PASSED [ 88%]
+.evaluation_tests/test_checkpoint_5.py::test_json_vector_eval_3val_cases[0b0101-0b0101-X-0b0110-1-0] PASSED [ 88%]
+.evaluation_tests/test_checkpoint_5.py::test_bench_3val_operator_cases[OR-1-X-1] PASSED [ 88%]
+.evaluation_tests/test_checkpoint_5.py::test_bench_3val_operator_cases[OR-0-X-X] PASSED [ 88%]
+.evaluation_tests/test_checkpoint_5.py::test_bench_3val_operator_cases[AND-0-X-0] PASSED [ 89%]
+.evaluation_tests/test_checkpoint_5.py::test_bench_3val_operator_cases[AND-1-X-X] PASSED [ 89%]
+.evaluation_tests/test_checkpoint_5.py::test_bench_3val_operator_cases[XOR-1-X-X] PASSED [ 89%]
+.evaluation_tests/test_checkpoint_5.py::test_json_errors PASSED          [ 89%]
+.evaluation_tests/test_checkpoint_5.py::test_bench_errors PASSED         [ 89%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_basic_structure FAILED [ 90%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[majority_vote-MAJORITY_VOTE-expected0] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[parity-PARITY-expected1] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[decoder-DECODER-expected2] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[duplicate_edge-input a\noutput y\ny = AND(a, a)\n-expected3] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[literal_only-input a\noutput y\ny = 1\n-expected4] FAILED [ 91%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[chain_depth-input a\noutput y\nwire t1 t2 t3\nt1 = NOT(a)\nt2 = NOT(t1)\nt3 = NOT(t2)\ny = NOT(t3)\n-expected5] FAILED [ 91%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[multi_depth-input a\noutput y1 y2\nwire t\nt = NOT(a)\ny1 = t\ny2 = NOT(t)\n-expected6] FAILED [ 91%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[no_wires-input a b\noutput y\ny = AND(a, b)\n-expected7] FAILED [ 91%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[multi_arity-input a b c\noutput y\ny = AND(a, b, c)\n-expected8] FAILED [ 91%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[all_buf-input a b\noutput y z\nwire t\nt = a\ny = t\nz = b\n-expected9] FAILED [ 92%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[nested-input a b c\noutput y\ny = OR(a, AND(b, c))\n-expected10] FAILED [ 92%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_metrics[index_slice-input v[3:0]\noutput y[1:0]\ny = AND(v[3:2], v[1:0])\n-expected11] FAILED [ 92%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_depth_uses_maximum_output_path FAILED [ 92%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_op_histogram_coverage FAILED [ 92%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_all_buf_histogram FAILED [ 93%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_cross_format[circ] FAILED [ 93%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_cross_format[json] FAILED [ 93%]
+.evaluation_tests/test_checkpoint_6.py::test_stats_cross_format[bench] FAILED [ 93%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_no_warnings FAILED     [ 93%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_warnings[unused_one-input a b c\noutput y\ny = AND(a, b)\n-expected_types0-expected_names0] FAILED [ 94%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_warnings[all_unused-input a b c\noutput y\ny = 1\n-expected_types1-expected_names1] FAILED [ 94%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_warnings[const_one-input a b\noutput y\ny = OR(a, NOT(a))\n-expected_types2-expected_names2] FAILED [ 94%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_warnings[const_zero-input a b\noutput y\ny = AND(a, NOT(a))\n-expected_types3-expected_names3] FAILED [ 94%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_constant_output_values FAILED [ 94%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_constant_vector_format FAILED [ 95%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[16-16-run] FAILED [ 95%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[17-16-skip] FAILED [ 95%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[20-16-skip] FAILED [ 95%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[8-16-run] FAILED [ 95%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[20-20-run] FAILED [ 96%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[10-8-skip] FAILED [ 96%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits_sums_mixed_ports_at_threshold FAILED [ 96%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits_sums_mixed_ports_above_threshold FAILED [ 96%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_warning_sorting FAILED [ 96%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_invalid_circuit FAILED [ 97%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_cross_format[circ] FAILED [ 97%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_cross_format[json] FAILED [ 97%]
+.evaluation_tests/test_checkpoint_6.py::test_lint_cross_format[bench] FAILED [ 97%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_basic_structure FAILED  [ 97%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_node_ids_and_labels FAILED [ 98%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_edges FAILED            [ 98%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_no_duplicate_edges FAILED [ 98%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_vector_labels FAILED    [ 98%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_cone_filter[cone_outputs0-included0-excluded0] FAILED [ 98%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_cone_filter[cone_outputs1-included1-excluded1] FAILED [ 99%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_cone_filter[cone_outputs2-included2-excluded2] FAILED [ 99%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_cone_unknown_output FAILED [ 99%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_cross_format[circ] FAILED [ 99%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_cross_format[json] FAILED [ 99%]
+.evaluation_tests/test_checkpoint_6.py::test_dot_cross_format[bench] FAILED [100%]
+
+=================================== FAILURES ===================================
+_ test_check_parse_errors_have_location[literal_x-            input a\n            output y\n            y = X\n            ] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l1')
+case_id = 'literal_x'
+content = '            input a\n            output y\n            y = X\n            '
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("case_id", "content"),
+        [
+            (
+                "bad_syntax",
+                """\
+                input a b
+                output y
+                y = AND(a, b
+                """,
+            ),
+            (
+                "literal_x",
+                """\
+                input a
+                output y
+                y = X
+                """,
+            ),
+            (
+                "brackets",
+                """\
+                input a[0]
+                output y
+                y = a
+                """,
+            ),
+        ],
+    )
+    def test_check_parse_errors_have_location(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        content: str,
+    ) -> None:
+        path = write_circ(tmp_path, f"{case_id}.circ", content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 2
+E       assert 3 == 2
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l1/literal_x.circ', '--json'], returncode=3, stdout='{"ok":false,"command":"check","exit_code":3,"error":{"type":"UndefinedNameError","message":"Undefined signal: X","file":"/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l1/literal_x.circ","line":3,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:186: AssertionError
+_______________________ test_eval_invalid_input_value[X] _______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_eval_invalid_input_value_0')
+invalid_value = 'X'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize("invalid_value", ["X", "2"])
+    def test_eval_invalid_input_value(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        invalid_value: str,
+    ) -> None:
+        path = write_adder(tmp_path)
+>       result, payload = run_json_command(
+            entrypoint_argv,
+            [
+                "eval",
+                str(path),
+                "--set",
+                f"a={invalid_value}",
+                "--set",
+                "b=0",
+                "--set",
+                "cin=1",
+                "--json",
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_2.py:231: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/helpers.py:49: in run_json_command
+    payload = parse_json_output(result.stdout)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/helpers.py:38: in parse_json_output
+    payload = json.loads(stdout.strip())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/json/decoder.py:338: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x7dbe53a3b260>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+/usr/local/lib/python3.12/json/decoder.py:356: JSONDecodeError
+__________________________ test_stats_basic_structure __________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_basic_structure0')
+
+    def test_stats_basic_structure(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify stats returns correct JSON structure with all histogram categories."""
+        path = write_circ(tmp_path, "simple.circ", NO_WIRES_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_basic_structure0/simple.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:188: AssertionError
+__________ test_stats_metrics[majority_vote-MAJORITY_VOTE-expected0] ___________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_majority_vo0')
+circuit_name = 'majority_vote'
+circuit_content = 'input a b c\noutput y\nwire t1 t2 t3\nt1 = AND(a, b)\nt2 = AND(b, c)\nt3 = AND(a, c)\ny = OR(t1, t2, t3)\n'
+expected = {'assignments_count': 4, 'depth': 2, 'inputs_count': 3, 'outputs_count': 1, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_majority_vo0/majority_vote.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+_________________ test_stats_metrics[parity-PARITY-expected1] __________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_parity_PARI0')
+circuit_name = 'parity'
+circuit_content = 'input a b c d\noutput p\nwire t1 t2\nt1 = XOR(a, b)\nt2 = XOR(c, d)\np = XOR(t1, t2)\n'
+expected = {'assignments_count': 3, 'depth': 2, 'inputs_count': 4, 'outputs_count': 1, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_parity_PARI0/parity.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+________________ test_stats_metrics[decoder-DECODER-expected2] _________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_decoder_DEC0')
+circuit_name = 'decoder'
+circuit_content = 'input sel en\noutput y0 y1\ny0 = AND(NOT(sel), en)\ny1 = AND(sel, en)\n'
+expected = {'assignments_count': 2, 'depth': 1, 'inputs_count': 2, 'outputs_count': 2, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_decoder_DEC0/decoder.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+_ test_stats_metrics[duplicate_edge-input a\noutput y\ny = AND(a, a)\n-expected3] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_duplicate_e0')
+circuit_name = 'duplicate_edge'
+circuit_content = 'input a\noutput y\ny = AND(a, a)\n'
+expected = {'assignments_count': 1, 'depth': 1, 'edges_count': 2, 'inputs_count': 1, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_duplicate_e0/duplicate_edge.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+____ test_stats_metrics[literal_only-input a\noutput y\ny = 1\n-expected4] _____
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_literal_onl0')
+circuit_name = 'literal_only', circuit_content = 'input a\noutput y\ny = 1\n'
+expected = {'assignments_count': 1, 'depth': 1, 'edges_count': 0, 'inputs_count': 1, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_literal_onl0/literal_only.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+_ test_stats_metrics[chain_depth-input a\noutput y\nwire t1 t2 t3\nt1 = NOT(a)\nt2 = NOT(t1)\nt3 = NOT(t2)\ny = NOT(t3)\n-expected5] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_chain_depth0')
+circuit_name = 'chain_depth'
+circuit_content = 'input a\noutput y\nwire t1 t2 t3\nt1 = NOT(a)\nt2 = NOT(t1)\nt3 = NOT(t2)\ny = NOT(t3)\n'
+expected = {'assignments_count': 4, 'depth': 4, 'inputs_count': 1, 'outputs_count': 1, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_chain_depth0/chain_depth.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+_ test_stats_metrics[multi_depth-input a\noutput y1 y2\nwire t\nt = NOT(a)\ny1 = t\ny2 = NOT(t)\n-expected6] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_multi_depth0')
+circuit_name = 'multi_depth'
+circuit_content = 'input a\noutput y1 y2\nwire t\nt = NOT(a)\ny1 = t\ny2 = NOT(t)\n'
+expected = {'assignments_count': 3, 'depth': 2, 'inputs_count': 1, 'outputs_count': 2, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_multi_depth0/multi_depth.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+_ test_stats_metrics[no_wires-input a b\noutput y\ny = AND(a, b)\n-expected7] __
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_no_wires_in0')
+circuit_name = 'no_wires'
+circuit_content = 'input a b\noutput y\ny = AND(a, b)\n'
+expected = {'assignments_count': 1, 'depth': 1, 'inputs_count': 2, 'outputs_count': 1, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_no_wires_in0/no_wires.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+_ test_stats_metrics[multi_arity-input a b c\noutput y\ny = AND(a, b, c)\n-expected8] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_multi_arity0')
+circuit_name = 'multi_arity'
+circuit_content = 'input a b c\noutput y\ny = AND(a, b, c)\n'
+expected = {'assignments_count': 1, 'depth': 1, 'edges_count': 3, 'inputs_count': 3, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_multi_arity0/multi_arity.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+_ test_stats_metrics[all_buf-input a b\noutput y z\nwire t\nt = a\ny = t\nz = b\n-expected9] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_all_buf_inp0')
+circuit_name = 'all_buf'
+circuit_content = 'input a b\noutput y z\nwire t\nt = a\ny = t\nz = b\n'
+expected = {'assignments_count': 3, 'depth': 2, 'inputs_count': 2, 'outputs_count': 2, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_all_buf_inp0/all_buf.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+_ test_stats_metrics[nested-input a b c\noutput y\ny = OR(a, AND(b, c))\n-expected10] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_nested_inpu0')
+circuit_name = 'nested'
+circuit_content = 'input a b c\noutput y\ny = OR(a, AND(b, c))\n'
+expected = {'assignments_count': 1, 'depth': 1, 'edges_count': 3, 'inputs_count': 3, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_nested_inpu0/nested.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+_ test_stats_metrics[index_slice-input v[3:0]\noutput y[1:0]\ny = AND(v[3:2], v[1:0])\n-expected11] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_metrics_index_slice0')
+circuit_name = 'index_slice'
+circuit_content = 'input v[3:0]\noutput y[1:0]\ny = AND(v[3:2], v[1:0])\n'
+expected = {'assignments_count': 1, 'depth': 1, 'edges_count': 2, 'inputs_count': 1, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected"),
+        [
+            # Novel circuits from novel_circuits.py (will be loaded)
+            ("majority_vote", "MAJORITY_VOTE", {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 2,
+            }),
+            ("parity", "PARITY", {
+                "inputs_count": 4, "outputs_count": 1, "wires_count": 2,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("decoder", "DECODER", {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 0,
+                "assignments_count": 2, "depth": 1,
+            }),
+            # Edge cases with inline circuits
+            ("duplicate_edge", DUPLICATE_EDGE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+            ("literal_only", LITERAL_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 0, "depth": 1,
+            }),
+            ("chain_depth", CHAIN_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 3,
+                "assignments_count": 4, "depth": 4,
+            }),
+            ("multi_depth", MULTI_DEPTH_CIRC, {
+                "inputs_count": 1, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("no_wires", NO_WIRES_CIRC, {
+                "inputs_count": 2, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "depth": 1,
+            }),
+            ("multi_arity", MULTI_ARITY_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("all_buf", ALL_BUF_CIRC, {
+                "inputs_count": 2, "outputs_count": 2, "wires_count": 1,
+                "assignments_count": 3, "depth": 2,
+            }),
+            ("nested", NESTED_CIRC, {
+                "inputs_count": 3, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 3, "depth": 1,
+            }),
+            ("index_slice", INDEX_SLICE_CIRC, {
+                "inputs_count": 1, "outputs_count": 1, "wires_count": 0,
+                "assignments_count": 1, "edges_count": 2, "depth": 1,
+            }),
+        ],
+    )
+    def test_stats_metrics(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected: dict,
+    ) -> None:
+        """Verify stats metrics for various circuits including edge cases."""
+        # Handle novel circuits by name
+        if circuit_content == "MAJORITY_VOTE":
+            from novel_circuits import MAJORITY_VOTE_CIRC
+            circuit_content = MAJORITY_VOTE_CIRC
+        elif circuit_content == "PARITY":
+            from novel_circuits import PARITY_CIRC
+            circuit_content = PARITY_CIRC
+        elif circuit_content == "DECODER":
+            from novel_circuits import DECODER_CIRC
+            circuit_content = DECODER_CIRC
+    
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_index_slice0/index_slice.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:291: AssertionError
+__________________ test_stats_depth_uses_maximum_output_path ___________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_depth_uses_maximum_0')
+
+    @pytest.mark.functionality
+    def test_stats_depth_uses_maximum_output_path(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        path = write_circ(tmp_path, "divergent_depth.circ", DIVERGENT_DEPTH_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_depth_uses_maximum_0/divergent_depth.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:308: AssertionError
+_______________________ test_stats_op_histogram_coverage _______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_op_histogram_covera0')
+
+    @pytest.mark.functionality
+    def test_stats_op_histogram_coverage(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify op_histogram correctly counts operators using SHARED_SCALAR."""
+        from novel_circuits import SHARED_SCALAR_CIRC
+    
+        path = write_circ(tmp_path, "shared.circ", SHARED_SCALAR_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_op_histogram_covera0/shared.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:326: AssertionError
+_________________________ test_stats_all_buf_histogram _________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_all_buf_histogram0')
+
+    @pytest.mark.functionality
+    def test_stats_all_buf_histogram(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify histogram with only BUF operations (identifiers)."""
+        path = write_circ(tmp_path, "allbuf.circ", ALL_BUF_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_all_buf_histogram0/allbuf.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:351: AssertionError
+________________________ test_stats_cross_format[circ] _________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_cross_format_circ_0')
+fmt = 'circ'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("fmt", ["circ", "json", "bench"])
+    def test_stats_cross_format(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        fmt: str,
+    ) -> None:
+        """Verify stats works across formats, allowing BENCH differences."""
+        from novel_circuits import DECODER_BENCH, DECODER_CIRC, DECODER_JSON
+    
+        if fmt == "circ":
+            path = write_circ(tmp_path, "decoder.circ", DECODER_CIRC)
+        elif fmt == "json":
+            path = write_json_circuit(tmp_path, "decoder.json", DECODER_JSON)
+        else:
+            path = write_bench(tmp_path, "decoder.bench", DECODER_BENCH)
+    
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_cross_format_circ_0/decoder.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:382: AssertionError
+________________________ test_stats_cross_format[json] _________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_cross_format_json_0')
+fmt = 'json'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("fmt", ["circ", "json", "bench"])
+    def test_stats_cross_format(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        fmt: str,
+    ) -> None:
+        """Verify stats works across formats, allowing BENCH differences."""
+        from novel_circuits import DECODER_BENCH, DECODER_CIRC, DECODER_JSON
+    
+        if fmt == "circ":
+            path = write_circ(tmp_path, "decoder.circ", DECODER_CIRC)
+        elif fmt == "json":
+            path = write_json_circuit(tmp_path, "decoder.json", DECODER_JSON)
+        else:
+            path = write_bench(tmp_path, "decoder.bench", DECODER_BENCH)
+    
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_cross_format_json_0/decoder.json', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:382: AssertionError
+________________________ test_stats_cross_format[bench] ________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_stats_cross_format_bench_0')
+fmt = 'bench'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("fmt", ["circ", "json", "bench"])
+    def test_stats_cross_format(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        fmt: str,
+    ) -> None:
+        """Verify stats works across formats, allowing BENCH differences."""
+        from novel_circuits import DECODER_BENCH, DECODER_CIRC, DECODER_JSON
+    
+        if fmt == "circ":
+            path = write_circ(tmp_path, "decoder.circ", DECODER_CIRC)
+        elif fmt == "json":
+            path = write_json_circuit(tmp_path, "decoder.json", DECODER_JSON)
+        else:
+            path = write_bench(tmp_path, "decoder.bench", DECODER_BENCH)
+    
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["stats", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_cross_format_bench_0/decoder.bench', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:382: AssertionError
+____________________________ test_lint_no_warnings _____________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_no_warnings0')
+
+    def test_lint_no_warnings(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Clean circuit produces empty warnings array."""
+        path = write_circ(tmp_path, "clean.circ", CLEAN_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_no_warnings0/clean.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:410: AssertionError
+_ test_lint_warnings[unused_one-input a b c\noutput y\ny = AND(a, b)\n-expected_types0-expected_names0] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_warnings_unused_one_0')
+circuit_name = 'unused_one'
+circuit_content = 'input a b c\noutput y\ny = AND(a, b)\n'
+expected_types = ['UnusedInputWarning'], expected_names = ['c']
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected_types", "expected_names"),
+        [
+            # Single unused input
+            ("unused_one", UNUSED_ONE_CIRC, ["UnusedInputWarning"], ["c"]),
+            # All inputs unused (sorted by name) - also y=1 is constant
+            ("all_unused", ALL_UNUSED_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning", "UnusedInputWarning", "UnusedInputWarning"],
+             ["y", "a", "b", "c"]),
+            # Constant output = 1 (also unused inputs)
+            ("const_one", CONSTANT_ONE_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning"],
+             ["y", "b"]),
+            # Constant output = 0 (also unused inputs)
+            ("const_zero", CONSTANT_ZERO_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning"],
+             ["y", "b"]),
+        ],
+    )
+    def test_lint_warnings(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected_types: list[str],
+        expected_names: list[str],
+    ) -> None:
+        """Verify lint detects expected warnings."""
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_warnings_unused_one_0/unused_one.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:450: AssertionError
+_ test_lint_warnings[all_unused-input a b c\noutput y\ny = 1\n-expected_types1-expected_names1] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_warnings_all_unused_0')
+circuit_name = 'all_unused', circuit_content = 'input a b c\noutput y\ny = 1\n'
+expected_types = ['ConstantOutputWarning', 'UnusedInputWarning', 'UnusedInputWarning', 'UnusedInputWarning']
+expected_names = ['y', 'a', 'b', 'c']
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected_types", "expected_names"),
+        [
+            # Single unused input
+            ("unused_one", UNUSED_ONE_CIRC, ["UnusedInputWarning"], ["c"]),
+            # All inputs unused (sorted by name) - also y=1 is constant
+            ("all_unused", ALL_UNUSED_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning", "UnusedInputWarning", "UnusedInputWarning"],
+             ["y", "a", "b", "c"]),
+            # Constant output = 1 (also unused inputs)
+            ("const_one", CONSTANT_ONE_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning"],
+             ["y", "b"]),
+            # Constant output = 0 (also unused inputs)
+            ("const_zero", CONSTANT_ZERO_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning"],
+             ["y", "b"]),
+        ],
+    )
+    def test_lint_warnings(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected_types: list[str],
+        expected_names: list[str],
+    ) -> None:
+        """Verify lint detects expected warnings."""
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_warnings_all_unused_0/all_unused.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:450: AssertionError
+_ test_lint_warnings[const_one-input a b\noutput y\ny = OR(a, NOT(a))\n-expected_types2-expected_names2] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_warnings_const_one_i0')
+circuit_name = 'const_one'
+circuit_content = 'input a b\noutput y\ny = OR(a, NOT(a))\n'
+expected_types = ['ConstantOutputWarning', 'UnusedInputWarning']
+expected_names = ['y', 'b']
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected_types", "expected_names"),
+        [
+            # Single unused input
+            ("unused_one", UNUSED_ONE_CIRC, ["UnusedInputWarning"], ["c"]),
+            # All inputs unused (sorted by name) - also y=1 is constant
+            ("all_unused", ALL_UNUSED_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning", "UnusedInputWarning", "UnusedInputWarning"],
+             ["y", "a", "b", "c"]),
+            # Constant output = 1 (also unused inputs)
+            ("const_one", CONSTANT_ONE_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning"],
+             ["y", "b"]),
+            # Constant output = 0 (also unused inputs)
+            ("const_zero", CONSTANT_ZERO_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning"],
+             ["y", "b"]),
+        ],
+    )
+    def test_lint_warnings(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected_types: list[str],
+        expected_names: list[str],
+    ) -> None:
+        """Verify lint detects expected warnings."""
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_warnings_const_one_i0/const_one.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:450: AssertionError
+_ test_lint_warnings[const_zero-input a b\noutput y\ny = AND(a, NOT(a))\n-expected_types3-expected_names3] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_warnings_const_zero_0')
+circuit_name = 'const_zero'
+circuit_content = 'input a b\noutput y\ny = AND(a, NOT(a))\n'
+expected_types = ['ConstantOutputWarning', 'UnusedInputWarning']
+expected_names = ['y', 'b']
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("circuit_name", "circuit_content", "expected_types", "expected_names"),
+        [
+            # Single unused input
+            ("unused_one", UNUSED_ONE_CIRC, ["UnusedInputWarning"], ["c"]),
+            # All inputs unused (sorted by name) - also y=1 is constant
+            ("all_unused", ALL_UNUSED_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning", "UnusedInputWarning", "UnusedInputWarning"],
+             ["y", "a", "b", "c"]),
+            # Constant output = 1 (also unused inputs)
+            ("const_one", CONSTANT_ONE_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning"],
+             ["y", "b"]),
+            # Constant output = 0 (also unused inputs)
+            ("const_zero", CONSTANT_ZERO_CIRC,
+             ["ConstantOutputWarning", "UnusedInputWarning"],
+             ["y", "b"]),
+        ],
+    )
+    def test_lint_warnings(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        circuit_name: str,
+        circuit_content: str,
+        expected_types: list[str],
+        expected_names: list[str],
+    ) -> None:
+        """Verify lint detects expected warnings."""
+        path = write_circ(tmp_path, f"{circuit_name}.circ", circuit_content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_warnings_const_zero_0/const_zero.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:450: AssertionError
+_______________________ test_lint_constant_output_values _______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_constant_output_valu0')
+
+    @pytest.mark.functionality
+    def test_lint_constant_output_values(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify constant output warnings include correct value field."""
+        # Test scalar constant = 1
+        path = write_circ(tmp_path, "const1.circ", CONSTANT_ONE_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_constant_output_valu0/const1.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:473: AssertionError
+_______________________ test_lint_constant_vector_format _______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_constant_vector_form0')
+
+    @pytest.mark.functionality
+    def test_lint_constant_vector_format(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify constant vector output uses 0b format with exact width."""
+        path = write_circ(tmp_path, "constvec.circ", CONST_VECTOR_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_constant_vector_form0/constvec.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:501: AssertionError
+_____________________ test_lint_max_input_bits[16-16-run] ______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_16_160')
+bits = 16, limit = 16, expectation = 'run'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("bits", "limit", "expectation"),
+        [
+            (16, 16, "run"),   # M=N boundary: should run check
+            (17, 16, "skip"),  # M=N+1 boundary: should skip
+            (20, 16, "skip"),  # M>N: should skip
+            (8, 16, "run"),    # M<N: should run check
+            (20, 20, "run"),   # M=N with larger limit: should run check
+            (10, 8, "skip"),   # M>N with smaller limit: should skip
+        ],
+    )
+    def test_lint_max_input_bits(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        bits: int,
+        limit: int,
+        expectation: str,
+    ) -> None:
+        """Verify --max-input-bits flag controls constant check threshold."""
+        # Create circuit with specified input bits
+        circuit = f"""\
+    input v[{bits-1}:0]
+    output y
+    y = REDUCE_XOR(v)
+    """
+        path = write_circ(tmp_path, f"bits{bits}.circ", circuit)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--max-input-bits", str(limit), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_16_160/bits16.circ', '--max-input-bits', '16', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:541: AssertionError
+_____________________ test_lint_max_input_bits[17-16-skip] _____________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_17_160')
+bits = 17, limit = 16, expectation = 'skip'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("bits", "limit", "expectation"),
+        [
+            (16, 16, "run"),   # M=N boundary: should run check
+            (17, 16, "skip"),  # M=N+1 boundary: should skip
+            (20, 16, "skip"),  # M>N: should skip
+            (8, 16, "run"),    # M<N: should run check
+            (20, 20, "run"),   # M=N with larger limit: should run check
+            (10, 8, "skip"),   # M>N with smaller limit: should skip
+        ],
+    )
+    def test_lint_max_input_bits(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        bits: int,
+        limit: int,
+        expectation: str,
+    ) -> None:
+        """Verify --max-input-bits flag controls constant check threshold."""
+        # Create circuit with specified input bits
+        circuit = f"""\
+    input v[{bits-1}:0]
+    output y
+    y = REDUCE_XOR(v)
+    """
+        path = write_circ(tmp_path, f"bits{bits}.circ", circuit)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--max-input-bits", str(limit), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_17_160/bits17.circ', '--max-input-bits', '16', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:541: AssertionError
+_____________________ test_lint_max_input_bits[20-16-skip] _____________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_20_160')
+bits = 20, limit = 16, expectation = 'skip'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("bits", "limit", "expectation"),
+        [
+            (16, 16, "run"),   # M=N boundary: should run check
+            (17, 16, "skip"),  # M=N+1 boundary: should skip
+            (20, 16, "skip"),  # M>N: should skip
+            (8, 16, "run"),    # M<N: should run check
+            (20, 20, "run"),   # M=N with larger limit: should run check
+            (10, 8, "skip"),   # M>N with smaller limit: should skip
+        ],
+    )
+    def test_lint_max_input_bits(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        bits: int,
+        limit: int,
+        expectation: str,
+    ) -> None:
+        """Verify --max-input-bits flag controls constant check threshold."""
+        # Create circuit with specified input bits
+        circuit = f"""\
+    input v[{bits-1}:0]
+    output y
+    y = REDUCE_XOR(v)
+    """
+        path = write_circ(tmp_path, f"bits{bits}.circ", circuit)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--max-input-bits", str(limit), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_20_160/bits20.circ', '--max-input-bits', '16', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:541: AssertionError
+______________________ test_lint_max_input_bits[8-16-run] ______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_8_16_0')
+bits = 8, limit = 16, expectation = 'run'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("bits", "limit", "expectation"),
+        [
+            (16, 16, "run"),   # M=N boundary: should run check
+            (17, 16, "skip"),  # M=N+1 boundary: should skip
+            (20, 16, "skip"),  # M>N: should skip
+            (8, 16, "run"),    # M<N: should run check
+            (20, 20, "run"),   # M=N with larger limit: should run check
+            (10, 8, "skip"),   # M>N with smaller limit: should skip
+        ],
+    )
+    def test_lint_max_input_bits(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        bits: int,
+        limit: int,
+        expectation: str,
+    ) -> None:
+        """Verify --max-input-bits flag controls constant check threshold."""
+        # Create circuit with specified input bits
+        circuit = f"""\
+    input v[{bits-1}:0]
+    output y
+    y = REDUCE_XOR(v)
+    """
+        path = write_circ(tmp_path, f"bits{bits}.circ", circuit)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--max-input-bits", str(limit), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_8_16_0/bits8.circ', '--max-input-bits', '16', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:541: AssertionError
+_____________________ test_lint_max_input_bits[20-20-run] ______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_20_200')
+bits = 20, limit = 20, expectation = 'run'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("bits", "limit", "expectation"),
+        [
+            (16, 16, "run"),   # M=N boundary: should run check
+            (17, 16, "skip"),  # M=N+1 boundary: should skip
+            (20, 16, "skip"),  # M>N: should skip
+            (8, 16, "run"),    # M<N: should run check
+            (20, 20, "run"),   # M=N with larger limit: should run check
+            (10, 8, "skip"),   # M>N with smaller limit: should skip
+        ],
+    )
+    def test_lint_max_input_bits(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        bits: int,
+        limit: int,
+        expectation: str,
+    ) -> None:
+        """Verify --max-input-bits flag controls constant check threshold."""
+        # Create circuit with specified input bits
+        circuit = f"""\
+    input v[{bits-1}:0]
+    output y
+    y = REDUCE_XOR(v)
+    """
+        path = write_circ(tmp_path, f"bits{bits}.circ", circuit)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--max-input-bits", str(limit), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_20_200/bits20.circ', '--max-input-bits', '20', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:541: AssertionError
+_____________________ test_lint_max_input_bits[10-8-skip] ______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_10_8_0')
+bits = 10, limit = 8, expectation = 'skip'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("bits", "limit", "expectation"),
+        [
+            (16, 16, "run"),   # M=N boundary: should run check
+            (17, 16, "skip"),  # M=N+1 boundary: should skip
+            (20, 16, "skip"),  # M>N: should skip
+            (8, 16, "run"),    # M<N: should run check
+            (20, 20, "run"),   # M=N with larger limit: should run check
+            (10, 8, "skip"),   # M>N with smaller limit: should skip
+        ],
+    )
+    def test_lint_max_input_bits(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        bits: int,
+        limit: int,
+        expectation: str,
+    ) -> None:
+        """Verify --max-input-bits flag controls constant check threshold."""
+        # Create circuit with specified input bits
+        circuit = f"""\
+    input v[{bits-1}:0]
+    output y
+    y = REDUCE_XOR(v)
+    """
+        path = write_circ(tmp_path, f"bits{bits}.circ", circuit)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--max-input-bits", str(limit), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_10_8_0/bits10.circ', '--max-input-bits', '8', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:541: AssertionError
+____________ test_lint_max_input_bits_sums_mixed_ports_at_threshold ____________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_sums_0')
+
+    @pytest.mark.functionality
+    def test_lint_max_input_bits_sums_mixed_ports_at_threshold(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            "mixed_threshold.circ",
+            """\
+            input a[2:0] b[1:0] c
+            output y
+            y = REDUCE_XOR({a, b, c})
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--max-input-bits", "6", "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_sums_0/mixed_threshold.circ', '--max-input-bits', '6', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:577: AssertionError
+__________ test_lint_max_input_bits_sums_mixed_ports_above_threshold ___________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_sums_1')
+
+    @pytest.mark.functionality
+    def test_lint_max_input_bits_sums_mixed_ports_above_threshold(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            "mixed_skip.circ",
+            """\
+            input a[2:0] b[2:0] c
+            output y
+            y = REDUCE_XOR({a, b, c})
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--max-input-bits", "6", "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_sums_1/mixed_skip.circ', '--max-input-bits', '6', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:603: AssertionError
+__________________________ test_lint_warning_sorting ___________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_warning_sorting0')
+
+    @pytest.mark.functionality
+    def test_lint_warning_sorting(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify warnings are sorted lexicographically by (type, name)."""
+        # Circuit with multiple warning types
+        circuit = """\
+    input a b c
+    output x y z
+    x = 1
+    y = AND(a, a)
+    z = 0
+    """
+        path = write_circ(tmp_path, "multi.circ", circuit)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_warning_sorting0/multi.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:636: AssertionError
+__________________________ test_lint_invalid_circuit ___________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_invalid_circuit0')
+
+    @pytest.mark.error
+    def test_lint_invalid_circuit(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Lint on invalid circuit returns same error as check."""
+        invalid_circuit = """\
+    input a
+    output y
+    y = AND(undefined, a)
+    """
+        path = write_circ(tmp_path, "invalid.circ", invalid_circuit)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 3
+E       assert 1 == 3
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_invalid_circuit0/invalid.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:664: AssertionError
+_________________________ test_lint_cross_format[circ] _________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_cross_format_circ_0')
+fmt = 'circ'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("fmt", ["circ", "json", "bench"])
+    def test_lint_cross_format(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        fmt: str,
+    ) -> None:
+        """Verify lint works with all input formats."""
+        # Use DECODER which has no warnings
+        from novel_circuits import DECODER_BENCH, DECODER_CIRC, DECODER_JSON
+    
+        if fmt == "circ":
+            path = write_circ(tmp_path, "decoder.circ", DECODER_CIRC)
+        elif fmt == "json":
+            path = write_json_circuit(tmp_path, "decoder.json", DECODER_JSON)
+        else:
+            path = write_bench(tmp_path, "decoder.bench", DECODER_BENCH)
+    
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_cross_format_circ_0/decoder.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:695: AssertionError
+_________________________ test_lint_cross_format[json] _________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_cross_format_json_0')
+fmt = 'json'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("fmt", ["circ", "json", "bench"])
+    def test_lint_cross_format(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        fmt: str,
+    ) -> None:
+        """Verify lint works with all input formats."""
+        # Use DECODER which has no warnings
+        from novel_circuits import DECODER_BENCH, DECODER_CIRC, DECODER_JSON
+    
+        if fmt == "circ":
+            path = write_circ(tmp_path, "decoder.circ", DECODER_CIRC)
+        elif fmt == "json":
+            path = write_json_circuit(tmp_path, "decoder.json", DECODER_JSON)
+        else:
+            path = write_bench(tmp_path, "decoder.bench", DECODER_BENCH)
+    
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_cross_format_json_0/decoder.json', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:695: AssertionError
+________________________ test_lint_cross_format[bench] _________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_lint_cross_format_bench_0')
+fmt = 'bench'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("fmt", ["circ", "json", "bench"])
+    def test_lint_cross_format(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        fmt: str,
+    ) -> None:
+        """Verify lint works with all input formats."""
+        # Use DECODER which has no warnings
+        from novel_circuits import DECODER_BENCH, DECODER_CIRC, DECODER_JSON
+    
+        if fmt == "circ":
+            path = write_circ(tmp_path, "decoder.circ", DECODER_CIRC)
+        elif fmt == "json":
+            path = write_json_circuit(tmp_path, "decoder.json", DECODER_JSON)
+        else:
+            path = write_bench(tmp_path, "decoder.bench", DECODER_BENCH)
+    
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["lint", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_cross_format_bench_0/decoder.bench', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:695: AssertionError
+___________________________ test_dot_basic_structure ___________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_basic_structure0')
+
+    def test_dot_basic_structure(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify dot creates file with correct structure."""
+        circ_path = write_circ(tmp_path, "simple.circ", NO_WIRES_CIRC)
+        dot_path = tmp_path / "output.dot"
+    
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["dot", str(circ_path), "-o", str(dot_path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_basic_structure0/simple.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_basic_structure0/output.dot', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: dot","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:717: AssertionError
+_________________________ test_dot_node_ids_and_labels _________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_node_ids_and_labels0')
+
+    @pytest.mark.functionality
+    def test_dot_node_ids_and_labels(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify correct node IDs (in:, sig:, op:) and labels."""
+        circ_path = write_circ(tmp_path, "simple.circ", NO_WIRES_CIRC)
+        dot_path = tmp_path / "output.dot"
+    
+        result = run_command(
+            entrypoint_argv,
+            ["dot", str(circ_path), "-o", str(dot_path)],
+        )
+>       assert result.returncode == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_node_ids_and_labels0/simple.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_node_ids_and_labels0/output.dot'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+
+.evaluation_tests/test_checkpoint_6.py:754: AssertionError
+________________________________ test_dot_edges ________________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_edges0')
+
+    @pytest.mark.functionality
+    def test_dot_edges(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify edges from inputs to ops to signals."""
+        circ_path = write_circ(tmp_path, "simple.circ", NO_WIRES_CIRC)
+        dot_path = tmp_path / "output.dot"
+    
+        result = run_command(
+            entrypoint_argv,
+            ["dot", str(circ_path), "-o", str(dot_path)],
+        )
+>       assert result.returncode == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_edges0/simple.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_edges0/output.dot'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+
+.evaluation_tests/test_checkpoint_6.py:794: AssertionError
+_________________________ test_dot_no_duplicate_edges __________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_no_duplicate_edges0')
+
+    @pytest.mark.functionality
+    def test_dot_no_duplicate_edges(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify AND(a, a) produces only one edge from in:a to op:y."""
+        circ_path = write_circ(tmp_path, "dup.circ", DUPLICATE_EDGE_CIRC)
+        dot_path = tmp_path / "output.dot"
+    
+        result = run_command(
+            entrypoint_argv,
+            ["dot", str(circ_path), "-o", str(dot_path)],
+        )
+>       assert result.returncode == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_no_duplicate_edges0/dup.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_no_duplicate_edges0/output.dot'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+
+.evaluation_tests/test_checkpoint_6.py:821: AssertionError
+____________________________ test_dot_vector_labels ____________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_vector_labels0')
+
+    @pytest.mark.functionality
+    def test_dot_vector_labels(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify vector signals show [msb:lsb] in labels."""
+        from novel_circuits import BIT_REVERSAL_CIRC
+    
+        circ_path = write_circ(tmp_path, "vec.circ", BIT_REVERSAL_CIRC)
+        dot_path = tmp_path / "output.dot"
+    
+        result = run_command(
+            entrypoint_argv,
+            ["dot", str(circ_path), "-o", str(dot_path)],
+        )
+>       assert result.returncode == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_vector_labels0/vec.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_vector_labels0/output.dot'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+
+.evaluation_tests/test_checkpoint_6.py:847: AssertionError
+___________ test_dot_cone_filter[cone_outputs0-included0-excluded0] ____________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp0')
+cone_outputs = ['y']
+included = ['in:a', 'in:b', 'op:y', 'sig:y', 'op:t', 'sig:t']
+excluded = ['op:z', 'sig:z']
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("cone_outputs", "included", "excluded"),
+        [
+            # Single output cone
+            (["y"], ["in:a", "in:b", "op:y", "sig:y", "op:t", "sig:t"], ["op:z", "sig:z"]),
+            # Other output cone
+            (["z"], ["in:a", "in:b", "op:z", "sig:z", "op:t", "sig:t"], ["op:y", "sig:y"]),
+            # Both outputs (full graph)
+            (["y", "z"], ["op:y", "op:z", "sig:y", "sig:z"], []),
+        ],
+    )
+    def test_dot_cone_filter(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        cone_outputs: list[str],
+        included: list[str],
+        excluded: list[str],
+    ) -> None:
+        """Verify --cone filtering includes only backward-reachable nodes."""
+        circ_path = write_circ(tmp_path, "cone.circ", OVERLAP_CONE_CIRC)
+        dot_path = tmp_path / "output.dot"
+    
+        cone_arg = ",".join(cone_outputs)
+        result = run_command(
+            entrypoint_argv,
+            ["dot", str(circ_path), "-o", str(dot_path), "--cone", cone_arg],
+        )
+>       assert result.returncode == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp0/cone.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp0/output.dot', '--cone', 'y'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+
+.evaluation_tests/test_checkpoint_6.py:885: AssertionError
+___________ test_dot_cone_filter[cone_outputs1-included1-excluded1] ____________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp1')
+cone_outputs = ['z']
+included = ['in:a', 'in:b', 'op:z', 'sig:z', 'op:t', 'sig:t']
+excluded = ['op:y', 'sig:y']
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("cone_outputs", "included", "excluded"),
+        [
+            # Single output cone
+            (["y"], ["in:a", "in:b", "op:y", "sig:y", "op:t", "sig:t"], ["op:z", "sig:z"]),
+            # Other output cone
+            (["z"], ["in:a", "in:b", "op:z", "sig:z", "op:t", "sig:t"], ["op:y", "sig:y"]),
+            # Both outputs (full graph)
+            (["y", "z"], ["op:y", "op:z", "sig:y", "sig:z"], []),
+        ],
+    )
+    def test_dot_cone_filter(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        cone_outputs: list[str],
+        included: list[str],
+        excluded: list[str],
+    ) -> None:
+        """Verify --cone filtering includes only backward-reachable nodes."""
+        circ_path = write_circ(tmp_path, "cone.circ", OVERLAP_CONE_CIRC)
+        dot_path = tmp_path / "output.dot"
+    
+        cone_arg = ",".join(cone_outputs)
+        result = run_command(
+            entrypoint_argv,
+            ["dot", str(circ_path), "-o", str(dot_path), "--cone", cone_arg],
+        )
+>       assert result.returncode == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp1/cone.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp1/output.dot', '--cone', 'z'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+
+.evaluation_tests/test_checkpoint_6.py:885: AssertionError
+___________ test_dot_cone_filter[cone_outputs2-included2-excluded2] ____________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp2')
+cone_outputs = ['y', 'z'], included = ['op:y', 'op:z', 'sig:y', 'sig:z']
+excluded = []
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("cone_outputs", "included", "excluded"),
+        [
+            # Single output cone
+            (["y"], ["in:a", "in:b", "op:y", "sig:y", "op:t", "sig:t"], ["op:z", "sig:z"]),
+            # Other output cone
+            (["z"], ["in:a", "in:b", "op:z", "sig:z", "op:t", "sig:t"], ["op:y", "sig:y"]),
+            # Both outputs (full graph)
+            (["y", "z"], ["op:y", "op:z", "sig:y", "sig:z"], []),
+        ],
+    )
+    def test_dot_cone_filter(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        cone_outputs: list[str],
+        included: list[str],
+        excluded: list[str],
+    ) -> None:
+        """Verify --cone filtering includes only backward-reachable nodes."""
+        circ_path = write_circ(tmp_path, "cone.circ", OVERLAP_CONE_CIRC)
+        dot_path = tmp_path / "output.dot"
+    
+        cone_arg = ",".join(cone_outputs)
+        result = run_command(
+            entrypoint_argv,
+            ["dot", str(circ_path), "-o", str(dot_path), "--cone", cone_arg],
+        )
+>       assert result.returncode == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp2/cone.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp2/output.dot', '--cone', 'y,z'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+
+.evaluation_tests/test_checkpoint_6.py:885: AssertionError
+_________________________ test_dot_cone_unknown_output _________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_cone_unknown_output0')
+
+    @pytest.mark.error
+    def test_dot_cone_unknown_output(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Verify --cone with unknown output returns UndefinedNameError."""
+        circ_path = write_circ(tmp_path, "simple.circ", NO_WIRES_CIRC)
+        dot_path = tmp_path / "output.dot"
+    
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["dot", str(circ_path), "-o", str(dot_path), "--cone", "nonexistent", "--json"],
+        )
+>       assert result.returncode == 3
+E       assert 1 == 3
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_unknown_output0/simple.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_unknown_output0/output.dot', '--cone', 'nonexistent', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: dot","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:909: AssertionError
+_________________________ test_dot_cross_format[circ] __________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_circ_0')
+fmt = 'circ'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("fmt", ["circ", "json", "bench"])
+    def test_dot_cross_format(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        fmt: str,
+    ) -> None:
+        """Verify dot works with all input formats."""
+        from novel_circuits import DECODER_BENCH, DECODER_CIRC, DECODER_JSON
+    
+        if fmt == "circ":
+            path = write_circ(tmp_path, "decoder.circ", DECODER_CIRC)
+        elif fmt == "json":
+            path = write_json_circuit(tmp_path, "decoder.json", DECODER_JSON)
+        else:
+            path = write_bench(tmp_path, "decoder.bench", DECODER_BENCH)
+    
+        dot_path = tmp_path / f"output_{fmt}.dot"
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["dot", str(path), "-o", str(dot_path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_circ_0/decoder.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_circ_0/output_circ.dot', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: dot","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:940: AssertionError
+_________________________ test_dot_cross_format[json] __________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_json_0')
+fmt = 'json'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("fmt", ["circ", "json", "bench"])
+    def test_dot_cross_format(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        fmt: str,
+    ) -> None:
+        """Verify dot works with all input formats."""
+        from novel_circuits import DECODER_BENCH, DECODER_CIRC, DECODER_JSON
+    
+        if fmt == "circ":
+            path = write_circ(tmp_path, "decoder.circ", DECODER_CIRC)
+        elif fmt == "json":
+            path = write_json_circuit(tmp_path, "decoder.json", DECODER_JSON)
+        else:
+            path = write_bench(tmp_path, "decoder.bench", DECODER_BENCH)
+    
+        dot_path = tmp_path / f"output_{fmt}.dot"
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["dot", str(path), "-o", str(dot_path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_json_0/decoder.json', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_json_0/output_json.dot', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: dot","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:940: AssertionError
+_________________________ test_dot_cross_format[bench] _________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_bench_0')
+fmt = 'bench'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("fmt", ["circ", "json", "bench"])
+    def test_dot_cross_format(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        fmt: str,
+    ) -> None:
+        """Verify dot works with all input formats."""
+        from novel_circuits import DECODER_BENCH, DECODER_CIRC, DECODER_JSON
+    
+        if fmt == "circ":
+            path = write_circ(tmp_path, "decoder.circ", DECODER_CIRC)
+        elif fmt == "json":
+            path = write_json_circuit(tmp_path, "decoder.json", DECODER_JSON)
+        else:
+            path = write_bench(tmp_path, "decoder.bench", DECODER_BENCH)
+    
+        dot_path = tmp_path / f"output_{fmt}.dot"
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["dot", str(path), "-o", str(dot_path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_bench_0/decoder.bench', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_bench_0/output_bench.dot', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: dot","file":null,"line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_6.py:940: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[literal_x-            input a\n            output y\n            y = X\n            ] - assert 3 == 2
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l1/literal_x.circ', '--json'], returncode=3, stdout='{"ok":false,"command":"check","exit_code":3,"error":{"type":"UndefinedNameError","message":"Undefined signal: X","file":"/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l1/literal_x.circ","line":3,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_eval_invalid_input_value[X] - json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_basic_structure - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_basic_structure0/simple.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[majority_vote-MAJORITY_VOTE-expected0] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_majority_vo0/majority_vote.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[parity-PARITY-expected1] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_parity_PARI0/parity.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[decoder-DECODER-expected2] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_decoder_DEC0/decoder.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[duplicate_edge-input a\noutput y\ny = AND(a, a)\n-expected3] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_duplicate_e0/duplicate_edge.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[literal_only-input a\noutput y\ny = 1\n-expected4] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_literal_onl0/literal_only.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[chain_depth-input a\noutput y\nwire t1 t2 t3\nt1 = NOT(a)\nt2 = NOT(t1)\nt3 = NOT(t2)\ny = NOT(t3)\n-expected5] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_chain_depth0/chain_depth.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[multi_depth-input a\noutput y1 y2\nwire t\nt = NOT(a)\ny1 = t\ny2 = NOT(t)\n-expected6] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_multi_depth0/multi_depth.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[no_wires-input a b\noutput y\ny = AND(a, b)\n-expected7] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_no_wires_in0/no_wires.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[multi_arity-input a b c\noutput y\ny = AND(a, b, c)\n-expected8] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_multi_arity0/multi_arity.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[all_buf-input a b\noutput y z\nwire t\nt = a\ny = t\nz = b\n-expected9] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_all_buf_inp0/all_buf.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[nested-input a b c\noutput y\ny = OR(a, AND(b, c))\n-expected10] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_nested_inpu0/nested.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_metrics[index_slice-input v[3:0]\noutput y[1:0]\ny = AND(v[3:2], v[1:0])\n-expected11] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_metrics_index_slice0/index_slice.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_depth_uses_maximum_output_path - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_depth_uses_maximum_0/divergent_depth.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_op_histogram_coverage - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_op_histogram_covera0/shared.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_all_buf_histogram - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_all_buf_histogram0/allbuf.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_cross_format[circ] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_cross_format_circ_0/decoder.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_cross_format[json] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_cross_format_json_0/decoder.json', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_stats_cross_format[bench] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'stats', '/tmp/pytest-of-agent/pytest-0/test_stats_cross_format_bench_0/decoder.bench', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: stats","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_no_warnings - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_no_warnings0/clean.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_warnings[unused_one-input a b c\noutput y\ny = AND(a, b)\n-expected_types0-expected_names0] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_warnings_unused_one_0/unused_one.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_warnings[all_unused-input a b c\noutput y\ny = 1\n-expected_types1-expected_names1] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_warnings_all_unused_0/all_unused.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_warnings[const_one-input a b\noutput y\ny = OR(a, NOT(a))\n-expected_types2-expected_names2] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_warnings_const_one_i0/const_one.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_warnings[const_zero-input a b\noutput y\ny = AND(a, NOT(a))\n-expected_types3-expected_names3] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_warnings_const_zero_0/const_zero.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_constant_output_values - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_constant_output_valu0/const1.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_constant_vector_format - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_constant_vector_form0/constvec.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[16-16-run] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_16_160/bits16.circ', '--max-input-bits', '16', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[17-16-skip] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_17_160/bits17.circ', '--max-input-bits', '16', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[20-16-skip] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_20_160/bits20.circ', '--max-input-bits', '16', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[8-16-run] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_8_16_0/bits8.circ', '--max-input-bits', '16', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[20-20-run] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_20_200/bits20.circ', '--max-input-bits', '20', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits[10-8-skip] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_10_8_0/bits10.circ', '--max-input-bits', '8', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits_sums_mixed_ports_at_threshold - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_sums_0/mixed_threshold.circ', '--max-input-bits', '6', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_max_input_bits_sums_mixed_ports_above_threshold - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_max_input_bits_sums_1/mixed_skip.circ', '--max-input-bits', '6', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_warning_sorting - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_warning_sorting0/multi.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_invalid_circuit - assert 1 == 3
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_invalid_circuit0/invalid.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_cross_format[circ] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_cross_format_circ_0/decoder.circ', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_cross_format[json] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_cross_format_json_0/decoder.json', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_lint_cross_format[bench] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'lint', '/tmp/pytest-of-agent/pytest-0/test_lint_cross_format_bench_0/decoder.bench', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: lint","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_basic_structure - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_basic_structure0/simple.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_basic_structure0/output.dot', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: dot","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_node_ids_and_labels - AssertionError: assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_node_ids_and_labels0/simple.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_node_ids_and_labels0/output.dot'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_edges - AssertionError: assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_edges0/simple.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_edges0/output.dot'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_no_duplicate_edges - AssertionError: assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_no_duplicate_edges0/dup.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_no_duplicate_edges0/output.dot'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_vector_labels - AssertionError: assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_vector_labels0/vec.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_vector_labels0/output.dot'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_cone_filter[cone_outputs0-included0-excluded0] - AssertionError: assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp0/cone.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp0/output.dot', '--cone', 'y'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_cone_filter[cone_outputs1-included1-excluded1] - AssertionError: assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp1/cone.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp1/output.dot', '--cone', 'z'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_cone_filter[cone_outputs2-included2-excluded2] - AssertionError: assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp2/cone.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_filter_cone_outp2/output.dot', '--cone', 'y,z'], returncode=1, stdout='', stderr='Error: Unknown command: dot\n').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_cone_unknown_output - assert 1 == 3
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_unknown_output0/simple.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cone_unknown_output0/output.dot', '--cone', 'nonexistent', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: dot","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_cross_format[circ] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_circ_0/decoder.circ', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_circ_0/output_circ.dot', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: dot","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_cross_format[json] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_json_0/decoder.json', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_json_0/output_json.dot', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: dot","file":null,"line":null,"col":null}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_dot_cross_format[bench] - assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'dot', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_bench_0/decoder.bench', '-o', '/tmp/pytest-of-agent/pytest-0/test_dot_cross_format_bench_0/output_bench.dot', '--json'], returncode=1, stdout='{"ok":false,"command":"__cli__","exit_code":1,"error":{"type":"CliUsageError","message":"Unknown command: dot","file":null,"line":null,"col":null}}\n', stderr='').returncode
+================== 53 failed, 455 passed in 78.23s (0:01:18) ===================

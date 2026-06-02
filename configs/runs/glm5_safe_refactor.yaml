@@ -1,0 +1,70 @@
+agent: claude_code_kimi
+environment: docker-python3.12-uv
+prompt: just-solve
+
+model:
+  provider: zhipu
+  name: glm-5-kimi
+
+post_checkpoint_skill:
+  prompt: |
+    Refactor ONLY the Python files in /workspace root (ls /workspace/*.py to find them).
+    Do NOT touch files under /workspace/files/, /workspace/tests/, /workspace/venv/, or any subdirectories.
+    Do NOT touch requirements.txt.
+
+    CRITICAL SAFETY RULES — violations will break tests:
+    - NEVER delete a function, method, or class that is called anywhere
+    - NEVER merge two functions that have different return values, exit codes, or output formats
+    - NEVER change error messages, exit codes, status codes, or output formats
+    - NEVER add or remove validation/checks — keep the exact same acceptance/rejection behavior
+    - NEVER change the order of operations if it could affect output ordering
+    - When in doubt, DO NOT change it
+
+    After each edit, mentally verify: "does this produce identical output for every possible input?"
+
+    SAFE REFACTORS (apply these):
+    1. Delete comments that repeat what the code says
+    2. Remove multi-line docstrings that just restate the function name — replace with single-line
+    3. Move inline imports to top of file
+    4. Simplify: range(len(x)) -> enumerate
+    5. Simplify: if cond: return True else: return False -> return cond
+    6. Remove unnecessary else/elif after return (but keep the logic identical)
+    7. Remove dead code that is truly unreachable (unused imports, unused variables)
+    8. Remove excessive blank lines
+    9. Extract repeated code blocks into a helper function (only if 3+ copies exist)
+    10. Simplify expressions: e.g. x = foo(); x = bar(x) -> x = bar(foo())
+
+    UNSAFE — DO NOT DO THESE:
+    - Merging two different functions into one
+    - Deleting a function and replacing calls with inline code
+    - Changing constants, exit codes, or error strings
+    - Removing "redundant" checks that might handle edge cases
+    - Changing data structures (dict -> list, class -> tuple, etc.)
+    - Reordering function parameters or changing default values
+    - Adding new validation or type checking that wasn't there before
+
+    Be conservative. A missed cleanup opportunity is fine. A broken test is not.
+  run_on: all
+  eval_after: true
+
+problems:
+  - cfgpipe
+  - circuit_eval
+  - code_search
+  - dag_execution
+  - database_migration
+  - datagate
+  - dynamic_buffer
+  - dynamic_config_service_api
+  - etl_pipeline
+  - eve_industry
+  - eve_jump_planner
+  - eve_market_tools
+  - eve_route_planner
+  - file_query_tool
+  - forge
+  - l2m
+  - layered_config_synthesizer
+  - meshctl
+  - metric_transform_lang
+  - migrate_configs

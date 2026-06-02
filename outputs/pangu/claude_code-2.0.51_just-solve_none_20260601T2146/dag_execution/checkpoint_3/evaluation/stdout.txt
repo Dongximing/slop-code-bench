@@ -1,0 +1,2127 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/fOSR1x6hnQ4OdU3e/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 51 items
+
+.evaluation_tests/test_checkpoint_1.py::test_basic FAILED                [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_arrays FAILED               [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_bool_params FAILED          [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_string_concat FAILED        [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_if FAILED            [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_elif FAILED          [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_else FAILED          [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_array_indexing FAILED       [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_for_requires FAILED         [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_while_requires FAILED       [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_working_dirs FAILED         [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_existing_dir FAILED         [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops FAILED       [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_exists_function FAILED      [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_float_params FAILED         [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_nested_loops FAILED         [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_stderr_validation FAILED    [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_string_params FAILED        [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_timeout FAILED              [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_circular_dependency FAILED  [ 39%]
+.evaluation_tests/test_checkpoint_1.py::test_default_param_order FAILED  [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_required_arg FAILED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_multiline_success_no_return FAILED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_no_main FAILED              [ 47%]
+.evaluation_tests/test_checkpoint_1.py::test_recursive_call FAILED       [ 49%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params FAILED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false FAILED [ 52%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool FAILED [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_requires_failure_stops FAILED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe FAILED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe FAILED [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_bad_toml_syntax FAILED [ 62%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block FAILED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_basic_cache FAILED          [ 66%]
+.evaluation_tests/test_checkpoint_2.py::test_file_change FAILED          [ 68%]
+.evaluation_tests/test_checkpoint_2.py::test_cache_exclude FAILED        [ 70%]
+.evaluation_tests/test_checkpoint_2.py::test_ttl_strategy FAILED         [ 72%]
+.evaluation_tests/test_checkpoint_2.py::test_cascade_invalidation FAILED [ 74%]
+.evaluation_tests/test_checkpoint_2.py::test_global_cache_disabled FAILED [ 76%]
+.evaluation_tests/test_checkpoint_2.py::test_force_refresh_skips_cache FAILED [ 78%]
+.evaluation_tests/test_checkpoint_2.py::test_always_strategy_ignores_input_change FAILED [ 80%]
+.evaluation_tests/test_checkpoint_3.py::test_ttl_override_basic FAILED   [ 82%]
+.evaluation_tests/test_checkpoint_3.py::test_strategy_override FAILED    [ 84%]
+.evaluation_tests/test_checkpoint_3.py::test_full_object_replacement FAILED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::test_noop_override FAILED        [ 88%]
+.evaluation_tests/test_checkpoint_3.py::test_disable_cache_override FAILED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::test_partial_override_preserves_defaults FAILED [ 92%]
+.evaluation_tests/test_checkpoint_3.py::test_multiple_overrides_same_task FAILED [ 94%]
+.evaluation_tests/test_checkpoint_3.py::test_multiple_param_override FAILED [ 96%]
+.evaluation_tests/test_checkpoint_3.py::test_ttl_object_replacement_drops_base FAILED [ 98%]
+.evaluation_tests/test_checkpoint_3.py::test_invalid_cached_param_cache_error FAILED [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_basic __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic(entrypoint_argv):
+        """Core: Basic pipeline with requires, fail(), and task chaining."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_PIPELINE, BASIC_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmps5h6e5gj/pipeline.pipe', '--workspace', '/tmp/tmps5h6e5gj/working', '--output', '/tmp/tmps5h6e5gj/output', '--config', '/tmp/tmps5h6e5gj/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:296: AssertionError
+_________________________________ test_arrays __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_arrays(entrypoint_argv):
+        """Core: Array parameters and len() function."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAYS_PIPELINE, ARRAYS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp3xp8r4wd/pipeline.pipe', '--workspace', '/tmp/tmp3xp8r4wd/working', '--output', '/tmp/tmp3xp8r4wd/output', '--config', '/tmp/tmp3xp8r4wd/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:358: AssertionError
+_______________________________ test_bool_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_bool_params(entrypoint_argv):
+        """Core: Boolean parameters with TRUE/FALSE literals."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BOOL_PARAMS_PIPELINE, BOOL_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjtwu5uut/pipeline.pipe', '--workspace', '/tmp/tmpjtwu5uut/working', '--output', '/tmp/tmpjtwu5uut/output', '--config', '/tmp/tmpjtwu5uut/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:415: AssertionError
+______________________________ test_string_concat ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_string_concat(entrypoint_argv):
+        """Core: String concatenation with % operator in for loops."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_CONCAT_PIPELINE, STRING_CONCAT_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp5l00vip/pipeline.pipe', '--workspace', '/tmp/tmpp5l00vip/working', '--output', '/tmp/tmpp5l00vip/output', '--config', '/tmp/tmpp5l00vip/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:478: AssertionError
+________________________________ test_branch_if ________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_if(entrypoint_argv):
+        """Core: If conditional branching - true branch taken."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_IF_PIPELINE, BRANCH_IF_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpheo_3ph_/pipeline.pipe', '--workspace', '/tmp/tmpheo_3ph_/working', '--output', '/tmp/tmpheo_3ph_/output', '--config', '/tmp/tmpheo_3ph_/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:557: AssertionError
+_______________________________ test_branch_elif _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_elif(entrypoint_argv):
+        """Core: Elif branch - first fails, elif succeeds."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELIF_PIPELINE, BRANCH_ELIF_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmplrlpp9_7/pipeline.pipe', '--workspace', '/tmp/tmplrlpp9_7/working', '--output', '/tmp/tmplrlpp9_7/output', '--config', '/tmp/tmplrlpp9_7/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:632: AssertionError
+_______________________________ test_branch_else _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_else(entrypoint_argv):
+        """Core: Else branch - if and elif both fail."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELSE_PIPELINE, BRANCH_ELSE_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpi019ce9b/pipeline.pipe', '--workspace', '/tmp/tmpi019ce9b/working', '--output', '/tmp/tmpi019ce9b/output', '--config', '/tmp/tmpi019ce9b/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:708: AssertionError
+_____________________________ test_array_indexing ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_array_indexing(entrypoint_argv):
+        """Core: Array subscript access with [i] notation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAY_INDEXING_PIPELINE, ARRAY_INDEXING_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_d3e9mu8/pipeline.pipe', '--workspace', '/tmp/tmp_d3e9mu8/working', '--output', '/tmp/tmp_d3e9mu8/output', '--config', '/tmp/tmp_d3e9mu8/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:766: AssertionError
+______________________________ test_for_requires _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_for_requires(entrypoint_argv):
+        """Core: For loop in requires clause."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FOR_REQUIRES_PIPELINE, FOR_REQUIRES_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp3wksx_h2/pipeline.pipe', '--workspace', '/tmp/tmp3wksx_h2/working', '--output', '/tmp/tmp3wksx_h2/output', '--config', '/tmp/tmp3wksx_h2/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:818: AssertionError
+_____________________________ test_while_requires ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_while_requires(entrypoint_argv):
+        """Core: While loop with break/continue in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WHILE_REQUIRES_PIPELINE, WHILE_REQUIRES_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpircgwaiu/pipeline.pipe', '--workspace', '/tmp/tmpircgwaiu/working', '--output', '/tmp/tmpircgwaiu/output', '--config', '/tmp/tmpircgwaiu/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:874: AssertionError
+______________________________ test_working_dirs _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_working_dirs(entrypoint_argv):
+        """Core: Working directory isolation for nested task calls."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WORKING_DIRS_PIPELINE, WORKING_DIRS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpsh2olxd6/pipeline.pipe', '--workspace', '/tmp/tmpsh2olxd6/working', '--output', '/tmp/tmpsh2olxd6/output', '--config', '/tmp/tmpsh2olxd6/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:937: AssertionError
+______________________________ test_existing_dir _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_existing_dir(entrypoint_argv):
+        """Core: Pre-existing workspace files (clean_cwd=false)."""
+        existing_files = {"run.sh": 'echo "Hello"'}
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            EXISTING_DIR_PIPELINE,
+            EXISTING_DIR_CONFIG,
+            existing_files=existing_files,
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpm8hh5ugo/pipeline.pipe', '--workspace', '/tmp/tmpm8hh5ugo/working', '--output', '/tmp/tmpm8hh5ugo/output', '--config', '/tmp/tmpm8hh5ugo/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:980: AssertionError
+_____________________________ test_arithmetic_ops ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_arithmetic_ops(entrypoint_argv):
+        """Functionality: Integer arithmetic operations in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARITHMETIC_OPS_PIPELINE, ARITHMETIC_OPS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpxy83e0r2/pipeline.pipe', '--workspace', '/tmp/tmpxy83e0r2/working', '--output', '/tmp/tmpxy83e0r2/output', '--config', '/tmp/tmpxy83e0r2/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1038: AssertionError
+_____________________________ test_exists_function _____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_exists_function(entrypoint_argv):
+        """Functionality: exists() and !exists() functions in success checks."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, EXISTS_FUNCTION_PIPELINE, EXISTS_FUNCTION_CONFIG
+        )
+    
+        # This test expects exit code 1 because CheckMultiple fails
+        # (nested file doesn't exist when CheckMultiple runs)
+        assert result.returncode == 1, f"Expected exit 1, got {result.returncode}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # CheckMultiple should have nested=False
+        check_job = next((j for j in jobs if j.get("task") == "CheckMultiple"), None)
+>       assert check_job is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:1109: AssertionError
+______________________________ test_float_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_float_params(entrypoint_argv):
+        """Functionality: Float parameters and Python integration."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FLOAT_PARAMS_PIPELINE, FLOAT_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpkrzjvdsa/pipeline.pipe', '--workspace', '/tmp/tmpkrzjvdsa/working', '--output', '/tmp/tmpkrzjvdsa/output', '--config', '/tmp/tmpkrzjvdsa/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1152: AssertionError
+______________________________ test_nested_loops _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_nested_loops(entrypoint_argv):
+        """Functionality: Nested loops with break statements."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, NESTED_LOOPS_PIPELINE, NESTED_LOOPS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpf9ktfoow/pipeline.pipe', '--workspace', '/tmp/tmpf9ktfoow/working', '--output', '/tmp/tmpf9ktfoow/output', '--config', '/tmp/tmpf9ktfoow/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1211: AssertionError
+____________________________ test_stderr_validation ____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_stderr_validation(entrypoint_argv):
+        """Functionality: stderr contains() and equals() validation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STDERR_VALIDATION_PIPELINE, STDERR_VALIDATION_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpiu50_557/pipeline.pipe', '--workspace', '/tmp/tmpiu50_557/working', '--output', '/tmp/tmpiu50_557/output', '--config', '/tmp/tmpiu50_557/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1271: AssertionError
+______________________________ test_string_params ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_string_params(entrypoint_argv):
+        """Functionality: String parameter interpolation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_PARAMS_PIPELINE, STRING_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmplwkhjkv_/pipeline.pipe', '--workspace', '/tmp/tmplwkhjkv_/working', '--output', '/tmp/tmplwkhjkv_/output', '--config', '/tmp/tmplwkhjkv_/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1327: AssertionError
+_________________________________ test_timeout _________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_timeout(entrypoint_argv):
+        """Functionality: Task timeout handling with exit code 124."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TIMEOUT_TEST_PIPELINE, TIMEOUT_TEST_CONFIG, timeout=30
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1l2nsm7a/pipeline.pipe', '--workspace', '/tmp/tmp1l2nsm7a/working', '--output', '/tmp/tmp1l2nsm7a/output', '--config', '/tmp/tmp1l2nsm7a/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1392: AssertionError
+___________________________ test_circular_dependency ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_circular_dependency(entrypoint_argv):
+        """Error: Circular dependency detection (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        run: {
+            echo "A"
+        }
+        requires {
+            B()
+        }
+    }
+    
+    task B {
+        run: {
+            echo "B"
+        }
+        requires {
+            C()
+        }
+    }
+    task C {
+        run: {
+            echo "C"
+        }
+        requires: {
+            A()
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            C()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 1
+E       assert 1 == 3
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8f1bzemj/pipeline.pipe', '--workspace', '/tmp/tmp8f1bzemj/working', '--output', '/tmp/tmp8f1bzemj/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1458: AssertionError
+___________________________ test_default_param_order ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_default_param_order(entrypoint_argv):
+        """Error: Default param before required param (exit 2, SYNTAX_ERROR)."""
+        pipeline = '''task A {
+        params: {
+            x: int = 1
+            y: int
+        }
+        run: {
+            echo "A"
+        }
+    }
+    
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            A()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+E       AssertionError: Expected exit 2, got 1
+E       assert 1 == 2
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpe44d7iw6/pipeline.pipe', '--workspace', '/tmp/tmpe44d7iw6/working', '--output', '/tmp/tmpe44d7iw6/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1487: AssertionError
+__________________________ test_missing_required_arg ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_missing_required_arg(entrypoint_argv):
+        """Error: Missing required argument (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        params: {
+            x: int
+            y: int = 1
+        }
+        run: {
+            echo "A"
+        }
+    }
+    
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            A(y=2)
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 1
+E       assert 1 == 3
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpkxg60mjl/pipeline.pipe', '--workspace', '/tmp/tmpkxg60mjl/working', '--output', '/tmp/tmpkxg60mjl/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1516: AssertionError
+_______________________ test_multiline_success_no_return _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_multiline_success_no_return(entrypoint_argv):
+        """Error: Multiline success block without return (exit 2, SYNTAX_ERROR)."""
+        pipeline = '''task ProcessItem {
+        params: {
+            item: string
+            index: int
+        }
+        run: {
+            echo "Item ${params.index}: ${params.item}" >> ${workspace}/items.txt
+        }
+    }
+    
+    task main {
+        params: {
+            items: list[string] = ["apple", "banana", "cherry", "date"];
+        }
+        run: {
+            cat items.txt
+        }
+        requires: {
+            for (int i = 0; i < len(${params.items}); i++) {
+                ProcessItem(${params.items}[i], i);
+            }
+        }
+        success: {
+            check_items: {
+                for (int i = 0; i < len(${params.items}); i++) {
+                    if (!contains("${workspace}/items.txt", ${params.items}[i])) {
+                        FALSE;
+                    }
+                }
+            }
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+E       AssertionError: Expected exit 2, got 1
+E       assert 1 == 2
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpxrx_flkl/pipeline.pipe', '--workspace', '/tmp/tmpxrx_flkl/working', '--output', '/tmp/tmpxrx_flkl/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1558: AssertionError
+_________________________________ test_no_main _________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_no_main(entrypoint_argv):
+        """Error: Pipeline without main task (exit 3, INVALID_PIPE)."""
+        pipeline = '''task Task {
+        run {
+            echo "I should not run"
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 1
+E       assert 1 == 3
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpf5weas5h/pipeline.pipe', '--workspace', '/tmp/tmpf5weas5h/working', '--output', '/tmp/tmpf5weas5h/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1573: AssertionError
+_____________________________ test_recursive_call ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_recursive_call(entrypoint_argv):
+        """Error: Recursive task call (exit 3, INVALID_PIPE)."""
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            main()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 1
+E       assert 1 == 3
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpcn0sy0j0/pipeline.pipe', '--workspace', '/tmp/tmpcn0sy0j0/working', '--output', '/tmp/tmpcn0sy0j0/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1591: AssertionError
+_______________________ test_edge_entry_call_with_params _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_entry_call_with_params(entrypoint_argv):
+        """Edge case: entry can be a task invocation with params.
+    
+        Spec says: "entry=<task invocation ... can be just its name `A` or a call
+        with params `A(1, x=2)`"
+        """
+        pipeline = '''task Start {
+        params: {
+            x: int
+            y: int
+        }
+        run: {
+            echo "${params.x}_${params.y}"
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Ignored"
+        }
+    }'''
+        config = '''entry = "Start(1, y=2)"
+    clean_cwd = true'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpmss6vvd3/pipeline.pipe', '--workspace', '/tmp/tmpmss6vvd3/working', '--output', '/tmp/tmpmss6vvd3/output', '--config', '/tmp/tmpmss6vvd3/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1624: AssertionError
+______________________ test_edge_clean_cwd_default_false _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_clean_cwd_default_false(entrypoint_argv):
+        """Edge case: clean_cwd defaults to false when omitted.
+    
+        Spec says: "clean_cwd = <bool ... Default false.>"
+        """
+        pipeline = '''task main {
+        run: {
+            cat existing.txt
+        }
+    }'''
+        existing_files = {"existing.txt": "hello"}
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            pipeline,
+            existing_files=existing_files,
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmph4dg972e/pipeline.pipe', '--workspace', '/tmp/tmph4dg972e/working', '--output', '/tmp/tmph4dg972e/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1650: AssertionError
+_____________________ test_edge_env_default_type_cast_bool _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_env_default_type_cast_bool(entrypoint_argv):
+        """Edge case: env default values are dynamically type cast (bool).
+    
+        Spec says: "Environment variables can be used as default values ... dynamic
+        type casting ... (i.e. 1 would convert to a bool of TRUE)"
+        """
+        pipeline = '''task CheckFlag {
+        params: {
+            flag: bool = $FLAG
+        }
+        run: {
+            echo "${params.flag}"
+        }
+    }
+    
+    task main {
+        requires: {
+            CheckFlag()
+        }
+    }'''
+        config = '''clean_cwd = true
+    [env]
+    FLAG = "1"'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp560yx0l_/pipeline.pipe', '--workspace', '/tmp/tmp560yx0l_/working', '--output', '/tmp/tmp560yx0l_/output', '--config', '/tmp/tmp560yx0l_/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1685: AssertionError
+_______________________ test_edge_requires_failure_stops _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_requires_failure_stops(entrypoint_argv):
+        """Edge case: requires stops on failure and task fails.
+    
+        Spec says: "If one requires fails ... we stop executing and the task fails."
+        """
+        pipeline = '''task FailTask {
+        run: {
+            exit 1
+        }
+    }
+    
+    task AfterTask {
+        run: {
+            echo "should not run"
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Finished."
+        }
+        requires: {
+            FailTask();
+            AfterTask();
+        }
+    }'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline)
+    
+        assert result.returncode == 1, f"Expected exit 1, got {result.returncode}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        task_names = [j.get("task") for j in jobs]
+>       assert "FailTask" in task_names
+E       AssertionError: assert 'FailTask' in []
+
+.evaluation_tests/test_checkpoint_1.py:1726: AssertionError
+_____________________ test_edge_type_mismatch_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_type_mismatch_invalid_pipe(entrypoint_argv):
+        """Edge case: type mismatch should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... type mismatch"
+        """
+        pipeline = '''task A {
+        params: {
+            x: int
+        }
+        run: {
+            echo "${params.x}"
+        }
+    }
+    
+    task main {
+        requires: {
+            A("not-int");
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 1
+E       assert 1 == 3
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp0x64tm1u/pipeline.pipe', '--workspace', '/tmp/tmp0x64tm1u/working', '--output', '/tmp/tmp0x64tm1u/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1752: AssertionError
+____________________ test_edge_undefined_task_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_undefined_task_invalid_pipe(entrypoint_argv):
+        """Edge case: undefined task call should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... undefined tasks"
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            MissingTask();
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 1
+E       assert 1 == 3
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmppooyo7jj/pipeline.pipe', '--workspace', '/tmp/tmppooyo7jj/working', '--output', '/tmp/tmppooyo7jj/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1772: AssertionError
+__________________________ test_edge_bad_toml_syntax ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_bad_toml_syntax(entrypoint_argv):
+        """Edge case: bad TOML config should be SYNTAX_ERROR.
+    
+        Spec says: "Exit 2: SYNTAX_ERROR:<msg> ... bad TOML/.pipe syntax"
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+    }'''
+        config = "entry = ["
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+E       AssertionError: Expected exit 2, got 1
+E       assert 1 == 2
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp47thkua9/pipeline.pipe', '--workspace', '/tmp/tmp47thkua9/working', '--output', '/tmp/tmp47thkua9/output', '--config', '/tmp/tmp47thkua9/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1790: AssertionError
+________________________ test_edge_empty_success_block _________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_empty_success_block(entrypoint_argv):
+        """Edge case: empty success block is allowed.
+    
+        Spec says: "Success can be empty."
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        success: {
+        }
+    }'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpl2o6fjcm/pipeline.pipe', '--workspace', '/tmp/tmpl2o6fjcm/working', '--output', '/tmp/tmpl2o6fjcm/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1809: AssertionError
+_______________________________ test_basic_cache _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic_cache(entrypoint_argv):
+        """Core: Basic cache hit/miss - same params should cache."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_CACHE_PIPELINE, BASIC_CACHE_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1_y612r5/pipeline.pipe', '--workspace', '/tmp/tmp1_y612r5/working', '--output', '/tmp/tmp1_y612r5/output', '--config', '/tmp/tmp1_y612r5/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:192: AssertionError
+_______________________________ test_file_change _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_file_change(entrypoint_argv):
+        """Core: Content-based cache - different files should have different cache keys."""
+        # Create existing input files
+        existing_files = {
+            "file1": "this is file 1",
+            "file2": "this is file 2 with different content",
+        }
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv, FILE_CHANGE_PIPELINE, FILE_CHANGE_CONFIG,
+            existing_files=existing_files
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp84lybltb/pipeline.pipe', '--workspace', '/tmp/tmp84lybltb/working', '--output', '/tmp/tmp84lybltb/output', '--config', '/tmp/tmp84lybltb/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:284: AssertionError
+______________________________ test_cache_exclude ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_cache_exclude(entrypoint_argv):
+        """Core: Excluded params don't affect cache key."""
+        # Create input file
+        existing_files = {
+            "data/sales.csv": "id,value\n1,100\n2,200\n",
+        }
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv, CACHE_EXCLUDE_PIPELINE, CACHE_EXCLUDE_CONFIG,
+            existing_files=existing_files
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpd1lqwool/pipeline.pipe', '--workspace', '/tmp/tmpd1lqwool/working', '--output', '/tmp/tmpd1lqwool/output', '--config', '/tmp/tmpd1lqwool/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:383: AssertionError
+______________________________ test_ttl_strategy _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_ttl_strategy(entrypoint_argv):
+        """Core: Stale strategy with TTL - cache expires after TTL."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TTL_STRATEGY_PIPELINE, TTL_STRATEGY_CONFIG,
+            timeout=30
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp23m_avwn/pipeline.pipe', '--workspace', '/tmp/tmp23m_avwn/working', '--output', '/tmp/tmp23m_avwn/output', '--config', '/tmp/tmp23m_avwn/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:529: AssertionError
+__________________________ test_cascade_invalidation ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_cascade_invalidation(entrypoint_argv):
+        """Core: Cascade invalidation - upstream change invalidates downstream caches."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, CASCADE_INVALIDATION_PIPELINE, CASCADE_INVALIDATION_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp4b_k2rh/pipeline.pipe', '--workspace', '/tmp/tmpp4b_k2rh/working', '--output', '/tmp/tmpp4b_k2rh/output', '--config', '/tmp/tmpp4b_k2rh/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:655: AssertionError
+__________________________ test_global_cache_disabled __________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_global_cache_disabled(entrypoint_argv):
+        """Edge case: Global cache disable ignores task cache settings."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, CACHE_DISABLED_PIPELINE, CACHE_DISABLED_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpa8oo0k0m/pipeline.pipe', '--workspace', '/tmp/tmpa8oo0k0m/working', '--output', '/tmp/tmpa8oo0k0m/output', '--config', '/tmp/tmpa8oo0k0m/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:729: AssertionError
+________________________ test_force_refresh_skips_cache ________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_force_refresh_skips_cache(entrypoint_argv):
+        """Edge case: force_refresh treats the task as not cacheable."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FORCE_REFRESH_PIPELINE, FORCE_REFRESH_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpave55cd8/pipeline.pipe', '--workspace', '/tmp/tmpave55cd8/working', '--output', '/tmp/tmpave55cd8/output', '--config', '/tmp/tmpave55cd8/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:789: AssertionError
+__________________ test_always_strategy_ignores_input_change ___________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_always_strategy_ignores_input_change(entrypoint_argv):
+        """Edge case: Always strategy uses cache even when inputs change."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ALWAYS_STRATEGY_PIPELINE, ALWAYS_STRATEGY_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpntr9emi9/pipeline.pipe', '--workspace', '/tmp/tmpntr9emi9/working', '--output', '/tmp/tmpntr9emi9/output', '--config', '/tmp/tmpntr9emi9/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:862: AssertionError
+___________________________ test_ttl_override_basic ____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_ttl_override_basic(entrypoint_argv):
+        """Core: TTL override via CachedTask(ttl.seconds=10) - partial override preserves defaults."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TTL_OVERRIDE_BASIC_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1k3xbnjt/pipeline.pipe', '--workspace', '/tmp/tmp1k3xbnjt/working', '--output', '/tmp/tmp1k3xbnjt/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:175: AssertionError
+____________________________ test_strategy_override ____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_strategy_override(entrypoint_argv):
+        """Core: Strategy override via CachedTask(strategy="always")."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRATEGY_OVERRIDE_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpyxje8_5m/pipeline.pipe', '--workspace', '/tmp/tmpyxje8_5m/working', '--output', '/tmp/tmpyxje8_5m/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:239: AssertionError
+_________________________ test_full_object_replacement _________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_full_object_replacement(entrypoint_argv):
+        """Core: Full object replacement ttl={seconds:2} vs partial ttl.hours=1."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FULL_OBJECT_REPLACEMENT_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp96ukth9v/pipeline.pipe', '--workspace', '/tmp/tmp96ukth9v/working', '--output', '/tmp/tmp96ukth9v/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:324: AssertionError
+______________________________ test_noop_override ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_noop_override(entrypoint_argv):
+        """Functionality: No-op override with same values should cache correctly."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, NOOP_OVERRIDE_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpoaoueg4q/pipeline.pipe', '--workspace', '/tmp/tmpoaoueg4q/working', '--output', '/tmp/tmpoaoueg4q/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:401: AssertionError
+_________________________ test_disable_cache_override __________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_disable_cache_override(entrypoint_argv):
+        """Functionality: Disable cache via CachedTask(enabled=false)."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, DISABLE_CACHE_OVERRIDE_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpdmaxh6k5/pipeline.pipe', '--workspace', '/tmp/tmpdmaxh6k5/working', '--output', '/tmp/tmpdmaxh6k5/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:464: AssertionError
+___________________ test_partial_override_preserves_defaults ___________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_partial_override_preserves_defaults(entrypoint_argv):
+        """Functionality: Partial override preserves non-overridden fields."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, PARTIAL_OVERRIDE_PRESERVES_DEFAULTS_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp9ugehegk/pipeline.pipe', '--workspace', '/tmp/tmp9ugehegk/working', '--output', '/tmp/tmp9ugehegk/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:537: AssertionError
+______________________ test_multiple_overrides_same_task _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_multiple_overrides_same_task(entrypoint_argv):
+        """Functionality: Multiple different cached variants of same task."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, MULTIPLE_OVERRIDES_SAME_TASK_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpn7b3kme5/pipeline.pipe', '--workspace', '/tmp/tmpn7b3kme5/working', '--output', '/tmp/tmpn7b3kme5/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:620: AssertionError
+_________________________ test_multiple_param_override _________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_multiple_param_override(entrypoint_argv):
+        """Functionality: Override both strategy and TTL in same invocation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, MULTIPLE_PARAM_OVERRIDE_PIPELINE
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp62tzunpc/pipeline.pipe', '--workspace', '/tmp/tmp62tzunpc/working', '--output', '/tmp/tmp62tzunpc/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:686: AssertionError
+____________________ test_ttl_object_replacement_drops_base ____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_ttl_object_replacement_drops_base(entrypoint_argv):
+        """Functionality: ttl={...} replaces base TTL fields."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TTL_OBJECT_REPLACEMENT_PIPELINE
+        )
+    
+>       assert result.returncode == 0, (
+            "Expected exit 0, got "
+            f"{result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpfpcjrrt2/pipeline.pipe', '--workspace', '/tmp/tmpfpcjrrt2/working', '--output', '/tmp/tmpfpcjrrt2/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:750: AssertionError
+____________________ test_invalid_cached_param_cache_error _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_invalid_cached_param_cache_error(entrypoint_argv):
+        """Functionality: Invalid CachedTask parameters should cause CACHE_ERROR."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, INVALID_TTL_FIELD_PIPELINE
+        )
+    
+>       assert result.returncode == 5, (
+            "Expected CACHE_ERROR exit code 5, "
+            f"got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected CACHE_ERROR exit code 5, got 1: Traceback (most recent call last):
+E           File "/workspace/launch.py", line 125, in <module>
+E             main()
+E           File "/workspace/launch.py", line 68, in main
+E             from pipeline_parser import parse_pipeline_file, ParseError
+E           File "/workspace/pipeline_parser.py", line 7, in <module>
+E             from config_parser import _parse_value
+E           File "/workspace/config_parser.py", line 7, in <module>
+E             from pipeline_parser import ParseError
+E         ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+E         
+E       assert 1 == 5
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8yscba57/pipeline.pipe', '--workspace', '/tmp/tmp8yscba57/working', '--output', '/tmp/tmp8yscba57/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+
+.evaluation_tests/test_checkpoint_3.py:804: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_basic - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmps5h6e5gj/pipeline.pipe', '--workspace', '/tmp/tmps5h6e5gj/working', '--output', '/tmp/tmps5h6e5gj/output', '--config', '/tmp/tmps5h6e5gj/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arrays - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp3xp8r4wd/pipeline.pipe', '--workspace', '/tmp/tmp3xp8r4wd/working', '--output', '/tmp/tmp3xp8r4wd/output', '--config', '/tmp/tmp3xp8r4wd/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_bool_params - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjtwu5uut/pipeline.pipe', '--workspace', '/tmp/tmpjtwu5uut/working', '--output', '/tmp/tmpjtwu5uut/output', '--config', '/tmp/tmpjtwu5uut/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_concat - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp5l00vip/pipeline.pipe', '--workspace', '/tmp/tmpp5l00vip/working', '--output', '/tmp/tmpp5l00vip/output', '--config', '/tmp/tmpp5l00vip/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_if - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpheo_3ph_/pipeline.pipe', '--workspace', '/tmp/tmpheo_3ph_/working', '--output', '/tmp/tmpheo_3ph_/output', '--config', '/tmp/tmpheo_3ph_/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_elif - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmplrlpp9_7/pipeline.pipe', '--workspace', '/tmp/tmplrlpp9_7/working', '--output', '/tmp/tmplrlpp9_7/output', '--config', '/tmp/tmplrlpp9_7/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_else - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpi019ce9b/pipeline.pipe', '--workspace', '/tmp/tmpi019ce9b/working', '--output', '/tmp/tmpi019ce9b/output', '--config', '/tmp/tmpi019ce9b/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_array_indexing - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_d3e9mu8/pipeline.pipe', '--workspace', '/tmp/tmp_d3e9mu8/working', '--output', '/tmp/tmp_d3e9mu8/output', '--config', '/tmp/tmp_d3e9mu8/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_for_requires - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp3wksx_h2/pipeline.pipe', '--workspace', '/tmp/tmp3wksx_h2/working', '--output', '/tmp/tmp3wksx_h2/output', '--config', '/tmp/tmp3wksx_h2/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_while_requires - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpircgwaiu/pipeline.pipe', '--workspace', '/tmp/tmpircgwaiu/working', '--output', '/tmp/tmpircgwaiu/output', '--config', '/tmp/tmpircgwaiu/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_working_dirs - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpsh2olxd6/pipeline.pipe', '--workspace', '/tmp/tmpsh2olxd6/working', '--output', '/tmp/tmpsh2olxd6/output', '--config', '/tmp/tmpsh2olxd6/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_existing_dir - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpm8hh5ugo/pipeline.pipe', '--workspace', '/tmp/tmpm8hh5ugo/working', '--output', '/tmp/tmpm8hh5ugo/output', '--config', '/tmp/tmpm8hh5ugo/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpxy83e0r2/pipeline.pipe', '--workspace', '/tmp/tmpxy83e0r2/working', '--output', '/tmp/tmpxy83e0r2/output', '--config', '/tmp/tmpxy83e0r2/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_exists_function - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_1.py::test_float_params - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpkrzjvdsa/pipeline.pipe', '--workspace', '/tmp/tmpkrzjvdsa/working', '--output', '/tmp/tmpkrzjvdsa/output', '--config', '/tmp/tmpkrzjvdsa/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_nested_loops - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpf9ktfoow/pipeline.pipe', '--workspace', '/tmp/tmpf9ktfoow/working', '--output', '/tmp/tmpf9ktfoow/output', '--config', '/tmp/tmpf9ktfoow/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_stderr_validation - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpiu50_557/pipeline.pipe', '--workspace', '/tmp/tmpiu50_557/working', '--output', '/tmp/tmpiu50_557/output', '--config', '/tmp/tmpiu50_557/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_params - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmplwkhjkv_/pipeline.pipe', '--workspace', '/tmp/tmplwkhjkv_/working', '--output', '/tmp/tmplwkhjkv_/output', '--config', '/tmp/tmplwkhjkv_/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_timeout - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1l2nsm7a/pipeline.pipe', '--workspace', '/tmp/tmp1l2nsm7a/working', '--output', '/tmp/tmp1l2nsm7a/output', '--config', '/tmp/tmp1l2nsm7a/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_circular_dependency - AssertionError: Expected exit 3, got 1
+assert 1 == 3
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8f1bzemj/pipeline.pipe', '--workspace', '/tmp/tmp8f1bzemj/working', '--output', '/tmp/tmp8f1bzemj/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_default_param_order - AssertionError: Expected exit 2, got 1
+assert 1 == 2
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpe44d7iw6/pipeline.pipe', '--workspace', '/tmp/tmpe44d7iw6/working', '--output', '/tmp/tmpe44d7iw6/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_missing_required_arg - AssertionError: Expected exit 3, got 1
+assert 1 == 3
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpkxg60mjl/pipeline.pipe', '--workspace', '/tmp/tmpkxg60mjl/working', '--output', '/tmp/tmpkxg60mjl/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_multiline_success_no_return - AssertionError: Expected exit 2, got 1
+assert 1 == 2
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpxrx_flkl/pipeline.pipe', '--workspace', '/tmp/tmpxrx_flkl/working', '--output', '/tmp/tmpxrx_flkl/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_no_main - AssertionError: Expected exit 3, got 1
+assert 1 == 3
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpf5weas5h/pipeline.pipe', '--workspace', '/tmp/tmpf5weas5h/working', '--output', '/tmp/tmpf5weas5h/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recursive_call - AssertionError: Expected exit 3, got 1
+assert 1 == 3
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpcn0sy0j0/pipeline.pipe', '--workspace', '/tmp/tmpcn0sy0j0/working', '--output', '/tmp/tmpcn0sy0j0/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpmss6vvd3/pipeline.pipe', '--workspace', '/tmp/tmpmss6vvd3/working', '--output', '/tmp/tmpmss6vvd3/output', '--config', '/tmp/tmpmss6vvd3/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmph4dg972e/pipeline.pipe', '--workspace', '/tmp/tmph4dg972e/working', '--output', '/tmp/tmph4dg972e/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp560yx0l_/pipeline.pipe', '--workspace', '/tmp/tmp560yx0l_/working', '--output', '/tmp/tmp560yx0l_/output', '--config', '/tmp/tmp560yx0l_/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_requires_failure_stops - AssertionError: assert 'FailTask' in []
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe - AssertionError: Expected exit 3, got 1
+assert 1 == 3
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp0x64tm1u/pipeline.pipe', '--workspace', '/tmp/tmp0x64tm1u/working', '--output', '/tmp/tmp0x64tm1u/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe - AssertionError: Expected exit 3, got 1
+assert 1 == 3
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmppooyo7jj/pipeline.pipe', '--workspace', '/tmp/tmppooyo7jj/working', '--output', '/tmp/tmppooyo7jj/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_bad_toml_syntax - AssertionError: Expected exit 2, got 1
+assert 1 == 2
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp47thkua9/pipeline.pipe', '--workspace', '/tmp/tmp47thkua9/working', '--output', '/tmp/tmp47thkua9/output', '--config', '/tmp/tmp47thkua9/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block - AssertionError: Expected exit 0: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpl2o6fjcm/pipeline.pipe', '--workspace', '/tmp/tmpl2o6fjcm/working', '--output', '/tmp/tmpl2o6fjcm/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_basic_cache - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1_y612r5/pipeline.pipe', '--workspace', '/tmp/tmp1_y612r5/working', '--output', '/tmp/tmp1_y612r5/output', '--config', '/tmp/tmp1_y612r5/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_file_change - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp84lybltb/pipeline.pipe', '--workspace', '/tmp/tmp84lybltb/working', '--output', '/tmp/tmp84lybltb/output', '--config', '/tmp/tmp84lybltb/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_cache_exclude - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpd1lqwool/pipeline.pipe', '--workspace', '/tmp/tmpd1lqwool/working', '--output', '/tmp/tmpd1lqwool/output', '--config', '/tmp/tmpd1lqwool/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_ttl_strategy - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp23m_avwn/pipeline.pipe', '--workspace', '/tmp/tmp23m_avwn/working', '--output', '/tmp/tmp23m_avwn/output', '--config', '/tmp/tmp23m_avwn/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_cascade_invalidation - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp4b_k2rh/pipeline.pipe', '--workspace', '/tmp/tmpp4b_k2rh/working', '--output', '/tmp/tmpp4b_k2rh/output', '--config', '/tmp/tmpp4b_k2rh/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_global_cache_disabled - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpa8oo0k0m/pipeline.pipe', '--workspace', '/tmp/tmpa8oo0k0m/working', '--output', '/tmp/tmpa8oo0k0m/output', '--config', '/tmp/tmpa8oo0k0m/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_force_refresh_skips_cache - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpave55cd8/pipeline.pipe', '--workspace', '/tmp/tmpave55cd8/working', '--output', '/tmp/tmpave55cd8/output', '--config', '/tmp/tmpave55cd8/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_always_strategy_ignores_input_change - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpntr9emi9/pipeline.pipe', '--workspace', '/tmp/tmpntr9emi9/working', '--output', '/tmp/tmpntr9emi9/output', '--config', '/tmp/tmpntr9emi9/config.toml'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_ttl_override_basic - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1k3xbnjt/pipeline.pipe', '--workspace', '/tmp/tmp1k3xbnjt/working', '--output', '/tmp/tmp1k3xbnjt/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_strategy_override - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpyxje8_5m/pipeline.pipe', '--workspace', '/tmp/tmpyxje8_5m/working', '--output', '/tmp/tmpyxje8_5m/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_full_object_replacement - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp96ukth9v/pipeline.pipe', '--workspace', '/tmp/tmp96ukth9v/working', '--output', '/tmp/tmp96ukth9v/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_noop_override - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpoaoueg4q/pipeline.pipe', '--workspace', '/tmp/tmpoaoueg4q/working', '--output', '/tmp/tmpoaoueg4q/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_disable_cache_override - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpdmaxh6k5/pipeline.pipe', '--workspace', '/tmp/tmpdmaxh6k5/working', '--output', '/tmp/tmpdmaxh6k5/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_partial_override_preserves_defaults - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp9ugehegk/pipeline.pipe', '--workspace', '/tmp/tmp9ugehegk/working', '--output', '/tmp/tmp9ugehegk/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_multiple_overrides_same_task - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpn7b3kme5/pipeline.pipe', '--workspace', '/tmp/tmpn7b3kme5/working', '--output', '/tmp/tmpn7b3kme5/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_multiple_param_override - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp62tzunpc/pipeline.pipe', '--workspace', '/tmp/tmp62tzunpc/working', '--output', '/tmp/tmp62tzunpc/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_ttl_object_replacement_drops_base - AssertionError: Expected exit 0, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpfpcjrrt2/pipeline.pipe', '--workspace', '/tmp/tmpfpcjrrt2/working', '--output', '/tmp/tmpfpcjrrt2/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_invalid_cached_param_cache_error - AssertionError: Expected CACHE_ERROR exit code 5, got 1: Traceback (most recent call last):
+    File "/workspace/launch.py", line 125, in <module>
+      main()
+    File "/workspace/launch.py", line 68, in main
+      from pipeline_parser import parse_pipeline_file, ParseError
+    File "/workspace/pipeline_parser.py", line 7, in <module>
+      from config_parser import _parse_value
+    File "/workspace/config_parser.py", line 7, in <module>
+      from pipeline_parser import ParseError
+  ImportError: cannot import name 'ParseError' from partially initialized module 'pipeline_parser' (most likely due to a circular import) (/workspace/pipeline_parser.py)
+  
+assert 1 == 5
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8yscba57/pipeline.pipe', '--workspace', '/tmp/tmp8yscba57/working', '--output', '/tmp/tmp8yscba57/output'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/launch.py", line 125, in <module>\n    main()\n  File "/workspace/launch.py", line 68, in main\n    from pipeline_parser import parse_pipeline_file, ParseError\n  File "/workspace/pipeline_parser.py", line 7, in <module>\n    from config_parser import _parse_value\n  File "/workspace/config_parser.py", line 7, in <module>\n    from pipeline_parser import ParseError\nImportError: cannot import name \'ParseError\' from partially initialized module \'pipeline_parser\' (most likely due to a circular import) (/workspace/pipeline_parser.py)\n').returncode
+============================== 51 failed in 9.41s ==============================

@@ -1,0 +1,1313 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/B7IUTmBIfmlue_9Q/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 49 items
+
+.evaluation_tests/test_checkpoint_3.py::test_preamble_macro_expansion[def] FAILED [  2%]
+.evaluation_tests/test_checkpoint_3.py::test_preamble_macro_expansion[newcommand] FAILED [  4%]
+.evaluation_tests/test_checkpoint_3.py::test_param_newcommand_ignored PASSED [  6%]
+.evaluation_tests/test_checkpoint_3.py::test_includegraphics_conversion PASSED [  8%]
+.evaluation_tests/test_checkpoint_3.py::test_unwrap_multicols_minipage FAILED [ 10%]
+.evaluation_tests/test_checkpoint_3.py::test_parbox_unwrap PASSED        [ 12%]
+.evaluation_tests/test_checkpoint_3.py::test_np_in_math_mode PASSED      [ 14%]
+.evaluation_tests/test_checkpoint_3.py::test_np_in_plain_text PASSED     [ 16%]
+.evaluation_tests/test_checkpoint_3.py::test_body_macro_not_expanded PASSED [ 18%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_after_comment_removal PASSED [ 20%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_escaped_percent FAILED [ 22%]
+.evaluation_tests/test_checkpoint_3.py::test_commented_macro_ignored PASSED [ 24%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_before_includegraphics PASSED [ 26%]
+.evaluation_tests/test_checkpoint_3.py::test_parbox_nested_formatting FAILED [ 28%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_multiple_occurrences FAILED [ 30%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_shared_prefix PASSED  [ 32%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_recursive_chain PASSED [ 34%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_without_begin_document PASSED [ 36%]
+.evaluation_tests/test_checkpoint_3.py::test_param_macro_ignored[newcommand-two-params] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_3.py::test_param_macro_ignored[def-one-param] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_to_formatting FAILED  [ 42%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_to_list FAILED        [ 44%]
+.evaluation_tests/test_checkpoint_3.py::test_includegraphics_in_list[enumerate] FAILED [ 46%]
+.evaluation_tests/test_checkpoint_3.py::test_includegraphics_in_list[itemize] FAILED [ 48%]
+.evaluation_tests/test_checkpoint_3.py::test_includegraphics_complex_options PASSED [ 51%]
+.evaluation_tests/test_checkpoint_3.py::test_inline_unwrap[multicols] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_3.py::test_inline_unwrap[minipage] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_3.py::test_nested_unwrap_envs FAILED   [ 57%]
+.evaluation_tests/test_checkpoint_3.py::test_parbox_nested_itemize FAILED [ 59%]
+.evaluation_tests/test_checkpoint_3.py::test_parbox_inline PASSED        [ 61%]
+.evaluation_tests/test_checkpoint_3.py::test_np_multiple PASSED          [ 63%]
+.evaluation_tests/test_checkpoint_3.py::test_np_in_enumerate FAILED      [ 65%]
+.evaluation_tests/test_checkpoint_3.py::test_multicols_itemize FAILED    [ 67%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_empty_replacement FAILED [ 69%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_expands_to_np FAILED  [ 71%]
+.evaluation_tests/test_checkpoint_3.py::test_np_inside_parbox PASSED     [ 73%]
+.evaluation_tests/test_checkpoint_3.py::test_parbox_deeply_nested_braces FAILED [ 75%]
+.evaluation_tests/test_checkpoint_3.py::test_includegraphics_inside_parbox PASSED [ 77%]
+.evaluation_tests/test_checkpoint_3.py::test_parbox_empty_content FAILED [ 79%]
+.evaluation_tests/test_checkpoint_3.py::test_multicols_enumerate FAILED  [ 81%]
+.evaluation_tests/test_checkpoint_3.py::test_minipage_itemize FAILED     [ 83%]
+.evaluation_tests/test_checkpoint_3.py::test_includegraphics_standalone_no_options PASSED [ 85%]
+.evaluation_tests/test_checkpoint_3.py::test_np_in_display_math_context PASSED [ 87%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_expands_to_includegraphics FAILED [ 89%]
+.evaluation_tests/test_checkpoint_3.py::test_multicols_with_formatting FAILED [ 91%]
+.evaluation_tests/test_checkpoint_3.py::test_parbox_with_enumerate FAILED [ 93%]
+.evaluation_tests/test_checkpoint_3.py::test_np_at_line_start PASSED     [ 95%]
+.evaluation_tests/test_checkpoint_3.py::test_macro_two_defs_both_used PASSED [ 97%]
+.evaluation_tests/test_checkpoint_3.py::test_unwrap_multicols_surrounding_text FAILED [100%]
+
+=================================== FAILURES ===================================
+______________________ test_preamble_macro_expansion[def] ______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_preamble_macro_expansion_0')
+filename = 'def_macro.tex'
+tex_body = '\\documentclass{article}\n\\def\\RR{\\mathbb{R}}\n\\begin{document}\nSet $\\RR$ of real numbers.\n\\end{document}\n'
+expected = '\nSet $\\mathbb{R}$ of real numbers.\n'
+
+    @pytest.mark.parametrize(
+        ("filename", "tex_body", "expected"),
+        [
+            pytest.param(
+                "def_macro.tex",
+                "\\documentclass{article}\n"
+                "\\def\\RR{\\mathbb{R}}\n"
+                "\\begin{document}\n"
+                "Set $\\RR$ of real numbers.\n"
+                "\\end{document}\n",
+                "\nSet $\\mathbb{R}$ of real numbers.\n",
+                id="def",
+            ),
+            pytest.param(
+                "newcommand_macro.tex",
+                "\\newcommand{\\NN}{\\mathbb{N}}\n"
+                "\\begin{document}\n"
+                "Domain is $\\NN$.\n"
+                "\\end{document}\n",
+                "\nDomain is $\\mathbb{N}$.\n",
+                id="newcommand",
+            ),
+        ],
+    )
+    def test_preamble_macro_expansion(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        filename: str,
+        tex_body: str,
+        expected: str,
+    ) -> None:
+        """Expands preamble \\def and \\newcommand macros in document body."""
+        source = write_tex(tmp_path, filename, tex_body)
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+>       assert_success_and_output(
+            result, tmp_path / Path(filename).with_suffix(".md"), expected
+        )
+
+.evaluation_tests/test_checkpoint_3.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_preamble_macro_expansion_0/def_macro.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_preamble_macro_expansion_0/def_macro.md')
+expected = '\nSet $\\mathbb{R}$ of real numbers.\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+__________________ test_preamble_macro_expansion[newcommand] ___________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_preamble_macro_expansion_1')
+filename = 'newcommand_macro.tex'
+tex_body = '\\newcommand{\\NN}{\\mathbb{N}}\n\\begin{document}\nDomain is $\\NN$.\n\\end{document}\n'
+expected = '\nDomain is $\\mathbb{N}$.\n'
+
+    @pytest.mark.parametrize(
+        ("filename", "tex_body", "expected"),
+        [
+            pytest.param(
+                "def_macro.tex",
+                "\\documentclass{article}\n"
+                "\\def\\RR{\\mathbb{R}}\n"
+                "\\begin{document}\n"
+                "Set $\\RR$ of real numbers.\n"
+                "\\end{document}\n",
+                "\nSet $\\mathbb{R}$ of real numbers.\n",
+                id="def",
+            ),
+            pytest.param(
+                "newcommand_macro.tex",
+                "\\newcommand{\\NN}{\\mathbb{N}}\n"
+                "\\begin{document}\n"
+                "Domain is $\\NN$.\n"
+                "\\end{document}\n",
+                "\nDomain is $\\mathbb{N}$.\n",
+                id="newcommand",
+            ),
+        ],
+    )
+    def test_preamble_macro_expansion(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        filename: str,
+        tex_body: str,
+        expected: str,
+    ) -> None:
+        """Expands preamble \\def and \\newcommand macros in document body."""
+        source = write_tex(tmp_path, filename, tex_body)
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+>       assert_success_and_output(
+            result, tmp_path / Path(filename).with_suffix(".md"), expected
+        )
+
+.evaluation_tests/test_checkpoint_3.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_preamble_macro_expansion_1/newcommand_macro.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_preamble_macro_expansion_1/newcommand_macro.md')
+expected = '\nDomain is $\\mathbb{N}$.\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+________________________ test_unwrap_multicols_minipage ________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_unwrap_multicols_minipage0')
+
+    def test_unwrap_multicols_minipage(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Unwraps multicols and minipage environments while preserving contents."""
+        source = write_tex(
+            tmp_path,
+            "unwrap_envs.tex",
+            "\\begin{document}\n"
+            "\\begin{multicols}{2}\n"
+            "Column content.\n"
+            "\\end{multicols}\n"
+            "\\begin{minipage}{0.5\\linewidth}\n"
+            "Boxed content.\n"
+            "\\end{minipage}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "unwrap_envs.md",
+            "\nColumn content.\nBoxed content.\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:125: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_unwrap_multicols_minipage0/unwrap_envs.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_unwrap_multicols_minipage0/unwrap_envs.md')
+expected = '\nColumn content.\nBoxed content.\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+__________________________ test_macro_escaped_percent __________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_escaped_percent0')
+
+    @pytest.mark.functionality
+    def test_macro_escaped_percent(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Expands macro replacement text that includes escaped percent characters."""
+        source = write_tex(
+            tmp_path,
+            "macro_escaped_percent.tex",
+            "\\def\\RATE{50\\%}\n"
+            "\\begin{document}\n"
+            "Rate: \\RATE\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "macro_escaped_percent.md",
+            "\nRate: 50\\%\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:255: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_macro_escaped_percent0/macro_escaped_percent.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_escaped_percent0/macro_escaped_percent.md')
+expected = '\nRate: 50\\%\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+________________________ test_parbox_nested_formatting _________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_parbox_nested_formatting0')
+
+    @pytest.mark.functionality
+    def test_parbox_nested_formatting(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Unwraps parbox and keeps nested markdown formatting inside."""
+        source = write_tex(
+            tmp_path,
+            "parbox_nested_content.tex",
+            "\\begin{document}\n"
+            "\\parbox{0.5\\linewidth}{\\textbf{Bold} value}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "parbox_nested_content.md",
+            "\n**Bold** value\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:323: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_parbox_nested_formatting0/parbox_nested_content.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_parbox_nested_formatting0/parbox_nested_content.md')
+expected = '\n**Bold** value\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+_______________________ test_macro_multiple_occurrences ________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_multiple_occurrence0')
+
+    @pytest.mark.functionality
+    def test_macro_multiple_occurrences(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Expands preamble macros on multiple body occurrences."""
+        source = write_tex(
+            tmp_path,
+            "macro_multiple_occurrences.tex",
+            "\\def\\RR{\\mathbb{R}}\n"
+            "\\begin{document}\n"
+            "\\RR and \\RR again.\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "macro_multiple_occurrences.md",
+            "\n\\mathbb{R} and \\mathbb{R} again.\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:346: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_macro_multiple_occurrence0/macro_multiple_occurrences.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_multiple_occurrence0/macro_multiple_occurrences.md')
+expected = '\n\\mathbb{R} and \\mathbb{R} again.\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+___________________________ test_macro_to_formatting ___________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_to_formatting0')
+
+    @pytest.mark.functionality
+    def test_macro_to_formatting(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Expands macro replacement text before applying downstream formatting rules."""
+        source = write_tex(
+            tmp_path,
+            "macro_to_formatting.tex",
+            "\\def\\HEAD{\\section{Title}}\n"
+            "\\begin{document}\n"
+            "\\HEAD\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "macro_to_formatting.md",
+            "\n## Title\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:505: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_macro_to_formatting0/macro_to_formatting.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_to_formatting0/macro_to_formatting.md')
+expected = '\n## Title\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+______________________________ test_macro_to_list ______________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_to_list0')
+
+    @pytest.mark.functionality
+    def test_macro_to_list(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Expands macro text containing list markup and preserves list conversion."""
+        source = write_tex(
+            tmp_path,
+            "macro_to_list_item.tex",
+            "\\def\\STEP{\\item Expanded}\n"
+            "\\begin{document}\n"
+            "\\begin{enumerate}\n"
+            "\\STEP\n"
+            "\\end{enumerate}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "macro_to_list_item.md",
+            "\n**1.** Expanded\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:530: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_macro_to_list0/macro_to_list_item.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_to_list0/macro_to_list_item.md')
+expected = '\n**1.** Expanded\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+___________________ test_includegraphics_in_list[enumerate] ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_includegraphics_in_list_e0')
+filename = 'graphics_inside_enumerate.tex'
+tex_body = '\\begin{document}\n\\begin{enumerate}\n\\item \\includegraphics{plot.png}\n\\end{enumerate}\n\\end{document}\n'
+expected = '\n**1.** ![image](plot.png)\n'
+
+    @pytest.mark.parametrize(
+        ("filename", "tex_body", "expected"),
+        [
+            pytest.param(
+                "graphics_inside_enumerate.tex",
+                "\\begin{document}\n"
+                "\\begin{enumerate}\n"
+                "\\item \\includegraphics{plot.png}\n"
+                "\\end{enumerate}\n"
+                "\\end{document}\n",
+                "\n**1.** ![image](plot.png)\n",
+                id="enumerate",
+            ),
+            pytest.param(
+                "graphics_inside_itemize.tex",
+                "\\begin{document}\n"
+                "\\begin{itemize}\n"
+                "\\item \\includegraphics{plot.png}\n"
+                "\\end{itemize}\n"
+                "\\end{document}\n",
+                "\n-   ![image](plot.png)\n",
+                id="itemize",
+            ),
+        ],
+    )
+    @pytest.mark.functionality
+    def test_includegraphics_in_list(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        filename: str,
+        tex_body: str,
+        expected: str,
+    ) -> None:
+        """Converts includegraphics to images when used inside list items."""
+        source = write_tex(tmp_path, filename, tex_body)
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+>       assert_success_and_output(
+            result, tmp_path / Path(filename).with_suffix(".md"), expected
+        )
+
+.evaluation_tests/test_checkpoint_3.py:573: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_includegraphics_in_list_e0/graphics_inside_enumerate.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_includegraphics_in_list_e0/graphics_inside_enumerate.md')
+expected = '\n**1.** ![image](plot.png)\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+____________________ test_includegraphics_in_list[itemize] _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_includegraphics_in_list_i0')
+filename = 'graphics_inside_itemize.tex'
+tex_body = '\\begin{document}\n\\begin{itemize}\n\\item \\includegraphics{plot.png}\n\\end{itemize}\n\\end{document}\n'
+expected = '\n-   ![image](plot.png)\n'
+
+    @pytest.mark.parametrize(
+        ("filename", "tex_body", "expected"),
+        [
+            pytest.param(
+                "graphics_inside_enumerate.tex",
+                "\\begin{document}\n"
+                "\\begin{enumerate}\n"
+                "\\item \\includegraphics{plot.png}\n"
+                "\\end{enumerate}\n"
+                "\\end{document}\n",
+                "\n**1.** ![image](plot.png)\n",
+                id="enumerate",
+            ),
+            pytest.param(
+                "graphics_inside_itemize.tex",
+                "\\begin{document}\n"
+                "\\begin{itemize}\n"
+                "\\item \\includegraphics{plot.png}\n"
+                "\\end{itemize}\n"
+                "\\end{document}\n",
+                "\n-   ![image](plot.png)\n",
+                id="itemize",
+            ),
+        ],
+    )
+    @pytest.mark.functionality
+    def test_includegraphics_in_list(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        filename: str,
+        tex_body: str,
+        expected: str,
+    ) -> None:
+        """Converts includegraphics to images when used inside list items."""
+        source = write_tex(tmp_path, filename, tex_body)
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+>       assert_success_and_output(
+            result, tmp_path / Path(filename).with_suffix(".md"), expected
+        )
+
+.evaluation_tests/test_checkpoint_3.py:573: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_includegraphics_in_list_i0/graphics_inside_itemize.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_includegraphics_in_list_i0/graphics_inside_itemize.md')
+expected = '\n-   ![image](plot.png)\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+___________________________ test_nested_unwrap_envs ____________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_nested_unwrap_envs0')
+
+    @pytest.mark.functionality
+    def test_nested_unwrap_envs(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Unwraps nested multicols/minipage environments while preserving contents."""
+        source = write_tex(
+            tmp_path,
+            "nested_unwrapped_envs.tex",
+            "\\begin{document}\n"
+            "\\begin{multicols}{2}\n"
+            "\\begin{minipage}{0.4\\linewidth}\n"
+            "Inner content.\n"
+            "\\end{minipage}\n"
+            "\\end{multicols}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "nested_unwrapped_envs.md",
+            "\nInner content.\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:656: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_nested_unwrap_envs0/nested_unwrapped_envs.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_nested_unwrap_envs0/nested_unwrapped_envs.md')
+expected = '\nInner content.\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+__________________________ test_parbox_nested_itemize __________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_parbox_nested_itemize0')
+
+    @pytest.mark.functionality
+    def test_parbox_nested_itemize(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Unwraps parbox that wraps an itemized list and keeps item bullets."""
+        source = write_tex(
+            tmp_path,
+            "parbox_nested_itemize.tex",
+            "\\begin{document}\n"
+            "\\parbox{0.5\\linewidth}{\\begin{itemize}\n"
+            "\\item Bullet A\n"
+            "\\item Bullet B\n"
+            "\\end{itemize}}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "parbox_nested_itemize.md",
+            "\n-   Bullet A\n"
+            "-   Bullet B\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:681: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_parbox_nested_itemize0/parbox_nested_itemize.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_parbox_nested_itemize0/parbox_nested_itemize.md')
+expected = '\n-   Bullet A\n-   Bullet B\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+_____________________________ test_np_in_enumerate _____________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_np_in_enumerate0')
+
+    @pytest.mark.functionality
+    def test_np_in_enumerate(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Converts \\np values inside enumerate list items."""
+        source = write_tex(
+            tmp_path,
+            "np_inside_enumerate.tex",
+            "\\begin{document}\n"
+            "\\begin{enumerate}\n"
+            "\\item \\np{0,35}\n"
+            "\\end{enumerate}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "np_inside_enumerate.md",
+            "\n**1.** 0,35\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:750: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_np_in_enumerate0/np_inside_enumerate.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_np_in_enumerate0/np_inside_enumerate.md')
+expected = '\n**1.** 0,35\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+____________________________ test_multicols_itemize ____________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multicols_itemize0')
+
+    @pytest.mark.functionality
+    def test_multicols_itemize(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Unwraps multicols wrappers around itemized lists without changing bullets."""
+        source = write_tex(
+            tmp_path,
+            "multicols_itemize_interaction.tex",
+            "\\begin{document}\n"
+            "\\begin{multicols}{2}\n"
+            "\\begin{itemize}\n"
+            "\\item Inside columns\n"
+            "\\end{itemize}\n"
+            "\\end{multicols}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "multicols_itemize_interaction.md",
+            "\n-   Inside columns\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:776: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_multicols_itemize0/multicols_itemize_interaction.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multicols_itemize0/multicols_itemize_interaction.md')
+expected = '\n-   Inside columns\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+_________________________ test_macro_empty_replacement _________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_empty_replacement0')
+
+    @pytest.mark.functionality
+    def test_macro_empty_replacement(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Expands preamble macro with empty replacement text to nothing in body."""
+        source = write_tex(
+            tmp_path,
+            "macro_empty_replacement.tex",
+            "\\def\\E{}\n"
+            "\\begin{document}\n"
+            "Before \\E after.\n"
+            "\\end{document}\n",
+        )
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+>       assert_success_and_output(
+            result,
+            tmp_path / "macro_empty_replacement.md",
+            "\nBefore  after.\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:797: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_macro_empty_replacement0/macro_empty_replacement.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_empty_replacement0/macro_empty_replacement.md')
+expected = '\nBefore  after.\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+___________________________ test_macro_expands_to_np ___________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_expands_to_np0')
+
+    @pytest.mark.functionality
+    def test_macro_expands_to_np(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Strips \\np wrapper from macro-expanded replacement text."""
+        source = write_tex(
+            tmp_path,
+            "macro_expands_to_np.tex",
+            "\\def\\VAL{\\np{0,35}}\n"
+            "\\begin{document}\n"
+            "Value is \\VAL.\n"
+            "\\end{document}\n",
+        )
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+>       assert_success_and_output(
+            result,
+            tmp_path / "macro_expands_to_np.md",
+            "\nValue is 0,35.\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:818: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_macro_expands_to_np0/macro_expands_to_np.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_expands_to_np0/macro_expands_to_np.md')
+expected = '\nValue is 0,35.\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+_______________________ test_parbox_deeply_nested_braces _______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_parbox_deeply_nested_brac0')
+
+    @pytest.mark.functionality
+    def test_parbox_deeply_nested_braces(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Preserves balanced non-command braces inside parbox content after unwrapping."""
+        source = write_tex(
+            tmp_path,
+            "parbox_nested_braces.tex",
+            "\\begin{document}\n"
+            "\\parbox{0.5\\linewidth}{Value {A} and {B}}\n"
+            "\\end{document}\n",
+        )
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+>       assert_success_and_output(
+            result,
+            tmp_path / "parbox_nested_braces.md",
+            "\nValue {A} and {B}\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:858: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_parbox_deeply_nested_brac0/parbox_nested_braces.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_parbox_deeply_nested_brac0/parbox_nested_braces.md')
+expected = '\nValue {A} and {B}\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+__________________________ test_parbox_empty_content ___________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_parbox_empty_content0')
+
+    @pytest.mark.functionality
+    def test_parbox_empty_content(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Unwraps parbox with empty content argument to nothing."""
+        source = write_tex(
+            tmp_path,
+            "parbox_empty.tex",
+            "\\begin{document}\n"
+            "Before \\parbox{0.5\\linewidth}{} after.\n"
+            "\\end{document}\n",
+        )
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+>       assert_success_and_output(
+            result,
+            tmp_path / "parbox_empty.md",
+            "\nBefore  after.\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:898: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_parbox_empty_content0/parbox_empty.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_parbox_empty_content0/parbox_empty.md')
+expected = '\nBefore  after.\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+___________________________ test_multicols_enumerate ___________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multicols_enumerate0')
+
+    @pytest.mark.functionality
+    def test_multicols_enumerate(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "multicols_enumerate.tex",
+            "\\begin{document}\n"
+            "\\begin{multicols}{2}\n"
+            "\\begin{enumerate}\n"
+            "\\item First\n"
+            "\\item Second\n"
+            "\\end{enumerate}\n"
+            "\\end{multicols}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "multicols_enumerate.md",
+            "\n**1.** First\n\n**2.** Second\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:924: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_multicols_enumerate0/multicols_enumerate.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multicols_enumerate0/multicols_enumerate.md')
+expected = '\n**1.** First\n\n**2.** Second\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+____________________________ test_minipage_itemize _____________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_minipage_itemize0')
+
+    @pytest.mark.functionality
+    def test_minipage_itemize(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "minipage_itemize.tex",
+            "\\begin{document}\n"
+            "\\begin{minipage}{0.5\\linewidth}\n"
+            "\\begin{itemize}\n"
+            "\\item Point A\n"
+            "\\item Point B\n"
+            "\\end{itemize}\n"
+            "\\end{minipage}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "minipage_itemize.md",
+            "\n-   Point A\n-   Point B\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:950: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_minipage_itemize0/minipage_itemize.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_minipage_itemize0/minipage_itemize.md')
+expected = '\n-   Point A\n-   Point B\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+____________________ test_macro_expands_to_includegraphics _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_expands_to_includeg0')
+
+    @pytest.mark.functionality
+    def test_macro_expands_to_includegraphics(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "macro_to_includegraphics.tex",
+            "\\def\\MYIMG{\\includegraphics{chart.png}}\n"
+            "\\begin{document}\n"
+            "\\MYIMG\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "macro_to_includegraphics.md",
+            "\n![image](chart.png)\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:1014: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_macro_expands_to_includeg0/macro_to_includegraphics.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_macro_expands_to_includeg0/macro_to_includegraphics.md')
+expected = '\n![image](chart.png)\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+________________________ test_multicols_with_formatting ________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multicols_with_formatting0')
+
+    @pytest.mark.functionality
+    def test_multicols_with_formatting(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "multicols_formatting.tex",
+            "\\begin{document}\n"
+            "\\begin{multicols}{2}\n"
+            "\\textbf{Bold} and \\emph{italic}\n"
+            "\\end{multicols}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "multicols_formatting.md",
+            "\n**Bold** and _italic_\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:1037: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_multicols_with_formatting0/multicols_formatting.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multicols_with_formatting0/multicols_formatting.md')
+expected = '\n**Bold** and _italic_\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+__________________________ test_parbox_with_enumerate __________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_parbox_with_enumerate0')
+
+    @pytest.mark.functionality
+    def test_parbox_with_enumerate(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "parbox_enumerate.tex",
+            "\\begin{document}\n"
+            "\\parbox{0.5\\linewidth}{\\begin{enumerate}\n"
+            "\\item Alpha\n"
+            "\\item Beta\n"
+            "\\end{enumerate}}\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "parbox_enumerate.md",
+            "\n**1.** Alpha\n\n**2.** Beta\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:1061: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_parbox_with_enumerate0/parbox_enumerate.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_parbox_with_enumerate0/parbox_enumerate.md')
+expected = '\n**1.** Alpha\n\n**2.** Beta\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+____________________ test_unwrap_multicols_surrounding_text ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_unwrap_multicols_surround0')
+
+    @pytest.mark.functionality
+    def test_unwrap_multicols_surrounding_text(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "unwrap_surrounding.tex",
+            "\\begin{document}\n"
+            "Before\n"
+            "\\begin{multicols}{2}\n"
+            "Inside\n"
+            "\\end{multicols}\n"
+            "After\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "unwrap_surrounding.md",
+            "\nBefore\nInside\nAfter\n",
+        )
+
+.evaluation_tests/test_checkpoint_3.py:1130: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_unwrap_multicols_surround0/unwrap_surrounding.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_unwrap_multicols_surround0/unwrap_surrounding.md')
+expected = '\nBefore\nInside\nAfter\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_3.py::test_preamble_macro_expansion[def] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_preamble_macro_expansion[newcommand] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_unwrap_multicols_minipage - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_macro_escaped_percent - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_parbox_nested_formatting - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_macro_multiple_occurrences - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_macro_to_formatting - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_macro_to_list - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_includegraphics_in_list[enumerate] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_includegraphics_in_list[itemize] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_nested_unwrap_envs - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_parbox_nested_itemize - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_np_in_enumerate - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_multicols_itemize - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_macro_empty_replacement - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_macro_expands_to_np - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_parbox_deeply_nested_braces - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_parbox_empty_content - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_multicols_enumerate - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_minipage_itemize - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_macro_expands_to_includegraphics - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_multicols_with_formatting - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_parbox_with_enumerate - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_unwrap_multicols_surrounding_text - AssertionError
+======================== 24 failed, 25 passed in 6.44s =========================

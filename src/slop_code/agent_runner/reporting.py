@@ -15,6 +15,8 @@ from pydantic import Field
 from pydantic import field_validator
 
 from slop_code import common
+from collections import Counter
+
 from slop_code.agent_runner.agent import Agent
 from slop_code.agent_runner.agent import CheckpointInferenceResult
 from slop_code.agent_runner.models import AgentRunSpec
@@ -509,3 +511,91 @@ def save_agent_checkpoint_info(
                 sort_keys=True,
             )
         )
+
+
+def extract_trajectory_stats(
+    steps: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Extract trajectory statistics from agent step payloads.
+
+    Args:
+        steps: List of raw payload dicts from agent execution.
+
+    Returns:
+        Dict with tokens, thinking_tokens, steps, turns, tool_calls,
+        tools_used (counter), and total_tokens.
+    """
+    input_tokens = 0
+    output_tokens = 0
+    cache_read_tokens = 0
+    cache_write_tokens = 0
+    reasoning_tokens = 0
+    num_steps = 0
+    num_turns = 0
+    tool_calls = 0
+    tools_used: Counter[str] = Counter()
+    seen_msg_ids: set[str] = set()
+    prev_role = ""
+
+    for payload in steps:
+        msg_type = payload.get("type", "")
+
+        if msg_type == "result":
+            usage = payload.get("usage", {})
+            input_tokens = int(usage.get("input_tokens", 0))
+            output_tokens = int(usage.get("output_tokens", 0))
+            cache_read_tokens = int(usage.get("cache_read_input_tokens", 0))
+            cache_write_tokens = int(
+                usage.get("cache_creation_input_tokens", 0)
+            )
+            num_turns = int(payload.get("num_turns", 0))
+            continue
+
+        message = payload.get("message", {})
+        if not isinstance(message, dict):
+            continue
+
+        role = message.get("role", "")
+        msg_id = message.get("id", "")
+        content = message.get("content", [])
+        usage = message.get("usage", {})
+
+        if role == "assistant":
+            if usage and msg_id and msg_id not in seen_msg_ids:
+                inp = int(usage.get("input_tokens", 0))
+                out = int(usage.get("output_tokens", 0))
+                if inp > 0 or out > 0:
+                    num_steps += 1
+                    seen_msg_ids.add(msg_id)
+
+            if isinstance(content, list):
+                for item in content:
+                    if isinstance(item, dict) and item.get("type") == "tool_use":
+                        tool_calls += 1
+                        tools_used[item.get("name", "unknown")] += 1
+
+        prev_role = role
+
+    return {
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "cache_read_tokens": cache_read_tokens,
+        "cache_write_tokens": cache_write_tokens,
+        "reasoning_tokens": reasoning_tokens,
+        "total_tokens": input_tokens + output_tokens,
+        "steps": num_steps,
+        "turns": num_turns,
+        "tool_calls": tool_calls,
+        "tools_used": dict(tools_used.most_common()),
+    }
+
+
+def save_trajectory_stats(
+    output_path: Path,
+    stats: dict[str, Any],
+    filename: str = "trajectory_stats.json",
+) -> None:
+    """Save trajectory stats to a JSON file."""
+    output_path.mkdir(parents=True, exist_ok=True)
+    with (output_path / filename).open("w") as f:
+        json.dump(stats, f, indent=2)

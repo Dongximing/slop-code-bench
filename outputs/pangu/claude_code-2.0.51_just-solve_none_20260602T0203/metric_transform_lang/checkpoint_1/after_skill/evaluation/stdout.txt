@@ -1,0 +1,387 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/512dWU1GsIaXky60/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 46 items
+
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[01_all_rows_aggregates] PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[02_group_by_category] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[03_window_1h_counts] PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[05_filter_and_apply] PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core_extended[06_group_by_file_out] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core_extended[08_median_even_count] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core_extended[09_timestamp_transforms] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core_extended[10_round_function] FAILED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core_extended[11_group_by_multi_cols] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core_extended[25_filter_with_group_by] PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core_extended[27_apply_column_override] FAILED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core_extended[30_all_aggregates] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_window_variants[04_window_and_group_by] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_window_variants[12_window_10m] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_window_variants[13_window_24h] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_window_variants[29_window_7d] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_expressions[14_all_comparison_ops] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_expressions[15_logical_operators] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_expressions[16_in_operator] PASSED [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_expressions[17_column_comparison] PASSED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_cli_format[21_custom_timezone] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_cli_format[22_custom_timestamp_fmt] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_cli_format[24_extra_csv_columns] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_cli_format[28_comments_empty_lines] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_hidden[07_std_var_aggregates] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_hidden[19_single_row] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_hidden[20_null_aggregates] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_hidden[26_apply_then_filter] FAILED [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_hidden[31_group_by_timestamp] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[01_dsl_syntax_error] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[02_type_error_numeric_on_string] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[03_missing_csv_io_error] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[04_multiple_group_by] PASSED [ 71%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[05_multiple_window] PASSED [ 73%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[06_no_aggregate] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[07_duplicate_aliases] FAILED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[08_invalid_window_duration] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[09_len_on_number] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[10_day_on_string] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[11_string_number_comparison] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[12_invalid_in_usage] PASSED [ 89%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[13_undefined_column] PASSED [ 91%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[15_missing_dsl_file] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[16_in_with_two_literals] FAILED [ 95%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[17_zero_window_duration] PASSED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[18_filter_non_boolean] FAILED [100%]
+
+=================================== FAILURES ===================================
+______________ test_checkpoint_1_core_extended[10_round_function] ______________
+
+entrypoint_argv = ['uv', 'run', 'mtl.py'], checkpoint_name = 'checkpoint_1'
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_core/10_round_function')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_extende3')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_dir",
+        EXTENDED_CORE_CASES,
+        ids=[case_dir.name for case_dir in EXTENDED_CORE_CASES],
+    )
+    def test_checkpoint_1_core_extended(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_dir: Path,
+        tmp_path: Path,
+    ) -> None:
+        if _skip_for_new_dsl(checkpoint_name):
+            pytest.skip("Checkpoint 4+ uses a different execution surface.")
+>       run_case(case_dir, "core", entrypoint_argv, tmp_path, checkpoint_name)
+
+.evaluation_tests/test_checkpoint_1.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_core/10_round_function')
+group_name = 'core', entrypoint_argv = ['uv', 'run', 'mtl.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_extende3')
+checkpoint_name = 'checkpoint_1'
+
+    def run_case(
+        case_dir: Path,
+        group_name: str,
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        checkpoint_name: str | None = None,
+    ) -> None:
+        copy_inputs(case_dir, tmp_path)
+        args = normalize_args(read_arguments(case_dir), checkpoint_name)
+        result = run_command(entrypoint_argv, args, cwd=tmp_path)
+    
+        expected_status, _stderr = read_meta(case_dir)
+        if expected_status is None:
+            expected_status = default_status(group_name)
+    
+        if expected_status != 0:
+            assert result.returncode != 0
+            return
+    
+>       assert result.returncode == expected_status
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/case_utils.py:241: AssertionError
+__________ test_checkpoint_1_core_extended[27_apply_column_override] ___________
+
+entrypoint_argv = ['uv', 'run', 'mtl.py'], checkpoint_name = 'checkpoint_1'
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_core/27_apply_column_override')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_extende6')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_dir",
+        EXTENDED_CORE_CASES,
+        ids=[case_dir.name for case_dir in EXTENDED_CORE_CASES],
+    )
+    def test_checkpoint_1_core_extended(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_dir: Path,
+        tmp_path: Path,
+    ) -> None:
+        if _skip_for_new_dsl(checkpoint_name):
+            pytest.skip("Checkpoint 4+ uses a different execution surface.")
+>       run_case(case_dir, "core", entrypoint_argv, tmp_path, checkpoint_name)
+
+.evaluation_tests/test_checkpoint_1.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_core/27_apply_column_override')
+group_name = 'core', entrypoint_argv = ['uv', 'run', 'mtl.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_extende6')
+checkpoint_name = 'checkpoint_1'
+
+    def run_case(
+        case_dir: Path,
+        group_name: str,
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        checkpoint_name: str | None = None,
+    ) -> None:
+        copy_inputs(case_dir, tmp_path)
+        args = normalize_args(read_arguments(case_dir), checkpoint_name)
+        result = run_command(entrypoint_argv, args, cwd=tmp_path)
+    
+        expected_status, _stderr = read_meta(case_dir)
+        if expected_status is None:
+            expected_status = default_status(group_name)
+    
+        if expected_status != 0:
+            assert result.returncode != 0
+            return
+    
+>       assert result.returncode == expected_status
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/case_utils.py:241: AssertionError
+________________ test_checkpoint_1_hidden[26_apply_then_filter] ________________
+
+entrypoint_argv = ['uv', 'run', 'mtl.py'], checkpoint_name = 'checkpoint_1'
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_hidden/26_apply_then_filter')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_hidden_26_ap0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_dir",
+        HIDDEN_CASES,
+        ids=[case_dir.name for case_dir in HIDDEN_CASES],
+    )
+    def test_checkpoint_1_hidden(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_dir: Path,
+        tmp_path: Path,
+    ) -> None:
+        if _skip_for_new_dsl(checkpoint_name):
+            pytest.skip("Checkpoint 4+ uses a different execution surface.")
+>       run_case(case_dir, "hidden", entrypoint_argv, tmp_path, checkpoint_name)
+
+.evaluation_tests/test_checkpoint_1.py:163: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_hidden/26_apply_then_filter')
+group_name = 'hidden', entrypoint_argv = ['uv', 'run', 'mtl.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_hidden_26_ap0')
+checkpoint_name = 'checkpoint_1'
+
+    def run_case(
+        case_dir: Path,
+        group_name: str,
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        checkpoint_name: str | None = None,
+    ) -> None:
+        copy_inputs(case_dir, tmp_path)
+        args = normalize_args(read_arguments(case_dir), checkpoint_name)
+        result = run_command(entrypoint_argv, args, cwd=tmp_path)
+    
+        expected_status, _stderr = read_meta(case_dir)
+        if expected_status is None:
+            expected_status = default_status(group_name)
+    
+        if expected_status != 0:
+            assert result.returncode != 0
+            return
+    
+>       assert result.returncode == expected_status
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/case_utils.py:241: AssertionError
+________________ test_checkpoint_1_error[07_duplicate_aliases] _________________
+
+entrypoint_argv = ['uv', 'run', 'mtl.py'], checkpoint_name = 'checkpoint_1'
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_error/07_duplicate_aliases')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_error_07_dup0')
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "case_dir",
+        ERROR_CASES,
+        ids=[case_dir.name for case_dir in ERROR_CASES],
+    )
+    def test_checkpoint_1_error(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_dir: Path,
+        tmp_path: Path,
+    ) -> None:
+        if _skip_for_new_dsl(checkpoint_name):
+            pytest.skip("Checkpoint 4+ uses a different execution surface.")
+>       run_case(case_dir, "error", entrypoint_argv, tmp_path, checkpoint_name)
+
+.evaluation_tests/test_checkpoint_1.py:180: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_error/07_duplicate_aliases')
+group_name = 'error', entrypoint_argv = ['uv', 'run', 'mtl.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_error_07_dup0')
+checkpoint_name = 'checkpoint_1'
+
+    def run_case(
+        case_dir: Path,
+        group_name: str,
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        checkpoint_name: str | None = None,
+    ) -> None:
+        copy_inputs(case_dir, tmp_path)
+        args = normalize_args(read_arguments(case_dir), checkpoint_name)
+        result = run_command(entrypoint_argv, args, cwd=tmp_path)
+    
+        expected_status, _stderr = read_meta(case_dir)
+        if expected_status is None:
+            expected_status = default_status(group_name)
+    
+        if expected_status != 0:
+>           assert result.returncode != 0
+                   ^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/case_utils.py:238: AssertionError
+_______________ test_checkpoint_1_error[16_in_with_two_literals] _______________
+
+entrypoint_argv = ['uv', 'run', 'mtl.py'], checkpoint_name = 'checkpoint_1'
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_error/16_in_with_two_literals')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_error_16_in_0')
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "case_dir",
+        ERROR_CASES,
+        ids=[case_dir.name for case_dir in ERROR_CASES],
+    )
+    def test_checkpoint_1_error(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_dir: Path,
+        tmp_path: Path,
+    ) -> None:
+        if _skip_for_new_dsl(checkpoint_name):
+            pytest.skip("Checkpoint 4+ uses a different execution surface.")
+>       run_case(case_dir, "error", entrypoint_argv, tmp_path, checkpoint_name)
+
+.evaluation_tests/test_checkpoint_1.py:180: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_error/16_in_with_two_literals')
+group_name = 'error', entrypoint_argv = ['uv', 'run', 'mtl.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_error_16_in_0')
+checkpoint_name = 'checkpoint_1'
+
+    def run_case(
+        case_dir: Path,
+        group_name: str,
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        checkpoint_name: str | None = None,
+    ) -> None:
+        copy_inputs(case_dir, tmp_path)
+        args = normalize_args(read_arguments(case_dir), checkpoint_name)
+        result = run_command(entrypoint_argv, args, cwd=tmp_path)
+    
+        expected_status, _stderr = read_meta(case_dir)
+        if expected_status is None:
+            expected_status = default_status(group_name)
+    
+        if expected_status != 0:
+>           assert result.returncode != 0
+                   ^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/case_utils.py:238: AssertionError
+________________ test_checkpoint_1_error[18_filter_non_boolean] ________________
+
+entrypoint_argv = ['uv', 'run', 'mtl.py'], checkpoint_name = 'checkpoint_1'
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_error/18_filter_non_boolean')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_error_18_fil0')
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "case_dir",
+        ERROR_CASES,
+        ids=[case_dir.name for case_dir in ERROR_CASES],
+    )
+    def test_checkpoint_1_error(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_dir: Path,
+        tmp_path: Path,
+    ) -> None:
+        if _skip_for_new_dsl(checkpoint_name):
+            pytest.skip("Checkpoint 4+ uses a different execution surface.")
+>       run_case(case_dir, "error", entrypoint_argv, tmp_path, checkpoint_name)
+
+.evaluation_tests/test_checkpoint_1.py:180: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case_dir = PosixPath('/workspace/.evaluation_tests/assets/checkpoint_1_error/18_filter_non_boolean')
+group_name = 'error', entrypoint_argv = ['uv', 'run', 'mtl.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_error_18_fil0')
+checkpoint_name = 'checkpoint_1'
+
+    def run_case(
+        case_dir: Path,
+        group_name: str,
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        checkpoint_name: str | None = None,
+    ) -> None:
+        copy_inputs(case_dir, tmp_path)
+        args = normalize_args(read_arguments(case_dir), checkpoint_name)
+        result = run_command(entrypoint_argv, args, cwd=tmp_path)
+    
+        expected_status, _stderr = read_meta(case_dir)
+        if expected_status is None:
+            expected_status = default_status(group_name)
+    
+        if expected_status != 0:
+>           assert result.returncode != 0
+                   ^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/case_utils.py:238: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core_extended[10_round_function] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core_extended[27_apply_column_override] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_hidden[26_apply_then_filter] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[07_duplicate_aliases] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[16_in_with_two_literals] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_error[18_filter_non_boolean] - AssertionError
+========================= 6 failed, 40 passed in 7.52s =========================

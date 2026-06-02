@@ -1,0 +1,940 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/v4v483LBtr0XgyUE/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 180.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 33 items
+
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[naga] PASSED    [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[barrage_l] PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[fernite_carbide] PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[athanor] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[azariel] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[proteus] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_materials_sorted_case_insensitive PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_run_time_rounds_up PASSED   [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_buildable_column_accuracy PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_unpublished_item_error PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_case_sensitive_item_name PASSED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_nonexistent_item_error PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-1] FAILED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-2] FAILED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-3] FAILED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-4] FAILED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-5] FAILED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-1] FAILED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-5] FAILED [ 57%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-1] FAILED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-5] FAILED [ 63%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[redeemer-1] FAILED [ 66%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[jackdaw-5] FAILED [ 69%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[tengu-5] FAILED [ 72%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[valravn-5] FAILED [ 75%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[subsystem-5] FAILED [ 78%]
+.evaluation_tests/test_checkpoint_2.py::test_default_skill_is_five FAILED [ 81%]
+.evaluation_tests/test_checkpoint_2.py::test_tech_iii_accepts_blueprint_input FAILED [ 84%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_time_rounds_up FAILED [ 87%]
+.evaluation_tests/test_checkpoint_2.py::test_probability_clamps_to_one FAILED [ 90%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_zero PASSED     [ 93%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_six PASSED      [ 96%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_negative PASSED [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_invention_core[barrage_l-1] _______________________
+
+case_name = 'barrage_l', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_______________________ test_invention_core[barrage_l-2] _______________________
+
+case_name = 'barrage_l', skill_level = 2
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_______________________ test_invention_core[barrage_l-3] _______________________
+
+case_name = 'barrage_l', skill_level = 3
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_______________________ test_invention_core[barrage_l-4] _______________________
+
+case_name = 'barrage_l', skill_level = 4
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_______________________ test_invention_core[barrage_l-5] _______________________
+
+case_name = 'barrage_l', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+________________________ test_invention_core[proteus-1] ________________________
+
+case_name = 'proteus', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/industry.py", line 789, in <module>
+E             main()
+E           File "/workspace/industry.py", line 783, in main
+E             output = format_invention_report(sde, target_type_id, args.name, args.skill)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/industry.py", line 623, in format_invention_report
+E             raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+E         ValueError: Item cannot be invented via Invention: Proteus
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Proteus\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+________________________ test_invention_core[proteus-5] ________________________
+
+case_name = 'proteus', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/industry.py", line 789, in <module>
+E             main()
+E           File "/workspace/industry.py", line 783, in main
+E             output = format_invention_report(sde, target_type_id, args.name, args.skill)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/industry.py", line 623, in format_invention_report
+E             raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+E         ValueError: Item cannot be invented via Invention: Proteus
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Proteus\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+__________________ test_invention_functionality[dual_giga-1] ___________________
+
+case_name = 'dual_giga', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/industry.py", line 789, in <module>
+E             main()
+E           File "/workspace/industry.py", line 783, in main
+E             output = format_invention_report(sde, target_type_id, args.name, args.skill)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/industry.py", line 623, in format_invention_report
+E             raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+E         ValueError: Item cannot be invented via Invention: Dual Giga Pulse Laser II
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Dual Giga Pulse Laser II', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Dual Giga Pulse Laser II\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+__________________ test_invention_functionality[dual_giga-5] ___________________
+
+case_name = 'dual_giga', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/industry.py", line 789, in <module>
+E             main()
+E           File "/workspace/industry.py", line 783, in main
+E             output = format_invention_report(sde, target_type_id, args.name, args.skill)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/industry.py", line 623, in format_invention_report
+E             raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+E         ValueError: Item cannot be invented via Invention: Dual Giga Pulse Laser II
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Dual Giga Pulse Laser II', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Dual Giga Pulse Laser II\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+___________________ test_invention_functionality[redeemer-1] ___________________
+
+case_name = 'redeemer', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/industry.py", line 789, in <module>
+E             main()
+E           File "/workspace/industry.py", line 783, in main
+E             output = format_invention_report(sde, target_type_id, args.name, args.skill)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/industry.py", line 623, in format_invention_report
+E             raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+E         ValueError: Item cannot be invented via Invention: Redeemer
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Redeemer', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Redeemer\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+___________________ test_invention_functionality[jackdaw-5] ____________________
+
+case_name = 'jackdaw', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/industry.py", line 789, in <module>
+E             main()
+E           File "/workspace/industry.py", line 783, in main
+E             output = format_invention_report(sde, target_type_id, args.name, args.skill)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/industry.py", line 623, in format_invention_report
+E             raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+E         ValueError: Item cannot be invented via Invention: Jackdaw
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Jackdaw', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Jackdaw\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+____________________ test_invention_functionality[tengu-5] _____________________
+
+case_name = 'tengu', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/industry.py", line 789, in <module>
+E             main()
+E           File "/workspace/industry.py", line 783, in main
+E             output = format_invention_report(sde, target_type_id, args.name, args.skill)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/industry.py", line 623, in format_invention_report
+E             raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+E         ValueError: Item cannot be invented via Invention: Tengu
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Tengu', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Tengu\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+___________________ test_invention_functionality[valravn-5] ____________________
+
+case_name = 'valravn', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/industry.py", line 789, in <module>
+E             main()
+E           File "/workspace/industry.py", line 783, in main
+E             output = format_invention_report(sde, target_type_id, args.name, args.skill)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/industry.py", line 623, in format_invention_report
+E             raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+E         ValueError: Item cannot be invented via Invention: Valravn
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Valravn', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Valravn\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+__________________ test_invention_functionality[subsystem-5] ___________________
+
+case_name = 'subsystem', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Traceback (most recent call last):
+E           File "/workspace/industry.py", line 789, in <module>
+E             main()
+E           File "/workspace/industry.py", line 783, in main
+E             output = format_invention_report(sde, target_type_id, args.name, args.skill)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/industry.py", line 623, in format_invention_report
+E             raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+E         ValueError: Item cannot be invented via Invention: Proteus Defensive - Covert Reconfiguration
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus Defensive - Covert Reconfiguration', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Proteus Defensive - Covert Reconfiguration\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+__________________________ test_default_skill_is_five __________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_default_skill_is_five(entrypoint_argv, sde_dir):
+        """Functionality: Missing --skill defaults to level 5."""
+        case = load_json_case(2, "barrage_l")
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level=5)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+____________________ test_tech_iii_accepts_blueprint_input _____________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_tech_iii_accepts_blueprint_input(entrypoint_argv, sde_dir):
+        """Functionality: Tech III blueprint names resolve to the product."""
+        case = load_json_case(2, "proteus")
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            "Proteus Blueprint",
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            "5",
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level=5)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'datacores': 'Datacore - Mechanical Engineering, Datacore - Plasma Physics', 'group': 'Blueprint > Strategic Cruiser Blueprints', 'item': 'Proteus Blueprint (29989)', 'market_group': 'None', ...}
+expected = {'datacores': 'Datacore - Mechanical Engineering, Datacore - Plasma Physics', 'group': 'Ship > Strategic Cruiser', 'item': 'Proteus (29988)', 'market_group': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'dictionary_item_added': ["root['probabilities']"], 'values_changed': {"root['item']": {'new_value': 'Proteus (29988)', 'old_value': 'Proteus Blueprint (29989)'}, "root['group']": {'new_value': 'Ship > Strategic Cruiser', 'old_value': 'Blueprint > Strategic Cruiser Blueprints'}, "root['market_group']": {'new_value': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', 'old_value': 'None'}}}
+E       assert not {'dictionary_item_added': ["root['probabilities']"], 'values_changed': {"root['item']": {'new_value': 'Proteus (29988)', 'old_value': 'Proteus Blueprint (29989)'}, "root['group']": {'new_value': 'Ship > Strategic Cruiser', 'old_value': 'Blueprint > Strategic Cruiser Blueprints'}, "root['market_group']": {'new_value': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', 'old_value': 'None'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+________________________ test_invention_time_rounds_up _________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_invention_time_rounds_up(entrypoint_argv, sde_dir):
+        """Functionality: Invention time rounds up to whole minutes."""
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            "Entosis Link II Blueprint",
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            "5",
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+>       assert actual["item"] == "Entosis Link II (34595)"
+E       AssertionError: assert 'Entosis Link II Blueprint (34596)' == 'Entosis Link II (34595)'
+E         
+E         - Entosis Link II (34595)
+E         ?                      ^
+E         + Entosis Link II Blueprint (34596)
+E         ?                ++++++++++      ^
+
+.evaluation_tests/test_checkpoint_2.py:156: AssertionError
+________________________ test_probability_clamps_to_one ________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_probability_clamps_to_one(entrypoint_argv, sde_dir):
+        """Functionality: Probabilities clamp to 100%."""
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            "Dual Giga Beam Laser II Blueprint",
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            "5",
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+>       assert actual["item"] == "Dual Giga Beam Laser II (37299)"
+E       AssertionError: assert 'Dual Giga Beam Laser II Blueprint (41186)' == 'Dual Giga Beam Laser II (37299)'
+E         
+E         - Dual Giga Beam Laser II (37299)
+E         + Dual Giga Beam Laser II Blueprint (41186)
+
+.evaluation_tests/test_checkpoint_2.py:175: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-1] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-2] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-3] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-4] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-5] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-1] - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/industry.py", line 789, in <module>
+      main()
+    File "/workspace/industry.py", line 783, in main
+      output = format_invention_report(sde, target_type_id, args.name, args.skill)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/industry.py", line 623, in format_invention_report
+      raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+  ValueError: Item cannot be invented via Invention: Proteus
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Proteus\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-5] - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/industry.py", line 789, in <module>
+      main()
+    File "/workspace/industry.py", line 783, in main
+      output = format_invention_report(sde, target_type_id, args.name, args.skill)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/industry.py", line 623, in format_invention_report
+      raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+  ValueError: Item cannot be invented via Invention: Proteus
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Proteus\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-1] - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/industry.py", line 789, in <module>
+      main()
+    File "/workspace/industry.py", line 783, in main
+      output = format_invention_report(sde, target_type_id, args.name, args.skill)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/industry.py", line 623, in format_invention_report
+      raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+  ValueError: Item cannot be invented via Invention: Dual Giga Pulse Laser II
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Dual Giga Pulse Laser II', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Dual Giga Pulse Laser II\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-5] - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/industry.py", line 789, in <module>
+      main()
+    File "/workspace/industry.py", line 783, in main
+      output = format_invention_report(sde, target_type_id, args.name, args.skill)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/industry.py", line 623, in format_invention_report
+      raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+  ValueError: Item cannot be invented via Invention: Dual Giga Pulse Laser II
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Dual Giga Pulse Laser II', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Dual Giga Pulse Laser II\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[redeemer-1] - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/industry.py", line 789, in <module>
+      main()
+    File "/workspace/industry.py", line 783, in main
+      output = format_invention_report(sde, target_type_id, args.name, args.skill)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/industry.py", line 623, in format_invention_report
+      raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+  ValueError: Item cannot be invented via Invention: Redeemer
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Redeemer', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Redeemer\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[jackdaw-5] - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/industry.py", line 789, in <module>
+      main()
+    File "/workspace/industry.py", line 783, in main
+      output = format_invention_report(sde, target_type_id, args.name, args.skill)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/industry.py", line 623, in format_invention_report
+      raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+  ValueError: Item cannot be invented via Invention: Jackdaw
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Jackdaw', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Jackdaw\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[tengu-5] - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/industry.py", line 789, in <module>
+      main()
+    File "/workspace/industry.py", line 783, in main
+      output = format_invention_report(sde, target_type_id, args.name, args.skill)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/industry.py", line 623, in format_invention_report
+      raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+  ValueError: Item cannot be invented via Invention: Tengu
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Tengu', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Tengu\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[valravn-5] - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/industry.py", line 789, in <module>
+      main()
+    File "/workspace/industry.py", line 783, in main
+      output = format_invention_report(sde, target_type_id, args.name, args.skill)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/industry.py", line 623, in format_invention_report
+      raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+  ValueError: Item cannot be invented via Invention: Valravn
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Valravn', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Valravn\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[subsystem-5] - AssertionError: Command failed: Traceback (most recent call last):
+    File "/workspace/industry.py", line 789, in <module>
+      main()
+    File "/workspace/industry.py", line 783, in main
+      output = format_invention_report(sde, target_type_id, args.name, args.skill)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/workspace/industry.py", line 623, in format_invention_report
+      raise ValueError(f"Item cannot be invented via Invention: {target_name}")
+  ValueError: Item cannot be invented via Invention: Proteus Defensive - Covert Reconfiguration
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus Defensive - Covert Reconfiguration', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Traceback (most recent call last):\n  File "/workspace/industry.py", line 789, in <module>\n    main()\n  File "/workspace/industry.py", line 783, in main\n    output = format_invention_report(sde, target_type_id, args.name, args.skill)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/industry.py", line 623, in format_invention_report\n    raise ValueError(f"Item cannot be invented via Invention: {target_name}")\nValueError: Item cannot be invented via Invention: Proteus Defensive - Covert Reconfiguration\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_default_skill_is_five - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_tech_iii_accepts_blueprint_input - AssertionError: 
+  Diff: {'dictionary_item_added': ["root['probabilities']"], 'values_changed': {"root['item']": {'new_value': 'Proteus (29988)', 'old_value': 'Proteus Blueprint (29989)'}, "root['group']": {'new_value': 'Ship > Strategic Cruiser', 'old_value': 'Blueprint > Strategic Cruiser Blueprints'}, "root['market_group']": {'new_value': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', 'old_value': 'None'}}}
+assert not {'dictionary_item_added': ["root['probabilities']"], 'values_changed': {"root['item']": {'new_value': 'Proteus (29988)', 'old_value': 'Proteus Blueprint (29989)'}, "root['group']": {'new_value': 'Ship > Strategic Cruiser', 'old_value': 'Blueprint > Strategic Cruiser Blueprints'}, "root['market_group']": {'new_value': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', 'old_value': 'None'}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_time_rounds_up - AssertionError: assert 'Entosis Link II Blueprint (34596)' == 'Entosis Link II (34595)'
+  
+  - Entosis Link II (34595)
+  ?                      ^
+  + Entosis Link II Blueprint (34596)
+  ?                ++++++++++      ^
+FAILED .evaluation_tests/test_checkpoint_2.py::test_probability_clamps_to_one - AssertionError: assert 'Dual Giga Beam Laser II Blueprint (41186)' == 'Dual Giga Beam Laser II (37299)'
+  
+  - Dual Giga Beam Laser II (37299)
+  + Dual Giga Beam Laser II Blueprint (41186)
+======================== 18 failed, 15 passed in 44.50s ========================
