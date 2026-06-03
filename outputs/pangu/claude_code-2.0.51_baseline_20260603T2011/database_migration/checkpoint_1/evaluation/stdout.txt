@@ -1,0 +1,593 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/E9xdXe__SXJmAeYc/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 39 items
+
+.evaluation_tests/test_checkpoint_1.py::test_create_table PASSED         [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column PASSED           [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_operations PASSED  [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_skip_already_applied PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_single_column PASSED   [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_preserve_data PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_drop_columns PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_preserves_existing_data PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_foreign_keys_disabled_during_drop_column PASSED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_auto_increment_primary_key PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_unique_and_not_null_constraints PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_default_values_various_types PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column_with_default_to_populated_table PASSED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_complex_data_preservation PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_add_not_null_with_default PASSED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::test_create_multiple_tables PASSED [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_reserved_word_identifiers_are_quoted FAILED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_mixed_operations_all_types PASSED [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_non_sequential_versions PASSED [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_create_table_multiple_primary_keys_rejected FAILED [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_auto_increment_requires_integer_primary_key FAILED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column_rejects_invalid_identifier FAILED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_missing_table FAILED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_table_exists FAILED         [ 61%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_migration_file PASSED [ 64%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_json PASSED         [ 66%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_schema_missing_operations PASSED [ 69%]
+.evaluation_tests/test_checkpoint_1.py::test_table_missing_for_add_column FAILED [ 71%]
+.evaluation_tests/test_checkpoint_1.py::test_column_already_exists FAILED [ 74%]
+.evaluation_tests/test_checkpoint_1.py::test_column_missing_for_drop FAILED [ 76%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_only_column FAILED     [ 79%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_primary_key_column FAILED [ 82%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_identifier_rejected FAILED [ 84%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_column_type_rejected FAILED [ 87%]
+.evaluation_tests/test_checkpoint_1.py::test_unique_constraint_prevents_duplicates PASSED [ 89%]
+.evaluation_tests/test_checkpoint_1.py::test_version_zero_rejected PASSED [ 92%]
+.evaluation_tests/test_checkpoint_1.py::test_version_negative_rejected PASSED [ 94%]
+.evaluation_tests/test_checkpoint_1.py::test_version_string_rejected PASSED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_removes_unique_index_on_dropped_column PASSED [100%]
+
+=================================== FAILURES ===================================
+__________________ test_reserved_word_identifiers_are_quoted ___________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_reserved_word_identifiers0')
+
+    @pytest.mark.functionality
+    def test_reserved_word_identifiers_are_quoted(entrypoint_argv, tmp_path):
+        """Functionality: Reserved words still work as identifiers."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        migration = {
+            "version": 1,
+            "description": "Create table with reserved identifiers",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "select",
+                    "columns": [
+                        {"name": "from", "type": "TEXT", "not_null": True},
+                        {"name": "where", "type": "INTEGER"},
+                    ],
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: SQL error: near "select": syntax error
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_reserved_word_identifiers0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_reserved_word_identifiers0/app.db'], returncode=2, stdout='', stderr='Error: SQL error: near "select": syntax error\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:923: AssertionError
+_______________ test_create_table_multiple_primary_keys_rejected _______________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_table_multiple_pri0')
+
+    @pytest.mark.error
+    def test_create_table_multiple_primary_keys_rejected(entrypoint_argv, tmp_path):
+        """Error: Reject tables with multiple primary keys."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        migration = {
+            "version": 1,
+            "description": "Invalid primary keys",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "accounts",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True},
+                        {"name": "email", "type": "TEXT", "primary_key": True},
+                    ],
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_create_table_multiple_pri0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_create_table_multiple_pri0/app.db'], returncode=2, stdout='', stderr='Error: operation 0: only one column can have primary_key=true\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1111: AssertionError
+_______________ test_auto_increment_requires_integer_primary_key _______________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_auto_increment_requires_i0')
+
+    @pytest.mark.error
+    def test_auto_increment_requires_integer_primary_key(entrypoint_argv, tmp_path):
+        """Error: Reject auto_increment on non-integer columns."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        migration = {
+            "version": 1,
+            "description": "Invalid auto_increment",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "notes",
+                    "columns": [
+                        {
+                            "name": "id",
+                            "type": "TEXT",
+                            "primary_key": True,
+                            "auto_increment": True,
+                        }
+                    ],
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_auto_increment_requires_i0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_auto_increment_requires_i0/app.db'], returncode=2, stdout='', stderr="Error: column 'id': auto_increment can only be used with INTEGER type\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1146: AssertionError
+__________________ test_add_column_rejects_invalid_identifier __________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_add_column_rejects_invali0')
+
+    @pytest.mark.error
+    def test_add_column_rejects_invalid_identifier(entrypoint_argv, tmp_path):
+        """Error: Reject invalid column identifiers on add_column."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY)")
+            conn.commit()
+    
+        migration = {
+            "version": 1,
+            "description": "Invalid column name",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "bad-name", "type": "TEXT"},
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_add_column_rejects_invali0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_add_column_rejects_invali0/app.db'], returncode=2, stdout='', stderr="Error: invalid column name 'bad-name' in operation 0, column\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1178: AssertionError
+________________________ test_drop_column_missing_table ________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_drop_column_missing_table0')
+
+    @pytest.mark.error
+    def test_drop_column_missing_table(entrypoint_argv, tmp_path):
+        """Error: Dropping a column from a missing table fails."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        migration = {
+            "version": 1,
+            "description": "Drop from missing table",
+            "operations": [
+                {"type": "drop_column", "table": "missing_table", "column": "age"}
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_drop_column_missing_table0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_drop_column_missing_table0/app.db'], returncode=2, stdout='', stderr="Error: table 'missing_table' does not exist\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1202: AssertionError
+______________________________ test_table_exists _______________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_table_exists0')
+
+    @pytest.mark.error
+    def test_table_exists(entrypoint_argv, seeds_dir, tmp_path):
+        """Error: Attempting to create a table that already exists should fail."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "table_exists.db", db_file)
+    
+        migration = {
+            "version": 2,
+            "description": "Try to create users table again",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "users",
+                    "columns": [
+                        {
+                            "name": "id",
+                            "type": "INTEGER",
+                            "primary_key": True,
+                            "auto_increment": True,
+                        }
+                    ],
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_table_exists0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_table_exists0/app.db'], returncode=2, stdout='', stderr="Error: table 'users' already exists\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1244: AssertionError
+______________________ test_table_missing_for_add_column _______________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_table_missing_for_add_col0')
+
+    @pytest.mark.error
+    def test_table_missing_for_add_column(entrypoint_argv, tmp_path):
+        """Error: Adding a column to a missing table should fail."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        migration = {
+            "version": 1,
+            "description": "Add column to missing table",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "missing_table",
+                    "column": {"name": "age", "type": "INTEGER"},
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_table_missing_for_add_col0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_table_missing_for_add_col0/app.db'], returncode=2, stdout='', stderr="Error: table 'missing_table' does not exist\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1317: AssertionError
+__________________________ test_column_already_exists __________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_column_already_exists0')
+
+    @pytest.mark.error
+    def test_column_already_exists(entrypoint_argv, tmp_path):
+        """Error: Adding an existing column should fail."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, age INTEGER)")
+            conn.commit()
+    
+        migration = {
+            "version": 1,
+            "description": "Add duplicate column",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "age", "type": "INTEGER"},
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_column_already_exists0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_column_already_exists0/app.db'], returncode=2, stdout='', stderr="Error: column 'age' already exists in table 'users'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1350: AssertionError
+_________________________ test_column_missing_for_drop _________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_column_missing_for_drop0')
+
+    @pytest.mark.error
+    def test_column_missing_for_drop(entrypoint_argv, tmp_path):
+        """Error: Dropping a missing column should fail."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY)")
+            conn.commit()
+    
+        migration = {
+            "version": 1,
+            "description": "Drop missing column",
+            "operations": [
+                {"type": "drop_column", "table": "users", "column": "age"}
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_column_missing_for_drop0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_column_missing_for_drop0/app.db'], returncode=2, stdout='', stderr="Error: column 'age' does not exist in table 'users'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1379: AssertionError
+____________________________ test_drop_only_column _____________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_drop_only_column0')
+
+    @pytest.mark.error
+    def test_drop_only_column(entrypoint_argv, tmp_path):
+        """Error: Dropping the only column should fail."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute("CREATE TABLE single_col (value TEXT)")
+            conn.commit()
+    
+        migration = {
+            "version": 1,
+            "description": "Drop only column",
+            "operations": [
+                {"type": "drop_column", "table": "single_col", "column": "value"}
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_drop_only_column0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_drop_only_column0/app.db'], returncode=2, stdout='', stderr="Error: cannot drop column 'value': it is the only column in table 'single_col'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1408: AssertionError
+_________________________ test_drop_primary_key_column _________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_drop_primary_key_column0')
+
+    @pytest.mark.error
+    def test_drop_primary_key_column(entrypoint_argv, tmp_path):
+        """Error: Dropping a primary key column should fail."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "CREATE TABLE accounts (id INTEGER PRIMARY KEY, name TEXT)"
+            )
+            conn.commit()
+    
+        migration = {
+            "version": 1,
+            "description": "Drop primary key column",
+            "operations": [
+                {"type": "drop_column", "table": "accounts", "column": "id"}
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_drop_primary_key_column0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_drop_primary_key_column0/app.db'], returncode=2, stdout='', stderr="Error: cannot drop column 'id': it is a PRIMARY KEY column\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1438: AssertionError
+_______________________ test_invalid_identifier_rejected _______________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_invalid_identifier_reject0')
+
+    @pytest.mark.error
+    def test_invalid_identifier_rejected(entrypoint_argv, tmp_path):
+        """Error: Invalid identifiers should fail schema validation."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        migration = {
+            "version": 1,
+            "description": "Invalid table name",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "invalid-name",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True}
+                    ],
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, "Expected command to fail with exit code 1"
+E       AssertionError: Expected command to fail with exit code 1
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_invalid_identifier_reject0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_invalid_identifier_reject0/app.db'], returncode=2, stdout='', stderr="Error: operation 0: invalid table name 'invalid-name'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1468: AssertionError
+______________________ test_invalid_column_type_rejected _______________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_invalid_column_type_rejec0')
+
+    @pytest.mark.error
+    def test_invalid_column_type_rejected(entrypoint_argv, tmp_path):
+        """Error: Invalid column types should fail schema validation.
+    
+        The spec lists valid types as: INTEGER|TEXT|REAL|BLOB|TIMESTAMP
+        Types like VARCHAR, BOOLEAN, INT should be rejected.
+        """
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        migration = {
+            "version": 1,
+            "description": "Table with invalid type",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "users",
+                    "columns": [
+                        {"name": "id", "type": "INTEGER", "primary_key": True},
+                        {"name": "name", "type": "VARCHAR"},  # Invalid type!
+                    ],
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 1, (
+            "Expected command to fail with exit code 1 for invalid type"
+        )
+E       AssertionError: Expected command to fail with exit code 1 for invalid type
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_invalid_column_type_rejec0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_invalid_column_type_rejec0/app.db'], returncode=2, stdout='', stderr="Error: invalid column type 'VARCHAR' for column 'name'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1507: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_reserved_word_identifiers_are_quoted - AssertionError: Command failed: Error: SQL error: near "select": syntax error
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_reserved_word_identifiers0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_reserved_word_identifiers0/app.db'], returncode=2, stdout='', stderr='Error: SQL error: near "select": syntax error\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_table_multiple_primary_keys_rejected - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_create_table_multiple_pri0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_create_table_multiple_pri0/app.db'], returncode=2, stdout='', stderr='Error: operation 0: only one column can have primary_key=true\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_auto_increment_requires_integer_primary_key - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_auto_increment_requires_i0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_auto_increment_requires_i0/app.db'], returncode=2, stdout='', stderr="Error: column 'id': auto_increment can only be used with INTEGER type\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_add_column_rejects_invalid_identifier - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_add_column_rejects_invali0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_add_column_rejects_invali0/app.db'], returncode=2, stdout='', stderr="Error: invalid column name 'bad-name' in operation 0, column\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_drop_column_missing_table - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_drop_column_missing_table0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_drop_column_missing_table0/app.db'], returncode=2, stdout='', stderr="Error: table 'missing_table' does not exist\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_table_exists - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_table_exists0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_table_exists0/app.db'], returncode=2, stdout='', stderr="Error: table 'users' already exists\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_table_missing_for_add_column - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_table_missing_for_add_col0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_table_missing_for_add_col0/app.db'], returncode=2, stdout='', stderr="Error: table 'missing_table' does not exist\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_column_already_exists - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_column_already_exists0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_column_already_exists0/app.db'], returncode=2, stdout='', stderr="Error: column 'age' already exists in table 'users'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_column_missing_for_drop - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_column_missing_for_drop0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_column_missing_for_drop0/app.db'], returncode=2, stdout='', stderr="Error: column 'age' does not exist in table 'users'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_drop_only_column - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_drop_only_column0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_drop_only_column0/app.db'], returncode=2, stdout='', stderr="Error: cannot drop column 'value': it is the only column in table 'single_col'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_drop_primary_key_column - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_drop_primary_key_column0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_drop_primary_key_column0/app.db'], returncode=2, stdout='', stderr="Error: cannot drop column 'id': it is a PRIMARY KEY column\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_invalid_identifier_rejected - AssertionError: Expected command to fail with exit code 1
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_invalid_identifier_reject0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_invalid_identifier_reject0/app.db'], returncode=2, stdout='', stderr="Error: operation 0: invalid table name 'invalid-name'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_invalid_column_type_rejected - AssertionError: Expected command to fail with exit code 1 for invalid type
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_invalid_column_type_rejec0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_invalid_column_type_rejec0/app.db'], returncode=2, stdout='', stderr="Error: invalid column type 'VARCHAR' for column 'name'\n").returncode
+======================== 13 failed, 26 passed in 5.23s =========================

@@ -1,1 +1,0 @@
-The vector space $\R^n$ with inner product $\innerprod{x}{y}$ and vector $\vect{v}$.

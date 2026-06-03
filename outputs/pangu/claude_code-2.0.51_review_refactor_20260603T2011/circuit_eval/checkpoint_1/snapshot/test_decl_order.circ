@@ -1,0 +1,10 @@
+input a b
+wire t1
+wire t2
+output y
+
+t1 = NOT(b)
+output z  # Should fail - output after assignment
+t2 = XOR(a, b)
+y = OR(t1, t2)
+z = BUF(t1)

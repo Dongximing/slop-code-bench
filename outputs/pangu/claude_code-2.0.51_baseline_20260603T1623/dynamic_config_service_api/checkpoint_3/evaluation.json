@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "problem_name": "dynamic_config_service_api",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_3",
+  "checkpoint_version": 1,
+  "duration": 4.309748411178589,
+  "entrypoint": "uv run config_server.py",
+  "tests": {
+    "checkpoint_3-Core": {
+      "passed": [
+        "TestCore::test_01_set_base_policy",
+        "TestCore::test_02_create_base_draft",
+        "TestCore::test_06_set_billing_policy",
+        "TestCore::test_07_create_billing_draft",
+        "TestCore::test_22_healthcheck"
+      ],
+      "failed": [
+        "TestCore::test_11_resolve_billing_after_activation"
+      ],
+      "skipped": [
+        "TestCore::test_03_create_proposal_for_base",
+        "TestCore::test_04_review_approve_base",
+        "TestCore::test_05_merge_base_proposal",
+        "TestCore::test_08_propose_billing",
+        "TestCore::test_09_approve_billing",
+        "TestCore::test_10_activate_billing_with_proposal"
+      ]
+    },
+    "checkpoint_3-Functionality": {
+      "passed": [
+        "TestCore::test_12_get_policy_defaults",
+        "TestCore::test_15_create_second_base_draft",
+        "TestCore::test_18_list_proposals_filtered",
+        "TestFunctionality::test_01_setup_edge_policy",
+        "TestFunctionality::test_02_setup_edge_draft",
+        "TestFunctionality::test_07_review_on_merged_proposal_returns_snapshot",
+        "TestFunctionality::test_08_idempotent_merge",
+        "TestFunctionality::test_11_withdraw_on_closed_returns_snapshot",
+        "TestFunctionality::test_21_review_on_withdrawn_returns_snapshot",
+        "TestFunctionality::test_23_clearing_rejection_recalculates_status"
+      ],
+      "failed": [
+        "TestCore::test_14_list_proposals",
+        "TestCore::test_16_propose_base_v2",
+        "TestCore::test_19_propose_base_v2_again"
+      ],
+      "skipped": [
+        "TestCore::test_13_get_proposal_by_id",
+        "TestCore::test_17_withdraw_proposal",
+        "TestCore::test_20_reject_then_re_approve",
+        "TestCore::test_21_merge_base_v2",
+        "TestFunctionality::test_03_proposal_with_empty_diffs",
+        "TestFunctionality::test_04_author_can_reject_self",
+        "TestFunctionality::test_05_idempotent_review",
+        "TestFunctionality::test_06_tally_by_actor_is_sorted",
+        "TestFunctionality::test_09_supersede_on_merge",
+        "TestFunctionality::test_10_labels_are_sorted",
+        "TestFunctionality::test_12_proposal_with_title_and_description",
+        "TestFunctionality::test_13_review_with_message_stored",
+        "TestFunctionality::test_14_decision_replacement_updates_tally",
+        "TestFunctionality::test_15_proposal_ids_globally_monotonic",
+        "TestFunctionality::test_16_proposals_sorted_by_id_ascending",
+        "TestFunctionality::test_17_quorum_snapshot_captured_at_proposal_time",
+        "TestFunctionality::test_18_diffs_with_actual_changes",
+        "TestFunctionality::test_19_multiple_reviewers_quorum",
+        "TestFunctionality::test_20_second_proposal_for_same_draft_supersedes",
+        "TestFunctionality::test_22_rejection_blocks_quorum",
+        "TestFunctionality::test_24_diff_ordering_and_includes_sorted"
+      ]
+    },
+    "checkpoint_3-Error": {
+      "passed": [
+        "TestError::test_01_setup_policy",
+        "TestError::test_02_setup_draft",
+        "TestError::test_11_policy_required_approvals_invalid",
+        "TestError::test_12_policy_required_approvals_too_high",
+        "TestError::test_13_get_nonexistent_proposal",
+        "TestError::test_17_review_nonexistent_proposal",
+        "TestError::test_18_merge_nonexistent_proposal",
+        "TestError::test_19_withdraw_nonexistent_proposal",
+        "TestError::test_30_request_too_large"
+      ],
+      "failed": [
+        "TestError::test_03_activate_without_proposal",
+        "TestError::test_14_rollback_without_proposal"
+      ],
+      "skipped": [
+        "TestError::test_04_setup_proposal",
+        "TestError::test_05_author_self_approve_not_allowed",
+        "TestError::test_06_reviewer_not_in_allowed_list",
+        "TestError::test_07_withdraw_not_author",
+        "TestError::test_08_merge_not_approved",
+        "TestError::test_09_propose_non_draft",
+        "TestError::test_10_stale_base_proposal",
+        "TestError::test_15_invalid_label_format",
+        "TestError::test_16_propose_nonexistent_version",
+        "TestError::test_20_proposal_validation_failed_resolved",
+        "TestError::test_21_merge_not_mergeable",
+        "TestError::test_22_merge_stale_base",
+        "TestError::test_23_max_proposals_per_scope",
+        "TestError::test_24_max_reviews_per_proposal",
+        "TestError::test_25_title_too_long",
+        "TestError::test_26_description_too_long",
+        "TestError::test_27_label_too_long",
+        "TestError::test_28_too_many_labels",
+        "TestError::test_29_actor_too_long"
+      ]
+    }
+  },
+  "pass_counts": {
+    "Core": 5,
+    "Functionality": 10,
+    "Regression": 0,
+    "Error": 9
+  },
+  "total_counts": {
+    "Core": 12,
+    "Functionality": 34,
+    "Regression": 0,
+    "Error": 30
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 76,
+  "test_collection_hash": "5b41991d39c0dd112e5a93a02650c2806ed872f0c759263103f67ea34bb33790",
+  "infrastructure_failure": false
+}

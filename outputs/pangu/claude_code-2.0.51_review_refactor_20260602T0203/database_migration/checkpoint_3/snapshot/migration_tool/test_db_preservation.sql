@@ -1,2 +1,0 @@
--- This file will contain SQL statements to test data preservation
--- and the drop_column operation.
