@@ -1,0 +1,26 @@
+// Test always cache strategy
+task always_task {
+    params: {
+        value: int
+    }
+    cache: {
+        enabled: true
+        strategy: "always"
+    }
+    run: {
+        echo "Running always task for ${params.value}";
+        echo "result_${params.value}" > output.txt;
+    }
+    output: "always_${params.value}"
+}
+
+task main {
+    params: {}
+    requires: {
+        always_task(1);
+        always_task(1);
+    }
+    run: {
+        echo "Done";
+    }
+}

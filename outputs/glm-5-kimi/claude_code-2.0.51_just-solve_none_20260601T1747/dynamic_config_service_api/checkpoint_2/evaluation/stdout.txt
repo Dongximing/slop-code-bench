@@ -1,0 +1,997 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 93 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_00_healthz PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_01_create_base_v1 PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_02_create_billing_v1_including_base PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_03_list_versions_billing PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_04_get_active_billing PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_05_resolve_billing_active PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_06_create_billing_v2_override_pool PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_07_resolve_billing_explicit_version PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_08_list_versions_after_second PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_09_resolve_billing_active_after_second FAILED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_10_rollback_billing_to_v1 PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_11_get_active_billing_after_rollback PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_12_resolve_inactive_version_dry_run FAILED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_01_missing_pair_get_active PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_02_invalid_input_create_missing_scope PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_03_setup_cycle_create_a PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_04_setup_cycle_create_b PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_05_resolve_cycle_expect_conflict PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_06_setup_conflict_create_base PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_07_setup_conflict_create_billing_conflict PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_08_resolve_billing2_type_conflict PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_09_request_too_large PASSED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_10_type_conflict_base PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_11_deep_merge_type_conflict PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_12_resolve_type_conflict PASSED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_13_invalid_scope_key_type PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_14_resolve_missing_include_reference PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_15_include_chain_max_depth PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_01_setup_array_base PASSED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_02_setup_type_conflict_base PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_03_get_specific_version PASSED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_04_get_specific_version_not_found PASSED [ 34%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_05_activate_specific_version PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_06_activate_specific_version_conflict FAILED [ 36%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_07_idempotent_create PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_08_idempotent_activate PASSED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_09_idempotent_rollback PASSED [ 39%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_10_include_null_version PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_11_deep_merge_arrays PASSED [ 41%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_12_resolve_array_merge PASSED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_13_idempotent_resolve PASSED [ 44%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_14_empty_scope PASSED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_15_case_sensitive_scope PASSED [ 46%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_16_rollback_to_future_version PASSED [ 47%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_17_rollback_to_same_active PASSED [ 48%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_18_canonical_json_response PASSED [ 49%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_19_max_versions_per_scope PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_01_create_base_v1 PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_02_create_schema_cfg_v1 PASSED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_03_bind_schema_billing PASSED [ 53%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_04_create_billing_v1_yaml PASSED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_05_create_multiple_schema_versions PASSED [ 55%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_06_list_schema_versions PASSED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_07_get_specific_schema_version PASSED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_08_update_binding PASSED [ 59%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_09_get_schema_binding_billing PASSED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_10_create_config_with_schema_ref_override PASSED [ 61%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_11_resolve_billing_validated PASSED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_12_validate_only_ok PASSED [ 63%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_13_validate_with_version PASSED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_14_validate_stored_mode PASSED [ 65%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_15_validate_with_schema_ref_override PASSED [ 66%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_16_resolve_with_schema_ref PASSED [ 67%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_17_create_config_raw_json PASSED [ 68%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_18_create_config_toml PASSED [ 69%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_19_create_schema_yaml PASSED [ 70%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_01_setup_schema_valid PASSED [ 72%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_02_setup_bind_billing PASSED [ 73%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_03_bind_missing_schema_name PASSED [ 74%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_04_bind_missing_version_conflict FAILED [ 75%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_05_get_schema_binding_not_found FAILED [ 76%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_06_get_nonexistent_schema PASSED [ 77%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_07_get_nonexistent_schema_version PASSED [ 78%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_08_invalid_schema_definition PASSED [ 79%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_09_schema_external_ref_not_allowed PASSED [ 80%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_10_unsupported_schema_format_toml PASSED [ 81%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_11_unsupported_raw_config_format PASSED [ 82%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_12_create_billing_v2_invalid_pool_string PASSED [ 83%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_13_validation_failed_required PASSED [ 84%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_14_validation_failed_enum PASSED [ 86%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_15_validation_failed_pattern PASSED [ 87%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_16_validate_no_schema_bound PASSED [ 88%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_17_validation_failed_nested_path PASSED [ 89%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_18_yaml_anchors_not_allowed PASSED [ 90%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_19_yaml_with_custom_tags PASSED [ 91%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_20_yaml_with_merge_keys PASSED [ 92%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_21_toml_non_json_type_datetime PASSED [ 93%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_22_toml_parsing_error PASSED [ 94%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_23_raw_json_with_comments PASSED [ 95%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_24_raw_json_array_root_unprocessable PASSED [ 96%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_25_raw_schema_too_large PASSED [ 97%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_26_schema_version_limit FAILED [ 98%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_27_yaml_non_string_key FAILED [100%]
+
+=================================== FAILURES ===================================
+_____________ TestCore.test_09_resolve_billing_active_after_second _____________
+
+self = <test_checkpoint_1.TestCore object at 0x7fdd6304f5c0>
+client = <httpx.Client object at 0x7fdd62fe7c80>
+
+    @pytest.mark.functionality
+    def test_09_resolve_billing_active_after_second(
+        self, client: httpx.Client
+    ) -> None:
+        """Resolve billing after v2 - pool should be 8."""
+        response = _make_request(
+            client,
+            "POST",
+            "/v1/configs/billing:resolve",
+            body={"scope": {"app": "billing", "env": "prod"}},
+        )
+>       _assert_response(
+            response,
+            200,
+            {
+                "name": "billing",
+                "resolution_graph": [
+                    {
+                        "name": "base",
+                        "scope": {"env": "prod"},
+                        "version_used": 1,
+                    },
+                    {
+                        "name": "billing",
+                        "scope": {"app": "billing", "env": "prod"},
+                        "version_used": 2,
+                    },
+                ],
+                "resolved_config": {
+                    "db": {"host": "prod.db", "pool": 8},
+                    "feature_flags": ["a", "b"],
+                },
+                "scope": {"app": "billing", "env": "prod"},
+                "version_used": 2,
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:379: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>, expected_status = 200
+expected_output = {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'bill...: {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, ...}
+
+    def _assert_response(
+        response: httpx.Response,
+        expected_status: int | tuple[int, ...],
+        expected_output: dict[str, Any],
+    ) -> None:
+        """Assert response matches expected values."""
+        if isinstance(expected_status, tuple):
+            status_ok = response.status_code in expected_status
+            expected_desc = f"one of {expected_status}"
+        else:
+            status_ok = response.status_code == expected_status
+            expected_desc = str(expected_status)
+    
+        assert status_ok, (
+            f"Expected status {expected_desc}, got {response.status_code}. "
+            f"Response: {response.text}"
+        )
+    
+        _assert_content_type(response)
+        actual = response.json()
+    
+        if _is_json_schema(expected_output):
+            jsonschema.validate(actual, expected_output)
+        else:
+>           assert actual == expected_output, (
+                f"Expected {expected_output}, got {actual}"
+            )
+E           AssertionError: Expected {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}, got {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+E           assert {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2} == {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+E             
+E             Common items:
+E             {'name': 'billing',
+E              'resolved_config': {'db': {'host': 'prod.db', 'pool': 8},
+E                                  'feature_flags': ['a', 'b']},
+E              'scope': {'app': 'billing', 'env': 'prod'},
+E              'version_used': 2}
+E             Differing items:
+E             {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]} != {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]}
+E             
+E             Full diff:
+E               {
+E                   'name': 'billing',
+E                   'resolution_graph': [
+E             +         {
+E             +             'name': 'base',
+E             +             'scope': {
+E             +                 'env': 'prod',
+E             +             },
+E             +             'version_used': 1,
+E             +         },
+E                       {
+E                           'name': 'base',
+E                           'scope': {
+E                               'env': 'prod',
+E                           },
+E                           'version_used': 1,
+E                       },
+E                       {
+E                           'name': 'billing',
+E                           'scope': {
+E                               'app': 'billing',
+E                               'env': 'prod',
+E                           },
+E                           'version_used': 2,
+E                       },
+E                   ],
+E                   'resolved_config': {
+E                       'db': {
+E                           'host': 'prod.db',
+E                           'pool': 8,
+E                       },
+E                       'feature_flags': [
+E                           'a',
+E                           'b',
+E                       ],
+E                   },
+E                   'scope': {
+E                       'app': 'billing',
+E                       'env': 'prod',
+E                   },
+E                   'version_used': 2,
+E               }
+
+.evaluation_tests/test_checkpoint_1.py:111: AssertionError
+______________ TestCore.test_12_resolve_inactive_version_dry_run _______________
+
+self = <test_checkpoint_1.TestCore object at 0x7fdd6304e330>
+client = <httpx.Client object at 0x7fdd62fe7c80>
+
+    @pytest.mark.functionality
+    def test_12_resolve_inactive_version_dry_run(
+        self, client: httpx.Client
+    ) -> None:
+        """Resolve an inactive version with dry_run enabled."""
+        response = _make_request(
+            client,
+            "POST",
+            "/v1/configs/billing:resolve",
+            body={
+                "scope": {"app": "billing", "env": "prod"},
+                "version": 2,
+                "dry_run": True,
+            },
+        )
+>       _assert_response(
+            response,
+            200,
+            {
+                "name": "billing",
+                "resolution_graph": [
+                    {
+                        "name": "base",
+                        "scope": {"env": "prod"},
+                        "version_used": 1,
+                    },
+                    {
+                        "name": "billing",
+                        "scope": {"app": "billing", "env": "prod"},
+                        "version_used": 2,
+                    },
+                ],
+                "resolved_config": {
+                    "db": {"host": "prod.db", "pool": 8},
+                    "feature_flags": ["a", "b"],
+                },
+                "scope": {"app": "billing", "env": "prod"},
+                "version_used": 2,
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:497: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>, expected_status = 200
+expected_output = {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'bill...: {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, ...}
+
+    def _assert_response(
+        response: httpx.Response,
+        expected_status: int | tuple[int, ...],
+        expected_output: dict[str, Any],
+    ) -> None:
+        """Assert response matches expected values."""
+        if isinstance(expected_status, tuple):
+            status_ok = response.status_code in expected_status
+            expected_desc = f"one of {expected_status}"
+        else:
+            status_ok = response.status_code == expected_status
+            expected_desc = str(expected_status)
+    
+        assert status_ok, (
+            f"Expected status {expected_desc}, got {response.status_code}. "
+            f"Response: {response.text}"
+        )
+    
+        _assert_content_type(response)
+        actual = response.json()
+    
+        if _is_json_schema(expected_output):
+            jsonschema.validate(actual, expected_output)
+        else:
+>           assert actual == expected_output, (
+                f"Expected {expected_output}, got {actual}"
+            )
+E           AssertionError: Expected {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}, got {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+E           assert {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2} == {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+E             
+E             Common items:
+E             {'name': 'billing',
+E              'resolved_config': {'db': {'host': 'prod.db', 'pool': 8},
+E                                  'feature_flags': ['a', 'b']},
+E              'scope': {'app': 'billing', 'env': 'prod'},
+E              'version_used': 2}
+E             Differing items:
+E             {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]} != {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]}
+E             
+E             Full diff:
+E               {
+E                   'name': 'billing',
+E                   'resolution_graph': [
+E             +         {
+E             +             'name': 'base',
+E             +             'scope': {
+E             +                 'env': 'prod',
+E             +             },
+E             +             'version_used': 1,
+E             +         },
+E                       {
+E                           'name': 'base',
+E                           'scope': {
+E                               'env': 'prod',
+E                           },
+E                           'version_used': 1,
+E                       },
+E                       {
+E                           'name': 'billing',
+E                           'scope': {
+E                               'app': 'billing',
+E                               'env': 'prod',
+E                           },
+E                           'version_used': 2,
+E                       },
+E                   ],
+E                   'resolved_config': {
+E                       'db': {
+E                           'host': 'prod.db',
+E                           'pool': 8,
+E                       },
+E                       'feature_flags': [
+E                           'a',
+E                           'b',
+E                       ],
+E                   },
+E                   'scope': {
+E                       'app': 'billing',
+E                       'env': 'prod',
+E                   },
+E                   'version_used': 2,
+E               }
+
+.evaluation_tests/test_checkpoint_1.py:111: AssertionError
+_________ TestFunctionality.test_06_activate_specific_version_conflict _________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x7fdd63039c40>
+client = <httpx.Client object at 0x7fdd62fe7c80>
+
+    def test_06_activate_specific_version_conflict(
+        self, client: httpx.Client
+    ) -> None:
+        """Activate non-existent version returns 409."""
+        response = _make_request(
+            client,
+            "POST",
+            "/v1/configs/array_base/999:activate",
+            body={"scope": {"env": "prod"}},
+        )
+>       _assert_response(
+            response,
+            409,
+            {
+                "type": "object",
+                "required": ["error"],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": ["code", "message", "details"],
+                        "properties": {
+                            "code": {"type": "string", "const": "conflict"},
+                            "message": {"type": "string"},
+                            "details": {"type": "object"},
+                        },
+                    }
+                },
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:1223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [404 NOT FOUND]>, expected_status = 409
+expected_output = {'properties': {'error': {'properties': {'code': {'const': 'conflict', 'type': 'string'}, 'details': {'type': 'object'...': 'string'}}, 'required': ['code', 'message', 'details'], 'type': 'object'}}, 'required': ['error'], 'type': 'object'}
+
+    def _assert_response(
+        response: httpx.Response,
+        expected_status: int | tuple[int, ...],
+        expected_output: dict[str, Any],
+    ) -> None:
+        """Assert response matches expected values."""
+        if isinstance(expected_status, tuple):
+            status_ok = response.status_code in expected_status
+            expected_desc = f"one of {expected_status}"
+        else:
+            status_ok = response.status_code == expected_status
+            expected_desc = str(expected_status)
+    
+>       assert status_ok, (
+            f"Expected status {expected_desc}, got {response.status_code}. "
+            f"Response: {response.text}"
+        )
+E       AssertionError: Expected status 409, got 404. Response: {"error":{"code":"not_found","details":{},"message":"Version 999 not found for config 'array_base'"}}
+E         
+E       assert False
+
+.evaluation_tests/test_checkpoint_1.py:100: AssertionError
+_______________ TestError.test_04_bind_missing_version_conflict ________________
+
+self = <test_checkpoint_2.TestError object at 0x7fdd630430b0>
+client = <httpx.Client object at 0x7fdd62897770>
+
+    def test_04_bind_missing_version_conflict(self, client: httpx.Client) -> None:
+        """Bind with non-existent schema version returns 409."""
+        response = _make_request(
+            client,
+            "POST",
+            "/v1/configs/billing:bind",
+            body={
+                "schema_ref": {"name": "cfg", "version": 99},
+                "scope": {"app": "billing", "env": "prod"},
+            },
+        )
+>       _assert_response(
+            response,
+            409,
+            {
+                "type": "object",
+                "required": ["error"],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": ["code", "message"],
+                        "properties": {
+                            "code": {"type": "string", "const": "conflict"},
+                            "message": {"type": "string"},
+                            "details": {"type": "object"},
+                        },
+                    }
+                },
+            },
+        )
+
+.evaluation_tests/test_checkpoint_2.py:675: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [404 NOT FOUND]>, expected_status = 409
+expected_output = {'properties': {'error': {'properties': {'code': {'const': 'conflict', 'type': 'string'}, 'details': {'type': 'object'...ge': {'type': 'string'}}, 'required': ['code', 'message'], 'type': 'object'}}, 'required': ['error'], 'type': 'object'}
+
+    def _assert_response(
+        response: httpx.Response,
+        expected_status: int,
+        expected_output: dict[str, Any],
+    ) -> None:
+        """Assert response matches expected values."""
+>       assert response.status_code == expected_status, (
+            f"Expected status {expected_status}, got {response.status_code}. "
+            f"Response: {response.text}"
+        )
+E       AssertionError: Expected status 409, got 404. Response: {"error":{"code":"not_found","details":{},"message":"Schema 'cfg' version 99 not found"}}
+E         
+E       assert 404 == 409
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:106: AssertionError
+________________ TestError.test_05_get_schema_binding_not_found ________________
+
+self = <test_checkpoint_2.TestError object at 0x7fdd630435f0>
+client = <httpx.Client object at 0x7fdd62897770>
+
+    def test_05_get_schema_binding_not_found(self, client: httpx.Client) -> None:
+        """Get schema binding for non-existent config returns 404."""
+        response = _make_request(
+            client,
+            "POST",
+            "/v1/configs/unbound_config/schema",
+            body={"scope": {"env": "test", "app": "unbound"}},
+        )
+>       _assert_response(
+            response,
+            404,
+            {
+                "type": "object",
+                "required": ["error"],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": ["code", "message"],
+                        "properties": {
+                            "code": {"type": "string", "const": "not_found"},
+                            "message": {"type": "string"},
+                        },
+                    }
+                },
+            },
+        )
+
+.evaluation_tests/test_checkpoint_2.py:703: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_2.py:114: in _assert_response
+    jsonschema.validate(actual, expected_output)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+instance = {'error': {'code': 'schema_not_bound', 'details': {}, 'message': "No schema bound to config 'unbound_config' with given scope"}}
+schema = {'properties': {'error': {'properties': {'code': {'const': 'not_found', 'type': 'string'}, 'message': {'type': 'string'}}, 'required': ['code', 'message'], 'type': 'object'}}, 'required': ['error'], 'type': 'object'}
+cls = <class 'jsonschema.validators.Draft202012Validator'>, args = ()
+kwargs = {}
+validator = Draft202012Validator(schema={'properties': {'error': {'properties': {'code': {'const': 'not_found', 'type': 'string'},...}}, 'required': ['code', 'message'], 'type': 'object'}}, 'required': ['error'], 'type': 'object'}, format_checker=None)
+error = <ValidationError: "'not_found' was expected">
+
+    def validate(instance, schema, cls=None, *args, **kwargs):  # noqa: D417
+        """
+        Validate an instance under the given schema.
+    
+            >>> validate([2, 3, 4], {"maxItems": 2})
+            Traceback (most recent call last):
+                ...
+            ValidationError: [2, 3, 4] is too long
+    
+        :func:`~jsonschema.validators.validate` will first verify that the
+        provided schema is itself valid, since not doing so can lead to less
+        obvious error messages and fail in less obvious or consistent ways.
+    
+        If you know you have a valid schema already, especially
+        if you intend to validate multiple instances with
+        the same schema, you likely would prefer using the
+        `jsonschema.protocols.Validator.validate` method directly on a
+        specific validator (e.g. ``Draft202012Validator.validate``).
+    
+    
+        Arguments:
+    
+            instance:
+    
+                The instance to validate
+    
+            schema:
+    
+                The schema to validate with
+    
+            cls (jsonschema.protocols.Validator):
+    
+                The class that will be used to validate the instance.
+    
+        If the ``cls`` argument is not provided, two things will happen
+        in accordance with the specification. First, if the schema has a
+        :kw:`$schema` keyword containing a known meta-schema [#]_ then the
+        proper validator will be used. The specification recommends that
+        all schemas contain :kw:`$schema` properties for this reason. If no
+        :kw:`$schema` property is found, the default validator class is the
+        latest released draft.
+    
+        Any other provided positional and keyword arguments will be passed
+        on when instantiating the ``cls``.
+    
+        Raises:
+    
+            `jsonschema.exceptions.ValidationError`:
+    
+                if the instance is invalid
+    
+            `jsonschema.exceptions.SchemaError`:
+    
+                if the schema itself is invalid
+    
+        .. rubric:: Footnotes
+        .. [#] known by a validator registered with
+            `jsonschema.validators.validates`
+    
+        """
+        if cls is None:
+            cls = validator_for(schema)
+    
+        cls.check_schema(schema)
+        validator = cls(schema, *args, **kwargs)
+        error = exceptions.best_match(validator.iter_errors(instance))
+        if error is not None:
+>           raise error
+E           jsonschema.exceptions.ValidationError: 'not_found' was expected
+E           
+E           Failed validating 'const' in schema['properties']['error']['properties']['code']:
+E               {'type': 'string', 'const': 'not_found'}
+E           
+E           On instance['error']['code']:
+E               'schema_not_bound'
+
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/jsonschema/validators.py:1332: ValidationError
+____________________ TestError.test_26_schema_version_limit ____________________
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -> typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+>           yield
+
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_transports/default.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_transports/default.py:250: in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py:256: in handle_request
+    raise exc from None
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py:236: in handle_request
+    response = connection.handle_request(
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/connection.py:103: in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/http11.py:136: in handle_request
+    raise exc
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/http11.py:106: in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/http11.py:177: in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/http11.py:217: in _receive_event
+    data = self._network_stream.read(
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_backends/sync.py:126: in read
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/contextlib.py:158: in __exit__
+    self.gen.throw(value)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+map = {<class 'TimeoutError'>: <class 'httpcore.ReadTimeout'>, <class 'OSError'>: <class 'httpcore.ReadError'>}
+
+    @contextlib.contextmanager
+    def map_exceptions(map: ExceptionMapping) -> typing.Iterator[None]:
+        try:
+            yield
+        except Exception as exc:  # noqa: PIE786
+            for from_exc, to_exc in map.items():
+                if isinstance(exc, from_exc):
+>                   raise to_exc(exc) from exc
+E                   httpcore.ReadTimeout: timed out
+
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_exceptions.py:14: ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+self = <test_checkpoint_2.TestError object at 0x7fdd62fdc0b0>
+client = <httpx.Client object at 0x7fdd62897770>
+
+    def test_26_schema_version_limit(self, client: httpx.Client) -> None:
+        """Creating more than 1,000 schema versions returns conflict."""
+        for _ in range(1000):
+>           response = _make_request(
+                client,
+                "POST",
+                "/v1/schemas/limit_schema",
+                body={"schema": {"type": "object"}},
+            )
+
+.evaluation_tests/test_checkpoint_2.py:1504: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_2.py:94: in _make_request
+    return client.post(path, json=body)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:1144: in post
+    return self.request(
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:914: in send
+    response = self._send_handling_auth(
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_transports/default.py:249: in handle_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/contextlib.py:158: in __exit__
+    self.gen.throw(value)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -> typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+            yield
+        except Exception as exc:
+            mapped_exc = None
+    
+            for from_exc, to_exc in HTTPCORE_EXC_MAP.items():
+                if not isinstance(exc, from_exc):
+                    continue
+                # We want to map to the most specific exception we can find.
+                # Eg if `exc` is an `httpcore.ReadTimeout`, we want to map to
+                # `httpx.ReadTimeout`, not just `httpx.TimeoutException`.
+                if mapped_exc is None or issubclass(to_exc, mapped_exc):
+                    mapped_exc = to_exc
+    
+            if mapped_exc is None:  # pragma: no cover
+                raise
+    
+            message = str(exc)
+>           raise mapped_exc(message) from exc
+E           httpx.ReadTimeout: timed out
+
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_transports/default.py:118: ReadTimeout
+____________________ TestError.test_27_yaml_non_string_key _____________________
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -> typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+>           yield
+
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_transports/default.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_transports/default.py:250: in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py:256: in handle_request
+    raise exc from None
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py:236: in handle_request
+    response = connection.handle_request(
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/connection.py:103: in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/http11.py:136: in handle_request
+    raise exc
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/http11.py:106: in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/http11.py:177: in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_sync/http11.py:217: in _receive_event
+    data = self._network_stream.read(
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_backends/sync.py:126: in read
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/contextlib.py:158: in __exit__
+    self.gen.throw(value)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+map = {<class 'TimeoutError'>: <class 'httpcore.ReadTimeout'>, <class 'OSError'>: <class 'httpcore.ReadError'>}
+
+    @contextlib.contextmanager
+    def map_exceptions(map: ExceptionMapping) -> typing.Iterator[None]:
+        try:
+            yield
+        except Exception as exc:  # noqa: PIE786
+            for from_exc, to_exc in map.items():
+                if isinstance(exc, from_exc):
+>                   raise to_exc(exc) from exc
+E                   httpcore.ReadTimeout: timed out
+
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpcore/_exceptions.py:14: ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+self = <test_checkpoint_2.TestError object at 0x7fdd62fdd850>
+client = <httpx.Client object at 0x7fdd62897770>
+
+    def test_27_yaml_non_string_key(self, client: httpx.Client) -> None:
+        """Create config with non-string YAML key returns 422."""
+>       response = _make_request(
+            client,
+            "POST",
+            "/v1/configs/yaml_key_test",
+            body={
+                "scope": {"env": "test", "app": "yaml_key_test"},
+                "raw_config": "1: value\n",
+                "raw_format": "yaml",
+            },
+        )
+
+.evaluation_tests/test_checkpoint_2.py:1543: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_2.py:94: in _make_request
+    return client.post(path, json=body)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:1144: in post
+    return self.request(
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:914: in send
+    response = self._send_handling_auth(
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_transports/default.py:249: in handle_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/contextlib.py:158: in __exit__
+    self.gen.throw(value)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @contextlib.contextmanager
+    def map_httpcore_exceptions() -> typing.Iterator[None]:
+        global HTTPCORE_EXC_MAP
+        if len(HTTPCORE_EXC_MAP) == 0:
+            HTTPCORE_EXC_MAP = _load_httpcore_exceptions()
+        try:
+            yield
+        except Exception as exc:
+            mapped_exc = None
+    
+            for from_exc, to_exc in HTTPCORE_EXC_MAP.items():
+                if not isinstance(exc, from_exc):
+                    continue
+                # We want to map to the most specific exception we can find.
+                # Eg if `exc` is an `httpcore.ReadTimeout`, we want to map to
+                # `httpx.ReadTimeout`, not just `httpx.TimeoutException`.
+                if mapped_exc is None or issubclass(to_exc, mapped_exc):
+                    mapped_exc = to_exc
+    
+            if mapped_exc is None:  # pragma: no cover
+                raise
+    
+            message = str(exc)
+>           raise mapped_exc(message) from exc
+E           httpx.ReadTimeout: timed out
+
+/tmp/uv-cache/archive-v0/X_kli8d-FOG9MmyA/lib/python3.12/site-packages/httpx/_transports/default.py:118: ReadTimeout
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_09_resolve_billing_active_after_second - AssertionError: Expected {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}, got {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+assert {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2} == {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+  
+  Common items:
+  {'name': 'billing',
+   'resolved_config': {'db': {'host': 'prod.db', 'pool': 8},
+                       'feature_flags': ['a', 'b']},
+   'scope': {'app': 'billing', 'env': 'prod'},
+   'version_used': 2}
+  Differing items:
+  {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]} != {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]}
+  
+  Full diff:
+    {
+        'name': 'billing',
+        'resolution_graph': [
+  +         {
+  +             'name': 'base',
+  +             'scope': {
+  +                 'env': 'prod',
+  +             },
+  +             'version_used': 1,
+  +         },
+            {
+                'name': 'base',
+                'scope': {
+                    'env': 'prod',
+                },
+                'version_used': 1,
+            },
+            {
+                'name': 'billing',
+                'scope': {
+                    'app': 'billing',
+                    'env': 'prod',
+                },
+                'version_used': 2,
+            },
+        ],
+        'resolved_config': {
+            'db': {
+                'host': 'prod.db',
+                'pool': 8,
+            },
+            'feature_flags': [
+                'a',
+                'b',
+            ],
+        },
+        'scope': {
+            'app': 'billing',
+            'env': 'prod',
+        },
+        'version_used': 2,
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_12_resolve_inactive_version_dry_run - AssertionError: Expected {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}, got {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+assert {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2} == {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+  
+  Common items:
+  {'name': 'billing',
+   'resolved_config': {'db': {'host': 'prod.db', 'pool': 8},
+                       'feature_flags': ['a', 'b']},
+   'scope': {'app': 'billing', 'env': 'prod'},
+   'version_used': 2}
+  Differing items:
+  {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]} != {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]}
+  
+  Full diff:
+    {
+        'name': 'billing',
+        'resolution_graph': [
+  +         {
+  +             'name': 'base',
+  +             'scope': {
+  +                 'env': 'prod',
+  +             },
+  +             'version_used': 1,
+  +         },
+            {
+                'name': 'base',
+                'scope': {
+                    'env': 'prod',
+                },
+                'version_used': 1,
+            },
+            {
+                'name': 'billing',
+                'scope': {
+                    'app': 'billing',
+                    'env': 'prod',
+                },
+                'version_used': 2,
+            },
+        ],
+        'resolved_config': {
+            'db': {
+                'host': 'prod.db',
+                'pool': 8,
+            },
+            'feature_flags': [
+                'a',
+                'b',
+            ],
+        },
+        'scope': {
+            'app': 'billing',
+            'env': 'prod',
+        },
+        'version_used': 2,
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_06_activate_specific_version_conflict - AssertionError: Expected status 409, got 404. Response: {"error":{"code":"not_found","details":{},"message":"Version 999 not found for config 'array_base'"}}
+  
+assert False
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_04_bind_missing_version_conflict - AssertionError: Expected status 409, got 404. Response: {"error":{"code":"not_found","details":{},"message":"Schema 'cfg' version 99 not found"}}
+  
+assert 404 == 409
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_05_get_schema_binding_not_found - jsonschema.exceptions.ValidationError: 'not_found' was expected
+
+Failed validating 'const' in schema['properties']['error']['properties']['code']:
+    {'type': 'string', 'const': 'not_found'}
+
+On instance['error']['code']:
+    'schema_not_bound'
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_26_schema_version_limit - httpx.ReadTimeout: timed out
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_27_yaml_non_string_key - httpx.ReadTimeout: timed out
+======================== 7 failed, 86 passed in 43.26s =========================

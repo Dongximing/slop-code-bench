@@ -1,0 +1,1056 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/_11qZAkeDPmLZbdd/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 41 items
+
+.evaluation_tests/test_checkpoint_1.py::test_basic FAILED                [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_arrays FAILED               [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_bool_params FAILED          [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_string_concat FAILED        [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_if FAILED            [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_elif FAILED          [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_else FAILED          [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_array_indexing FAILED       [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_for_requires FAILED         [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_while_requires FAILED       [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_working_dirs FAILED         [ 26%]
+.evaluation_tests/test_checkpoint_1.py::test_existing_dir FAILED         [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops FAILED       [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_exists_function FAILED      [ 34%]
+.evaluation_tests/test_checkpoint_1.py::test_float_params FAILED         [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_nested_loops FAILED         [ 39%]
+.evaluation_tests/test_checkpoint_1.py::test_stderr_validation FAILED    [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_string_params FAILED        [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_timeout FAILED              [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_circular_dependency FAILED  [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_default_param_order PASSED  [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_required_arg FAILED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_multiline_success_no_return PASSED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_no_main FAILED              [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_recursive_call FAILED       [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params FAILED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false FAILED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool FAILED [ 68%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_requires_failure_stops FAILED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe FAILED [ 73%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe FAILED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_bad_toml_syntax PASSED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block FAILED [ 80%]
+.evaluation_tests/test_checkpoint_2.py::test_basic_cache FAILED          [ 82%]
+.evaluation_tests/test_checkpoint_2.py::test_file_change FAILED          [ 85%]
+.evaluation_tests/test_checkpoint_2.py::test_cache_exclude FAILED        [ 87%]
+.evaluation_tests/test_checkpoint_2.py::test_ttl_strategy FAILED         [ 90%]
+.evaluation_tests/test_checkpoint_2.py::test_cascade_invalidation FAILED [ 92%]
+.evaluation_tests/test_checkpoint_2.py::test_global_cache_disabled FAILED [ 95%]
+.evaluation_tests/test_checkpoint_2.py::test_force_refresh_skips_cache FAILED [ 97%]
+.evaluation_tests/test_checkpoint_2.py::test_always_strategy_ignores_input_change FAILED [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_basic __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic(entrypoint_argv):
+        """Core: Basic pipeline with requires, fail(), and task chaining."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_PIPELINE, BASIC_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpfgkscnuq/pipeline.pipe', '--workspace', '/tmp/tmpfgkscnuq/working', '--output', '/tmp/tmpfgkscnuq/output', '--config', '/tmp/tmpfgkscnuq/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:296: AssertionError
+_________________________________ test_arrays __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_arrays(entrypoint_argv):
+        """Core: Array parameters and len() function."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAYS_PIPELINE, ARRAYS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpkvkyxg3v/pipeline.pipe', '--workspace', '/tmp/tmpkvkyxg3v/working', '--output', '/tmp/tmpkvkyxg3v/output', '--config', '/tmp/tmpkvkyxg3v/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:358: AssertionError
+_______________________________ test_bool_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_bool_params(entrypoint_argv):
+        """Core: Boolean parameters with TRUE/FALSE literals."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BOOL_PARAMS_PIPELINE, BOOL_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '|' at line 18
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp3583c0e3/pipeline.pipe', '--workspace', '/tmp/tmp3583c0e3/working', '--output', '/tmp/tmp3583c0e3/output', '--config', '/tmp/tmp3583c0e3/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '|' at line 18\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:415: AssertionError
+______________________________ test_string_concat ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_string_concat(entrypoint_argv):
+        """Core: String concatenation with % operator in for loops."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_CONCAT_PIPELINE, STRING_CONCAT_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpfr4a7rlc/pipeline.pipe', '--workspace', '/tmp/tmpfr4a7rlc/working', '--output', '/tmp/tmpfr4a7rlc/output', '--config', '/tmp/tmpfr4a7rlc/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:478: AssertionError
+________________________________ test_branch_if ________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_if(entrypoint_argv):
+        """Core: If conditional branching - true branch taken."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_IF_PIPELINE, BRANCH_IF_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp03j1ht4i/pipeline.pipe', '--workspace', '/tmp/tmp03j1ht4i/working', '--output', '/tmp/tmp03j1ht4i/output', '--config', '/tmp/tmp03j1ht4i/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:557: AssertionError
+_______________________________ test_branch_elif _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_elif(entrypoint_argv):
+        """Core: Elif branch - first fails, elif succeeds."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELIF_PIPELINE, BRANCH_ELIF_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp50e_ultz/pipeline.pipe', '--workspace', '/tmp/tmp50e_ultz/working', '--output', '/tmp/tmp50e_ultz/output', '--config', '/tmp/tmp50e_ultz/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:632: AssertionError
+_______________________________ test_branch_else _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_else(entrypoint_argv):
+        """Core: Else branch - if and elif both fail."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELSE_PIPELINE, BRANCH_ELSE_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpz4jonjn3/pipeline.pipe', '--workspace', '/tmp/tmpz4jonjn3/working', '--output', '/tmp/tmpz4jonjn3/output', '--config', '/tmp/tmpz4jonjn3/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:708: AssertionError
+_____________________________ test_array_indexing ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_array_indexing(entrypoint_argv):
+        """Core: Array subscript access with [i] notation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAY_INDEXING_PIPELINE, ARRAY_INDEXING_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmptj0qw926/pipeline.pipe', '--workspace', '/tmp/tmptj0qw926/working', '--output', '/tmp/tmptj0qw926/output', '--config', '/tmp/tmptj0qw926/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:766: AssertionError
+______________________________ test_for_requires _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_for_requires(entrypoint_argv):
+        """Core: For loop in requires clause."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FOR_REQUIRES_PIPELINE, FOR_REQUIRES_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp4xp3icky/pipeline.pipe', '--workspace', '/tmp/tmp4xp3icky/working', '--output', '/tmp/tmp4xp3icky/output', '--config', '/tmp/tmp4xp3icky/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:818: AssertionError
+_____________________________ test_while_requires ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_while_requires(entrypoint_argv):
+        """Core: While loop with break/continue in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WHILE_REQUIRES_PIPELINE, WHILE_REQUIRES_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpiib3j85h/pipeline.pipe', '--workspace', '/tmp/tmpiib3j85h/working', '--output', '/tmp/tmpiib3j85h/output', '--config', '/tmp/tmpiib3j85h/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:874: AssertionError
+______________________________ test_working_dirs _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_working_dirs(entrypoint_argv):
+        """Core: Working directory isolation for nested task calls."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WORKING_DIRS_PIPELINE, WORKING_DIRS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field '{'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpyn5sz14j/pipeline.pipe', '--workspace', '/tmp/tmpyn5sz14j/working', '--output', '/tmp/tmpyn5sz14j/output', '--config', '/tmp/tmpyn5sz14j/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field '{'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:937: AssertionError
+______________________________ test_existing_dir _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_existing_dir(entrypoint_argv):
+        """Core: Pre-existing workspace files (clean_cwd=false)."""
+        existing_files = {"run.sh": 'echo "Hello"'}
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            EXISTING_DIR_PIPELINE,
+            EXISTING_DIR_CONFIG,
+            existing_files=existing_files,
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field '{'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp5lyxmg03/pipeline.pipe', '--workspace', '/tmp/tmp5lyxmg03/working', '--output', '/tmp/tmp5lyxmg03/output', '--config', '/tmp/tmp5lyxmg03/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field '{'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:980: AssertionError
+_____________________________ test_arithmetic_ops ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_arithmetic_ops(entrypoint_argv):
+        """Functionality: Integer arithmetic operations in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARITHMETIC_OPS_PIPELINE, ARITHMETIC_OPS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpkuh2i4q8/pipeline.pipe', '--workspace', '/tmp/tmpkuh2i4q8/working', '--output', '/tmp/tmpkuh2i4q8/output', '--config', '/tmp/tmpkuh2i4q8/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1038: AssertionError
+_____________________________ test_exists_function _____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_exists_function(entrypoint_argv):
+        """Functionality: exists() and !exists() functions in success checks."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, EXISTS_FUNCTION_PIPELINE, EXISTS_FUNCTION_CONFIG
+        )
+    
+        # This test expects exit code 1 because CheckMultiple fails
+        # (nested file doesn't exist when CheckMultiple runs)
+>       assert result.returncode == 1, f"Expected exit 1, got {result.returncode}"
+E       AssertionError: Expected exit 1, got 2
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp5g8hu_in/pipeline.pipe', '--workspace', '/tmp/tmp5g8hu_in/working', '--output', '/tmp/tmp5g8hu_in/output', '--config', '/tmp/tmp5g8hu_in/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1103: AssertionError
+______________________________ test_float_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_float_params(entrypoint_argv):
+        """Functionality: Float parameters and Python integration."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FLOAT_PARAMS_PIPELINE, FLOAT_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp1abjcse/pipeline.pipe', '--workspace', '/tmp/tmpp1abjcse/working', '--output', '/tmp/tmpp1abjcse/output', '--config', '/tmp/tmpp1abjcse/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1152: AssertionError
+______________________________ test_nested_loops _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_nested_loops(entrypoint_argv):
+        """Functionality: Nested loops with break statements."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, NESTED_LOOPS_PIPELINE, NESTED_LOOPS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '|' at line 18
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpilxg18gp/pipeline.pipe', '--workspace', '/tmp/tmpilxg18gp/working', '--output', '/tmp/tmpilxg18gp/output', '--config', '/tmp/tmpilxg18gp/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '|' at line 18\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1211: AssertionError
+____________________________ test_stderr_validation ____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_stderr_validation(entrypoint_argv):
+        """Functionality: stderr contains() and equals() validation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STDERR_VALIDATION_PIPELINE, STDERR_VALIDATION_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '&' at line 6
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8l6cb2tj/pipeline.pipe', '--workspace', '/tmp/tmp8l6cb2tj/working', '--output', '/tmp/tmp8l6cb2tj/output', '--config', '/tmp/tmp8l6cb2tj/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '&' at line 6\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1271: AssertionError
+______________________________ test_string_params ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_string_params(entrypoint_argv):
+        """Functionality: String parameter interpolation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_PARAMS_PIPELINE, STRING_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp2bv_s237/pipeline.pipe', '--workspace', '/tmp/tmp2bv_s237/working', '--output', '/tmp/tmp2bv_s237/output', '--config', '/tmp/tmp2bv_s237/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1327: AssertionError
+_________________________________ test_timeout _________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_timeout(entrypoint_argv):
+        """Functionality: Task timeout handling with exit code 124."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TIMEOUT_TEST_PIPELINE, TIMEOUT_TEST_CONFIG, timeout=30
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '|' at line 31
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp0tgf3x3f/pipeline.pipe', '--workspace', '/tmp/tmp0tgf3x3f/working', '--output', '/tmp/tmp0tgf3x3f/output', '--config', '/tmp/tmp0tgf3x3f/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '|' at line 31\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1392: AssertionError
+___________________________ test_circular_dependency ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_circular_dependency(entrypoint_argv):
+        """Error: Circular dependency detection (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        run: {
+            echo "A"
+        }
+        requires {
+            B()
+        }
+    }
+    
+    task B {
+        run: {
+            echo "B"
+        }
+        requires {
+            C()
+        }
+    }
+    task C {
+        run: {
+            echo "C"
+        }
+        requires: {
+            A()
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            C()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpx301t5i3/pipeline.pipe', '--workspace', '/tmp/tmpx301t5i3/working', '--output', '/tmp/tmpx301t5i3/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1458: AssertionError
+__________________________ test_missing_required_arg ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_missing_required_arg(entrypoint_argv):
+        """Error: Missing required argument (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        params: {
+            x: int
+            y: int = 1
+        }
+        run: {
+            echo "A"
+        }
+    }
+    
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            A(y=2)
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8zyom03v/pipeline.pipe', '--workspace', '/tmp/tmp8zyom03v/working', '--output', '/tmp/tmp8zyom03v/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1516: AssertionError
+_________________________________ test_no_main _________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_no_main(entrypoint_argv):
+        """Error: Pipeline without main task (exit 3, INVALID_PIPE)."""
+        pipeline = '''task Task {
+        run {
+            echo "I should not run"
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmprcw0i6rl/pipeline.pipe', '--workspace', '/tmp/tmprcw0i6rl/working', '--output', '/tmp/tmprcw0i6rl/output'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Line 1: Expected TokenType.IDENTIFIER, got TokenType.TASK: Task\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1573: AssertionError
+_____________________________ test_recursive_call ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_recursive_call(entrypoint_argv):
+        """Error: Recursive task call (exit 3, INVALID_PIPE)."""
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            main()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmphg24wm8f/pipeline.pipe', '--workspace', '/tmp/tmphg24wm8f/working', '--output', '/tmp/tmphg24wm8f/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1591: AssertionError
+_______________________ test_edge_entry_call_with_params _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_entry_call_with_params(entrypoint_argv):
+        """Edge case: entry can be a task invocation with params.
+    
+        Spec says: "entry=<task invocation ... can be just its name `A` or a call
+        with params `A(1, x=2)`"
+        """
+        pipeline = '''task Start {
+        params: {
+            x: int
+            y: int
+        }
+        run: {
+            echo "${params.x}_${params.y}"
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Ignored"
+        }
+    }'''
+        config = '''entry = "Start(1, y=2)"
+    clean_cwd = true'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp12c9xqjt/pipeline.pipe', '--workspace', '/tmp/tmp12c9xqjt/working', '--output', '/tmp/tmp12c9xqjt/output', '--config', '/tmp/tmp12c9xqjt/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1624: AssertionError
+______________________ test_edge_clean_cwd_default_false _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_clean_cwd_default_false(entrypoint_argv):
+        """Edge case: clean_cwd defaults to false when omitted.
+    
+        Spec says: "clean_cwd = <bool ... Default false.>"
+        """
+        pipeline = '''task main {
+        run: {
+            cat existing.txt
+        }
+    }'''
+        existing_files = {"existing.txt": "hello"}
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            pipeline,
+            existing_files=existing_files,
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_n7misrt/pipeline.pipe', '--workspace', '/tmp/tmp_n7misrt/working', '--output', '/tmp/tmp_n7misrt/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1650: AssertionError
+_____________________ test_edge_env_default_type_cast_bool _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_env_default_type_cast_bool(entrypoint_argv):
+        """Edge case: env default values are dynamically type cast (bool).
+    
+        Spec says: "Environment variables can be used as default values ... dynamic
+        type casting ... (i.e. 1 would convert to a bool of TRUE)"
+        """
+        pipeline = '''task CheckFlag {
+        params: {
+            flag: bool = $FLAG
+        }
+        run: {
+            echo "${params.flag}"
+        }
+    }
+    
+    task main {
+        requires: {
+            CheckFlag()
+        }
+    }'''
+        config = '''clean_cwd = true
+    [env]
+    FLAG = "1"'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmps57cvce7/pipeline.pipe', '--workspace', '/tmp/tmps57cvce7/working', '--output', '/tmp/tmps57cvce7/output', '--config', '/tmp/tmps57cvce7/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1685: AssertionError
+_______________________ test_edge_requires_failure_stops _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_requires_failure_stops(entrypoint_argv):
+        """Edge case: requires stops on failure and task fails.
+    
+        Spec says: "If one requires fails ... we stop executing and the task fails."
+        """
+        pipeline = '''task FailTask {
+        run: {
+            exit 1
+        }
+    }
+    
+    task AfterTask {
+        run: {
+            echo "should not run"
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Finished."
+        }
+        requires: {
+            FailTask();
+            AfterTask();
+        }
+    }'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 1, f"Expected exit 1, got {result.returncode}"
+E       AssertionError: Expected exit 1, got 2
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpqy82yrh6/pipeline.pipe', '--workspace', '/tmp/tmpqy82yrh6/working', '--output', '/tmp/tmpqy82yrh6/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1722: AssertionError
+_____________________ test_edge_type_mismatch_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_type_mismatch_invalid_pipe(entrypoint_argv):
+        """Edge case: type mismatch should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... type mismatch"
+        """
+        pipeline = '''task A {
+        params: {
+            x: int
+        }
+        run: {
+            echo "${params.x}"
+        }
+    }
+    
+    task main {
+        requires: {
+            A("not-int");
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpl5_h9g7l/pipeline.pipe', '--workspace', '/tmp/tmpl5_h9g7l/working', '--output', '/tmp/tmpl5_h9g7l/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1752: AssertionError
+____________________ test_edge_undefined_task_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_undefined_task_invalid_pipe(entrypoint_argv):
+        """Edge case: undefined task call should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... undefined tasks"
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            MissingTask();
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpinvbxbdg/pipeline.pipe', '--workspace', '/tmp/tmpinvbxbdg/working', '--output', '/tmp/tmpinvbxbdg/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1772: AssertionError
+________________________ test_edge_empty_success_block _________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_empty_success_block(entrypoint_argv):
+        """Edge case: empty success block is allowed.
+    
+        Spec says: "Success can be empty."
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        success: {
+        }
+    }'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpij2som2j/pipeline.pipe', '--workspace', '/tmp/tmpij2som2j/working', '--output', '/tmp/tmpij2som2j/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+
+.evaluation_tests/test_checkpoint_1.py:1809: AssertionError
+_______________________________ test_basic_cache _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic_cache(entrypoint_argv):
+        """Core: Basic cache hit/miss - same params should cache."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_CACHE_PIPELINE, BASIC_CACHE_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpux19dp_o/pipeline.pipe', '--workspace', '/tmp/tmpux19dp_o/working', '--output', '/tmp/tmpux19dp_o/output', '--config', '/tmp/tmpux19dp_o/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:192: AssertionError
+_______________________________ test_file_change _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_file_change(entrypoint_argv):
+        """Core: Content-based cache - different files should have different cache keys."""
+        # Create existing input files
+        existing_files = {
+            "file1": "this is file 1",
+            "file2": "this is file 2 with different content",
+        }
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv, FILE_CHANGE_PIPELINE, FILE_CHANGE_CONFIG,
+            existing_files=existing_files
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmps07hhks6/pipeline.pipe', '--workspace', '/tmp/tmps07hhks6/working', '--output', '/tmp/tmps07hhks6/output', '--config', '/tmp/tmps07hhks6/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:284: AssertionError
+______________________________ test_cache_exclude ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_cache_exclude(entrypoint_argv):
+        """Core: Excluded params don't affect cache key."""
+        # Create input file
+        existing_files = {
+            "data/sales.csv": "id,value\n1,100\n2,200\n",
+        }
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv, CACHE_EXCLUDE_PIPELINE, CACHE_EXCLUDE_CONFIG,
+            existing_files=existing_files
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unterminated string at line 15
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp44fcecyh/pipeline.pipe', '--workspace', '/tmp/tmp44fcecyh/working', '--output', '/tmp/tmp44fcecyh/output', '--config', '/tmp/tmp44fcecyh/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Unterminated string at line 15\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:383: AssertionError
+______________________________ test_ttl_strategy _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_ttl_strategy(entrypoint_argv):
+        """Core: Stale strategy with TTL - cache expires after TTL."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TTL_STRATEGY_PIPELINE, TTL_STRATEGY_CONFIG,
+            timeout=30
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpwrrn0jn7/pipeline.pipe', '--workspace', '/tmp/tmpwrrn0jn7/working', '--output', '/tmp/tmpwrrn0jn7/output', '--config', '/tmp/tmpwrrn0jn7/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:529: AssertionError
+__________________________ test_cascade_invalidation ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_cascade_invalidation(entrypoint_argv):
+        """Core: Cascade invalidation - upstream change invalidates downstream caches."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, CASCADE_INVALIDATION_PIPELINE, CASCADE_INVALIDATION_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpukxyojws/pipeline.pipe', '--workspace', '/tmp/tmpukxyojws/working', '--output', '/tmp/tmpukxyojws/output', '--config', '/tmp/tmpukxyojws/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:655: AssertionError
+__________________________ test_global_cache_disabled __________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_global_cache_disabled(entrypoint_argv):
+        """Edge case: Global cache disable ignores task cache settings."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, CACHE_DISABLED_PIPELINE, CACHE_DISABLED_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_e5rcd8k/pipeline.pipe', '--workspace', '/tmp/tmp_e5rcd8k/working', '--output', '/tmp/tmp_e5rcd8k/output', '--config', '/tmp/tmp_e5rcd8k/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:729: AssertionError
+________________________ test_force_refresh_skips_cache ________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_force_refresh_skips_cache(entrypoint_argv):
+        """Edge case: force_refresh treats the task as not cacheable."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FORCE_REFRESH_PIPELINE, FORCE_REFRESH_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpu7rft2ez/pipeline.pipe', '--workspace', '/tmp/tmpu7rft2ez/working', '--output', '/tmp/tmpu7rft2ez/output', '--config', '/tmp/tmpu7rft2ez/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:789: AssertionError
+__________________ test_always_strategy_ignores_input_change ___________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_always_strategy_ignores_input_change(entrypoint_argv):
+        """Edge case: Always strategy uses cache even when inputs change."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ALWAYS_STRATEGY_PIPELINE, ALWAYS_STRATEGY_CONFIG
+        )
+    
+>       assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpxkwq0xed/pipeline.pipe', '--workspace', '/tmp/tmpxkwq0xed/working', '--output', '/tmp/tmpxkwq0xed/output', '--config', '/tmp/tmpxkwq0xed/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:862: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_basic - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpfgkscnuq/pipeline.pipe', '--workspace', '/tmp/tmpfgkscnuq/working', '--output', '/tmp/tmpfgkscnuq/output', '--config', '/tmp/tmpfgkscnuq/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arrays - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpkvkyxg3v/pipeline.pipe', '--workspace', '/tmp/tmpkvkyxg3v/working', '--output', '/tmp/tmpkvkyxg3v/output', '--config', '/tmp/tmpkvkyxg3v/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_bool_params - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '|' at line 18
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp3583c0e3/pipeline.pipe', '--workspace', '/tmp/tmp3583c0e3/working', '--output', '/tmp/tmp3583c0e3/output', '--config', '/tmp/tmp3583c0e3/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '|' at line 18\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_concat - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpfr4a7rlc/pipeline.pipe', '--workspace', '/tmp/tmpfr4a7rlc/working', '--output', '/tmp/tmpfr4a7rlc/output', '--config', '/tmp/tmpfr4a7rlc/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_if - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp03j1ht4i/pipeline.pipe', '--workspace', '/tmp/tmp03j1ht4i/working', '--output', '/tmp/tmp03j1ht4i/output', '--config', '/tmp/tmp03j1ht4i/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_elif - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp50e_ultz/pipeline.pipe', '--workspace', '/tmp/tmp50e_ultz/working', '--output', '/tmp/tmp50e_ultz/output', '--config', '/tmp/tmp50e_ultz/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_else - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpz4jonjn3/pipeline.pipe', '--workspace', '/tmp/tmpz4jonjn3/working', '--output', '/tmp/tmpz4jonjn3/output', '--config', '/tmp/tmpz4jonjn3/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_array_indexing - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmptj0qw926/pipeline.pipe', '--workspace', '/tmp/tmptj0qw926/working', '--output', '/tmp/tmptj0qw926/output', '--config', '/tmp/tmptj0qw926/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_for_requires - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp4xp3icky/pipeline.pipe', '--workspace', '/tmp/tmp4xp3icky/working', '--output', '/tmp/tmp4xp3icky/output', '--config', '/tmp/tmp4xp3icky/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_while_requires - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpiib3j85h/pipeline.pipe', '--workspace', '/tmp/tmpiib3j85h/working', '--output', '/tmp/tmpiib3j85h/output', '--config', '/tmp/tmpiib3j85h/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_working_dirs - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field '{'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpyn5sz14j/pipeline.pipe', '--workspace', '/tmp/tmpyn5sz14j/working', '--output', '/tmp/tmpyn5sz14j/output', '--config', '/tmp/tmpyn5sz14j/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field '{'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_existing_dir - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field '{'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp5lyxmg03/pipeline.pipe', '--workspace', '/tmp/tmp5lyxmg03/working', '--output', '/tmp/tmp5lyxmg03/output', '--config', '/tmp/tmp5lyxmg03/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field '{'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpkuh2i4q8/pipeline.pipe', '--workspace', '/tmp/tmpkuh2i4q8/working', '--output', '/tmp/tmpkuh2i4q8/output', '--config', '/tmp/tmpkuh2i4q8/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_exists_function - AssertionError: Expected exit 1, got 2
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp5g8hu_in/pipeline.pipe', '--workspace', '/tmp/tmp5g8hu_in/working', '--output', '/tmp/tmp5g8hu_in/output', '--config', '/tmp/tmp5g8hu_in/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_float_params - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpp1abjcse/pipeline.pipe', '--workspace', '/tmp/tmpp1abjcse/working', '--output', '/tmp/tmpp1abjcse/output', '--config', '/tmp/tmpp1abjcse/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_nested_loops - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '|' at line 18
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpilxg18gp/pipeline.pipe', '--workspace', '/tmp/tmpilxg18gp/working', '--output', '/tmp/tmpilxg18gp/output', '--config', '/tmp/tmpilxg18gp/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '|' at line 18\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_stderr_validation - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '&' at line 6
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8l6cb2tj/pipeline.pipe', '--workspace', '/tmp/tmp8l6cb2tj/working', '--output', '/tmp/tmp8l6cb2tj/output', '--config', '/tmp/tmp8l6cb2tj/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '&' at line 6\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_params - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp2bv_s237/pipeline.pipe', '--workspace', '/tmp/tmp2bv_s237/working', '--output', '/tmp/tmp2bv_s237/output', '--config', '/tmp/tmp2bv_s237/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_timeout - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected character '|' at line 31
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp0tgf3x3f/pipeline.pipe', '--workspace', '/tmp/tmp0tgf3x3f/working', '--output', '/tmp/tmp0tgf3x3f/output', '--config', '/tmp/tmp0tgf3x3f/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Unexpected character '|' at line 31\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_circular_dependency - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpx301t5i3/pipeline.pipe', '--workspace', '/tmp/tmpx301t5i3/working', '--output', '/tmp/tmpx301t5i3/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_missing_required_arg - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp8zyom03v/pipeline.pipe', '--workspace', '/tmp/tmp8zyom03v/working', '--output', '/tmp/tmp8zyom03v/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_no_main - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmprcw0i6rl/pipeline.pipe', '--workspace', '/tmp/tmprcw0i6rl/working', '--output', '/tmp/tmprcw0i6rl/output'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Line 1: Expected TokenType.IDENTIFIER, got TokenType.TASK: Task\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recursive_call - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmphg24wm8f/pipeline.pipe', '--workspace', '/tmp/tmphg24wm8f/working', '--output', '/tmp/tmphg24wm8f/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp12c9xqjt/pipeline.pipe', '--workspace', '/tmp/tmp12c9xqjt/working', '--output', '/tmp/tmp12c9xqjt/output', '--config', '/tmp/tmp12c9xqjt/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_n7misrt/pipeline.pipe', '--workspace', '/tmp/tmp_n7misrt/working', '--output', '/tmp/tmp_n7misrt/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmps57cvce7/pipeline.pipe', '--workspace', '/tmp/tmps57cvce7/working', '--output', '/tmp/tmps57cvce7/output', '--config', '/tmp/tmps57cvce7/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_requires_failure_stops - AssertionError: Expected exit 1, got 2
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpqy82yrh6/pipeline.pipe', '--workspace', '/tmp/tmpqy82yrh6/working', '--output', '/tmp/tmpqy82yrh6/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpl5_h9g7l/pipeline.pipe', '--workspace', '/tmp/tmpl5_h9g7l/working', '--output', '/tmp/tmpl5_h9g7l/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpinvbxbdg/pipeline.pipe', '--workspace', '/tmp/tmpinvbxbdg/working', '--output', '/tmp/tmpinvbxbdg/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block - AssertionError: Expected exit 0: SYNTAX_ERROR: Line 2: Unknown field ':'
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpij2som2j/pipeline.pipe', '--workspace', '/tmp/tmpij2som2j/working', '--output', '/tmp/tmpij2som2j/output'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 2: Unknown field ':'\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_basic_cache - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpux19dp_o/pipeline.pipe', '--workspace', '/tmp/tmpux19dp_o/working', '--output', '/tmp/tmpux19dp_o/output', '--config', '/tmp/tmpux19dp_o/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_file_change - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmps07hhks6/pipeline.pipe', '--workspace', '/tmp/tmps07hhks6/working', '--output', '/tmp/tmps07hhks6/output', '--config', '/tmp/tmps07hhks6/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_cache_exclude - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unterminated string at line 15
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp44fcecyh/pipeline.pipe', '--workspace', '/tmp/tmp44fcecyh/working', '--output', '/tmp/tmp44fcecyh/output', '--config', '/tmp/tmp44fcecyh/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Unterminated string at line 15\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_ttl_strategy - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpwrrn0jn7/pipeline.pipe', '--workspace', '/tmp/tmpwrrn0jn7/working', '--output', '/tmp/tmpwrrn0jn7/output', '--config', '/tmp/tmpwrrn0jn7/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_cascade_invalidation - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpukxyojws/pipeline.pipe', '--workspace', '/tmp/tmpukxyojws/working', '--output', '/tmp/tmpukxyojws/output', '--config', '/tmp/tmpukxyojws/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_global_cache_disabled - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp_e5rcd8k/pipeline.pipe', '--workspace', '/tmp/tmp_e5rcd8k/working', '--output', '/tmp/tmp_e5rcd8k/output', '--config', '/tmp/tmp_e5rcd8k/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_force_refresh_skips_cache - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpu7rft2ez/pipeline.pipe', '--workspace', '/tmp/tmpu7rft2ez/working', '--output', '/tmp/tmpu7rft2ez/output', '--config', '/tmp/tmpu7rft2ez/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_always_strategy_ignores_input_change - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Line 1: Expected 'task', got /
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpxkwq0xed/pipeline.pipe', '--workspace', '/tmp/tmpxkwq0xed/working', '--output', '/tmp/tmpxkwq0xed/output', '--config', '/tmp/tmpxkwq0xed/config.toml'], returncode=2, stdout='', stderr="SYNTAX_ERROR: Line 1: Expected 'task', got /\n").returncode
+======================== 38 failed, 3 passed in 10.35s =========================

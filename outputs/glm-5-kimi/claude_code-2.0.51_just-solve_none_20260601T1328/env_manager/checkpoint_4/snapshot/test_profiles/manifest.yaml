@@ -1,0 +1,26 @@
+version: "1"
+schema: "manifest"
+
+profiles:
+  minimal:
+    modules:
+      - core
+
+  work:
+    extends: minimal
+    modules:
+      - dev-tools
+      - work-apps
+
+  personal:
+    extends: minimal
+    modules:
+      - dev-tools
+      - media
+      - gaming
+
+  full:
+    extends: work
+    modules:
+      - media
+      - gaming

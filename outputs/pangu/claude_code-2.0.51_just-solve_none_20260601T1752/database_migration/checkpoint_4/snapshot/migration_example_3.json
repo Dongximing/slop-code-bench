@@ -1,0 +1,25 @@
+{
+  "version": 3,
+  "description": "Create posts table and add user_id to users",
+  "operations": [
+    {
+      "type": "add_column",
+      "table": "users",
+      "column": {
+        "name": "user_id",
+        "type": "TEXT",
+        "not_null": false
+      }
+    },
+    {
+      "type": "create_table",
+      "table": "posts",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true},
+        {"name": "title", "type": "TEXT", "not_null": true},
+        {"name": "content", "type": "TEXT", "not_null": false},
+        {"name": "created_at", "type": "TIMESTAMP", "default": "CURRENT_TIMESTAMP"}
+      ]
+    }
+  ]
+}

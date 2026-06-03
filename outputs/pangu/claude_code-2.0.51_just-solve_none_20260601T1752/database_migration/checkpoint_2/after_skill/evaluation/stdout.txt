@@ -1,0 +1,1111 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/2fDHDH25Y7uRh3tj/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 62 items
+
+.evaluation_tests/test_checkpoint_1.py::test_create_table PASSED         [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column PASSED           [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_operations PASSED  [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_skip_already_applied PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_single_column PASSED   [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_preserve_data PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_drop_columns PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_preserves_existing_data PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_foreign_keys_disabled_during_drop_column PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_auto_increment_primary_key PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_unique_and_not_null_constraints PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_default_values_various_types PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column_with_default_to_populated_table PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_complex_data_preservation PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_add_not_null_with_default PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_create_multiple_tables PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_reserved_word_identifiers_are_quoted FAILED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_mixed_operations_all_types PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_non_sequential_versions PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_create_table_multiple_primary_keys_rejected PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_auto_increment_requires_integer_primary_key PASSED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_add_column_rejects_invalid_identifier PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_missing_table PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_table_exists PASSED         [ 38%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_migration_file PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_json PASSED         [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_schema_missing_operations PASSED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_table_missing_for_add_column PASSED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_column_already_exists PASSED [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_column_missing_for_drop PASSED [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_only_column PASSED     [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_primary_key_column PASSED [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_identifier_rejected PASSED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_column_type_rejected PASSED [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_unique_constraint_prevents_duplicates PASSED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_version_zero_rejected PASSED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_version_negative_rejected PASSED [ 59%]
+.evaluation_tests/test_checkpoint_1.py::test_version_string_rejected PASSED [ 61%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_column_removes_unique_index_on_dropped_column PASSED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data FAILED  [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_data FAILED        [ 66%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_data PASSED       [ 67%]
+.evaluation_tests/test_checkpoint_2.py::test_complete_column_migration FAILED [ 69%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_overwrites_existing_values FAILED [ 70%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_default_value_for_null FAILED [ 72%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_data_without_where_updates_all FAILED [ 74%]
+.evaluation_tests/test_checkpoint_2.py::test_transformations_applied_in_order PASSED [ 75%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_then_backfill_uses_transformed_values PASSED [ 77%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_where_filters_rows FAILED [ 79%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_value_expression FAILED [ 80%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_null_without_default FAILED [ 82%]
+.evaluation_tests/test_checkpoint_2.py::test_column_not_exists PASSED    [ 83%]
+.evaluation_tests/test_checkpoint_2.py::test_invalid_expression PASSED   [ 85%]
+.evaluation_tests/test_checkpoint_2.py::test_migration_rolls_back_on_failure FAILED [ 87%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_missing_from_column PASSED [ 88%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_column_missing_to_column PASSED [ 90%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_with_numeric_constant FAILED [ 91%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_target_column_not_exists PASSED [ 93%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_table_not_exists PASSED [ 95%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_table_not_exists PASSED [ 96%]
+.evaluation_tests/test_checkpoint_2.py::test_backfill_invalid_where_clause PASSED [ 98%]
+.evaluation_tests/test_checkpoint_2.py::test_transform_table_not_exists PASSED [100%]
+
+=================================== FAILURES ===================================
+__________________ test_reserved_word_identifiers_are_quoted ___________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_reserved_word_identifiers0')
+
+    @pytest.mark.functionality
+    def test_reserved_word_identifiers_are_quoted(entrypoint_argv, tmp_path):
+        """Functionality: Reserved words still work as identifiers."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        migration = {
+            "version": 1,
+            "description": "Create table with reserved identifiers",
+            "operations": [
+                {
+                    "type": "create_table",
+                    "table": "select",
+                    "columns": [
+                        {"name": "from", "type": "TEXT", "not_null": True},
+                        {"name": "where", "type": "INTEGER"},
+                    ],
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: Operation 0: Table must have exactly one primary key column
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_reserved_word_identifiers0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_reserved_word_identifiers0/app.db'], returncode=1, stdout='', stderr='Error: Operation 0: Table must have exactly one primary key column\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:923: AssertionError
+___________________________ test_migrate_column_data ___________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_migrate_column_data0')
+
+    def test_migrate_column_data(entrypoint_argv, seeds_dir, tmp_path):
+        """Core: Migrate data from one column to another."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_2_users.db", db_file)
+    
+        migration = {
+            "version": 2,
+            "description": "Add email column and migrate data from old_email",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "new_email", "type": "TEXT", "not_null": False},
+                },
+                {
+                    "type": "migrate_column_data",
+                    "table": "users",
+                    "from_column": "old_email",
+                    "to_column": "new_email",
+                },
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "operation_applied", "type": "add_column", "table": "users", "column": "new_email", "version": 2},
+            {"event": "operation_applied", "type": "migrate_column_data", "table": "users", "from_column": "old_email", "to_column": "new_email", "version": 2},
+            {"event": "migration_complete", "version": 2, "operations_count": 2},
+        ]
+E       AssertionError: assert [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'version': 2, 'column': 'new_email'}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}] == [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'column': 'new_email', 'version': 2}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}]
+E         
+E         At index 1 diff: {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E                   'column': 'new_email',
+E                   'event': 'operation_applied',
+E                   'table': 'users',
+E                   'type': 'add_column',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'operation_applied',
+E         -         'from_column': 'old_email',
+E                   'table': 'users',
+E         -         'to_column': 'new_email',
+E                   'type': 'migrate_column_data',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'migration_complete',
+E                   'operations_count': 2,
+E                   'version': 2,
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:69: AssertionError
+______________________________ test_backfill_data ______________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_backfill_data0')
+
+    def test_backfill_data(entrypoint_argv, seeds_dir, tmp_path):
+        """Core: Backfill a column with constant value."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_2_users.db", db_file)
+    
+        migration = {
+            "version": 2,
+            "description": "Add and backfill status column",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "status", "type": "TEXT", "not_null": False},
+                },
+                {
+                    "type": "backfill_data",
+                    "table": "users",
+                    "column": "status",
+                    "value": "'active'",
+                    "where": "status IS NULL",
+                },
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "operation_applied", "type": "add_column", "table": "users", "column": "status", "version": 2},
+            {"event": "operation_applied", "type": "backfill_data", "table": "users", "column": "status", "version": 2},
+            {"event": "migration_complete", "version": 2, "operations_count": 2},
+        ]
+E       AssertionError: assert [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'version': 2, 'column': 'status'}, {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}] == [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'column': 'status', 'version': 2}, {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}]
+E         
+E         At index 1 diff: {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E                   'column': 'status',
+E                   'event': 'operation_applied',
+E                   'table': 'users',
+E                   'type': 'add_column',
+E                   'version': 2,
+E               },
+E               {
+E         -         'column': 'status',
+E                   'event': 'operation_applied',
+E                   'table': 'users',
+E                   'type': 'backfill_data',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'migration_complete',
+E                   'operations_count': 2,
+E                   'version': 2,
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:116: AssertionError
+________________________ test_complete_column_migration ________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_complete_column_migration0')
+
+    @pytest.mark.functionality
+    def test_complete_column_migration(entrypoint_argv, seeds_dir, tmp_path):
+        """Functionality: Complete column migration pattern (add, migrate, drop)."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_2_users.db", db_file)
+    
+        # Capture original email values before migration
+        with sqlite3.connect(db_file) as conn:
+            original_emails = conn.execute(
+                "SELECT id, email FROM users ORDER BY id"
+            ).fetchall()
+    
+        migration = {
+            "version": 2,
+            "description": "Migrate email to email_address",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "email_address", "type": "TEXT", "not_null": False},
+                },
+                {
+                    "type": "migrate_column_data",
+                    "table": "users",
+                    "from_column": "email",
+                    "to_column": "email_address",
+                },
+                {"type": "drop_column", "table": "users", "column": "email"},
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "operation_applied", "type": "add_column", "table": "users", "column": "email_address", "version": 2},
+            {"event": "operation_applied", "type": "migrate_column_data", "table": "users", "from_column": "email", "to_column": "email_address", "version": 2},
+            {"event": "operation_applied", "type": "drop_column", "table": "users", "column": "email", "version": 2},
+            {"event": "migration_complete", "version": 2, "operations_count": 3},
+        ]
+E       AssertionError: assert [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'version': 2, 'column': 'email_address'}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2}, {'event': 'operation_applied', 'type': 'drop_column', 'table': 'users', 'version': 2, 'column': 'email'}, {'event': 'migration_complete', 'version': 2, 'operations_count': 3}] == [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'column': 'email_address', 'version': 2}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email', 'to_column': 'email_address', 'version': 2}, {'event': 'operation_applied', 'type': 'drop_column', 'table': 'users', 'column': 'email', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 3}]
+E         
+E         At index 1 diff: {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email', 'to_column': 'email_address', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E                   'column': 'email_address',
+E                   'event': 'operation_applied',
+E                   'table': 'users',
+E                   'type': 'add_column',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'operation_applied',
+E         -         'from_column': 'email',
+E                   'table': 'users',
+E         -         'to_column': 'email_address',
+E                   'type': 'migrate_column_data',
+E                   'version': 2,
+E               },
+E               {
+E                   'column': 'email',
+E                   'event': 'operation_applied',
+E                   'table': 'users',
+E                   'type': 'drop_column',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'migration_complete',
+E                   'operations_count': 3,
+E                   'version': 2,
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:217: AssertionError
+_____________ test_migrate_column_data_overwrites_existing_values ______________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_migrate_column_data_overw0')
+
+    @pytest.mark.functionality
+    def test_migrate_column_data_overwrites_existing_values(
+        entrypoint_argv, seeds_dir, tmp_path
+    ):
+        """Functionality: Migrate column data overwrites existing values."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_2_users.db", db_file)
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute("UPDATE users SET email = 'temp@example.com'")
+            conn.commit()
+    
+        migration = {
+            "version": 2,
+            "description": "Overwrite email with old_email",
+            "operations": [
+                {
+                    "type": "migrate_column_data",
+                    "table": "users",
+                    "from_column": "old_email",
+                    "to_column": "email",
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "operation_applied", "type": "migrate_column_data", "table": "users", "from_column": "old_email", "to_column": "email", "version": 2},
+            {"event": "migration_complete", "version": 2, "operations_count": 1},
+        ]
+E       AssertionError: assert [{'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}] == [{'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'email', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}]
+E         
+E         At index 0 diff: {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'email', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E                   'event': 'operation_applied',
+E         -         'from_column': 'old_email',
+E                   'table': 'users',
+E         -         'to_column': 'email',
+E                   'type': 'migrate_column_data',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'migration_complete',
+E                   'operations_count': 1,
+E                   'version': 2,
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:273: AssertionError
+_______________ test_migrate_column_data_default_value_for_null ________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_migrate_column_data_defau0')
+
+    @pytest.mark.functionality
+    def test_migrate_column_data_default_value_for_null(
+        entrypoint_argv, seeds_dir, tmp_path
+    ):
+        """Functionality: Default value is used when from_column is NULL."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_2_users.db", db_file)
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute("UPDATE users SET old_email = NULL WHERE id = 1")
+            conn.commit()
+    
+        migration = {
+            "version": 2,
+            "description": "Migrate emails with default for NULL",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "new_email", "type": "TEXT", "not_null": False},
+                },
+                {
+                    "type": "migrate_column_data",
+                    "table": "users",
+                    "from_column": "old_email",
+                    "to_column": "new_email",
+                    "default_value": "'unknown'",
+                },
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "operation_applied", "type": "add_column", "table": "users", "column": "new_email", "version": 2},
+            {"event": "operation_applied", "type": "migrate_column_data", "table": "users", "from_column": "old_email", "to_column": "new_email", "version": 2},
+            {"event": "migration_complete", "version": 2, "operations_count": 2},
+        ]
+E       AssertionError: assert [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'version': 2, 'column': 'new_email'}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}] == [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'column': 'new_email', 'version': 2}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}]
+E         
+E         At index 1 diff: {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E                   'column': 'new_email',
+E                   'event': 'operation_applied',
+E                   'table': 'users',
+E                   'type': 'add_column',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'operation_applied',
+E         -         'from_column': 'old_email',
+E                   'table': 'users',
+E         -         'to_column': 'new_email',
+E                   'type': 'migrate_column_data',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'migration_complete',
+E                   'operations_count': 2,
+E                   'version': 2,
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:325: AssertionError
+_________________ test_backfill_data_without_where_updates_all _________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_backfill_data_without_whe0')
+
+    @pytest.mark.functionality
+    def test_backfill_data_without_where_updates_all(
+        entrypoint_argv, seeds_dir, tmp_path
+    ):
+        """Functionality: Backfill without where updates all rows."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_2_users.db", db_file)
+    
+        migration = {
+            "version": 2,
+            "description": "Backfill status for all users",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "status", "type": "TEXT", "not_null": False},
+                },
+                {
+                    "type": "backfill_data",
+                    "table": "users",
+                    "column": "status",
+                    "value": "'inactive'",
+                },
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "operation_applied", "type": "add_column", "table": "users", "column": "status", "version": 2},
+            {"event": "operation_applied", "type": "backfill_data", "table": "users", "column": "status", "version": 2},
+            {"event": "migration_complete", "version": 2, "operations_count": 2},
+        ]
+E       AssertionError: assert [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'version': 2, 'column': 'status'}, {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}] == [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'column': 'status', 'version': 2}, {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}]
+E         
+E         At index 1 diff: {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E                   'column': 'status',
+E                   'event': 'operation_applied',
+E                   'table': 'users',
+E                   'type': 'add_column',
+E                   'version': 2,
+E               },
+E               {
+E         -         'column': 'status',
+E                   'event': 'operation_applied',
+E                   'table': 'users',
+E                   'type': 'backfill_data',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'migration_complete',
+E                   'operations_count': 2,
+E                   'version': 2,
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:374: AssertionError
+_______________________ test_backfill_where_filters_rows _______________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_backfill_where_filters_ro0')
+
+    @pytest.mark.functionality
+    def test_backfill_where_filters_rows(entrypoint_argv, tmp_path):
+        """Functionality: Backfill updates only rows matching WHERE."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "CREATE TABLE users (id INTEGER PRIMARY KEY, status TEXT)"
+            )
+            conn.executemany(
+                "INSERT INTO users (id, status) VALUES (?, ?)",
+                [(1, None), (2, "active"), (3, None)],
+            )
+            conn.commit()
+    
+        migration = {
+            "version": 2,
+            "description": "Backfill status for NULL rows",
+            "operations": [
+                {
+                    "type": "backfill_data",
+                    "table": "users",
+                    "column": "status",
+                    "value": "'inactive'",
+                    "where": "status IS NULL",
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "operation_applied", "type": "backfill_data", "table": "users", "column": "status", "version": 2},
+            {"event": "migration_complete", "version": 2, "operations_count": 1},
+        ]
+E       AssertionError: assert [{'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}] == [{'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}]
+E         
+E         At index 0 diff: {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E         -         'column': 'status',
+E                   'event': 'operation_applied',
+E                   'table': 'users',
+E                   'type': 'backfill_data',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'migration_complete',
+E                   'operations_count': 1,
+E                   'version': 2,
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:532: AssertionError
+________________________ test_backfill_value_expression ________________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_backfill_value_expression0')
+
+    @pytest.mark.functionality
+    def test_backfill_value_expression(entrypoint_argv, tmp_path):
+        """Functionality: Backfill supports SQL expressions."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "CREATE TABLE users (id INTEGER PRIMARY KEY, first_name TEXT, "
+                "last_name TEXT, full_name TEXT)"
+            )
+            conn.executemany(
+                "INSERT INTO users (id, first_name, last_name, full_name) "
+                "VALUES (?, ?, ?, ?)",
+                [(1, "Jane", "Doe", None), (2, "Sam", "Lee", None)],
+            )
+            conn.commit()
+    
+        migration = {
+            "version": 2,
+            "description": "Backfill full_name from first and last",
+            "operations": [
+                {
+                    "type": "backfill_data",
+                    "table": "users",
+                    "column": "full_name",
+                    "value": "first_name || ' ' || last_name",
+                    "where": "full_name IS NULL",
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "operation_applied", "type": "backfill_data", "table": "users", "column": "full_name", "version": 2},
+            {"event": "migration_complete", "version": 2, "operations_count": 1},
+        ]
+E       AssertionError: assert [{'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}] == [{'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'full_name', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}]
+E         
+E         At index 0 diff: {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'full_name', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E         -         'column': 'full_name',
+E                   'event': 'operation_applied',
+E                   'table': 'users',
+E                   'type': 'backfill_data',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'migration_complete',
+E                   'operations_count': 1,
+E                   'version': 2,
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:584: AssertionError
+________________ test_migrate_column_data_null_without_default _________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_migrate_column_data_null_0')
+
+    @pytest.mark.functionality
+    def test_migrate_column_data_null_without_default(entrypoint_argv, tmp_path):
+        """Functionality: NULL values remain NULL without default_value."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "CREATE TABLE users (id INTEGER PRIMARY KEY, "
+                "old_email TEXT, new_email TEXT)"
+            )
+            conn.executemany(
+                "INSERT INTO users (id, old_email, new_email) VALUES (?, ?, ?)",
+                [(1, None, "existing@example.com"), (2, "a@b.com", None)],
+            )
+            conn.commit()
+    
+        migration = {
+            "version": 2,
+            "description": "Migrate without default value",
+            "operations": [
+                {
+                    "type": "migrate_column_data",
+                    "table": "users",
+                    "from_column": "old_email",
+                    "to_column": "new_email",
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        events = parse_jsonl(result.stdout)
+>       assert events == [
+            {"event": "operation_applied", "type": "migrate_column_data", "table": "users", "from_column": "old_email", "to_column": "new_email", "version": 2},
+            {"event": "migration_complete", "version": 2, "operations_count": 1},
+        ]
+E       AssertionError: assert [{'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}] == [{'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}]
+E         
+E         At index 0 diff: {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}
+E         
+E         Full diff:
+E           [
+E               {
+E                   'event': 'operation_applied',
+E         -         'from_column': 'old_email',
+E                   'table': 'users',
+E         -         'to_column': 'new_email',
+E                   'type': 'migrate_column_data',
+E                   'version': 2,
+E               },
+E               {
+E                   'event': 'migration_complete',
+E                   'operations_count': 1,
+E                   'version': 2,
+E               },
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:634: AssertionError
+_____________________ test_migration_rolls_back_on_failure _____________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+seeds_dir = PosixPath('/workspace/.evaluation_tests/assets/seeds')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_migration_rolls_back_on_f0')
+
+    @pytest.mark.error
+    def test_migration_rolls_back_on_failure(entrypoint_argv, seeds_dir, tmp_path):
+        """Error: Failed migration should roll back all operations."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+        shutil.copy(seeds_dir / "checkpoint_2_users.db", db_file)
+    
+        migration = {
+            "version": 2,
+            "description": "Fail after partial updates",
+            "operations": [
+                {
+                    "type": "add_column",
+                    "table": "users",
+                    "column": {"name": "status", "type": "TEXT", "not_null": False},
+                },
+                {
+                    "type": "backfill_data",
+                    "table": "users",
+                    "column": "status",
+                    "value": "'active'",
+                },
+                {
+                    "type": "transform_data",
+                    "table": "users",
+                    "transformations": [
+                        {"column": "status", "expression": "nonexistent_column"}
+                    ],
+                },
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+        assert result.returncode == 1, "Expected command to fail with exit code 1"
+    
+        with sqlite3.connect(db_file) as conn:
+            columns = [
+                row[1] for row in conn.execute("PRAGMA table_info(users)")
+            ]
+            applied = conn.execute(
+                "SELECT COUNT(*) FROM _migrations WHERE version = 2"
+            ).fetchone()[0]
+>       assert "status" not in columns
+E       AssertionError: assert 'status' not in ['id', 'first_name', 'last_name', 'old_email', 'email', 'name', 'status']
+
+.evaluation_tests/test_checkpoint_2.py:786: AssertionError
+_____________________ test_backfill_with_numeric_constant ______________________
+
+entrypoint_argv = ['uv', 'run', 'migration_tool.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0')
+
+    @pytest.mark.functionality
+    def test_backfill_with_numeric_constant(entrypoint_argv, tmp_path):
+        """Functionality: Backfill with numeric constant (spec: 'value can be a constant')."""
+        migration_file = tmp_path / "migration.json"
+        db_file = tmp_path / "app.db"
+    
+        with sqlite3.connect(db_file) as conn:
+            conn.execute(
+                "CREATE TABLE users (id INTEGER PRIMARY KEY, score INTEGER)"
+            )
+            conn.executemany(
+                "INSERT INTO users (id, score) VALUES (?, ?)",
+                [(1, None), (2, None)],
+            )
+            conn.commit()
+    
+        migration = {
+            "version": 2,
+            "description": "Backfill with numeric constant",
+            "operations": [
+                {
+                    "type": "backfill_data",
+                    "table": "users",
+                    "column": "score",
+                    "value": 42,  # Numeric constant
+                }
+            ],
+        }
+    
+        migration_file.write_text(json.dumps(migration))
+    
+        result = run_command(
+            entrypoint_argv, "migrate", str(migration_file), str(db_file)
+        )
+    
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: Operation 0: value must be a string (SQL expression)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/app.db'], returncode=1, stdout='', stderr='Error: Operation 0: value must be a string (SQL expression)\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:888: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_reserved_word_identifiers_are_quoted - AssertionError: Command failed: Error: Operation 0: Table must have exactly one primary key column
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_reserved_word_identifiers0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_reserved_word_identifiers0/app.db'], returncode=1, stdout='', stderr='Error: Operation 0: Table must have exactly one primary key column\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_migrate_column_data - AssertionError: assert [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'version': 2, 'column': 'new_email'}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}] == [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'column': 'new_email', 'version': 2}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}]
+  
+  At index 1 diff: {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}
+  
+  Full diff:
+    [
+        {
+            'column': 'new_email',
+            'event': 'operation_applied',
+            'table': 'users',
+            'type': 'add_column',
+            'version': 2,
+        },
+        {
+            'event': 'operation_applied',
+  -         'from_column': 'old_email',
+            'table': 'users',
+  -         'to_column': 'new_email',
+            'type': 'migrate_column_data',
+            'version': 2,
+        },
+        {
+            'event': 'migration_complete',
+            'operations_count': 2,
+            'version': 2,
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::test_backfill_data - AssertionError: assert [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'version': 2, 'column': 'status'}, {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}] == [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'column': 'status', 'version': 2}, {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}]
+  
+  At index 1 diff: {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}
+  
+  Full diff:
+    [
+        {
+            'column': 'status',
+            'event': 'operation_applied',
+            'table': 'users',
+            'type': 'add_column',
+            'version': 2,
+        },
+        {
+  -         'column': 'status',
+            'event': 'operation_applied',
+            'table': 'users',
+            'type': 'backfill_data',
+            'version': 2,
+        },
+        {
+            'event': 'migration_complete',
+            'operations_count': 2,
+            'version': 2,
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::test_complete_column_migration - AssertionError: assert [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'version': 2, 'column': 'email_address'}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2}, {'event': 'operation_applied', 'type': 'drop_column', 'table': 'users', 'version': 2, 'column': 'email'}, {'event': 'migration_complete', 'version': 2, 'operations_count': 3}] == [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'column': 'email_address', 'version': 2}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email', 'to_column': 'email_address', 'version': 2}, {'event': 'operation_applied', 'type': 'drop_column', 'table': 'users', 'column': 'email', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 3}]
+  
+  At index 1 diff: {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'email', 'to_column': 'email_address', 'version': 2}
+  
+  Full diff:
+    [
+        {
+            'column': 'email_address',
+            'event': 'operation_applied',
+            'table': 'users',
+            'type': 'add_column',
+            'version': 2,
+        },
+        {
+            'event': 'operation_applied',
+  -         'from_column': 'email',
+            'table': 'users',
+  -         'to_column': 'email_address',
+            'type': 'migrate_column_data',
+            'version': 2,
+        },
+        {
+            'column': 'email',
+            'event': 'operation_applied',
+            'table': 'users',
+            'type': 'drop_column',
+            'version': 2,
+        },
+        {
+            'event': 'migration_complete',
+            'operations_count': 3,
+            'version': 2,
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_overwrites_existing_values - AssertionError: assert [{'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}] == [{'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'email', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}]
+  
+  At index 0 diff: {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'email', 'version': 2}
+  
+  Full diff:
+    [
+        {
+            'event': 'operation_applied',
+  -         'from_column': 'old_email',
+            'table': 'users',
+  -         'to_column': 'email',
+            'type': 'migrate_column_data',
+            'version': 2,
+        },
+        {
+            'event': 'migration_complete',
+            'operations_count': 1,
+            'version': 2,
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_default_value_for_null - AssertionError: assert [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'version': 2, 'column': 'new_email'}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}] == [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'column': 'new_email', 'version': 2}, {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}]
+  
+  At index 1 diff: {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}
+  
+  Full diff:
+    [
+        {
+            'column': 'new_email',
+            'event': 'operation_applied',
+            'table': 'users',
+            'type': 'add_column',
+            'version': 2,
+        },
+        {
+            'event': 'operation_applied',
+  -         'from_column': 'old_email',
+            'table': 'users',
+  -         'to_column': 'new_email',
+            'type': 'migrate_column_data',
+            'version': 2,
+        },
+        {
+            'event': 'migration_complete',
+            'operations_count': 2,
+            'version': 2,
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::test_backfill_data_without_where_updates_all - AssertionError: assert [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'version': 2, 'column': 'status'}, {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}] == [{'event': 'operation_applied', 'type': 'add_column', 'table': 'users', 'column': 'status', 'version': 2}, {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 2}]
+  
+  At index 1 diff: {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}
+  
+  Full diff:
+    [
+        {
+            'column': 'status',
+            'event': 'operation_applied',
+            'table': 'users',
+            'type': 'add_column',
+            'version': 2,
+        },
+        {
+  -         'column': 'status',
+            'event': 'operation_applied',
+            'table': 'users',
+            'type': 'backfill_data',
+            'version': 2,
+        },
+        {
+            'event': 'migration_complete',
+            'operations_count': 2,
+            'version': 2,
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::test_backfill_where_filters_rows - AssertionError: assert [{'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}] == [{'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}]
+  
+  At index 0 diff: {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'status', 'version': 2}
+  
+  Full diff:
+    [
+        {
+  -         'column': 'status',
+            'event': 'operation_applied',
+            'table': 'users',
+            'type': 'backfill_data',
+            'version': 2,
+        },
+        {
+            'event': 'migration_complete',
+            'operations_count': 1,
+            'version': 2,
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::test_backfill_value_expression - AssertionError: assert [{'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}] == [{'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'full_name', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}]
+  
+  At index 0 diff: {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'backfill_data', 'table': 'users', 'column': 'full_name', 'version': 2}
+  
+  Full diff:
+    [
+        {
+  -         'column': 'full_name',
+            'event': 'operation_applied',
+            'table': 'users',
+            'type': 'backfill_data',
+            'version': 2,
+        },
+        {
+            'event': 'migration_complete',
+            'operations_count': 1,
+            'version': 2,
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::test_migrate_column_data_null_without_default - AssertionError: assert [{'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}] == [{'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}, {'event': 'migration_complete', 'version': 2, 'operations_count': 1}]
+  
+  At index 0 diff: {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'version': 2} != {'event': 'operation_applied', 'type': 'migrate_column_data', 'table': 'users', 'from_column': 'old_email', 'to_column': 'new_email', 'version': 2}
+  
+  Full diff:
+    [
+        {
+            'event': 'operation_applied',
+  -         'from_column': 'old_email',
+            'table': 'users',
+  -         'to_column': 'new_email',
+            'type': 'migrate_column_data',
+            'version': 2,
+        },
+        {
+            'event': 'migration_complete',
+            'operations_count': 1,
+            'version': 2,
+        },
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::test_migration_rolls_back_on_failure - AssertionError: assert 'status' not in ['id', 'first_name', 'last_name', 'old_email', 'email', 'name', 'status']
+FAILED .evaluation_tests/test_checkpoint_2.py::test_backfill_with_numeric_constant - AssertionError: Command failed: Error: Operation 0: value must be a string (SQL expression)
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'migration_tool.py', 'migrate', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/migration.json', '/tmp/pytest-of-agent/pytest-0/test_backfill_with_numeric_con0/app.db'], returncode=1, stdout='', stderr='Error: Operation 0: value must be a string (SQL expression)\n').returncode
+======================== 12 failed, 50 passed in 8.20s =========================

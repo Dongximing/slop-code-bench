@@ -1,0 +1,910 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/Et_qtoJO6szcZuko/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 41 items
+
+.evaluation_tests/test_checkpoint_1.py::test_basic FAILED                [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_arrays FAILED               [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_bool_params FAILED          [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_string_concat FAILED        [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_if FAILED            [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_elif FAILED          [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_else FAILED          [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_array_indexing FAILED       [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_for_requires FAILED         [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_while_requires FAILED       [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_working_dirs FAILED         [ 26%]
+.evaluation_tests/test_checkpoint_1.py::test_existing_dir FAILED         [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops FAILED       [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_exists_function PASSED      [ 34%]
+.evaluation_tests/test_checkpoint_1.py::test_float_params PASSED         [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_nested_loops FAILED         [ 39%]
+.evaluation_tests/test_checkpoint_1.py::test_stderr_validation FAILED    [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_string_params FAILED        [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_timeout PASSED              [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_circular_dependency FAILED  [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_default_param_order FAILED  [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_required_arg FAILED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_multiline_success_no_return PASSED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_no_main FAILED              [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_recursive_call FAILED       [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params PASSED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false PASSED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool PASSED [ 68%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_requires_failure_stops PASSED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe FAILED [ 73%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe FAILED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_bad_toml_syntax FAILED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block PASSED [ 80%]
+.evaluation_tests/test_checkpoint_2.py::test_basic_cache FAILED          [ 82%]
+.evaluation_tests/test_checkpoint_2.py::test_file_change FAILED          [ 85%]
+.evaluation_tests/test_checkpoint_2.py::test_cache_exclude FAILED        [ 87%]
+.evaluation_tests/test_checkpoint_2.py::test_ttl_strategy FAILED         [ 90%]
+.evaluation_tests/test_checkpoint_2.py::test_cascade_invalidation FAILED [ 92%]
+.evaluation_tests/test_checkpoint_2.py::test_global_cache_disabled FAILED [ 95%]
+.evaluation_tests/test_checkpoint_2.py::test_force_refresh_skips_cache FAILED [ 97%]
+.evaluation_tests/test_checkpoint_2.py::test_always_strategy_ignores_input_change FAILED [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_basic __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic(entrypoint_argv):
+        """Core: Basic pipeline with requires, fail(), and task chaining."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_PIPELINE, BASIC_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 25
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp4iyzeb3n/pipeline.pipe', '--workspace', '/tmp/tmp4iyzeb3n/working', '--output', '/tmp/tmp4iyzeb3n/output', '--config', '/tmp/tmp4iyzeb3n/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 25\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:296: AssertionError
+_________________________________ test_arrays __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_arrays(entrypoint_argv):
+        """Core: Array parameters and len() function."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAYS_PIPELINE, ARRAYS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 5
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmptiltp_yl/pipeline.pipe', '--workspace', '/tmp/tmptiltp_yl/working', '--output', '/tmp/tmptiltp_yl/output', '--config', '/tmp/tmptiltp_yl/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:358: AssertionError
+_______________________________ test_bool_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_bool_params(entrypoint_argv):
+        """Core: Boolean parameters with TRUE/FALSE literals."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BOOL_PARAMS_PIPELINE, BOOL_PARAMS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected boolean value at line 3
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp51us2yuc/pipeline.pipe', '--workspace', '/tmp/tmp51us2yuc/working', '--output', '/tmp/tmp51us2yuc/output', '--config', '/tmp/tmp51us2yuc/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected boolean value at line 3\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:415: AssertionError
+______________________________ test_string_concat ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_string_concat(entrypoint_argv):
+        """Core: String concatenation with % operator in for loops."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_CONCAT_PIPELINE, STRING_CONCAT_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token in expression: TokenType.STRING_TYPE at line 20
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpb5e5kxm5/pipeline.pipe', '--workspace', '/tmp/tmpb5e5kxm5/working', '--output', '/tmp/tmpb5e5kxm5/output', '--config', '/tmp/tmpb5e5kxm5/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Unexpected token in expression: TokenType.STRING_TYPE at line 20\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:478: AssertionError
+________________________________ test_branch_if ________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_if(entrypoint_argv):
+        """Core: If conditional branching - true branch taken."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_IF_PIPELINE, BRANCH_IF_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 37
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpc7yy4n3a/pipeline.pipe', '--workspace', '/tmp/tmpc7yy4n3a/working', '--output', '/tmp/tmpc7yy4n3a/output', '--config', '/tmp/tmpc7yy4n3a/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 37\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:557: AssertionError
+_______________________________ test_branch_elif _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_elif(entrypoint_argv):
+        """Core: Elif branch - first fails, elif succeeds."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELIF_PIPELINE, BRANCH_ELIF_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 37
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1w_gc_i1/pipeline.pipe', '--workspace', '/tmp/tmp1w_gc_i1/working', '--output', '/tmp/tmp1w_gc_i1/output', '--config', '/tmp/tmp1w_gc_i1/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 37\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:632: AssertionError
+_______________________________ test_branch_else _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_else(entrypoint_argv):
+        """Core: Else branch - if and elif both fail."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELSE_PIPELINE, BRANCH_ELSE_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 38
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp0s3qdqba/pipeline.pipe', '--workspace', '/tmp/tmp0s3qdqba/working', '--output', '/tmp/tmp0s3qdqba/output', '--config', '/tmp/tmp0s3qdqba/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 38\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:708: AssertionError
+_____________________________ test_array_indexing ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_array_indexing(entrypoint_argv):
+        """Core: Array subscript access with [i] notation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAY_INDEXING_PIPELINE, ARRAY_INDEXING_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token in expression: TokenType.PLUS at line 19
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp816ejs9h/pipeline.pipe', '--workspace', '/tmp/tmp816ejs9h/working', '--output', '/tmp/tmp816ejs9h/output', '--config', '/tmp/tmp816ejs9h/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Unexpected token in expression: TokenType.PLUS at line 19\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:766: AssertionError
+______________________________ test_for_requires _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_for_requires(entrypoint_argv):
+        """Core: For loop in requires clause."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FOR_REQUIRES_PIPELINE, FOR_REQUIRES_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 12
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp75qm4390/pipeline.pipe', '--workspace', '/tmp/tmp75qm4390/working', '--output', '/tmp/tmp75qm4390/output', '--config', '/tmp/tmp75qm4390/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 12\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:818: AssertionError
+_____________________________ test_while_requires ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_while_requires(entrypoint_argv):
+        """Core: While loop with break/continue in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WHILE_REQUIRES_PIPELINE, WHILE_REQUIRES_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 11
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp31m_grvh/pipeline.pipe', '--workspace', '/tmp/tmp31m_grvh/working', '--output', '/tmp/tmp31m_grvh/output', '--config', '/tmp/tmp31m_grvh/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 11\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:874: AssertionError
+______________________________ test_working_dirs _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_working_dirs(entrypoint_argv):
+        """Core: Working directory isolation for nested task calls."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WORKING_DIRS_PIPELINE, WORKING_DIRS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 2
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp5xkvzff7/pipeline.pipe', '--workspace', '/tmp/tmp5xkvzff7/working', '--output', '/tmp/tmp5xkvzff7/output', '--config', '/tmp/tmp5xkvzff7/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 2\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:937: AssertionError
+______________________________ test_existing_dir _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_existing_dir(entrypoint_argv):
+        """Core: Pre-existing workspace files (clean_cwd=false)."""
+        existing_files = {"run.sh": 'echo "Hello"'}
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            EXISTING_DIR_PIPELINE,
+            EXISTING_DIR_CONFIG,
+            existing_files=existing_files,
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 2
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpwysg3e85/pipeline.pipe', '--workspace', '/tmp/tmpwysg3e85/working', '--output', '/tmp/tmpwysg3e85/output', '--config', '/tmp/tmpwysg3e85/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 2\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:980: AssertionError
+_____________________________ test_arithmetic_ops ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_arithmetic_ops(entrypoint_argv):
+        """Functionality: Integer arithmetic operations in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARITHMETIC_OPS_PIPELINE, ARITHMETIC_OPS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token in expression: TokenType.INT_TYPE at line 21
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpwvixpjtv/pipeline.pipe', '--workspace', '/tmp/tmpwvixpjtv/working', '--output', '/tmp/tmpwvixpjtv/output', '--config', '/tmp/tmpwvixpjtv/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Unexpected token in expression: TokenType.INT_TYPE at line 21\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1038: AssertionError
+______________________________ test_nested_loops _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_nested_loops(entrypoint_argv):
+        """Functionality: Nested loops with break statements."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, NESTED_LOOPS_PIPELINE, NESTED_LOOPS_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: SYNTAX_ERROR: Unexpected character: | at line 18, column 25
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpb487fq10/pipeline.pipe', '--workspace', '/tmp/tmpb487fq10/working', '--output', '/tmp/tmpb487fq10/output', '--config', '/tmp/tmpb487fq10/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: SYNTAX_ERROR: Unexpected character: | at line 18, column 25\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1211: AssertionError
+____________________________ test_stderr_validation ____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_stderr_validation(entrypoint_argv):
+        """Functionality: stderr contains() and equals() validation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STDERR_VALIDATION_PIPELINE, STDERR_VALIDATION_CONFIG
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+E       AssertionError: Expected exit 0: SYNTAX_ERROR: SYNTAX_ERROR: Unexpected character: & at line 6, column 38
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpohnssx1r/pipeline.pipe', '--workspace', '/tmp/tmpohnssx1r/working', '--output', '/tmp/tmpohnssx1r/output', '--config', '/tmp/tmpohnssx1r/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: SYNTAX_ERROR: Unexpected character: & at line 6, column 38\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1271: AssertionError
+______________________________ test_string_params ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_string_params(entrypoint_argv):
+        """Functionality: String parameter interpolation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_PARAMS_PIPELINE, STRING_PARAMS_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # WriteMessage should have correct params
+        write_job = next((j for j in jobs if j.get("task") == "WriteMessage"), None)
+>       assert write_job is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:1333: AssertionError
+___________________________ test_circular_dependency ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_circular_dependency(entrypoint_argv):
+        """Error: Circular dependency detection (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        run: {
+            echo "A"
+        }
+        requires {
+            B()
+        }
+    }
+    
+    task B {
+        run: {
+            echo "B"
+        }
+        requires {
+            C()
+        }
+    }
+    task C {
+        run: {
+            echo "C"
+        }
+        requires: {
+            A()
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            C()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp5hhyo2ye/pipeline.pipe', '--workspace', '/tmp/tmp5hhyo2ye/working', '--output', '/tmp/tmp5hhyo2ye/output'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 5\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1458: AssertionError
+___________________________ test_default_param_order ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_default_param_order(entrypoint_argv):
+        """Error: Default param before required param (exit 2, SYNTAX_ERROR)."""
+        pipeline = '''task A {
+        params: {
+            x: int = 1
+            y: int
+        }
+        run: {
+            echo "A"
+        }
+    }
+    
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            A()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+E       AssertionError: Expected exit 2, got 0
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpghx04okc/pipeline.pipe', '--workspace', '/tmp/tmpghx04okc/working', '--output', '/tmp/tmpghx04okc/output'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1487: AssertionError
+__________________________ test_missing_required_arg ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_missing_required_arg(entrypoint_argv):
+        """Error: Missing required argument (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        params: {
+            x: int
+            y: int = 1
+        }
+        run: {
+            echo "A"
+        }
+    }
+    
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            A(y=2)
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 0
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp529ti_a9/pipeline.pipe', '--workspace', '/tmp/tmp529ti_a9/working', '--output', '/tmp/tmp529ti_a9/output'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1516: AssertionError
+_________________________________ test_no_main _________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_no_main(entrypoint_argv):
+        """Error: Pipeline without main task (exit 3, INVALID_PIPE)."""
+        pipeline = '''task Task {
+        run {
+            echo "I should not run"
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 2
+E       assert 2 == 3
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpf_5rf454/pipeline.pipe', '--workspace', '/tmp/tmpf_5rf454/working', '--output', '/tmp/tmpf_5rf454/output'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 2\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1573: AssertionError
+_____________________________ test_recursive_call ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_recursive_call(entrypoint_argv):
+        """Error: Recursive task call (exit 3, INVALID_PIPE)."""
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            main()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 0
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpla1ex1pz/pipeline.pipe', '--workspace', '/tmp/tmpla1ex1pz/working', '--output', '/tmp/tmpla1ex1pz/output'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1591: AssertionError
+_____________________ test_edge_type_mismatch_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_type_mismatch_invalid_pipe(entrypoint_argv):
+        """Edge case: type mismatch should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... type mismatch"
+        """
+        pipeline = '''task A {
+        params: {
+            x: int
+        }
+        run: {
+            echo "${params.x}"
+        }
+    }
+    
+    task main {
+        requires: {
+            A("not-int");
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 0
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpv1nwmbl4/pipeline.pipe', '--workspace', '/tmp/tmpv1nwmbl4/working', '--output', '/tmp/tmpv1nwmbl4/output'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1752: AssertionError
+____________________ test_edge_undefined_task_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_undefined_task_invalid_pipe(entrypoint_argv):
+        """Edge case: undefined task call should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... undefined tasks"
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            MissingTask();
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 0
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpfkghjbk6/pipeline.pipe', '--workspace', '/tmp/tmpfkghjbk6/working', '--output', '/tmp/tmpfkghjbk6/output'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1772: AssertionError
+__________________________ test_edge_bad_toml_syntax ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_bad_toml_syntax(entrypoint_argv):
+        """Edge case: bad TOML config should be SYNTAX_ERROR.
+    
+        Spec says: "Exit 2: SYNTAX_ERROR:<msg> ... bad TOML/.pipe syntax"
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+    }'''
+        config = "entry = ["
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+E       AssertionError: Expected exit 2, got 0
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpa_g_9gqn/pipeline.pipe', '--workspace', '/tmp/tmpa_g_9gqn/working', '--output', '/tmp/tmpa_g_9gqn/output', '--config', '/tmp/tmpa_g_9gqn/config.toml'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1790: AssertionError
+_______________________________ test_basic_cache _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic_cache(entrypoint_argv):
+        """Core: Basic cache hit/miss - same params should cache."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_CACHE_PIPELINE, BASIC_CACHE_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+    
+        # Parse events and jobs
+        events = parse_jsonl(result.stdout)
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Check cache events are present
+        cache_counts = count_cache_events(events)
+>       assert cache_counts["CACHE_CHECK"] >= 4, f"Expected at least 4 CACHE_CHECK events: {cache_counts}"
+E       AssertionError: Expected at least 4 CACHE_CHECK events: {'CACHE_CHECK': 0, 'CACHE_HIT': 0, 'CACHE_MISS': 0}
+E       assert 0 >= 4
+
+.evaluation_tests/test_checkpoint_2.py:200: AssertionError
+_______________________________ test_file_change _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_file_change(entrypoint_argv):
+        """Core: Content-based cache - different files should have different cache keys."""
+        # Create existing input files
+        existing_files = {
+            "file1": "this is file 1",
+            "file2": "this is file 2 with different content",
+        }
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv, FILE_CHANGE_PIPELINE, FILE_CHANGE_CONFIG,
+            existing_files=existing_files
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+    
+        # Parse jobs
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Get cache hits by task/params
+        cache_hits = get_cache_hits_by_task(jobs)
+    
+        # process_file("file1") called twice: miss, hit
+        file1_hits = cache_hits.get(("process_file", (("filename", "file1"),)), [])
+>       assert len(file1_hits) == 2, f"Expected 2 calls to process_file('file1'): {file1_hits}"
+E       AssertionError: Expected 2 calls to process_file('file1'): []
+E       assert 0 == 2
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_2.py:294: AssertionError
+______________________________ test_cache_exclude ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_cache_exclude(entrypoint_argv):
+        """Core: Excluded params don't affect cache key."""
+        # Create input file
+        existing_files = {
+            "data/sales.csv": "id,value\n1,100\n2,200\n",
+        }
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv, CACHE_EXCLUDE_PIPELINE, CACHE_EXCLUDE_CONFIG,
+            existing_files=existing_files
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 1: 
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpr4rmxdod/pipeline.pipe', '--workspace', '/tmp/tmpr4rmxdod/working', '--output', '/tmp/tmpr4rmxdod/output', '--config', '/tmp/tmpr4rmxdod/config.toml'], returncode=1, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "collect_reports", "params": {}}\n{"event": "TASK_STARTED", "job_id": 2, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": false}}\n{"event": "TASK_RUNNING", "job_id": 2, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": false}}\n{"event": "TASK_COMPLETED", "job_id": 2, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": false}}\n{"event": "TASK_STARTED", "job_id": 3, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": false}}\n{"event": "TASK_RUNNING", "job_id": 3, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": false}}\n{"event": "TASK_COMPLETED", "job_id": 3, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": false}}\n{"event": "TASK_STARTED", "job_id": 4, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": true}}\n{"event": "TASK_RUNNING", "job_id": 4, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": true}}\n{"event": "TASK_COMPLETED", "job_id": 4, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": true}}\n{"event": "TASK_STARTED", "job_id": 5, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": true}}\n{"event": "TASK_RUNNING", "job_id": 5, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": true}}\n{"event": "TASK_COMPLETED", "job_id": 5, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": true}}\n{"event": "TASK_STARTED", "job_id": 6, "task": "generate_report", "params": {"dataset": "sales", "format": "html", "debug": false, "verbose": false}}\n{"event": "TASK_RUNNING", "job_id": 6, "task": "generate_report", "params": {"dataset": "sales", "format": "html", "debug": false, "verbose": false}}\n{"event": "TASK_COMPLETED", "job_id": 6, "task": "generate_report", "params": {"dataset": "sales", "format": "html", "debug": false, "verbose": false}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "collect_reports", "params": {}}\n{"event": "TASK_FAILED", "job_id": 1, "task": "collect_reports", "params": {}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_2.py:383: AssertionError
+______________________________ test_ttl_strategy _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_ttl_strategy(entrypoint_argv):
+        """Core: Stale strategy with TTL - cache expires after TTL."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TTL_STRATEGY_PIPELINE, TTL_STRATEGY_CONFIG,
+            timeout=30
+        )
+    
+>       assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+E       AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected token in expression: TokenType.DOT at line 7
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjy9b7g9t/pipeline.pipe', '--workspace', '/tmp/tmpjy9b7g9t/working', '--output', '/tmp/tmpjy9b7g9t/output', '--config', '/tmp/tmpjy9b7g9t/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Unexpected token in expression: TokenType.DOT at line 7\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:529: AssertionError
+__________________________ test_cascade_invalidation ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_cascade_invalidation(entrypoint_argv):
+        """Core: Cascade invalidation - upstream change invalidates downstream caches."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, CASCADE_INVALIDATION_PIPELINE, CASCADE_INVALIDATION_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+    
+        # Parse jobs
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Get cache hits by task
+        cache_hits = get_cache_hits_by_task(jobs)
+    
+        # generate_base(42) - should be called multiple times
+        # First call: miss, subsequent calls: hit
+        base_42_hits = cache_hits.get(("generate_base", (("seed", 42),)), [])
+>       assert len(base_42_hits) >= 2, f"Expected at least 2 calls to generate_base(42): {base_42_hits}"
+E       AssertionError: Expected at least 2 calls to generate_base(42): []
+E       assert 0 >= 2
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_2.py:666: AssertionError
+__________________________ test_global_cache_disabled __________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_global_cache_disabled(entrypoint_argv):
+        """Edge case: Global cache disable ignores task cache settings."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, CACHE_DISABLED_PIPELINE, CACHE_DISABLED_CONFIG
+        )
+    
+        assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+    
+        events = parse_jsonl(result.stdout)
+        cache_counts = count_cache_events(events)
+        assert all(
+            count == 0 for count in cache_counts.values()
+        ), f"Expected no cache events: {cache_counts}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        for job in jobs:
+            assert job.get("cache") is None, "Cache should be disabled globally"
+>           assert "cache_hit" not in job, "cache_hit should be omitted"
+E           AssertionError: cache_hit should be omitted
+E           assert 'cache_hit' not in {'job_id': 2, 'task': 'cached_task', 'params': {'value': 1}, 'stdout': '', 'stderr': '', 'timed_out': False, 'success': {}, 'output': None, 'exit_code': 0, 'parent': 1, 'duration': 0.0011, 'inputs': ['/tmp/tmpxu6g2ig0/working'], 'cache': None, 'cache_hit': None, 'cache_key': None}
+
+.evaluation_tests/test_checkpoint_2.py:742: AssertionError
+________________________ test_force_refresh_skips_cache ________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_force_refresh_skips_cache(entrypoint_argv):
+        """Edge case: force_refresh treats the task as not cacheable."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FORCE_REFRESH_PIPELINE, FORCE_REFRESH_CONFIG
+        )
+    
+        assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+    
+        events = parse_jsonl(result.stdout)
+        cache_counts = count_cache_events(events)
+        assert all(
+            count == 0 for count in cache_counts.values()
+        ), f"Expected no cache events: {cache_counts}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        refresh_jobs = [
+            job for job in jobs if job.get("task") == "refresh_task"
+        ]
+        assert len(refresh_jobs) == 2, "Expected refresh_task to run twice"
+        for job in refresh_jobs:
+            assert job.get("cache") is None, "force_refresh should disable cache"
+>           assert "cache_hit" not in job, "cache_hit should be omitted"
+E           AssertionError: cache_hit should be omitted
+E           assert 'cache_hit' not in {'job_id': 2, 'task': 'refresh_task', 'params': {'value': 1}, 'stdout': '', 'stderr': '', 'timed_out': False, 'success': {}, 'output': None, 'exit_code': 0, 'parent': 1, 'duration': 0.0012, 'inputs': ['/tmp/tmpzsuln9yk/working'], 'cache': None, 'cache_hit': None, 'cache_key': None}
+
+.evaluation_tests/test_checkpoint_2.py:806: AssertionError
+__________________ test_always_strategy_ignores_input_change ___________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_always_strategy_ignores_input_change(entrypoint_argv):
+        """Edge case: Always strategy uses cache even when inputs change."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ALWAYS_STRATEGY_PIPELINE, ALWAYS_STRATEGY_CONFIG
+        )
+    
+        assert result.returncode == 0, (
+            f"Expected exit 0, got {result.returncode}: {result.stderr}"
+        )
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        cache_hits = get_cache_hits_by_task(jobs)
+        use_data_hits = cache_hits.get(("use_data", ()), [])
+>       assert len(use_data_hits) == 2, (
+            f"Expected 2 calls to use_data(): {use_data_hits}"
+        )
+E       AssertionError: Expected 2 calls to use_data(): []
+E       assert 0 == 2
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_2.py:869: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_basic - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 25
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp4iyzeb3n/pipeline.pipe', '--workspace', '/tmp/tmp4iyzeb3n/working', '--output', '/tmp/tmp4iyzeb3n/output', '--config', '/tmp/tmp4iyzeb3n/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 25\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arrays - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 5
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmptiltp_yl/pipeline.pipe', '--workspace', '/tmp/tmptiltp_yl/working', '--output', '/tmp/tmptiltp_yl/output', '--config', '/tmp/tmptiltp_yl/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_bool_params - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected boolean value at line 3
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp51us2yuc/pipeline.pipe', '--workspace', '/tmp/tmp51us2yuc/working', '--output', '/tmp/tmp51us2yuc/output', '--config', '/tmp/tmp51us2yuc/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected boolean value at line 3\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_concat - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token in expression: TokenType.STRING_TYPE at line 20
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpb5e5kxm5/pipeline.pipe', '--workspace', '/tmp/tmpb5e5kxm5/working', '--output', '/tmp/tmpb5e5kxm5/output', '--config', '/tmp/tmpb5e5kxm5/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Unexpected token in expression: TokenType.STRING_TYPE at line 20\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_if - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 37
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpc7yy4n3a/pipeline.pipe', '--workspace', '/tmp/tmpc7yy4n3a/working', '--output', '/tmp/tmpc7yy4n3a/output', '--config', '/tmp/tmpc7yy4n3a/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 37\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_elif - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 37
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp1w_gc_i1/pipeline.pipe', '--workspace', '/tmp/tmp1w_gc_i1/working', '--output', '/tmp/tmp1w_gc_i1/output', '--config', '/tmp/tmp1w_gc_i1/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 37\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_else - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 38
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp0s3qdqba/pipeline.pipe', '--workspace', '/tmp/tmp0s3qdqba/working', '--output', '/tmp/tmp0s3qdqba/output', '--config', '/tmp/tmp0s3qdqba/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 38\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_array_indexing - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token in expression: TokenType.PLUS at line 19
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp816ejs9h/pipeline.pipe', '--workspace', '/tmp/tmp816ejs9h/working', '--output', '/tmp/tmp816ejs9h/output', '--config', '/tmp/tmp816ejs9h/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Unexpected token in expression: TokenType.PLUS at line 19\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_for_requires - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 12
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp75qm4390/pipeline.pipe', '--workspace', '/tmp/tmp75qm4390/working', '--output', '/tmp/tmp75qm4390/output', '--config', '/tmp/tmp75qm4390/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 12\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_while_requires - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 11
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp31m_grvh/pipeline.pipe', '--workspace', '/tmp/tmp31m_grvh/working', '--output', '/tmp/tmp31m_grvh/output', '--config', '/tmp/tmp31m_grvh/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 11\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_working_dirs - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 2
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp5xkvzff7/pipeline.pipe', '--workspace', '/tmp/tmp5xkvzff7/working', '--output', '/tmp/tmp5xkvzff7/output', '--config', '/tmp/tmp5xkvzff7/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 2\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_existing_dir - AssertionError: Expected exit 0: SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 2
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpwysg3e85/pipeline.pipe', '--workspace', '/tmp/tmpwysg3e85/working', '--output', '/tmp/tmpwysg3e85/output', '--config', '/tmp/tmpwysg3e85/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 2\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops - AssertionError: Expected exit 0: SYNTAX_ERROR: Unexpected token in expression: TokenType.INT_TYPE at line 21
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpwvixpjtv/pipeline.pipe', '--workspace', '/tmp/tmpwvixpjtv/working', '--output', '/tmp/tmpwvixpjtv/output', '--config', '/tmp/tmpwvixpjtv/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Unexpected token in expression: TokenType.INT_TYPE at line 21\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_nested_loops - AssertionError: Expected exit 0: SYNTAX_ERROR: SYNTAX_ERROR: Unexpected character: | at line 18, column 25
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpb487fq10/pipeline.pipe', '--workspace', '/tmp/tmpb487fq10/working', '--output', '/tmp/tmpb487fq10/output', '--config', '/tmp/tmpb487fq10/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: SYNTAX_ERROR: Unexpected character: | at line 18, column 25\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_stderr_validation - AssertionError: Expected exit 0: SYNTAX_ERROR: SYNTAX_ERROR: Unexpected character: & at line 6, column 38
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpohnssx1r/pipeline.pipe', '--workspace', '/tmp/tmpohnssx1r/working', '--output', '/tmp/tmpohnssx1r/output', '--config', '/tmp/tmpohnssx1r/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: SYNTAX_ERROR: Unexpected character: & at line 6, column 38\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_params - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_1.py::test_circular_dependency - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp5hhyo2ye/pipeline.pipe', '--workspace', '/tmp/tmp5hhyo2ye/working', '--output', '/tmp/tmp5hhyo2ye/output'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 5\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_default_param_order - AssertionError: Expected exit 2, got 0
+assert 0 == 2
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpghx04okc/pipeline.pipe', '--workspace', '/tmp/tmpghx04okc/working', '--output', '/tmp/tmpghx04okc/output'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_missing_required_arg - AssertionError: Expected exit 3, got 0
+assert 0 == 3
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp529ti_a9/pipeline.pipe', '--workspace', '/tmp/tmp529ti_a9/working', '--output', '/tmp/tmp529ti_a9/output'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_no_main - AssertionError: Expected exit 3, got 2
+assert 2 == 3
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpf_5rf454/pipeline.pipe', '--workspace', '/tmp/tmpf_5rf454/working', '--output', '/tmp/tmpf_5rf454/output'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Expected TokenType.COLON, got TokenType.LBRACE at line 2\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recursive_call - AssertionError: Expected exit 3, got 0
+assert 0 == 3
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpla1ex1pz/pipeline.pipe', '--workspace', '/tmp/tmpla1ex1pz/working', '--output', '/tmp/tmpla1ex1pz/output'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe - AssertionError: Expected exit 3, got 0
+assert 0 == 3
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpv1nwmbl4/pipeline.pipe', '--workspace', '/tmp/tmpv1nwmbl4/working', '--output', '/tmp/tmpv1nwmbl4/output'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe - AssertionError: Expected exit 3, got 0
+assert 0 == 3
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpfkghjbk6/pipeline.pipe', '--workspace', '/tmp/tmpfkghjbk6/working', '--output', '/tmp/tmpfkghjbk6/output'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_bad_toml_syntax - AssertionError: Expected exit 2, got 0
+assert 0 == 2
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpa_g_9gqn/pipeline.pipe', '--workspace', '/tmp/tmpa_g_9gqn/working', '--output', '/tmp/tmpa_g_9gqn/output', '--config', '/tmp/tmpa_g_9gqn/config.toml'], returncode=0, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "main", "params": {}}\n{"event": "TASK_COMPLETED", "job_id": 1, "task": "main", "params": {}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_basic_cache - AssertionError: Expected at least 4 CACHE_CHECK events: {'CACHE_CHECK': 0, 'CACHE_HIT': 0, 'CACHE_MISS': 0}
+assert 0 >= 4
+FAILED .evaluation_tests/test_checkpoint_2.py::test_file_change - AssertionError: Expected 2 calls to process_file('file1'): []
+assert 0 == 2
+ +  where 0 = len([])
+FAILED .evaluation_tests/test_checkpoint_2.py::test_cache_exclude - AssertionError: Expected exit 0, got 1: 
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpr4rmxdod/pipeline.pipe', '--workspace', '/tmp/tmpr4rmxdod/working', '--output', '/tmp/tmpr4rmxdod/output', '--config', '/tmp/tmpr4rmxdod/config.toml'], returncode=1, stdout='{"event": "TASK_STARTED", "job_id": 1, "task": "collect_reports", "params": {}}\n{"event": "TASK_STARTED", "job_id": 2, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": false}}\n{"event": "TASK_RUNNING", "job_id": 2, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": false}}\n{"event": "TASK_COMPLETED", "job_id": 2, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": false}}\n{"event": "TASK_STARTED", "job_id": 3, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": false}}\n{"event": "TASK_RUNNING", "job_id": 3, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": false}}\n{"event": "TASK_COMPLETED", "job_id": 3, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": false}}\n{"event": "TASK_STARTED", "job_id": 4, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": true}}\n{"event": "TASK_RUNNING", "job_id": 4, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": true}}\n{"event": "TASK_COMPLETED", "job_id": 4, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": false, "verbose": true}}\n{"event": "TASK_STARTED", "job_id": 5, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": true}}\n{"event": "TASK_RUNNING", "job_id": 5, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": true}}\n{"event": "TASK_COMPLETED", "job_id": 5, "task": "generate_report", "params": {"dataset": "sales", "format": "pdf", "debug": true, "verbose": true}}\n{"event": "TASK_STARTED", "job_id": 6, "task": "generate_report", "params": {"dataset": "sales", "format": "html", "debug": false, "verbose": false}}\n{"event": "TASK_RUNNING", "job_id": 6, "task": "generate_report", "params": {"dataset": "sales", "format": "html", "debug": false, "verbose": false}}\n{"event": "TASK_COMPLETED", "job_id": 6, "task": "generate_report", "params": {"dataset": "sales", "format": "html", "debug": false, "verbose": false}}\n{"event": "TASK_RUNNING", "job_id": 1, "task": "collect_reports", "params": {}}\n{"event": "TASK_FAILED", "job_id": 1, "task": "collect_reports", "params": {}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_ttl_strategy - AssertionError: Expected exit 0, got 2: SYNTAX_ERROR: Unexpected token in expression: TokenType.DOT at line 7
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjy9b7g9t/pipeline.pipe', '--workspace', '/tmp/tmpjy9b7g9t/working', '--output', '/tmp/tmpjy9b7g9t/output', '--config', '/tmp/tmpjy9b7g9t/config.toml'], returncode=2, stdout='', stderr='SYNTAX_ERROR: Unexpected token in expression: TokenType.DOT at line 7\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_cascade_invalidation - AssertionError: Expected at least 2 calls to generate_base(42): []
+assert 0 >= 2
+ +  where 0 = len([])
+FAILED .evaluation_tests/test_checkpoint_2.py::test_global_cache_disabled - AssertionError: cache_hit should be omitted
+assert 'cache_hit' not in {'job_id': 2, 'task': 'cached_task', 'params': {'value': 1}, 'stdout': '', 'stderr': '', 'timed_out': False, 'success': {}, 'output': None, 'exit_code': 0, 'parent': 1, 'duration': 0.0011, 'inputs': ['/tmp/tmpxu6g2ig0/working'], 'cache': None, 'cache_hit': None, 'cache_key': None}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_force_refresh_skips_cache - AssertionError: cache_hit should be omitted
+assert 'cache_hit' not in {'job_id': 2, 'task': 'refresh_task', 'params': {'value': 1}, 'stdout': '', 'stderr': '', 'timed_out': False, 'success': {}, 'output': None, 'exit_code': 0, 'parent': 1, 'duration': 0.0012, 'inputs': ['/tmp/tmpzsuln9yk/working'], 'cache': None, 'cache_hit': None, 'cache_key': None}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_always_strategy_ignores_input_change - AssertionError: Expected 2 calls to use_data(): []
+assert 0 == 2
+ +  where 0 = len([])
+======================== 32 failed, 9 passed in 11.34s =========================

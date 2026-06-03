@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "problem_name": "database_migration",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_1",
+  "checkpoint_version": 1,
+  "duration": 7.407572984695435,
+  "entrypoint": "uv run migration_tool.py",
+  "tests": {
+    "checkpoint_1-Core": {
+      "passed": [
+        "test_add_column",
+        "test_create_table",
+        "test_drop_single_column",
+        "test_skip_already_applied"
+      ],
+      "failed": [],
+      "skipped": []
+    },
+    "checkpoint_1-Error": {
+      "passed": [
+        "test_add_column_rejects_invalid_identifier",
+        "test_auto_increment_requires_integer_primary_key",
+        "test_column_already_exists",
+        "test_column_missing_for_drop",
+        "test_create_table_multiple_primary_keys_rejected",
+        "test_drop_column_missing_table",
+        "test_drop_only_column",
+        "test_drop_primary_key_column",
+        "test_invalid_column_type_rejected",
+        "test_invalid_identifier_rejected",
+        "test_invalid_json",
+        "test_invalid_schema_missing_operations",
+        "test_missing_migration_file",
+        "test_table_exists",
+        "test_table_missing_for_add_column",
+        "test_version_negative_rejected",
+        "test_version_string_rejected",
+        "test_version_zero_rejected"
+      ],
+      "failed": [],
+      "skipped": []
+    },
+    "checkpoint_1-Functionality": {
+      "passed": [
+        "test_add_column_with_default_to_populated_table",
+        "test_add_not_null_with_default",
+        "test_auto_increment_primary_key",
+        "test_complex_data_preservation",
+        "test_create_multiple_tables",
+        "test_default_values_various_types",
+        "test_drop_column_preserve_data",
+        "test_drop_column_preserves_existing_data",
+        "test_drop_column_removes_unique_index_on_dropped_column",
+        "test_foreign_keys_disabled_during_drop_column",
+        "test_mixed_operations_all_types",
+        "test_multiple_drop_columns",
+        "test_multiple_operations",
+        "test_non_sequential_versions",
+        "test_unique_and_not_null_constraints",
+        "test_unique_constraint_prevents_duplicates"
+      ],
+      "failed": [
+        "test_reserved_word_identifiers_are_quoted"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 4,
+    "Functionality": 16,
+    "Regression": 0,
+    "Error": 18
+  },
+  "total_counts": {
+    "Core": 4,
+    "Functionality": 17,
+    "Regression": 0,
+    "Error": 18
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 39,
+  "test_collection_hash": "c2530698a33fb926b47c1baf7715cba6f828412a612fbcb3a7e8d120339c0d24",
+  "infrastructure_failure": false
+}

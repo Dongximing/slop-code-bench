@@ -1,0 +1,18 @@
+version: "1"
+schema: "preferences"
+
+preferences:
+  - name: "Disable auto-rearranging"
+    domain: com.apple.dock
+    key: mru-spaces
+    value: false
+    value_type: bool
+    apply_command: "defaults write com.apple.dock mru-spaces -bool false"
+    min_version: mojave
+  - name: "Show battery percentage"
+    domain: com.apple.menuextra.battery
+    key: ShowPercent
+    value: "YES"
+    value_type: string
+    apply_command: "defaults write com.apple.menuextra.battery ShowPercent -string YES"
+    enabled: false

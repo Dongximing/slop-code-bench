@@ -1,0 +1,353 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/ciuoc84Kjz1fj-un/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 180.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 33 items
+
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[naga] PASSED    [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[barrage_l] PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[fernite_carbide] PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[athanor] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[azariel] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[proteus] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_materials_sorted_case_insensitive PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_run_time_rounds_up PASSED   [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_buildable_column_accuracy PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_unpublished_item_error FAILED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_case_sensitive_item_name FAILED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_nonexistent_item_error FAILED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-1] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-2] PASSED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-3] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-4] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-5] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-1] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-5] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-1] FAILED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-5] FAILED [ 63%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[redeemer-1] FAILED [ 66%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[jackdaw-5] FAILED [ 69%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[tengu-5] PASSED [ 72%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[valravn-5] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[subsystem-5] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_2.py::test_default_skill_is_five PASSED [ 81%]
+.evaluation_tests/test_checkpoint_2.py::test_tech_iii_accepts_blueprint_input PASSED [ 84%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_time_rounds_up PASSED [ 87%]
+.evaluation_tests/test_checkpoint_2.py::test_probability_clamps_to_one PASSED [ 90%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_zero PASSED     [ 93%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_six PASSED      [ 96%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_negative PASSED [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_unpublished_item_error __________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.error
+    def test_unpublished_item_error(entrypoint_argv, sde_dir):
+        """Error: Unpublished items (published=0 in SDE) should fail with clear error."""
+        result = run_command(
+            entrypoint_argv, "recipe", "Python Mine", "--sde", str(sde_dir)
+        )
+>       assert result.returncode != 0, "Expected error for unpublished item"
+E       AssertionError: Expected error for unpublished item
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Python Mine', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Python Mine' not found in SDE.\n", stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:136: AssertionError
+________________________ test_case_sensitive_item_name _________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.error
+    def test_case_sensitive_item_name(entrypoint_argv, sde_dir):
+        """Error: Item names must match exact case."""
+        result = run_command(
+            entrypoint_argv, "recipe", "naga", "--sde", str(sde_dir)
+        )
+>       assert result.returncode != 0, "Expected error for wrong case item name"
+E       AssertionError: Expected error for wrong case item name
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'naga', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'naga' not found in SDE.\n", stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:145: AssertionError
+_________________________ test_nonexistent_item_error __________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.error
+    def test_nonexistent_item_error(entrypoint_argv, sde_dir):
+        """Error: Nonexistent item should fail with clear error."""
+        result = run_command(
+            entrypoint_argv,
+            "recipe",
+            "Totally Fake Item That Does Not Exist",
+            "--sde",
+            str(sde_dir),
+        )
+>       assert result.returncode != 0, "Expected error for nonexistent item"
+E       AssertionError: Expected error for nonexistent item
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Totally Fake Item That Does Not Exist', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Totally Fake Item That Does Not Exist' not found in SDE.\n", stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:158: AssertionError
+__________________ test_invention_functionality[dual_giga-1] ___________________
+
+case_name = 'dual_giga', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Dual Giga Pulse Laser I Blueprint (20445)', 'datacores': 'Datacore - High Energy Physics, Datacore - Laser Physics', 'group': 'Module > Energy Weapon', 'item': 'Dual Giga Pulse Laser II (37298)', ...}
+expected = {'base': 'Dual Giga Pulse Laser I Blueprint (20445)', 'datacores': 'Datacore - High Energy Physics, Datacore - Laser Physics', 'group': 'Module > Energy Weapon', 'item': 'Dual Giga Pulse Laser II (37298)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 38.25, 'old_value': 39.38}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 45.9, 'old_value': 47.26}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 68.85, 'old_value': 70.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.95, 'old_value': 23.63}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 72.68, 'old_value': 74.83}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 34.43, 'old_value': 35.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 57.38, 'old_value': 59.08}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 42.08, 'old_value': 43.32}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 38.25, 'old_value': 39.38}}}
+E       assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 38.25, 'old_value': 39.38}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 45.9, 'old_value': 47.26}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 68.85, 'old_value': 70.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.95, 'old_value': 23.63}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 72.68, 'old_value': 74.83}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 34.43, 'old_value': 35.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 57.38, 'old_value': 59.08}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 42.08, 'old_value': 43.32}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 38.25, 'old_value': 39.38}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+__________________ test_invention_functionality[dual_giga-5] ___________________
+
+case_name = 'dual_giga', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Dual Giga Pulse Laser I Blueprint (20445)', 'datacores': 'Datacore - High Energy Physics, Datacore - Laser Physics', 'group': 'Module > Energy Weapon', 'item': 'Dual Giga Pulse Laser II (37298)', ...}
+expected = {'base': 'Dual Giga Pulse Laser I Blueprint (20445)', 'datacores': 'Datacore - High Energy Physics, Datacore - Laser Physics', 'group': 'Module > Energy Weapon', 'item': 'Dual Giga Pulse Laser II (37298)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 55.25, 'old_value': 60.92}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 66.3, 'old_value': 73.1}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 99.45, 'old_value': 100.0}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 33.15, 'old_value': 36.55}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 49.73, 'old_value': 54.83}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 82.88, 'old_value': 91.38}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 60.78, 'old_value': 67.01}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 55.25, 'old_value': 60.92}}}
+E       assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 55.25, 'old_value': 60.92}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 66.3, 'old_value': 73.1}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 99.45, 'old_value': 100.0}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 33.15, 'old_value': 36.55}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 49.73, 'old_value': 54.83}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 82.88, 'old_value': 91.38}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 60.78, 'old_value': 67.01}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 55.25, 'old_value': 60.92}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+___________________ test_invention_functionality[redeemer-1] ___________________
+
+case_name = 'redeemer', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Armageddon Blueprint (997)', 'datacores': 'Datacore - Amarrian Starship Engineering, Datacore - Mechanical Engineering', 'group': 'Ship > Black Ops', 'item': 'Redeemer (22428)', ...}
+expected = {'base': 'Armageddon Blueprint (997)', 'datacores': 'Datacore - Amarrian Starship Engineering, Datacore - Mechanical Engineering', 'group': 'Ship > Black Ops', 'item': 'Redeemer (22428)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 24.02, 'old_value': 24.75}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 28.82, 'old_value': 29.7}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 43.23, 'old_value': 44.55}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 14.41, 'old_value': 14.85}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 45.63, 'old_value': 47.03}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 21.62, 'old_value': 22.28}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 36.03, 'old_value': 37.13}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 26.42, 'old_value': 27.22}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 24.02, 'old_value': 24.75}}}
+E       assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 24.02, 'old_value': 24.75}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 28.82, 'old_value': 29.7}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 43.23, 'old_value': 44.55}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 14.41, 'old_value': 14.85}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 45.63, 'old_value': 47.03}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 21.62, 'old_value': 22.28}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 36.03, 'old_value': 37.13}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 26.42, 'old_value': 27.22}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 24.02, 'old_value': 24.75}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+___________________ test_invention_functionality[jackdaw-5] ____________________
+
+case_name = 'jackdaw', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'datacores': 'Datacore - Mechanical Engineering, Datacore - Plasma Physics', 'group': 'Ship > Tactical Destroyer', 'item': 'Jackdaw (34828)', 'market_group': 'Ships > Destroyers > Advanced Destroyers > Tactical Destroyers > Caldari', ...}
+expected = {'datacores': 'Datacore - Mechanical Engineering, Datacore - Plasma Physics', 'group': 'Ship > Tactical Destroyer', 'item': 'Jackdaw (34828)', 'market_group': 'Ships > Destroyers > Advanced Destroyers > Tactical Destroyers > Caldari', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['probabilities']['Small Intact Hull Section|None']['Runs']": {'new_value': 20, 'old_value': 1}, "root['probabilities']['Small Intact Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 21, 'old_value': 2}, "root['probabilities']['Small Intact Hull Section|Attainment Decryptor']['Runs']": {'new_value': 24, 'old_value': 5}, "root['probabilities']['Small Intact Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 29, 'old_value': 10}, "root['probabilities']['Small Intact Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 22, 'old_value': 3}, "root['probabilities']['Small Intact Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 27, 'old_value': 8}, "root['probabilities']['Small Intact Hull Section|Parity Decryptor']['Runs']": {'new_value': 23, 'old_value': 4}, "root['probabilities']['Small Intact Hull Section|Process Decryptor']['Runs']": {'new_value': 20, 'old_value': 1}, "root['probabilities']['Small Intact Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 22, 'old_value': 3}, "root['probabilities']['Small Malfunctioning Hull Section|None']['Runs']": {'new_value': 10, 'old_value': 1}, "root['probabilities']['Small Malfunctioning Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 11, 'old_value': 2}, "root['probabilities']['Small Malfunctioning Hull Section|Attainment Decryptor']['Runs']": {'new_value': 14, 'old_value': 5}, "root['probabilities']['Small Malfunctioning Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 19, 'old_value': 10}, "root['probabilities']['Small Malfunctioning Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 12, 'old_value': 3}, "root['probabilities']['Small Malfunctioning Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 17, 'old_value': 8}, "root['probabilities']['Small Malfunctioning Hull Section|Parity Decryptor']['Runs']": {'new_value': 13, 'old_value': 4}, "root['probabilities']['Small Malfunctioning Hull Section|Process Decryptor']['Runs']": {'new_value': 10, 'old_value': 1}, "root['probabilities']['Small Malfunctioning Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 12, 'old_value': 3}, "root['probabilities']['Small Wrecked Hull Section|None']['Runs']": {'new_value': 3, 'old_value': 1}, "root['probabilities']['Small Wrecked Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 4, 'old_value': 2}, "root['probabilities']['Small Wrecked Hull Section|Attainment Decryptor']['Runs']": {'new_value': 7, 'old_value': 5}, "root['probabilities']['Small Wrecked Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 12, 'old_value': 10}, "root['probabilities']['Small Wrecked Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 5, 'old_value': 3}, "root['probabilities']['Small Wrecked Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 10, 'old_value': 8}, "root['probabilities']['Small Wrecked Hull Section|Parity Decryptor']['Runs']": {'new_value': 6, 'old_value': 4}, "root['probabilities']['Small Wrecked Hull Section|Process Decryptor']['Runs']": {'new_value': 3, 'old_value': 1}, "root['probabilities']['Small Wrecked Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 5, 'old_value': 3}}}
+E       assert not {'values_changed': {"root['probabilities']['Small Intact Hull Section|None']['Runs']": {'new_value': 20, 'old_value': 1}, "root['probabilities']['Small Intact Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 21, 'old_value': 2}, "root['probabilities']['Small Intact Hull Section|Attainment Decryptor']['Runs']": {'new_value': 24, 'old_value': 5}, "root['probabilities']['Small Intact Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 29, 'old_value': 10}, "root['probabilities']['Small Intact Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 22, 'old_value': 3}, "root['probabilities']['Small Intact Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 27, 'old_value': 8}, "root['probabilities']['Small Intact Hull Section|Parity Decryptor']['Runs']": {'new_value': 23, 'old_value': 4}, "root['probabilities']['Small Intact Hull Section|Process Decryptor']['Runs']": {'new_value': 20, 'old_value': 1}, "root['probabilities']['Small Intact Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 22, 'old_value': 3}, "root['probabilities']['Small Malfunctioning Hull Section|None']['Runs']": {'new_value': 10, 'old_value': 1}, "root['probabilities']['Small Malfunctioning Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 11, 'old_value': 2}, "root['probabilities']['Small Malfunctioning Hull Section|Attainment Decryptor']['Runs']": {'new_value': 14, 'old_value': 5}, "root['probabilities']['Small Malfunctioning Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 19, 'old_value': 10}, "root['probabilities']['Small Malfunctioning Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 12, 'old_value': 3}, "root['probabilities']['Small Malfunctioning Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 17, 'old_value': 8}, "root['probabilities']['Small Malfunctioning Hull Section|Parity Decryptor']['Runs']": {'new_value': 13, 'old_value': 4}, "root['probabilities']['Small Malfunctioning Hull Section|Process Decryptor']['Runs']": {'new_value': 10, 'old_value': 1}, "root['probabilities']['Small Malfunctioning Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 12, 'old_value': 3}, "root['probabilities']['Small Wrecked Hull Section|None']['Runs']": {'new_value': 3, 'old_value': 1}, "root['probabilities']['Small Wrecked Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 4, 'old_value': 2}, "root['probabilities']['Small Wrecked Hull Section|Attainment Decryptor']['Runs']": {'new_value': 7, 'old_value': 5}, "root['probabilities']['Small Wrecked Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 12, 'old_value': 10}, "root['probabilities']['Small Wrecked Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 5, 'old_value': 3}, "root['probabilities']['Small Wrecked Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 10, 'old_value': 8}, "root['probabilities']['Small Wrecked Hull Section|Parity Decryptor']['Runs']": {'new_value': 6, 'old_value': 4}, "root['probabilities']['Small Wrecked Hull Section|Process Decryptor']['Runs']": {'new_value': 3, 'old_value': 1}, "root['probabilities']['Small Wrecked Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 5, 'old_value': 3}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_unpublished_item_error - AssertionError: Expected error for unpublished item
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Python Mine', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Python Mine' not found in SDE.\n", stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_case_sensitive_item_name - AssertionError: Expected error for wrong case item name
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'naga', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'naga' not found in SDE.\n", stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_nonexistent_item_error - AssertionError: Expected error for nonexistent item
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Totally Fake Item That Does Not Exist', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Totally Fake Item That Does Not Exist' not found in SDE.\n", stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-1] - AssertionError: 
+  Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 38.25, 'old_value': 39.38}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 45.9, 'old_value': 47.26}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 68.85, 'old_value': 70.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.95, 'old_value': 23.63}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 72.68, 'old_value': 74.83}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 34.43, 'old_value': 35.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 57.38, 'old_value': 59.08}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 42.08, 'old_value': 43.32}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 38.25, 'old_value': 39.38}}}
+assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 38.25, 'old_value': 39.38}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 45.9, 'old_value': 47.26}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 68.85, 'old_value': 70.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.95, 'old_value': 23.63}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 72.68, 'old_value': 74.83}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 34.43, 'old_value': 35.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 57.38, 'old_value': 59.08}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 42.08, 'old_value': 43.32}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 38.25, 'old_value': 39.38}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-5] - AssertionError: 
+  Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 55.25, 'old_value': 60.92}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 66.3, 'old_value': 73.1}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 99.45, 'old_value': 100.0}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 33.15, 'old_value': 36.55}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 49.73, 'old_value': 54.83}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 82.88, 'old_value': 91.38}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 60.78, 'old_value': 67.01}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 55.25, 'old_value': 60.92}}}
+assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 55.25, 'old_value': 60.92}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 66.3, 'old_value': 73.1}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 99.45, 'old_value': 100.0}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 33.15, 'old_value': 36.55}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 49.73, 'old_value': 54.83}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 82.88, 'old_value': 91.38}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 60.78, 'old_value': 67.01}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 55.25, 'old_value': 60.92}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[redeemer-1] - AssertionError: 
+  Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 24.02, 'old_value': 24.75}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 28.82, 'old_value': 29.7}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 43.23, 'old_value': 44.55}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 14.41, 'old_value': 14.85}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 45.63, 'old_value': 47.03}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 21.62, 'old_value': 22.28}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 36.03, 'old_value': 37.13}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 26.42, 'old_value': 27.22}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 24.02, 'old_value': 24.75}}}
+assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 24.02, 'old_value': 24.75}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 28.82, 'old_value': 29.7}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 43.23, 'old_value': 44.55}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 14.41, 'old_value': 14.85}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 45.63, 'old_value': 47.03}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 21.62, 'old_value': 22.28}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 36.03, 'old_value': 37.13}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 26.42, 'old_value': 27.22}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 24.02, 'old_value': 24.75}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[jackdaw-5] - AssertionError: 
+  Diff: {'values_changed': {"root['probabilities']['Small Intact Hull Section|None']['Runs']": {'new_value': 20, 'old_value': 1}, "root['probabilities']['Small Intact Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 21, 'old_value': 2}, "root['probabilities']['Small Intact Hull Section|Attainment Decryptor']['Runs']": {'new_value': 24, 'old_value': 5}, "root['probabilities']['Small Intact Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 29, 'old_value': 10}, "root['probabilities']['Small Intact Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 22, 'old_value': 3}, "root['probabilities']['Small Intact Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 27, 'old_value': 8}, "root['probabilities']['Small Intact Hull Section|Parity Decryptor']['Runs']": {'new_value': 23, 'old_value': 4}, "root['probabilities']['Small Intact Hull Section|Process Decryptor']['Runs']": {'new_value': 20, 'old_value': 1}, "root['probabilities']['Small Intact Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 22, 'old_value': 3}, "root['probabilities']['Small Malfunctioning Hull Section|None']['Runs']": {'new_value': 10, 'old_value': 1}, "root['probabilities']['Small Malfunctioning Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 11, 'old_value': 2}, "root['probabilities']['Small Malfunctioning Hull Section|Attainment Decryptor']['Runs']": {'new_value': 14, 'old_value': 5}, "root['probabilities']['Small Malfunctioning Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 19, 'old_value': 10}, "root['probabilities']['Small Malfunctioning Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 12, 'old_value': 3}, "root['probabilities']['Small Malfunctioning Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 17, 'old_value': 8}, "root['probabilities']['Small Malfunctioning Hull Section|Parity Decryptor']['Runs']": {'new_value': 13, 'old_value': 4}, "root['probabilities']['Small Malfunctioning Hull Section|Process Decryptor']['Runs']": {'new_value': 10, 'old_value': 1}, "root['probabilities']['Small Malfunctioning Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 12, 'old_value': 3}, "root['probabilities']['Small Wrecked Hull Section|None']['Runs']": {'new_value': 3, 'old_value': 1}, "root['probabilities']['Small Wrecked Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 4, 'old_value': 2}, "root['probabilities']['Small Wrecked Hull Section|Attainment Decryptor']['Runs']": {'new_value': 7, 'old_value': 5}, "root['probabilities']['Small Wrecked Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 12, 'old_value': 10}, "root['probabilities']['Small Wrecked Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 5, 'old_value': 3}, "root['probabilities']['Small Wrecked Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 10, 'old_value': 8}, "root['probabilities']['Small Wrecked Hull Section|Parity Decryptor']['Runs']": {'new_value': 6, 'old_value': 4}, "root['probabilities']['Small Wrecked Hull Section|Process Decryptor']['Runs']": {'new_value': 3, 'old_value': 1}, "root['probabilities']['Small Wrecked Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 5, 'old_value': 3}}}
+assert not {'values_changed': {"root['probabilities']['Small Intact Hull Section|None']['Runs']": {'new_value': 20, 'old_value': 1}, "root['probabilities']['Small Intact Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 21, 'old_value': 2}, "root['probabilities']['Small Intact Hull Section|Attainment Decryptor']['Runs']": {'new_value': 24, 'old_value': 5}, "root['probabilities']['Small Intact Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 29, 'old_value': 10}, "root['probabilities']['Small Intact Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 22, 'old_value': 3}, "root['probabilities']['Small Intact Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 27, 'old_value': 8}, "root['probabilities']['Small Intact Hull Section|Parity Decryptor']['Runs']": {'new_value': 23, 'old_value': 4}, "root['probabilities']['Small Intact Hull Section|Process Decryptor']['Runs']": {'new_value': 20, 'old_value': 1}, "root['probabilities']['Small Intact Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 22, 'old_value': 3}, "root['probabilities']['Small Malfunctioning Hull Section|None']['Runs']": {'new_value': 10, 'old_value': 1}, "root['probabilities']['Small Malfunctioning Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 11, 'old_value': 2}, "root['probabilities']['Small Malfunctioning Hull Section|Attainment Decryptor']['Runs']": {'new_value': 14, 'old_value': 5}, "root['probabilities']['Small Malfunctioning Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 19, 'old_value': 10}, "root['probabilities']['Small Malfunctioning Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 12, 'old_value': 3}, "root['probabilities']['Small Malfunctioning Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 17, 'old_value': 8}, "root['probabilities']['Small Malfunctioning Hull Section|Parity Decryptor']['Runs']": {'new_value': 13, 'old_value': 4}, "root['probabilities']['Small Malfunctioning Hull Section|Process Decryptor']['Runs']": {'new_value': 10, 'old_value': 1}, "root['probabilities']['Small Malfunctioning Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 12, 'old_value': 3}, "root['probabilities']['Small Wrecked Hull Section|None']['Runs']": {'new_value': 3, 'old_value': 1}, "root['probabilities']['Small Wrecked Hull Section|Accelerant Decryptor']['Runs']": {'new_value': 4, 'old_value': 2}, "root['probabilities']['Small Wrecked Hull Section|Attainment Decryptor']['Runs']": {'new_value': 7, 'old_value': 5}, "root['probabilities']['Small Wrecked Hull Section|Augmentation Decryptor']['Runs']": {'new_value': 12, 'old_value': 10}, "root['probabilities']['Small Wrecked Hull Section|Optimized Attainment Decryptor']['Runs']": {'new_value': 5, 'old_value': 3}, "root['probabilities']['Small Wrecked Hull Section|Optimized Augmentation Decryptor']['Runs']": {'new_value': 10, 'old_value': 8}, "root['probabilities']['Small Wrecked Hull Section|Parity Decryptor']['Runs']": {'new_value': 6, 'old_value': 4}, "root['probabilities']['Small Wrecked Hull Section|Process Decryptor']['Runs']": {'new_value': 3, 'old_value': 1}, "root['probabilities']['Small Wrecked Hull Section|Symmetry Decryptor']['Runs']": {'new_value': 5, 'old_value': 3}}}
+======================== 7 failed, 26 passed in 29.00s =========================

@@ -1,0 +1,23 @@
+version: "1"
+schema: "module"
+
+depends_on:
+  - core
+
+applications:
+  - pycharm
+
+actions:
+  - type: run
+    command: "pip3 install --user neovim pynvim"
+
+environments:
+  - language: python
+    versions:
+      - "3.12"
+    manager: uv
+    plugins:
+      - name: venv
+        virtual_environments:
+          - version: "3.12"
+            name: py312-venv

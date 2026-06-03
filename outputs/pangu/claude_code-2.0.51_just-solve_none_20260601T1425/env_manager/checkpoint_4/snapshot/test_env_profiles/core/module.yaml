@@ -1,0 +1,23 @@
+version: "1"
+schema: "module"
+
+applications:
+  - vim
+  - git
+  - zsh
+
+actions:
+  - type: copy
+    source: vimrc
+    dest: ~/.vimrc
+  - type: link
+    source: zshrc
+    dest: ~/.zshrc
+  - type: link
+    source: gitconfig
+    dest: ~/.gitconfig
+
+preferences:
+  - scope: system
+    key: "track_changes"
+    value: true

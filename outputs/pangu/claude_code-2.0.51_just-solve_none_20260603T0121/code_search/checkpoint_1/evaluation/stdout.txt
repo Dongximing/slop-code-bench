@@ -1,0 +1,169 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/87rHZCS0BFEk6wP0/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 13 items
+
+.evaluation_tests/test_checkpoint_1.py::test_basic PASSED                [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_single_match FAILED         [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_spec_example PASSED         [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_output_order_and_format PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_no_matches_outputs_nothing PASSED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::test_ignore_non_py_files PASSED  [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_skip_undecodable_file PASSED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_undecodable_file_before_decodable_still_scans PASSED [ 61%]
+.evaluation_tests/test_checkpoint_1.py::test_encoding_option_reads_non_utf8 PASSED [ 69%]
+.evaluation_tests/test_checkpoint_1.py::test_case_insensitive_and_language PASSED [ 76%]
+.evaluation_tests/test_checkpoint_1.py::test_multi_file_ordering PASSED  [ 84%]
+.evaluation_tests/test_checkpoint_1.py::test_regex_flag_variations FAILED [ 92%]
+.evaluation_tests/test_checkpoint_1.py::test_unicode_and_ties PASSED     [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_single_match _______________________________
+
+entrypoint_argv = ['uv', 'run', 'code_search.py']
+proj_dir = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/proj')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_single_match0')
+
+    @pytest.mark.core
+    def test_single_match(entrypoint_argv, proj_dir, tmp_path):
+        """Core: Single multiline regex match in N.py."""
+        rules = [
+            {
+                "id": "heatmap",
+                "kind": "regex",
+                "pattern": "# Create heatmap\n        sns.heatmap",
+                "regex_flags": ["i"],
+            }
+        ]
+        expected = [
+            {
+                "end": {"col": 20, "line": 326},
+                "file": "N.py",
+                "language": "python",
+                "match": "# Create heatmap\n        sns.heatmap",
+                "rule_id": "heatmap",
+                "start": {"col": 9, "line": 325},
+            }
+        ]
+    
+        rules_file = write_rules(tmp_path, rules)
+        result = run_search(entrypoint_argv, proj_dir, rules_file)
+>       assert_matches(result.stdout, expected, actual_returncode=result.returncode)
+
+.evaluation_tests/test_checkpoint_1.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/code_search_test_helpers.py:168: in assert_matches_basic
+    assert_jsonl_matches(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual_stdout = ''
+expected = [{'end': {'col': 20, 'line': 326}, 'file': 'N.py', 'language': 'python', 'match': '# Create heatmap\n        sns.heatmap', ...}]
+
+    def assert_jsonl_matches(
+        actual_stdout: str,
+        expected: JsonList,
+        *,
+        sorter: Sorter,
+        exit_code: int = 0,
+        actual_returncode: int = 0,
+    ) -> None:
+        """Assert that JSONL output equals expected after sorting."""
+        assert actual_returncode == exit_code, (
+            f"Expected exit code {exit_code}, got {actual_returncode}"
+        )
+        actual = parse_jsonl(actual_stdout)
+>       assert sorter(actual) == sorter(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/code_search_test_helpers.py:142: AssertionError
+__________________________ test_regex_flag_variations __________________________
+
+entrypoint_argv = ['uv', 'run', 'code_search.py']
+proj_dir = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/proj')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_regex_flag_variations0')
+
+    @pytest.mark.functionality
+    def test_regex_flag_variations(entrypoint_argv, proj_dir, tmp_path):
+        """Functionality: Multiline (m) and dotall (s) flags."""
+        rules = [
+            {"id": "style-comment", "kind": "regex", "pattern": "^# Set style for better-looking plots$", "regex_flags": ["m"]},
+            {"id": "heatmap-block", "kind": "regex", "pattern": "def create_heatmap\\(.*?sns\\.heatmap", "regex_flags": ["s"]},
+        ]
+        expected = [
+            {"end": {"col": 37, "line": 21}, "file": "N.py", "language": "python", "match": "# Set style for better-looking plots", "rule_id": "style-comment", "start": {"col": 1, "line": 21}},
+            {
+                "end": {"col": 20, "line": 326},
+                "file": "N.py",
+                "language": "python",
+                "match": "def create_heatmap(self, data: pd.DataFrame, config: Optional[ChartConfig] = None) -> plt.Figure:\n"
+                '        """\n'
+                "        Create a correlation heatmap.\n"
+                "        \n"
+                "        Args:\n"
+                "            data: DataFrame containing numerical data\n"
+                "            config: Optional chart configuration\n"
+                "            \n"
+                "        Returns:\n"
+                "            Matplotlib figure object\n"
+                '        """\n'
+                "        config = config or self.config\n"
+                "        \n"
+                "        fig, ax = plt.subplots(figsize=config.figsize, dpi=config.dpi)\n"
+                "        \n"
+                "        # Calculate correlation matrix\n"
+                "        corr_matrix = data.select_dtypes(include=[np.number]).corr()\n"
+                "        \n"
+                "        # Create heatmap\n"
+                "        sns.heatmap",
+                "rule_id": "heatmap-block",
+                "start": {"col": 5, "line": 307},
+            },
+        ]
+    
+        rules_file = write_rules(tmp_path, rules)
+        result = run_search(entrypoint_argv, proj_dir, rules_file)
+>       assert_matches(result.stdout, expected, actual_returncode=result.returncode)
+
+.evaluation_tests/test_checkpoint_1.py:409: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/code_search_test_helpers.py:168: in assert_matches_basic
+    assert_jsonl_matches(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual_stdout = '{"rule_id": "style-comment", "file": "N.py", "language": "python", "start": {"line": 21, "col": 1}, "end": {"line": 21, "col": 37}, "match": "# Set style for better-looking plots"}\n'
+expected = [{'end': {'col': 37, 'line': 21}, 'file': 'N.py', 'language': 'python', 'match': '# Set style for better-looking plots...atrix = data.select_dtypes(include=[np.number]).corr()\n        \n        # Create heatmap\n        sns.heatmap', ...}]
+
+    def assert_jsonl_matches(
+        actual_stdout: str,
+        expected: JsonList,
+        *,
+        sorter: Sorter,
+        exit_code: int = 0,
+        actual_returncode: int = 0,
+    ) -> None:
+        """Assert that JSONL output equals expected after sorting."""
+        assert actual_returncode == exit_code, (
+            f"Expected exit code {exit_code}, got {actual_returncode}"
+        )
+        actual = parse_jsonl(actual_stdout)
+>       assert sorter(actual) == sorter(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/code_search_test_helpers.py:142: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_single_match - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_regex_flag_variations - AssertionError
+========================= 2 failed, 11 passed in 2.10s =========================

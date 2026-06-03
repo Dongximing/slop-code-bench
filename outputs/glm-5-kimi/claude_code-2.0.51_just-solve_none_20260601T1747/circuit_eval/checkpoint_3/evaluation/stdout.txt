@@ -1,0 +1,371 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/7ALatHK9-3FjMKqY/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 205 items
+
+.evaluation_tests/test_checkpoint_1.py::test_help_ignores_json_flag PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::test_version_plain_text PASSED   [  0%]
+.evaluation_tests/test_checkpoint_1.py::test_version_json PASSED         [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_usage_error_no_args PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_usage_error_without_command PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_unknown_command PASSED  [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_check_valid_circuit_reports_interface FAILED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_check_file_not_found FAILED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[bad_syntax-            input a b\n            output y\n            y = AND(a, b\n            ] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[literal_x-            input a\n            output y\n            y = X\n            ] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[brackets-            input a[0]\n            output y\n            y = a\n            ] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[declaration_after_assignment-            input a\n            output y\n            y = a\n            wire t1\n            t1 = a\n            -DeclarationAfterAssignmentError] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[duplicate_name-            input a a\n            output y\n            y = a\n            -DuplicateNameError] PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[undefined_name-            input a\n            output y\n            y = z\n            -UndefinedNameError] PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[input_assignment-            input a\n            output y\n            y = a\n            a = 1\n            -InputAssignmentError] PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[multiple_assignment-            input a\n            output y\n            y = a\n            y = NOT(a)\n            -MultipleAssignmentError] PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[unassigned_signal-            input a\n            output y\n            -UnassignedSignalError] PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[duplicate_name_across_lines-            input a\n            input a\n            output y\n            y = a\n            -DuplicateNameError] PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[unassigned_wire-            input a\n            output y\n            wire t1\n            y = a\n            -UnassignedSignalError] PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[undeclared_lhs-            input a\n            output y\n            t1 = a\n            y = a\n            -UndefinedNameError] PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_check_cycle_error_message PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_check_accepts_all_operators PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_not_too_many-a-NOT(a, a)] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_buf_too_many-a b-BUF(a, b)] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_and_too_few-a-AND(a)] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_or_too_few-a-OR(a)] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_xor_too_few-a-XOR(a)] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_nand_too_few-a-NAND(a)] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_nor_too_few-a-NOR(a)] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_xnor_too_few-a-XNOR(a)] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_check_identifiers_are_case_sensitive PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_check_majority_vote_circuit PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parity_generator_circuit PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_check_comparator_2bit_circuit PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_check_decoder_circuit PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_check_shared_scalar_circuit PASSED [ 17%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_text_outputs_sorted FAILED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_json_outputs_fields PASSED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_input_error_reports_payload[args0-MissingInputError] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_input_error_reports_payload[args1-UnknownInputError] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_unknown_input_with_allow_extra PASSED [ 20%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_default_value_applied[0-expected0] PASSED [ 20%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_default_value_applied[1-expected1] PASSED [ 20%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_invalid_input_value[X] PASSED [ 21%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_invalid_input_value[2] FAILED [ 21%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments0-expected0] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments1-expected1] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments2-expected2] PASSED [ 23%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments3-expected3] PASSED [ 23%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments4-expected4] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments5-expected5] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments6-expected6] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_operator_semantics[assignments7-expected7] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_2.py::test_eval_default_applies_to_unspecified_inputs PASSED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[0-0-0-0] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[0-0-1-0] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[0-1-0-0] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[0-1-1-1] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[1-0-0-0] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[1-0-1-1] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[1-1-0-1] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::test_majority_vote_exhaustive[1-1-1-1] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-0-0-0-0] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-0-0-1-1] PASSED [ 31%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-0-1-0-1] PASSED [ 31%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-0-1-1-0] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-1-0-0-1] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-1-0-1-0] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-1-1-0-0] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[0-1-1-1-1] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-0-0-0-1] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-0-0-1-0] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-0-1-0-0] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-0-1-1-1] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-1-0-0-0] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-1-0-1-1] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-1-1-0-1] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::test_parity_generator_exhaustive[1-1-1-1-0] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-0-0-0-1-0-0] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-0-0-1-0-0-1] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-0-1-0-0-0-1] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-0-1-1-0-0-1] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-1-0-0-0-1-0] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-1-0-1-1-0-0] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-1-1-0-0-0-1] PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[0-1-1-1-0-0-1] PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-0-0-0-0-1-0] PASSED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-0-0-1-0-1-0] PASSED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-0-1-0-1-0-0] PASSED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-0-1-1-0-0-1] PASSED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-1-0-0-0-1-0] PASSED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-1-0-1-0-1-0] PASSED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-1-1-0-0-1-0] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::test_comparator_2bit_exhaustive[1-1-1-1-1-0-0] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::test_decoder_exhaustive[0-0-0-0] PASSED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::test_decoder_exhaustive[0-1-1-0] PASSED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::test_decoder_exhaustive[1-0-0-0] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::test_decoder_exhaustive[1-1-0-1] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::test_shared_scalar_eval_cases PASSED [ 48%]
+.evaluation_tests/test_checkpoint_3.py::test_check_vector_declaration_reports_width PASSED [ 48%]
+.evaluation_tests/test_checkpoint_3.py::test_check_mixed_scalar_vector_declarations PASSED [ 49%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_bit_index_extracts_single_bit PASSED [ 49%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_bit_slice_extracts_range PASSED [ 50%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_concatenation_joins_expressions PASSED [ 50%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_slice_concat_swaps_halves PASSED [ 51%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_unsized_binary_literal PASSED [ 51%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_unsized_hex_literal PASSED [ 52%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_sized_binary_literal PASSED [ 52%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_sized_hex_literal PASSED [ 53%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_sized_decimal_literal PASSED [ 53%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_eq_returns_expected[0x2a-0x2a-1] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_eq_returns_expected[0x2a-0x2b-0] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_formats[bin-a=0x0f-y=0b00001111] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_formats[hex-a=0b00001111-y=0x0f] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_formats[dec-a=0x0f-y=15] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_formats[None-a=0x0f-y=0b00001111] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_json_includes_radix_field PASSED [ 57%]
+.evaluation_tests/test_checkpoint_3.py::test_check_width_mismatch_error PASSED [ 57%]
+.evaluation_tests/test_checkpoint_3.py::test_check_index_out_of_bounds_error PASSED [ 58%]
+.evaluation_tests/test_checkpoint_3.py::test_check_slice_out_of_bounds_error PASSED [ 58%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_input_width_mismatch_error PASSED [ 59%]
+.evaluation_tests/test_checkpoint_3.py::test_check_literal_width_mismatch_error PASSED [ 59%]
+.evaluation_tests/test_checkpoint_3.py::test_check_concat_width_mismatch_error PASSED [ 60%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_mux_ite_semantics[0-0b1110-MUX] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_mux_ite_semantics[0-0b1110-ITE] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_mux_ite_semantics[1-0b0001-MUX] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_mux_ite_semantics[1-0b0001-ITE] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_AND-0b1111-1] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_AND-0b1110-0] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_OR-0b0000-0] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_OR-0b0001-1] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_XOR-0b1100-0] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduction_operators[REDUCE_XOR-0b1101-1] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[AND] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[OR] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[XOR] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[NAND] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[NOR] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bitwise_width_mismatch[XNOR] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_literal_with_underscores PASSED [ 68%]
+.evaluation_tests/test_checkpoint_3.py::test_check_sized_decimal_overflow_parse_error PASSED [ 68%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_scalar_literal[0-0] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_scalar_literal[1-1] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_3.py::test_check_unary_preserves_vector_width[NOT] PASSED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::test_check_unary_preserves_vector_width[BUF] PASSED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::test_check_mux_selector_must_be_width_one PASSED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::test_check_mux_operands_must_match_width PASSED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::test_check_eq_operands_must_match_width PASSED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_scalar_output_ignores_radix PASSED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_hex_padding PASSED [ 73%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_chained_operations PASSED [ 73%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_slice_full_range PASSED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::test_check_single_bit_vector_declaration PASSED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_reduce_on_width_one PASSED [ 75%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_concat_mixed_widths PASSED [ 75%]
+.evaluation_tests/test_checkpoint_3.py::test_check_index_at_exact_boundary PASSED [ 76%]
+.evaluation_tests/test_checkpoint_3.py::test_check_index_one_past_boundary_error PASSED [ 76%]
+.evaluation_tests/test_checkpoint_3.py::test_check_slice_hi_equals_lo_valid PASSED [ 77%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_hex_odd_width PASSED [ 77%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_radix_bin_preserves_leading_zeros PASSED [ 78%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_mux_with_complex_operands PASSED [ 78%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_eq_with_literal PASSED [ 79%]
+.evaluation_tests/test_checkpoint_3.py::test_eval_all_new_operators_combined PASSED [ 79%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[0-0b0000] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[1-0b1000] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[2-0b0100] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[4-0b0010] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[8-0b0001] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[10-0b0101] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[15-0b1111] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[12-0b0011] PASSED [ 83%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_exhaustive[3-0b1100] PASSED [ 83%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[0-0-0-0b00] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[0-0-1-0b01] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[0-1-0-0b01] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[0-1-1-0b10] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[1-0-0-0b01] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[1-0-1-0b10] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[1-1-0-0b10] PASSED [ 87%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_exhaustive[1-1-1-0b11] PASSED [ 87%]
+.evaluation_tests/test_checkpoint_3.py::test_check_bit_reversal_circuit PASSED [ 88%]
+.evaluation_tests/test_checkpoint_3.py::test_check_popcount_circuit PASSED [ 88%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-0-0-0-1-0-0] PASSED [ 89%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-0-0-1-0-0-1] PASSED [ 89%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-0-1-0-0-0-1] PASSED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-0-1-1-0-0-1] PASSED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-1-0-0-0-1-0] PASSED [ 91%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-1-0-1-1-0-0] PASSED [ 91%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-1-1-0-0-0-1] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[0-1-1-1-0-0-1] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-0-0-0-0-1-0] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-0-0-1-0-1-0] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-0-1-0-1-0-0] PASSED [ 94%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-0-1-1-0-0-1] PASSED [ 94%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-1-0-0-0-1-0] PASSED [ 95%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-1-0-1-0-1-0] PASSED [ 95%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-1-1-0-0-1-0] PASSED [ 96%]
+.evaluation_tests/test_checkpoint_3.py::test_comparator_2bit_exhaustive[1-1-1-1-1-0-0] PASSED [ 96%]
+.evaluation_tests/test_checkpoint_3.py::test_decoder_exhaustive[0-0-0-0] PASSED [ 97%]
+.evaluation_tests/test_checkpoint_3.py::test_decoder_exhaustive[0-1-1-0] PASSED [ 97%]
+.evaluation_tests/test_checkpoint_3.py::test_decoder_exhaustive[1-0-0-0] PASSED [ 98%]
+.evaluation_tests/test_checkpoint_3.py::test_decoder_exhaustive[1-1-0-1] PASSED [ 98%]
+.evaluation_tests/test_checkpoint_3.py::test_popcount_radix_hex PASSED   [ 99%]
+.evaluation_tests/test_checkpoint_3.py::test_bit_reversal_radix_hex PASSED [ 99%]
+.evaluation_tests/test_checkpoint_3.py::test_shared_vector_pipeline_eval PASSED [100%]
+
+=================================== FAILURES ===================================
+__________________ test_check_valid_circuit_reports_interface __________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_valid_circuit_repor0')
+
+    def test_check_valid_circuit_reports_interface(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            "basic.circ",
+            """\
+            InPuT b a
+            OuTPuT y x
+            wIrE t1
+    
+            t1 = aNd(a, b)
+            x = NoT(t1)
+            y = BuF(t1)
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_valid_circuit_repor0/basic.circ', '--json'], returncode=2, stdout='{"ok":false,"command":"check","exit_code":2,"error":{"type":"CircParseError","message":"Expected declaration keyword or assignment, got \'x\'","file":"/tmp/pytest-of-agent/pytest-0/test_check_valid_circuit_repor0/basic.circ","line":2,"col":10}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:119: AssertionError
+__________________________ test_check_file_not_found ___________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_file_not_found0')
+
+    def test_check_file_not_found(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        missing = tmp_path / "missing.circ"
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(missing), "--json"],
+        )
+        assert result.returncode == 1
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type="FileNotFoundError",
+            exit_code=1,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': None, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_file_not_found0/missing....e not found: /tmp/pytest-of-agent/pytest-0/test_check_file_not_found0/missing.circ', ...}, 'exit_code': 1, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+________________________ test_eval_text_outputs_sorted _________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_eval_text_outputs_sorted0')
+
+    def test_eval_text_outputs_sorted(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            "basic.circ",
+            """\
+            input b a
+            output y x
+            wire t1
+    
+            t1 = AND(a, b)
+            x = NOT(t1)
+            y = BUF(t1)
+            """,
+        )
+        result = run_command(
+            entrypoint_argv,
+            ["eval", str(path), "--set", "a=1", "--set", "b=1"],
+        )
+>       assert result.returncode == 0
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'eval', '/tmp/pytest-of-agent/pytest-0/test_eval_text_outputs_sorted0/basic.circ', '--set', 'a=1', '--set', 'b=1'], returncode=2, stdout='', stderr="Error: Expected declaration keyword or assignment, got 'x' in /tmp/pytest-of-agent/pytest-0/test_eval_text_outputs_sorted0/basic.circ at line 2, col 10\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:89: AssertionError
+_______________________ test_eval_invalid_input_value[2] _______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_eval_invalid_input_value_1')
+invalid_value = '2'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize("invalid_value", ["X", "2"])
+    def test_eval_invalid_input_value(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        invalid_value: str,
+    ) -> None:
+        path = write_adder(tmp_path)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            [
+                "eval",
+                str(path),
+                "--set",
+                f"a={invalid_value}",
+                "--set",
+                "b=0",
+                "--set",
+                "cin=1",
+                "--json",
+            ],
+        )
+>       assert result.returncode == 2
+E       assert 3 == 2
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'eval', '/tmp/pytest-of-agent/pytest-0/test_eval_invalid_input_value_1/adder.circ', '--set', 'a=2', '--set', 'b=0', '--set', 'cin=1', '--json'], returncode=3, stdout='{"ok":false,"command":"eval","exit_code":3,"error":{"type":"InputWidthMismatchError","message":"Input width mismatch for \'a\': expected 1, got 2","file":"/tmp/pytest-of-agent/pytest-0/test_eval_invalid_input_value_1/adder.circ","line":null,"col":null}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_2.py:245: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_valid_circuit_reports_interface - assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_valid_circuit_repor0/basic.circ', '--json'], returncode=2, stdout='{"ok":false,"command":"check","exit_code":2,"error":{"type":"CircParseError","message":"Expected declaration keyword or assignment, got \'x\'","file":"/tmp/pytest-of-agent/pytest-0/test_check_valid_circuit_repor0/basic.circ","line":2,"col":10}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_file_not_found - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_eval_text_outputs_sorted - assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'eval', '/tmp/pytest-of-agent/pytest-0/test_eval_text_outputs_sorted0/basic.circ', '--set', 'a=1', '--set', 'b=1'], returncode=2, stdout='', stderr="Error: Expected declaration keyword or assignment, got 'x' in /tmp/pytest-of-agent/pytest-0/test_eval_text_outputs_sorted0/basic.circ at line 2, col 10\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_eval_invalid_input_value[2] - assert 3 == 2
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'eval', '/tmp/pytest-of-agent/pytest-0/test_eval_invalid_input_value_1/adder.circ', '--set', 'a=2', '--set', 'b=0', '--set', 'cin=1', '--json'], returncode=3, stdout='{"ok":false,"command":"eval","exit_code":3,"error":{"type":"InputWidthMismatchError","message":"Input width mismatch for \'a\': expected 1, got 2","file":"/tmp/pytest-of-agent/pytest-0/test_eval_invalid_input_value_1/adder.circ","line":null,"col":null}}\n', stderr='').returncode
+======================== 4 failed, 201 passed in 17.34s ========================

@@ -1,0 +1,511 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/DplMXSo3dE1g2ADF/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 47 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_00_healthz PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_01_create_base_v1 PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_02_create_billing_v1_including_base PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_03_list_versions_billing PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_04_get_active_billing PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_05_resolve_billing_active PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_06_create_billing_v2_override_pool PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_07_resolve_billing_explicit_version PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_08_list_versions_after_second PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_09_resolve_billing_active_after_second FAILED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_10_rollback_billing_to_v1 PASSED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_11_get_active_billing_after_rollback PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_12_resolve_inactive_version_dry_run FAILED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_01_missing_pair_get_active PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_02_invalid_input_create_missing_scope PASSED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_03_setup_cycle_create_a PASSED [ 34%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_04_setup_cycle_create_b PASSED [ 36%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_05_resolve_cycle_expect_conflict PASSED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_06_setup_conflict_create_base PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_07_setup_conflict_create_billing_conflict PASSED [ 42%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_08_resolve_billing2_type_conflict PASSED [ 44%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_09_request_too_large PASSED [ 46%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_10_type_conflict_base PASSED [ 48%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_11_deep_merge_type_conflict PASSED [ 51%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_12_resolve_type_conflict PASSED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_13_invalid_scope_key_type PASSED [ 55%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_14_resolve_missing_include_reference PASSED [ 57%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_15_include_chain_max_depth PASSED [ 59%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_01_setup_array_base PASSED [ 61%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_02_setup_type_conflict_base PASSED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_03_get_specific_version PASSED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_04_get_specific_version_not_found PASSED [ 68%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_05_activate_specific_version PASSED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_06_activate_specific_version_conflict FAILED [ 72%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_07_idempotent_create PASSED [ 74%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_08_idempotent_activate PASSED [ 76%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_09_idempotent_rollback PASSED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_10_include_null_version PASSED [ 80%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_11_deep_merge_arrays PASSED [ 82%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_12_resolve_array_merge PASSED [ 85%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_13_idempotent_resolve PASSED [ 87%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_14_empty_scope PASSED [ 89%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_15_case_sensitive_scope PASSED [ 91%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_16_rollback_to_future_version PASSED [ 93%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_17_rollback_to_same_active PASSED [ 95%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_18_canonical_json_response PASSED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_19_max_versions_per_scope PASSED [100%]
+
+=================================== FAILURES ===================================
+_____________ TestCore.test_09_resolve_billing_active_after_second _____________
+
+self = <test_checkpoint_1.TestCore object at 0x70dafbf5f3e0>
+client = <httpx.Client object at 0x70dafbf5f500>
+
+    @pytest.mark.functionality
+    def test_09_resolve_billing_active_after_second(
+        self, client: httpx.Client
+    ) -> None:
+        """Resolve billing after v2 - pool should be 8."""
+        response = _make_request(
+            client,
+            "POST",
+            "/v1/configs/billing:resolve",
+            body={"scope": {"app": "billing", "env": "prod"}},
+        )
+>       _assert_response(
+            response,
+            200,
+            {
+                "name": "billing",
+                "resolution_graph": [
+                    {
+                        "name": "base",
+                        "scope": {"env": "prod"},
+                        "version_used": 1,
+                    },
+                    {
+                        "name": "billing",
+                        "scope": {"app": "billing", "env": "prod"},
+                        "version_used": 2,
+                    },
+                ],
+                "resolved_config": {
+                    "db": {"host": "prod.db", "pool": 8},
+                    "feature_flags": ["a", "b"],
+                },
+                "scope": {"app": "billing", "env": "prod"},
+                "version_used": 2,
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:379: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>, expected_status = 200
+expected_output = {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'bill...: {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, ...}
+
+    def _assert_response(
+        response: httpx.Response,
+        expected_status: int | tuple[int, ...],
+        expected_output: dict[str, Any],
+    ) -> None:
+        """Assert response matches expected values."""
+        if isinstance(expected_status, tuple):
+            status_ok = response.status_code in expected_status
+            expected_desc = f"one of {expected_status}"
+        else:
+            status_ok = response.status_code == expected_status
+            expected_desc = str(expected_status)
+    
+        assert status_ok, (
+            f"Expected status {expected_desc}, got {response.status_code}. "
+            f"Response: {response.text}"
+        )
+    
+        _assert_content_type(response)
+        actual = response.json()
+    
+        if _is_json_schema(expected_output):
+            jsonschema.validate(actual, expected_output)
+        else:
+>           assert actual == expected_output, (
+                f"Expected {expected_output}, got {actual}"
+            )
+E           AssertionError: Expected {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}, got {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+E           assert {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2} == {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+E             
+E             Common items:
+E             {'name': 'billing',
+E              'resolved_config': {'db': {'host': 'prod.db', 'pool': 8},
+E                                  'feature_flags': ['a', 'b']},
+E              'scope': {'app': 'billing', 'env': 'prod'},
+E              'version_used': 2}
+E             Differing items:
+E             {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]} != {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]}
+E             
+E             Full diff:
+E               {
+E                   'name': 'billing',
+E                   'resolution_graph': [
+E             +         {
+E             +             'name': 'base',
+E             +             'scope': {
+E             +                 'env': 'prod',
+E             +             },
+E             +             'version_used': 1,
+E             +         },
+E                       {
+E                           'name': 'base',
+E                           'scope': {
+E                               'env': 'prod',
+E                           },
+E                           'version_used': 1,
+E                       },
+E                       {
+E                           'name': 'billing',
+E                           'scope': {
+E                               'app': 'billing',
+E                               'env': 'prod',
+E                           },
+E                           'version_used': 2,
+E                       },
+E                   ],
+E                   'resolved_config': {
+E                       'db': {
+E                           'host': 'prod.db',
+E                           'pool': 8,
+E                       },
+E                       'feature_flags': [
+E                           'a',
+E                           'b',
+E                       ],
+E                   },
+E                   'scope': {
+E                       'app': 'billing',
+E                       'env': 'prod',
+E                   },
+E                   'version_used': 2,
+E               }
+
+.evaluation_tests/test_checkpoint_1.py:111: AssertionError
+______________ TestCore.test_12_resolve_inactive_version_dry_run _______________
+
+self = <test_checkpoint_1.TestCore object at 0x70dafbf5e150>
+client = <httpx.Client object at 0x70dafbf5f500>
+
+    @pytest.mark.functionality
+    def test_12_resolve_inactive_version_dry_run(
+        self, client: httpx.Client
+    ) -> None:
+        """Resolve an inactive version with dry_run enabled."""
+        response = _make_request(
+            client,
+            "POST",
+            "/v1/configs/billing:resolve",
+            body={
+                "scope": {"app": "billing", "env": "prod"},
+                "version": 2,
+                "dry_run": True,
+            },
+        )
+>       _assert_response(
+            response,
+            200,
+            {
+                "name": "billing",
+                "resolution_graph": [
+                    {
+                        "name": "base",
+                        "scope": {"env": "prod"},
+                        "version_used": 1,
+                    },
+                    {
+                        "name": "billing",
+                        "scope": {"app": "billing", "env": "prod"},
+                        "version_used": 2,
+                    },
+                ],
+                "resolved_config": {
+                    "db": {"host": "prod.db", "pool": 8},
+                    "feature_flags": ["a", "b"],
+                },
+                "scope": {"app": "billing", "env": "prod"},
+                "version_used": 2,
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:497: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>, expected_status = 200
+expected_output = {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'bill...: {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, ...}
+
+    def _assert_response(
+        response: httpx.Response,
+        expected_status: int | tuple[int, ...],
+        expected_output: dict[str, Any],
+    ) -> None:
+        """Assert response matches expected values."""
+        if isinstance(expected_status, tuple):
+            status_ok = response.status_code in expected_status
+            expected_desc = f"one of {expected_status}"
+        else:
+            status_ok = response.status_code == expected_status
+            expected_desc = str(expected_status)
+    
+        assert status_ok, (
+            f"Expected status {expected_desc}, got {response.status_code}. "
+            f"Response: {response.text}"
+        )
+    
+        _assert_content_type(response)
+        actual = response.json()
+    
+        if _is_json_schema(expected_output):
+            jsonschema.validate(actual, expected_output)
+        else:
+>           assert actual == expected_output, (
+                f"Expected {expected_output}, got {actual}"
+            )
+E           AssertionError: Expected {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}, got {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+E           assert {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2} == {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+E             
+E             Common items:
+E             {'name': 'billing',
+E              'resolved_config': {'db': {'host': 'prod.db', 'pool': 8},
+E                                  'feature_flags': ['a', 'b']},
+E              'scope': {'app': 'billing', 'env': 'prod'},
+E              'version_used': 2}
+E             Differing items:
+E             {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]} != {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]}
+E             
+E             Full diff:
+E               {
+E                   'name': 'billing',
+E                   'resolution_graph': [
+E             +         {
+E             +             'name': 'base',
+E             +             'scope': {
+E             +                 'env': 'prod',
+E             +             },
+E             +             'version_used': 1,
+E             +         },
+E                       {
+E                           'name': 'base',
+E                           'scope': {
+E                               'env': 'prod',
+E                           },
+E                           'version_used': 1,
+E                       },
+E                       {
+E                           'name': 'billing',
+E                           'scope': {
+E                               'app': 'billing',
+E                               'env': 'prod',
+E                           },
+E                           'version_used': 2,
+E                       },
+E                   ],
+E                   'resolved_config': {
+E                       'db': {
+E                           'host': 'prod.db',
+E                           'pool': 8,
+E                       },
+E                       'feature_flags': [
+E                           'a',
+E                           'b',
+E                       ],
+E                   },
+E                   'scope': {
+E                       'app': 'billing',
+E                       'env': 'prod',
+E                   },
+E                   'version_used': 2,
+E               }
+
+.evaluation_tests/test_checkpoint_1.py:111: AssertionError
+_________ TestFunctionality.test_06_activate_specific_version_conflict _________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x70dafbfd5a30>
+client = <httpx.Client object at 0x70dafbf5f500>
+
+    def test_06_activate_specific_version_conflict(
+        self, client: httpx.Client
+    ) -> None:
+        """Activate non-existent version returns 409."""
+        response = _make_request(
+            client,
+            "POST",
+            "/v1/configs/array_base/999:activate",
+            body={"scope": {"env": "prod"}},
+        )
+>       _assert_response(
+            response,
+            409,
+            {
+                "type": "object",
+                "required": ["error"],
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "required": ["code", "message", "details"],
+                        "properties": {
+                            "code": {"type": "string", "const": "conflict"},
+                            "message": {"type": "string"},
+                            "details": {"type": "object"},
+                        },
+                    }
+                },
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:1223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [404 NOT FOUND]>, expected_status = 409
+expected_output = {'properties': {'error': {'properties': {'code': {'const': 'conflict', 'type': 'string'}, 'details': {'type': 'object'...': 'string'}}, 'required': ['code', 'message', 'details'], 'type': 'object'}}, 'required': ['error'], 'type': 'object'}
+
+    def _assert_response(
+        response: httpx.Response,
+        expected_status: int | tuple[int, ...],
+        expected_output: dict[str, Any],
+    ) -> None:
+        """Assert response matches expected values."""
+        if isinstance(expected_status, tuple):
+            status_ok = response.status_code in expected_status
+            expected_desc = f"one of {expected_status}"
+        else:
+            status_ok = response.status_code == expected_status
+            expected_desc = str(expected_status)
+    
+>       assert status_ok, (
+            f"Expected status {expected_desc}, got {response.status_code}. "
+            f"Response: {response.text}"
+        )
+E       AssertionError: Expected status 409, got 404. Response: {"error":{"code":"not_found","details":{},"message":"Version 999 not found for config 'array_base'"}}
+E         
+E       assert False
+
+.evaluation_tests/test_checkpoint_1.py:100: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_09_resolve_billing_active_after_second - AssertionError: Expected {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}, got {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+assert {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2} == {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+  
+  Common items:
+  {'name': 'billing',
+   'resolved_config': {'db': {'host': 'prod.db', 'pool': 8},
+                       'feature_flags': ['a', 'b']},
+   'scope': {'app': 'billing', 'env': 'prod'},
+   'version_used': 2}
+  Differing items:
+  {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]} != {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]}
+  
+  Full diff:
+    {
+        'name': 'billing',
+        'resolution_graph': [
+  +         {
+  +             'name': 'base',
+  +             'scope': {
+  +                 'env': 'prod',
+  +             },
+  +             'version_used': 1,
+  +         },
+            {
+                'name': 'base',
+                'scope': {
+                    'env': 'prod',
+                },
+                'version_used': 1,
+            },
+            {
+                'name': 'billing',
+                'scope': {
+                    'app': 'billing',
+                    'env': 'prod',
+                },
+                'version_used': 2,
+            },
+        ],
+        'resolved_config': {
+            'db': {
+                'host': 'prod.db',
+                'pool': 8,
+            },
+            'feature_flags': [
+                'a',
+                'b',
+            ],
+        },
+        'scope': {
+            'app': 'billing',
+            'env': 'prod',
+        },
+        'version_used': 2,
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_12_resolve_inactive_version_dry_run - AssertionError: Expected {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}, got {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+assert {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2} == {'name': 'billing', 'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}], 'resolved_config': {'db': {'host': 'prod.db', 'pool': 8}, 'feature_flags': ['a', 'b']}, 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}
+  
+  Common items:
+  {'name': 'billing',
+   'resolved_config': {'db': {'host': 'prod.db', 'pool': 8},
+                       'feature_flags': ['a', 'b']},
+   'scope': {'app': 'billing', 'env': 'prod'},
+   'version_used': 2}
+  Differing items:
+  {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]} != {'resolution_graph': [{'name': 'base', 'scope': {'env': 'prod'}, 'version_used': 1}, {'name': 'billing', 'scope': {'app': 'billing', 'env': 'prod'}, 'version_used': 2}]}
+  
+  Full diff:
+    {
+        'name': 'billing',
+        'resolution_graph': [
+  +         {
+  +             'name': 'base',
+  +             'scope': {
+  +                 'env': 'prod',
+  +             },
+  +             'version_used': 1,
+  +         },
+            {
+                'name': 'base',
+                'scope': {
+                    'env': 'prod',
+                },
+                'version_used': 1,
+            },
+            {
+                'name': 'billing',
+                'scope': {
+                    'app': 'billing',
+                    'env': 'prod',
+                },
+                'version_used': 2,
+            },
+        ],
+        'resolved_config': {
+            'db': {
+                'host': 'prod.db',
+                'pool': 8,
+            },
+            'feature_flags': [
+                'a',
+                'b',
+            ],
+        },
+        'scope': {
+            'app': 'billing',
+            'env': 'prod',
+        },
+        'version_used': 2,
+    }
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_06_activate_specific_version_conflict - AssertionError: Expected status 409, got 404. Response: {"error":{"code":"not_found","details":{},"message":"Version 999 not found for config 'array_base'"}}
+  
+assert False
+========================= 3 failed, 44 passed in 1.18s =========================

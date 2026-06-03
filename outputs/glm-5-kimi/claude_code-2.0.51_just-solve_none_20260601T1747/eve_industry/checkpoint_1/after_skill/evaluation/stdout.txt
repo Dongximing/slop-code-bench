@@ -1,0 +1,96 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/t4oI8kH4lQZ3Txd2/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 180.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 12 items
+
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[naga] PASSED    [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[barrage_l] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[fernite_carbide] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[athanor] PASSED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[azariel] PASSED [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[proteus] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_materials_sorted_case_insensitive PASSED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_run_time_rounds_up PASSED   [ 66%]
+.evaluation_tests/test_checkpoint_1.py::test_buildable_column_accuracy PASSED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_unpublished_item_error FAILED [ 83%]
+.evaluation_tests/test_checkpoint_1.py::test_case_sensitive_item_name FAILED [ 91%]
+.evaluation_tests/test_checkpoint_1.py::test_nonexistent_item_error FAILED [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_unpublished_item_error __________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.error
+    def test_unpublished_item_error(entrypoint_argv, sde_dir):
+        """Error: Unpublished items (published=0 in SDE) should fail with clear error."""
+        result = run_command(
+            entrypoint_argv, "recipe", "Python Mine", "--sde", str(sde_dir)
+        )
+>       assert result.returncode != 0, "Expected error for unpublished item"
+E       AssertionError: Expected error for unpublished item
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Python Mine', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Python Mine' not found in SDE.\n", stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:136: AssertionError
+________________________ test_case_sensitive_item_name _________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.error
+    def test_case_sensitive_item_name(entrypoint_argv, sde_dir):
+        """Error: Item names must match exact case."""
+        result = run_command(
+            entrypoint_argv, "recipe", "naga", "--sde", str(sde_dir)
+        )
+>       assert result.returncode != 0, "Expected error for wrong case item name"
+E       AssertionError: Expected error for wrong case item name
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'naga', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'naga' not found in SDE.\n", stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:145: AssertionError
+_________________________ test_nonexistent_item_error __________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.error
+    def test_nonexistent_item_error(entrypoint_argv, sde_dir):
+        """Error: Nonexistent item should fail with clear error."""
+        result = run_command(
+            entrypoint_argv,
+            "recipe",
+            "Totally Fake Item That Does Not Exist",
+            "--sde",
+            str(sde_dir),
+        )
+>       assert result.returncode != 0, "Expected error for nonexistent item"
+E       AssertionError: Expected error for nonexistent item
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Totally Fake Item That Does Not Exist', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Totally Fake Item That Does Not Exist' not found in SDE.\n", stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:158: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_unpublished_item_error - AssertionError: Expected error for unpublished item
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Python Mine', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Python Mine' not found in SDE.\n", stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_case_sensitive_item_name - AssertionError: Expected error for wrong case item name
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'naga', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'naga' not found in SDE.\n", stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_nonexistent_item_error - AssertionError: Expected error for nonexistent item
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'industry.py', 'recipe', 'Totally Fake Item That Does Not Exist', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=0, stdout="Error: Item 'Totally Fake Item That Does Not Exist' not found in SDE.\n", stderr='').returncode
+========================= 3 failed, 9 passed in 11.20s =========================

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "problem_name": "etl_pipeline",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_1",
+  "checkpoint_version": 1,
+  "duration": 5.546934604644775,
+  "entrypoint": "uv run etl_pipeline.py",
+  "tests": {
+    "checkpoint_1-Error": {
+      "passed": [
+        "test_bad_expr_in_second_step",
+        "test_dataset_missing",
+        "test_dataset_not_array",
+        "test_dataset_row_not_object",
+        "test_filter_empty_where_error",
+        "test_limit_n_not_integer",
+        "test_limit_negative_error",
+        "test_malformed_step_missing_op",
+        "test_map_as_whitespace_only",
+        "test_map_expr_whitespace_only",
+        "test_pipeline_steps_not_array_error",
+        "test_select_columns_not_array",
+        "test_step_not_an_object",
+        "test_unknown_op",
+        "test_unknown_op_aggregate_error"
+      ],
+      "failed": [
+        "test_filter_missing_where",
+        "test_limit_missing_n",
+        "test_map_missing_as_error",
+        "test_map_missing_expr",
+        "test_rename_missing_both_forms",
+        "test_rename_missing_column_error",
+        "test_select_missing_columns"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Core": {
+      "passed": [
+        "test_consistent_key_ordering",
+        "test_drop_unknown_keys",
+        "test_empty_pipeline_is_valid",
+        "test_preserve_column_names_no_trimming",
+        "test_rename_from_to",
+        "test_trim_and_case"
+      ],
+      "failed": [],
+      "skipped": []
+    },
+    "checkpoint_1-Functionality": {
+      "passed": [
+        "test_dataset_empty_array",
+        "test_empty_pipeline_ignores_metadata",
+        "test_empty_select_columns",
+        "test_full_pipeline_all_ops",
+        "test_limit_zero_passthrough",
+        "test_map_and_filter_chain",
+        "test_rename_from_to_canonical",
+        "test_rename_mapping_empty_error",
+        "test_rename_mixed_forms",
+        "test_rename_multiple_mapping",
+        "test_select_duplicate_columns_error",
+        "test_select_missing_after_filter",
+        "test_trimmed_ops_and_exprs"
+      ],
+      "failed": [],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 6,
+    "Functionality": 13,
+    "Regression": 0,
+    "Error": 15
+  },
+  "total_counts": {
+    "Core": 6,
+    "Functionality": 13,
+    "Regression": 0,
+    "Error": 22
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 41,
+  "test_collection_hash": "fed32791f08dab7334a405afec5420521c1b33142636e1634fcc20685c4c5425",
+  "infrastructure_failure": false
+}

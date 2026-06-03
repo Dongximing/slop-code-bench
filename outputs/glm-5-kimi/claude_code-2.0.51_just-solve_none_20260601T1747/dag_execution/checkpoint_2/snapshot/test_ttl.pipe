@@ -1,0 +1,29 @@
+// Test stale cache strategy with TTL
+task slow_task {
+    params: {
+        value: int
+    }
+    cache: {
+        enabled: true
+        strategy: "stale"
+        ttl: {
+            seconds: 5
+        }
+    }
+    run: {
+        echo "Running slow task for ${params.value}";
+        echo "result_${params.value}" > output.txt;
+    }
+    output: "slow_${params.value}"
+}
+
+task main {
+    params: {}
+    requires: {
+        slow_task(1);
+        slow_task(1);
+    }
+    run: {
+        echo "Done";
+    }
+}
