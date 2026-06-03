@@ -1,0 +1,745 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/13KuaAw9dH9X4Ctp/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 180.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 11 items
+
+.evaluation_tests/test_checkpoint_1.py::test_turnur_ahb[default] FAILED  [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_turnur_isbra[default] FAILED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_fatigue_caps[default] FAILED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_jita_ama[default] FAILED    [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_jita_ama[reduction=0] FAILED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_jita_ama[range=6] FAILED    [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_jita_serp_prime[default] FAILED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=90] FAILED [ 72%]
+.evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0] FAILED [ 81%]
+.evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0_fuel=5000] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[reduction=90] FAILED [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_turnur_ahb[default] ___________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Turnur III - Moon 18 - Freedom Extension Storage\nUNDOCK\nJUMP 3.07 LY: Egghelende (31K isotopes)...UMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 103K\n  Time Waiting: 00:02\n  Total LY: 10.22'}
+
+    @pytest.mark.parametrize("case", TURNUR_AHB["cases"], ids=["default"])
+    def test_turnur_ahb(entrypoint_argv, sde_dir, case):
+        """Core: Plan route from Turnur to Ahbazon."""
+>       run_and_check(
+            entrypoint_argv, sde_dir, TURNUR_AHB["start"], TURNUR_AHB["end"], case
+        )
+
+.evaluation_tests/test_checkpoint_1.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Turnur III - Moon 18 - Freedom Extension Storage'
+end = 'Ahbazon VI - Imperial Shipment Storage'
+case = {'expected': 'START: Turnur III - Moon 18 - Freedom Extension Storage\nUNDOCK\nJUMP 3.07 LY: Egghelende (31K isotopes)...UMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 103K\n  Time Waiting: 00:02\n  Total LY: 10.22'}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         Calculating optimal route...
+E         Traceback (most recent call last):
+E           File "/workspace/did_he_say_jump.py", line 500, in <module>
+E             sys.exit(main())
+E                      ^^^^^^
+E           File "/workspace/did_he_say_jump.py", line 429, in main
+E             path = find_path(
+E                    ^^^^^^^^^^
+E         TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Turnur III - Moon 18 - Freedom Extension Storage', '--end', 'Ahbazon VI - Imperial Shipment Storage', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+__________________________ test_turnur_isbra[default] __________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Turnur III - Moon 18 - Freedom Extension Storage\nUNDOCK\nJUMP 0.95 LY: Isbrabata (10K isotopes)\...nSUMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:11\n  Isotopes Used: 10K\n  Time Waiting: 00:00\n  Total LY: 0.95'}
+
+    @pytest.mark.parametrize("case", TURNUR_ISBRA["cases"], ids=["default"])
+    def test_turnur_isbra(entrypoint_argv, sde_dir, case):
+        """Core: Plan route from Turnur to Isbrabata."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            TURNUR_ISBRA["start"],
+            TURNUR_ISBRA["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:105: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Turnur III - Moon 18 - Freedom Extension Storage'
+end = 'Isbrabata VII - Boundless Creation Factory'
+case = {'expected': 'START: Turnur III - Moon 18 - Freedom Extension Storage\nUNDOCK\nJUMP 0.95 LY: Isbrabata (10K isotopes)\...nSUMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:11\n  Isotopes Used: 10K\n  Time Waiting: 00:00\n  Total LY: 0.95'}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         Calculating optimal route...
+E         Traceback (most recent call last):
+E           File "/workspace/did_he_say_jump.py", line 500, in <module>
+E             sys.exit(main())
+E                      ^^^^^^
+E           File "/workspace/did_he_say_jump.py", line 429, in main
+E             path = find_path(
+E                    ^^^^^^^^^^
+E         TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Turnur III - Moon 18 - Freedom Extension Storage', '--end', 'Isbrabata VII - Boundless Creation Factory', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+__________________________ test_fatigue_caps[default] __________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: 3-CE1R VIII - Moon 5 - Prosper Vault\nUNDOCK\nJUMP 8.11 LY: 2RV-06 (82K isotopes)\nDOCK: 2RV-06 V...UMMARY:\n  End Cooldown: 00:28\n  End Fatigue: 05:00\n  Isotopes Used: 877K\n  Time Waiting: 02:20\n  Total LY: 87.67'}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", FATIGUE_CAPS["cases"], ids=["default"])
+    def test_fatigue_caps(entrypoint_argv, sde_dir, case):
+        """Functionality: Long route that hits fatigue caps."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            FATIGUE_CAPS["start"],
+            FATIGUE_CAPS["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:172: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = '3-CE1R VIII - Moon 5 - Prosper Vault'
+end = 'B-G1LG VI - Moon 3 - True Power Mining Outpost'
+case = {'expected': 'START: 3-CE1R VIII - Moon 5 - Prosper Vault\nUNDOCK\nJUMP 8.11 LY: 2RV-06 (82K isotopes)\nDOCK: 2RV-06 V...UMMARY:\n  End Cooldown: 00:28\n  End Fatigue: 05:00\n  Isotopes Used: 877K\n  Time Waiting: 02:20\n  Total LY: 87.67'}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', '3-CE1R VIII - Moon 5 - Prosper Vault', '--end', 'B-G1LG VI - Moon 3 - True Power Mining Outpost', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\nError: End station must not be in pochven or zarzakh (negative security)\n", stderr='Loading SDE data...\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+____________________________ test_jita_ama[default] ____________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDO...UMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:24\n  Isotopes Used: 128K\n  Time Waiting: 00:02\n  Total LY: 12.75'}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", JITA_AMA["cases"], ids=["default", "reduction=0", "range=6"]
+    )
+    def test_jita_ama(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Jita to Amamake."""
+>       run_and_check(
+            entrypoint_argv, sde_dir, JITA_AMA["start"], JITA_AMA["end"], case
+        )
+
+.evaluation_tests/test_checkpoint_1.py:245: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'
+end = 'Amamake VI - Moon 2 - Nurtura Food Packaging'
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDO...UMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:24\n  Isotopes Used: 128K\n  Time Waiting: 00:02\n  Total LY: 12.75'}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         Calculating optimal route...
+E         Traceback (most recent call last):
+E           File "/workspace/did_he_say_jump.py", line 500, in <module>
+E             sys.exit(main())
+E                      ^^^^^^
+E           File "/workspace/did_he_say_jump.py", line 429, in main
+E             path = find_path(
+E                    ^^^^^^^^^^
+E         TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+__________________________ test_jita_ama[reduction=0] __________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDO...ooldown: 00:09\n  End Fatigue: 05:00\n  Isotopes Used: 128K\n  Time Waiting: 00:10\n  Total LY: 12.75', 'reduction': 0}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", JITA_AMA["cases"], ids=["default", "reduction=0", "range=6"]
+    )
+    def test_jita_ama(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Jita to Amamake."""
+>       run_and_check(
+            entrypoint_argv, sde_dir, JITA_AMA["start"], JITA_AMA["end"], case
+        )
+
+.evaluation_tests/test_checkpoint_1.py:245: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'
+end = 'Amamake VI - Moon 2 - Nurtura Food Packaging'
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDO...ooldown: 00:09\n  End Fatigue: 05:00\n  Isotopes Used: 128K\n  Time Waiting: 00:10\n  Total LY: 12.75', 'reduction': 0}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         Calculating optimal route...
+E         Traceback (most recent call last):
+E           File "/workspace/did_he_say_jump.py", line 500, in <module>
+E             sys.exit(main())
+E                      ^^^^^^
+E           File "/workspace/did_he_say_jump.py", line 429, in main
+E             path = find_path(
+E                    ^^^^^^^^^^
+E         TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--reduction', '0'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+____________________________ test_jita_ama[range=6] ____________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 5.58 LY: Carrou (56K isotopes)\nDOCK...nd Cooldown: 00:02\n  End Fatigue: 00:28\n  Isotopes Used: 147K\n  Time Waiting: 00:03\n  Total LY: 14.62', 'range': 6}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", JITA_AMA["cases"], ids=["default", "reduction=0", "range=6"]
+    )
+    def test_jita_ama(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Jita to Amamake."""
+>       run_and_check(
+            entrypoint_argv, sde_dir, JITA_AMA["start"], JITA_AMA["end"], case
+        )
+
+.evaluation_tests/test_checkpoint_1.py:245: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'
+end = 'Amamake VI - Moon 2 - Nurtura Food Packaging'
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 5.58 LY: Carrou (56K isotopes)\nDOCK...nd Cooldown: 00:02\n  End Fatigue: 00:28\n  Isotopes Used: 147K\n  Time Waiting: 00:03\n  Total LY: 14.62', 'range': 6}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         Calculating optimal route...
+E         Traceback (most recent call last):
+E           File "/workspace/did_he_say_jump.py", line 500, in <module>
+E             sys.exit(main())
+E                      ^^^^^^
+E           File "/workspace/did_he_say_jump.py", line 429, in main
+E             path = find_path(
+E                    ^^^^^^^^^^
+E         TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '6'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+________________________ test_jita_serp_prime[default] _________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 9.48 LY: Yvangier (95K isotopes)\nDO...UMMARY:\n  End Cooldown: 00:11\n  End Fatigue: 03:10\n  Isotopes Used: 451K\n  Time Waiting: 00:13\n  Total LY: 45.08'}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", JITA_SERP_PRIME["cases"], ids=["default"])
+    def test_jita_serp_prime(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Jita to Serpentis Prime."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            JITA_SERP_PRIME["start"],
+            JITA_SERP_PRIME["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'
+end = 'Serpentis Prime II - Archangels Testing Facilities'
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 9.48 LY: Yvangier (95K isotopes)\nDO...UMMARY:\n  End Cooldown: 00:11\n  End Fatigue: 03:10\n  Isotopes Used: 451K\n  Time Waiting: 00:13\n  Total LY: 45.08'}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Serpentis Prime II - Archangels Testing Facilities', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\nError: End station must not be in pochven or zarzakh (negative security)\n", stderr='Loading SDE data...\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+___________________ test_mesy_siseide[range=5_reduction=90] ____________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fl...3\n  End Fatigue: 00:31\n  Isotopes Used: 164K\n  Time Waiting: 00:05\n  Total LY: 16.38', 'range': 5, 'reduction': 90}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        MESY_SISEIDE["cases"],
+        ids=[
+            "range=5_reduction=90",
+            "range=5_reduction=0",
+            "range=5_reduction=0_fuel=5000",
+            "reduction=90",
+        ],
+    )
+    def test_mesy_siseide(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Mesybier to Siseide with various params."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            MESY_SISEIDE["start"],
+            MESY_SISEIDE["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:402: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Mesybier II - TransStellar Shipping Storage'
+end = 'Siseide VIII - Expert Distribution Warehouse'
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fl...3\n  End Fatigue: 00:31\n  Isotopes Used: 164K\n  Time Waiting: 00:05\n  Total LY: 16.38', 'range': 5, 'reduction': 90}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         Calculating optimal route...
+E         Traceback (most recent call last):
+E           File "/workspace/did_he_say_jump.py", line 500, in <module>
+E             sys.exit(main())
+E                      ^^^^^^
+E           File "/workspace/did_he_say_jump.py", line 429, in main
+E             path = find_path(
+E                    ^^^^^^^^^^
+E         TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--reduction', '90'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+____________________ test_mesy_siseide[range=5_reduction=0] ____________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fl...29\n  End Fatigue: 05:00\n  Isotopes Used: 164K\n  Time Waiting: 00:27\n  Total LY: 16.38', 'range': 5, 'reduction': 0}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        MESY_SISEIDE["cases"],
+        ids=[
+            "range=5_reduction=90",
+            "range=5_reduction=0",
+            "range=5_reduction=0_fuel=5000",
+            "reduction=90",
+        ],
+    )
+    def test_mesy_siseide(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Mesybier to Siseide with various params."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            MESY_SISEIDE["start"],
+            MESY_SISEIDE["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:402: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Mesybier II - TransStellar Shipping Storage'
+end = 'Siseide VIII - Expert Distribution Warehouse'
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fl...29\n  End Fatigue: 05:00\n  Isotopes Used: 164K\n  Time Waiting: 00:27\n  Total LY: 16.38', 'range': 5, 'reduction': 0}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         Calculating optimal route...
+E         Traceback (most recent call last):
+E           File "/workspace/did_he_say_jump.py", line 500, in <module>
+E             sys.exit(main())
+E                      ^^^^^^
+E           File "/workspace/did_he_say_jump.py", line 429, in main
+E             path = find_path(
+E                    ^^^^^^^^^^
+E         TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--reduction', '0'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+_______________ test_mesy_siseide[range=5_reduction=0_fuel=5000] _______________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (14K isotopes)\nDOCK: Fl...igue: 05:00\n  Isotopes Used: 82K\n  Time Waiting: 00:27\n  Total LY: 16.38', 'fuel': 5000, 'range': 5, 'reduction': 0}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        MESY_SISEIDE["cases"],
+        ids=[
+            "range=5_reduction=90",
+            "range=5_reduction=0",
+            "range=5_reduction=0_fuel=5000",
+            "reduction=90",
+        ],
+    )
+    def test_mesy_siseide(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Mesybier to Siseide with various params."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            MESY_SISEIDE["start"],
+            MESY_SISEIDE["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:402: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Mesybier II - TransStellar Shipping Storage'
+end = 'Siseide VIII - Expert Distribution Warehouse'
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (14K isotopes)\nDOCK: Fl...igue: 05:00\n  Isotopes Used: 82K\n  Time Waiting: 00:27\n  Total LY: 16.38', 'fuel': 5000, 'range': 5, 'reduction': 0}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         Calculating optimal route...
+E         Traceback (most recent call last):
+E           File "/workspace/did_he_say_jump.py", line 500, in <module>
+E             sys.exit(main())
+E                      ^^^^^^
+E           File "/workspace/did_he_say_jump.py", line 429, in main
+E             path = find_path(
+E                    ^^^^^^^^^^
+E         TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--fuel', '5000', '--reduction', '0'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+_______________________ test_mesy_siseide[reduction=90] ________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 9.27 LY: Vimeini (93K isotopes)\nDOCK: ...oldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 112K\n  Time Waiting: 00:02\n  Total LY: 11.13', 'reduction': 90}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        MESY_SISEIDE["cases"],
+        ids=[
+            "range=5_reduction=90",
+            "range=5_reduction=0",
+            "range=5_reduction=0_fuel=5000",
+            "reduction=90",
+        ],
+    )
+    def test_mesy_siseide(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Mesybier to Siseide with various params."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            MESY_SISEIDE["start"],
+            MESY_SISEIDE["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:402: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Mesybier II - TransStellar Shipping Storage'
+end = 'Siseide VIII - Expert Distribution Warehouse'
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 9.27 LY: Vimeini (93K isotopes)\nDOCK: ...oldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 112K\n  Time Waiting: 00:02\n  Total LY: 11.13', 'reduction': 90}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Loading SDE data...
+E         Calculating optimal route...
+E         Traceback (most recent call last):
+E           File "/workspace/did_he_say_jump.py", line 500, in <module>
+E             sys.exit(main())
+E                      ^^^^^^
+E           File "/workspace/did_he_say_jump.py", line 429, in main
+E             path = find_path(
+E                    ^^^^^^^^^^
+E         TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--reduction', '90'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_turnur_ahb[default] - AssertionError: Command failed: Loading SDE data...
+  Calculating optimal route...
+  Traceback (most recent call last):
+    File "/workspace/did_he_say_jump.py", line 500, in <module>
+      sys.exit(main())
+               ^^^^^^
+    File "/workspace/did_he_say_jump.py", line 429, in main
+      path = find_path(
+             ^^^^^^^^^^
+  TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Turnur III - Moon 18 - Freedom Extension Storage', '--end', 'Ahbazon VI - Imperial Shipment Storage', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_turnur_isbra[default] - AssertionError: Command failed: Loading SDE data...
+  Calculating optimal route...
+  Traceback (most recent call last):
+    File "/workspace/did_he_say_jump.py", line 500, in <module>
+      sys.exit(main())
+               ^^^^^^
+    File "/workspace/did_he_say_jump.py", line 429, in main
+      path = find_path(
+             ^^^^^^^^^^
+  TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Turnur III - Moon 18 - Freedom Extension Storage', '--end', 'Isbrabata VII - Boundless Creation Factory', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_fatigue_caps[default] - AssertionError: Command failed: Loading SDE data...
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', '3-CE1R VIII - Moon 5 - Prosper Vault', '--end', 'B-G1LG VI - Moon 3 - True Power Mining Outpost', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\nError: End station must not be in pochven or zarzakh (negative security)\n", stderr='Loading SDE data...\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_jita_ama[default] - AssertionError: Command failed: Loading SDE data...
+  Calculating optimal route...
+  Traceback (most recent call last):
+    File "/workspace/did_he_say_jump.py", line 500, in <module>
+      sys.exit(main())
+               ^^^^^^
+    File "/workspace/did_he_say_jump.py", line 429, in main
+      path = find_path(
+             ^^^^^^^^^^
+  TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_jita_ama[reduction=0] - AssertionError: Command failed: Loading SDE data...
+  Calculating optimal route...
+  Traceback (most recent call last):
+    File "/workspace/did_he_say_jump.py", line 500, in <module>
+      sys.exit(main())
+               ^^^^^^
+    File "/workspace/did_he_say_jump.py", line 429, in main
+      path = find_path(
+             ^^^^^^^^^^
+  TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--reduction', '0'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_jita_ama[range=6] - AssertionError: Command failed: Loading SDE data...
+  Calculating optimal route...
+  Traceback (most recent call last):
+    File "/workspace/did_he_say_jump.py", line 500, in <module>
+      sys.exit(main())
+               ^^^^^^
+    File "/workspace/did_he_say_jump.py", line 429, in main
+      path = find_path(
+             ^^^^^^^^^^
+  TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Amamake VI - Moon 2 - Nurtura Food Packaging', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '6'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_jita_serp_prime[default] - AssertionError: Command failed: Loading SDE data...
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Jita IV - Moon 4 - Caldari Navy Assembly Plant', '--end', 'Serpentis Prime II - Archangels Testing Facilities', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\nError: End station must not be in pochven or zarzakh (negative security)\n", stderr='Loading SDE data...\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=90] - AssertionError: Command failed: Loading SDE data...
+  Calculating optimal route...
+  Traceback (most recent call last):
+    File "/workspace/did_he_say_jump.py", line 500, in <module>
+      sys.exit(main())
+               ^^^^^^
+    File "/workspace/did_he_say_jump.py", line 429, in main
+      path = find_path(
+             ^^^^^^^^^^
+  TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--reduction', '90'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0] - AssertionError: Command failed: Loading SDE data...
+  Calculating optimal route...
+  Traceback (most recent call last):
+    File "/workspace/did_he_say_jump.py", line 500, in <module>
+      sys.exit(main())
+               ^^^^^^
+    File "/workspace/did_he_say_jump.py", line 429, in main
+      path = find_path(
+             ^^^^^^^^^^
+  TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--reduction', '0'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0_fuel=5000] - AssertionError: Command failed: Loading SDE data...
+  Calculating optimal route...
+  Traceback (most recent call last):
+    File "/workspace/did_he_say_jump.py", line 500, in <module>
+      sys.exit(main())
+               ^^^^^^
+    File "/workspace/did_he_say_jump.py", line 429, in main
+      path = find_path(
+             ^^^^^^^^^^
+  TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--range', '5', '--fuel', '5000', '--reduction', '0'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[reduction=90] - AssertionError: Command failed: Loading SDE data...
+  Calculating optimal route...
+  Traceback (most recent call last):
+    File "/workspace/did_he_say_jump.py", line 500, in <module>
+      sys.exit(main())
+               ^^^^^^
+    File "/workspace/did_he_say_jump.py", line 429, in main
+      path = find_path(
+             ^^^^^^^^^^
+  TypeError: find_path() missing 1 required positional argument: 'isotopes_per_jump'
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'did_he_say_jump.py', '--start', 'Mesybier II - TransStellar Shipping Storage', '--end', 'Siseide VIII - Expert Distribution Warehouse', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--reduction', '90'], returncode=1, stdout="DEBUG: args.sde type=<class 'str'>, value='/workspace/.evaluation_tests/assets/sde_dir'\n", stderr='Loading SDE data...\nCalculating optimal route...\nTraceback (most recent call last):\n  File "/workspace/did_he_say_jump.py", line 500, in <module>\n    sys.exit(main())\n             ^^^^^^\n  File "/workspace/did_he_say_jump.py", line 429, in main\n    path = find_path(\n           ^^^^^^^^^^\nTypeError: find_path() missing 1 required positional argument: \'isotopes_per_jump\'\n').returncode
+============================== 11 failed in 4.32s ==============================

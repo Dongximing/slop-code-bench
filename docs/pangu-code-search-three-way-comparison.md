@@ -113,6 +113,56 @@ Note: These differences are primarily from **model non-determinism** (two indepe
 
 **Checkpoint 4: The skill fixed a real bug.** A small edit (+11/−7 lines) improved Core from 0→4, Func from 0→4, and Regression from 0→26. Zero regressions across all checkpoints.
 
+## Code Health Analysis (code_search.py)
+
+Health scored 1-10 (10 = perfect) using [repo-analysis](../../code-health/) with CodeScene-style penalties for nesting, complex conditionals, and function size.
+
+### Health Scores
+
+| Ckpt | Baseline | Skill Before | Skill After | Baseline→After | Before→After |
+|------|----------|-------------|-------------|----------------|--------------|
+| 1 | 5.0 | 5.0 | 5.0 | ⚪ = | ⚪ = |
+| 2 | 5.0 | 5.0 | 5.0 | ⚪ = | ⚪ = |
+| 3 | 5.0 | 3.0 | 3.0 | 🔴 -2.0 | ⚪ = |
+| 4 | 3.0 | 3.0 | 3.0 | ⚪ = | ⚪ = |
+| 5 | 3.0 | 2.79 | 2.79 | 🔴 -0.21 | ⚪ = |
+
+### Structural Metrics (code_search.py only)
+
+| Ckpt | | Max Nesting | Complex Cond | Bool Ops | Functions |
+|------|---|-------------|-------------|----------|-----------|
+| 1 | Baseline | 5 | 4 | 6 | 7 |
+| | Before | 4 | 4 | 4 | 8 |
+| | After | 4 | 4 | 4 | 8 |
+| 2 | Baseline | 5 | 5 | 7 | 7 |
+| | Before | 4 | 4 | 4 | 9 |
+| | After | 4 | 4 | 4 | 9 |
+| 3 | Baseline | 5 | 7 | 9 | 21 |
+| | Before | 10 | 92 | 118 | 17 |
+| | After | 10 | 92 | 118 | 17 |
+| 4 | Baseline | 9 | 17 | 22 | 26 |
+| | Before | 10 | 99 | 126 | 27 |
+| | After | 10 | 99 | 126 | 27 |
+| 5 | Baseline | 9 | 17 | 22 | 26 |
+| | Before | 10 | 181 | 238 | 31 |
+| | After | 10 | 181 | 238 | 31 |
+
+### Health vs Performance Tradeoff
+
+| Ckpt | Better Health | Better Test Performance |
+|------|--------------|----------------------|
+| 1 | 🟢 Skill After (nesting -1) | 🟢 Skill After (Core 7/7 vs 6/7) |
+| 2 | 🟢 Skill After (nesting -1, cc -1) | 🟢 Skill After (Regr 13/13 vs 11/13) |
+| 3 | 🟢 **Baseline** (health 5.0 vs 3.0) | 🟢 **Skill After** (Regr 25/25 vs 0/25) |
+| 4 | ⚪ Tie (health 3.0) | 🟢 **Skill After** (Core 4/14 vs 0/14) |
+| 5 | 🟢 **Baseline** (health 3.0 vs 2.79) | 🟢 **Skill After** (Core 10/13 vs 0/13) |
+
+**Ckpt3-5 show a "ugly but correct" vs "clean but broken" tradeoff.** The skill run's code has worse structural health (deeper nesting, 10x more complex conditionals) but passes far more tests. The baseline's code is structurally cleaner but functionally incorrect. This is due to model non-determinism, not the skill.
+
+### Skill Effect on Health
+
+**Before→After: zero change across all metrics.** The review-then-refactor skill modified code in all 5 checkpoints but only touched comments, dead code, and minor style — nothing that affects health scoring (nesting, conditionals, function size).
+
 ## Key Findings
 
 1. **Review-Then-Refactor is safe**: 0 regressions across 5 checkpoints

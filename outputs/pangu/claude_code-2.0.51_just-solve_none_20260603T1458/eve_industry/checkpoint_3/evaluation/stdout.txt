@@ -1,0 +1,1180 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/AXoZga_Nh2t_PDzN/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 180.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 50 items
+
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[naga] PASSED    [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[barrage_l] FAILED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[fernite_carbide] PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[athanor] PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[azariel] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[proteus] FAILED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_materials_sorted_case_insensitive PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_run_time_rounds_up PASSED   [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_buildable_column_accuracy PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_unpublished_item_error PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_case_sensitive_item_name PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_nonexistent_item_error PASSED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-1] FAILED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-2] FAILED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-3] FAILED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-4] FAILED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-5] FAILED [ 34%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-1] FAILED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-5] FAILED [ 38%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-1] FAILED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-5] FAILED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[redeemer-1] FAILED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[jackdaw-5] FAILED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[tengu-5] FAILED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[valravn-5] FAILED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[subsystem-5] FAILED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::test_default_skill_is_five FAILED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::test_tech_iii_accepts_blueprint_input FAILED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_time_rounds_up FAILED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::test_probability_clamps_to_one FAILED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_zero PASSED     [ 62%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_six PASSED      [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_negative PASSED [ 66%]
+.evaluation_tests/test_checkpoint_3.py::test_naga_core[me10] PASSED      [ 68%]
+.evaluation_tests/test_checkpoint_3.py::test_naga_core[me5] PASSED       [ 70%]
+.evaluation_tests/test_checkpoint_3.py::test_naga_core[te20] PASSED      [ 72%]
+.evaluation_tests/test_checkpoint_3.py::test_naga_core[me5_waste] PASSED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::test_naga_core[me10_te20] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_3.py::test_fernite_carbide_te10 PASSED [ 78%]
+.evaluation_tests/test_checkpoint_3.py::test_proteus_me5_waste FAILED    [ 80%]
+.evaluation_tests/test_checkpoint_3.py::test_ark_me5_waste FAILED        [ 82%]
+.evaluation_tests/test_checkpoint_3.py::test_reaction_ignores_me PASSED  [ 84%]
+.evaluation_tests/test_checkpoint_3.py::test_te_rounds_at_seconds_level FAILED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::test_me10_with_display_waste FAILED [ 88%]
+.evaluation_tests/test_checkpoint_3.py::test_reaction_with_display_waste PASSED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::test_me_negative PASSED          [ 92%]
+.evaluation_tests/test_checkpoint_3.py::test_me_eleven PASSED            [ 94%]
+.evaluation_tests/test_checkpoint_3.py::test_te_negative PASSED          [ 96%]
+.evaluation_tests/test_checkpoint_3.py::test_te_odd PASSED               [ 98%]
+.evaluation_tests/test_checkpoint_3.py::test_te_twentytwo PASSED         [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_recipe_core[barrage_l] __________________________
+
+case_name = 'barrage_l', entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name", CORE_CASES)
+    def test_recipe_core(case_name, entrypoint_argv, sde_dir):
+        """Core: Recipe lookup tests."""
+        case = load_json_case(1, case_name)
+        result = run_command(
+            entrypoint_argv,
+            case["input"]["command"],
+            *case["input"]["args"],
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_1.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Manufacturing', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', 'market_group': 'None', ...}
+expected = {'activity': 'Manufacturing', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', 'market_group': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+______________________ test_recipe_functionality[proteus] ______________________
+
+case_name = 'proteus', entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name", FUNCTIONALITY_CASES)
+    def test_recipe_functionality(case_name, entrypoint_argv, sde_dir):
+        """Functionality: Extended recipe lookup tests."""
+        case = load_json_case(1, case_name)
+        result = run_command(
+            entrypoint_argv,
+            case["input"]["command"],
+            *case["input"]["args"],
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_1.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Manufacturing', 'group': 'Ship > Strategic Cruiser', 'item': 'Proteus (29988)', 'market_group': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', ...}
+expected = {'activity': 'Manufacturing', 'group': 'Ship > Strategic Cruiser', 'item': 'Proteus (29988)', 'market_group': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['tech_level']": {'new_value': 'Tech III', 'old_value': 'Tech I'}}}
+E       assert not {'values_changed': {"root['tech_level']": {'new_value': 'Tech III', 'old_value': 'Tech I'}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_______________________ test_invention_core[barrage_l-1] _______________________
+
+case_name = 'barrage_l', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 37.12, 'old_value': 0.37}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 44.54, 'old_value': 0.45}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 66.81, 'old_value': 0.67}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.27, 'old_value': 0.22}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 70.52, 'old_value': 0.71}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 33.41, 'old_value': 0.33}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 55.68, 'old_value': 0.56}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 40.83, 'old_value': 0.41}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 37.12, 'old_value': 0.37}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 37.12, 'old_value': 0.37}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 44.54, 'old_value': 0.45}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 66.81, 'old_value': 0.67}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.27, 'old_value': 0.22}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 70.52, 'old_value': 0.71}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 33.41, 'old_value': 0.33}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 55.68, 'old_value': 0.56}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 40.83, 'old_value': 0.41}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 37.12, 'old_value': 0.37}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_______________________ test_invention_core[barrage_l-2] _______________________
+
+case_name = 'barrage_l', skill_level = 2
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 40.23, 'old_value': 0.4}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 48.28, 'old_value': 0.48}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 72.42, 'old_value': 0.72}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 24.14, 'old_value': 0.24}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 76.44, 'old_value': 0.76}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 36.21, 'old_value': 0.36}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 60.35, 'old_value': 0.6}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 44.26, 'old_value': 0.44}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 40.23, 'old_value': 0.4}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 40.23, 'old_value': 0.4}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 48.28, 'old_value': 0.48}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 72.42, 'old_value': 0.72}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 24.14, 'old_value': 0.24}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 76.44, 'old_value': 0.76}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 36.21, 'old_value': 0.36}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 60.35, 'old_value': 0.6}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 44.26, 'old_value': 0.44}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 40.23, 'old_value': 0.4}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_______________________ test_invention_core[barrage_l-3] _______________________
+
+case_name = 'barrage_l', skill_level = 3
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 43.35, 'old_value': 0.43}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 52.02, 'old_value': 0.52}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 78.03, 'old_value': 0.78}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 26.01, 'old_value': 0.26}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 82.37, 'old_value': 0.82}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 39.02, 'old_value': 0.39}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 65.03, 'old_value': 0.65}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 47.69, 'old_value': 0.48}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 43.35, 'old_value': 0.43}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 43.35, 'old_value': 0.43}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 52.02, 'old_value': 0.52}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 78.03, 'old_value': 0.78}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 26.01, 'old_value': 0.26}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 82.37, 'old_value': 0.82}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 39.02, 'old_value': 0.39}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 65.03, 'old_value': 0.65}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 47.69, 'old_value': 0.48}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 43.35, 'old_value': 0.43}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_______________________ test_invention_core[barrage_l-4] _______________________
+
+case_name = 'barrage_l', skill_level = 4
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 46.47, 'old_value': 0.46}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 55.76, 'old_value': 0.56}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 83.64, 'old_value': 0.84}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 27.88, 'old_value': 0.28}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 88.29, 'old_value': 0.88}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 41.82, 'old_value': 0.42}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 69.7, 'old_value': 0.7}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 51.11, 'old_value': 0.51}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 46.47, 'old_value': 0.46}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 46.47, 'old_value': 0.46}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 55.76, 'old_value': 0.56}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 83.64, 'old_value': 0.84}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 27.88, 'old_value': 0.28}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 88.29, 'old_value': 0.88}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 41.82, 'old_value': 0.42}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 69.7, 'old_value': 0.7}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 51.11, 'old_value': 0.51}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 46.47, 'old_value': 0.46}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_______________________ test_invention_core[barrage_l-5] _______________________
+
+case_name = 'barrage_l', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 49.58, 'old_value': 0.5}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 59.5, 'old_value': 0.59}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 89.25, 'old_value': 0.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 29.75, 'old_value': 0.3}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 94.21, 'old_value': 0.94}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 44.63, 'old_value': 0.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 74.38, 'old_value': 0.74}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 54.54, 'old_value': 0.55}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 49.58, 'old_value': 0.5}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 49.58, 'old_value': 0.5}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 59.5, 'old_value': 0.59}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 89.25, 'old_value': 0.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 29.75, 'old_value': 0.3}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 94.21, 'old_value': 0.94}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 44.63, 'old_value': 0.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 74.38, 'old_value': 0.74}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 54.54, 'old_value': 0.55}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 49.58, 'old_value': 0.5}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+________________________ test_invention_core[proteus-1] ________________________
+
+case_name = 'proteus', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Proteus"
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Proteus"\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+________________________ test_invention_core[proteus-5] ________________________
+
+case_name = 'proteus', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Proteus"
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Proteus"\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+__________________ test_invention_functionality[dual_giga-1] ___________________
+
+case_name = 'dual_giga', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Dual Giga Pulse Laser I Blueprint (20445)', 'datacores': 'Datacore - High Energy Physics, Datacore - Laser Physics', 'group': 'Module > Energy Weapon', 'item': 'Dual Giga Pulse Laser II (37298)', ...}
+expected = {'base': 'Dual Giga Pulse Laser I Blueprint (20445)', 'datacores': 'Datacore - High Energy Physics, Datacore - Laser Physics', 'group': 'Module > Energy Weapon', 'item': 'Dual Giga Pulse Laser II (37298)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 38.25, 'old_value': 0.38}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 45.9, 'old_value': 0.46}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 68.85, 'old_value': 0.69}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.95, 'old_value': 0.23}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 72.68, 'old_value': 0.73}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 34.43, 'old_value': 0.34}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 57.38, 'old_value': 0.57}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 42.08, 'old_value': 0.42}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 38.25, 'old_value': 0.38}}}
+E       assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 38.25, 'old_value': 0.38}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 45.9, 'old_value': 0.46}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 68.85, 'old_value': 0.69}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.95, 'old_value': 0.23}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 72.68, 'old_value': 0.73}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 34.43, 'old_value': 0.34}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 57.38, 'old_value': 0.57}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 42.08, 'old_value': 0.42}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 38.25, 'old_value': 0.38}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+__________________ test_invention_functionality[dual_giga-5] ___________________
+
+case_name = 'dual_giga', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Dual Giga Pulse Laser I Blueprint (20445)', 'datacores': 'Datacore - High Energy Physics, Datacore - Laser Physics', 'group': 'Module > Energy Weapon', 'item': 'Dual Giga Pulse Laser II (37298)', ...}
+expected = {'base': 'Dual Giga Pulse Laser I Blueprint (20445)', 'datacores': 'Datacore - High Energy Physics, Datacore - Laser Physics', 'group': 'Module > Energy Weapon', 'item': 'Dual Giga Pulse Laser II (37298)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 55.25, 'old_value': 0.55}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 66.3, 'old_value': 0.66}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 99.45, 'old_value': 0.99}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 33.15, 'old_value': 0.33}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 100.0, 'old_value': 1.0}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 49.73, 'old_value': 0.5}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 82.88, 'old_value': 0.83}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 60.78, 'old_value': 0.61}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 55.25, 'old_value': 0.55}}}
+E       assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 55.25, 'old_value': 0.55}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 66.3, 'old_value': 0.66}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 99.45, 'old_value': 0.99}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 33.15, 'old_value': 0.33}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 100.0, 'old_value': 1.0}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 49.73, 'old_value': 0.5}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 82.88, 'old_value': 0.83}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 60.78, 'old_value': 0.61}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 55.25, 'old_value': 0.55}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+___________________ test_invention_functionality[redeemer-1] ___________________
+
+case_name = 'redeemer', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Armageddon Blueprint (997)', 'datacores': 'Datacore - Amarrian Starship Engineering, Datacore - Mechanical Engineering', 'group': 'Ship > Black Ops', 'item': 'Redeemer (22428)', ...}
+expected = {'base': 'Armageddon Blueprint (997)', 'datacores': 'Datacore - Amarrian Starship Engineering, Datacore - Mechanical Engineering', 'group': 'Ship > Black Ops', 'item': 'Redeemer (22428)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 24.02, 'old_value': 0.24}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 28.82, 'old_value': 0.29}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 43.23, 'old_value': 0.43}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 14.41, 'old_value': 0.14}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 45.63, 'old_value': 0.46}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 21.62, 'old_value': 0.22}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 36.03, 'old_value': 0.36}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 26.42, 'old_value': 0.26}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 24.02, 'old_value': 0.24}}}
+E       assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 24.02, 'old_value': 0.24}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 28.82, 'old_value': 0.29}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 43.23, 'old_value': 0.43}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 14.41, 'old_value': 0.14}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 45.63, 'old_value': 0.46}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 21.62, 'old_value': 0.22}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 36.03, 'old_value': 0.36}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 26.42, 'old_value': 0.26}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 24.02, 'old_value': 0.24}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+___________________ test_invention_functionality[jackdaw-5] ____________________
+
+case_name = 'jackdaw', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Jackdaw"
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Jackdaw', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Jackdaw"\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+____________________ test_invention_functionality[tengu-5] _____________________
+
+case_name = 'tengu', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Tengu"
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Tengu', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Tengu"\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+___________________ test_invention_functionality[valravn-5] ____________________
+
+case_name = 'valravn', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Naglfar Blueprint (19723)', 'datacores': 'Datacore - High Energy Physics, Datacore - Minmatar Starship Engineering', 'group': 'Ship > Lancer Dreadnought', 'item': 'Valravn (77288)', ...}
+expected = {'base': 'Naglfar Blueprint (19723)', 'datacores': 'Datacore - High Energy Physics, Datacore - Minmatar Starship Engineering', 'group': 'Ship > Lancer Dreadnought', 'item': 'Valravn (77288)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 26.25, 'old_value': 0.26}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 31.5, 'old_value': 0.31}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 47.25, 'old_value': 0.47}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 15.75, 'old_value': 0.16}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 49.88, 'old_value': 0.5}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 23.63, 'old_value': 0.24}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 39.38, 'old_value': 0.39}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 28.88, 'old_value': 0.29}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 26.25, 'old_value': 0.26}}}
+E       assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 26.25, 'old_value': 0.26}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 31.5, 'old_value': 0.31}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 47.25, 'old_value': 0.47}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 15.75, 'old_value': 0.16}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 49.88, 'old_value': 0.5}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 23.63, 'old_value': 0.24}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 39.38, 'old_value': 0.39}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 28.88, 'old_value': 0.29}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 26.25, 'old_value': 0.26}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+__________________ test_invention_functionality[subsystem-5] ___________________
+
+case_name = 'subsystem', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Proteus Defensive - Covert Reconfiguration"
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus Defensive - Covert Reconfiguration', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Proteus Defensive - Covert Reconfiguration"\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+__________________________ test_default_skill_is_five __________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_default_skill_is_five(entrypoint_argv, sde_dir):
+        """Functionality: Missing --skill defaults to level 5."""
+        case = load_json_case(2, "barrage_l")
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+        expected = build_expected_output(case, skill_level=5)
+>       assert_dict_equal(actual, expected)
+
+.evaluation_tests/test_checkpoint_2.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Blueprint > Advanced Projectile Ammo Blueprint', 'item': 'Barrage L Blueprint (12776)', ...}
+expected = {'base': 'Nuclear L Blueprint (896)', 'datacores': 'Datacore - Mechanical Engineering, Datacore - Nuclear Physics', 'group': 'Charge > Advanced Autocannon Ammo', 'item': 'Barrage L (12775)', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 49.58, 'old_value': 0.5}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 59.5, 'old_value': 0.59}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 89.25, 'old_value': 0.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 29.75, 'old_value': 0.3}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 94.21, 'old_value': 0.94}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 44.63, 'old_value': 0.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 74.38, 'old_value': 0.74}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 54.54, 'old_value': 0.55}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 49.58, 'old_value': 0.5}}}
+E       assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 49.58, 'old_value': 0.5}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 59.5, 'old_value': 0.59}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 89.25, 'old_value': 0.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 29.75, 'old_value': 0.3}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 94.21, 'old_value': 0.94}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 44.63, 'old_value': 0.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 74.38, 'old_value': 0.74}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 54.54, 'old_value': 0.55}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 49.58, 'old_value': 0.5}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+____________________ test_tech_iii_accepts_blueprint_input _____________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_tech_iii_accepts_blueprint_input(entrypoint_argv, sde_dir):
+        """Functionality: Tech III blueprint names resolve to the product."""
+        case = load_json_case(2, "proteus")
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            "Proteus Blueprint",
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            "5",
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Proteus Blueprint"
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Proteus Blueprint"\n').returncode
+
+.evaluation_tests/test_checkpoint_2.py:136: AssertionError
+________________________ test_invention_time_rounds_up _________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_invention_time_rounds_up(entrypoint_argv, sde_dir):
+        """Functionality: Invention time rounds up to whole minutes."""
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            "Entosis Link II Blueprint",
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            "5",
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+>       assert actual["item"] == "Entosis Link II (34595)"
+E       AssertionError: assert 'Entosis Link II Blueprint (34596)' == 'Entosis Link II (34595)'
+E         
+E         - Entosis Link II (34595)
+E         ?                      ^
+E         + Entosis Link II Blueprint (34596)
+E         ?                ++++++++++      ^
+
+.evaluation_tests/test_checkpoint_2.py:156: AssertionError
+________________________ test_probability_clamps_to_one ________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_probability_clamps_to_one(entrypoint_argv, sde_dir):
+        """Functionality: Probabilities clamp to 100%."""
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            "Dual Giga Beam Laser II Blueprint",
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            "5",
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_invention_output(result.stdout)
+>       assert actual["item"] == "Dual Giga Beam Laser II (37299)"
+E       AssertionError: assert 'Dual Giga Beam Laser II Blueprint (41186)' == 'Dual Giga Beam Laser II (37299)'
+E         
+E         - Dual Giga Beam Laser II (37299)
+E         + Dual Giga Beam Laser II Blueprint (41186)
+
+.evaluation_tests/test_checkpoint_2.py:175: AssertionError
+____________________________ test_proteus_me5_waste ____________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_proteus_me5_waste(entrypoint_argv, sde_dir):
+        """Functionality: Proteus Tech III ship with ME=5 and waste display."""
+        data = load_json_case(3, "proteus")
+        case = next(c for c in data["cases"] if c["case_id"] == "me5_waste")
+    
+        result = run_command(
+            entrypoint_argv,
+            "recipe",
+            data["item_name"],
+            "-me",
+            "5",
+            "-waste",
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_3.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Manufacturing', 'group': 'Ship > Strategic Cruiser', 'item': 'Proteus (29988)', 'market_group': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', ...}
+expected = {'activity': 'Manufacturing', 'group': 'Ship > Strategic Cruiser', 'item': 'Proteus (29988)', 'market_group': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['tech_level']": {'new_value': 'Tech III', 'old_value': 'Tech I'}, "root['materials']['Metallofullerene Plating']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['R.A.M.- Starship Tech']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['Superconducting Magnetometric Amplifier']['Waste']": {'new_value': 1, 'old_value': 0}}}
+E       assert not {'values_changed': {"root['tech_level']": {'new_value': 'Tech III', 'old_value': 'Tech I'}, "root['materials']['Metallofullerene Plating']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['R.A.M.- Starship Tech']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['Superconducting Magnetometric Amplifier']['Waste']": {'new_value': 1, 'old_value': 0}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+______________________________ test_ark_me5_waste ______________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_ark_me5_waste(entrypoint_argv, sde_dir):
+        """Functionality: Ark Jump Freighter with ME=5 and waste display."""
+        data = load_json_case(3, "ark")
+        case = next(c for c in data["cases"] if c["case_id"] == "me5_waste")
+    
+        result = run_command(
+            entrypoint_argv,
+            "recipe",
+            data["item_name"],
+            "--material-efficiency",
+            "5",
+            "-waste",
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_3.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Manufacturing', 'group': 'Ship > Jump Freighter', 'item': 'Ark (28850)', 'market_group': 'Ships > Capital Ships > Jump Freighters > Amarr', ...}
+expected = {'activity': 'Manufacturing', 'group': 'Ship > Jump Freighter', 'item': 'Ark (28850)', 'market_group': 'Ships > Capital Ships > Jump Freighters > Amarr', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['materials']['Capital Antimatter Reactor Unit']['Waste']": {'new_value': 39, 'old_value': 38}, "root['materials']['Capital Fusion Thruster']['Waste']": {'new_value': 32, 'old_value': 31}, "root['materials']['Capital Jump Drive']['Waste']": {'new_value': 2, 'old_value': 1}, "root['materials']['Capital Linear Shield Emitter']['Waste']": {'new_value': 34, 'old_value': 33}, "root['materials']['Capital Nanoelectrical Microprocessor']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Capital Tesseract Capacitor Unit']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Construction Blocks']['Waste']": {'new_value': 113, 'old_value': 112}, "root['materials']['Morphite']['Waste']": {'new_value': 188, 'old_value': 187}}}
+E       assert not {'values_changed': {"root['materials']['Capital Antimatter Reactor Unit']['Waste']": {'new_value': 39, 'old_value': 38}, "root['materials']['Capital Fusion Thruster']['Waste']": {'new_value': 32, 'old_value': 31}, "root['materials']['Capital Jump Drive']['Waste']": {'new_value': 2, 'old_value': 1}, "root['materials']['Capital Linear Shield Emitter']['Waste']": {'new_value': 34, 'old_value': 33}, "root['materials']['Capital Nanoelectrical Microprocessor']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Capital Tesseract Capacitor Unit']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Construction Blocks']['Waste']": {'new_value': 113, 'old_value': 112}, "root['materials']['Morphite']['Waste']": {'new_value': 188, 'old_value': 187}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_______________________ test_te_rounds_at_seconds_level ________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_te_rounds_at_seconds_level(entrypoint_argv, sde_dir):
+        """Functionality: TE applies before minute rounding."""
+        result = run_command(
+            entrypoint_argv,
+            "recipe",
+            "Spatial Attunement Unit",
+            "-te",
+            "20",
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+        assert actual["item"] == "Spatial Attunement Unit (33195)"
+        assert actual["activity"] == "Manufacturing"
+>       assert actual["run_time"] == 1
+E       assert 2 == 1
+
+.evaluation_tests/test_checkpoint_3.py:157: AssertionError
+_________________________ test_me10_with_display_waste _________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_me10_with_display_waste(entrypoint_argv, sde_dir):
+        """Functionality: ME=10 with --display-waste should show all zeros."""
+        result = run_command(
+            entrypoint_argv,
+            "recipe",
+            "Naga",
+            "-me",
+            "10",
+            "--display-waste",
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+        # All waste values should be 0 at ME=10
+        for material_name, material_data in actual["materials"].items():
+            assert "Waste" in material_data, f"Missing Waste column for {material_name}"
+>           assert material_data["Waste"] == 0, f"Expected waste=0 for {material_name} at ME=10"
+E           AssertionError: Expected waste=0 for Isogen at ME=10
+E           assert 2600 == 0
+
+.evaluation_tests/test_checkpoint_3.py:178: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recipe_core[barrage_l] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}}}
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[proteus] - AssertionError: 
+  Diff: {'values_changed': {"root['tech_level']": {'new_value': 'Tech III', 'old_value': 'Tech I'}}}
+assert not {'values_changed': {"root['tech_level']": {'new_value': 'Tech III', 'old_value': 'Tech I'}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-1] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 37.12, 'old_value': 0.37}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 44.54, 'old_value': 0.45}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 66.81, 'old_value': 0.67}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.27, 'old_value': 0.22}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 70.52, 'old_value': 0.71}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 33.41, 'old_value': 0.33}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 55.68, 'old_value': 0.56}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 40.83, 'old_value': 0.41}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 37.12, 'old_value': 0.37}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 37.12, 'old_value': 0.37}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 44.54, 'old_value': 0.45}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 66.81, 'old_value': 0.67}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.27, 'old_value': 0.22}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 70.52, 'old_value': 0.71}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 33.41, 'old_value': 0.33}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 55.68, 'old_value': 0.56}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 40.83, 'old_value': 0.41}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 37.12, 'old_value': 0.37}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-2] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 40.23, 'old_value': 0.4}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 48.28, 'old_value': 0.48}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 72.42, 'old_value': 0.72}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 24.14, 'old_value': 0.24}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 76.44, 'old_value': 0.76}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 36.21, 'old_value': 0.36}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 60.35, 'old_value': 0.6}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 44.26, 'old_value': 0.44}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 40.23, 'old_value': 0.4}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 40.23, 'old_value': 0.4}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 48.28, 'old_value': 0.48}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 72.42, 'old_value': 0.72}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 24.14, 'old_value': 0.24}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 76.44, 'old_value': 0.76}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 36.21, 'old_value': 0.36}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 60.35, 'old_value': 0.6}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 44.26, 'old_value': 0.44}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 40.23, 'old_value': 0.4}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-3] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 43.35, 'old_value': 0.43}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 52.02, 'old_value': 0.52}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 78.03, 'old_value': 0.78}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 26.01, 'old_value': 0.26}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 82.37, 'old_value': 0.82}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 39.02, 'old_value': 0.39}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 65.03, 'old_value': 0.65}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 47.69, 'old_value': 0.48}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 43.35, 'old_value': 0.43}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 43.35, 'old_value': 0.43}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 52.02, 'old_value': 0.52}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 78.03, 'old_value': 0.78}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 26.01, 'old_value': 0.26}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 82.37, 'old_value': 0.82}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 39.02, 'old_value': 0.39}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 65.03, 'old_value': 0.65}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 47.69, 'old_value': 0.48}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 43.35, 'old_value': 0.43}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-4] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 46.47, 'old_value': 0.46}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 55.76, 'old_value': 0.56}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 83.64, 'old_value': 0.84}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 27.88, 'old_value': 0.28}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 88.29, 'old_value': 0.88}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 41.82, 'old_value': 0.42}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 69.7, 'old_value': 0.7}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 51.11, 'old_value': 0.51}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 46.47, 'old_value': 0.46}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 46.47, 'old_value': 0.46}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 55.76, 'old_value': 0.56}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 83.64, 'old_value': 0.84}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 27.88, 'old_value': 0.28}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 88.29, 'old_value': 0.88}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 41.82, 'old_value': 0.42}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 69.7, 'old_value': 0.7}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 51.11, 'old_value': 0.51}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 46.47, 'old_value': 0.46}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-5] - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 49.58, 'old_value': 0.5}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 59.5, 'old_value': 0.59}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 89.25, 'old_value': 0.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 29.75, 'old_value': 0.3}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 94.21, 'old_value': 0.94}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 44.63, 'old_value': 0.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 74.38, 'old_value': 0.74}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 54.54, 'old_value': 0.55}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 49.58, 'old_value': 0.5}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 49.58, 'old_value': 0.5}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 59.5, 'old_value': 0.59}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 89.25, 'old_value': 0.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 29.75, 'old_value': 0.3}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 94.21, 'old_value': 0.94}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 44.63, 'old_value': 0.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 74.38, 'old_value': 0.74}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 54.54, 'old_value': 0.55}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 49.58, 'old_value': 0.5}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-1] - AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Proteus"
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Proteus"\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-5] - AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Proteus"
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Proteus"\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-1] - AssertionError: 
+  Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 38.25, 'old_value': 0.38}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 45.9, 'old_value': 0.46}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 68.85, 'old_value': 0.69}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.95, 'old_value': 0.23}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 72.68, 'old_value': 0.73}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 34.43, 'old_value': 0.34}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 57.38, 'old_value': 0.57}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 42.08, 'old_value': 0.42}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 38.25, 'old_value': 0.38}}}
+assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 38.25, 'old_value': 0.38}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 45.9, 'old_value': 0.46}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 68.85, 'old_value': 0.69}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 22.95, 'old_value': 0.23}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 72.68, 'old_value': 0.73}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 34.43, 'old_value': 0.34}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 57.38, 'old_value': 0.57}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 42.08, 'old_value': 0.42}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 38.25, 'old_value': 0.38}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-5] - AssertionError: 
+  Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 55.25, 'old_value': 0.55}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 66.3, 'old_value': 0.66}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 99.45, 'old_value': 0.99}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 33.15, 'old_value': 0.33}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 100.0, 'old_value': 1.0}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 49.73, 'old_value': 0.5}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 82.88, 'old_value': 0.83}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 60.78, 'old_value': 0.61}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 55.25, 'old_value': 0.55}}}
+assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 55.25, 'old_value': 0.55}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 66.3, 'old_value': 0.66}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 99.45, 'old_value': 0.99}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 33.15, 'old_value': 0.33}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 100.0, 'old_value': 1.0}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 49.73, 'old_value': 0.5}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 82.88, 'old_value': 0.83}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 60.78, 'old_value': 0.61}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 55.25, 'old_value': 0.55}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[redeemer-1] - AssertionError: 
+  Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 24.02, 'old_value': 0.24}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 28.82, 'old_value': 0.29}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 43.23, 'old_value': 0.43}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 14.41, 'old_value': 0.14}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 45.63, 'old_value': 0.46}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 21.62, 'old_value': 0.22}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 36.03, 'old_value': 0.36}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 26.42, 'old_value': 0.26}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 24.02, 'old_value': 0.24}}}
+assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 24.02, 'old_value': 0.24}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 28.82, 'old_value': 0.29}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 43.23, 'old_value': 0.43}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 14.41, 'old_value': 0.14}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 45.63, 'old_value': 0.46}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 21.62, 'old_value': 0.22}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 36.03, 'old_value': 0.36}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 26.42, 'old_value': 0.26}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 24.02, 'old_value': 0.24}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[jackdaw-5] - AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Jackdaw"
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Jackdaw', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Jackdaw"\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[tengu-5] - AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Tengu"
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Tengu', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Tengu"\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[valravn-5] - AssertionError: 
+  Diff: {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 26.25, 'old_value': 0.26}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 31.5, 'old_value': 0.31}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 47.25, 'old_value': 0.47}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 15.75, 'old_value': 0.16}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 49.88, 'old_value': 0.5}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 23.63, 'old_value': 0.24}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 39.38, 'old_value': 0.39}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 28.88, 'old_value': 0.29}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 26.25, 'old_value': 0.26}}}
+assert not {'values_changed': {"root['probabilities']['None']['Probability']": {'new_value': 26.25, 'old_value': 0.26}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 31.5, 'old_value': 0.31}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 47.25, 'old_value': 0.47}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 15.75, 'old_value': 0.16}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 49.88, 'old_value': 0.5}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 23.63, 'old_value': 0.24}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 39.38, 'old_value': 0.39}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 28.88, 'old_value': 0.29}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 26.25, 'old_value': 0.26}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[subsystem-5] - AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Proteus Defensive - Covert Reconfiguration"
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus Defensive - Covert Reconfiguration', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Proteus Defensive - Covert Reconfiguration"\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_default_skill_is_five - AssertionError: 
+  Diff: {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 49.58, 'old_value': 0.5}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 59.5, 'old_value': 0.59}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 89.25, 'old_value': 0.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 29.75, 'old_value': 0.3}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 94.21, 'old_value': 0.94}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 44.63, 'old_value': 0.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 74.38, 'old_value': 0.74}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 54.54, 'old_value': 0.55}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 49.58, 'old_value': 0.5}}}
+assert not {'values_changed': {"root['item']": {'new_value': 'Barrage L (12775)', 'old_value': 'Barrage L Blueprint (12776)'}, "root['group']": {'new_value': 'Charge > Advanced Autocannon Ammo', 'old_value': 'Blueprint > Advanced Projectile Ammo Blueprint'}, "root['market_group']": {'new_value': 'Ammunition & Charges > Projectile Ammo > Advanced Autocannon Ammo > Large', 'old_value': 'None'}, "root['probabilities']['None']['Probability']": {'new_value': 49.58, 'old_value': 0.5}, "root['probabilities']['Accelerant Decryptor']['Probability']": {'new_value': 59.5, 'old_value': 0.59}, "root['probabilities']['Attainment Decryptor']['Probability']": {'new_value': 89.25, 'old_value': 0.89}, "root['probabilities']['Augmentation Decryptor']['Probability']": {'new_value': 29.75, 'old_value': 0.3}, "root['probabilities']['Optimized Attainment Decryptor']['Probability']": {'new_value': 94.21, 'old_value': 0.94}, "root['probabilities']['Optimized Augmentation Decryptor']['Probability']": {'new_value': 44.63, 'old_value': 0.45}, "root['probabilities']['Parity Decryptor']['Probability']": {'new_value': 74.38, 'old_value': 0.74}, "root['probabilities']['Process Decryptor']['Probability']": {'new_value': 54.54, 'old_value': 0.55}, "root['probabilities']['Symmetry Decryptor']['Probability']": {'new_value': 49.58, 'old_value': 0.5}}}
+FAILED .evaluation_tests/test_checkpoint_2.py::test_tech_iii_accepts_blueprint_input - AssertionError: Command failed: Error: Could not find Tech II or Tech III invention data for "Proteus Blueprint"
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=1, stdout='', stderr='Error: Could not find Tech II or Tech III invention data for "Proteus Blueprint"\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_time_rounds_up - AssertionError: assert 'Entosis Link II Blueprint (34596)' == 'Entosis Link II (34595)'
+  
+  - Entosis Link II (34595)
+  ?                      ^
+  + Entosis Link II Blueprint (34596)
+  ?                ++++++++++      ^
+FAILED .evaluation_tests/test_checkpoint_2.py::test_probability_clamps_to_one - AssertionError: assert 'Dual Giga Beam Laser II Blueprint (41186)' == 'Dual Giga Beam Laser II (37299)'
+  
+  - Dual Giga Beam Laser II (37299)
+  + Dual Giga Beam Laser II Blueprint (41186)
+FAILED .evaluation_tests/test_checkpoint_3.py::test_proteus_me5_waste - AssertionError: 
+  Diff: {'values_changed': {"root['tech_level']": {'new_value': 'Tech III', 'old_value': 'Tech I'}, "root['materials']['Metallofullerene Plating']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['R.A.M.- Starship Tech']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['Superconducting Magnetometric Amplifier']['Waste']": {'new_value': 1, 'old_value': 0}}}
+assert not {'values_changed': {"root['tech_level']": {'new_value': 'Tech III', 'old_value': 'Tech I'}, "root['materials']['Metallofullerene Plating']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['R.A.M.- Starship Tech']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['Superconducting Magnetometric Amplifier']['Waste']": {'new_value': 1, 'old_value': 0}}}
+FAILED .evaluation_tests/test_checkpoint_3.py::test_ark_me5_waste - AssertionError: 
+  Diff: {'values_changed': {"root['materials']['Capital Antimatter Reactor Unit']['Waste']": {'new_value': 39, 'old_value': 38}, "root['materials']['Capital Fusion Thruster']['Waste']": {'new_value': 32, 'old_value': 31}, "root['materials']['Capital Jump Drive']['Waste']": {'new_value': 2, 'old_value': 1}, "root['materials']['Capital Linear Shield Emitter']['Waste']": {'new_value': 34, 'old_value': 33}, "root['materials']['Capital Nanoelectrical Microprocessor']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Capital Tesseract Capacitor Unit']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Construction Blocks']['Waste']": {'new_value': 113, 'old_value': 112}, "root['materials']['Morphite']['Waste']": {'new_value': 188, 'old_value': 187}}}
+assert not {'values_changed': {"root['materials']['Capital Antimatter Reactor Unit']['Waste']": {'new_value': 39, 'old_value': 38}, "root['materials']['Capital Fusion Thruster']['Waste']": {'new_value': 32, 'old_value': 31}, "root['materials']['Capital Jump Drive']['Waste']": {'new_value': 2, 'old_value': 1}, "root['materials']['Capital Linear Shield Emitter']['Waste']": {'new_value': 34, 'old_value': 33}, "root['materials']['Capital Nanoelectrical Microprocessor']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Capital Tesseract Capacitor Unit']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Construction Blocks']['Waste']": {'new_value': 113, 'old_value': 112}, "root['materials']['Morphite']['Waste']": {'new_value': 188, 'old_value': 187}}}
+FAILED .evaluation_tests/test_checkpoint_3.py::test_te_rounds_at_seconds_level - assert 2 == 1
+FAILED .evaluation_tests/test_checkpoint_3.py::test_me10_with_display_waste - AssertionError: Expected waste=0 for Isogen at ME=10
+assert 2600 == 0
+======================== 24 failed, 26 passed in 41.05s ========================

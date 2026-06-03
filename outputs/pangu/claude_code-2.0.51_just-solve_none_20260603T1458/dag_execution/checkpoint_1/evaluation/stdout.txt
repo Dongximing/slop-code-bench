@@ -1,0 +1,1004 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/ZJiwqpRRKDysG8dt/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 33 items
+
+.evaluation_tests/test_checkpoint_1.py::test_basic FAILED                [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_arrays FAILED               [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_bool_params FAILED          [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_string_concat FAILED        [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_if FAILED            [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_elif FAILED          [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_branch_else FAILED          [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_array_indexing FAILED       [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_for_requires FAILED         [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_while_requires FAILED       [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_working_dirs FAILED         [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_existing_dir FAILED         [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops FAILED       [ 39%]
+.evaluation_tests/test_checkpoint_1.py::test_exists_function FAILED      [ 42%]
+.evaluation_tests/test_checkpoint_1.py::test_float_params FAILED         [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_nested_loops FAILED         [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_stderr_validation FAILED    [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_string_params FAILED        [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_timeout FAILED              [ 57%]
+.evaluation_tests/test_checkpoint_1.py::test_circular_dependency FAILED  [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_default_param_order FAILED  [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_required_arg FAILED [ 66%]
+.evaluation_tests/test_checkpoint_1.py::test_multiline_success_no_return FAILED [ 69%]
+.evaluation_tests/test_checkpoint_1.py::test_no_main FAILED              [ 72%]
+.evaluation_tests/test_checkpoint_1.py::test_recursive_call FAILED       [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params FAILED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false FAILED [ 81%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool FAILED [ 84%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_requires_failure_stops FAILED [ 87%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe FAILED [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe FAILED [ 93%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_bad_toml_syntax FAILED [ 96%]
+.evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block FAILED [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_basic __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_basic(entrypoint_argv):
+        """Core: Basic pipeline with requires, fail(), and task chaining."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BASIC_PIPELINE, BASIC_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0, got {result.returncode}: {result.stderr}"
+    
+        # Check stdout events only have required keys
+        actual_events = parse_jsonl(result.stdout)
+        for event in actual_events:
+            assert "event" in event
+            assert "job_id" in event
+    
+        # Check jobs
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        errors = verify_jobs(jobs, BASIC_EXPECTED_JOBS)
+>       assert not errors, "\n".join(errors)
+E       AssertionError: Missing job 2
+E         Missing job 3
+E         Missing job 4
+E         Missing job 5
+E         Missing job 1
+E       assert not ['Missing job 2', 'Missing job 3', 'Missing job 4', 'Missing job 5', 'Missing job 1']
+
+.evaluation_tests/test_checkpoint_1.py:307: AssertionError
+_________________________________ test_arrays __________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_arrays(entrypoint_argv):
+        """Core: Array parameters and len() function."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAYS_PIPELINE, ARRAYS_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # PrintInt should have num=5 (length of array)
+        print_job = next((j for j in jobs if j.get("task") == "PrintInt"), None)
+>       assert print_job is not None, "PrintInt job not found"
+E       AssertionError: PrintInt job not found
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:364: AssertionError
+_______________________________ test_bool_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_bool_params(entrypoint_argv):
+        """Core: Boolean parameters with TRUE/FALSE literals."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BOOL_PARAMS_PIPELINE, BOOL_PARAMS_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # First ConditionalTask call: (FALSE, TRUE) - no flag, verbose output
+        cond_jobs = [j for j in jobs if j.get("task") == "ConditionalTask"]
+>       assert len(cond_jobs) == 2
+E       assert 0 == 2
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_1.py:421: AssertionError
+______________________________ test_string_concat ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_string_concat(entrypoint_argv):
+        """Core: String concatenation with % operator in for loops."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_CONCAT_PIPELINE, STRING_CONCAT_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Should have 3 LogMessage calls
+        log_jobs = [j for j in jobs if j.get("task") == "LogMessage"]
+>       assert len(log_jobs) == 3
+E       assert 0 == 3
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_1.py:484: AssertionError
+________________________________ test_branch_if ________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_if(entrypoint_argv):
+        """Core: If conditional branching - true branch taken."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_IF_PIPELINE, BRANCH_IF_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        task_names = [j.get("task") for j in jobs]
+    
+        # B succeeds (exit 0), so A should be called
+>       assert "B" in task_names
+E       AssertionError: assert 'B' in []
+
+.evaluation_tests/test_checkpoint_1.py:563: AssertionError
+_______________________________ test_branch_elif _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_elif(entrypoint_argv):
+        """Core: Elif branch - first fails, elif succeeds."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELIF_PIPELINE, BRANCH_ELIF_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        task_names = [j.get("task") for j in jobs]
+    
+        # B fails (exit 1), E succeeds, so F should be called
+>       assert "B" in task_names
+E       AssertionError: assert 'B' in []
+
+.evaluation_tests/test_checkpoint_1.py:638: AssertionError
+_______________________________ test_branch_else _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_branch_else(entrypoint_argv):
+        """Core: Else branch - if and elif both fail."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, BRANCH_ELSE_PIPELINE, BRANCH_ELSE_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        task_names = [j.get("task") for j in jobs]
+    
+        # B fails, E fails, so C should be called
+>       assert "B" in task_names
+E       AssertionError: assert 'B' in []
+
+.evaluation_tests/test_checkpoint_1.py:714: AssertionError
+_____________________________ test_array_indexing ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_array_indexing(entrypoint_argv):
+        """Core: Array subscript access with [i] notation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARRAY_INDEXING_PIPELINE, ARRAY_INDEXING_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Should have 4 ProcessItem calls with correct items
+        process_jobs = [j for j in jobs if j.get("task") == "ProcessItem"]
+>       assert len(process_jobs) == 4
+E       assert 0 == 4
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_1.py:772: AssertionError
+______________________________ test_for_requires _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_for_requires(entrypoint_argv):
+        """Core: For loop in requires clause."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FOR_REQUIRES_PIPELINE, FOR_REQUIRES_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Should have 2 A task calls
+        a_jobs = [j for j in jobs if j.get("task") == "A"]
+>       assert len(a_jobs) == 2
+E       assert 0 == 2
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_1.py:824: AssertionError
+_____________________________ test_while_requires ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_while_requires(entrypoint_argv):
+        """Core: While loop with break/continue in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WHILE_REQUIRES_PIPELINE, WHILE_REQUIRES_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Should have 2 A calls and 1 PrintInt(2)
+        a_jobs = [j for j in jobs if j.get("task") == "A"]
+>       assert len(a_jobs) == 2
+E       assert 0 == 2
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_1.py:880: AssertionError
+______________________________ test_working_dirs _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_working_dirs(entrypoint_argv):
+        """Core: Working directory isolation for nested task calls."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, WORKING_DIRS_PIPELINE, WORKING_DIRS_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Check output paths
+        outputs = {j.get("task"): j.get("output") for j in jobs if j.get("output")}
+>       assert outputs.get("B") == "B"
+E       AssertionError: assert None == 'B'
+E        +  where None = <built-in method get of dict object at 0x7ad8b3804e40>('B')
+E        +    where <built-in method get of dict object at 0x7ad8b3804e40> = {}.get
+
+.evaluation_tests/test_checkpoint_1.py:943: AssertionError
+______________________________ test_existing_dir _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    def test_existing_dir(entrypoint_argv):
+        """Core: Pre-existing workspace files (clean_cwd=false)."""
+        existing_files = {"run.sh": 'echo "Hello"'}
+    
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            EXISTING_DIR_PIPELINE,
+            EXISTING_DIR_CONFIG,
+            existing_files=existing_files,
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        main_job = next((j for j in jobs if j.get("task") == "main"), None)
+>       assert main_job is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:984: AssertionError
+_____________________________ test_arithmetic_ops ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_arithmetic_ops(entrypoint_argv):
+        """Functionality: Integer arithmetic operations in requires."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, ARITHMETIC_OPS_PIPELINE, ARITHMETIC_OPS_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Check Calculate calls have correct params
+        calc_jobs = [j for j in jobs if j.get("task") == "Calculate"]
+>       assert len(calc_jobs) == 3
+E       assert 0 == 3
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_1.py:1044: AssertionError
+_____________________________ test_exists_function _____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_exists_function(entrypoint_argv):
+        """Functionality: exists() and !exists() functions in success checks."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, EXISTS_FUNCTION_PIPELINE, EXISTS_FUNCTION_CONFIG
+        )
+    
+        # This test expects exit code 1 because CheckMultiple fails
+        # (nested file doesn't exist when CheckMultiple runs)
+>       assert result.returncode == 1, f"Expected exit 1, got {result.returncode}"
+E       AssertionError: Expected exit 1, got 0
+E       assert 0 == 1
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpyicyza1c/pipeline.pipe', '--workspace', '/tmp/tmpyicyza1c/working', '--output', '/tmp/tmpyicyza1c/output', '--config', '/tmp/tmpyicyza1c/config.toml'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1103: AssertionError
+______________________________ test_float_params _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_float_params(entrypoint_argv):
+        """Functionality: Float parameters and Python integration."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, FLOAT_PARAMS_PIPELINE, FLOAT_PARAMS_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Check Calculate calls
+        calc_jobs = [j for j in jobs if j.get("task") == "Calculate"]
+>       assert len(calc_jobs) == 2
+E       assert 0 == 2
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_1.py:1158: AssertionError
+______________________________ test_nested_loops _______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_nested_loops(entrypoint_argv):
+        """Functionality: Nested loops with break statements."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, NESTED_LOOPS_PIPELINE, NESTED_LOOPS_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # Count CreateMatrix calls
+        matrix_jobs = [j for j in jobs if j.get("task") == "CreateMatrix"]
+    
+        # Expected: (0,0-3), (1,0-2 then break), (2,0-3 then outer break)
+        # = 4 + 3 + 4 = 11 calls
+>       assert len(matrix_jobs) == 11
+E       assert 0 == 11
+E        +  where 0 = len([])
+
+.evaluation_tests/test_checkpoint_1.py:1220: AssertionError
+____________________________ test_stderr_validation ____________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_stderr_validation(entrypoint_argv):
+        """Functionality: stderr contains() and equals() validation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STDERR_VALIDATION_PIPELINE, STDERR_VALIDATION_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # GenerateError should have all success checks pass
+        gen_job = next((j for j in jobs if j.get("task") == "GenerateError"), None)
+>       assert gen_job is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:1277: AssertionError
+______________________________ test_string_params ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_string_params(entrypoint_argv):
+        """Functionality: String parameter interpolation."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, STRING_PARAMS_PIPELINE, STRING_PARAMS_CONFIG
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # WriteMessage should have correct params
+        write_job = next((j for j in jobs if j.get("task") == "WriteMessage"), None)
+>       assert write_job is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:1333: AssertionError
+_________________________________ test_timeout _________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_timeout(entrypoint_argv):
+        """Functionality: Task timeout handling with exit code 124."""
+        result, working, output = run_pipeline(
+            entrypoint_argv, TIMEOUT_TEST_PIPELINE, TIMEOUT_TEST_CONFIG, timeout=30
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+    
+        # SlowTask should timeout
+        slow_job = next((j for j in jobs if j.get("task") == "SlowTask"), None)
+>       assert slow_job is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:1398: AssertionError
+___________________________ test_circular_dependency ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_circular_dependency(entrypoint_argv):
+        """Error: Circular dependency detection (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        run: {
+            echo "A"
+        }
+        requires {
+            B()
+        }
+    }
+    
+    task B {
+        run: {
+            echo "B"
+        }
+        requires {
+            C()
+        }
+    }
+    task C {
+        run: {
+            echo "C"
+        }
+        requires: {
+            A()
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            C()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 0
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpq34svf2y/pipeline.pipe', '--workspace', '/tmp/tmpq34svf2y/working', '--output', '/tmp/tmpq34svf2y/output'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1458: AssertionError
+___________________________ test_default_param_order ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_default_param_order(entrypoint_argv):
+        """Error: Default param before required param (exit 2, SYNTAX_ERROR)."""
+        pipeline = '''task A {
+        params: {
+            x: int = 1
+            y: int
+        }
+        run: {
+            echo "A"
+        }
+    }
+    
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            A()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+E       AssertionError: Expected exit 2, got 0
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpodya88is/pipeline.pipe', '--workspace', '/tmp/tmpodya88is/working', '--output', '/tmp/tmpodya88is/output'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1487: AssertionError
+__________________________ test_missing_required_arg ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_missing_required_arg(entrypoint_argv):
+        """Error: Missing required argument (exit 3, INVALID_PIPE)."""
+        pipeline = '''task A {
+        params: {
+            x: int
+            y: int = 1
+        }
+        run: {
+            echo "A"
+        }
+    }
+    
+    
+    task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            A(y=2)
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 0
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp195cj3av/pipeline.pipe', '--workspace', '/tmp/tmp195cj3av/working', '--output', '/tmp/tmp195cj3av/output'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1516: AssertionError
+_______________________ test_multiline_success_no_return _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_multiline_success_no_return(entrypoint_argv):
+        """Error: Multiline success block without return (exit 2, SYNTAX_ERROR)."""
+        pipeline = '''task ProcessItem {
+        params: {
+            item: string
+            index: int
+        }
+        run: {
+            echo "Item ${params.index}: ${params.item}" >> ${workspace}/items.txt
+        }
+    }
+    
+    task main {
+        params: {
+            items: list[string] = ["apple", "banana", "cherry", "date"];
+        }
+        run: {
+            cat items.txt
+        }
+        requires: {
+            for (int i = 0; i < len(${params.items}); i++) {
+                ProcessItem(${params.items}[i], i);
+            }
+        }
+        success: {
+            check_items: {
+                for (int i = 0; i < len(${params.items}); i++) {
+                    if (!contains("${workspace}/items.txt", ${params.items}[i])) {
+                        FALSE;
+                    }
+                }
+            }
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+E       AssertionError: Expected exit 2, got 0
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmppasz8v41/pipeline.pipe', '--workspace', '/tmp/tmppasz8v41/working', '--output', '/tmp/tmppasz8v41/output'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1558: AssertionError
+_________________________________ test_no_main _________________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_no_main(entrypoint_argv):
+        """Error: Pipeline without main task (exit 3, INVALID_PIPE)."""
+        pipeline = '''task Task {
+        run {
+            echo "I should not run"
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 0
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpezfccjs8/pipeline.pipe', '--workspace', '/tmp/tmpezfccjs8/working', '--output', '/tmp/tmpezfccjs8/output'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1573: AssertionError
+_____________________________ test_recursive_call ______________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.error
+    def test_recursive_call(entrypoint_argv):
+        """Error: Recursive task call (exit 3, INVALID_PIPE)."""
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            main()
+        }
+    }'''
+    
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 0
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjv7t7n36/pipeline.pipe', '--workspace', '/tmp/tmpjv7t7n36/working', '--output', '/tmp/tmpjv7t7n36/output'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1591: AssertionError
+_______________________ test_edge_entry_call_with_params _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_entry_call_with_params(entrypoint_argv):
+        """Edge case: entry can be a task invocation with params.
+    
+        Spec says: "entry=<task invocation ... can be just its name `A` or a call
+        with params `A(1, x=2)`"
+        """
+        pipeline = '''task Start {
+        params: {
+            x: int
+            y: int
+        }
+        run: {
+            echo "${params.x}_${params.y}"
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Ignored"
+        }
+    }'''
+        config = '''entry = "Start(1, y=2)"
+    clean_cwd = true'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline, config)
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        start_job = next((j for j in jobs if j.get("task") == "Start"), None)
+>       assert start_job is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:1628: AssertionError
+______________________ test_edge_clean_cwd_default_false _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_clean_cwd_default_false(entrypoint_argv):
+        """Edge case: clean_cwd defaults to false when omitted.
+    
+        Spec says: "clean_cwd = <bool ... Default false.>"
+        """
+        pipeline = '''task main {
+        run: {
+            cat existing.txt
+        }
+    }'''
+        existing_files = {"existing.txt": "hello"}
+        result, working, output = run_pipeline(
+            entrypoint_argv,
+            pipeline,
+            existing_files=existing_files,
+        )
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+        assert working.get("existing.txt") == "hello"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        main_job = next((j for j in jobs if j.get("task") == "main"), None)
+>       assert main_job is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:1655: AssertionError
+_____________________ test_edge_env_default_type_cast_bool _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_env_default_type_cast_bool(entrypoint_argv):
+        """Edge case: env default values are dynamically type cast (bool).
+    
+        Spec says: "Environment variables can be used as default values ... dynamic
+        type casting ... (i.e. 1 would convert to a bool of TRUE)"
+        """
+        pipeline = '''task CheckFlag {
+        params: {
+            flag: bool = $FLAG
+        }
+        run: {
+            echo "${params.flag}"
+        }
+    }
+    
+    task main {
+        requires: {
+            CheckFlag()
+        }
+    }'''
+        config = '''clean_cwd = true
+    [env]
+    FLAG = "1"'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline, config)
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        check_job = next((j for j in jobs if j.get("task") == "CheckFlag"), None)
+>       assert check_job is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:1689: AssertionError
+_______________________ test_edge_requires_failure_stops _______________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_requires_failure_stops(entrypoint_argv):
+        """Edge case: requires stops on failure and task fails.
+    
+        Spec says: "If one requires fails ... we stop executing and the task fails."
+        """
+        pipeline = '''task FailTask {
+        run: {
+            exit 1
+        }
+    }
+    
+    task AfterTask {
+        run: {
+            echo "should not run"
+        }
+    }
+    
+    task main {
+        run: {
+            echo "Finished."
+        }
+        requires: {
+            FailTask();
+            AfterTask();
+        }
+    }'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 1, f"Expected exit 1, got {result.returncode}"
+E       AssertionError: Expected exit 1, got 0
+E       assert 0 == 1
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmps73fs9r0/pipeline.pipe', '--workspace', '/tmp/tmps73fs9r0/working', '--output', '/tmp/tmps73fs9r0/output'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1722: AssertionError
+_____________________ test_edge_type_mismatch_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_type_mismatch_invalid_pipe(entrypoint_argv):
+        """Edge case: type mismatch should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... type mismatch"
+        """
+        pipeline = '''task A {
+        params: {
+            x: int
+        }
+        run: {
+            echo "${params.x}"
+        }
+    }
+    
+    task main {
+        requires: {
+            A("not-int");
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 0
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpd7_3jdp5/pipeline.pipe', '--workspace', '/tmp/tmpd7_3jdp5/working', '--output', '/tmp/tmpd7_3jdp5/output'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1752: AssertionError
+____________________ test_edge_undefined_task_invalid_pipe _____________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_undefined_task_invalid_pipe(entrypoint_argv):
+        """Edge case: undefined task call should be INVALID_PIPE.
+    
+        Spec says: "Exit 3: INVALID_PIPE ... undefined tasks"
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        requires: {
+            MissingTask();
+        }
+    }'''
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline)
+    
+>       assert result.returncode == 3, f"Expected exit 3, got {result.returncode}"
+E       AssertionError: Expected exit 3, got 0
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpx3b26wb8/pipeline.pipe', '--workspace', '/tmp/tmpx3b26wb8/working', '--output', '/tmp/tmpx3b26wb8/output'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1772: AssertionError
+__________________________ test_edge_bad_toml_syntax ___________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_bad_toml_syntax(entrypoint_argv):
+        """Edge case: bad TOML config should be SYNTAX_ERROR.
+    
+        Spec says: "Exit 2: SYNTAX_ERROR:<msg> ... bad TOML/.pipe syntax"
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+    }'''
+        config = "entry = ["
+        result, _, _ = run_pipeline(entrypoint_argv, pipeline, config)
+    
+>       assert result.returncode == 2, f"Expected exit 2, got {result.returncode}"
+E       AssertionError: Expected exit 2, got 0
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpmqi9ed0t/pipeline.pipe', '--workspace', '/tmp/tmpmqi9ed0t/working', '--output', '/tmp/tmpmqi9ed0t/output', '--config', '/tmp/tmpmqi9ed0t/config.toml'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:1790: AssertionError
+________________________ test_edge_empty_success_block _________________________
+
+entrypoint_argv = ['uv', 'run', 'launch.py']
+
+    @pytest.mark.functionality
+    def test_edge_empty_success_block(entrypoint_argv):
+        """Edge case: empty success block is allowed.
+    
+        Spec says: "Success can be empty."
+        """
+        pipeline = '''task main {
+        run: {
+            echo "Hello"
+        }
+        success: {
+        }
+    }'''
+        result, _, output = run_pipeline(entrypoint_argv, pipeline)
+    
+        assert result.returncode == 0, f"Expected exit 0: {result.stderr}"
+    
+        jobs = parse_jsonl(output.get("jobs.jsonl", ""))
+        main_job = next((j for j in jobs if j.get("task") == "main"), None)
+>       assert main_job is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_1.py:1813: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_basic - AssertionError: Missing job 2
+  Missing job 3
+  Missing job 4
+  Missing job 5
+  Missing job 1
+assert not ['Missing job 2', 'Missing job 3', 'Missing job 4', 'Missing job 5', 'Missing job 1']
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arrays - AssertionError: PrintInt job not found
+assert None is not None
+FAILED .evaluation_tests/test_checkpoint_1.py::test_bool_params - assert 0 == 2
+ +  where 0 = len([])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_concat - assert 0 == 3
+ +  where 0 = len([])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_if - AssertionError: assert 'B' in []
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_elif - AssertionError: assert 'B' in []
+FAILED .evaluation_tests/test_checkpoint_1.py::test_branch_else - AssertionError: assert 'B' in []
+FAILED .evaluation_tests/test_checkpoint_1.py::test_array_indexing - assert 0 == 4
+ +  where 0 = len([])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_for_requires - assert 0 == 2
+ +  where 0 = len([])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_while_requires - assert 0 == 2
+ +  where 0 = len([])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_working_dirs - AssertionError: assert None == 'B'
+ +  where None = <built-in method get of dict object at 0x7ad8b3804e40>('B')
+ +    where <built-in method get of dict object at 0x7ad8b3804e40> = {}.get
+FAILED .evaluation_tests/test_checkpoint_1.py::test_existing_dir - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_1.py::test_arithmetic_ops - assert 0 == 3
+ +  where 0 = len([])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_exists_function - AssertionError: Expected exit 1, got 0
+assert 0 == 1
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpyicyza1c/pipeline.pipe', '--workspace', '/tmp/tmpyicyza1c/working', '--output', '/tmp/tmpyicyza1c/output', '--config', '/tmp/tmpyicyza1c/config.toml'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_float_params - assert 0 == 2
+ +  where 0 = len([])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_nested_loops - assert 0 == 11
+ +  where 0 = len([])
+FAILED .evaluation_tests/test_checkpoint_1.py::test_stderr_validation - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_1.py::test_string_params - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_1.py::test_timeout - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_1.py::test_circular_dependency - AssertionError: Expected exit 3, got 0
+assert 0 == 3
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpq34svf2y/pipeline.pipe', '--workspace', '/tmp/tmpq34svf2y/working', '--output', '/tmp/tmpq34svf2y/output'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_default_param_order - AssertionError: Expected exit 2, got 0
+assert 0 == 2
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpodya88is/pipeline.pipe', '--workspace', '/tmp/tmpodya88is/working', '--output', '/tmp/tmpodya88is/output'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_missing_required_arg - AssertionError: Expected exit 3, got 0
+assert 0 == 3
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmp195cj3av/pipeline.pipe', '--workspace', '/tmp/tmp195cj3av/working', '--output', '/tmp/tmp195cj3av/output'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_multiline_success_no_return - AssertionError: Expected exit 2, got 0
+assert 0 == 2
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmppasz8v41/pipeline.pipe', '--workspace', '/tmp/tmppasz8v41/working', '--output', '/tmp/tmppasz8v41/output'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_no_main - AssertionError: Expected exit 3, got 0
+assert 0 == 3
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpezfccjs8/pipeline.pipe', '--workspace', '/tmp/tmpezfccjs8/working', '--output', '/tmp/tmpezfccjs8/output'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_recursive_call - AssertionError: Expected exit 3, got 0
+assert 0 == 3
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpjv7t7n36/pipeline.pipe', '--workspace', '/tmp/tmpjv7t7n36/working', '--output', '/tmp/tmpjv7t7n36/output'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_entry_call_with_params - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_clean_cwd_default_false - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_env_default_type_cast_bool - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_requires_failure_stops - AssertionError: Expected exit 1, got 0
+assert 0 == 1
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmps73fs9r0/pipeline.pipe', '--workspace', '/tmp/tmps73fs9r0/working', '--output', '/tmp/tmps73fs9r0/output'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_type_mismatch_invalid_pipe - AssertionError: Expected exit 3, got 0
+assert 0 == 3
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpd7_3jdp5/pipeline.pipe', '--workspace', '/tmp/tmpd7_3jdp5/working', '--output', '/tmp/tmpd7_3jdp5/output'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_undefined_task_invalid_pipe - AssertionError: Expected exit 3, got 0
+assert 0 == 3
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpx3b26wb8/pipeline.pipe', '--workspace', '/tmp/tmpx3b26wb8/working', '--output', '/tmp/tmpx3b26wb8/output'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_bad_toml_syntax - AssertionError: Expected exit 2, got 0
+assert 0 == 2
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'launch.py', '/tmp/tmpmqi9ed0t/pipeline.pipe', '--workspace', '/tmp/tmpmqi9ed0t/working', '--output', '/tmp/tmpmqi9ed0t/output', '--config', '/tmp/tmpmqi9ed0t/config.toml'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_edge_empty_success_block - assert None is not None
+============================== 33 failed in 6.71s ==============================

@@ -1,0 +1,361 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/Qjk-7UtQXt9qA7xW/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 37 items
+
+.evaluation_tests/test_checkpoint_1.py::test_priority_chain PASSED       [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_file_overrides_env PASSED   [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_parse_failure_halts PASSED  [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_unresolved_params_error PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_schema_json PASSED  [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_arg_parse_failure PASSED    [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_non_string_default PASSED   [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_env_parse_failure PASSED    [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_file_absent PASSED  [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_whitespace_file_absent PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_file_value_is_trimmed FAILED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_arg_forms[arg_candidates0] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_arg_forms[arg_candidates1] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_unmatched_args PASSED       [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_bool_float_formats PASSED   [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_unreadable_file_absent PASSED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_env_parse_error_priority FAILED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_undeclared_sources PASSED   [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_schema_file PASSED  [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_boolean[whitespace] FAILED [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_invalid_boolean[suffix] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_default_parse_error_stops FAILED [ 59%]
+.evaluation_tests/test_checkpoint_1.py::test_file_parse_error_stops FAILED [ 62%]
+.evaluation_tests/test_checkpoint_1.py::test_empty_env_string_is_present FAILED [ 64%]
+.evaluation_tests/test_checkpoint_1.py::test_empty_schema PASSED         [ 67%]
+.evaluation_tests/test_checkpoint_1.py::test_non_string_env PASSED       [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_non_string_file PASSED      [ 72%]
+.evaluation_tests/test_checkpoint_1.py::test_non_string_arg PASSED       [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_schema_array_root PASSED    [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_negative_integer PASSED     [ 81%]
+.evaluation_tests/test_checkpoint_1.py::test_integer_string_as_float PASSED [ 83%]
+.evaluation_tests/test_checkpoint_1.py::test_arg_error_stops_resolution PASSED [ 86%]
+.evaluation_tests/test_checkpoint_1.py::test_env_error_stops_resolution PASSED [ 89%]
+.evaluation_tests/test_checkpoint_1.py::test_unrecognized_type PASSED    [ 91%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_type_field PASSED   [ 94%]
+.evaluation_tests/test_checkpoint_1.py::test_no_sources_unresolved PASSED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::test_unresolved_mixed_sources PASSED [100%]
+
+=================================== FAILURES ===================================
+__________________________ test_file_value_is_trimmed __________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/cfgpipe.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_file_value_is_trimmed0')
+
+    @pytest.mark.functionality
+    def test_file_value_is_trimmed(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """File values are trimmed."""
+        value_file = write_text(tmp_path / "value.txt", "  0042\n")
+        schema_path = _write_schema(
+            tmp_path,
+            {
+                "count": {
+                    "type": "integer",
+                    "file": str(value_file),
+                }
+            },
+        )
+    
+        result = run_cfgpipe(
+            entrypoint_argv,
+            schema_path=schema_path,
+            cwd=tmp_path,
+        )
+    
+        assert_success(result)
+>       assert _parse_output(result.stdout)["count"] == "42"
+E       AssertionError: assert '0042' == '42'
+E         
+E         - 42
+E         + 0042
+
+.evaluation_tests/test_checkpoint_1.py:340: AssertionError
+________________________ test_env_parse_error_priority _________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/cfgpipe.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_env_parse_error_priority0')
+
+    @pytest.mark.error
+    def test_env_parse_error_priority(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Env parse failure outranks valid arg."""
+        schema_path = _write_schema(
+            tmp_path,
+            {
+                "port": {
+                    "type": "integer",
+                    "env": "CFGPIPE_CP1_BAD_PORT_OVERRIDE",
+                    "arg": "port",
+                }
+            },
+        )
+    
+        result = run_cfgpipe(
+            entrypoint_argv,
+            schema_path=schema_path,
+            env={"CFGPIPE_CP1_BAD_PORT_OVERRIDE": "oops"},
+            arg_candidates=["--port=9000"],
+            cwd=tmp_path,
+        )
+    
+>       assert_error(result, "port", "env", "integer")
+
+.evaluation_tests/test_checkpoint_1.py:495: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/cfgpipe.py', '/tmp/pytest-of-agent/pytest-0/test_env_parse_error_priority0/schema.json', '--port=9000'], returncode=0, stdout='{"port": "9000"}\n', stderr='')
+tokens = ('port', 'env', 'integer')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *tokens: str,
+    ) -> None:
+>       assert result.returncode != 0
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/utils.py:73: AssertionError
+_______________________ test_invalid_boolean[whitespace] _______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/cfgpipe.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_invalid_boolean_whitespac0')
+arg_candidates = ['--enabled= true']
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "arg_candidates",
+        [
+            ["--enabled= true"],
+            ["--enabled=falsex"],
+        ],
+        ids=["whitespace", "suffix"],
+    )
+    def test_invalid_boolean(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        arg_candidates: list[str],
+    ) -> None:
+        """Invalid boolean arg is rejected."""
+        schema_path = _write_schema(
+            tmp_path,
+            {
+                "enabled": {
+                    "type": "boolean",
+                    "arg": "enabled",
+                }
+            },
+        )
+    
+        result = run_cfgpipe(
+            entrypoint_argv,
+            schema_path=schema_path,
+            arg_candidates=arg_candidates,
+            cwd=tmp_path,
+        )
+    
+>       assert_error(result, "enabled", "arg", "boolean")
+
+.evaluation_tests/test_checkpoint_1.py:576: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/cfgpipe.py', '/tmp/pytest-of-agent/pytest-0...t_invalid_boolean_whitespac0/schema.json', '--enabled= true'], returncode=0, stdout='{"enabled": "true"}\n', stderr='')
+tokens = ('enabled', 'arg', 'boolean')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *tokens: str,
+    ) -> None:
+>       assert result.returncode != 0
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/utils.py:73: AssertionError
+________________________ test_default_parse_error_stops ________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/cfgpipe.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_default_parse_error_stops0')
+
+    @pytest.mark.error
+    def test_default_parse_error_stops(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Default parse error stops resolution."""
+        schema_path = _write_schema(
+            tmp_path,
+            {
+                "port": {
+                    "type": "integer",
+                    "default": "oops",
+                    "env": "CFGPIPE_CP1_PORT",
+                    "arg": "port",
+                },
+                "timeout": {
+                    "type": "integer",
+                    "default": "30",
+                },
+            },
+        )
+    
+        result = run_cfgpipe(
+            entrypoint_argv,
+            schema_path=schema_path,
+            env={"CFGPIPE_CP1_PORT": "9000"},
+            arg_candidates=["--port=7000"],
+            cwd=tmp_path,
+        )
+    
+>       assert_error(result, "port", "default", "integer")
+
+.evaluation_tests/test_checkpoint_1.py:609: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/cfgpipe.py', '/tmp/pytest-of-agent/pytest-0...parse_error_stops0/schema.json', '--port=7000'], returncode=0, stdout='{"port": "7000", "timeout": "30"}\n', stderr='')
+tokens = ('port', 'default', 'integer')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *tokens: str,
+    ) -> None:
+>       assert result.returncode != 0
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/utils.py:73: AssertionError
+_________________________ test_file_parse_error_stops __________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/cfgpipe.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_file_parse_error_stops0')
+
+    @pytest.mark.error
+    def test_file_parse_error_stops(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """File parse error stops resolution."""
+        value_file = write_text(tmp_path / "port.txt", "not-an-int")
+        schema_path = _write_schema(
+            tmp_path,
+            {
+                "port": {
+                    "type": "integer",
+                    "file": str(value_file),
+                    "arg": "port",
+                },
+                "timeout": {
+                    "type": "integer",
+                    "default": "30",
+                },
+            },
+        )
+    
+        result = run_cfgpipe(
+            entrypoint_argv,
+            schema_path=schema_path,
+            arg_candidates=["--port=7000"],
+            cwd=tmp_path,
+        )
+    
+>       assert_error(result, "port", "file", "integer")
+
+.evaluation_tests/test_checkpoint_1.py:642: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/cfgpipe.py', '/tmp/pytest-of-agent/pytest-0...parse_error_stops0/schema.json', '--port=7000'], returncode=0, stdout='{"port": "7000", "timeout": "30"}\n', stderr='')
+tokens = ('port', 'file', 'integer')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *tokens: str,
+    ) -> None:
+>       assert result.returncode != 0
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/utils.py:73: AssertionError
+_______________________ test_empty_env_string_is_present _______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/cfgpipe.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_empty_env_string_is_prese0')
+
+    @pytest.mark.functionality
+    def test_empty_env_string_is_present(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """A set-but-empty env string is a present string value."""
+        schema_path = _write_schema(
+            tmp_path,
+            {
+                "name": {
+                    "type": "string",
+                    "default": "fallback",
+                    "env": "CFGPIPE_CP1_NAME",
+                }
+            },
+        )
+    
+        result = run_cfgpipe(
+            entrypoint_argv,
+            schema_path=schema_path,
+            env={"CFGPIPE_CP1_NAME": ""},
+            cwd=tmp_path,
+        )
+    
+        assert_success(result)
+>       assert _parse_output(result.stdout) == {"name": ""}
+E       AssertionError: assert {'name': 'fallback'} == {'name': ''}
+E         
+E         Differing items:
+E         {'name': 'fallback'} != {'name': ''}
+E         
+E         Full diff:
+E           {
+E         -     'name': '',
+E         +     'name': 'fallback',
+E         ?              ++++++++
+E           }
+
+.evaluation_tests/test_checkpoint_1.py:671: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_file_value_is_trimmed - AssertionError: assert '0042' == '42'
+  
+  - 42
+  + 0042
+FAILED .evaluation_tests/test_checkpoint_1.py::test_env_parse_error_priority - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_invalid_boolean[whitespace] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_default_parse_error_stops - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_file_parse_error_stops - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_empty_env_string_is_present - AssertionError: assert {'name': 'fallback'} == {'name': ''}
+  
+  Differing items:
+  {'name': 'fallback'} != {'name': ''}
+  
+  Full diff:
+    {
+  -     'name': '',
+  +     'name': 'fallback',
+  ?              ++++++++
+    }
+========================= 6 failed, 31 passed in 4.96s =========================
