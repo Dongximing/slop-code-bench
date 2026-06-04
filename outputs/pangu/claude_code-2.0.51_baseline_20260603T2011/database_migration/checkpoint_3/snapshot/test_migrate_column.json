@@ -1,0 +1,22 @@
+{
+  "version": 5,
+  "description": "Migrate email to email_address",
+  "operations": [
+    {
+      "type": "create_table",
+      "table": "users_email",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true},
+        {"name": "old_email", "type": "TEXT", "not_null": false},
+        {"name": "email", "type": "TEXT", "not_null": false}
+      ]
+    },
+    {
+      "type": "migrate_column_data",
+      "table": "users_email",
+      "from_column": "old_email",
+      "to_column": "email",
+      "default_value": null
+    }
+  ]
+}

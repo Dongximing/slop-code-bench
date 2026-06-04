@@ -1,0 +1,29 @@
+{
+  "version": 7,
+  "description": "Add indexes for user posts queries",
+  "operations": [
+    {
+      "type": "add_column",
+      "table": "posts",
+      "column": {
+        "name": "created_at",
+        "type": "TIMESTAMP",
+        "not_null": false
+      }
+    },
+    {
+      "type": "create_index",
+      "name": "idx_users_email",
+      "table": "users",
+      "columns": ["email"],
+      "unique": false
+    },
+    {
+      "type": "create_index",
+      "name": "idx_posts_user_created",
+      "table": "posts",
+      "columns": ["user_id", "created_at"],
+      "unique": false
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 8,
+  "description": "Test error handling for missing column in transform_data",
+  "operations": [
+    {
+      "type": "create_table",
+      "table": "error_test",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true}
+      ]
+    },
+    {
+      "type": "transform_data",
+      "table": "error_test",
+      "transformations": [
+        {
+          "column": "nonexistent_column",
+          "expression": "'test'"
+        }
+      ]
+    }
+  ]
+}

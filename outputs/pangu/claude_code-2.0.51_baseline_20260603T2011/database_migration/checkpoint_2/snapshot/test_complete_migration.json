@@ -1,0 +1,42 @@
+{
+  "version": 6,
+  "description": "Complete column migration: rename email to email_address",
+  "operations": [
+    {
+      "type": "create_table",
+      "table": "users_email_rename",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true},
+        {"name": "email", "type": "TEXT", "not_null": false},
+        {"name": "status", "type": "TEXT", "not_null": false}
+      ]
+    },
+    {
+      "type": "add_column",
+      "table": "users_email_rename",
+      "column": {
+        "name": "email_address",
+        "type": "TEXT",
+        "not_null": false
+      }
+    },
+    {
+      "type": "migrate_column_data",
+      "table": "users_email_rename",
+      "from_column": "email",
+      "to_column": "email_address"
+    },
+    {
+      "type": "drop_column",
+      "table": "users_email_rename",
+      "column": "email"
+    },
+    {
+      "type": "backfill_data",
+      "table": "users_email_rename",
+      "column": "status",
+      "value": "'active'",
+      "where": "status IS NULL"
+    }
+  ]
+}

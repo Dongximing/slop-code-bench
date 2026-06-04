@@ -1,0 +1,166 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/-I-Ve7z_nFvpT_DU/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 40 items
+
+.evaluation_tests/test_checkpoint_1.py::test_create_blueprint_returns_persisted_resource PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_requirement_set_order_preserved_non_lexicographic PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_orders_by_created_at_name_uuid PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_name_tiebreak_when_created_at_collides FAILED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_and_delete_single_uuid PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_delete_missing_uuid_returns_not_found PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_invalid_json_input PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_unique_sorted_messages PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_deduplicates_messages_across_requirement_sets PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_duplicate_name_with_conflict PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_is_atomic_and_reports_sorted_unresolved PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_rejects_blank_csv_members_atomically PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_empty_returns_empty_array PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_unknown_top_level_keys PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_caller_supplied_uuid PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_boolean_resource_count PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_success_returns_deleted_count PASSED [ 42%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_duplicate_members_count_unique_deletions FAILED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_create_output_is_compact_sorted_json_without_trailing_newline PASSED [ 47%]
+.evaluation_tests/test_checkpoint_1.py::test_create_missing_required_fields_reports_sorted_unique_messages PASSED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_failure_is_atomic PASSED [ 52%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_caller_supplied_created_at PASSED [ 55%]
+.evaluation_tests/test_checkpoint_1.py::test_create_preserves_empty_capabilities_array PASSED [ 57%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_name_string PASSED [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_requirement_sets PASSED [ 62%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_set_missing_required_keys PASSED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_object_json_payload PASSED [ 67%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_top_level_and_nested_failures PASSED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_create_generates_valid_uuid_v4_format PASSED [ 72%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_float_resource_count PASSED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_string_name_type PASSED [ 77%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_array_requirement_sets PASSED [ 80%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_sets_with_non_object_elements PASSED [ 82%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_single_name_succeeds PASSED [ 85%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_uuid_tiebreak_when_created_at_and_name_collide FAILED [ 87%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_nonexistent_uuid_returns_not_found PASSED [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_unsupported_key_as_sole_violation PASSED [ 92%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_capabilities_with_non_string_elements PASSED [ 95%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_returns_all_stored_fields PASSED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_multiple_unsupported_keys PASSED [100%]
+
+=================================== FAILURES ===================================
+__________ test_blueprint_list_name_tiebreak_when_created_at_collides __________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_blueprint_list_name_tiebr0/data')
+
+    @pytest.mark.functionality
+    def test_blueprint_list_name_tiebreak_when_created_at_collides(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        first = create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="zeta-tie",
+            requirement_sets=[{"resource_type": "CPU", "resource_count": 1}],
+        )
+        second = create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="alpha-tie",
+            requirement_sets=[{"resource_type": "CPU", "resource_count": 1}],
+        )
+        shared_timestamp = "2024-01-01T00:00:00Z"
+        store_path = data_dir / "blueprints.json"
+        stored = json.loads(store_path.read_text())
+        for row in stored:
+>           if row["uuid"] in {first["uuid"], second["uuid"]}:
+               ^^^^^^^^^^^
+E           TypeError: string indices must be integers, not 'str'
+
+.evaluation_tests/test_checkpoint_1.py:128: TypeError
+__________ test_delete_names_duplicate_members_count_unique_deletions __________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_names_duplicate_me0/data')
+
+    @pytest.mark.functionality
+    def test_delete_names_duplicate_members_count_unique_deletions(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Duplicate CSV members delete once and report the number of removed blueprints."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="alpha",
+            requirement_sets=[{"resource_type": "CPU", "resource_count": 1}],
+        )
+    
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "delete", "--names", "alpha,alpha"],
+        )
+>       payload = unwrap_object(assert_success(result))
+                                ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:445: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...nts[name_to_uuid[name]]\n        ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\nKeyError: \'e9841a8a-ccc1-47c8-b839-c2ac7e6e9ddf\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 267, in <module>\n    main()\n  File "/workspace/forge.py", line 257, in main\n    result = args.func(args, data_dir)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 249, in <lambda>\n    else cmd_delete_names(data_dir, args.names)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 207, in cmd_delete_names\n    del blueprints[name_to_uuid[name]]\n        ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\nKeyError: \'e9841a8a-ccc1-47c8-b839-c2ac7e6e9ddf\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+______ test_blueprint_list_uuid_tiebreak_when_created_at_and_name_collide ______
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_blueprint_list_uuid_tiebr0/data')
+
+    @pytest.mark.functionality
+    def test_blueprint_list_uuid_tiebreak_when_created_at_and_name_collide(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List uses UUID as final tiebreaker when created_at and name are identical."""
+        first = create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="uuid-tie-a",
+            requirement_sets=[{"resource_type": "CPU", "resource_count": 1}],
+        )
+        second = create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="uuid-tie-b",
+            requirement_sets=[{"resource_type": "GPU", "resource_count": 1}],
+        )
+        shared_timestamp = "2024-01-01T00:00:00Z"
+        shared_name = "uuid-tie"
+        store_path = data_dir / "blueprints.json"
+        stored = json.loads(store_path.read_text())
+        for row in stored:
+>           if row["uuid"] in {first["uuid"], second["uuid"]}:
+               ^^^^^^^^^^^
+E           TypeError: string indices must be integers, not 'str'
+
+.evaluation_tests/test_checkpoint_1.py:792: TypeError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_blueprint_list_name_tiebreak_when_created_at_collides - TypeError: string indices must be integers, not 'str'
+FAILED .evaluation_tests/test_checkpoint_1.py::test_delete_names_duplicate_members_count_unique_deletions - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 267, in <module>\n    main()\n  File "/workspace/forge.py", line 257, in main\n    result = args.func(args, data_dir)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 249, in <lambda>\n    else cmd_delete_names(data_dir, args.names)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 207, in cmd_delete_names\n    del blueprints[name_to_uuid[name]]\n        ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\nKeyError: \'e9841a8a-ccc1-47c8-b839-c2ac7e6e9ddf\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_1.py::test_blueprint_list_uuid_tiebreak_when_created_at_and_name_collide - TypeError: string indices must be integers, not 'str'
+======================== 3 failed, 37 passed in 10.25s =========================

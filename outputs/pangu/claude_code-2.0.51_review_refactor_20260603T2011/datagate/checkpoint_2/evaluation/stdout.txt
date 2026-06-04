@@ -1,0 +1,1468 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/s86FO-J2XuOvkCmb/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 122 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_convert_bad_params[missing-source] PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_convert_bad_params[invalid-url] PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unreachable_source FAILED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_non_tabular_payload PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_success_returns_id PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_single_column_csv FAILED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_query_envelope PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_order_preserved PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_default_limit_100 PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_charset_latin1 FAILED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_autodetect_latin1 FAILED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_upstream_500_to_404 FAILED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_decimals_as_numbers PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_semicolon_delimiter PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_time_values_as_text PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unknown_route_404 PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_relative_endpoint PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[,] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[;] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[\t] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[name,emoji-alice,smile\nbob,wave\n] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[name,note-alice,naive\nbob,cafe\n] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[k,v-left,  space\nright,space  \n] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[id,text-1,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_query_stable PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_limit_exactly_100 PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_whitespace FAILED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_negative_values_as_numbers FAILED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_routes[/convert] PASSED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_routes[/not-found] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_dataset_query PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_options_preflight_cors[/convert] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_options_preflight_cors[/datasets/does-not-exist] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_same_url_same_id PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_different_urls_different_ids FAILED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_empty_file_rejected PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_time_boundary_values_are_text PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_large_dataset_limit_order PASSED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_id_from_url_not_charset FAILED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_header_and_time_whitespace FAILED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_trailing_empty_line_excluded FAILED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_extra_columns_trimmed PASSED [ 34%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_multiple_datasets_independent PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_unknown_dataset_404 PASSED [ 36%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_malformed_charset PASSED [ 36%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_convert_bad_url[bad-scheme] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_convert_bad_url[missing-scheme] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_header_only_rejected PASSED [ 39%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_empty_source_parameter PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_upstream_403_to_404 FAILED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_total_before_pagination PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_size_and_offset_apply PASSED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_ascending_is_stable PASSED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_paginate FAILED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_precedence FAILED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_shape_objects_includes_rowid FAILED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_ignores_sort FAILED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_hide_removes_rowid PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_total_hide_removes_total PASSED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_invalid_param_400[invalid_size] PASSED [ 49%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_invalid_param_400[invalid_shape] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[1-1] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[2-2] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[5-5] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[20-5] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[0-Alice] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[1-Bob] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[4-Eve] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[10-None] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[name] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[age] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[city] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[name] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[age] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[city] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_name_and_city_order_values FAILED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params0] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params1] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params2] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_columns_exclude_rowid PASSED [ 65%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sorted_requests_stable PASSED [ 66%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_hide_noop_lists PASSED [ 67%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_hide_noop_default PASSED [ 68%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_total_ignores_offset_size PASSED [ 68%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_composed_controls FAILED [ 69%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shapes_consistent_values PASSED [ 70%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_tie_stability FAILED [ 71%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_precedence_different_columns FAILED [ 72%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_sequential_all_rows FAILED [ 72%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_total_default_bare_request PASSED [ 73%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_at_dataset_length PASSED [ 74%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_empty_toggle_value_400[_rowid] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_empty_toggle_value_400[_total] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_large_size_returns_all_rows PASSED [ 77%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_unknown_sort_column_400 PASSED [ 77%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort_desc] PASSED [ 79%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_rowid-show] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_rowid-false] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_total-show] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_total-0] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_total_default_shape PASSED [ 83%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_size=1&_size=2] FAILED [ 84%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort=age&_sort=name] FAILED [ 85%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_rowid=hide&_rowid=hide] FAILED [ 86%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_offset=1&_offset=2] FAILED [ 86%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_shape=lists&_shape=objects] FAILED [ 87%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort_desc=age&_sort_desc=name] FAILED [ 88%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_total=hide&_total=hide] FAILED [ 89%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_rowid_list_or_default[params0] PASSED [ 90%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_rowid_list_or_default[params1] PASSED [ 90%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_both_params_400[_sort=age&_sort_desc=] PASSED [ 91%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[shape] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[size] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[offset] PASSED [ 94%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[0] PASSED [ 95%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[-1] PASSED [ 95%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[3.1] PASSED [ 96%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[abc] PASSED [ 97%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[-1] PASSED [ 98%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[oops] PASSED [ 99%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[2.5] PASSED [100%]
+
+=================================== FAILURES ===================================
+_______________________ TestCore.test_unreachable_source _______________________
+
+self = <test_checkpoint_1.TestCore object at 0x708f15bc2630>
+client = <httpx.Client object at 0x708f151adaf0>
+
+    @pytest.mark.error
+    def test_unreachable_source(self, client: httpx.Client) -> None:
+        """Return 404 for an unreachable /convert source URL."""
+        response = convert_request(client, _unused_source_url())
+>       assert_error_envelope(response, status_code=404)
+
+.evaluation_tests/test_checkpoint_1.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": false, "error": "HTTPConnectionPool(host='127.0.0.1', port=45687): Max retries exceeded with url: /missing.csv (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=45687): Failed to establish a new connection: [Errno 111] Connection refused\"))"}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______________________ TestCore.test_single_column_csv ________________________
+
+self = <test_checkpoint_1.TestCore object at 0x708f15c974a0>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f15111d30>
+
+    def test_single_column_csv(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Single-column CSV ingestion and query."""
+>       dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/single_column.csv",
+            body=b"name\na\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:53: in _ingest_source
+    payload = assert_ok_envelope(response)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": false, "error": "Non-tabular content"}
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_________________________ TestCore.test_charset_latin1 _________________________
+
+self = <test_checkpoint_1.TestCore object at 0x708f15bc2000>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f150fa210>
+
+    @pytest.mark.functionality
+    def test_charset_latin1(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Explicit charset parameter is honored when decoding source bytes."""
+        latin1_bytes = "name\ncafé\n".encode("iso-8859-1")
+>       dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/latin1.csv",
+            body=latin1_bytes,
+            params={"charset": "iso-8859-1"},
+        )
+
+.evaluation_tests/test_checkpoint_1.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:53: in _ingest_source
+    payload = assert_ok_envelope(response)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": false, "error": "Non-tabular content"}
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_______________________ TestCore.test_autodetect_latin1 ________________________
+
+self = <test_checkpoint_1.TestCore object at 0x708f15d8c560>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f150e48f0>
+
+    @pytest.mark.functionality
+    def test_autodetect_latin1(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Auto-detect source encoding when no charset parameter is supplied."""
+        body = "name\ncafé\n".encode("iso-8859-1")
+>       dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/latin1_auto.csv",
+            body=body,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:220: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:53: in _ingest_source
+    payload = assert_ok_envelope(response)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": false, "error": "Non-tabular content"}
+
+.evaluation_tests/_helpers.py:27: AssertionError
+______________________ TestCore.test_upstream_500_to_404 _______________________
+
+self = <test_checkpoint_1.TestCore object at 0x708f150aa180>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f150e4ef0>
+
+    @pytest.mark.error
+    def test_upstream_500_to_404(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Upstream fetch failures map to 404 conversion error."""
+        local_source_server.set_route(
+            "/upstream_500.csv", body=b"boom", status_code=500
+        )
+        response = convert_request(
+            client,
+            local_source_server.url("/upstream_500.csv"),
+        )
+>       assert_error_envelope(response, status_code=404)
+
+.evaluation_tests/test_checkpoint_1.py:243: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": false, "error": "HTTP 500"}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_________________ TestFunctionality.test_preserves_whitespace __________________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x708f150c3260>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f150eaa80>
+
+    @pytest.mark.functionality
+    def test_preserves_whitespace(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Leading and trailing spaces in CSV field values are preserved."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/space_text.csv",
+            body=b"side,value\nleft,  space\nright,space  \n",
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+>       assert payload["rows"] == [["left", "  space"], ["right", "space  "]]
+E       AssertionError: assert [['left', 'space'], ['right', 'space']] == [['left', '  space'], ['right', 'space  ']]
+E         
+E         At index 0 diff: ['left', 'space'] != ['left', '  space']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'left',
+E         -         '  space',
+E         ?          --
+E         +         'space',
+E               ],
+E               [
+E                   'right',
+E         -         'space  ',
+E         ?               --
+E         +         'space',
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_1.py:439: AssertionError
+______________ TestFunctionality.test_negative_values_as_numbers _______________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x708f150bb5f0>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f150ea7e0>
+
+    @pytest.mark.functionality
+    def test_negative_values_as_numbers(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Negative numeric values are preserved as number types."""
+>       dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/negative_numeric.csv",
+            body=b"value\n-3\n-4.5\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:449: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:53: in _ingest_source
+    payload = assert_ok_envelope(response)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": false, "error": "Non-tabular content"}
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_____________ TestFunctionality.test_different_urls_different_ids ______________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x708f14ded910>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f150e7140>
+
+    @pytest.mark.functionality
+    def test_different_urls_different_ids(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Different source URLs produce different dataset ids."""
+        local_source_server.set_route("/a.csv", body=b"name\na\n")
+        local_source_server.set_route("/b.csv", body=b"name\na\n")
+>       first = assert_ok_envelope(
+            convert_request(client, local_source_server.url("/a.csv"))
+        )
+
+.evaluation_tests/test_checkpoint_1.py:533: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": false, "error": "Non-tabular content"}
+
+.evaluation_tests/_helpers.py:27: AssertionError
+________________ TestFunctionality.test_id_from_url_not_charset ________________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x708f14dc0590>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f150e9490>
+
+    @pytest.mark.functionality
+    def test_id_from_url_not_charset(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Dataset identity is source-URL-based, not charset-dependent."""
+        path = "/charset_id.csv"
+        local_source_server.set_route(path, body=b"name\ncafe\n")
+        source = local_source_server.url(path)
+    
+>       baseline = assert_ok_envelope(convert_request(client, source))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:606: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": false, "error": "Non-tabular content"}
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_________ TestFunctionality.test_preserves_header_and_time_whitespace __________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x708f14dc0b60>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f150e8410>
+
+    @pytest.mark.functionality
+    def test_preserves_header_and_time_whitespace(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Headers and time-like text preserve significant surrounding whitespace."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/header_time_whitespace.csv",
+            body=(b" name ,time\nAlice, 08:30 \nBob,09:15\n"),
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+        assert payload["columns"] == [" name ", "time"]
+>       assert payload["rows"] == [["Alice", " 08:30 "], ["Bob", "09:15"]]
+E       AssertionError: assert [['Alice', '08:30'], ['Bob', '09:15']] == [['Alice', ' 08:30 '], ['Bob', '09:15']]
+E         
+E         At index 0 diff: ['Alice', '08:30'] != ['Alice', ' 08:30 ']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'Alice',
+E         -         ' 08:30 ',
+E         ?          -     -
+E         +         '08:30',
+E               ],
+E               [
+E                   'Bob',
+E                   '09:15',
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_1.py:627: AssertionError
+_____________ TestFunctionality.test_trailing_empty_line_excluded ______________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x708f14dc11c0>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f150ff9b0>
+
+    @pytest.mark.functionality
+    def test_trailing_empty_line_excluded(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Trailing empty lines in CSV do not produce extra data rows."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/trailing_empty.csv",
+            body=b"name,val\na,1\nb,2\n\n",
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+>       assert len(payload["rows"]) == 2
+E       AssertionError: assert 3 == 2
+E        +  where 3 = len([['a', 1], ['b', 2], []])
+
+.evaluation_tests/test_checkpoint_1.py:643: AssertionError
+______________________ TestError.test_upstream_403_to_404 ______________________
+
+self = <test_checkpoint_1.TestError object at 0x708f14dc17c0>
+client = <httpx.Client object at 0x708f151adaf0>
+local_source_server = <conftest.SourceServer object at 0x708f1510d6a0>
+
+    @pytest.mark.functionality
+    def test_upstream_403_to_404(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Upstream 4xx errors (e.g. 403) map to 404 conversion error."""
+        local_source_server.set_route(
+            "/forbidden.csv", body=b"denied", status_code=403
+        )
+        response = convert_request(
+            client,
+            local_source_server.url("/forbidden.csv"),
+        )
+>       assert_error_envelope(response, status_code=404)
+
+.evaluation_tests/test_checkpoint_1.py:770: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": false, "error": "HTTP 403"}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______________________ TestCore.test_sort_desc_paginate _______________________
+
+self = <test_checkpoint_2.TestCore object at 0x708f150a8f20>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = 'edd779b6bf6c'
+
+    def test_sort_desc_paginate(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """_sort_desc is applied to full data before _offset and _size paging."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp2_dataset_id,
+                params={"_sort_desc": "age", "_offset": "1", "_size": "2"},
+            )
+        )
+>       assert payload["rows"] == [["Alice", 30, "Portland"], ["Eve", 30, "Seattle"]]
+E       AssertionError: assert [['Eve', 30, 'Seattle'], ['Alice', 30, 'Portland']] == [['Alice', 30, 'Portland'], ['Eve', 30, 'Seattle']]
+E         
+E         At index 0 diff: ['Eve', 30, 'Seattle'] != ['Alice', 30, 'Portland']
+E         
+E         Full diff:
+E           [
+E         +     [
+E         +         'Eve',
+E         +         30,
+E         +         'Seattle',
+E         +     ],
+E               [
+E                   'Alice',
+E                   30,
+E                   'Portland',
+E               ],
+E         -     [
+E         -         'Eve',
+E         -         30,
+E         -         'Seattle',
+E         -     ],
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:99: AssertionError
+______________________ TestCore.test_sort_desc_precedence ______________________
+
+self = <test_checkpoint_2.TestCore object at 0x708f14ded0d0>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = 'a8f35404a564'
+
+    def test_sort_desc_precedence(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """When _sort and _sort_desc are both set, _sort_desc takes precedence."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp2_dataset_id,
+                params={"_sort": "age", "_sort_desc": "age", "_size": "2"},
+            )
+        )
+>       assert payload["rows"] == [["Charlie", 35, "Portland"], ["Alice", 30, "Portland"]]
+E       AssertionError: assert [['Charlie', 35, 'Portland'], ['Eve', 30, 'Seattle']] == [['Charlie', 35, 'Portland'], ['Alice', 30, 'Portland']]
+E         
+E         At index 1 diff: ['Eve', 30, 'Seattle'] != ['Alice', 30, 'Portland']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'Charlie',
+E                   35,
+E                   'Portland',
+E               ],
+E               [
+E         -         'Alice',
+E         ?          ^^^^
+E         +         'Eve',
+E         ?          ^^
+E                   30,
+E         -         'Portland',
+E         +         'Seattle',
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:114: AssertionError
+__________________ TestCore.test_shape_objects_includes_rowid __________________
+
+self = <test_checkpoint_2.TestCore object at 0x708f15221b80>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '993c54e2420b'
+
+    def test_shape_objects_includes_rowid(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """_shape=objects includes each row's source-file rowid."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_shape": "objects"})
+        )
+        first = payload["rows"][0]
+>       assert first["rowid"] == 2
+E       assert 1 == 2
+
+.evaluation_tests/test_checkpoint_2.py:126: AssertionError
+_______________________ TestCore.test_rowid_ignores_sort _______________________
+
+self = <test_checkpoint_2.TestCore object at 0x708f15223d10>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '14cf023ede65'
+
+    def test_rowid_ignores_sort(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Object rows report original source rowid values under sorted pagination."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp2_dataset_id,
+                params={"_shape": "objects", "_sort": "age", "_size": "2"},
+            )
+        )
+        assert payload["rows"][0]["name"] == "Bob"
+>       assert payload["rows"][0]["rowid"] == 3
+E       assert 1 == 3
+
+.evaluation_tests/test_checkpoint_2.py:143: AssertionError
+____________ TestFunctionality.test_sort_name_and_city_order_values ____________
+
+self = <test_checkpoint_2.TestFunctionality object at 0x708f151f33b0>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '97e597065b32'
+
+    @pytest.mark.functionality
+    def test_sort_name_and_city_order_values(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """_sort and _sort_desc order rows by specified columns."""
+        by_name = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_sort": "name"})
+        )
+        assert [row[0] for row in by_name["rows"]] == [
+            "Alice",
+            "Bob",
+            "Charlie",
+            "Diana",
+            "Eve",
+        ]
+    
+        by_city_desc = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_sort_desc": "city"})
+        )
+        assert [row[2] for row in by_city_desc["rows"]] == [
+            "Seattle",
+            "Seattle",
+            "Portland",
+            "Portland",
+            "Austin",
+        ]
+>       assert [row[0] for row in by_city_desc["rows"]] == [
+            "Bob",
+            "Eve",
+            "Alice",
+            "Charlie",
+            "Diana",
+        ]
+E       AssertionError: assert ['Eve', 'Bob', 'Charlie', 'Alice', 'Diana'] == ['Bob', 'Eve', 'Alice', 'Charlie', 'Diana']
+E         
+E         At index 0 diff: 'Eve' != 'Bob'
+E         
+E         Full diff:
+E           [
+E         +     'Eve',
+E               'Bob',
+E         -     'Eve',
+E         +     'Charlie',
+E               'Alice',
+E         -     'Charlie',
+E               'Diana',
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:282: AssertionError
+___________________ TestFunctionality.test_composed_controls ___________________
+
+self = <test_checkpoint_2.TestFunctionality object at 0x708f151f1730>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '33a38309bbf6'
+
+    @pytest.mark.functionality
+    def test_composed_controls(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Sort, paging, shape, and hide toggles can be applied in one request."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp2_dataset_id,
+                params={
+                    "_sort_desc": "age",
+                    "_offset": "1",
+                    "_size": "2",
+                    "_shape": "objects",
+                    "_rowid": "hide",
+                    "_total": "hide",
+                },
+            )
+        )
+        assert "total" not in payload
+>       assert payload["rows"] == [
+            {"name": "Alice", "age": 30, "city": "Portland"},
+            {"name": "Eve", "age": 30, "city": "Seattle"},
+        ]
+E       AssertionError: assert [{'name': 'Eve', 'age': 30, 'city': 'Seattle'}, {'name': 'Alice', 'age': 30, 'city': 'Portland'}] == [{'name': 'Alice', 'age': 30, 'city': 'Portland'}, {'name': 'Eve', 'age': 30, 'city': 'Seattle'}]
+E         
+E         At index 0 diff: {'name': 'Eve', 'age': 30, 'city': 'Seattle'} != {'name': 'Alice', 'age': 30, 'city': 'Portland'}
+E         
+E         Full diff:
+E           [
+E         +     {
+E         +         'age': 30,
+E         +         'city': 'Seattle',
+E         +         'name': 'Eve',
+E         +     },
+E               {
+E                   'age': 30,
+E                   'city': 'Portland',
+E                   'name': 'Alice',
+E               },
+E         -     {
+E         -         'age': 30,
+E         -         'city': 'Seattle',
+E         -         'name': 'Eve',
+E         -     },
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:410: AssertionError
+________________ TestFunctionality.test_sort_desc_tie_stability ________________
+
+self = <test_checkpoint_2.TestFunctionality object at 0x708f151f26f0>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '3dfa804f493e'
+
+    @pytest.mark.functionality
+    def test_sort_desc_tie_stability(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """_sort_desc preserves source file order within tied sort-key values."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_sort_desc": "age"})
+        )
+        # age=35: Charlie; age=30: Alice before Eve (source order); age=25: Bob before Diana
+>       assert payload["rows"] == [
+            ["Charlie", 35, "Portland"],
+            ["Alice", 30, "Portland"],
+            ["Eve", 30, "Seattle"],
+            ["Bob", 25, "Seattle"],
+            ["Diana", 25, "Austin"],
+        ]
+E       AssertionError: assert [['Charlie', 35, 'Portland'], ['Eve', 30, 'Seattle'], ['Alice', 30, 'Portland'], ['Diana', 25, 'Austin'], ['Bob', 25, 'Seattle']] == [['Charlie', 35, 'Portland'], ['Alice', 30, 'Portland'], ['Eve', 30, 'Seattle'], ['Bob', 25, 'Seattle'], ['Diana', 25, 'Austin']]
+E         
+E         At index 1 diff: ['Eve', 30, 'Seattle'] != ['Alice', 30, 'Portland']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'Charlie',
+E                   35,
+E         -         'Portland',
+E         -     ],
+E         -     [
+E         -         'Alice',
+E         -         30,
+E                   'Portland',
+E               ],
+E               [
+E                   'Eve',
+E                   30,
+E                   'Seattle',
+E               ],
+E               [
+E         -         'Bob',
+E         +         'Alice',
+E         -         25,
+E         ?         ^^
+E         +         30,
+E         ?         ^^
+E         -         'Seattle',
+E         +         'Portland',
+E               ],
+E               [
+E                   'Diana',
+E                   25,
+E                   'Austin',
+E               ],
+E         +     [
+E         +         'Bob',
+E         +         25,
+E         +         'Seattle',
+E         +     ],
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:450: AssertionError
+________ TestFunctionality.test_sort_desc_precedence_different_columns _________
+
+self = <test_checkpoint_2.TestFunctionality object at 0x708f151f2de0>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = 'c5466bb85ec3'
+
+    @pytest.mark.functionality
+    def test_sort_desc_precedence_different_columns(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """When _sort and _sort_desc reference different columns, _sort_desc wins."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp2_dataset_id,
+                params={"_sort": "name", "_sort_desc": "age"},
+            )
+        )
+        # Result is sorted desc by age, not asc by name
+        assert payload["rows"][0] == ["Charlie", 35, "Portland"]
+>       assert payload["rows"][-1] == ["Diana", 25, "Austin"]
+E       AssertionError: assert ['Bob', 25, 'Seattle'] == ['Diana', 25, 'Austin']
+E         
+E         At index 0 diff: 'Bob' != 'Diana'
+E         
+E         Full diff:
+E           [
+E         -     'Diana',
+E         +     'Bob',
+E               25,
+E         -     'Austin',
+E         +     'Seattle',
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:474: AssertionError
+_______________ TestFunctionality.test_rowid_sequential_all_rows _______________
+
+self = <test_checkpoint_2.TestFunctionality object at 0x708f151f35c0>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '0f05300cd4ef'
+
+    @pytest.mark.functionality
+    def test_rowid_sequential_all_rows(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Object-shaped rows have sequential 1-based rowid values for all rows."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_shape": "objects"})
+        )
+>       assert [row["rowid"] for row in payload["rows"]] == [2, 3, 4, 5, 6]
+E       assert [1, 2, 3, 4, 5] == [2, 3, 4, 5, 6]
+E         
+E         At index 0 diff: 1 != 2
+E         
+E         Full diff:
+E           [
+E         +     1,
+E               2,
+E               3,
+E               4,
+E               5,
+E         -     6,
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:486: AssertionError
+_________ TestError.test_duplicate_control_params_400[_size=1&_size=2] _________
+
+self = <test_checkpoint_2.TestError object at 0x708f151acbf0>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = 'ff3628ab794b', query = '_size=1&_size=2'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "query",
+        [
+            "_size=1&_size=2",
+            "_sort=age&_sort=name",
+            "_rowid=hide&_rowid=hide",
+            "_offset=1&_offset=2",
+            "_shape=lists&_shape=objects",
+            "_sort_desc=age&_sort_desc=name",
+            "_total=hide&_total=hide",
+        ],
+    )
+    def test_duplicate_control_params_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        query: str,
+    ) -> None:
+        """Repeated control parameters in one request return HTTP 400."""
+        response = client.get(f"/datasets/{cp2_dataset_id}?{query}")
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:624: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Alice", 30, "Portland"]], "query_ms": 0.0, "total": 5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+______ TestError.test_duplicate_control_params_400[_sort=age&_sort=name] _______
+
+self = <test_checkpoint_2.TestError object at 0x708f151ac080>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '0485dd4815ba', query = '_sort=age&_sort=name'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "query",
+        [
+            "_size=1&_size=2",
+            "_sort=age&_sort=name",
+            "_rowid=hide&_rowid=hide",
+            "_offset=1&_offset=2",
+            "_shape=lists&_shape=objects",
+            "_sort_desc=age&_sort_desc=name",
+            "_total=hide&_total=hide",
+        ],
+    )
+    def test_duplicate_control_params_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        query: str,
+    ) -> None:
+        """Repeated control parameters in one request return HTTP 400."""
+        response = client.get(f"/datasets/{cp2_dataset_id}?{query}")
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:624: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Bob", 25, "Seattle"], ["Diana", 25, "Austin"], ["Alice", 30, "Portland"], ["Eve", 30, "Seattle"], ["Charlie", 35, "Portland"]], "query_ms": 0.0, "total": 5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_____ TestError.test_duplicate_control_params_400[_rowid=hide&_rowid=hide] _____
+
+self = <test_checkpoint_2.TestError object at 0x708f151ae240>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '477aef4d120f', query = '_rowid=hide&_rowid=hide'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "query",
+        [
+            "_size=1&_size=2",
+            "_sort=age&_sort=name",
+            "_rowid=hide&_rowid=hide",
+            "_offset=1&_offset=2",
+            "_shape=lists&_shape=objects",
+            "_sort_desc=age&_sort_desc=name",
+            "_total=hide&_total=hide",
+        ],
+    )
+    def test_duplicate_control_params_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        query: str,
+    ) -> None:
+        """Repeated control parameters in one request return HTTP 400."""
+        response = client.get(f"/datasets/{cp2_dataset_id}?{query}")
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:624: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Alice", 30, "Portland"], ["Bob", 25, "Seattle"], ["Charlie", 35, "Portland"], ["Diana", 25, "Austin"], ["Eve", 30, "Seattle"]], "query_ms": 0.0, "total": 5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______ TestError.test_duplicate_control_params_400[_offset=1&_offset=2] _______
+
+self = <test_checkpoint_2.TestError object at 0x708f151ac350>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = 'cdb41e1091f6', query = '_offset=1&_offset=2'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "query",
+        [
+            "_size=1&_size=2",
+            "_sort=age&_sort=name",
+            "_rowid=hide&_rowid=hide",
+            "_offset=1&_offset=2",
+            "_shape=lists&_shape=objects",
+            "_sort_desc=age&_sort_desc=name",
+            "_total=hide&_total=hide",
+        ],
+    )
+    def test_duplicate_control_params_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        query: str,
+    ) -> None:
+        """Repeated control parameters in one request return HTTP 400."""
+        response = client.get(f"/datasets/{cp2_dataset_id}?{query}")
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:624: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Bob", 25, "Seattle"], ["Charlie", 35, "Portland"], ["Diana", 25, "Austin"], ["Eve", 30, "Seattle"]], "query_ms": 0.0, "total": 5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+___ TestError.test_duplicate_control_params_400[_shape=lists&_shape=objects] ___
+
+self = <test_checkpoint_2.TestError object at 0x708f151afdd0>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '12720fdea017', query = '_shape=lists&_shape=objects'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "query",
+        [
+            "_size=1&_size=2",
+            "_sort=age&_sort=name",
+            "_rowid=hide&_rowid=hide",
+            "_offset=1&_offset=2",
+            "_shape=lists&_shape=objects",
+            "_sort_desc=age&_sort_desc=name",
+            "_total=hide&_total=hide",
+        ],
+    )
+    def test_duplicate_control_params_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        query: str,
+    ) -> None:
+        """Repeated control parameters in one request return HTTP 400."""
+        response = client.get(f"/datasets/{cp2_dataset_id}?{query}")
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:624: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Alice", 30, "Portland"], ["Bob", 25, "Seattle"], ["Charlie", 35, "Portland"], ["Diana", 25, "Austin"], ["Eve", 30, "Seattle"]], "query_ms": 0.0, "total": 5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_ TestError.test_duplicate_control_params_400[_sort_desc=age&_sort_desc=name] __
+
+self = <test_checkpoint_2.TestError object at 0x708f151adf10>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '900c238fc579', query = '_sort_desc=age&_sort_desc=name'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "query",
+        [
+            "_size=1&_size=2",
+            "_sort=age&_sort=name",
+            "_rowid=hide&_rowid=hide",
+            "_offset=1&_offset=2",
+            "_shape=lists&_shape=objects",
+            "_sort_desc=age&_sort_desc=name",
+            "_total=hide&_total=hide",
+        ],
+    )
+    def test_duplicate_control_params_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        query: str,
+    ) -> None:
+        """Repeated control parameters in one request return HTTP 400."""
+        response = client.get(f"/datasets/{cp2_dataset_id}?{query}")
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:624: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Charlie", 35, "Portland"], ["Eve", 30, "Seattle"], ["Alice", 30, "Portland"], ["Diana", 25, "Austin"], ["Bob", 25, "Seattle"]], "query_ms": 0.0, "total": 5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_____ TestError.test_duplicate_control_params_400[_total=hide&_total=hide] _____
+
+self = <test_checkpoint_2.TestError object at 0x708f151ad850>
+client = <httpx.Client object at 0x708f15212e40>
+cp2_dataset_id = '8aac08616e8b', query = '_total=hide&_total=hide'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "query",
+        [
+            "_size=1&_size=2",
+            "_sort=age&_sort=name",
+            "_rowid=hide&_rowid=hide",
+            "_offset=1&_offset=2",
+            "_shape=lists&_shape=objects",
+            "_sort_desc=age&_sort_desc=name",
+            "_total=hide&_total=hide",
+        ],
+    )
+    def test_duplicate_control_params_400(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+        query: str,
+    ) -> None:
+        """Repeated control parameters in one request return HTTP 400."""
+        response = client.get(f"/datasets/{cp2_dataset_id}?{query}")
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_2.py:624: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Alice", 30, "Portland"], ["Bob", 25, "Seattle"], ["Charlie", 35, "Portland"], ["Diana", 25, "Austin"], ["Eve", 30, "Seattle"]], "query_ms": 0.0}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_unreachable_source - AssertionError: {"ok": false, "error": "HTTPConnectionPool(host='127.0.0.1', port=45687): Max retries exceeded with url: /missing.csv (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=45687): Failed to establish a new connection: [Errno 111] Connection refused\"))"}
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_single_column_csv - AssertionError: {"ok": false, "error": "Non-tabular content"}
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_charset_latin1 - AssertionError: {"ok": false, "error": "Non-tabular content"}
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_autodetect_latin1 - AssertionError: {"ok": false, "error": "Non-tabular content"}
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_upstream_500_to_404 - AssertionError: {"ok": false, "error": "HTTP 500"}
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_whitespace - AssertionError: assert [['left', 'space'], ['right', 'space']] == [['left', '  space'], ['right', 'space  ']]
+  
+  At index 0 diff: ['left', 'space'] != ['left', '  space']
+  
+  Full diff:
+    [
+        [
+            'left',
+  -         '  space',
+  ?          --
+  +         'space',
+        ],
+        [
+            'right',
+  -         'space  ',
+  ?               --
+  +         'space',
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_negative_values_as_numbers - AssertionError: {"ok": false, "error": "Non-tabular content"}
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_different_urls_different_ids - AssertionError: {"ok": false, "error": "Non-tabular content"}
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_id_from_url_not_charset - AssertionError: {"ok": false, "error": "Non-tabular content"}
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_header_and_time_whitespace - AssertionError: assert [['Alice', '08:30'], ['Bob', '09:15']] == [['Alice', ' 08:30 '], ['Bob', '09:15']]
+  
+  At index 0 diff: ['Alice', '08:30'] != ['Alice', ' 08:30 ']
+  
+  Full diff:
+    [
+        [
+            'Alice',
+  -         ' 08:30 ',
+  ?          -     -
+  +         '08:30',
+        ],
+        [
+            'Bob',
+            '09:15',
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_trailing_empty_line_excluded - AssertionError: assert 3 == 2
+ +  where 3 = len([['a', 1], ['b', 2], []])
+FAILED .evaluation_tests/test_checkpoint_1.py::TestError::test_upstream_403_to_404 - AssertionError: {"ok": false, "error": "HTTP 403"}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_paginate - AssertionError: assert [['Eve', 30, 'Seattle'], ['Alice', 30, 'Portland']] == [['Alice', 30, 'Portland'], ['Eve', 30, 'Seattle']]
+  
+  At index 0 diff: ['Eve', 30, 'Seattle'] != ['Alice', 30, 'Portland']
+  
+  Full diff:
+    [
+  +     [
+  +         'Eve',
+  +         30,
+  +         'Seattle',
+  +     ],
+        [
+            'Alice',
+            30,
+            'Portland',
+        ],
+  -     [
+  -         'Eve',
+  -         30,
+  -         'Seattle',
+  -     ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_precedence - AssertionError: assert [['Charlie', 35, 'Portland'], ['Eve', 30, 'Seattle']] == [['Charlie', 35, 'Portland'], ['Alice', 30, 'Portland']]
+  
+  At index 1 diff: ['Eve', 30, 'Seattle'] != ['Alice', 30, 'Portland']
+  
+  Full diff:
+    [
+        [
+            'Charlie',
+            35,
+            'Portland',
+        ],
+        [
+  -         'Alice',
+  ?          ^^^^
+  +         'Eve',
+  ?          ^^
+            30,
+  -         'Portland',
+  +         'Seattle',
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_shape_objects_includes_rowid - assert 1 == 2
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_ignores_sort - assert 1 == 3
+FAILED .evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_name_and_city_order_values - AssertionError: assert ['Eve', 'Bob', 'Charlie', 'Alice', 'Diana'] == ['Bob', 'Eve', 'Alice', 'Charlie', 'Diana']
+  
+  At index 0 diff: 'Eve' != 'Bob'
+  
+  Full diff:
+    [
+  +     'Eve',
+        'Bob',
+  -     'Eve',
+  +     'Charlie',
+        'Alice',
+  -     'Charlie',
+        'Diana',
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_composed_controls - AssertionError: assert [{'name': 'Eve', 'age': 30, 'city': 'Seattle'}, {'name': 'Alice', 'age': 30, 'city': 'Portland'}] == [{'name': 'Alice', 'age': 30, 'city': 'Portland'}, {'name': 'Eve', 'age': 30, 'city': 'Seattle'}]
+  
+  At index 0 diff: {'name': 'Eve', 'age': 30, 'city': 'Seattle'} != {'name': 'Alice', 'age': 30, 'city': 'Portland'}
+  
+  Full diff:
+    [
+  +     {
+  +         'age': 30,
+  +         'city': 'Seattle',
+  +         'name': 'Eve',
+  +     },
+        {
+            'age': 30,
+            'city': 'Portland',
+            'name': 'Alice',
+        },
+  -     {
+  -         'age': 30,
+  -         'city': 'Seattle',
+  -         'name': 'Eve',
+  -     },
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_tie_stability - AssertionError: assert [['Charlie', 35, 'Portland'], ['Eve', 30, 'Seattle'], ['Alice', 30, 'Portland'], ['Diana', 25, 'Austin'], ['Bob', 25, 'Seattle']] == [['Charlie', 35, 'Portland'], ['Alice', 30, 'Portland'], ['Eve', 30, 'Seattle'], ['Bob', 25, 'Seattle'], ['Diana', 25, 'Austin']]
+  
+  At index 1 diff: ['Eve', 30, 'Seattle'] != ['Alice', 30, 'Portland']
+  
+  Full diff:
+    [
+        [
+            'Charlie',
+            35,
+  -         'Portland',
+  -     ],
+  -     [
+  -         'Alice',
+  -         30,
+            'Portland',
+        ],
+        [
+            'Eve',
+            30,
+            'Seattle',
+        ],
+        [
+  -         'Bob',
+  +         'Alice',
+  -         25,
+  ?         ^^
+  +         30,
+  ?         ^^
+  -         'Seattle',
+  +         'Portland',
+        ],
+        [
+            'Diana',
+            25,
+            'Austin',
+        ],
+  +     [
+  +         'Bob',
+  +         25,
+  +         'Seattle',
+  +     ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_precedence_different_columns - AssertionError: assert ['Bob', 25, 'Seattle'] == ['Diana', 25, 'Austin']
+  
+  At index 0 diff: 'Bob' != 'Diana'
+  
+  Full diff:
+    [
+  -     'Diana',
+  +     'Bob',
+        25,
+  -     'Austin',
+  +     'Seattle',
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_sequential_all_rows - assert [1, 2, 3, 4, 5] == [2, 3, 4, 5, 6]
+  
+  At index 0 diff: 1 != 2
+  
+  Full diff:
+    [
+  +     1,
+        2,
+        3,
+        4,
+        5,
+  -     6,
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_size=1&_size=2] - AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Alice", 30, "Portland"]], "query_ms": 0.0, "total": 5}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort=age&_sort=name] - AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Bob", 25, "Seattle"], ["Diana", 25, "Austin"], ["Alice", 30, "Portland"], ["Eve", 30, "Seattle"], ["Charlie", 35, "Portland"]], "query_ms": 0.0, "total": 5}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_rowid=hide&_rowid=hide] - AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Alice", 30, "Portland"], ["Bob", 25, "Seattle"], ["Charlie", 35, "Portland"], ["Diana", 25, "Austin"], ["Eve", 30, "Seattle"]], "query_ms": 0.0, "total": 5}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_offset=1&_offset=2] - AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Bob", 25, "Seattle"], ["Charlie", 35, "Portland"], ["Diana", 25, "Austin"], ["Eve", 30, "Seattle"]], "query_ms": 0.0, "total": 5}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_shape=lists&_shape=objects] - AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Alice", 30, "Portland"], ["Bob", 25, "Seattle"], ["Charlie", 35, "Portland"], ["Diana", 25, "Austin"], ["Eve", 30, "Seattle"]], "query_ms": 0.0, "total": 5}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort_desc=age&_sort_desc=name] - AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Charlie", 35, "Portland"], ["Eve", 30, "Seattle"], ["Alice", 30, "Portland"], ["Diana", 25, "Austin"], ["Bob", 25, "Seattle"]], "query_ms": 0.0, "total": 5}
+FAILED .evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_total=hide&_total=hide] - AssertionError: {"ok": true, "columns": ["name", "age", "city"], "rows": [["Alice", 30, "Portland"], ["Bob", 25, "Seattle"], ["Charlie", 35, "Portland"], ["Diana", 25, "Austin"], ["Eve", 30, "Seattle"]], "query_ms": 0.0}
+======================== 28 failed, 94 passed in 57.19s ========================

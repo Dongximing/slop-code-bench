@@ -1,0 +1,23 @@
+{
+  "version": 3,
+  "description": "Add and backfill status column",
+  "operations": [
+    {
+      "type": "create_table",
+      "table": "users",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true},
+        {"name": "first_name", "type": "TEXT", "not_null": false},
+        {"name": "last_name", "type": "TEXT", "not_null": false},
+        {"name": "status", "type": "TEXT", "not_null": false}
+      ]
+    },
+    {
+      "type": "backfill_data",
+      "table": "users",
+      "column": "status",
+      "value": "'active'",
+      "where": "status IS NULL"
+    }
+  ]
+}

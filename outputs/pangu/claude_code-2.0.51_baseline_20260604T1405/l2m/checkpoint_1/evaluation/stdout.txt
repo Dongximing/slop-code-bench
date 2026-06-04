@@ -1,0 +1,895 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/WLbP2llKtmM3R9Zq/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 52 items
+
+.evaluation_tests/test_checkpoint_1.py::test_default_output_path PASSED  [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_explicit_output_path PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_unreadable_input[missing-file] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_unreadable_input[directory] PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_input_preserves_cli_path PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_comments_and_escaped_percent PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_document_body_extraction PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_no_begin_document_uses_all PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_end_without_begin_keeps_all PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_split FAILED   [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_inline_text[lowercase] FAILED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_inline_text[capitalized] FAILED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_multiple_same_line[with-middle-text] FAILED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_multiple_same_line[with-plus] FAILED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::test_headings_and_inline_commands PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_layout_command_deletion PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_layout_command_deletion_respects_command_boundaries FAILED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_newline_collapse PASSED     [ 34%]
+.evaluation_tests/test_checkpoint_1.py::test_two_newlines_preserved PASSED [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_inline_math_preserved PASSED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::test_inline_formatting[in-sentence] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_inline_formatting[adjacent] PASSED [ 42%]
+.evaluation_tests/test_checkpoint_1.py::test_comment_at_first_unescaped_percent PASSED [ 44%]
+.evaluation_tests/test_checkpoint_1.py::test_comment_even_backslash_parity PASSED [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_default_output_basename FAILED [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_default_output_multi_ext PASSED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_commented_begin_document PASSED [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_commented_end_document PASSED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_line_strip_tabs_spaces PASSED [ 55%]
+.evaluation_tests/test_checkpoint_1.py::test_indented_section_stripped PASSED [ 57%]
+.evaluation_tests/test_checkpoint_1.py::test_layout_cleanup_inline_text FAILED [ 59%]
+.evaluation_tests/test_checkpoint_1.py::test_blank_normalization_edges PASSED [ 61%]
+.evaluation_tests/test_checkpoint_1.py::test_comment_no_formatting_leak PASSED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_command_delete_then_normalize FAILED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::test_indented_full_line_comment PASSED [ 67%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_own_lines FAILED [ 69%]
+.evaluation_tests/test_checkpoint_1.py::test_empty_input_file PASSED     [ 71%]
+.evaluation_tests/test_checkpoint_1.py::test_whitespace_only_input PASSED [ 73%]
+.evaluation_tests/test_checkpoint_1.py::test_interior_spacing_preserved_with_formatting PASSED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_empty_body_between_document_markers PASSED [ 76%]
+.evaluation_tests/test_checkpoint_1.py::test_file_containing_only_comments PASSED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_only_block FAILED [ 80%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_at_start_and_text_after FAILED [ 82%]
+.evaluation_tests/test_checkpoint_1.py::test_text_before_display_math_at_end FAILED [ 84%]
+.evaluation_tests/test_checkpoint_1.py::test_consecutive_display_math_blocks FAILED [ 86%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_preserves_inline_math FAILED [ 88%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_inside_document_body FAILED [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_section_then_display_math FAILED [ 92%]
+.evaluation_tests/test_checkpoint_1.py::test_emph_then_textbf_separate_lines PASSED [ 94%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_with_text_both_sides FAILED [ 96%]
+.evaluation_tests/test_checkpoint_1.py::test_display_math_empty_content FAILED [ 98%]
+.evaluation_tests/test_checkpoint_1.py::test_comment_on_begin_document_line PASSED [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_display_math_split ____________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_split0')
+
+    def test_display_math_split(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Converts a display math block into opening and closing $$ lines."""
+        source = write_tex(tmp_path, "math.tex", "\\[ \\frac{2}{3} \\]\n")
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "math.md",
+            "$$\n\\frac{2}{3}\n$$\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_display_math_split0/math.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_split0/math.md')
+expected = '$$\n\\frac{2}{3}\n$$\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+___________________ test_display_math_inline_text[lowercase] ___________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_inline_text_0')
+name = 'math_with_text', word = 'after'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("name", "word"),
+        [("math_with_text", "after"), ("display_inline_text", "After")],
+        ids=["lowercase", "capitalized"],
+    )
+    def test_display_math_inline_text(
+        entrypoint_argv: list[str], tmp_path: Path, name: str, word: str
+    ) -> None:
+        """Places surrounding inline text outside converted $$ display math blocks."""
+        source = write_tex(
+            tmp_path, f"{name}.tex", f"Before \\[ x + y \\] {word}\n"
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / f"{name}.md",
+            f"Before\n$$\nx + y\n$$\n{word}\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:199: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_display_math_inline_text_0/math_with_text.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_inline_text_0/math_with_text.md')
+expected = 'Before\n$$\nx + y\n$$\nafter\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+__________________ test_display_math_inline_text[capitalized] __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_inline_text_1')
+name = 'display_inline_text', word = 'After'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("name", "word"),
+        [("math_with_text", "after"), ("display_inline_text", "After")],
+        ids=["lowercase", "capitalized"],
+    )
+    def test_display_math_inline_text(
+        entrypoint_argv: list[str], tmp_path: Path, name: str, word: str
+    ) -> None:
+        """Places surrounding inline text outside converted $$ display math blocks."""
+        source = write_tex(
+            tmp_path, f"{name}.tex", f"Before \\[ x + y \\] {word}\n"
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / f"{name}.md",
+            f"Before\n$$\nx + y\n$$\n{word}\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:199: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_display_math_inline_text_1/display_inline_text.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_inline_text_1/display_inline_text.md')
+expected = 'Before\n$$\nx + y\n$$\nAfter\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+____________ test_display_math_multiple_same_line[with-middle-text] ____________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_multiple_sam0')
+name = 'multi_math', tex_input = '\\[ a \\] middle \\[ b \\]'
+separator = 'middle'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("name", "tex_input", "separator"),
+        [
+            ("multi_math", "\\[ a \\] middle \\[ b \\]", "middle"),
+            ("display_two_blocks", "\\[a\\] + \\[b\\]", "+"),
+        ],
+        ids=["with-middle-text", "with-plus"],
+    )
+    def test_display_math_multiple_same_line(
+        entrypoint_argv: list[str], tmp_path: Path, name: str, tex_input: str, separator: str
+    ) -> None:
+        """Emits multiple $$ blocks when multiple display math occur on one line."""
+        source = write_tex(tmp_path, f"{name}.tex", f"{tex_input}\n")
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / f"{name}.md",
+            f"$$\na\n$$\n{separator}\n$$\nb\n$$\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_display_math_multiple_sam0/multi_math.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_multiple_sam0/multi_math.md')
+expected = '$$\na\n$$\nmiddle\n$$\nb\n$$\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+_______________ test_display_math_multiple_same_line[with-plus] ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_multiple_sam1')
+name = 'display_two_blocks', tex_input = '\\[a\\] + \\[b\\]', separator = '+'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("name", "tex_input", "separator"),
+        [
+            ("multi_math", "\\[ a \\] middle \\[ b \\]", "middle"),
+            ("display_two_blocks", "\\[a\\] + \\[b\\]", "+"),
+        ],
+        ids=["with-middle-text", "with-plus"],
+    )
+    def test_display_math_multiple_same_line(
+        entrypoint_argv: list[str], tmp_path: Path, name: str, tex_input: str, separator: str
+    ) -> None:
+        """Emits multiple $$ blocks when multiple display math occur on one line."""
+        source = write_tex(tmp_path, f"{name}.tex", f"{tex_input}\n")
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / f"{name}.md",
+            f"$$\na\n$$\n{separator}\n$$\nb\n$$\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_display_math_multiple_sam1/display_two_blocks.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_multiple_sam1/display_two_blocks.md')
+expected = '$$\na\n$$\n+\n$$\nb\n$$\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+___________ test_layout_command_deletion_respects_command_boundaries ___________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_layout_command_deletion_r0')
+
+    @pytest.mark.functionality
+    def test_layout_command_deletion_respects_command_boundaries(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Deletes only named skip commands and preserves longer command names."""
+        source = write_tex(
+            tmp_path,
+            "delete_cmd_boundaries.tex",
+            "left\\medskipper right\n"
+            "\\smallskip\n"
+            "after\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "delete_cmd_boundaries.md",
+            "left\\medskipper right\n\nafter\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:290: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_layout_command_deletion_r0/delete_cmd_boundaries.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_layout_command_deletion_r0/delete_cmd_boundaries.md')
+expected = 'left\\medskipper right\n\nafter\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+_________________________ test_default_output_basename _________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_default_output_basename0')
+
+    @pytest.mark.functionality
+    def test_default_output_basename(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Writes default output beside current working directory input basename."""
+        source = write_tex(tmp_path / "nested", "lesson.tex", "Nested source.\n")
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+        assert result.returncode == 0, result.stderr
+>       assert (tmp_path / "lesson.md").exists()
+E       AssertionError: assert False
+E        +  where False = exists()
+E        +    where exists = (PosixPath('/tmp/pytest-of-agent/pytest-0/test_default_output_basename0') / 'lesson.md').exists
+
+.evaluation_tests/test_checkpoint_1.py:419: AssertionError
+_______________________ test_layout_cleanup_inline_text ________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_layout_cleanup_inline_tex0')
+
+    @pytest.mark.functionality
+    def test_layout_cleanup_inline_text(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Deletes inline layout commands without extra spacing cleanup in that step."""
+        source = write_tex(
+            tmp_path,
+            "inline_layout_cleanup.tex",
+            "left\\vspace{1cm}right\n"
+            "up \\medskip down\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "inline_layout_cleanup.md",
+            "leftright\nup  down\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:548: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_layout_cleanup_inline_tex0/inline_layout_cleanup.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_layout_cleanup_inline_tex0/inline_layout_cleanup.md')
+expected = 'leftright\nup  down\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+______________________ test_command_delete_then_normalize ______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_command_delete_then_norma0')
+
+    @pytest.mark.functionality
+    def test_command_delete_then_normalize(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Removes layout commands then applies newline normalization after conversion."""
+        source = write_tex(
+            tmp_path,
+            "delete_then_normalize.tex",
+            "Top\n"
+            "\\medskip\n"
+            "\\smallskip\n"
+            "\\bigskip\n"
+            "Bottom\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "delete_then_normalize.md",
+            "Top\n\nBottom\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:612: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_command_delete_then_norma0/delete_then_normalize.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_command_delete_then_norma0/delete_then_normalize.md')
+expected = 'Top\n\nBottom\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+_________________________ test_display_math_own_lines __________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_own_lines0')
+
+    @pytest.mark.functionality
+    def test_display_math_own_lines(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        """Converts multi-line display math blocks into $$ blocks on dedicated lines."""
+        source = write_tex(
+            tmp_path,
+            "display_block.tex",
+            "\\[\n"
+            "x + y\n"
+            "\\]\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+        output_path = tmp_path / "display_block.md"
+        assert result.returncode == 0, result.stderr
+        actual = normalize_output(output_path.read_text(encoding="utf-8"))
+>       assert actual == "$$\nx + y\n$$"
+E       AssertionError: assert '\n$$\n\nx + y\n\n$$' == '$$\nx + y\n$$'
+E         
+E         + 
+E           $$
+E         + 
+E           x + y
+E         + 
+E           $$
+
+.evaluation_tests/test_checkpoint_1.py:658: AssertionError
+_________________________ test_display_math_only_block _________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_only_block0')
+
+    @pytest.mark.functionality
+    def test_display_math_only_block(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(tmp_path, "math_only.tex", "\\[x + y\\]\n")
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "math_only.md",
+            "$$\nx + y\n$$\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:745: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_display_math_only_block0/math_only.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_only_block0/math_only.md')
+expected = '$$\nx + y\n$$\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+__________________ test_display_math_at_start_and_text_after ___________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_at_start_and0')
+
+    @pytest.mark.functionality
+    def test_display_math_at_start_and_text_after(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "math_start_text.tex",
+            "\\[a\\]\nThen text\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "math_start_text.md",
+            "$$\na\n$$\nThen text\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:764: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_display_math_at_start_and0/math_start_text.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_at_start_and0/math_start_text.md')
+expected = '$$\na\n$$\nThen text\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+_____________________ test_text_before_display_math_at_end _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_text_before_display_math_0')
+
+    @pytest.mark.functionality
+    def test_text_before_display_math_at_end(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "text_math_end.tex",
+            "Prefix\n\\[b\\]\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "text_math_end.md",
+            "Prefix\n$$\nb\n$$\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:783: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_text_before_display_math_0/text_math_end.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_text_before_display_math_0/text_math_end.md')
+expected = 'Prefix\n$$\nb\n$$\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+_____________________ test_consecutive_display_math_blocks _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_consecutive_display_math_0')
+
+    @pytest.mark.functionality
+    def test_consecutive_display_math_blocks(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "consecutive_math.tex",
+            "\\[a\\]\n\\[b\\]\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "consecutive_math.md",
+            "$$\na\n$$\n$$\nb\n$$\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:802: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_consecutive_display_math_0/consecutive_math.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_consecutive_display_math_0/consecutive_math.md')
+expected = '$$\na\n$$\n$$\nb\n$$\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+___________________ test_display_math_preserves_inline_math ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_preserves_in0')
+
+    @pytest.mark.functionality
+    def test_display_math_preserves_inline_math(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "display_with_inline.tex",
+            "\\[f($x$) = $y$\\]\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "display_with_inline.md",
+            "$$\nf($x$) = $y$\n$$\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:821: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_display_math_preserves_in0/display_with_inline.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_preserves_in0/display_with_inline.md')
+expected = '$$\nf($x$) = $y$\n$$\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+____________________ test_display_math_inside_document_body ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_inside_docum0')
+
+    @pytest.mark.functionality
+    def test_display_math_inside_document_body(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "doc_math.tex",
+            "\\begin{document}\n"
+            "\\[E = mc^2\\]\n"
+            "\\end{document}\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "doc_math.md",
+            "\n$$\nE = mc^2\n$$\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:842: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_display_math_inside_docum0/doc_math.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_inside_docum0/doc_math.md')
+expected = '\n$$\nE = mc^2\n$$\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+________________________ test_section_then_display_math ________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_section_then_display_math0')
+
+    @pytest.mark.functionality
+    def test_section_then_display_math(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "section_math.tex",
+            "\\section{Intro}\n"
+            "\\[x + y\\]\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "section_math.md",
+            "## Intro\n$$\nx + y\n$$\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:862: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_section_then_display_math0/section_math.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_section_then_display_math0/section_math.md')
+expected = '## Intro\n$$\nx + y\n$$\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+____________________ test_display_math_with_text_both_sides ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_with_text_bo0')
+
+    @pytest.mark.functionality
+    def test_display_math_with_text_both_sides(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(
+            tmp_path,
+            "math_both_sides.tex",
+            "Left \\[mid\\] Right\n",
+        )
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+>       assert_success_and_output(
+            result,
+            tmp_path / "math_both_sides.md",
+            "Left\n$$\nmid\n$$\nRight\n",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:900: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/l2m.py', '/tmp/pytest-of-agent/pytest-0/test_display_math_with_text_bo0/math_both_sides.tex'], returncode=0, stdout='', stderr='')
+output_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_with_text_bo0/math_both_sides.md')
+expected = 'Left\n$$\nmid\n$$\nRight\n'
+
+    def assert_success_and_output(
+        result: subprocess.CompletedProcess[str],
+        output_path: Path,
+        expected: str,
+    ) -> None:
+        assert result.returncode == 0, result.stderr
+        assert output_path.exists()
+        actual = normalize_output(read_text(output_path))
+>       assert actual == normalize_output(expected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:67: AssertionError
+_______________________ test_display_math_empty_content ________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/l2m.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_display_math_empty_conten0')
+
+    @pytest.mark.functionality
+    def test_display_math_empty_content(
+        entrypoint_argv: list[str], tmp_path: Path
+    ) -> None:
+        source = write_tex(tmp_path, "empty_math.tex", "\\[\\]\n")
+    
+        result = run_l2m(entrypoint_argv, source, cwd=tmp_path)
+    
+        output_path = tmp_path / "empty_math.md"
+        assert result.returncode == 0, result.stderr
+        actual = normalize_output(output_path.read_text(encoding="utf-8"))
+>       assert actual.startswith("$$")
+E       AssertionError: assert False
+E        +  where False = <built-in method startswith of str object at 0x7e1b7d8a85a0>('$$')
+E        +    where <built-in method startswith of str object at 0x7e1b7d8a85a0> = '\n$$\n\n$$'.startswith
+
+.evaluation_tests/test_checkpoint_1.py:918: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_split - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_inline_text[lowercase] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_inline_text[capitalized] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_multiple_same_line[with-middle-text] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_multiple_same_line[with-plus] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_layout_command_deletion_respects_command_boundaries - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_default_output_basename - AssertionError: assert False
+ +  where False = exists()
+ +    where exists = (PosixPath('/tmp/pytest-of-agent/pytest-0/test_default_output_basename0') / 'lesson.md').exists
+FAILED .evaluation_tests/test_checkpoint_1.py::test_layout_cleanup_inline_text - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_command_delete_then_normalize - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_own_lines - AssertionError: assert '\n$$\n\nx + y\n\n$$' == '$$\nx + y\n$$'
+  
+  + 
+    $$
+  + 
+    x + y
+  + 
+    $$
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_only_block - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_at_start_and_text_after - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_text_before_display_math_at_end - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_consecutive_display_math_blocks - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_preserves_inline_math - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_inside_document_body - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_section_then_display_math - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_with_text_both_sides - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_display_math_empty_content - AssertionError: assert False
+ +  where False = <built-in method startswith of str object at 0x7e1b7d8a85a0>('$$')
+ +    where <built-in method startswith of str object at 0x7e1b7d8a85a0> = '\n$$\n\n$$'.startswith
+======================== 19 failed, 33 passed in 6.67s =========================

@@ -1,0 +1,22 @@
+version: "1"
+schema: "preferences"
+
+preferences:
+  - name: "Disable dock auto-rearranging"
+    domain: com.apple.dock
+    key: mru-spaces
+    value: false
+    value_type: bool
+    check_command: "defaults read com.apple.dock mru-spaces"
+    expected_state: "0"
+    apply_command: "defaults write com.apple.dock mru-spaces -bool false"
+    min_version: mojave
+    max_version: ventura
+    enabled: true
+  - name: "Show battery percentage"
+    domain: com.apple.menuextra.battery
+    key: ShowPercent
+    value: "YES"
+    value_type: string
+    apply_command: "defaults write com.apple.menuextra.battery ShowPercent -string YES"
+    enabled: false

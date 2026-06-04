@@ -1,0 +1,1071 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/jmBg-9aHXGrsWCm7/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 25.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 34 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_no_args_shows_help_text FAILED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_command_dispatch_top_level FAILED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_subcommand_dispatch PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_help_rewrite FAILED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_help_rewrite_for_multi_level_command FAILED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_version_rewrite FAILED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_positional_arg_parsing PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unrecognized_command_error FAILED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::TestErrors::test_missing_required_positional_shows_usage FAILED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::TestErrors::test_excess_positional_args_error FAILED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::TestErrors::test_unknown_associative_with_suggestion FAILED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::TestErrors::test_unknown_associative_no_suggestion FAILED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::TestErrors::test_multiple_parameter_errors_collected FAILED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::TestErrors::test_unrecognized_subcommand_error FAILED [ 41%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_help_alphabetical_ordering_case_insensitive FAILED [ 44%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_help_column_alignment FAILED [ 47%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_parent_command_no_handler_shows_subcommands FAILED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_synonym_suggestion_trash_to_delete PASSED [ 52%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_subcommand_synonym_example_allows_optional_delete_suggestion FAILED [ 55%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_synonym_checked_before_levenshtein PASSED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_synonym_only_when_target_registered PASSED [ 61%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_levenshtein_suggestion_within_distance_2 FAILED [ 64%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_levenshtein_no_suggestion_beyond_distance_2 FAILED [ 67%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_levenshtein_tiebreaker_sort_order PASSED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_optional_modifier PASSED [ 73%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_repeating_modifier_accepts_multiple PASSED [ 76%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_no_flag_sets_false PASSED [ 79%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_required_associative_missing_error FAILED [ 82%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_required_associative_empty_value_is_rejected FAILED [ 85%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_error_messages_to_stderr FAILED [ 88%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_exit_code_1_on_error FAILED [ 91%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_help_for_specific_command FAILED [ 94%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_generic_token_classification FAILED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_default_value_for_optional_arg FAILED [100%]
+
+=================================== FAILURES ===================================
+____________________ TestCore.test_no_args_shows_help_text _____________________
+
+self = <test_checkpoint_1.TestCore object at 0x79afd35226c0>
+cli = <function cli.<locals>._run at 0x79afd313da80>
+
+    def test_no_args_shows_help_text(self, cli):
+        """No arguments → prints help text with command list sorted
+        case-insensitively, exit 0.
+    
+        Spec: "When invoked with no arguments, the tool prints help text
+        listing all top-level commands in case-insensitive alphabetical
+        order, then exits with code 0."
+        """
+        result = cli([])
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_1.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:322: in assert_success
+    assert_exit_code(result, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 0
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 0, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+___________________ TestCore.test_command_dispatch_top_level ___________________
+
+self = <test_checkpoint_1.TestCore object at 0x79afd35223c0>
+cli = <function cli.<locals>._run at 0x79afd313dbc0>
+
+    def test_command_dispatch_top_level(self, cli):
+        """``appctl help`` dispatches to the help command handler.
+    
+        Spec: "The first positional argument selects a top-level command."
+        """
+        result = cli(["help"])
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_1.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:322: in assert_success
+    assert_exit_code(result, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 0
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 0, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+__________________________ TestCore.test_help_rewrite __________________________
+
+self = <test_checkpoint_1.TestCore object at 0x79afd3521070>
+cli = <function cli.<locals>._run at 0x79afd313e340>
+
+    def test_help_rewrite(self, cli):
+        """``appctl site --help`` rewrites to ``appctl help site``.
+    
+        Spec: "appctl <command> --help is rewritten to appctl help <command>
+        before dispatch."
+        """
+        rewritten = cli(["site", "--help"])
+        direct = cli(["help", "site"])
+>       assert_success(rewritten)
+
+.evaluation_tests/test_checkpoint_1.py:87: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:322: in assert_success
+    assert_exit_code(result, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', '--help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 0
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 0, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', '--help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+______________ TestCore.test_help_rewrite_for_multi_level_command ______________
+
+self = <test_checkpoint_1.TestCore object at 0x79afd3520b30>
+cli = <function cli.<locals>._run at 0x79afd313e980>
+
+    @pytest.mark.functionality
+    def test_help_rewrite_for_multi_level_command(self, cli):
+        """``appctl site create --help`` rewrites to ``appctl help site create``.
+    
+        Spec: command names may be multi-level, and
+        "appctl <command> --help" is rewritten before dispatch.
+        """
+        rewritten = cli(["site", "create", "--help"])
+        direct = cli(["help", "site", "create"])
+>       assert_success(rewritten)
+
+.evaluation_tests/test_checkpoint_1.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:322: in assert_success
+    assert_exit_code(result, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', '--help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 0
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 0, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', '--help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+________________________ TestCore.test_version_rewrite _________________________
+
+self = <test_checkpoint_1.TestCore object at 0x79afd3520740>
+cli = <function cli.<locals>._run at 0x79afd313c680>
+
+    def test_version_rewrite(self, cli):
+        """``appctl --version`` rewrites to ``appctl cli version``.
+    
+        Spec: "appctl --version is rewritten to appctl cli version."
+        """
+        rewritten = cli(["--version"])
+        direct = cli(["cli", "version"])
+>       assert_success(rewritten)
+
+.evaluation_tests/test_checkpoint_1.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:322: in assert_success
+    assert_exit_code(result, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', '--version'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 0
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 0, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', '--version'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+___________________ TestCore.test_unrecognized_command_error ___________________
+
+self = <test_checkpoint_1.TestCore object at 0x79afd37876e0>
+cli = <function cli.<locals>._run at 0x79afd313f2e0>
+
+    def test_unrecognized_command_error(self, cli):
+        """Unknown top-level command → exact error format, exit 1.
+    
+        Spec: "Error: '<command>' is not a registered appctl command.
+        See 'appctl help' for available commands."
+        """
+        result = cli(["foobar"])
+>       assert_error(result, "is not a registered appctl command")
+
+.evaluation_tests/test_checkpoint_1.py:138: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+message = 'is not a registered appctl command'
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        message: str | None = None,
+    ) -> None:
+        """Assert the process failed; optionally check stderr contains *message*."""
+        assert result.returncode != 0, (
+            f"Expected non-zero exit, got 0.\nstdout: {result.stdout!r}"
+        )
+        if message is not None:
+>           assert message in result.stderr, (
+                f"Expected {message!r} in stderr.\nstderr: {result.stderr!r}"
+            )
+E           AssertionError: Expected 'is not a registered appctl command' in stderr.
+E             stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E           assert 'is not a registered appctl command' in 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E            +  where 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+
+.evaluation_tests/conftest.py:334: AssertionError
+___________ TestErrors.test_missing_required_positional_shows_usage ____________
+
+self = <test_checkpoint_1.TestErrors object at 0x79afd3524cb0>
+cli = <function cli.<locals>._run at 0x79afd313f7e0>
+
+    @pytest.mark.error
+    def test_missing_required_positional_shows_usage(self, cli):
+        """Missing positional prints usage line to STDOUT, exit 1.
+    
+        Spec: "If not, the tool prints the command's usage line and exits
+        with code 1." Example 4.
+        """
+        result = cli(["site", "create", "--type=html"])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', '--type=html'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', '--type=html'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+_________________ TestErrors.test_excess_positional_args_error _________________
+
+self = <test_checkpoint_1.TestErrors object at 0x79afd3787590>
+cli = <function cli.<locals>._run at 0x79afd313efc0>
+
+    @pytest.mark.error
+    def test_excess_positional_args_error(self, cli):
+        """Extra positional args without repeating token → error.
+    
+        Spec: "Error: Too many positional arguments: extra-arg" Example 6.
+        """
+        result = cli(["site", "create", "example.test", "extra-arg"])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:171: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', 'extra-arg'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', 'extra-arg'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+_____________ TestErrors.test_unknown_associative_with_suggestion ______________
+
+self = <test_checkpoint_1.TestErrors object at 0x79afd35204a0>
+cli = <function cli.<locals>._run at 0x79afd313fd80>
+
+    @pytest.mark.error
+    def test_unknown_associative_with_suggestion(self, cli):
+        """Unknown ``--typo`` with registered ``--type`` (dist ≤ 2) → suggestion.
+    
+        Spec: Example 5.
+        """
+        result = cli(["site", "create", "example.test", "--typo=html"])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:181: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--typo=html'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--typo=html'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+______________ TestErrors.test_unknown_associative_no_suggestion _______________
+
+self = <test_checkpoint_1.TestErrors object at 0x79afd3520da0>
+cli = <function cli.<locals>._run at 0x79afd313e660>
+
+    @pytest.mark.error
+    def test_unknown_associative_no_suggestion(self, cli):
+        """Unknown ``--zzzzz`` with no close match → no suggestion.
+    
+        Spec: "unknown --<key> parameter" under Parameter errors header.
+        """
+        result = cli(["site", "create", "example.test", "--zzzzz=abc"])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--zzzzz=abc'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--zzzzz=abc'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+_____________ TestErrors.test_multiple_parameter_errors_collected ______________
+
+self = <test_checkpoint_1.TestErrors object at 0x79afd35227e0>
+cli = <function cli.<locals>._run at 0x79afd313f420>
+
+    @pytest.mark.error
+    def test_multiple_parameter_errors_collected(self, cli):
+        """Two unknown associative args reported under single header.
+    
+        Spec: "they are collected and reported together under a
+        ``Parameter errors:`` header."
+        """
+        result = cli(
+            [
+                "site",
+                "create",
+                "example.test",
+                "--aaaa=x",
+                "--bbbb=y",
+            ]
+        )
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:212: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--aaaa=x', '--bbbb=...code=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--aaaa=x', '--bbbb=y'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+________________ TestErrors.test_unrecognized_subcommand_error _________________
+
+self = <test_checkpoint_1.TestErrors object at 0x79afd3527350>
+cli = <function cli.<locals>._run at 0x79afd313f1a0>
+
+    @pytest.mark.error
+    def test_unrecognized_subcommand_error(self, cli):
+        """``appctl site bogus`` → subcommand error, exit 1.
+    
+        Spec: "Error: '<subcommand>' is not a registered subcommand of
+        '<parent>'."
+        """
+        result = cli(["site", "bogus"])
+>       assert_error(result, "is not a registered subcommand of")
+
+.evaluation_tests/test_checkpoint_1.py:225: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'bogus'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+message = 'is not a registered subcommand of'
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        message: str | None = None,
+    ) -> None:
+        """Assert the process failed; optionally check stderr contains *message*."""
+        assert result.returncode != 0, (
+            f"Expected non-zero exit, got 0.\nstdout: {result.stdout!r}"
+        )
+        if message is not None:
+>           assert message in result.stderr, (
+                f"Expected {message!r} in stderr.\nstderr: {result.stderr!r}"
+            )
+E           AssertionError: Expected 'is not a registered subcommand of' in stderr.
+E             stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E           assert 'is not a registered subcommand of' in 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E            +  where 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'bogus'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+
+.evaluation_tests/conftest.py:334: AssertionError
+______ TestFunctionality.test_help_alphabetical_ordering_case_insensitive ______
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd35aee40>
+cli = <function cli.<locals>._run at 0x79afd30d8360>
+
+    @pytest.mark.functionality
+    def test_help_alphabetical_ordering_case_insensitive(self, cli):
+        """Commands sorted case-insensitively: cli, help, site.
+    
+        Spec: "case-insensitive alphabetical order."
+        """
+        result = cli([])
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_1.py:244: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:322: in assert_success
+    assert_exit_code(result, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 0
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 0, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+_________________ TestFunctionality.test_help_column_alignment _________________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd35acad0>
+cli = <function cli.<locals>._run at 0x79afd30d8400>
+
+    @pytest.mark.functionality
+    def test_help_column_alignment(self, cli):
+        """Command names and descriptions in fixed-width column-aligned format.
+    
+        Spec: "fixed-width column-aligned format."
+        """
+        result = cli([])
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_1.py:258: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:322: in assert_success
+    assert_exit_code(result, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 0
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 0, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+______ TestFunctionality.test_parent_command_no_handler_shows_subcommands ______
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd35acf80>
+cli = <function cli.<locals>._run at 0x79afd30d8ea0>
+
+    @pytest.mark.functionality
+    def test_parent_command_no_handler_shows_subcommands(self, cli):
+        """``appctl site`` (no direct handler) lists subcommands.
+    
+        Spec: "A command that has subcommands but no direct handler prints
+        its usage."
+        """
+        result = cli(["site"])
+        out = strip_ansi(result.stdout + result.stderr)
+        # Should list available subcommands (create, delete, list, etc.)
+>       assert "create" in out.lower() or "subcommand" in out.lower()
+E       AssertionError: assert ('create' in 'error: failed to spawn: `appctl.py`\n  caused by: no such file or directory (os error 2)\n' or 'subcommand' in 'error: failed to spawn: `appctl.py`\n  caused by: no such file or directory (os error 2)\n')
+E        +  where 'error: failed to spawn: `appctl.py`\n  caused by: no such file or directory (os error 2)\n' = <built-in method lower of str object at 0x79afd310fc60>()
+E        +    where <built-in method lower of str object at 0x79afd310fc60> = 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'.lower
+E        +  and   'error: failed to spawn: `appctl.py`\n  caused by: no such file or directory (os error 2)\n' = <built-in method lower of str object at 0x79afd310fc60>()
+E        +    where <built-in method lower of str object at 0x79afd310fc60> = 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'.lower
+
+.evaluation_tests/test_checkpoint_1.py:281: AssertionError
+_ TestFunctionality.test_subcommand_synonym_example_allows_optional_delete_suggestion _
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd35ada30>
+cli = <function cli.<locals>._run at 0x79afd30d9120>
+
+    @pytest.mark.functionality
+    def test_subcommand_synonym_example_allows_optional_delete_suggestion(
+        self, cli
+    ):
+        """Subcommand errors stay valid whether or not synonym hints are shown.
+    
+        Spec: curated synonym suggestions are optional.
+        """
+        result = cli(["site", "trash"])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:303: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'trash'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'trash'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+_______ TestFunctionality.test_levenshtein_suggestion_within_distance_2 ________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd35aef90>
+cli = <function cli.<locals>._run at 0x79afd30d84a0>
+
+    def test_levenshtein_suggestion_within_distance_2(self, cli):
+        """``siet`` → suggests ``site`` (distance 2).
+    
+        Spec: Example 2.
+        """
+        result = cli(["siet", "create"])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:341: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'siet', 'create'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'siet', 'create'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+______ TestFunctionality.test_levenshtein_no_suggestion_beyond_distance_2 ______
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd35afa10>
+cli = <function cli.<locals>._run at 0x79afd30d8360>
+
+    @pytest.mark.functionality
+    def test_levenshtein_no_suggestion_beyond_distance_2(self, cli):
+        """``foobar`` → no suggestion.
+    
+        Spec: Example 3.
+        """
+        result = cli(["foobar"])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:351: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+__________ TestFunctionality.test_required_associative_missing_error ___________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd35ace00>
+cli = <function cli.<locals>._run at 0x79afd30d8180>
+
+    @pytest.mark.functionality
+    def test_required_associative_missing_error(self, cli):
+        """Missing required ``--type=<type>`` → error.
+    
+        Spec: Error Summary table.
+        """
+        result = cli(["site", "create", "example.test"])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:406: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+_____ TestFunctionality.test_required_associative_empty_value_is_rejected ______
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd35acd10>
+cli = <function cli.<locals>._run at 0x79afd30d98a0>
+
+    @pytest.mark.functionality
+    def test_required_associative_empty_value_is_rejected(self, cli):
+        """Required associative args must have non-empty values.
+    
+        Spec: "All required associative arguments must be present with
+        non-empty values."
+        """
+        result = cli(["site", "create", "example.test", "--type="])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:420: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--type='], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--type='], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+_______________ TestFunctionality.test_error_messages_to_stderr ________________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd3522660>
+cli = <function cli.<locals>._run at 0x79afd30d9260>
+
+    def test_error_messages_to_stderr(self, cli):
+        """All error messages written to STDERR.
+    
+        Spec: "All error messages are written to STDERR."
+        """
+        result = cli(["foobar"])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:433: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+_________________ TestFunctionality.test_exit_code_1_on_error __________________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd35227b0>
+cli = <function cli.<locals>._run at 0x79afd30d9b20>
+
+    def test_exit_code_1_on_error(self, cli):
+        """All error conditions exit with code 1.
+    
+        Spec: "Exit code is 1."
+        """
+        result = cli(["foobar"])
+>       assert_exit_code(result, 1)
+
+.evaluation_tests/test_checkpoint_1.py:444: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 1
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 1
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+_______________ TestFunctionality.test_help_for_specific_command _______________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd359a330>
+cli = <function cli.<locals>._run at 0x79afd314e8e0>
+
+    def test_help_for_specific_command(self, cli):
+        """``appctl help site`` shows help for ``site`` command.
+    
+        Spec: help command dispatches to show help for the given command.
+        """
+        result = cli(["help", "site"])
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_1.py:452: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:322: in assert_success
+    assert_exit_code(result, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'help', 'site'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 0
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 0, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'help', 'site'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+_____________ TestFunctionality.test_generic_token_classification ______________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd359acf0>
+cli = <function cli.<locals>._run at 0x79afd313f9c0>
+
+    @pytest.mark.functionality
+    def test_generic_token_classification(self, cli):
+        """``--<field>=<value>`` classified as generic.
+    
+        Spec: Priority table row 4.
+        """
+        # Generic tokens accept arbitrary --key=value pairs
+        # Commands with generic synopsis should accept unknown --key=value
+        result = cli(["site", "create", "example.test", "--type=html"])
+        # Just verify no crash on standard args
+>       assert result.returncode in (0, 1)
+E       AssertionError: assert 2 in (0, 1)
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--type=html'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:466: AssertionError
+____________ TestFunctionality.test_default_value_for_optional_arg _____________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x79afd359b1d0>
+cli = <function cli.<locals>._run at 0x79afd313ff60>
+
+    @pytest.mark.functionality
+    def test_default_value_for_optional_arg(self, cli):
+        """Optional arg with default uses the default when omitted.
+    
+        Spec: "Default values may be declared for optional arguments."
+        """
+        # When an optional arg is omitted, its default should apply
+        # This is command-specific behavior; verify no error when optional omitted
+        result = cli(["help"])
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_1.py:477: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:322: in assert_success
+    assert_exit_code(result, 0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n')
+code = 0
+
+    def assert_exit_code(
+        result: subprocess.CompletedProcess[str], code: int
+    ) -> None:
+        """Assert the process exited with *code*."""
+>       assert result.returncode == code, (
+            f"Expected exit code {code}, got {result.returncode}.\n"
+            f"stdout: {result.stdout!r}\nstderr: {result.stderr!r}"
+        )
+E       AssertionError: Expected exit code 0, got 2.
+E         stdout: ''
+E         stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:314: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_no_args_shows_help_text - AssertionError: Expected exit code 0, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_command_dispatch_top_level - AssertionError: Expected exit code 0, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_help_rewrite - AssertionError: Expected exit code 0, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', '--help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_help_rewrite_for_multi_level_command - AssertionError: Expected exit code 0, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', '--help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_version_rewrite - AssertionError: Expected exit code 0, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', '--version'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestCore::test_unrecognized_command_error - AssertionError: Expected 'is not a registered appctl command' in stderr.
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 'is not a registered appctl command' in 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+ +  where 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+FAILED .evaluation_tests/test_checkpoint_1.py::TestErrors::test_missing_required_positional_shows_usage - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', '--type=html'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestErrors::test_excess_positional_args_error - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', 'extra-arg'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestErrors::test_unknown_associative_with_suggestion - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--typo=html'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestErrors::test_unknown_associative_no_suggestion - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--zzzzz=abc'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestErrors::test_multiple_parameter_errors_collected - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--aaaa=x', '--bbbb=y'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestErrors::test_unrecognized_subcommand_error - AssertionError: Expected 'is not a registered subcommand of' in stderr.
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 'is not a registered subcommand of' in 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+ +  where 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'bogus'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_help_alphabetical_ordering_case_insensitive - AssertionError: Expected exit code 0, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_help_column_alignment - AssertionError: Expected exit code 0, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_parent_command_no_handler_shows_subcommands - AssertionError: assert ('create' in 'error: failed to spawn: `appctl.py`\n  caused by: no such file or directory (os error 2)\n' or 'subcommand' in 'error: failed to spawn: `appctl.py`\n  caused by: no such file or directory (os error 2)\n')
+ +  where 'error: failed to spawn: `appctl.py`\n  caused by: no such file or directory (os error 2)\n' = <built-in method lower of str object at 0x79afd310fc60>()
+ +    where <built-in method lower of str object at 0x79afd310fc60> = 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'.lower
+ +  and   'error: failed to spawn: `appctl.py`\n  caused by: no such file or directory (os error 2)\n' = <built-in method lower of str object at 0x79afd310fc60>()
+ +    where <built-in method lower of str object at 0x79afd310fc60> = 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'.lower
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_subcommand_synonym_example_allows_optional_delete_suggestion - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'trash'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_levenshtein_suggestion_within_distance_2 - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'siet', 'create'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_levenshtein_no_suggestion_beyond_distance_2 - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_required_associative_missing_error - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_required_associative_empty_value_is_rejected - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--type='], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_error_messages_to_stderr - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_exit_code_1_on_error - AssertionError: Expected exit code 1, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 1
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'foobar'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_help_for_specific_command - AssertionError: Expected exit code 0, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'help', 'site'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_generic_token_classification - AssertionError: assert 2 in (0, 1)
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'site', 'create', 'example.test', '--type=html'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_default_value_for_optional_arg - AssertionError: Expected exit code 0, got 2.
+  stdout: ''
+  stderr: 'error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n'
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['/usr/local/bin/uv', 'run', 'appctl.py', 'help'], returncode=2, stdout='', stderr='error: Failed to spawn: `appctl.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+========================= 25 failed, 9 passed in 0.84s =========================

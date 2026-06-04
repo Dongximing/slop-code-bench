@@ -1,0 +1,2700 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/_FzJNCdDKkAxcOc0/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 101 items
+
+.evaluation_tests/test_checkpoint_1.py::test_create_blueprint_returns_persisted_resource PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::test_requirement_set_order_preserved_non_lexicographic PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_orders_by_created_at_name_uuid PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_name_tiebreak_when_created_at_collides PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_and_delete_single_uuid PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_delete_missing_uuid_returns_not_found PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_invalid_json_input PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_unique_sorted_messages PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_deduplicates_messages_across_requirement_sets PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_duplicate_name_with_conflict PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_is_atomic_and_reports_sorted_unresolved PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_rejects_blank_csv_members_atomically PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_empty_returns_empty_array PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_unknown_top_level_keys PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_caller_supplied_uuid PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_boolean_resource_count PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_success_returns_deleted_count PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_duplicate_members_count_unique_deletions FAILED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_create_output_is_compact_sorted_json_without_trailing_newline PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_create_missing_required_fields_reports_sorted_unique_messages PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_failure_is_atomic PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_caller_supplied_created_at PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_create_preserves_empty_capabilities_array PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_name_string FAILED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_requirement_sets FAILED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_set_missing_required_keys PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_object_json_payload FAILED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_top_level_and_nested_failures PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_create_generates_valid_uuid_v4_format PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_float_resource_count PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_string_name_type PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_array_requirement_sets PASSED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_sets_with_non_object_elements FAILED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_single_name_succeeds PASSED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_uuid_tiebreak_when_created_at_and_name_collide PASSED [ 34%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_nonexistent_uuid_returns_not_found PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_unsupported_key_as_sole_violation PASSED [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_capabilities_with_non_string_elements PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_returns_all_stored_fields PASSED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_multiple_unsupported_keys PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_expands_requirement_sets FAILED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::test_blueprint_name_across_create_list_get FAILED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_ordering FAILED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_returns_single_resource FAILED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_generated_uuid_is_canonical_v4 FAILED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::test_create_utc_second_precision FAILED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_unknown_blueprint_not_found FAILED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[non_object_payload] FAILED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[missing_blueprint_name] FAILED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_wrong_type] FAILED [ 49%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_empty] FAILED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_unknown_uuid_not_found PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_empty_returns_empty_array PASSED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_match_is_exact_and_case_sensitive FAILED [ 53%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_filters_compose_conjunctively FAILED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::test_expansion_order_places_multiplied_entries_consecutively FAILED [ 55%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_breaks_created_at_ties_by_uuid FAILED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_once_per_set_duplicate_caps FAILED [ 57%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_requires_exact_capability_match FAILED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::test_multiplier_adversarial_mix_preserves_order FAILED [ 59%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_output_is_scoped_to_current_batch FAILED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_returns_complete_dataset FAILED [ 61%]
+.evaluation_tests/test_checkpoint_2.py::test_list_negative_filter_empty[status-filter] FAILED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::test_list_negative_filter_empty[assignment-filter] FAILED [ 63%]
+.evaluation_tests/test_checkpoint_2.py::test_type_a_multiplier_rows_match_except_for_uuid FAILED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_returns_complete_field_set FAILED [ 65%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_round_trip_preserves_all_fields FAILED [ 66%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_create_same_blueprint_twice_distinct_uuids FAILED [ 67%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_list_status_filter_positive_match FAILED [ 68%]
+.evaluation_tests/test_checkpoint_2.py::test_allocation_get_malformed_uuid_returns_not_found PASSED [ 69%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_add_updates_state_and_returns_ack FAILED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_remove_is_idempotent FAILED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_by_assignment_is_idempotent FAILED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_by_assignment_spares_nonmatching FAILED [ 73%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_missing_assignment_id FAILED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_rejects_empty_allocations[missing_allocations] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_rejects_empty_allocations[empty_allocations] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_invalid_op_reports_bad_value FAILED [ 77%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_not_found_lists_sorted_ids FAILED [ 78%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_duplicate_assignment_guard FAILED [ 79%]
+.evaluation_tests/test_checkpoint_3.py::test_duplicate_guard_blocks_mixed_ops FAILED [ 80%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_invalid_op_precedes_not_found FAILED [ 81%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_requires_exactly_one_mode_flag[no_flag] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_requires_exactly_one_mode_flag[both_flags] PASSED [ 83%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_ids_rejects_partial_matches FAILED [ 84%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_ids_rejects_blank_csv FAILED [ 85%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_atomic_on_missing_ids FAILED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::test_invalid_op_no_remove_side_effects FAILED [ 87%]
+.evaluation_tests/test_checkpoint_3.py::test_remove_only_bypasses_duplicate_guard FAILED [ 88%]
+.evaluation_tests/test_checkpoint_3.py::test_remove_unbinds_ignoring_assignment FAILED [ 89%]
+.evaluation_tests/test_checkpoint_3.py::test_validation_precedes_op_and_not_found FAILED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::test_not_found_precedes_duplicate FAILED [ 91%]
+.evaluation_tests/test_checkpoint_3.py::test_invalid_op_precedes_duplicate FAILED [ 92%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_ids_reports_missing_uuids FAILED [ 93%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_mixed_ops_success FAILED [ 94%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_add_records_assignment_id FAILED [ 95%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_remove_clears_assignment_id_to_null FAILED [ 96%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_by_ids_succeeds_and_returns_count FAILED [ 97%]
+.evaluation_tests/test_checkpoint_3.py::test_delete_by_ids_duplicate_members_count_unique_deletions FAILED [ 98%]
+.evaluation_tests/test_checkpoint_3.py::test_bind_add_rebinds_to_new_assignment FAILED [ 99%]
+.evaluation_tests/test_checkpoint_3.py::test_not_found_mixed_ops_atomic_vs_duplicate FAILED [100%]
+
+=================================== FAILURES ===================================
+__________ test_delete_names_duplicate_members_count_unique_deletions __________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_names_duplicate_me0/data')
+
+    @pytest.mark.functionality
+    def test_delete_names_duplicate_members_count_unique_deletions(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Duplicate CSV members delete once and report the number of removed blueprints."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="alpha",
+            requirement_sets=[{"resource_type": "CPU", "resource_count": 1}],
+        )
+    
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "delete", "--names", "alpha,alpha"],
+        )
+>       payload = unwrap_object(assert_success(result))
+                                ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:445: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...'alpha,alpha'], returncode=1, stdout='{"error": "not_found", "detail": "Unresolved names: alpha, alpha"}\n', stderr='')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='' stdout='{"error": "not_found", "detail": "Unresolved names: alpha, alpha"}\n'
+
+.evaluation_tests/_helpers.py:131: AssertionError
+____________________ test_create_rejects_empty_name_string _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_empty_name0/data')
+
+    @pytest.mark.error
+    def test_create_rejects_empty_name_string(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "",
+                "requirement_sets": [{"resource_type": "GPU", "resource_count": 1}],
+            },
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="name must be a non-empty string",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:568: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:183: in assert_error
+    assert_detail_contains(actual_detail, detail_contains)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = 'name must be non-empty', expected = 'name must be a non-empty string'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'name must be a non-empty string'; actual detail='name must be non-empty'
+
+.evaluation_tests/_helpers.py:141: AssertionError
+__________________ test_create_rejects_empty_requirement_sets __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_empty_requ0/data')
+
+    @pytest.mark.error
+    def test_create_rejects_empty_requirement_sets(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={"name": "empty-sets", "requirement_sets": []},
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="requirement_sets must be a non-empty array",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:588: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:183: in assert_error
+    assert_detail_contains(actual_detail, detail_contains)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = 'requirement_sets must be non-empty'
+expected = 'requirement_sets must be a non-empty array'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'requirement_sets must be a non-empty array'; actual detail='requirement_sets must be non-empty'
+
+.evaluation_tests/_helpers.py:141: AssertionError
+_________________ test_create_rejects_non_object_json_payload __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_non_object0/data')
+
+    @pytest.mark.error
+    def test_create_rejects_non_object_json_payload(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_text="[]",
+        )
+>       assert_error(result, category="validation_error")
+
+.evaluation_tests/test_checkpoint_1.py:626: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:176: in assert_error
+    payload = parse_stdout_json(result)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...t("requirement_sets"), list):\n                  ^^^^^^^^\nAttributeError: \'list\' object has no attribute \'get\'\n')
+
+    def parse_stdout_json(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.stdout != "", (
+               ^^^^^^^^^^^^^^^^^^^
+            f"expected JSON on stdout, got empty output; stderr={result.stderr!r}"
+        )
+E       AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 617, in <module>\n    main()\n  File "/workspace/forge.py", line 556, in main\n    args.func(args, storage)\n  File "/workspace/forge.py", line 568, in cmd_create\n    errors = validate_blueprint_create(input_data)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 99, in validate_blueprint_create\n    if isinstance(data.get("requirement_sets"), list):\n                  ^^^^^^^^\nAttributeError: \'list\' object has no attribute \'get\'\n'
+
+.evaluation_tests/_helpers.py:122: AssertionError
+________ test_create_rejects_requirement_sets_with_non_object_elements _________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_requiremen1/data')
+
+    @pytest.mark.functionality
+    def test_create_rejects_requirement_sets_with_non_object_elements(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Non-object elements inside requirement_sets array are rejected."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={"name": "bad-rs-elements", "requirement_sets": ["string", 42]},
+        )
+>       assert_error(result, category="validation_error")
+
+.evaluation_tests/test_checkpoint_1.py:747: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:176: in assert_error
+    payload = parse_stdout_json(result)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...e 42, in validate_requirement_set\n    for key in rs:\n               ^^\nTypeError: \'int\' object is not iterable\n')
+
+    def parse_stdout_json(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.stdout != "", (
+               ^^^^^^^^^^^^^^^^^^^
+            f"expected JSON on stdout, got empty output; stderr={result.stderr!r}"
+        )
+E       AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 617, in <module>\n    main()\n  File "/workspace/forge.py", line 556, in main\n    args.func(args, storage)\n  File "/workspace/forge.py", line 568, in cmd_create\n    errors = validate_blueprint_create(input_data)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 101, in validate_blueprint_create\n    rs_errors = validate_requirement_set(rs, f"requirement_sets[{i}]")\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 42, in validate_requirement_set\n    for key in rs:\n               ^^\nTypeError: \'int\' object is not iterable\n'
+
+.evaluation_tests/_helpers.py:122: AssertionError
+_______________ test_allocation_create_expands_requirement_sets ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_expands0/data')
+
+    def test_allocation_create_expands_requirement_sets(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create expands each requirement set and multiplies TYPE_A sets into two allocations."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="mixed",
+            requirement_sets=[
+                {"resource_type": "gpu", "resource_count": 1},
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 2,
+                    "capabilities": ["category=TYPE_A", "vendor=acme"],
+                },
+            ],
+        )
+    
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "mixed"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'mixed', 'created_at': '2026-06-04T16:55:28Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+__________________ test_blueprint_name_across_create_list_get __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_blueprint_name_across_cre0/data')
+
+    def test_blueprint_name_across_create_list_get(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create, list, and get all preserve blueprint_name on the source blueprint."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="name-source",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+    
+        created = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "name-source"},
+        )
+>       create_payload = unwrap_collection(
+            assert_success(created), key="allocations"
+        )
+
+.evaluation_tests/test_checkpoint_2.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'name-source', 'created_at': '2026-06-04T16:55:28Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+________________________ test_allocation_list_ordering _________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_ordering0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_ordering(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List returns allocations sorted by created_at and uuid in ascending order."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="batch-a",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="batch-b",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "batch-a"},
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "batch-b"},
+        )
+    
+        listed = run_forge(entrypoint_argv, data_dir, ["allocation", "list"])
+        payload = unwrap_collection(assert_success(listed), key="allocations")
+        tuples = [(item["created_at"], item["uuid"]) for item in payload]
+>       assert tuples == sorted(tuples)
+E       AssertionError: assert [('2026-06-04T16:55:28Z', 'ee74f5b0-2480-4240-95a8-17d944466fc0'), ('2026-06-04T16:55:28Z', '5418f5c1-0030-4a53-bba1-4f279a23e14b')] == [('2026-06-04T16:55:28Z', '5418f5c1-0030-4a53-bba1-4f279a23e14b'), ('2026-06-04T16:55:28Z', 'ee74f5b0-2480-4240-95a8-17d944466fc0')]
+E         
+E         At index 0 diff: ('2026-06-04T16:55:28Z', 'ee74f5b0-2480-4240-95a8-17d944466fc0') != ('2026-06-04T16:55:28Z', '5418f5c1-0030-4a53-bba1-4f279a23e14b')
+E         
+E         Full diff:
+E           [
+E         +     (
+E         +         '2026-06-04T16:55:28Z',
+E         +         'ee74f5b0-2480-4240-95a8-17d944466fc0',
+E         +     ),
+E               (
+E                   '2026-06-04T16:55:28Z',
+E                   '5418f5c1-0030-4a53-bba1-4f279a23e14b',
+E               ),
+E         -     (
+E         -         '2026-06-04T16:55:28Z',
+E         -         'ee74f5b0-2480-4240-95a8-17d944466fc0',
+E         -     ),
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:131: AssertionError
+_________________ test_allocation_get_returns_single_resource __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_get_returns_si0/data')
+
+    def test_allocation_get_returns_single_resource(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Get returns a single allocation record when queried by UUID."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="single-get",
+            requirement_sets=[{"resource_type": "cpu", "resource_count": 1}],
+        )
+        created = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "single-get"},
+        )
+>       allocations = unwrap_collection(assert_success(created), key="allocations")
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'single-get', 'created_at': '2026-06-04T16:55:29Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+____________ test_allocation_create_generated_uuid_is_canonical_v4 _____________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_generat0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_create_generated_uuid_is_canonical_v4(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Created allocation UUIDs must be canonical lowercase UUID v4 values."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="uuid-format",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                }
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "uuid-format"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'uuid-format', 'created_at': '2026-06-04T16:55:29Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_______________________ test_create_utc_second_precision _______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_utc_second_precisi0/data')
+
+    @pytest.mark.functionality
+    def test_create_utc_second_precision(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create emits shared created_at timestamps with ISO-8601 second precision."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="timestamp-format",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "timestamp-format"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'timestamp-format', 'created_at': '2026-06-04T16:55:30Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+______________ test_allocation_create_unknown_blueprint_not_found ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_unknown0/data')
+
+    @pytest.mark.error
+    def test_allocation_create_unknown_blueprint_not_found(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create returns not_found when the blueprint_name does not exist."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "missing-blueprint"},
+        )
+>       assert_error(
+            result, category="not_found", detail_contains="missing-blueprint"
+        )
+
+.evaluation_tests/test_checkpoint_2.py:226: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...nd", "assignment_id": null, "blueprint_name": "missing-blueprint", "created_at": "2026-06-04T16:55:30Z"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"uuid": "a0a4ec93-87fb-446c-a631-e6c9811ceccf", "binding_status": "unbound", "assignment_id": null, "blueprint_name": "missing-blueprint", "created_at": "2026-06-04T16:55:30Z"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+__ test_allocation_create_rejects_invalid_payload_shapes[non_object_payload] ___
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_rejects0/data')
+stdin_text = '[]'
+
+    @pytest.mark.parametrize(
+        "stdin_text",
+        [
+            "[]",
+            "{}",
+            '{"blueprint_name": 1}',
+            '{"blueprint_name": ""}',
+        ],
+        ids=[
+            "non_object_payload",
+            "missing_blueprint_name",
+            "blueprint_name_wrong_type",
+            "blueprint_name_empty",
+        ],
+    )
+    @pytest.mark.error
+    def test_allocation_create_rejects_invalid_payload_shapes(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        stdin_text: str,
+    ) -> None:
+        """Invalid create payloads are rejected with validation_error."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_text=stdin_text,
+        )
+>       assert_error(result, category="validation_error")
+
+.evaluation_tests/test_checkpoint_2.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:176: in assert_error
+    payload = parse_stdout_json(result)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...forge.py", line 256, in create\n    allocation = {\n                 ^\nTypeError: \'list\' object is not a mapping\n')
+
+    def parse_stdout_json(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.stdout != "", (
+               ^^^^^^^^^^^^^^^^^^^
+            f"expected JSON on stdout, got empty output; stderr={result.stderr!r}"
+        )
+E       AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 617, in <module>\n    main()\n  File "/workspace/forge.py", line 556, in main\n    args.func(args, storage)\n  File "/workspace/forge.py", line 363, in cmd_allocation_create\n    allocation = storage.create(input_data)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 256, in create\n    allocation = {\n                 ^\nTypeError: \'list\' object is not a mapping\n'
+
+.evaluation_tests/_helpers.py:122: AssertionError
+_ test_allocation_create_rejects_invalid_payload_shapes[missing_blueprint_name] _
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_rejects1/data')
+stdin_text = '{}'
+
+    @pytest.mark.parametrize(
+        "stdin_text",
+        [
+            "[]",
+            "{}",
+            '{"blueprint_name": 1}',
+            '{"blueprint_name": ""}',
+        ],
+        ids=[
+            "non_object_payload",
+            "missing_blueprint_name",
+            "blueprint_name_wrong_type",
+            "blueprint_name_empty",
+        ],
+    )
+    @pytest.mark.error
+    def test_allocation_create_rejects_invalid_payload_shapes(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        stdin_text: str,
+    ) -> None:
+        """Invalid create payloads are rejected with validation_error."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_text=stdin_text,
+        )
+>       assert_error(result, category="validation_error")
+
+.evaluation_tests/test_checkpoint_2.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...513dd2424b2e", "binding_status": "unbound", "assignment_id": null, "created_at": "2026-06-04T16:55:30Z"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"uuid": "bf21debe-8614-421f-be56-513dd2424b2e", "binding_status": "unbound", "assignment_id": null, "created_at": "2026-06-04T16:55:30Z"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+_ test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_wrong_type] _
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_rejects2/data')
+stdin_text = '{"blueprint_name": 1}'
+
+    @pytest.mark.parametrize(
+        "stdin_text",
+        [
+            "[]",
+            "{}",
+            '{"blueprint_name": 1}',
+            '{"blueprint_name": ""}',
+        ],
+        ids=[
+            "non_object_payload",
+            "missing_blueprint_name",
+            "blueprint_name_wrong_type",
+            "blueprint_name_empty",
+        ],
+    )
+    @pytest.mark.error
+    def test_allocation_create_rejects_invalid_payload_shapes(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        stdin_text: str,
+    ) -> None:
+        """Invalid create payloads are rejected with validation_error."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_text=stdin_text,
+        )
+>       assert_error(result, category="validation_error")
+
+.evaluation_tests/test_checkpoint_2.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...ng_status": "unbound", "assignment_id": null, "blueprint_name": 1, "created_at": "2026-06-04T16:55:30Z"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"uuid": "d0f2a94b-c2f1-4f6d-bae0-8dd14ce5b7d8", "binding_status": "unbound", "assignment_id": null, "blueprint_name": 1, "created_at": "2026-06-04T16:55:30Z"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+_ test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_empty] __
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_rejects3/data')
+stdin_text = '{"blueprint_name": ""}'
+
+    @pytest.mark.parametrize(
+        "stdin_text",
+        [
+            "[]",
+            "{}",
+            '{"blueprint_name": 1}',
+            '{"blueprint_name": ""}',
+        ],
+        ids=[
+            "non_object_payload",
+            "missing_blueprint_name",
+            "blueprint_name_wrong_type",
+            "blueprint_name_empty",
+        ],
+    )
+    @pytest.mark.error
+    def test_allocation_create_rejects_invalid_payload_shapes(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        stdin_text: str,
+    ) -> None:
+        """Invalid create payloads are rejected with validation_error."""
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_text=stdin_text,
+        )
+>       assert_error(result, category="validation_error")
+
+.evaluation_tests/test_checkpoint_2.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...g_status": "unbound", "assignment_id": null, "blueprint_name": "", "created_at": "2026-06-04T16:55:30Z"}\n', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        category: str,
+        detail: str | None = None,
+        detail_contains: str | None = None,
+        revision: str | None = None,
+        has_revision: bool | None = None,
+    ) -> dict[str, Any]:
+>       assert result.returncode == 1, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected error exit code 1; stdout={result.stdout!r} "
+            f"stderr={result.stderr!r}"
+        )
+E       AssertionError: expected error exit code 1; stdout='{"uuid": "d72de58d-dd4d-46eb-bd98-e0a6feee0895", "binding_status": "unbound", "assignment_id": null, "blueprint_name": "", "created_at": "2026-06-04T16:55:30Z"}\n' stderr=''
+
+.evaluation_tests/_helpers.py:172: AssertionError
+______________ test_multiplier_match_is_exact_and_case_sensitive _______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multiplier_match_is_exact0/data')
+
+    @pytest.mark.functionality
+    def test_multiplier_match_is_exact_and_case_sensitive(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Only exact category=TYPE_A (case-sensitive) triggers a multiplier."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="case-sensitive",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 2,
+                    "capabilities": ["category=type_a"],
+                }
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "case-sensitive"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:308: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'case-sensitive', 'created_at': '2026-06-04T16:55:31Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+______________ test_allocation_list_filters_compose_conjunctively ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_filters_c0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_filters_compose_conjunctively(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List filters combine with AND semantics when status and assignment are both set."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="filters",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "filters"},
+        )
+    
+        by_status = run_forge(
+            entrypoint_argv, data_dir, ["allocation", "list", "--status", "unbound"]
+        )
+        status_payload = unwrap_collection(
+>           assert_success(by_status), key="allocations"
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+        )
+
+.evaluation_tests/test_checkpoint_2.py:334: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --status unbound\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='usage: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --status unbound\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_________ test_expansion_order_places_multiplied_entries_consecutively _________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_expansion_order_places_mu0/data')
+
+    @pytest.mark.functionality
+    def test_expansion_order_places_multiplied_entries_consecutively(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create preserves requirement index order and keeps multiplied rows consecutive."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="ordering",
+            requirement_sets=[
+                {"resource_type": "gpu", "resource_count": 1},
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                },
+                {"resource_type": "nic", "resource_count": 1},
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "ordering"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:378: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'ordering', 'created_at': '2026-06-04T16:55:32Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_____________ test_allocation_list_breaks_created_at_ties_by_uuid ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_breaks_cr0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_breaks_created_at_ties_by_uuid(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List breaks created_at ties using ascending UUID order."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="uuid-tie",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                }
+            ],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "uuid-tie"},
+        )
+    
+        listed = run_forge(entrypoint_argv, data_dir, ["allocation", "list"])
+        payload = unwrap_collection(assert_success(listed), key="allocations")
+>       assert len(payload) == 2
+E       AssertionError: assert 1 == 2
+E        +  where 1 = len([{'uuid': '36dbe5c5-9da1-4b5d-ad2a-268e493273b5', 'binding_status': 'unbound', 'assignment_id': None, 'blueprint_name': 'uuid-tie', 'created_at': '2026-06-04T16:55:32Z'}])
+
+.evaluation_tests/test_checkpoint_2.py:408: AssertionError
+_________________ test_multiplier_once_per_set_duplicate_caps __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multiplier_once_per_set_d0/data')
+
+    @pytest.mark.functionality
+    def test_multiplier_once_per_set_duplicate_caps(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """A single requirement set with duplicate TYPE_A markers still creates exactly two rows."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="duplicate-marker",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A", "category=TYPE_A"],
+                }
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "duplicate-marker"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:438: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'duplicate-marker', 'created_at': '2026-06-04T16:55:33Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_______________ test_multiplier_requires_exact_capability_match ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multiplier_requires_exact0/data')
+
+    @pytest.mark.functionality
+    def test_multiplier_requires_exact_capability_match(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Only requirement sets with exact category=TYPE_A are multiplied."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="exact-match-only",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A "],
+                },
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["prefix:category=TYPE_A"],
+                },
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                },
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "exact-match-only"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:476: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'exact-match-only', 'created_at': '2026-06-04T16:55:33Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_______________ test_multiplier_adversarial_mix_preserves_order ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multiplier_adversarial_mi0/data')
+
+    @pytest.mark.functionality
+    def test_multiplier_adversarial_mix_preserves_order(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Adversarial capability mixes preserve expansion order and share one created_at batch."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="adversarial-mix",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": [
+                        "category=TYPE_A",
+                        "category=TYPE_A",
+                        "vendor=acme",
+                    ],
+                },
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A "],
+                },
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["prefix:category=TYPE_A"],
+                },
+                {
+                    "resource_type": "gpu",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                },
+            ],
+        )
+    
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "adversarial-mix"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:523: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'adversarial-mix', 'created_at': '2026-06-04T16:55:33Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+___________ test_allocation_create_output_is_scoped_to_current_batch ___________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_output_0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_create_output_is_scoped_to_current_batch(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create returns only the allocations produced by the current create call."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="batch-a-only",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="batch-b-only",
+            requirement_sets=[{"resource_type": "nic", "resource_count": 1}],
+        )
+    
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "batch-a-only"},
+        )
+        second = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "batch-b-only"},
+        )
+>       payload = unwrap_collection(assert_success(second), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:565: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'batch-b-only', 'created_at': '2026-06-04T16:55:34Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+________________ test_allocation_list_returns_complete_dataset _________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_returns_c0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_returns_complete_dataset(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List includes allocations from multiple prior create commands."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="complete-a",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="complete-b",
+            requirement_sets=[{"resource_type": "cpu", "resource_count": 1}],
+        )
+        created_a = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "complete-a"},
+        )
+>       payload_a = unwrap_collection(assert_success(created_a), key="allocations")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:593: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'complete-a', 'created_at': '2026-06-04T16:55:34Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+________________ test_list_negative_filter_empty[status-filter] ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_list_negative_filter_empt0/data')
+filter_args = ['--status', 'bound'], blueprint_name = 'status-negative'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("filter_args", "blueprint_name"),
+        [
+            (["--status", "bound"], "status-negative"),
+            (["--assignment", "assignment-1"], "assignment-negative"),
+        ],
+        ids=["status-filter", "assignment-filter"],
+    )
+    def test_list_negative_filter_empty(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        filter_args: list[str],
+        blueprint_name: str,
+    ) -> None:
+        """Unmatched list status/assignment filters return an empty array."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name=blueprint_name,
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": blueprint_name},
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "list"] + filter_args,
+        )
+>       assert unwrap_collection(assert_success(result), key="allocations") == []
+                                 ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:643: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...ge: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --status bound\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='usage: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --status bound\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+______________ test_list_negative_filter_empty[assignment-filter] ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_list_negative_filter_empt1/data')
+filter_args = ['--assignment', 'assignment-1']
+blueprint_name = 'assignment-negative'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("filter_args", "blueprint_name"),
+        [
+            (["--status", "bound"], "status-negative"),
+            (["--assignment", "assignment-1"], "assignment-negative"),
+        ],
+        ids=["status-filter", "assignment-filter"],
+    )
+    def test_list_negative_filter_empty(
+        entrypoint_argv: list[str],
+        data_dir: Path,
+        filter_args: list[str],
+        blueprint_name: str,
+    ) -> None:
+        """Unmatched list status/assignment filters return an empty array."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name=blueprint_name,
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": blueprint_name},
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "list"] + filter_args,
+        )
+>       assert unwrap_collection(assert_success(result), key="allocations") == []
+                                 ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:643: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --assignment assignment-1\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='usage: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --assignment assignment-1\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+______________ test_type_a_multiplier_rows_match_except_for_uuid _______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_type_a_multiplier_rows_ma0/data')
+
+    @pytest.mark.functionality
+    def test_type_a_multiplier_rows_match_except_for_uuid(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Type-A multiplier creates matching pairs differing only by UUID."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="type-a-pair",
+            requirement_sets=[
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A", "vendor=acme"],
+                }
+            ],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "type-a-pair"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:669: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'type-a-pair', 'created_at': '2026-06-04T16:55:36Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+______________ test_allocation_create_returns_complete_field_set _______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_returns0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_create_returns_complete_field_set(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Create output objects contain exactly the six specified allocation fields."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="field-check",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "field-check"},
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'field-check', 'created_at': '2026-06-04T16:55:36Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_____________ test_allocation_get_round_trip_preserves_all_fields ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_get_round_trip0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_get_round_trip_preserves_all_fields(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Get returns all six fields with values matching the original create output."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="get-roundtrip",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        created = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "get-roundtrip"},
+        )
+>       created_row = unwrap_collection(assert_success(created), key="allocations")[0]
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:727: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'get-roundtrip', 'created_at': '2026-06-04T16:55:36Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+__________ test_allocation_create_same_blueprint_twice_distinct_uuids __________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_create_same_bl0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_create_same_blueprint_twice_distinct_uuids(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Two create calls against the same blueprint produce independent allocations with unique UUIDs."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="reusable",
+            requirement_sets=[{"resource_type": "gpu", "resource_count": 1}],
+        )
+        first = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "reusable"},
+        )
+        second = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "reusable"},
+        )
+        first_uuids = {
+            row["uuid"]
+>           for row in unwrap_collection(assert_success(first), key="allocations")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        }
+
+.evaluation_tests/test_checkpoint_2.py:774: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'reusable', 'created_at': '2026-06-04T16:55:37Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+______________ test_allocation_list_status_filter_positive_match _______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_allocation_list_status_fi0/data')
+
+    @pytest.mark.functionality
+    def test_allocation_list_status_filter_positive_match(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """List with --status unbound returns all newly created unbound allocations."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="status-pos",
+            requirement_sets=[
+                {"resource_type": "gpu", "resource_count": 1},
+                {
+                    "resource_type": "fpga",
+                    "resource_count": 1,
+                    "capabilities": ["category=TYPE_A"],
+                },
+            ],
+        )
+        run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["allocation", "create"],
+            stdin_json={"blueprint_name": "status-pos"},
+        )
+        result = run_forge(
+            entrypoint_argv, data_dir, ["allocation", "list", "--status", "unbound"]
+        )
+>       payload = unwrap_collection(assert_success(result), key="allocations")
+                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_2.py:810: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag...: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --status unbound\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='usage: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --status unbound\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+_________________ test_bind_add_updates_state_and_returns_ack __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_add_updates_state_an0/data')
+
+    def test_bind_add_updates_state_and_returns_ack(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Bind add marks both allocations bound and returns the accepted acknowledgment."""
+>       alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:38Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+________________________ test_bind_remove_is_idempotent ________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_remove_is_idempotent0/data')
+
+    def test_bind_remove_is_idempotent(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Removing an already unbound allocation is a silent no-op."""
+>       alloc_a, _, assignment_id = _seed_and_bind_a(entrypoint_argv, data_dir)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:100: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:57: in _seed_and_bind_a
+    alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:38Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+___________________ test_delete_by_assignment_is_idempotent ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_by_assignment_is_i0/data')
+
+    def test_delete_by_assignment_is_idempotent(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Delete by assignment is idempotent and returns zero when no matches remain."""
+>       alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:131: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:38Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_________________ test_delete_by_assignment_spares_nonmatching _________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_by_assignment_spar0/data')
+
+    @pytest.mark.functionality
+    def test_delete_by_assignment_spares_nonmatching(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Assignment-mode delete only removes allocations matching the given assignment."""
+>       alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:163: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:39Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_______________________ test_bind_missing_assignment_id ________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_missing_assignment_i0/data')
+
+    @pytest.mark.error
+    def test_bind_missing_assignment_id(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Bind requires assignment_id and returns validation_error when it is missing."""
+>       alloc_a, _ = _seed_allocation_ids(entrypoint_argv, data_dir)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:205: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:39Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+____________________ test_bind_invalid_op_reports_bad_value ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_invalid_op_reports_b0/data')
+
+    @pytest.mark.error
+    def test_bind_invalid_op_reports_bad_value(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Bind rejects non add/remove operations with invalid_operation."""
+>       alloc_a, alloc_b = sorted(_seed_allocation_ids(entrypoint_argv, data_dir))
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:255: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:40Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_____________________ test_bind_not_found_lists_sorted_ids _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_not_found_lists_sort0/data')
+
+    @pytest.mark.error
+    def test_bind_not_found_lists_sorted_ids(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Bind not_found errors include missing allocation IDs in sorted order."""
+>       _seed_allocation_ids(entrypoint_argv, data_dir)
+
+.evaluation_tests/test_checkpoint_3.py:277: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:40Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_____________________ test_bind_duplicate_assignment_guard _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_duplicate_assignment0/data')
+
+    @pytest.mark.error
+    def test_bind_duplicate_assignment_guard(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Duplicate-assignment guard rejects add operations when assignment already has bound allocations."""
+>       alloc_a, alloc_b, assignment_id = _seed_and_bind_a(entrypoint_argv, data_dir)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:299: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:57: in _seed_and_bind_a
+    alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:40Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+____________________ test_duplicate_guard_blocks_mixed_ops _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_duplicate_guard_blocks_mi0/data')
+
+    @pytest.mark.error
+    def test_duplicate_guard_blocks_mixed_ops(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Duplicate guard blocks mixed bind ops when any add is requested for a duplicate assignment."""
+>       alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:322: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:41Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+___________________ test_bind_invalid_op_precedes_not_found ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_invalid_op_precedes_0/data')
+
+    @pytest.mark.functionality
+    def test_bind_invalid_op_precedes_not_found(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Invalid operations are validated before not_found checks in bind request processing."""
+>       alloc_a, _ = sorted(_seed_allocation_ids(entrypoint_argv, data_dir))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:370: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:41Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+___________________ test_delete_ids_rejects_partial_matches ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_ids_rejects_partia0/data')
+
+    @pytest.mark.error
+    def test_delete_ids_rejects_partial_matches(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """ID-list delete is all-or-nothing and fails with not_found if any UUID is missing."""
+>       alloc_a, _ = _seed_allocation_ids(entrypoint_argv, data_dir)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:417: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:42Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+______________________ test_delete_ids_rejects_blank_csv _______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_ids_rejects_blank_0/data')
+
+    @pytest.mark.error
+    def test_delete_ids_rejects_blank_csv(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Blank CSV members in ids are treated as unresolved IDs and trigger not_found."""
+>       alloc_a, _ = _seed_allocation_ids(entrypoint_argv, data_dir)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:440: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:42Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_______________________ test_bind_atomic_on_missing_ids ________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_atomic_on_missing_id0/data')
+
+    @pytest.mark.functionality
+    def test_bind_atomic_on_missing_ids(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Bind is atomic: a missing allocation ID prevents any binding from being applied."""
+>       alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:462: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:42Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+____________________ test_invalid_op_no_remove_side_effects ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_invalid_op_no_remove_side0/data')
+
+    @pytest.mark.functionality
+    def test_invalid_op_no_remove_side_effects(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Invalid bind operations abort the request with no side effects from earlier removes."""
+>       alloc_a, alloc_b, assignment_id = _seed_and_bind_a(entrypoint_argv, data_dir)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:488: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:57: in _seed_and_bind_a
+    alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:43Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+__________________ test_remove_only_bypasses_duplicate_guard ___________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_remove_only_bypasses_dupl0/data')
+
+    @pytest.mark.functionality
+    def test_remove_only_bypasses_duplicate_guard(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """A payload containing only remove operations skips duplicate-assignment checking."""
+>       alloc_a, alloc_b, assignment_id = _seed_and_bind_a(entrypoint_argv, data_dir)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:514: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:57: in _seed_and_bind_a
+    alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:43Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+___________________ test_remove_unbinds_ignoring_assignment ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_remove_unbinds_ignoring_a0/data')
+
+    @pytest.mark.functionality
+    def test_remove_unbinds_ignoring_assignment(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Remove unbinds allocations and clears assignment_id regardless of their current assignment."""
+>       alloc_a, _, _ = _seed_and_bind_a(entrypoint_argv, data_dir)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:533: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:57: in _seed_and_bind_a
+    alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:43Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+__________________ test_validation_precedes_op_and_not_found ___________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_validation_precedes_op_an0/data')
+
+    @pytest.mark.functionality
+    def test_validation_precedes_op_and_not_found(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Missing required assignment_id triggers validation_error before other bind failures."""
+>       alloc_a, _ = _seed_allocation_ids(entrypoint_argv, data_dir)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:559: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:44Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+______________________ test_not_found_precedes_duplicate _______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_not_found_precedes_duplic0/data')
+
+    @pytest.mark.functionality
+    def test_not_found_precedes_duplicate(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Not_found errors are returned before duplicate-assignment errors in bind validation."""
+>       alloc_a, _, assignment_id = _seed_and_bind_a(entrypoint_argv, data_dir)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:586: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:57: in _seed_and_bind_a
+    alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:44Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+______________________ test_invalid_op_precedes_duplicate ______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_invalid_op_precedes_dupli0/data')
+
+    @pytest.mark.functionality
+    def test_invalid_op_precedes_duplicate(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Invalid_operation errors are returned before duplicate-assignment errors."""
+>       alloc_a, alloc_b, assignment_id = _seed_and_bind_a(entrypoint_argv, data_dir)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:613: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:57: in _seed_and_bind_a
+    alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:44Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+____________________ test_delete_ids_reports_missing_uuids _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_ids_reports_missin0/data')
+
+    @pytest.mark.functionality
+    def test_delete_ids_reports_missing_uuids(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """ID-list delete reports all missing UUIDs and does not delete any existing allocations."""
+>       alloc_a, _ = _seed_allocation_ids(entrypoint_argv, data_dir)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:639: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:45Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_________________________ test_bind_mixed_ops_success __________________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_mixed_ops_success0/data')
+
+    @pytest.mark.functionality
+    def test_bind_mixed_ops_success(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Mixed remove/add bind operations can both succeed when validation passes."""
+>       alloc_a, alloc_b, _ = _seed_and_bind_a(entrypoint_argv, data_dir)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:663: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:57: in _seed_and_bind_a
+    alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:45Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_____________________ test_bind_add_records_assignment_id ______________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_add_records_assignme0/data')
+
+    @pytest.mark.functionality
+    def test_bind_add_records_assignment_id(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Bind add records the payload's assignment_id on each allocation via get."""
+>       alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:45Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+________________ test_bind_remove_clears_assignment_id_to_null _________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_remove_clears_assign0/data')
+
+    @pytest.mark.functionality
+    def test_bind_remove_clears_assignment_id_to_null(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Bind remove clears assignment_id to null after unbinding a bound allocation."""
+>       alloc_a, _, assignment_id = _seed_and_bind_a(entrypoint_argv, data_dir)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:724: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:57: in _seed_and_bind_a
+    alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:46Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+________________ test_delete_by_ids_succeeds_and_returns_count _________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_by_ids_succeeds_an0/data')
+
+    @pytest.mark.functionality
+    def test_delete_by_ids_succeeds_and_returns_count(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """ID-list delete with all valid UUIDs deletes them and returns the correct count."""
+>       alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:749: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:46Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_________ test_delete_by_ids_duplicate_members_count_unique_deletions __________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_by_ids_duplicate_m0/data')
+
+    @pytest.mark.functionality
+    def test_delete_by_ids_duplicate_members_count_unique_deletions(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Duplicate UUIDs delete once and report the number of removed allocations."""
+>       alloc_a, _ = _seed_allocation_ids(entrypoint_argv, data_dir)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:770: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:46Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+___________________ test_bind_add_rebinds_to_new_assignment ____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_bind_add_rebinds_to_new_a0/data')
+
+    @pytest.mark.functionality
+    def test_bind_add_rebinds_to_new_assignment(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Bind add on an already-bound allocation changes it to the new assignment_id."""
+>       alloc_a, _, old_assignment = _seed_and_bind_a(entrypoint_argv, data_dir)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:788: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:57: in _seed_and_bind_a
+    alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:47Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+_________________ test_not_found_mixed_ops_atomic_vs_duplicate _________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_not_found_mixed_ops_atomi0/data')
+
+    @pytest.mark.functionality
+    def test_not_found_mixed_ops_atomic_vs_duplicate(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Mixed bind operations remain atomic and do not apply when a missing ID causes not_found."""
+>       alloc_a, alloc_b = _seed_allocation_ids(entrypoint_argv, data_dir)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_3.py:815: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_3.py:50: in _seed_allocation_ids
+    payload = unwrap_collection(assert_success(result), key="allocations")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'assignment_id': None, 'binding_status': 'unbound', 'blueprint_name': 'bind-seed', 'created_at': '2026-06-04T16:55:47Z', ...}
+
+    def unwrap_collection(
+        payload: JSONValue,
+        *,
+        key: str,
+        revision: str = "1.0",
+    ) -> list[Any]:
+        if not _uses_revision_envelope():
+>           assert isinstance(payload, list)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError
+
+.evaluation_tests/_helpers.py:226: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_delete_names_duplicate_members_count_unique_deletions - AssertionError: expected success exit code; stderr='' stdout='{"error": "not_found", "detail": "Unresolved names: alpha, alpha"}\n'
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_name_string - AssertionError: expected detail to contain 'name must be a non-empty string'; actual detail='name must be non-empty'
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_requirement_sets - AssertionError: expected detail to contain 'requirement_sets must be a non-empty array'; actual detail='requirement_sets must be non-empty'
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_object_json_payload - AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 617, in <module>\n    main()\n  File "/workspace/forge.py", line 556, in main\n    args.func(args, storage)\n  File "/workspace/forge.py", line 568, in cmd_create\n    errors = validate_blueprint_create(input_data)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 99, in validate_blueprint_create\n    if isinstance(data.get("requirement_sets"), list):\n                  ^^^^^^^^\nAttributeError: \'list\' object has no attribute \'get\'\n'
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_sets_with_non_object_elements - AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 617, in <module>\n    main()\n  File "/workspace/forge.py", line 556, in main\n    args.func(args, storage)\n  File "/workspace/forge.py", line 568, in cmd_create\n    errors = validate_blueprint_create(input_data)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 101, in validate_blueprint_create\n    rs_errors = validate_requirement_set(rs, f"requirement_sets[{i}]")\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 42, in validate_requirement_set\n    for key in rs:\n               ^^\nTypeError: \'int\' object is not iterable\n'
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_expands_requirement_sets - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_blueprint_name_across_create_list_get - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_ordering - AssertionError: assert [('2026-06-04T16:55:28Z', 'ee74f5b0-2480-4240-95a8-17d944466fc0'), ('2026-06-04T16:55:28Z', '5418f5c1-0030-4a53-bba1-4f279a23e14b')] == [('2026-06-04T16:55:28Z', '5418f5c1-0030-4a53-bba1-4f279a23e14b'), ('2026-06-04T16:55:28Z', 'ee74f5b0-2480-4240-95a8-17d944466fc0')]
+  
+  At index 0 diff: ('2026-06-04T16:55:28Z', 'ee74f5b0-2480-4240-95a8-17d944466fc0') != ('2026-06-04T16:55:28Z', '5418f5c1-0030-4a53-bba1-4f279a23e14b')
+  
+  Full diff:
+    [
+  +     (
+  +         '2026-06-04T16:55:28Z',
+  +         'ee74f5b0-2480-4240-95a8-17d944466fc0',
+  +     ),
+        (
+            '2026-06-04T16:55:28Z',
+            '5418f5c1-0030-4a53-bba1-4f279a23e14b',
+        ),
+  -     (
+  -         '2026-06-04T16:55:28Z',
+  -         'ee74f5b0-2480-4240-95a8-17d944466fc0',
+  -     ),
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_get_returns_single_resource - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_generated_uuid_is_canonical_v4 - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_create_utc_second_precision - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_unknown_blueprint_not_found - AssertionError: expected error exit code 1; stdout='{"uuid": "a0a4ec93-87fb-446c-a631-e6c9811ceccf", "binding_status": "unbound", "assignment_id": null, "blueprint_name": "missing-blueprint", "created_at": "2026-06-04T16:55:30Z"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[non_object_payload] - AssertionError: expected JSON on stdout, got empty output; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 617, in <module>\n    main()\n  File "/workspace/forge.py", line 556, in main\n    args.func(args, storage)\n  File "/workspace/forge.py", line 363, in cmd_allocation_create\n    allocation = storage.create(input_data)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 256, in create\n    allocation = {\n                 ^\nTypeError: \'list\' object is not a mapping\n'
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[missing_blueprint_name] - AssertionError: expected error exit code 1; stdout='{"uuid": "bf21debe-8614-421f-be56-513dd2424b2e", "binding_status": "unbound", "assignment_id": null, "created_at": "2026-06-04T16:55:30Z"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_wrong_type] - AssertionError: expected error exit code 1; stdout='{"uuid": "d0f2a94b-c2f1-4f6d-bae0-8dd14ce5b7d8", "binding_status": "unbound", "assignment_id": null, "blueprint_name": 1, "created_at": "2026-06-04T16:55:30Z"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_rejects_invalid_payload_shapes[blueprint_name_empty] - AssertionError: expected error exit code 1; stdout='{"uuid": "d72de58d-dd4d-46eb-bd98-e0a6feee0895", "binding_status": "unbound", "assignment_id": null, "blueprint_name": "", "created_at": "2026-06-04T16:55:30Z"}\n' stderr=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_multiplier_match_is_exact_and_case_sensitive - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_filters_compose_conjunctively - AssertionError: expected success exit code; stderr='usage: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --status unbound\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_expansion_order_places_multiplied_entries_consecutively - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_breaks_created_at_ties_by_uuid - AssertionError: assert 1 == 2
+ +  where 1 = len([{'uuid': '36dbe5c5-9da1-4b5d-ad2a-268e493273b5', 'binding_status': 'unbound', 'assignment_id': None, 'blueprint_name': 'uuid-tie', 'created_at': '2026-06-04T16:55:32Z'}])
+FAILED .evaluation_tests/test_checkpoint_2.py::test_multiplier_once_per_set_duplicate_caps - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_multiplier_requires_exact_capability_match - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_multiplier_adversarial_mix_preserves_order - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_output_is_scoped_to_current_batch - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_returns_complete_dataset - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_list_negative_filter_empty[status-filter] - AssertionError: expected success exit code; stderr='usage: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --status bound\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_list_negative_filter_empty[assignment-filter] - AssertionError: expected success exit code; stderr='usage: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --assignment assignment-1\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_2.py::test_type_a_multiplier_rows_match_except_for_uuid - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_returns_complete_field_set - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_get_round_trip_preserves_all_fields - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_create_same_blueprint_twice_distinct_uuids - AssertionError
+FAILED .evaluation_tests/test_checkpoint_2.py::test_allocation_list_status_filter_positive_match - AssertionError: expected success exit code; stderr='usage: forge [-h] --data-dir DATA_DIR {blueprint,allocation} ...\nforge: error: unrecognized arguments: --status unbound\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_add_updates_state_and_returns_ack - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_remove_is_idempotent - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_delete_by_assignment_is_idempotent - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_delete_by_assignment_spares_nonmatching - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_missing_assignment_id - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_invalid_op_reports_bad_value - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_not_found_lists_sorted_ids - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_duplicate_assignment_guard - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_duplicate_guard_blocks_mixed_ops - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_invalid_op_precedes_not_found - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_delete_ids_rejects_partial_matches - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_delete_ids_rejects_blank_csv - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_atomic_on_missing_ids - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_invalid_op_no_remove_side_effects - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_remove_only_bypasses_duplicate_guard - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_remove_unbinds_ignoring_assignment - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_validation_precedes_op_and_not_found - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_not_found_precedes_duplicate - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_invalid_op_precedes_duplicate - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_delete_ids_reports_missing_uuids - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_mixed_ops_success - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_add_records_assignment_id - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_remove_clears_assignment_id_to_null - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_delete_by_ids_succeeds_and_returns_count - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_delete_by_ids_duplicate_members_count_unique_deletions - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_bind_add_rebinds_to_new_assignment - AssertionError
+FAILED .evaluation_tests/test_checkpoint_3.py::test_not_found_mixed_ops_atomic_vs_duplicate - AssertionError
+======================== 59 failed, 42 passed in 29.94s ========================

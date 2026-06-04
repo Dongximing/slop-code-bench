@@ -1,0 +1,25 @@
+version: "1"
+schema: "module"
+os:
+  name: macos
+  package_manager: brew
+  packages:
+    - coreutils
+  applications:
+    - firefox
+actions:
+  - type: link
+    source: gitconfig
+    destination: ~/.gitconfig
+    hidden: false
+    elevated: false
+  - type: link
+    source: notfound.txt
+    destination: ~/notfound.txt
+    hidden: false
+    elevated: false
+  - type: link
+    source: subdir/file.txt
+    destination: ~/.file.txt
+    hidden: false
+    elevated: false

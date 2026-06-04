@@ -1,0 +1,1416 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/MqTB0KNuQ7VSRiE-/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 20 items
+
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[basic] FAILED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[groupby] FAILED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[join] FAILED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[sorted_join] FAILED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[aggregates] FAILED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[column_alias] FAILED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[complex_boolean] FAILED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[count_column] FAILED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[having_clause] FAILED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[integer_comparisons] FAILED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[join_with_aggregate] FAILED [ 55%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[left_join] FAILED [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[like_patterns] FAILED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[limit_offset] FAILED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[not_operator] FAILED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[null_handling] FAILED [ 80%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[order_by_multiple] FAILED [ 85%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[right_join] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[table_alias] FAILED [ 95%]
+.evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[where_clauses] FAILED [100%]
+
+=================================== FAILURES ===================================
+________________________ test_checkpoint_1_core[basic] _________________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/core/basic.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_basic_0')
+
+    @pytest.mark.parametrize(
+        "case_path",
+        CORE_CASES,
+        ids=[case_path.stem for case_path in CORE_CASES],
+    )
+    def test_checkpoint_1_core(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "core",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'core'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/core/basic.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_basic_0')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_basic_0/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_basic_0/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+_______________________ test_checkpoint_1_core[groupby] ________________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/core/groupby.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_groupby0')
+
+    @pytest.mark.parametrize(
+        "case_path",
+        CORE_CASES,
+        ids=[case_path.stem for case_path in CORE_CASES],
+    )
+    def test_checkpoint_1_core(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "core",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'core'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/core/groupby.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_groupby0')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_groupby0/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_groupby0/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+_________________________ test_checkpoint_1_core[join] _________________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/core/join.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_join_0')
+
+    @pytest.mark.parametrize(
+        "case_path",
+        CORE_CASES,
+        ids=[case_path.stem for case_path in CORE_CASES],
+    )
+    def test_checkpoint_1_core(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "core",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'core'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/core/join.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_join_0')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_join_0/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_join_0/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+_____________________ test_checkpoint_1_core[sorted_join] ______________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/core/sorted_join.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_sorted_0')
+
+    @pytest.mark.parametrize(
+        "case_path",
+        CORE_CASES,
+        ids=[case_path.stem for case_path in CORE_CASES],
+    )
+    def test_checkpoint_1_core(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "core",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'core'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/core/sorted_join.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_sorted_0')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_sorted_0/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_sorted_0/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+_________________ test_checkpoint_1_functionality[aggregates] __________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/aggregates.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit0')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/aggregates.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit0')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit0/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit0/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+________________ test_checkpoint_1_functionality[column_alias] _________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/column_alias.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit1')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/column_alias.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit1')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit1/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit1/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+_______________ test_checkpoint_1_functionality[complex_boolean] _______________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/complex_boolean.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit2')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/complex_boolean.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit2')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit2/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit2/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+________________ test_checkpoint_1_functionality[count_column] _________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/count_column.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit3')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/count_column.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit3')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit3/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit3/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+________________ test_checkpoint_1_functionality[having_clause] ________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/having_clause.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit4')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/having_clause.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit4')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit4/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit4/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+_____________ test_checkpoint_1_functionality[integer_comparisons] _____________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/integer_comparisons.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit5')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/integer_comparisons.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit5')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit5/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit5/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+_____________ test_checkpoint_1_functionality[join_with_aggregate] _____________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/join_with_aggregate.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit6')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/join_with_aggregate.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit6')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit6/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit6/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+__________________ test_checkpoint_1_functionality[left_join] __________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/left_join.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit7')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/left_join.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit7')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit7/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit7/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+________________ test_checkpoint_1_functionality[like_patterns] ________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/like_patterns.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit8')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/like_patterns.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit8')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit8/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit8/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+________________ test_checkpoint_1_functionality[limit_offset] _________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/limit_offset.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit9')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/limit_offset.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit9')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit9/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit9/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+________________ test_checkpoint_1_functionality[not_operator] _________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/not_operator.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit10')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/not_operator.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit10')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit10/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit10/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+________________ test_checkpoint_1_functionality[null_handling] ________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/null_handling.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit11')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/null_handling.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit11')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit11/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit11/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+______________ test_checkpoint_1_functionality[order_by_multiple] ______________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/order_by_multiple.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit12')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/order_by_multiple.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit12')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit12/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit12/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+_________________ test_checkpoint_1_functionality[right_join] __________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/right_join.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit13')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/right_join.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit13')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit13/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit13/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+_________________ test_checkpoint_1_functionality[table_alias] _________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/table_alias.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit14')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/table_alias.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit14')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit14/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit14/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+________________ test_checkpoint_1_functionality[where_clauses] ________________
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/where_clauses.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit15')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case_path",
+        FUNCTIONALITY_CASES,
+        ids=[case_path.stem for case_path in FUNCTIONALITY_CASES],
+    )
+    def test_checkpoint_1_functionality(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+>       run_checkpoint_1_case(
+            entrypoint_argv,
+            checkpoint_name,
+            "functionality",
+            case_path,
+            tmp_path,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'query_files.py']
+checkpoint_name = 'checkpoint_1', group = 'functionality'
+case_path = PosixPath('/workspace/.evaluation_tests/data/checkpoint_1/functionality/where_clauses.yaml')
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit15')
+
+    def run_checkpoint_1_case(
+        entrypoint_argv: list[str],
+        checkpoint_name: str,
+        group: str,
+        case_path: Path,
+        tmp_path: Path,
+    ) -> None:
+        case_data = load_yaml_case(case_path)
+        group_dir = DATA_DIR / CHECKPOINT / group
+        copy_tree(group_dir / "test_data", tmp_path / "test_data")
+        query_sql = case_data.get("files", {}).get("query.sql", "")
+        (tmp_path / "query.sql").write_text(query_sql)
+        args = parse_arguments(case_data.get("arguments"))
+        args = absolutize_args(args, tmp_path)
+        status_code = case_data.get("status_code", 0)
+        result = run_command(
+            entrypoint_argv,
+            args,
+            cwd=Path.cwd(),
+            timeout=TIMEOUT,
+        )
+>       assert result.returncode == status_code, result.stderr
+E       AssertionError: error: Failed to spawn: `query_files.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit15/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit15/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/test_checkpoint_1.py:51: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[basic] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_basic_0/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_basic_0/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[groupby] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_groupby0/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_groupby0/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[join] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_join_0/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_join_0/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_core[sorted_join] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_sorted_0/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_core_sorted_0/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[aggregates] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit0/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit0/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[column_alias] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit1/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit1/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[complex_boolean] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit2/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit2/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[count_column] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit3/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit3/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[having_clause] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit4/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit4/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[integer_comparisons] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit5/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit5/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[join_with_aggregate] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit6/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit6/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[left_join] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit7/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit7/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[like_patterns] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit8/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit8/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[limit_offset] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit9/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit9/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[not_operator] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit10/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit10/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[null_handling] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit11/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit11/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[order_by_multiple] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit12/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit12/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[right_join] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit13/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit13/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[table_alias] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit14/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit14/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_checkpoint_1_functionality[where_clauses] - AssertionError: error: Failed to spawn: `query_files.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'query_files.py', '--sql', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit15/query.sql', '--data', '/tmp/pytest-of-agent/pytest-0/test_checkpoint_1_functionalit15/test_data'], returncode=2, stdout='', stderr='error: Failed to spawn: `query_files.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+============================== 20 failed in 0.61s ==============================

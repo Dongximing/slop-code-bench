@@ -1,0 +1,23 @@
+version: "1"
+schema: "environments"
+
+environments:
+  - language: python
+    versions:
+      - "3.11.2"
+      - "3.10.8"
+    manager:
+      name: pyenv
+      plugins:
+        - name: pyenv-virtualenv
+          virtual_environments:
+            - version: "3.11.2"
+              name: default-3.11
+            - version: "3.10.8"
+              name: legacy
+  - language: java
+    versions:
+      - "17"
+      - "11"
+    manager:
+      name: jenv

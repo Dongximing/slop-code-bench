@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "problem_name": "pwd_manager",
+  "problem_version": 2,
+  "checkpoint_name": "checkpoint_1",
+  "checkpoint_version": 2,
+  "duration": 6.479249954223633,
+  "entrypoint": "uv run pwd_manager.py",
+  "tests": {
+    "checkpoint_1-Core": {
+      "passed": [
+        "test_multi_result_invalid_selection_returns_to_menu",
+        "test_search_prompt_shortcut_b_returns_to_menu"
+      ],
+      "failed": [
+        "test_add_and_search_displays_fields_and_notes",
+        "test_add_notes_over_fifteen_lines_truncates_to_first_fifteen",
+        "test_all_lists_items_and_enters_search",
+        "test_all_with_no_items_prints_empty_marker",
+        "test_first_run_creates_default_vault_directory",
+        "test_first_run_shows_banner_and_welcome_message",
+        "test_item_count_in_menu_prompt",
+        "test_list_table_headers_and_column_order",
+        "test_listing_shows_incrementing_ids_starting_at_one",
+        "test_master_key_prompt_does_not_echo_typed_secret",
+        "test_menu_shortcuts_are_case_insensitive",
+        "test_missing_config_blocks_unlock",
+        "test_search_multiple_matches_then_select_by_id",
+        "test_search_prompt_multichar_all_is_treated_as_query",
+        "test_search_prompt_shortcut_a_dispatches_to_add_flow",
+        "test_search_zero_results_prints_message_and_returns_to_menu",
+        "test_setup_confirmation_mentions_salt_value",
+        "test_setup_creates_config_and_unlocks",
+        "test_setup_success_still_requires_unlock_and_can_lock_out",
+        "test_text_search_is_case_sensitive",
+        "test_unlock_lockout_after_three_failures"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Functionality": {
+      "passed": [
+        "test_item_view_without_notes_omits_notes_section",
+        "test_multi_result_non_numeric_selection_returns_to_menu"
+      ],
+      "failed": [
+        "test_add_notes_accepts_fifteen_lines",
+        "test_add_secret_password_entry_does_not_echo_in_tty",
+        "test_config_salt_remains_stable_across_runs",
+        "test_config_without_payload_restarts_setup_flow",
+        "test_empty_vault_directory_triggers_setup_flow",
+        "test_excess_note_lines_consumed_before_next_prompt",
+        "test_existing_vault_uses_unlock_flow_not_setup_flow",
+        "test_ids_continue_auto_incrementing_after_vault_restart",
+        "test_item_view_s_shortcut_starts_new_search",
+        "test_menu_and_item_view_emit_clear_screen_behavior",
+        "test_menu_uppercase_all_lists_and_enters_search",
+        "test_missing_config_exits_before_master_key_prompt",
+        "test_numeric_search_falls_back_to_keyword_when_id_missing",
+        "test_numeric_search_prefers_exact_id_over_keyword_matches",
+        "test_password_not_displayed_in_item_view_or_table",
+        "test_search_prompt_shortcut_q_exits_immediately",
+        "test_search_prompt_shortcut_s_dispatches_new_search",
+        "test_search_prompt_uppercase_back_returns_to_menu",
+        "test_search_prompt_uppercase_quit_exits_immediately",
+        "test_search_prompt_uppercase_search_restarts_search_prompt",
+        "test_search_prompt_uppercase_shortcut_a_dispatches_to_add_flow",
+        "test_setup_accepts_exactly_eight_character_master_key",
+        "test_setup_master_key_entries_do_not_echo_in_tty",
+        "test_setup_short_or_mismatch_restarts_full_setup_sequence",
+        "test_text_search_matches_url_and_login_fields",
+        "test_unicode_fields_round_trip_and_search",
+        "test_unlock_succeeds_after_two_failed_attempts"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Error": {
+      "passed": [],
+      "failed": [
+        "test_empty_search_query_returns_to_menu",
+        "test_setup_reprompts_for_short_and_mismatch_keys",
+        "test_tampered_vault_payload_rejects_unlock"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 2,
+    "Functionality": 2,
+    "Regression": 0,
+    "Error": 0
+  },
+  "total_counts": {
+    "Core": 23,
+    "Functionality": 29,
+    "Regression": 0,
+    "Error": 3
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 55,
+  "test_collection_hash": "df712e12aafff5902459236c447bb5ad92bc6167e5a9857fe07e117433f3e7ae",
+  "infrastructure_failure": false
+}

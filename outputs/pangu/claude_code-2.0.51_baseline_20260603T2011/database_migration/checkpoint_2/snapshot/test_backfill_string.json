@@ -1,0 +1,21 @@
+{
+  "version": 10,
+  "description": "Test backfill with numeric value (not string expression)",
+  "operations": [
+    {
+      "type": "create_table",
+      "table": "test_backfill2",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true},
+        {"name": "count", "type": "INTEGER", "not_null": false}
+      ]
+    },
+    {
+      "type": "backfill_data",
+      "table": "test_backfill2",
+      "column": "count",
+      "value": 42,
+      "where": "count IS NULL"
+    }
+  ]
+}

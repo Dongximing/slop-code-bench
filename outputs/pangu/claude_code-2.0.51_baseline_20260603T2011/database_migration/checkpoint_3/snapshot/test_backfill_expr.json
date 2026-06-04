@@ -1,0 +1,20 @@
+{
+  "version": 9,
+  "description": "Test backfill with SQL expression as value",
+  "operations": [
+    {
+      "type": "create_table",
+      "table": "test_expr",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true}
+      ]
+    },
+    {
+      "type": "backfill_data",
+      "table": "test_expr",
+      "column": "id",
+      "value": "888",
+      "where": "id IS NULL"
+    }
+  ]
+}

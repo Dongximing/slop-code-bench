@@ -1,0 +1,2220 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/BvDjSq036zoUC-CB/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 37 items
+
+.evaluation_tests/test_checkpoint_1.py::test_help_prints_usage_and_subcommands FAILED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_init_creates_exact_v3_catalog_no_backup FAILED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_first_observation_initializes_entry_shape_across_categories FAILED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_second_observation_updates_only_changed_fields FAILED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_likes_null_semantics FAILED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_marks_removed_and_restores_entries FAILED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_orders_and_normalizes_datetimes FAILED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_backup_is_prewrite_snapshot FAILED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_no_subcommand_prints_usage_to_stderr PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_init_existing_directory_errors_without_modification FAILED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_missing_vault_errors_with_name FAILED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_invalid_vault_errors_with_name FAILED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_fetch_failure_errors FAILED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_missing_tracked_field FAILED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_with_wrong_field_type FAILED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_init_catalog_root_keys_are_exact FAILED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[title-Episode One] FAILED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[description-Episode Description] FAILED [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[views-321] FAILED [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[likes-45] FAILED [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[preview-preview-hash] FAILED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[removed-False] FAILED [ 59%]
+.evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[episodes-shared] FAILED [ 62%]
+.evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[streams-shared] FAILED [ 64%]
+.evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[clips-shared] FAILED [ 67%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_field_changes_append_only_changed_histories FAILED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[None-100-2-100] FAILED [ 72%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[100-None-2-None] FAILED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[None-None-1-None] FAILED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_null_is_stored_as_json_null FAILED [ 81%]
+.evaluation_tests/test_checkpoint_1.py::test_reappearance_with_changed_title_updates_removed_and_title FAILED [ 83%]
+.evaluation_tests/test_checkpoint_1.py::test_ordering_is_per_category_independent FAILED [ 86%]
+.evaluation_tests/test_checkpoint_1.py::test_title_change_does_not_change_published_order FAILED [ 89%]
+.evaluation_tests/test_checkpoint_1.py::test_full_datetime_source_value_is_preserved FAILED [ 91%]
+.evaluation_tests/test_checkpoint_1.py::test_backup_after_first_sync_matches_post_init_catalog_bytes FAILED [ 94%]
+.evaluation_tests/test_checkpoint_1.py::test_backup_after_second_sync_matches_immediate_pre_sync_catalog_bytes FAILED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::test_current_value_uses_latest_timestamp_not_json_key_order FAILED [100%]
+
+=================================== FAILURES ===================================
+____________________ test_help_prints_usage_and_subcommands ____________________
+
+cli = <function cli.<locals>._run at 0x74aba84d4720>
+
+    def test_help_prints_usage_and_subcommands(cli) -> None:
+        result = cli(["--help"])
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_1.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', '--help'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', '--help'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_________________ test_init_creates_exact_v3_catalog_no_backup _________________
+
+cli = <function cli.<locals>._run at 0x74aba84d4a40>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_init_creates_exact_v3_cat0')
+mock_platform = MockPlatform(host='127.0.0.1', port=46941, url='http://127.0.0.1:46941', _metadata_body=b'{}', _metadata_status=200, _...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8189240>)
+
+    def test_init_creates_exact_v3_catalog_no_backup(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:46941'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+____ test_sync_first_observation_initializes_entry_shape_across_categories _____
+
+cli = <function cli.<locals>._run at 0x74aba84d6d40>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_first_observation_in0')
+mock_platform = MockPlatform(host='127.0.0.1', port=56863, url='http://127.0.0.1:56863', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8167180>)
+
+    def test_sync_first_observation_initializes_entry_shape_across_categories(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[
+                make_source_entry(
+                    "ep1",
+                    published="2024-06-15",
+                    title="Episode One",
+                    description="Episode Description",
+                    views=111,
+                    likes=11,
+                    preview="ep-preview",
+                    width=1280,
+                    height=720,
+                )
+            ],
+            streams=[
+                make_source_entry(
+                    "st1",
+                    published="2024-06-14T12:30:45",
+                    title="Stream One",
+                )
+            ],
+            clips=[
+                make_source_entry(
+                    "cl1",
+                    published="2024-06-13T03:04:05",
+                    title="Clip One",
+                )
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:56863'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+___________ test_sync_second_observation_updates_only_changed_fields ___________
+
+cli = <function cli.<locals>._run at 0x74aba84d6de0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_second_observation_u0')
+mock_platform = MockPlatform(host='127.0.0.1', port=37147, url='http://127.0.0.1:37147', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba817afc0>)
+
+    def test_sync_second_observation_updates_only_changed_fields(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[make_source_entry("ep1", title="Original", views=100)],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:208: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:37147'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+________________________ test_sync_likes_null_semantics ________________________
+
+cli = <function cli.<locals>._run at 0x74aba84d7420>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_likes_null_semantics0')
+mock_platform = MockPlatform(host='127.0.0.1', port=33807, url='http://127.0.0.1:33807', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba807b500>)
+
+    def test_sync_likes_null_semantics(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[make_source_entry("ep1", likes=None)],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:247: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:33807'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_________________ test_sync_marks_removed_and_restores_entries _________________
+
+cli = <function cli.<locals>._run at 0x74aba84d77e0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_marks_removed_and_re0')
+mock_platform = MockPlatform(host='127.0.0.1', port=42313, url='http://127.0.0.1:42313', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8180240>)
+
+    def test_sync_marks_removed_and_restores_entries(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[make_source_entry("ep1", title="Present")],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:287: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:42313'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+__________________ test_sync_orders_and_normalizes_datetimes ___________________
+
+cli = <function cli.<locals>._run at 0x74aba84d79c0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_orders_and_normalize0')
+mock_platform = MockPlatform(host='127.0.0.1', port=40185, url='http://127.0.0.1:40185', _metadata_body=b'{}', _metadata_status=200, _...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8468b80>)
+
+    def test_sync_orders_and_normalizes_datetimes(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:320: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:40185'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+____________________ test_sync_backup_is_prewrite_snapshot _____________________
+
+cli = <function cli.<locals>._run at 0x74aba84d6f20>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_backup_is_prewrite_s0')
+mock_platform = MockPlatform(host='127.0.0.1', port=49785, url='http://127.0.0.1:49785', _metadata_body=b'{}', _metadata_status=200, _...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8297400>)
+
+    def test_sync_backup_is_prewrite_snapshot(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:366: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:49785'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+___________ test_init_existing_directory_errors_without_modification ___________
+
+cli = <function cli.<locals>._run at 0x74aba84d6de0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_init_existing_directory_e0')
+mock_platform = MockPlatform(host='127.0.0.1', port=56161, url='http://127.0.0.1:56161', _metadata_body=b'{}', _metadata_status=200, _...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba808cd00>)
+
+    @pytest.mark.error
+    def test_init_existing_directory_errors_without_modification(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+        vault_path = tmp_path / "myvault"
+        vault_path.mkdir()
+        keep_file = vault_path / "keep.txt"
+        keep_file.write_text("keep me", encoding="utf-8")
+    
+        result = cli(["init", "myvault", mock_platform.url], cwd=tmp_path)
+>       assert_error(result, contains="myvault")
+
+.evaluation_tests/test_checkpoint_1.py:402: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        contains: str | None = None,
+    ) -> None:
+        assert result.returncode != 0, (
+            f"Expected non-zero exit but got 0.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+        assert result.stderr.strip(), "Expected error output on stderr"
+        if contains is not None:
+>           assert contains.lower() in result.stderr.lower(), (
+                f"Expected stderr to contain {contains!r}.\nstderr:\n{result.stderr}"
+            )
+E           AssertionError: Expected stderr to contain 'myvault'.
+E             stderr:
+E             error: Failed to spawn: `/workspace/mvault.py`
+E               Caused by: No such file or directory (os error 2)
+E             
+E           assert 'myvault' in 'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n'
+E            +  where 'myvault' = <built-in method lower of str object at 0x74aba8efad00>()
+E            +    where <built-in method lower of str object at 0x74aba8efad00> = 'myvault'.lower
+E            +  and   'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n' = <built-in method lower of str object at 0x74aba828c390>()
+E            +    where <built-in method lower of str object at 0x74aba828c390> = 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n'.lower
+E            +      where 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:56161'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+
+.evaluation_tests/conftest.py:920: AssertionError
+___________________ test_sync_missing_vault_errors_with_name ___________________
+
+cli = <function cli.<locals>._run at 0x74aba84d7e20>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_missing_vault_errors0')
+
+    @pytest.mark.error
+    def test_sync_missing_vault_errors_with_name(cli, tmp_path: Path) -> None:
+        result = cli(["sync", "missingvault"], cwd=tmp_path)
+>       assert_error(result, contains="missingvault")
+
+.evaluation_tests/test_checkpoint_1.py:410: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'missingvault'], return...out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        contains: str | None = None,
+    ) -> None:
+        assert result.returncode != 0, (
+            f"Expected non-zero exit but got 0.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+        assert result.stderr.strip(), "Expected error output on stderr"
+        if contains is not None:
+>           assert contains.lower() in result.stderr.lower(), (
+                f"Expected stderr to contain {contains!r}.\nstderr:\n{result.stderr}"
+            )
+E           AssertionError: Expected stderr to contain 'missingvault'.
+E             stderr:
+E             error: Failed to spawn: `/workspace/mvault.py`
+E               Caused by: No such file or directory (os error 2)
+E             
+E           assert 'missingvault' in 'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n'
+E            +  where 'missingvault' = <built-in method lower of str object at 0x74aba80bca30>()
+E            +    where <built-in method lower of str object at 0x74aba80bca30> = 'missingvault'.lower
+E            +  and   'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n' = <built-in method lower of str object at 0x74aba842bd80>()
+E            +    where <built-in method lower of str object at 0x74aba842bd80> = 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n'.lower
+E            +      where 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'missingvault'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+
+.evaluation_tests/conftest.py:920: AssertionError
+___________________ test_sync_invalid_vault_errors_with_name ___________________
+
+cli = <function cli.<locals>._run at 0x74aba84d7f60>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_invalid_vault_errors0')
+
+    @pytest.mark.error
+    def test_sync_invalid_vault_errors_with_name(cli, tmp_path: Path) -> None:
+        invalid_vault = tmp_path / "brokenvault"
+        invalid_vault.mkdir()
+    
+        result = cli(["sync", "brokenvault"], cwd=tmp_path)
+>       assert_error(result, contains="brokenvault")
+
+.evaluation_tests/test_checkpoint_1.py:419: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'brokenvault'], returnc...out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        contains: str | None = None,
+    ) -> None:
+        assert result.returncode != 0, (
+            f"Expected non-zero exit but got 0.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+        assert result.stderr.strip(), "Expected error output on stderr"
+        if contains is not None:
+>           assert contains.lower() in result.stderr.lower(), (
+                f"Expected stderr to contain {contains!r}.\nstderr:\n{result.stderr}"
+            )
+E           AssertionError: Expected stderr to contain 'brokenvault'.
+E             stderr:
+E             error: Failed to spawn: `/workspace/mvault.py`
+E               Caused by: No such file or directory (os error 2)
+E             
+E           assert 'brokenvault' in 'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n'
+E            +  where 'brokenvault' = <built-in method lower of str object at 0x74aba80bdc30>()
+E            +    where <built-in method lower of str object at 0x74aba80bdc30> = 'brokenvault'.lower
+E            +  and   'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n' = <built-in method lower of str object at 0x74aba828ca50>()
+E            +    where <built-in method lower of str object at 0x74aba828ca50> = 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n'.lower
+E            +      where 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'brokenvault'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+
+.evaluation_tests/conftest.py:920: AssertionError
+________________________ test_sync_fetch_failure_errors ________________________
+
+cli = <function cli.<locals>._run at 0x74aba82fc2c0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_fetch_failure_errors0')
+mock_platform = MockPlatform(host='127.0.0.1', port=41207, url='http://127.0.0.1:41207', _metadata_body=b'{}', _metadata_status=200, _...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8170200>)
+
+    @pytest.mark.error
+    def test_sync_fetch_failure_errors(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:428: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:41207'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_____________ test_sync_rejects_source_entry_missing_tracked_field _____________
+
+cli = <function cli.<locals>._run at 0x74aba82fc680>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_rejects_source_entry0')
+mock_platform = MockPlatform(host='127.0.0.1', port=57683, url='http://127.0.0.1:57683', _metadata_body=b'{}', _metadata_status=200, _...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba80213c0>)
+
+    @pytest.mark.error
+    def test_sync_rejects_source_entry_missing_tracked_field(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:445: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:57683'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_____________ test_sync_rejects_source_entry_with_wrong_field_type _____________
+
+cli = <function cli.<locals>._run at 0x74aba84d6f20>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_rejects_source_entry1')
+mock_platform = MockPlatform(host='127.0.0.1', port=54091, url='http://127.0.0.1:54091', _metadata_body=b'{}', _metadata_status=200, _...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8d8c280>)
+
+    @pytest.mark.error
+    def test_sync_rejects_source_entry_with_wrong_field_type(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:464: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:54091'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+____________________ test_init_catalog_root_keys_are_exact _____________________
+
+cli = <function cli.<locals>._run at 0x74aba82fc720>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_init_catalog_root_keys_ar0')
+mock_platform = MockPlatform(host='127.0.0.1', port=37989, url='http://127.0.0.1:37989', _metadata_body=b'{}', _metadata_status=200, _...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba81e1400>)
+
+    @pytest.mark.functionality
+    def test_init_catalog_root_keys_are_exact(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:483: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:37989'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+____ test_first_sync_initializes_each_tracked_field_once[title-Episode One] ____
+
+cli = <function cli.<locals>._run at 0x74aba82fcc20>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_first_sync_initializes_ea0')
+mock_platform = MockPlatform(host='127.0.0.1', port=47945, url='http://127.0.0.1:47945', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8226900>)
+field = 'title', expected = 'Episode One'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("field", "expected"),
+        [
+            ("title", "Episode One"),
+            ("description", "Episode Description"),
+            ("views", 321),
+            ("likes", 45),
+            ("preview", "preview-hash"),
+            ("removed", False),
+        ],
+    )
+    def test_first_sync_initializes_each_tracked_field_once(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        field: str,
+        expected: Any,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[
+                make_source_entry(
+                    "ep1",
+                    title="Episode One",
+                    description="Episode Description",
+                    views=321,
+                    likes=45,
+                    preview="preview-hash",
+                )
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:507: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:47945'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_ test_first_sync_initializes_each_tracked_field_once[description-Episode Description] _
+
+cli = <function cli.<locals>._run at 0x74aba82fcea0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_first_sync_initializes_ea1')
+mock_platform = MockPlatform(host='127.0.0.1', port=51695, url='http://127.0.0.1:51695', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba815b080>)
+field = 'description', expected = 'Episode Description'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("field", "expected"),
+        [
+            ("title", "Episode One"),
+            ("description", "Episode Description"),
+            ("views", 321),
+            ("likes", 45),
+            ("preview", "preview-hash"),
+            ("removed", False),
+        ],
+    )
+    def test_first_sync_initializes_each_tracked_field_once(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        field: str,
+        expected: Any,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[
+                make_source_entry(
+                    "ep1",
+                    title="Episode One",
+                    description="Episode Description",
+                    views=321,
+                    likes=45,
+                    preview="preview-hash",
+                )
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:507: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:51695'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+________ test_first_sync_initializes_each_tracked_field_once[views-321] ________
+
+cli = <function cli.<locals>._run at 0x74aba82fcae0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_first_sync_initializes_ea2')
+mock_platform = MockPlatform(host='127.0.0.1', port=49777, url='http://127.0.0.1:49777', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba84a7e00>)
+field = 'views', expected = 321
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("field", "expected"),
+        [
+            ("title", "Episode One"),
+            ("description", "Episode Description"),
+            ("views", 321),
+            ("likes", 45),
+            ("preview", "preview-hash"),
+            ("removed", False),
+        ],
+    )
+    def test_first_sync_initializes_each_tracked_field_once(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        field: str,
+        expected: Any,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[
+                make_source_entry(
+                    "ep1",
+                    title="Episode One",
+                    description="Episode Description",
+                    views=321,
+                    likes=45,
+                    preview="preview-hash",
+                )
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:507: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:49777'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+________ test_first_sync_initializes_each_tracked_field_once[likes-45] _________
+
+cli = <function cli.<locals>._run at 0x74aba82fca40>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_first_sync_initializes_ea3')
+mock_platform = MockPlatform(host='127.0.0.1', port=44283, url='http://127.0.0.1:44283', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba83f0f80>)
+field = 'likes', expected = 45
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("field", "expected"),
+        [
+            ("title", "Episode One"),
+            ("description", "Episode Description"),
+            ("views", 321),
+            ("likes", 45),
+            ("preview", "preview-hash"),
+            ("removed", False),
+        ],
+    )
+    def test_first_sync_initializes_each_tracked_field_once(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        field: str,
+        expected: Any,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[
+                make_source_entry(
+                    "ep1",
+                    title="Episode One",
+                    description="Episode Description",
+                    views=321,
+                    likes=45,
+                    preview="preview-hash",
+                )
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:507: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:44283'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+__ test_first_sync_initializes_each_tracked_field_once[preview-preview-hash] ___
+
+cli = <function cli.<locals>._run at 0x74aba82fcb80>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_first_sync_initializes_ea4')
+mock_platform = MockPlatform(host='127.0.0.1', port=35975, url='http://127.0.0.1:35975', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8415300>)
+field = 'preview', expected = 'preview-hash'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("field", "expected"),
+        [
+            ("title", "Episode One"),
+            ("description", "Episode Description"),
+            ("views", 321),
+            ("likes", 45),
+            ("preview", "preview-hash"),
+            ("removed", False),
+        ],
+    )
+    def test_first_sync_initializes_each_tracked_field_once(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        field: str,
+        expected: Any,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[
+                make_source_entry(
+                    "ep1",
+                    title="Episode One",
+                    description="Episode Description",
+                    views=321,
+                    likes=45,
+                    preview="preview-hash",
+                )
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:507: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:35975'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+______ test_first_sync_initializes_each_tracked_field_once[removed-False] ______
+
+cli = <function cli.<locals>._run at 0x74aba82fcea0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_first_sync_initializes_ea5')
+mock_platform = MockPlatform(host='127.0.0.1', port=53791, url='http://127.0.0.1:53791', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8158300>)
+field = 'removed', expected = False
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("field", "expected"),
+        [
+            ("title", "Episode One"),
+            ("description", "Episode Description"),
+            ("views", 321),
+            ("likes", 45),
+            ("preview", "preview-hash"),
+            ("removed", False),
+        ],
+    )
+    def test_first_sync_initializes_each_tracked_field_once(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        field: str,
+        expected: Any,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[
+                make_source_entry(
+                    "ep1",
+                    title="Episode One",
+                    description="Episode Description",
+                    views=321,
+                    likes=45,
+                    preview="preview-hash",
+                )
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:507: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:53791'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_________ test_entries_land_only_in_matching_category[episodes-shared] _________
+
+cli = <function cli.<locals>._run at 0x74aba82fcd60>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_entries_land_only_in_matc0')
+mock_platform = MockPlatform(host='127.0.0.1', port=41575, url='http://127.0.0.1:41575', _metadata_body=b'{"episodes": [{"id": "shared...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba812c680>)
+category = 'episodes', entry_id = 'shared'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("category", "entry_id"),
+        [
+            ("episodes", "shared"),
+            ("streams", "shared"),
+            ("clips", "shared"),
+        ],
+    )
+    def test_entries_land_only_in_matching_category(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        category: str,
+        entry_id: str,
+    ) -> None:
+        payload = make_source_entry(entry_id, title=f"{category} title")
+        kwargs: dict[str, list[dict[str, Any]]] = {
+            "episodes": [],
+            "streams": [],
+            "clips": [],
+        }
+        kwargs[category] = [payload]
+>       vault_path = _init_and_first_sync(cli, tmp_path, mock_platform, **kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:552: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:41575'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_________ test_entries_land_only_in_matching_category[streams-shared] __________
+
+cli = <function cli.<locals>._run at 0x74aba82fd760>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_entries_land_only_in_matc1')
+mock_platform = MockPlatform(host='127.0.0.1', port=33669, url='http://127.0.0.1:33669', _metadata_body=b'{"episodes": [], "streams": ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8063640>)
+category = 'streams', entry_id = 'shared'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("category", "entry_id"),
+        [
+            ("episodes", "shared"),
+            ("streams", "shared"),
+            ("clips", "shared"),
+        ],
+    )
+    def test_entries_land_only_in_matching_category(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        category: str,
+        entry_id: str,
+    ) -> None:
+        payload = make_source_entry(entry_id, title=f"{category} title")
+        kwargs: dict[str, list[dict[str, Any]]] = {
+            "episodes": [],
+            "streams": [],
+            "clips": [],
+        }
+        kwargs[category] = [payload]
+>       vault_path = _init_and_first_sync(cli, tmp_path, mock_platform, **kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:552: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:33669'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+__________ test_entries_land_only_in_matching_category[clips-shared] ___________
+
+cli = <function cli.<locals>._run at 0x74aba82fda80>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_entries_land_only_in_matc2')
+mock_platform = MockPlatform(host='127.0.0.1', port=42283, url='http://127.0.0.1:42283', _metadata_body=b'{"episodes": [], "streams": ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8137c00>)
+category = 'clips', entry_id = 'shared'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("category", "entry_id"),
+        [
+            ("episodes", "shared"),
+            ("streams", "shared"),
+            ("clips", "shared"),
+        ],
+    )
+    def test_entries_land_only_in_matching_category(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        category: str,
+        entry_id: str,
+    ) -> None:
+        payload = make_source_entry(entry_id, title=f"{category} title")
+        kwargs: dict[str, list[dict[str, Any]]] = {
+            "episodes": [],
+            "streams": [],
+            "clips": [],
+        }
+        kwargs[category] = [payload]
+>       vault_path = _init_and_first_sync(cli, tmp_path, mock_platform, **kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:552: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:42283'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+__________ test_multiple_field_changes_append_only_changed_histories ___________
+
+cli = <function cli.<locals>._run at 0x74aba82fdda0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_multiple_field_changes_ap0')
+mock_platform = MockPlatform(host='127.0.0.1', port=48863, url='http://127.0.0.1:48863', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8d81cc0>)
+
+    @pytest.mark.functionality
+    def test_multiple_field_changes_append_only_changed_histories(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[make_source_entry("ep1", title="Before", views=100, likes=10)],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:568: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:48863'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_____________ test_likes_change_detection_variants[None-100-2-100] _____________
+
+cli = <function cli.<locals>._run at 0x74aba82fd940>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_likes_change_detection_va0')
+mock_platform = MockPlatform(host='127.0.0.1', port=40409, url='http://127.0.0.1:40409', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba80326c0>)
+first_likes = None, second_likes = 100, expected_length = 2
+expected_value = 100
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("first_likes", "second_likes", "expected_length", "expected_value"),
+        [
+            (None, 100, 2, 100),
+            (100, None, 2, None),
+            (None, None, 1, None),
+        ],
+    )
+    def test_likes_change_detection_variants(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        first_likes: int | None,
+        second_likes: int | None,
+        expected_length: int,
+        expected_value: int | None,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[make_source_entry("ep1", likes=first_likes)],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:616: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:40409'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+____________ test_likes_change_detection_variants[100-None-2-None] _____________
+
+cli = <function cli.<locals>._run at 0x74aba82fde40>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_likes_change_detection_va1')
+mock_platform = MockPlatform(host='127.0.0.1', port=54389, url='http://127.0.0.1:54389', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8416040>)
+first_likes = 100, second_likes = None, expected_length = 2
+expected_value = None
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("first_likes", "second_likes", "expected_length", "expected_value"),
+        [
+            (None, 100, 2, 100),
+            (100, None, 2, None),
+            (None, None, 1, None),
+        ],
+    )
+    def test_likes_change_detection_variants(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        first_likes: int | None,
+        second_likes: int | None,
+        expected_length: int,
+        expected_value: int | None,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[make_source_entry("ep1", likes=first_likes)],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:616: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:54389'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+____________ test_likes_change_detection_variants[None-None-1-None] ____________
+
+cli = <function cli.<locals>._run at 0x74aba82fd580>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_likes_change_detection_va2')
+mock_platform = MockPlatform(host='127.0.0.1', port=37811, url='http://127.0.0.1:37811', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba7d8c900>)
+first_likes = None, second_likes = None, expected_length = 1
+expected_value = None
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("first_likes", "second_likes", "expected_length", "expected_value"),
+        [
+            (None, 100, 2, 100),
+            (100, None, 2, None),
+            (None, None, 1, None),
+        ],
+    )
+    def test_likes_change_detection_variants(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        first_likes: int | None,
+        second_likes: int | None,
+        expected_length: int,
+        expected_value: int | None,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[make_source_entry("ep1", likes=first_likes)],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:616: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:37811'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+____________________ test_likes_null_is_stored_as_json_null ____________________
+
+cli = <function cli.<locals>._run at 0x74aba82fc2c0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_likes_null_is_stored_as_j0')
+mock_platform = MockPlatform(host='127.0.0.1', port=57611, url='http://127.0.0.1:57611', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba83e0cc0>)
+
+    @pytest.mark.functionality
+    def test_likes_null_is_stored_as_json_null(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[make_source_entry("ep1", likes=None)],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:644: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:57611'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+________ test_reappearance_with_changed_title_updates_removed_and_title ________
+
+cli = <function cli.<locals>._run at 0x74aba82fda80>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_reappearance_with_changed0')
+mock_platform = MockPlatform(host='127.0.0.1', port=54225, url='http://127.0.0.1:54225', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba7d7c500>)
+
+    @pytest.mark.functionality
+    def test_reappearance_with_changed_title_updates_removed_and_title(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[make_source_entry("ep1", title="Initial")],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:662: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:54225'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+__________________ test_ordering_is_per_category_independent ___________________
+
+cli = <function cli.<locals>._run at 0x74aba82fe0c0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_ordering_is_per_category_0')
+mock_platform = MockPlatform(host='127.0.0.1', port=49299, url='http://127.0.0.1:49299', _metadata_body=b'{"episodes": [{"id": "ep_old...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8d67e00>)
+
+    @pytest.mark.functionality
+    def test_ordering_is_per_category_independent(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[
+                make_source_entry("ep_old", published="2024-01-01T00:00:00"),
+                make_source_entry("ep_new", published="2024-03-01T00:00:00"),
+            ],
+            streams=[
+                make_source_entry("st_old", published="2024-02-01T00:00:00"),
+                make_source_entry("st_new", published="2024-04-01T00:00:00"),
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:695: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:49299'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+______________ test_title_change_does_not_change_published_order _______________
+
+cli = <function cli.<locals>._run at 0x74aba82fcd60>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_title_change_does_not_cha0')
+mock_platform = MockPlatform(host='127.0.0.1', port=34115, url='http://127.0.0.1:34115', _metadata_body=b'{"episodes": [{"id": "ep_new...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba83fdf00>)
+
+    @pytest.mark.functionality
+    def test_title_change_does_not_change_published_order(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[
+                make_source_entry("ep_new", published="2024-03-01T00:00:00", title="New"),
+                make_source_entry("ep_old", published="2024-01-01T00:00:00", title="Old"),
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:720: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:34115'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_________________ test_full_datetime_source_value_is_preserved _________________
+
+cli = <function cli.<locals>._run at 0x74aba82fcb80>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_full_datetime_source_valu0')
+mock_platform = MockPlatform(host='127.0.0.1', port=51469, url='http://127.0.0.1:51469', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba7d8c900>)
+
+    @pytest.mark.functionality
+    def test_full_datetime_source_value_is_preserved(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[
+                make_source_entry(
+                    "ep1",
+                    published="2024-06-15T14:30:00",
+                )
+            ],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:756: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:51469'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_________ test_backup_after_first_sync_matches_post_init_catalog_bytes _________
+
+cli = <function cli.<locals>._run at 0x74aba82fc2c0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_backup_after_first_sync_m0')
+mock_platform = MockPlatform(host='127.0.0.1', port=43609, url='http://127.0.0.1:43609', _metadata_body=b'{}', _metadata_status=200, _...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba82a1f00>)
+
+    @pytest.mark.functionality
+    def test_backup_after_first_sync_matches_post_init_catalog_bytes(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:777: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:43609'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+____ test_backup_after_second_sync_matches_immediate_pre_sync_catalog_bytes ____
+
+cli = <function cli.<locals>._run at 0x74aba82fea20>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_backup_after_second_sync_0')
+mock_platform = MockPlatform(host='127.0.0.1', port=51505, url='http://127.0.0.1:51505', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8009a00>)
+
+    @pytest.mark.functionality
+    def test_backup_after_second_sync_matches_immediate_pre_sync_catalog_bytes(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_and_first_sync(
+            cli,
+            tmp_path,
+            mock_platform,
+            episodes=[make_source_entry("ep1", title="Before")],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:794: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:107: in _init_and_first_sync
+    vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:51505'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_________ test_current_value_uses_latest_timestamp_not_json_key_order __________
+
+cli = <function cli.<locals>._run at 0x74aba82feac0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_current_value_uses_latest0')
+mock_platform = MockPlatform(host='127.0.0.1', port=34605, url='http://127.0.0.1:34605', _metadata_body=b'{}', _metadata_status=200, _...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x74aba8235080>)
+
+    @pytest.mark.functionality
+    def test_current_value_uses_latest_timestamp_not_json_key_order(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+>       vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:816: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:62: in _init_vault
+    assert_success(result)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127....out='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 2.
+E         stdout:
+E         
+E         stderr:
+E         error: Failed to spawn: `/workspace/mvault.py`
+E           Caused by: No such file or directory (os error 2)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:34605'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_help_prints_usage_and_subcommands - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', '--help'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_init_creates_exact_v3_catalog_no_backup - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:46941'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_first_observation_initializes_entry_shape_across_categories - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:56863'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_second_observation_updates_only_changed_fields - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:37147'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_likes_null_semantics - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:33807'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_marks_removed_and_restores_entries - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:42313'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_orders_and_normalizes_datetimes - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:40185'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_backup_is_prewrite_snapshot - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:49785'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_init_existing_directory_errors_without_modification - AssertionError: Expected stderr to contain 'myvault'.
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 'myvault' in 'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n'
+ +  where 'myvault' = <built-in method lower of str object at 0x74aba8efad00>()
+ +    where <built-in method lower of str object at 0x74aba8efad00> = 'myvault'.lower
+ +  and   'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n' = <built-in method lower of str object at 0x74aba828c390>()
+ +    where <built-in method lower of str object at 0x74aba828c390> = 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n'.lower
+ +      where 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:56161'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_missing_vault_errors_with_name - AssertionError: Expected stderr to contain 'missingvault'.
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 'missingvault' in 'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n'
+ +  where 'missingvault' = <built-in method lower of str object at 0x74aba80bca30>()
+ +    where <built-in method lower of str object at 0x74aba80bca30> = 'missingvault'.lower
+ +  and   'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n' = <built-in method lower of str object at 0x74aba842bd80>()
+ +    where <built-in method lower of str object at 0x74aba842bd80> = 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n'.lower
+ +      where 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'missingvault'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_invalid_vault_errors_with_name - AssertionError: Expected stderr to contain 'brokenvault'.
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 'brokenvault' in 'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n'
+ +  where 'brokenvault' = <built-in method lower of str object at 0x74aba80bdc30>()
+ +    where <built-in method lower of str object at 0x74aba80bdc30> = 'brokenvault'.lower
+ +  and   'error: failed to spawn: `/workspace/mvault.py`\n  caused by: no such file or directory (os error 2)\n' = <built-in method lower of str object at 0x74aba828ca50>()
+ +    where <built-in method lower of str object at 0x74aba828ca50> = 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n'.lower
+ +      where 'error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'brokenvault'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').stderr
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_fetch_failure_errors - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:41207'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_missing_tracked_field - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:57683'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_with_wrong_field_type - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:54091'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_init_catalog_root_keys_are_exact - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:37989'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[title-Episode One] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:47945'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[description-Episode Description] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:51695'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[views-321] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:49777'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[likes-45] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:44283'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[preview-preview-hash] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:35975'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[removed-False] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:53791'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[episodes-shared] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:41575'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[streams-shared] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:33669'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[clips-shared] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:42283'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_multiple_field_changes_append_only_changed_histories - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:48863'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[None-100-2-100] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:40409'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[100-None-2-None] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:54389'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[None-None-1-None] - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:37811'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_likes_null_is_stored_as_json_null - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:57611'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_reappearance_with_changed_title_updates_removed_and_title - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:54225'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_ordering_is_per_category_independent - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:49299'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_title_change_does_not_change_published_order - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:34115'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_full_datetime_source_value_is_preserved - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:51469'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_backup_after_first_sync_matches_post_init_catalog_bytes - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:43609'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_backup_after_second_sync_matches_immediate_pre_sync_catalog_bytes - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:51505'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_current_value_uses_latest_timestamp_not_json_key_order - AssertionError: Expected exit 0 but got 2.
+  stdout:
+  
+  stderr:
+  error: Failed to spawn: `/workspace/mvault.py`
+    Caused by: No such file or directory (os error 2)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'init', 'myvault', 'http://127.0.0.1:34605'], returncode=2, stdout='', stderr='error: Failed to spawn: `/workspace/mvault.py`\n  Caused by: No such file or directory (os error 2)\n').returncode
+======================== 36 failed, 1 passed in 16.90s =========================

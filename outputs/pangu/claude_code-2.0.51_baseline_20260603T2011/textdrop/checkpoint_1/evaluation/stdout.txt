@@ -1,0 +1,1497 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/-trpkTOtYxz-c_x2/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 60.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 28 items
+
+.evaluation_tests/test_checkpoint_1.py::test_submit_returns_302_with_valid_note_location ERROR [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_generated_note_id_is_alphanumeric_and_within_length_bounds ERROR [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_note_view_is_complete_html_and_escapes_content ERROR [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_raw_text_returns_exact_source_and_plain_content_type ERROR [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_whitespace_only_content_is_rejected ERROR [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_non_empty_mode_is_rejected ERROR [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_mode_field_defaults_to_plain_text ERROR [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_content_field_is_rejected ERROR [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_note_view_returns_html_404 ERROR [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_missing_note_raw_returns_html_404 ERROR [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_editor_root_contains_submit_form ERROR [ 39%]
+.evaluation_tests/test_checkpoint_1.py::test_editor_root_form_posts_urlencoded ERROR [ 42%]
+.evaluation_tests/test_checkpoint_1.py::test_editor_submit_get_contains_form ERROR [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_health_returns_active_json ERROR [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_unregistered_route_returns_complete_html_404 ERROR [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_note_ids_are_unique_across_submissions ERROR [ 57%]
+.evaluation_tests/test_checkpoint_1.py::test_note_view_content_type_is_text_html ERROR [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_entity_escaping_matrix[<-&lt;] ERROR [ 64%]
+.evaluation_tests/test_checkpoint_1.py::test_entity_escaping_matrix[>-&gt;] ERROR [ 67%]
+.evaluation_tests/test_checkpoint_1.py::test_entity_escaping_matrix[&-&amp;] ERROR [ 71%]
+.evaluation_tests/test_checkpoint_1.py::test_entity_escaping_matrix["-&quot;] ERROR [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_repeated_retrieval_is_deterministic ERROR [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_submit_accepts_absent_mode_as_plain_text ERROR [ 82%]
+.evaluation_tests/test_checkpoint_1.py::test_submit_rejects_missing_content_field ERROR [ 85%]
+.evaluation_tests/test_checkpoint_1.py::test_submit_rejects_whitespace_mode_value ERROR [ 89%]
+.evaluation_tests/test_checkpoint_1.py::test_host_port_precedence_cli_overrides_environment FAILED [ 92%]
+.evaluation_tests/test_checkpoint_1.py::test_host_port_precedence_environment_used_without_cli FAILED [ 96%]
+.evaluation_tests/test_checkpoint_1.py::test_view_and_raw_both_correct_for_entity_rich_content ERROR [100%]
+
+==================================== ERRORS ====================================
+______ ERROR at setup of test_submit_returns_302_with_valid_note_location ______
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d134900>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 54377
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+_ ERROR at setup of test_generated_note_id_is_alphanumeric_and_within_length_bounds _
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d3087c0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 35553
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+____ ERROR at setup of test_note_view_is_complete_html_and_escapes_content _____
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d1365c0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 44185
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+_ ERROR at setup of test_raw_text_returns_exact_source_and_plain_content_type __
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d3082c0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 54433
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+__________ ERROR at setup of test_whitespace_only_content_is_rejected __________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d308f40>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 52775
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+______________ ERROR at setup of test_non_empty_mode_is_rejected _______________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d3094e0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 51631
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+_______ ERROR at setup of test_missing_mode_field_defaults_to_plain_text _______
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d3091c0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 46323
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+___________ ERROR at setup of test_missing_content_field_is_rejected ___________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d3089a0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 48247
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+__________ ERROR at setup of test_missing_note_view_returns_html_404 ___________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d309940>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 41511
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+___________ ERROR at setup of test_missing_note_raw_returns_html_404 ___________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d309da0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 40771
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+___________ ERROR at setup of test_editor_root_contains_submit_form ____________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d3099e0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 35321
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+___________ ERROR at setup of test_editor_root_form_posts_urlencoded ___________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d308b80>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 56677
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+____________ ERROR at setup of test_editor_submit_get_contains_form ____________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d30a160>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 36337
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+______________ ERROR at setup of test_health_returns_active_json _______________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d30a840>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 44027
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+_____ ERROR at setup of test_unregistered_route_returns_complete_html_404 ______
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d309120>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 55821
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+________ ERROR at setup of test_note_ids_are_unique_across_submissions _________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d309940>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 40575
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+__________ ERROR at setup of test_note_view_content_type_is_text_html __________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d30ade0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 40683
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+____________ ERROR at setup of test_entity_escaping_matrix[<-&lt;] _____________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d30b240>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 57371
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+____________ ERROR at setup of test_entity_escaping_matrix[>-&gt;] _____________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d309bc0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 56389
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+____________ ERROR at setup of test_entity_escaping_matrix[&-&amp;] ____________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d3082c0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 45289
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+___________ ERROR at setup of test_entity_escaping_matrix["-&quot;] ____________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d30b600>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 32783
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+__________ ERROR at setup of test_repeated_retrieval_is_deterministic __________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d30ba60>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 45355
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+_______ ERROR at setup of test_submit_accepts_absent_mode_as_plain_text ________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d30a2a0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 35923
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+_________ ERROR at setup of test_submit_rejects_missing_content_field __________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d30ade0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 57967
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+_________ ERROR at setup of test_submit_rejects_whitespace_mode_value __________
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d30be20>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 52757
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+___ ERROR at setup of test_view_and_raw_both_correct_for_entity_rich_content ___
+
+textdrop_server = <function textdrop_server.<locals>._run at 0x789a0d30b6a0>
+
+    @pytest.fixture()
+    def client(textdrop_server) -> Generator[httpx.Client, None, None]:
+>       with textdrop_server() as server:
+             ^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/conftest.py:304: in _run
+    _wait_for_tcp_port(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 57117
+
+    def _wait_for_tcp_port(
+        host: str,
+        port: int,
+        *,
+        process: subprocess.Popen[str],
+        timeout: float,
+    ) -> None:
+        deadline = time.monotonic() + timeout
+        last_error: OSError | None = None
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                stdout, stderr = process.communicate(timeout=1)
+>               raise RuntimeError(
+                    "textdrop exited before readiness"
+                    f"\nexit={process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+                )
+E               RuntimeError: textdrop exited before readiness
+E               exit=2
+E               stdout:
+E               
+E               stderr:
+E               error: Failed to spawn: `textdrop.py`
+E                 Caused by: No such file or directory (os error 2)
+
+.evaluation_tests/conftest.py:234: RuntimeError
+=================================== FAILURES ===================================
+_____________ test_host_port_precedence_cli_overrides_environment ______________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', 'textdrop.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_host_port_precedence_cli_0')
+
+    @pytest.mark.functionality
+    def test_host_port_precedence_cli_overrides_environment(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        env_port = _find_free_port()
+        cli_port = _find_free_port()
+        while cli_port == env_port:
+            cli_port = _find_free_port()
+>       with _run_server_with_cmd(
+            entrypoint_argv=entrypoint_argv,
+            host="127.0.0.1",
+            port=cli_port,
+            tmp_path=tmp_path,
+            extra_env={
+                "TEXTDROP_HOST": "127.0.0.1",
+                "TEXTDROP_PORT": str(env_port),
+            },
+            extra_args=["--host", "127.0.0.1", "--port", str(cli_port)],
+        ) as base_url:
+
+.evaluation_tests/test_checkpoint_1.py:321: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:86: in _run_server_with_cmd
+    _wait_for_port(host, port)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 35713, timeout = 5.0
+
+    def _wait_for_port(host: str, port: int, timeout: float = 5.0) -> None:
+        deadline = time.monotonic() + timeout
+        while time.monotonic() < deadline:
+            try:
+                with socket.create_connection((host, port), timeout=0.2):
+                    return
+            except OSError:
+                time.sleep(0.05)
+>       raise AssertionError(f"server not reachable at {host}:{port}")
+E       AssertionError: server not reachable at 127.0.0.1:35713
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+____________ test_host_port_precedence_environment_used_without_cli ____________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', 'textdrop.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_host_port_precedence_envi0')
+
+    @pytest.mark.functionality
+    def test_host_port_precedence_environment_used_without_cli(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        env_port = _find_free_port()
+>       with _run_server_with_cmd(
+            entrypoint_argv=entrypoint_argv,
+            host="127.0.0.1",
+            port=env_port,
+            tmp_path=tmp_path,
+            extra_env={
+                "TEXTDROP_HOST": "127.0.0.1",
+                "TEXTDROP_PORT": str(env_port),
+            },
+        ) as base_url:
+
+.evaluation_tests/test_checkpoint_1.py:346: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+.evaluation_tests/test_checkpoint_1.py:86: in _run_server_with_cmd
+    _wait_for_port(host, port)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+host = '127.0.0.1', port = 38967, timeout = 5.0
+
+    def _wait_for_port(host: str, port: int, timeout: float = 5.0) -> None:
+        deadline = time.monotonic() + timeout
+        while time.monotonic() < deadline:
+            try:
+                with socket.create_connection((host, port), timeout=0.2):
+                    return
+            except OSError:
+                time.sleep(0.05)
+>       raise AssertionError(f"server not reachable at {host}:{port}")
+E       AssertionError: server not reachable at 127.0.0.1:38967
+
+.evaluation_tests/test_checkpoint_1.py:43: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_host_port_precedence_cli_overrides_environment - AssertionError: server not reachable at 127.0.0.1:35713
+FAILED .evaluation_tests/test_checkpoint_1.py::test_host_port_precedence_environment_used_without_cli - AssertionError: server not reachable at 127.0.0.1:38967
+ERROR .evaluation_tests/test_checkpoint_1.py::test_submit_returns_302_with_valid_note_location - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_generated_note_id_is_alphanumeric_and_within_length_bounds - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_note_view_is_complete_html_and_escapes_content - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_raw_text_returns_exact_source_and_plain_content_type - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_whitespace_only_content_is_rejected - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_non_empty_mode_is_rejected - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_missing_mode_field_defaults_to_plain_text - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_missing_content_field_is_rejected - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_missing_note_view_returns_html_404 - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_missing_note_raw_returns_html_404 - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_editor_root_contains_submit_form - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_editor_root_form_posts_urlencoded - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_editor_submit_get_contains_form - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_health_returns_active_json - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_unregistered_route_returns_complete_html_404 - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_note_ids_are_unique_across_submissions - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_note_view_content_type_is_text_html - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_entity_escaping_matrix[<-&lt;] - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_entity_escaping_matrix[>-&gt;] - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_entity_escaping_matrix[&-&amp;] - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_entity_escaping_matrix["-&quot;] - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_repeated_retrieval_is_deterministic - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_submit_accepts_absent_mode_as_plain_text - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_submit_rejects_missing_content_field - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_submit_rejects_whitespace_mode_value - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+ERROR .evaluation_tests/test_checkpoint_1.py::test_view_and_raw_both_correct_for_entity_rich_content - RuntimeError: textdrop exited before readiness
+exit=2
+stdout:
+
+stderr:
+error: Failed to spawn: `textdrop.py`
+  Caused by: No such file or directory (os error 2)
+======================== 2 failed, 26 errors in 13.42s =========================

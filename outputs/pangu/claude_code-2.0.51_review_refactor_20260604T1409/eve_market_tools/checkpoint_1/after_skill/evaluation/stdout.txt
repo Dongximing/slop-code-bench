@@ -1,0 +1,248 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/U9SBl-HA-ZVnzxsT/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 10 items
+
+.evaluation_tests/test_checkpoint_1.py::test_hub_compare_error_no_data PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_get_market_stats FAILED     [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_get_market_stats_with_type_ids FAILED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_tritanium FAILED            [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_hubs FAILED                 [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_domain_stats FAILED         [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_placid_stats FAILED         [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_rhea_orders FAILED          [ 80%]
+.evaluation_tests/test_checkpoint_1.py::test_domain_vargur FAILED        [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_hub_compare FAILED          [100%]
+
+=================================== FAILURES ===================================
+____________________________ test_get_market_stats _____________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    def test_get_market_stats(uploaded_data):
+        """Core: Get regional market statistics for The Forge."""
+        resp = httpx.get(f"{uploaded_data}/v1/market/10000002", timeout=60)
+>       assert resp.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_1.py:75: AssertionError
+_____________________ test_get_market_stats_with_type_ids ______________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_get_market_stats_with_type_ids(uploaded_data):
+        """Functionality: Get market stats with specific type IDs."""
+        resp = httpx.get(
+            f"{uploaded_data}/v1/market/10000002?type_ids=34,35,85392", timeout=60
+        )
+>       assert resp.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_1.py:96: AssertionError
+________________________________ test_tritanium ________________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+orders_df =           order_id  duration  ...  volume_remain volume_total
+0       7183066786        90  ...          24000        ....              2            2
+895786  7200369348        90  ...              1            1
+
+[895787 rows x 12 columns]
+sde_data = {'materials':        typeID  materialTypeID  quantity
+0          18              34       175
+1          18           ...330, 30000331, ...}, ...}, 'type_to_name': {0: '#System', 2: 'Corporation', 3: 'Region', 4: 'Constellation', ...}, ...}
+
+    def test_tritanium(uploaded_data, orders_df, sde_data):
+        """Core: Get detailed type statistics for Tritanium."""
+        resp = httpx.get(f"{uploaded_data}/v1/market/10000002/34", timeout=60)
+>       assert resp.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_1.py:137: AssertionError
+__________________________________ test_hubs ___________________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_hubs(uploaded_data):
+        """Functionality: Get market stats with top 10 trading hubs."""
+        resp = httpx.get(f"{uploaded_data}/v1/market/10000002?hubs=10", timeout=60)
+>       assert resp.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_1.py:195: AssertionError
+______________________________ test_domain_stats _______________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_domain_stats(uploaded_data):
+        """Functionality: Get Domain region stats with top 3 hubs."""
+        resp = httpx.get(f"{uploaded_data}/v1/market/10000043?hubs=3", timeout=60)
+>       assert resp.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_1.py:271: AssertionError
+______________________________ test_placid_stats _______________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_placid_stats(uploaded_data):
+        """Functionality: Get Placid region stats with types and hubs."""
+        resp = httpx.get(
+            f"{uploaded_data}/v1/market/10000048?hubs=3&type_ids=33076,3756",
+            timeout=60,
+        )
+>       assert resp.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_1.py:310: AssertionError
+_______________________________ test_rhea_orders _______________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_rhea_orders(uploaded_data):
+        """Functionality: Get market stats for Rhea and related ships."""
+        resp = httpx.get(
+            f"{uploaded_data}/v1/market/10000002?type_ids=28844,28845,20185",
+            timeout=60,
+        )
+>       assert resp.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_1.py:361: AssertionError
+______________________________ test_domain_vargur ______________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_domain_vargur(uploaded_data):
+        """Functionality: Get detailed type statistics for Vargur in Domain."""
+        resp = httpx.get(f"{uploaded_data}/v1/market/10000043/28665", timeout=60)
+>       assert resp.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_1.py:403: AssertionError
+_______________________________ test_hub_compare _______________________________
+
+uploaded_data = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_hub_compare(uploaded_data):
+        """Functionality: Compare Vargur prices across all trading hubs."""
+        resp = httpx.get(f"{uploaded_data}/v1/hub-compare/28665", timeout=60)
+        assert resp.status_code == 200
+        body = resp.json()
+>       assert_dict_equal(
+            body,
+            {
+                "jita_buy": 940700000.0,
+                "jita_buy_volume": 30,
+                "jita_buy_5pct": 936766666.67,
+                "jita_sell": 1045000000.0,
+                "jita_sell_volume": 100,
+                "jita_sell_5pct": 1046000000.0,
+                "jita_value": 104.6,
+                "amarr_buy": 1000000000.0,
+                "amarr_buy_volume": 18,
+                "amarr_buy_5pct": 1000000000.0,
+                "amarr_sell": 1138000000.0,
+                "amarr_sell_volume": 20,
+                "amarr_sell_5pct": 1138000000.0,
+                "amarr_value": 22.76,
+                "dodixie_buy": 951200000.0,
+                "dodixie_buy_volume": 4,
+                "dodixie_buy_5pct": 951200000.0,
+                "dodixie_sell": 1073000000.0,
+                "dodixie_sell_volume": 11,
+                "dodixie_sell_5pct": 1073000000.0,
+                "dodixie_value": 11.8,
+                "rens_buy": 799500000.0,
+                "rens_buy_volume": 1,
+                "rens_buy_5pct": 799500000.0,
+                "rens_sell": 1200000000.0,
+                "rens_sell_volume": 8,
+                "rens_sell_5pct": 1200000000.0,
+                "rens_value": 9.6,
+                "hek_buy": 864200000.0,
+                "hek_buy_volume": 2,
+                "hek_buy_5pct": 864200000.0,
+                "hek_sell": 1228000000.0,
+                "hek_sell_volume": 16,
+                "hek_sell_5pct": 1228000000.0,
+                "hek_value": 19.65,
+            },
+        )
+
+.evaluation_tests/test_checkpoint_1.py:430: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'jita_buy': 927000000.0, 'jita_buy_5pct': 390223.96, 'jita_buy_volume': 1000050, 'jita_sell': 1049000000.0, ...}
+expected = {'amarr_buy': 1000000000.0, 'amarr_buy_5pct': 1000000000.0, 'amarr_buy_volume': 18, 'amarr_sell': 1138000000.0, ...}
+msg = '', tolerance = 0.01
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.01):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.01)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {'root': {'new_value': {'jita_buy': 940700000.0, 'jita_buy_volume': 30, 'jita_buy_5pct': 936766666.67, 'jita_sell': 1045000000.0, 'jita_sell_volume': 100, 'jita_sell_5pct': 1046000000.0, 'jita_value': 104.6, 'amarr_buy': 1000000000.0, 'amarr_buy_volume': 18, 'amarr_buy_5pct': 1000000000.0, 'amarr_sell': 1138000000.0, 'amarr_sell_volume': 20, 'amarr_sell_5pct': 1138000000.0, 'amarr_value': 22.76, 'dodixie_buy': 951200000.0, 'dodixie_buy_volume': 4, 'dodixie_buy_5pct': 951200000.0, 'dodixie_sell': 1073000000.0, 'dodixie_sell_volume': 11, 'dodixie_sell_5pct': 1073000000.0, 'dodixie_value': 11.8, 'rens_buy': 799500000.0, 'rens_buy_volume': 1, 'rens_buy_5pct': 799500000.0, 'rens_sell': 1200000000.0, 'rens_sell_volume': 8, 'rens_sell_5pct': 1200000000.0, 'rens_value': 9.6, 'hek_buy': 864200000.0, 'hek_buy_volume': 2, 'hek_buy_5pct': 864200000.0, 'hek_sell': 1228000000.0, 'hek_sell_volume': 16, 'hek_sell_5pct': 1228000000.0, 'hek_value': 19.65}, 'old_value': {'jita_buy': 927000000.0, 'jita_buy_5pct': 390223.96, 'jita_buy_volume': 1000050, 'jita_sell': 1049000000.0, 'jita_sell_5pct': 1050255813.95, 'jita_sell_volume': 86, 'jita_value': 90.32}}}}
+E       assert not {'values_changed': {'root': {'new_value': {'jita_buy': 940700000.0, 'jita_buy_volume': 30, 'jita_buy_5pct': 936766666.67, 'jita_sell': 1045000000.0, 'jita_sell_volume': 100, 'jita_sell_5pct': 1046000000.0, 'jita_value': 104.6, 'amarr_buy': 1000000000.0, 'amarr_buy_volume': 18, 'amarr_buy_5pct': 1000000000.0, 'amarr_sell': 1138000000.0, 'amarr_sell_volume': 20, 'amarr_sell_5pct': 1138000000.0, 'amarr_value': 22.76, 'dodixie_buy': 951200000.0, 'dodixie_buy_volume': 4, 'dodixie_buy_5pct': 951200000.0, 'dodixie_sell': 1073000000.0, 'dodixie_sell_volume': 11, 'dodixie_sell_5pct': 1073000000.0, 'dodixie_value': 11.8, 'rens_buy': 799500000.0, 'rens_buy_volume': 1, 'rens_buy_5pct': 799500000.0, 'rens_sell': 1200000000.0, 'rens_sell_volume': 8, 'rens_sell_5pct': 1200000000.0, 'rens_value': 9.6, 'hek_buy': 864200000.0, 'hek_buy_volume': 2, 'hek_buy_5pct': 864200000.0, 'hek_sell': 1228000000.0, 'hek_sell_volume': 16, 'hek_sell_5pct': 1228000000.0, 'hek_value': 19.65}, 'old_value': {'jita_buy': 927000000.0, 'jita_buy_5pct': 390223.96, 'jita_buy_volume': 1000050, 'jita_sell': 1049000000.0, 'jita_sell_5pct': 1050255813.95, 'jita_sell_volume': 86, 'jita_value': 90.32}}}}
+
+.evaluation_tests/conftest.py:39: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_get_market_stats - assert 404 == 200
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_1.py::test_get_market_stats_with_type_ids - assert 404 == 200
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_1.py::test_tritanium - assert 404 == 200
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hubs - assert 404 == 200
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_1.py::test_domain_stats - assert 404 == 200
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_1.py::test_placid_stats - assert 404 == 200
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_1.py::test_rhea_orders - assert 404 == 200
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_1.py::test_domain_vargur - assert 404 == 200
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hub_compare - AssertionError: 
+  Diff: {'values_changed': {'root': {'new_value': {'jita_buy': 940700000.0, 'jita_buy_volume': 30, 'jita_buy_5pct': 936766666.67, 'jita_sell': 1045000000.0, 'jita_sell_volume': 100, 'jita_sell_5pct': 1046000000.0, 'jita_value': 104.6, 'amarr_buy': 1000000000.0, 'amarr_buy_volume': 18, 'amarr_buy_5pct': 1000000000.0, 'amarr_sell': 1138000000.0, 'amarr_sell_volume': 20, 'amarr_sell_5pct': 1138000000.0, 'amarr_value': 22.76, 'dodixie_buy': 951200000.0, 'dodixie_buy_volume': 4, 'dodixie_buy_5pct': 951200000.0, 'dodixie_sell': 1073000000.0, 'dodixie_sell_volume': 11, 'dodixie_sell_5pct': 1073000000.0, 'dodixie_value': 11.8, 'rens_buy': 799500000.0, 'rens_buy_volume': 1, 'rens_buy_5pct': 799500000.0, 'rens_sell': 1200000000.0, 'rens_sell_volume': 8, 'rens_sell_5pct': 1200000000.0, 'rens_value': 9.6, 'hek_buy': 864200000.0, 'hek_buy_volume': 2, 'hek_buy_5pct': 864200000.0, 'hek_sell': 1228000000.0, 'hek_sell_volume': 16, 'hek_sell_5pct': 1228000000.0, 'hek_value': 19.65}, 'old_value': {'jita_buy': 927000000.0, 'jita_buy_5pct': 390223.96, 'jita_buy_volume': 1000050, 'jita_sell': 1049000000.0, 'jita_sell_5pct': 1050255813.95, 'jita_sell_volume': 86, 'jita_value': 90.32}}}}
+assert not {'values_changed': {'root': {'new_value': {'jita_buy': 940700000.0, 'jita_buy_volume': 30, 'jita_buy_5pct': 936766666.67, 'jita_sell': 1045000000.0, 'jita_sell_volume': 100, 'jita_sell_5pct': 1046000000.0, 'jita_value': 104.6, 'amarr_buy': 1000000000.0, 'amarr_buy_volume': 18, 'amarr_buy_5pct': 1000000000.0, 'amarr_sell': 1138000000.0, 'amarr_sell_volume': 20, 'amarr_sell_5pct': 1138000000.0, 'amarr_value': 22.76, 'dodixie_buy': 951200000.0, 'dodixie_buy_volume': 4, 'dodixie_buy_5pct': 951200000.0, 'dodixie_sell': 1073000000.0, 'dodixie_sell_volume': 11, 'dodixie_sell_5pct': 1073000000.0, 'dodixie_value': 11.8, 'rens_buy': 799500000.0, 'rens_buy_volume': 1, 'rens_buy_5pct': 799500000.0, 'rens_sell': 1200000000.0, 'rens_sell_volume': 8, 'rens_sell_5pct': 1200000000.0, 'rens_value': 9.6, 'hek_buy': 864200000.0, 'hek_buy_volume': 2, 'hek_buy_5pct': 864200000.0, 'hek_sell': 1228000000.0, 'hek_sell_volume': 16, 'hek_sell_5pct': 1228000000.0, 'hek_value': 19.65}, 'old_value': {'jita_buy': 927000000.0, 'jita_buy_5pct': 390223.96, 'jita_buy_volume': 1000050, 'jita_sell': 1049000000.0, 'jita_sell_5pct': 1050255813.95, 'jita_sell_volume': 86, 'jita_value': 90.32}}}}
+========================= 9 failed, 1 passed in 12.12s =========================

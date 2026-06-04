@@ -1,0 +1,71 @@
+{
+  "version": 7,
+  "description": "Complete column migration - full test",
+  "operations": [
+    {
+      "type": "create_table",
+      "table": "users_final",
+      "columns": [
+        {"name": "id", "type": "INTEGER", "primary_key": true, "auto_increment": true},
+        {"name": "first_name", "type": "TEXT", "not_null": false},
+        {"name": "last_name", "type": "TEXT", "not_null": false},
+        {"name": "email", "type": "TEXT", "not_null": false}
+      ]
+    },
+    {
+      "type": "add_column",
+      "table": "users_final",
+      "column": {
+        "name": "email_address",
+        "type": "TEXT",
+        "not_null": false
+      }
+    },
+    {
+      "type": "migrate_column_data",
+      "table": "users_final",
+      "from_column": "email",
+      "to_column": "email_address"
+    },
+    {
+      "type": "drop_column",
+      "table": "users_final",
+      "column": "email"
+    },
+    {
+      "type": "add_column",
+      "table": "users_final",
+      "column": {
+        "name": "status",
+        "type": "TEXT",
+        "not_null": false
+      }
+    },
+    {
+      "type": "backfill_data",
+      "table": "users_final",
+      "column": "status",
+      "value": "'active'",
+      "where": "status IS NULL"
+    },
+    {
+      "type": "add_column",
+      "table": "users_final",
+      "column": {
+        "name": "full_name",
+        "type": "TEXT",
+        "not_null": false
+      }
+    },
+    {
+      "type": "transform_data",
+      "table": "users_final",
+      "transformations": [
+        {
+          "column": "full_name",
+          "expression": "first_name || ' ' || last_name"
+        }
+      ]
+    }
+  ]
+}

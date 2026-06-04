@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "problem_name": "recli",
+  "problem_version": 2,
+  "checkpoint_name": "checkpoint_1",
+  "checkpoint_version": 1,
+  "duration": 2.8859357833862305,
+  "entrypoint": "uv run appctl.py",
+  "tests": {
+    "checkpoint_1-Core": {
+      "passed": [
+        "TestCore::test_positional_arg_parsing",
+        "TestCore::test_subcommand_dispatch"
+      ],
+      "failed": [
+        "TestCore::test_command_dispatch_top_level",
+        "TestCore::test_help_rewrite",
+        "TestCore::test_no_args_shows_help_text",
+        "TestCore::test_unrecognized_command_error",
+        "TestCore::test_version_rewrite",
+        "TestFunctionality::test_error_messages_to_stderr",
+        "TestFunctionality::test_exit_code_1_on_error",
+        "TestFunctionality::test_help_for_specific_command",
+        "TestFunctionality::test_levenshtein_suggestion_within_distance_2"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Functionality": {
+      "passed": [
+        "TestFunctionality::test_levenshtein_tiebreaker_sort_order",
+        "TestFunctionality::test_no_flag_sets_false",
+        "TestFunctionality::test_optional_modifier",
+        "TestFunctionality::test_repeating_modifier_accepts_multiple",
+        "TestFunctionality::test_synonym_checked_before_levenshtein",
+        "TestFunctionality::test_synonym_only_when_target_registered",
+        "TestFunctionality::test_synonym_suggestion_trash_to_delete"
+      ],
+      "failed": [
+        "TestCore::test_help_rewrite_for_multi_level_command",
+        "TestFunctionality::test_default_value_for_optional_arg",
+        "TestFunctionality::test_generic_token_classification",
+        "TestFunctionality::test_help_alphabetical_ordering_case_insensitive",
+        "TestFunctionality::test_help_column_alignment",
+        "TestFunctionality::test_levenshtein_no_suggestion_beyond_distance_2",
+        "TestFunctionality::test_parent_command_no_handler_shows_subcommands",
+        "TestFunctionality::test_required_associative_empty_value_is_rejected",
+        "TestFunctionality::test_required_associative_missing_error",
+        "TestFunctionality::test_subcommand_synonym_example_allows_optional_delete_suggestion"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Error": {
+      "passed": [],
+      "failed": [
+        "TestErrors::test_excess_positional_args_error",
+        "TestErrors::test_missing_required_positional_shows_usage",
+        "TestErrors::test_multiple_parameter_errors_collected",
+        "TestErrors::test_unknown_associative_no_suggestion",
+        "TestErrors::test_unknown_associative_with_suggestion",
+        "TestErrors::test_unrecognized_subcommand_error"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 2,
+    "Functionality": 7,
+    "Regression": 0,
+    "Error": 0
+  },
+  "total_counts": {
+    "Core": 11,
+    "Functionality": 17,
+    "Regression": 0,
+    "Error": 6
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 34,
+  "test_collection_hash": "5adda4ff7639cc21f34dacbaed0644843443cb81defe9bf1acc93eab07122fac",
+  "infrastructure_failure": false
+}
