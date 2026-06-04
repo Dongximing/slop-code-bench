@@ -1,4 +1,4 @@
-# Pangu: Baseline vs Skill — 5 Problems Comparison
+# Pangu: Baseline vs Skill — 6 Problems Comparison
 
 ## Run Info
 
@@ -10,7 +10,7 @@
 | **Baseline run** | `pangu/.../20260603T1458` (cfgpipe, etl_pipeline, eve_jump_planner) + `pangu/.../20260603T0121` (code_search) |
 | **Skill run** | `pangu/...review_refactor_20260602T0203` |
 
-![Performance vs Health](pangu-5prob-perf-vs-health.png)
+![Performance vs Health](pangu-6prob-perf-vs-health.png)
 
 ---
 
