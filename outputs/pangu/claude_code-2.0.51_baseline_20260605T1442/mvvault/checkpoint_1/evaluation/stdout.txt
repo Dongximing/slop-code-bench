@@ -1,0 +1,183 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/SxWFwJU2QGP7RZoF/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 37 items
+
+.evaluation_tests/test_checkpoint_1.py::test_help_prints_usage_and_subcommands PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_init_creates_exact_v3_catalog_no_backup PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_first_observation_initializes_entry_shape_across_categories PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_second_observation_updates_only_changed_fields PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_likes_null_semantics PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_marks_removed_and_restores_entries PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_orders_and_normalizes_datetimes PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_backup_is_prewrite_snapshot PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_no_subcommand_prints_usage_to_stderr PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_init_existing_directory_errors_without_modification PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_missing_vault_errors_with_name PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_invalid_vault_errors_with_name PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_fetch_failure_errors PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_missing_tracked_field FAILED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_with_wrong_field_type FAILED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_init_catalog_root_keys_are_exact PASSED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[title-Episode One] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[description-Episode Description] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[views-321] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[likes-45] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[preview-preview-hash] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[removed-False] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[episodes-shared] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[streams-shared] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[clips-shared] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_field_changes_append_only_changed_histories PASSED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[None-100-2-100] PASSED [ 72%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[100-None-2-None] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[None-None-1-None] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_null_is_stored_as_json_null PASSED [ 81%]
+.evaluation_tests/test_checkpoint_1.py::test_reappearance_with_changed_title_updates_removed_and_title PASSED [ 83%]
+.evaluation_tests/test_checkpoint_1.py::test_ordering_is_per_category_independent PASSED [ 86%]
+.evaluation_tests/test_checkpoint_1.py::test_title_change_does_not_change_published_order PASSED [ 89%]
+.evaluation_tests/test_checkpoint_1.py::test_full_datetime_source_value_is_preserved PASSED [ 91%]
+.evaluation_tests/test_checkpoint_1.py::test_backup_after_first_sync_matches_post_init_catalog_bytes PASSED [ 94%]
+.evaluation_tests/test_checkpoint_1.py::test_backup_after_second_sync_matches_immediate_pre_sync_catalog_bytes PASSED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::test_current_value_uses_latest_timestamp_not_json_key_order PASSED [100%]
+
+=================================== FAILURES ===================================
+_____________ test_sync_rejects_source_entry_missing_tracked_field _____________
+
+cli = <function cli.<locals>._run at 0x7b362188b740>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_rejects_source_entry0')
+mock_platform = MockPlatform(host='127.0.0.1', port=58271, url='http://127.0.0.1:58271', _metadata_body=b'{"episodes": [{"id": "ep1", ...rmanent_failures=set(), _transient_failures={}, _hits={'/': 1}, _lock=<unlocked _thread.lock object at 0x7b362192f3c0>)
+
+    @pytest.mark.error
+    def test_sync_rejects_source_entry_missing_tracked_field(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+        vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+        before_sync = (vault_path / "catalog.json").read_bytes()
+        invalid_entry = make_source_entry("ep1")
+        del invalid_entry["title"]
+        mock_platform.set_metadata_entries(episodes=[invalid_entry])
+    
+        result = cli(["sync", "myvault"], cwd=tmp_path)
+    
+>       assert_error(result, contains="Source metadata fetch failure")
+
+.evaluation_tests/test_checkpoint_1.py:453: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Missing required field: title\n')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        contains: str | None = None,
+    ) -> None:
+        assert result.returncode != 0, (
+            f"Expected non-zero exit but got 0.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+        assert result.stderr.strip(), "Expected error output on stderr"
+        if contains is not None:
+>           assert contains.lower() in result.stderr.lower(), (
+                f"Expected stderr to contain {contains!r}.\nstderr:\n{result.stderr}"
+            )
+E           AssertionError: Expected stderr to contain 'Source metadata fetch failure'.
+E             stderr:
+E             Error: Malformed source entry in episodes[0]: Missing required field: title
+E             
+E           assert 'source metadata fetch failure' in 'error: malformed source entry in episodes[0]: missing required field: title\n'
+E            +  where 'source metadata fetch failure' = <built-in method lower of str object at 0x7b362195e240>()
+E            +    where <built-in method lower of str object at 0x7b362195e240> = 'Source metadata fetch failure'.lower
+E            +  and   'error: malformed source entry in episodes[0]: missing required field: title\n' = <built-in method lower of str object at 0x7b36215fa8b0>()
+E            +    where <built-in method lower of str object at 0x7b36215fa8b0> = 'Error: Malformed source entry in episodes[0]: Missing required field: title\n'.lower
+E            +      where 'Error: Malformed source entry in episodes[0]: Missing required field: title\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Missing required field: title\n').stderr
+
+.evaluation_tests/conftest.py:920: AssertionError
+_____________ test_sync_rejects_source_entry_with_wrong_field_type _____________
+
+cli = <function cli.<locals>._run at 0x7b362188bba0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_rejects_source_entry1')
+mock_platform = MockPlatform(host='127.0.0.1', port=37669, url='http://127.0.0.1:37669', _metadata_body=b'{"episodes": [{"id": "ep1", ...rmanent_failures=set(), _transient_failures={}, _hits={'/': 1}, _lock=<unlocked _thread.lock object at 0x7b36215cdac0>)
+
+    @pytest.mark.error
+    def test_sync_rejects_source_entry_with_wrong_field_type(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+        vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+        before_sync = (vault_path / "catalog.json").read_bytes()
+        invalid_entry = make_source_entry("ep1")
+        invalid_entry["views"] = "100"
+        mock_platform.set_metadata_entries(episodes=[invalid_entry])
+    
+        result = cli(["sync", "myvault"], cwd=tmp_path)
+    
+>       assert_error(result, contains="Source metadata fetch failure")
+
+.evaluation_tests/test_checkpoint_1.py:472: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Field views must be int\n')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        contains: str | None = None,
+    ) -> None:
+        assert result.returncode != 0, (
+            f"Expected non-zero exit but got 0.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+        assert result.stderr.strip(), "Expected error output on stderr"
+        if contains is not None:
+>           assert contains.lower() in result.stderr.lower(), (
+                f"Expected stderr to contain {contains!r}.\nstderr:\n{result.stderr}"
+            )
+E           AssertionError: Expected stderr to contain 'Source metadata fetch failure'.
+E             stderr:
+E             Error: Malformed source entry in episodes[0]: Field views must be int
+E             
+E           assert 'source metadata fetch failure' in 'error: malformed source entry in episodes[0]: field views must be int\n'
+E            +  where 'source metadata fetch failure' = <built-in method lower of str object at 0x7b362195e240>()
+E            +    where <built-in method lower of str object at 0x7b362195e240> = 'Source metadata fetch failure'.lower
+E            +  and   'error: malformed source entry in episodes[0]: field views must be int\n' = <built-in method lower of str object at 0x7b3621623980>()
+E            +    where <built-in method lower of str object at 0x7b3621623980> = 'Error: Malformed source entry in episodes[0]: Field views must be int\n'.lower
+E            +      where 'Error: Malformed source entry in episodes[0]: Field views must be int\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Field views must be int\n').stderr
+
+.evaluation_tests/conftest.py:920: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_missing_tracked_field - AssertionError: Expected stderr to contain 'Source metadata fetch failure'.
+  stderr:
+  Error: Malformed source entry in episodes[0]: Missing required field: title
+  
+assert 'source metadata fetch failure' in 'error: malformed source entry in episodes[0]: missing required field: title\n'
+ +  where 'source metadata fetch failure' = <built-in method lower of str object at 0x7b362195e240>()
+ +    where <built-in method lower of str object at 0x7b362195e240> = 'Source metadata fetch failure'.lower
+ +  and   'error: malformed source entry in episodes[0]: missing required field: title\n' = <built-in method lower of str object at 0x7b36215fa8b0>()
+ +    where <built-in method lower of str object at 0x7b36215fa8b0> = 'Error: Malformed source entry in episodes[0]: Missing required field: title\n'.lower
+ +      where 'Error: Malformed source entry in episodes[0]: Missing required field: title\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Missing required field: title\n').stderr
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_with_wrong_field_type - AssertionError: Expected stderr to contain 'Source metadata fetch failure'.
+  stderr:
+  Error: Malformed source entry in episodes[0]: Field views must be int
+  
+assert 'source metadata fetch failure' in 'error: malformed source entry in episodes[0]: field views must be int\n'
+ +  where 'source metadata fetch failure' = <built-in method lower of str object at 0x7b362195e240>()
+ +    where <built-in method lower of str object at 0x7b362195e240> = 'Source metadata fetch failure'.lower
+ +  and   'error: malformed source entry in episodes[0]: field views must be int\n' = <built-in method lower of str object at 0x7b3621623980>()
+ +    where <built-in method lower of str object at 0x7b3621623980> = 'Error: Malformed source entry in episodes[0]: Field views must be int\n'.lower
+ +      where 'Error: Malformed source entry in episodes[0]: Field views must be int\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Field views must be int\n').stderr
+======================== 2 failed, 35 passed in 40.99s =========================

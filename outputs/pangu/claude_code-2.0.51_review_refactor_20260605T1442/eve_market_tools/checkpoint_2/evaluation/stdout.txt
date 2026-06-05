@@ -1,0 +1,1278 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/8Wm8XAWbs5AGPOz-/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 28 items
+
+.evaluation_tests/test_checkpoint_1.py::test_hub_compare_error_no_data FAILED [  3%]
+.evaluation_tests/test_checkpoint_1.py::test_get_market_stats ERROR      [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_get_market_stats_with_type_ids ERROR [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_tritanium ERROR             [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_hubs ERROR                  [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_domain_stats ERROR          [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_placid_stats ERROR          [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_rhea_orders ERROR           [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_domain_vargur ERROR         [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_hub_compare ERROR           [ 35%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[create_config] FAILED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[drill_down_base] FAILED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reproc_base] FAILED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[upload_structures] FAILED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reprocess_with_config] FAILED [ 53%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[scrap_perfect] FAILED [ 57%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[drill_down_perfect] FAILED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[multiple_items] FAILED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[upload_prices] FAILED [ 67%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reproc_with_price] FAILED [ 71%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[gas_eff_perfect] FAILED [ 75%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[upload_structures] FAILED [ 78%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[gas_eff_base] FAILED [ 82%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[skill_config_ice] FAILED [ 85%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[ice_eff] FAILED [ 89%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[upload_prices] FAILED [ 92%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[scrap_drill_with_config] FAILED [ 96%]
+.evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[scrap_with_config] FAILED [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at setup of test_get_market_stats ____________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+
+    @pytest.fixture(scope="session")
+    def uploaded_data(api_server, market_data_dir):
+        """Upload prices and stations data, return api_server URL.
+    
+        This fixture ensures data is uploaded once per test module.
+        Tests that need data should depend on this fixture.
+        """
+        prices_file = market_data_dir / "orders.csv.gz"
+        stations_file = market_data_dir / "stations.csv.gz"
+    
+        resp = httpx.post(
+            f"{api_server}/v1/prices",
+            content=prices_file.read_bytes(),
+            headers={"content-type": "application/octet-stream"},
+            timeout=60,
+        )
+>       assert resp.status_code == 200, f"Failed to upload prices: {resp.text}"
+E       AssertionError: Failed to upload prices: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/conftest.py:140: AssertionError
+____________ ERROR at setup of test_get_market_stats_with_type_ids _____________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+
+    @pytest.fixture(scope="session")
+    def uploaded_data(api_server, market_data_dir):
+        """Upload prices and stations data, return api_server URL.
+    
+        This fixture ensures data is uploaded once per test module.
+        Tests that need data should depend on this fixture.
+        """
+        prices_file = market_data_dir / "orders.csv.gz"
+        stations_file = market_data_dir / "stations.csv.gz"
+    
+        resp = httpx.post(
+            f"{api_server}/v1/prices",
+            content=prices_file.read_bytes(),
+            headers={"content-type": "application/octet-stream"},
+            timeout=60,
+        )
+>       assert resp.status_code == 200, f"Failed to upload prices: {resp.text}"
+E       AssertionError: Failed to upload prices: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/conftest.py:140: AssertionError
+_______________________ ERROR at setup of test_tritanium _______________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+
+    @pytest.fixture(scope="session")
+    def uploaded_data(api_server, market_data_dir):
+        """Upload prices and stations data, return api_server URL.
+    
+        This fixture ensures data is uploaded once per test module.
+        Tests that need data should depend on this fixture.
+        """
+        prices_file = market_data_dir / "orders.csv.gz"
+        stations_file = market_data_dir / "stations.csv.gz"
+    
+        resp = httpx.post(
+            f"{api_server}/v1/prices",
+            content=prices_file.read_bytes(),
+            headers={"content-type": "application/octet-stream"},
+            timeout=60,
+        )
+>       assert resp.status_code == 200, f"Failed to upload prices: {resp.text}"
+E       AssertionError: Failed to upload prices: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/conftest.py:140: AssertionError
+_________________________ ERROR at setup of test_hubs __________________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+
+    @pytest.fixture(scope="session")
+    def uploaded_data(api_server, market_data_dir):
+        """Upload prices and stations data, return api_server URL.
+    
+        This fixture ensures data is uploaded once per test module.
+        Tests that need data should depend on this fixture.
+        """
+        prices_file = market_data_dir / "orders.csv.gz"
+        stations_file = market_data_dir / "stations.csv.gz"
+    
+        resp = httpx.post(
+            f"{api_server}/v1/prices",
+            content=prices_file.read_bytes(),
+            headers={"content-type": "application/octet-stream"},
+            timeout=60,
+        )
+>       assert resp.status_code == 200, f"Failed to upload prices: {resp.text}"
+E       AssertionError: Failed to upload prices: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/conftest.py:140: AssertionError
+_____________________ ERROR at setup of test_domain_stats ______________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+
+    @pytest.fixture(scope="session")
+    def uploaded_data(api_server, market_data_dir):
+        """Upload prices and stations data, return api_server URL.
+    
+        This fixture ensures data is uploaded once per test module.
+        Tests that need data should depend on this fixture.
+        """
+        prices_file = market_data_dir / "orders.csv.gz"
+        stations_file = market_data_dir / "stations.csv.gz"
+    
+        resp = httpx.post(
+            f"{api_server}/v1/prices",
+            content=prices_file.read_bytes(),
+            headers={"content-type": "application/octet-stream"},
+            timeout=60,
+        )
+>       assert resp.status_code == 200, f"Failed to upload prices: {resp.text}"
+E       AssertionError: Failed to upload prices: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/conftest.py:140: AssertionError
+_____________________ ERROR at setup of test_placid_stats ______________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+
+    @pytest.fixture(scope="session")
+    def uploaded_data(api_server, market_data_dir):
+        """Upload prices and stations data, return api_server URL.
+    
+        This fixture ensures data is uploaded once per test module.
+        Tests that need data should depend on this fixture.
+        """
+        prices_file = market_data_dir / "orders.csv.gz"
+        stations_file = market_data_dir / "stations.csv.gz"
+    
+        resp = httpx.post(
+            f"{api_server}/v1/prices",
+            content=prices_file.read_bytes(),
+            headers={"content-type": "application/octet-stream"},
+            timeout=60,
+        )
+>       assert resp.status_code == 200, f"Failed to upload prices: {resp.text}"
+E       AssertionError: Failed to upload prices: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/conftest.py:140: AssertionError
+______________________ ERROR at setup of test_rhea_orders ______________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+
+    @pytest.fixture(scope="session")
+    def uploaded_data(api_server, market_data_dir):
+        """Upload prices and stations data, return api_server URL.
+    
+        This fixture ensures data is uploaded once per test module.
+        Tests that need data should depend on this fixture.
+        """
+        prices_file = market_data_dir / "orders.csv.gz"
+        stations_file = market_data_dir / "stations.csv.gz"
+    
+        resp = httpx.post(
+            f"{api_server}/v1/prices",
+            content=prices_file.read_bytes(),
+            headers={"content-type": "application/octet-stream"},
+            timeout=60,
+        )
+>       assert resp.status_code == 200, f"Failed to upload prices: {resp.text}"
+E       AssertionError: Failed to upload prices: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/conftest.py:140: AssertionError
+_____________________ ERROR at setup of test_domain_vargur _____________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+
+    @pytest.fixture(scope="session")
+    def uploaded_data(api_server, market_data_dir):
+        """Upload prices and stations data, return api_server URL.
+    
+        This fixture ensures data is uploaded once per test module.
+        Tests that need data should depend on this fixture.
+        """
+        prices_file = market_data_dir / "orders.csv.gz"
+        stations_file = market_data_dir / "stations.csv.gz"
+    
+        resp = httpx.post(
+            f"{api_server}/v1/prices",
+            content=prices_file.read_bytes(),
+            headers={"content-type": "application/octet-stream"},
+            timeout=60,
+        )
+>       assert resp.status_code == 200, f"Failed to upload prices: {resp.text}"
+E       AssertionError: Failed to upload prices: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/conftest.py:140: AssertionError
+______________________ ERROR at setup of test_hub_compare ______________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+
+    @pytest.fixture(scope="session")
+    def uploaded_data(api_server, market_data_dir):
+        """Upload prices and stations data, return api_server URL.
+    
+        This fixture ensures data is uploaded once per test module.
+        Tests that need data should depend on this fixture.
+        """
+        prices_file = market_data_dir / "orders.csv.gz"
+        stations_file = market_data_dir / "stations.csv.gz"
+    
+        resp = httpx.post(
+            f"{api_server}/v1/prices",
+            content=prices_file.read_bytes(),
+            headers={"content-type": "application/octet-stream"},
+            timeout=60,
+        )
+>       assert resp.status_code == 200, f"Failed to upload prices: {resp.text}"
+E       AssertionError: Failed to upload prices: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/conftest.py:140: AssertionError
+=================================== FAILURES ===================================
+________________________ test_hub_compare_error_no_data ________________________
+
+api_server = 'http://127.0.0.1:8000'
+
+    @pytest.mark.functionality
+    def test_hub_compare_error_no_data(api_server):
+        """Functionality: Hub compare returns 404 when no price data loaded."""
+        resp = httpx.get(f"{api_server}/v1/hub-compare/28665", timeout=60)
+>       assert resp.status_code == 404
+E       assert 500 == 404
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/test_checkpoint_1.py:60: AssertionError
+____________________ test_checkpoint_2_core[create_config] _____________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'create_config', '_subdir': 'core', 'expected': {'output': {'key': 'STRING'}, 'status_code': 201}, 'input': ...atara'}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/config'}, ...}
+
+    @pytest.mark.parametrize("case", get_sorted_cases("core"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_core(api_server, market_data_dir, case):
+        """Core: Reprocessing API test cases."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'create_config', '_subdir': 'core', 'expected': {'output': {'key': 'STRING'}, 'status_code': 201}, 'input': ...atara'}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/config'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for create_config: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+___________________ test_checkpoint_2_core[drill_down_base] ____________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'drill_down_base', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sel... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+
+    @pytest.mark.parametrize("case", get_sorted_cases("core"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_core(api_server, market_data_dir, case):
+        """Core: Reprocessing API test cases."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'drill_down_base', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sel... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for drill_down_base: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+_____________________ test_checkpoint_2_core[reproc_base] ______________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'reproc_base', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sell': ... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+
+    @pytest.mark.parametrize("case", get_sorted_cases("core"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_core(api_server, market_data_dir, case):
+        """Core: Reprocessing API test cases."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'reproc_base', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sell': ... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for reproc_base: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+__________________ test_checkpoint_2_core[upload_structures] ___________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'upload_structures', '_subdir': 'core', 'expected': {'output': {'count': 5128, 'status': 'STATIONS_UPDATED'}...nt-type': 'application/octet-stream'}, 'input_file': 'stations.csv.gz', 'method': 'POST', 'path': '/v1/stations'}, ...}
+
+    @pytest.mark.parametrize("case", get_sorted_cases("core"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_core(api_server, market_data_dir, case):
+        """Core: Reprocessing API test cases."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'upload_structures', '_subdir': 'core', 'expected': {'output': {'count': 5128, 'status': 'STATIONS_UPDATED'}...nt-type': 'application/octet-stream'}, 'input_file': 'stations.csv.gz', 'method': 'POST', 'path': '/v1/stations'}, ...}
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for upload_structures: got 500, expected 200
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+________________ test_checkpoint_2_core[reprocess_with_config] _________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'reprocess_with_config', '_subdir': 'core', 'api_key': 'create_config', 'expected': {'output': {'inputs': {'...ll': None, 'volume': 741.51}, ...}, 'yields': {'gas': 0.8239, 'ore': 0.8239, 'scrap': 0.54}}, 'status_code': 201}, ...}
+
+    @pytest.mark.parametrize("case", get_sorted_cases("core"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_core(api_server, market_data_dir, case):
+        """Core: Reprocessing API test cases."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'reprocess_with_config', '_subdir': 'core', 'api_key': 'create_config', 'expected': {'output': {'inputs': {'...ll': None, 'volume': 741.51}, ...}, 'yields': {'gas': 0.8239, 'ore': 0.8239, 'scrap': 0.54}}, 'status_code': 201}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for reprocess_with_config: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+____________________ test_checkpoint_2_core[scrap_perfect] _____________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'scrap_perfect', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sell'... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+
+    @pytest.mark.parametrize("case", get_sorted_cases("core"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_core(api_server, market_data_dir, case):
+        """Core: Reprocessing API test cases."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'scrap_perfect', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sell'... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for scrap_perfect: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+__________________ test_checkpoint_2_core[drill_down_perfect] __________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'drill_down_perfect', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, '... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+
+    @pytest.mark.parametrize("case", get_sorted_cases("core"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_core(api_server, market_data_dir, case):
+        """Core: Reprocessing API test cases."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'drill_down_perfect', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, '... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for drill_down_perfect: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+____________________ test_checkpoint_2_core[multiple_items] ____________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'multiple_items', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sell... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+
+    @pytest.mark.parametrize("case", get_sorted_cases("core"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_core(api_server, market_data_dir, case):
+        """Core: Reprocessing API test cases."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'multiple_items', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sell... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for multiple_items: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+____________________ test_checkpoint_2_core[upload_prices] _____________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'upload_prices', '_subdir': 'core', 'expected': {'output': {'count': 895787, 'status': 'PRICES_UPDATED'}, 's...ontent-type': 'application/octet-stream'}, 'input_file': 'orders.csv.gz', 'method': 'POST', 'path': '/v1/prices'}, ...}
+
+    @pytest.mark.parametrize("case", get_sorted_cases("core"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_core(api_server, market_data_dir, case):
+        """Core: Reprocessing API test cases."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'upload_prices', '_subdir': 'core', 'expected': {'output': {'count': 895787, 'status': 'PRICES_UPDATED'}, 's...ontent-type': 'application/octet-stream'}, 'input_file': 'orders.csv.gz', 'method': 'POST', 'path': '/v1/prices'}, ...}
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for upload_prices: got 500, expected 200
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+__________________ test_checkpoint_2_core[reproc_with_price] ___________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'reproc_with_price', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': 75582400.0, 'buy_5pct': 75...ita'}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+
+    @pytest.mark.parametrize("case", get_sorted_cases("core"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_core(api_server, market_data_dir, case):
+        """Core: Reprocessing API test cases."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'reproc_with_price', '_subdir': 'core', 'expected': {'output': {'inputs': {'buy': 75582400.0, 'buy_5pct': 75...ita'}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for reproc_with_price: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+__________________ test_checkpoint_2_hidden[gas_eff_perfect] ___________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'gas_eff_perfect', '_subdir': 'hidden', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 's... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", get_sorted_cases("hidden"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_hidden(api_server, market_data_dir, case):
+        """Functionality: Reprocessing API edge cases and advanced features."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'gas_eff_perfect', '_subdir': 'hidden', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 's... 10}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for gas_eff_perfect: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+_________________ test_checkpoint_2_hidden[upload_structures] __________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'upload_structures', '_subdir': 'hidden', 'expected': {'output': {'count': 5128, 'status': 'STATIONS_UPDATED...nt-type': 'application/octet-stream'}, 'input_file': 'stations.csv.gz', 'method': 'POST', 'path': '/v1/stations'}, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", get_sorted_cases("hidden"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_hidden(api_server, market_data_dir, case):
+        """Functionality: Reprocessing API edge cases and advanced features."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'upload_structures', '_subdir': 'hidden', 'expected': {'output': {'count': 5128, 'status': 'STATIONS_UPDATED...nt-type': 'application/octet-stream'}, 'input_file': 'stations.csv.gz', 'method': 'POST', 'path': '/v1/stations'}, ...}
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for upload_structures: got 500, expected 200
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+____________________ test_checkpoint_2_hidden[gas_eff_base] ____________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'gas_eff_base', '_subdir': 'hidden', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sell...234}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", get_sorted_cases("hidden"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_hidden(api_server, market_data_dir, case):
+        """Functionality: Reprocessing API edge cases and advanced features."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'gas_eff_base', '_subdir': 'hidden', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sell...234}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for gas_eff_base: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+__________________ test_checkpoint_2_hidden[skill_config_ice] __________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'skill_config_ice', '_subdir': 'hidden', 'expected': {'output': {'key': 'STRING'}, 'status_code': 201}, 'inp...hanor'}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/config'}, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", get_sorted_cases("hidden"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_hidden(api_server, market_data_dir, case):
+        """Functionality: Reprocessing API edge cases and advanced features."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'skill_config_ice', '_subdir': 'hidden', 'expected': {'output': {'key': 'STRING'}, 'status_code': 201}, 'inp...hanor'}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/config'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for skill_config_ice: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+______________________ test_checkpoint_2_hidden[ice_eff] _______________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'ice_eff', '_subdir': 'hidden', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sell': No...: 1}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", get_sorted_cases("hidden"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_hidden(api_server, market_data_dir, case):
+        """Functionality: Reprocessing API edge cases and advanced features."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'ice_eff', '_subdir': 'hidden', 'expected': {'output': {'inputs': {'buy': None, 'buy_5pct': None, 'sell': No...: 1}}, 'headers': {'content-type': 'application/json; charset=utf-8'}, 'method': 'POST', 'path': '/v1/reprocess'}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for ice_eff: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+___________________ test_checkpoint_2_hidden[upload_prices] ____________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'upload_prices', '_subdir': 'hidden', 'expected': {'output': {'count': 895787, 'status': 'PRICES_UPDATED'}, ...ontent-type': 'application/octet-stream'}, 'input_file': 'orders.csv.gz', 'method': 'POST', 'path': '/v1/prices'}, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", get_sorted_cases("hidden"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_hidden(api_server, market_data_dir, case):
+        """Functionality: Reprocessing API edge cases and advanced features."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'upload_prices', '_subdir': 'hidden', 'expected': {'output': {'count': 895787, 'status': 'PRICES_UPDATED'}, ...ontent-type': 'application/octet-stream'}, 'input_file': 'orders.csv.gz', 'method': 'POST', 'path': '/v1/prices'}, ...}
+response = <Response [500 INTERNAL SERVER ERROR]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for upload_prices: got 500, expected 200
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>500 Internal Server Error</title>
+E         <h1>Internal Server Error</h1>
+E         <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+E         
+E       assert 500 == 200
+E        +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+______________ test_checkpoint_2_hidden[scrap_drill_with_config] _______________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'scrap_drill_with_config', '_subdir': 'hidden', 'api_key': 'skill_config_ice', 'expected': {'output': {'inpu...l': 35820.0, 'volume': 1041.0}, ...}, 'yields': {'gas': 0.7122, 'ore': 0.755, 'scrap': 0.5}}, 'status_code': 201}, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", get_sorted_cases("hidden"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_hidden(api_server, market_data_dir, case):
+        """Functionality: Reprocessing API edge cases and advanced features."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'scrap_drill_with_config', '_subdir': 'hidden', 'api_key': 'skill_config_ice', 'expected': {'output': {'inpu...l': 35820.0, 'volume': 1041.0}, ...}, 'yields': {'gas': 0.7122, 'ore': 0.755, 'scrap': 0.5}}, 'status_code': 201}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for scrap_drill_with_config: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+_________________ test_checkpoint_2_hidden[scrap_with_config] __________________
+
+api_server = 'http://127.0.0.1:8000'
+market_data_dir = PosixPath('/workspace/.evaluation_tests/market_data')
+case = {'_name': 'scrap_with_config', '_subdir': 'hidden', 'api_key': 'skill_config_ice', 'expected': {'output': {'inputs': {...l': 7007.0, 'volume': 18750.0}, ...}, 'yields': {'gas': 0.7122, 'ore': 0.755, 'scrap': 0.5}}, 'status_code': 201}, ...}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", get_sorted_cases("hidden"), ids=lambda c: c["_name"])
+    def test_checkpoint_2_hidden(api_server, market_data_dir, case):
+        """Functionality: Reprocessing API edge cases and advanced features."""
+        response = execute_case(api_server, market_data_dir, case)
+>       verify_response(case, response)
+
+.evaluation_tests/test_checkpoint_2.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+case = {'_name': 'scrap_with_config', '_subdir': 'hidden', 'api_key': 'skill_config_ice', 'expected': {'output': {'inputs': {...l': 7007.0, 'volume': 18750.0}, ...}, 'yields': {'gas': 0.7122, 'ore': 0.755, 'scrap': 0.5}}, 'status_code': 201}, ...}
+response = <Response [404 NOT FOUND]>
+
+    def verify_response(case: dict, response: httpx.Response):
+        """Verify the response matches expected values."""
+        expected = case["expected"]
+    
+>       assert response.status_code == expected["status_code"], (
+            f"Status code mismatch for {case['_name']}: "
+            f"got {response.status_code}, expected {expected['status_code']}\n"
+            f"Response: {response.text}"
+        )
+E       AssertionError: Status code mismatch for scrap_with_config: got 404, expected 201
+E         Response: <!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         
+E       assert 404 == 201
+E        +  where 404 = <Response [404 NOT FOUND]>.status_code
+
+.evaluation_tests/test_checkpoint_2.py:80: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_hub_compare_error_no_data - assert 500 == 404
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[create_config] - AssertionError: Status code mismatch for create_config: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[drill_down_base] - AssertionError: Status code mismatch for drill_down_base: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reproc_base] - AssertionError: Status code mismatch for reproc_base: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[upload_structures] - AssertionError: Status code mismatch for upload_structures: got 500, expected 200
+  Response: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reprocess_with_config] - AssertionError: Status code mismatch for reprocess_with_config: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[scrap_perfect] - AssertionError: Status code mismatch for scrap_perfect: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[drill_down_perfect] - AssertionError: Status code mismatch for drill_down_perfect: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[multiple_items] - AssertionError: Status code mismatch for multiple_items: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[upload_prices] - AssertionError: Status code mismatch for upload_prices: got 500, expected 200
+  Response: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_core[reproc_with_price] - AssertionError: Status code mismatch for reproc_with_price: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[gas_eff_perfect] - AssertionError: Status code mismatch for gas_eff_perfect: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[upload_structures] - AssertionError: Status code mismatch for upload_structures: got 500, expected 200
+  Response: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[gas_eff_base] - AssertionError: Status code mismatch for gas_eff_base: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[skill_config_ice] - AssertionError: Status code mismatch for skill_config_ice: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[ice_eff] - AssertionError: Status code mismatch for ice_eff: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[upload_prices] - AssertionError: Status code mismatch for upload_prices: got 500, expected 200
+  Response: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[scrap_drill_with_config] - AssertionError: Status code mismatch for scrap_drill_with_config: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+FAILED .evaluation_tests/test_checkpoint_2.py::test_checkpoint_2_hidden[scrap_with_config] - AssertionError: Status code mismatch for scrap_with_config: got 404, expected 201
+  Response: <!doctype html>
+  <html lang=en>
+  <title>404 Not Found</title>
+  <h1>Not Found</h1>
+  <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+  
+assert 404 == 201
+ +  where 404 = <Response [404 NOT FOUND]>.status_code
+ERROR .evaluation_tests/test_checkpoint_1.py::test_get_market_stats - AssertionError: Failed to upload prices: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+ERROR .evaluation_tests/test_checkpoint_1.py::test_get_market_stats_with_type_ids - AssertionError: Failed to upload prices: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+ERROR .evaluation_tests/test_checkpoint_1.py::test_tritanium - AssertionError: Failed to upload prices: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+ERROR .evaluation_tests/test_checkpoint_1.py::test_hubs - AssertionError: Failed to upload prices: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+ERROR .evaluation_tests/test_checkpoint_1.py::test_domain_stats - AssertionError: Failed to upload prices: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+ERROR .evaluation_tests/test_checkpoint_1.py::test_placid_stats - AssertionError: Failed to upload prices: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+ERROR .evaluation_tests/test_checkpoint_1.py::test_rhea_orders - AssertionError: Failed to upload prices: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+ERROR .evaluation_tests/test_checkpoint_1.py::test_domain_vargur - AssertionError: Failed to upload prices: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+ERROR .evaluation_tests/test_checkpoint_1.py::test_hub_compare - AssertionError: Failed to upload prices: <!doctype html>
+  <html lang=en>
+  <title>500 Internal Server Error</title>
+  <h1>Internal Server Error</h1>
+  <p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+  
+assert 500 == 200
+ +  where 500 = <Response [500 INTERNAL SERVER ERROR]>.status_code
+======================== 19 failed, 9 errors in 36.03s =========================

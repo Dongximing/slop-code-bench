@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "problem_name": "mvvault",
+  "problem_version": 2,
+  "checkpoint_name": "checkpoint_2",
+  "checkpoint_version": 2,
+  "duration": 51.514437437057495,
+  "entrypoint": "uv run mvault.py",
+  "tests": {
+    "checkpoint_1-Regression": {
+      "passed": [
+        "test_backup_after_first_sync_matches_post_init_catalog_bytes",
+        "test_backup_after_second_sync_matches_immediate_pre_sync_catalog_bytes",
+        "test_current_value_uses_latest_timestamp_not_json_key_order",
+        "test_entries_land_only_in_matching_category[clips-shared]",
+        "test_entries_land_only_in_matching_category[episodes-shared]",
+        "test_entries_land_only_in_matching_category[streams-shared]",
+        "test_first_sync_initializes_each_tracked_field_once[likes-45]",
+        "test_first_sync_initializes_each_tracked_field_once[preview-preview-hash]",
+        "test_first_sync_initializes_each_tracked_field_once[removed-False]",
+        "test_first_sync_initializes_each_tracked_field_once[views-321]",
+        "test_full_datetime_source_value_is_preserved",
+        "test_help_prints_usage_and_subcommands",
+        "test_init_catalog_root_keys_are_exact",
+        "test_init_creates_exact_v3_catalog_no_backup",
+        "test_init_existing_directory_errors_without_modification",
+        "test_likes_change_detection_variants[100-None-2-None]",
+        "test_likes_change_detection_variants[None-100-2-100]",
+        "test_likes_change_detection_variants[None-None-1-None]",
+        "test_likes_null_is_stored_as_json_null",
+        "test_multiple_field_changes_append_only_changed_histories",
+        "test_no_subcommand_prints_usage_to_stderr",
+        "test_ordering_is_per_category_independent",
+        "test_reappearance_with_changed_title_updates_removed_and_title",
+        "test_sync_backup_is_prewrite_snapshot",
+        "test_sync_fetch_failure_errors",
+        "test_sync_first_observation_initializes_entry_shape_across_categories",
+        "test_sync_invalid_vault_errors_with_name",
+        "test_sync_likes_null_semantics",
+        "test_sync_marks_removed_and_restores_entries",
+        "test_sync_missing_vault_errors_with_name",
+        "test_sync_orders_and_normalizes_datetimes",
+        "test_sync_second_observation_updates_only_changed_fields",
+        "test_title_change_does_not_change_published_order",
+        "test_first_sync_initializes_each_tracked_field_once[title-Episode One]",
+        "test_first_sync_initializes_each_tracked_field_once[description-Episode Description]"
+      ],
+      "failed": [
+        "test_sync_rejects_source_entry_missing_tracked_field",
+        "test_sync_rejects_source_entry_with_wrong_field_type"
+      ],
+      "skipped": []
+    },
+    "checkpoint_2-Error": {
+      "passed": [
+        "test_invalid_json_catalog_errors_without_modification",
+        "test_invalid_version_value_errors_are_version_related[\"3\"]",
+        "test_invalid_version_value_errors_are_version_related[2.5]",
+        "test_invalid_version_value_errors_are_version_related[4]",
+        "test_missing_version_errors_without_modifying_catalog"
+      ],
+      "failed": [
+        "test_backup_write_failure_aborts_and_preserves_original_catalog",
+        "test_malformed_v1_entry_errors_without_migration",
+        "test_malformed_v2_entry_errors_without_migration"
+      ],
+      "skipped": []
+    },
+    "checkpoint_2-Functionality": {
+      "passed": [
+        "test_migrate_second_run_on_migrated_catalog_is_noop",
+        "test_migrate_v1_adds_removed_history_for_all_entries",
+        "test_migrate_v1_backup_is_json_equivalent_to_original",
+        "test_migrate_v1_converts_epoch_history_keys_to_utc_iso",
+        "test_migrate_v1_converts_multiple_history_keys_without_losing_values",
+        "test_migrate_v1_epoch_zero_converts_to_1970_utc",
+        "test_migrate_v1_large_epoch_converts_to_2030_utc",
+        "test_migrate_v1_numeric_epoch_order_semantics_survive_9_vs_10",
+        "test_migrate_v1_removed_timestamp_is_iso8601",
+        "test_migrate_v2_backup_is_json_equivalent_to_original",
+        "test_migrate_v2_preserves_existing_iso_history_keys",
+        "test_sync_v2_absent_entry_gets_removed_true_after_migration",
+        "test_sync_v2_preserves_non_episode_category_after_auto_migration"
+      ],
+      "failed": [
+        "test_sync_second_run_after_v1_auto_migration_has_no_re_migration_artifacts",
+        "test_sync_v1_adds_new_entries_in_v3_shape",
+        "test_sync_v1_backup_preserves_original_v1_bytes",
+        "test_sync_v1_updates_existing_entry_after_auto_migration"
+      ],
+      "skipped": []
+    },
+    "checkpoint_2-Core": {
+      "passed": [
+        "test_migrate_v1_to_v3_rewrites_catalog_shape",
+        "test_migrate_v2_to_v3_preserves_source_and_categories",
+        "test_migrate_v3_is_noop_without_backup_or_catalog_rewrite",
+        "test_sync_v2_auto_migrates_then_applies_v3_sync_rules"
+      ],
+      "failed": [
+        "test_sync_v1_auto_migrates_and_fetches_via_derived_source"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 4,
+    "Functionality": 13,
+    "Regression": 35,
+    "Error": 5
+  },
+  "total_counts": {
+    "Core": 5,
+    "Functionality": 17,
+    "Regression": 37,
+    "Error": 8
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 65,
+  "test_collection_hash": "7ff414870f5257eab4ffcdbba7dead1550d1371e4a1cbe81b98daf31d4e41843",
+  "infrastructure_failure": false
+}

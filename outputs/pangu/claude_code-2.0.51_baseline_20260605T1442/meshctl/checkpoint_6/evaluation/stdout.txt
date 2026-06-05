@@ -1,0 +1,2819 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/0am1IHGhyMy_oTh-/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 40 items
+
+.evaluation_tests/test_checkpoint_6.py::test_fullstop_lifecycle FAILED   [  2%]
+.evaluation_tests/test_checkpoint_6.py::test_deprecated_runtime_warning FAILED [  5%]
+.evaluation_tests/test_checkpoint_6.py::test_initial_version_no_migration PASSED [  7%]
+.evaluation_tests/test_checkpoint_6.py::test_skipped_runtime_rejected FAILED [ 10%]
+.evaluation_tests/test_checkpoint_6.py::test_version_downgrade_forbidden FAILED [ 12%]
+.evaluation_tests/test_checkpoint_6.py::test_change_during_migration[runtime-change] FAILED [ 15%]
+.evaluation_tests/test_checkpoint_6.py::test_change_during_migration[strategy-change] FAILED [ 17%]
+.evaluation_tests/test_checkpoint_6.py::test_supported_catalog_versions[3.1.1] FAILED [ 20%]
+.evaluation_tests/test_checkpoint_6.py::test_supported_catalog_versions[4.0.0] FAILED [ 22%]
+.evaluation_tests/test_checkpoint_6.py::test_unknown_runtime_version FAILED [ 25%]
+.evaluation_tests/test_checkpoint_6.py::test_warnings_not_with_errors FAILED [ 27%]
+.evaluation_tests/test_checkpoint_6.py::test_no_warnings_supported_runtime PASSED [ 30%]
+.evaluation_tests/test_checkpoint_6.py::test_deprecated_runtime_update_warning FAILED [ 32%]
+.evaluation_tests/test_checkpoint_6.py::test_same_runtime_no_migration PASSED [ 35%]
+.evaluation_tests/test_checkpoint_6.py::test_skipped_runtime_update_rejected FAILED [ 37%]
+.evaluation_tests/test_checkpoint_6.py::test_invalid_strategy_rejected FAILED [ 40%]
+.evaluation_tests/test_checkpoint_6.py::test_rollingpatch_cross_minor_rejected FAILED [ 42%]
+.evaluation_tests/test_checkpoint_6.py::test_rollingpatch_major_below_4_rejected FAILED [ 45%]
+.evaluation_tests/test_checkpoint_6.py::test_rollingpatch_multiple_errors FAILED [ 47%]
+.evaluation_tests/test_checkpoint_6.py::test_livemigration_records_migration FAILED [ 50%]
+.evaluation_tests/test_checkpoint_6.py::test_runtime_updates_on_trigger PASSED [ 52%]
+.evaluation_tests/test_checkpoint_6.py::test_migration_runtime_conflict FAILED [ 55%]
+.evaluation_tests/test_checkpoint_6.py::test_livemigration_advances_stage FAILED [ 57%]
+.evaluation_tests/test_checkpoint_6.py::test_livemigration_rollback FAILED [ 60%]
+.evaluation_tests/test_checkpoint_6.py::test_fullstop_no_rollback FAILED [ 62%]
+.evaluation_tests/test_checkpoint_6.py::test_migrate_no_active_migration FAILED [ 65%]
+.evaluation_tests/test_checkpoint_6.py::test_migrate_mesh_not_found FAILED [ 67%]
+.evaluation_tests/test_checkpoint_6.py::test_migration_affects_stability FAILED [ 70%]
+.evaluation_tests/test_checkpoint_6.py::test_non_runtime_update_during_migration PASSED [ 72%]
+.evaluation_tests/test_checkpoint_6.py::test_multiple_runtime_errors_reported FAILED [ 75%]
+.evaluation_tests/test_checkpoint_6.py::test_livemigration_regions_rejected FAILED [ 77%]
+.evaluation_tests/test_checkpoint_6.py::test_rollingpatch_downgrade_combined_errors FAILED [ 80%]
+.evaluation_tests/test_checkpoint_6.py::test_livemigration_full_lifecycle FAILED [ 82%]
+.evaluation_tests/test_checkpoint_6.py::test_first_runtime_update_no_migration PASSED [ 85%]
+.evaluation_tests/test_checkpoint_6.py::test_migration_condition_empty_message FAILED [ 87%]
+.evaluation_tests/test_checkpoint_6.py::test_regression_vault_crud_and_mesh_protection FAILED [ 90%]
+.evaluation_tests/test_checkpoint_6.py::test_regression_conditions_and_stability_without_migration FAILED [ 92%]
+.evaluation_tests/test_checkpoint_6.py::test_regression_task_snapshot_recovery_lifecycle PASSED [ 95%]
+.evaluation_tests/test_checkpoint_6.py::test_regression_deep_merge_preserves_existing_fields FAILED [ 97%]
+.evaluation_tests/test_checkpoint_6.py::test_regression_stop_resume_and_scaling FAILED [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_fullstop_lifecycle ____________________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eb298a0>
+
+    def test_fullstop_lifecycle(run_cli) -> None:
+        """FullStop runtime change starts a migration and `mesh migrate` completes it."""
+        create_mesh(run_cli, "web-cache", spec={"runtime": "3.1.1", "instances": 3})
+    
+        # Update runtime to trigger migration
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "web-cache"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+        assert_success(result)
+    
+        migration = find_condition(result.json, "Migration")
+>       assert migration is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_6.py:34: AssertionError
+_______________________ test_deprecated_runtime_warning ________________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacc4a0>
+
+    @pytest.mark.functionality
+    def test_deprecated_runtime_warning(run_cli) -> None:
+        """Deprecated runtime versions are accepted on create and emit a runtime deprecation warning."""
+        result = run_cli(
+            ["mesh", "create"],
+            input_yaml={
+                "metadata": {"name": "old-mesh"},
+                "spec": {"runtime": "3.0.0", "instances": 2},
+            },
+        )
+        assert_success(result)
+>       assert "warnings" in result.json
+E       assert 'warnings' in {'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'old-mesh'}, 'spec': {'runtime': '3.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}
+E        +  where {'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'old-mesh'}, 'spec': {'runtime': '3.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}} = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "old-mesh"\n  },\n  "spec": {\n    "runtime": "3.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'old-mesh'}, 'spec': {'runtime': '3.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).json
+
+.evaluation_tests/test_checkpoint_6.py:60: AssertionError
+________________________ test_skipped_runtime_rejected _________________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacccc0>
+
+    @pytest.mark.error
+    def test_skipped_runtime_rejected(run_cli) -> None:
+        """Skipped catalog runtime versions are rejected on mesh create."""
+        result = run_cli(
+            ["mesh", "create"],
+            input_yaml={
+                "metadata": {"name": "bad-mesh"},
+                "spec": {"runtime": "3.1.0"},
+            },
+        )
+>       assert_error_contains(
+            result,
+            field="spec.runtime",
+            error_type="invalid",
+            message_contains="skipped",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "bad-mesh...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "bad-mesh"
+E           },
+E           "spec": {
+E             "runtime": "3.1.0",
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 1
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 1,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "bad-mesh"\n  },\n  "spec": {\n    "runtime": "3.1.0",\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 1\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 1,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'bad-mesh'}, 'spec': {'runtime': '3.1.0', 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 1}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 1, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+_______________________ test_version_downgrade_forbidden _______________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacd260>
+
+    @pytest.mark.error
+    def test_version_downgrade_forbidden(run_cli) -> None:
+        """Runtime downgrades are rejected when no active migration allows them."""
+        create_mesh(run_cli, "my-mesh", spec={"runtime": "4.0.0"})
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "3.1.1"},
+            },
+        )
+>       assert_error_contains(
+            result,
+            field="spec.runtime",
+            error_type="invalid",
+            message_contains="downgrade",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 2,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+_________________ test_change_during_migration[runtime-change] _________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacd6c0>
+update_spec = {'runtime': '3.0.0'}, field = 'spec.runtime'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("update_spec", "field"),
+        [
+            ({"runtime": "3.0.0"}, "spec.runtime"),
+            ({"migration": {"strategy": "LiveMigration"}}, "spec.migration.strategy"),
+        ],
+        ids=["runtime-change", "strategy-change"],
+    )
+    def test_change_during_migration(run_cli, update_spec, field) -> None:
+        """Runtime or migration strategy changes are rejected while a migration is active."""
+        create_mesh(run_cli, "my-mesh", spec={"runtime": "3.1.1"})
+        run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": update_spec,
+            },
+        )
+>       assert_error_contains(
+            result,
+            field=field,
+            error_type="invalid",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 2,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+________________ test_change_during_migration[strategy-change] _________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacda80>
+update_spec = {'migration': {'strategy': 'LiveMigration'}}
+field = 'spec.migration.strategy'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("update_spec", "field"),
+        [
+            ({"runtime": "3.0.0"}, "spec.runtime"),
+            ({"migration": {"strategy": "LiveMigration"}}, "spec.migration.strategy"),
+        ],
+        ids=["runtime-change", "strategy-change"],
+    )
+    def test_change_during_migration(run_cli, update_spec, field) -> None:
+        """Runtime or migration strategy changes are rejected while a migration is active."""
+        create_mesh(run_cli, "my-mesh", spec={"runtime": "3.1.1"})
+        run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": update_spec,
+            },
+        )
+>       assert_error_contains(
+            result,
+            field=field,
+            error_type="invalid",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 2,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+____________________ test_supported_catalog_versions[3.1.1] ____________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacd940>, version = '3.1.1'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "version",
+        ["3.1.1", "4.0.0"],
+        ids=["3.1.1", "4.0.0"],
+    )
+    def test_supported_catalog_versions(run_cli, version: str) -> None:
+        """Catalog-listed supported runtimes are accepted and produce no warnings."""
+        data = create_mesh(run_cli, "my-mesh", spec={"runtime": version})
+>       assert data["spec"]["runtime"] == version
+               ^^^^^^^^^^^^
+E       KeyError: 'spec'
+
+.evaluation_tests/test_checkpoint_6.py:170: KeyError
+____________________ test_supported_catalog_versions[4.0.0] ____________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacd6c0>, version = '4.0.0'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "version",
+        ["3.1.1", "4.0.0"],
+        ids=["3.1.1", "4.0.0"],
+    )
+    def test_supported_catalog_versions(run_cli, version: str) -> None:
+        """Catalog-listed supported runtimes are accepted and produce no warnings."""
+        data = create_mesh(run_cli, "my-mesh", spec={"runtime": version})
+>       assert data["spec"]["runtime"] == version
+               ^^^^^^^^^^^^
+E       KeyError: 'spec'
+
+.evaluation_tests/test_checkpoint_6.py:170: KeyError
+_________________________ test_unknown_runtime_version _________________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacdda0>
+
+    @pytest.mark.error
+    def test_unknown_runtime_version(run_cli) -> None:
+        """Unknown runtimes outside the catalog are rejected as invalid runtime versions."""
+        result = run_cli(
+            ["mesh", "create"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "5.0.0"},
+            },
+        )
+>       assert_error_contains(
+            result,
+            field="spec.runtime",
+            error_type="invalid",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:184: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "duplicate",\n      "message...code=0, json={'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'my-mesh' already exists"}]})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "errors": [
+E             {
+E               "field": "metadata.name",
+E               "type": "duplicate",
+E               "message": "mesh 'my-mesh' already exists"
+E             }
+E           ]
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "duplicate",\n      "message": "mesh \'my-mesh\' already exists"\n    }\n  ]\n}\n', stderr='', returncode=0, json={'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'my-mesh' already exists"}]}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+________________________ test_warnings_not_with_errors _________________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacdee0>
+
+    @pytest.mark.error
+    def test_warnings_not_with_errors(run_cli) -> None:
+        """Operations that return errors must not include warnings."""
+        result = run_cli(
+            ["mesh", "create"],
+            input_yaml={
+                "metadata": {"name": "BAD"},
+                "spec": {"runtime": "3.0.0"},
+            },
+        )
+>       assert_error(result)
+
+.evaluation_tests/test_checkpoint_6.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "BAD"\n  ...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "BAD"
+E           },
+E           "spec": {
+E             "runtime": "3.0.0",
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 1
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 1,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "BAD"\n  },\n  "spec": {\n    "runtime": "3.0.0",\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 1\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 1,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'BAD'}, 'spec': {'runtime': '3.0.0', 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 1}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 1, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+____________________ test_deprecated_runtime_update_warning ____________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eace2a0>
+
+    @pytest.mark.functionality
+    def test_deprecated_runtime_update_warning(run_cli) -> None:
+        """Assigning a deprecated runtime on update succeeds and emits a deprecation warning."""
+        create_mesh(run_cli, "my-mesh")
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "3.0.0"},
+            },
+        )
+        assert_success(result)
+>       assert result.json["spec"]["runtime"] == "3.0.0"
+E       AssertionError: assert '4.0.0' == '3.0.0'
+E         
+E         - 3.0.0
+E         ? ^
+E         + 4.0.0
+E         ? ^
+
+.evaluation_tests/test_checkpoint_6.py:224: AssertionError
+_____________________ test_skipped_runtime_update_rejected _____________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eace700>
+
+    @pytest.mark.error
+    def test_skipped_runtime_update_rejected(run_cli) -> None:
+        """Skipped runtimes are rejected when assigned during update."""
+        create_mesh(run_cli, "my-mesh")
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "3.1.0"},
+            },
+        )
+>       assert_error_contains(
+            result,
+            field="spec.runtime",
+            error_type="invalid",
+            message_contains="skipped",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:266: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 2,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+________________________ test_invalid_strategy_rejected ________________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eaceac0>
+
+    @pytest.mark.error
+    def test_invalid_strategy_rejected(run_cli) -> None:
+        """Only FullStop, LiveMigration, and RollingPatch strategies are accepted."""
+        result = run_cli(
+            ["mesh", "create"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"migration": {"strategy": "BlueGreen"}},
+            },
+        )
+>       assert_error_contains(
+            result,
+            field="spec.migration.strategy",
+            error_type="invalid",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:284: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "duplicate",\n      "message...code=0, json={'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'my-mesh' already exists"}]})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "errors": [
+E             {
+E               "field": "metadata.name",
+E               "type": "duplicate",
+E               "message": "mesh 'my-mesh' already exists"
+E             }
+E           ]
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "duplicate",\n      "message": "mesh \'my-mesh\' already exists"\n    }\n  ]\n}\n', stderr='', returncode=0, json={'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'my-mesh' already exists"}]}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+____________________ test_rollingpatch_cross_minor_rejected ____________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacef20>
+
+    @pytest.mark.error
+    def test_rollingpatch_cross_minor_rejected(run_cli) -> None:
+        """RollingPatch rejects runtime changes that do not keep major and minor aligned."""
+        create_mesh(
+            run_cli,
+            "my-mesh",
+            spec={
+                "runtime": "3.1.1",
+                "migration": {"strategy": "RollingPatch"},
+            },
+        )
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+>       assert_error_contains(result, field="spec.runtime", error_type="invalid")
+
+.evaluation_tests/test_checkpoint_6.py:310: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 2,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+___________________ test_rollingpatch_major_below_4_rejected ___________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eace480>
+
+    @pytest.mark.error
+    def test_rollingpatch_major_below_4_rejected(run_cli) -> None:
+        """RollingPatch requires target runtime major version to be at least 4."""
+        create_mesh(
+            run_cli,
+            "my-mesh",
+            spec={
+                "runtime": "3.0.0",
+                "migration": {"strategy": "RollingPatch"},
+            },
+        )
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "3.1.1"},
+            },
+        )
+>       assert_error_contains(
+            result,
+            field="spec.runtime",
+            error_type="invalid",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:332: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 2,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+______________________ test_rollingpatch_multiple_errors _______________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacc4a0>
+
+    @pytest.mark.error
+    def test_rollingpatch_multiple_errors(run_cli) -> None:
+        """RollingPatch can report multiple runtime version-change errors for one update."""
+        create_mesh(
+            run_cli,
+            "my-mesh",
+            spec={
+                "runtime": "3.0.0",
+                "migration": {"strategy": "RollingPatch"},
+            },
+        )
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "3.1.1"},
+            },
+        )
+>       assert_error(result)
+
+.evaluation_tests/test_checkpoint_6.py:358: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 2,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+_____________________ test_livemigration_records_migration _____________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacd940>
+
+    @pytest.mark.functionality
+    def test_livemigration_records_migration(run_cli) -> None:
+        """LiveMigration runtime change records sourceRuntime, targetRuntime, and initial stage."""
+        create_mesh(
+            run_cli,
+            "my-mesh",
+            spec={
+                "runtime": "3.1.1",
+                "migration": {"strategy": "LiveMigration"},
+            },
+        )
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+        assert_success(result)
+        migration = find_condition(result.json, "Migration")
+>       assert migration is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_6.py:385: AssertionError
+_______________________ test_migration_runtime_conflict ________________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacf420>
+
+    @pytest.mark.error
+    def test_migration_runtime_conflict(run_cli) -> None:
+        """Runtime changes during an active migration are rejected with in-progress migration error."""
+        create_mesh(run_cli, "my-mesh", spec={"runtime": "3.1.1"})
+        run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "3.0.0"},
+            },
+        )
+>       assert_error(result)
+
+.evaluation_tests/test_checkpoint_6.py:430: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 2,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+______________________ test_livemigration_advances_stage _______________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacf740>
+
+    @pytest.mark.functionality
+    def test_livemigration_advances_stage(run_cli) -> None:
+        """`mesh migrate` advances a LiveMigration stage without completing it."""
+        create_mesh(
+            run_cli,
+            "my-mesh",
+            spec={
+                "runtime": "3.1.1",
+                "migration": {"strategy": "LiveMigration"},
+            },
+        )
+    
+        update = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+        assert_success(update)
+>       start_stage = update.json["status"]["migration"]["stage"]
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'migration'
+
+.evaluation_tests/test_checkpoint_6.py:459: KeyError
+_________________________ test_livemigration_rollback __________________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacf9c0>
+
+    @pytest.mark.functionality
+    def test_livemigration_rollback(run_cli) -> None:
+        """LiveMigration rollback by restoring source runtime removes migration state."""
+        create_mesh(
+            run_cli,
+            "my-mesh",
+            spec={
+                "runtime": "3.1.1",
+                "migration": {"strategy": "LiveMigration"},
+            },
+        )
+    
+        # Trigger migration
+        run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+    
+        # Rollback by setting runtime to source version
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "3.1.1"},
+            },
+        )
+        assert_success(result)
+>       assert result.json["spec"]["runtime"] == "3.1.1"
+E       AssertionError: assert '4.0.0' == '3.1.1'
+E         
+E         - 3.1.1
+E         + 4.0.0
+
+.evaluation_tests/test_checkpoint_6.py:497: AssertionError
+__________________________ test_fullstop_no_rollback ___________________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacfc40>
+
+    @pytest.mark.error
+    def test_fullstop_no_rollback(run_cli) -> None:
+        """FullStop does not allow rollback by restoring source runtime during active migration."""
+        create_mesh(run_cli, "my-mesh", spec={"runtime": "3.1.1"})
+    
+        # Trigger FullStop migration
+        run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+    
+        # Try rollback
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "3.1.1"},
+            },
+        )
+>       assert_error_contains(
+            result,
+            field="spec.runtime",
+            error_type="invalid",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:525: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...[{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 2,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": true,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 0,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+_______________________ test_migrate_no_active_migration _______________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacf9c0>
+
+    @pytest.mark.error
+    def test_migrate_no_active_migration(run_cli) -> None:
+        """`mesh migrate` reports invalid when no active migration exists."""
+        create_mesh(run_cli, "my-mesh")
+    
+        result = run_cli(["mesh", "migrate", "my-mesh"])
+>       assert_error_contains(
+            result,
+            field="status.migration",
+            error_type="invalid",
+            message_contains="no active migration",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:538: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='', stderr="usage: python meshctl.py mesh [-h] {create,list,describe,delete,update} ...\npython meshc... operation: invalid choice: 'migrate' (choose from create, list, describe, delete, update)\n", returncode=2, json=None)
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout:
+E         
+E         stderr:
+E         usage: python meshctl.py mesh [-h] {create,list,describe,delete,update} ...
+E         python meshctl.py mesh: error: argument operation: invalid choice: 'migrate' (choose from create, list, describe, delete, update)
+E         
+E       assert 2 == 1
+E        +  where 2 = CLIResult(stdout='', stderr="usage: python meshctl.py mesh [-h] {create,list,describe,delete,update} ...\npython meshctl.py mesh: error: argument operation: invalid choice: 'migrate' (choose from create, list, describe, delete, update)\n", returncode=2, json=None).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+_________________________ test_migrate_mesh_not_found __________________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eb29a80>
+
+    @pytest.mark.error
+    def test_migrate_mesh_not_found(run_cli) -> None:
+        """`mesh migrate` returns a not_found error for missing mesh metadata.name."""
+        result = run_cli(["mesh", "migrate", "nonexistent"])
+>       assert_error_contains(
+            result,
+            field="metadata.name",
+            error_type="not_found",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:550: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='', stderr="usage: python meshctl.py mesh [-h] {create,list,describe,delete,update} ...\npython meshc... operation: invalid choice: 'migrate' (choose from create, list, describe, delete, update)\n", returncode=2, json=None)
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 2.
+E         stdout:
+E         
+E         stderr:
+E         usage: python meshctl.py mesh [-h] {create,list,describe,delete,update} ...
+E         python meshctl.py mesh: error: argument operation: invalid choice: 'migrate' (choose from create, list, describe, delete, update)
+E         
+E       assert 2 == 1
+E        +  where 2 = CLIResult(stdout='', stderr="usage: python meshctl.py mesh [-h] {create,list,describe,delete,update} ...\npython meshctl.py mesh: error: argument operation: invalid choice: 'migrate' (choose from create, list, describe, delete, update)\n", returncode=2, json=None).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+_______________________ test_migration_affects_stability _______________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacfb00>
+
+    @pytest.mark.functionality
+    def test_migration_affects_stability(run_cli) -> None:
+        """Migration sets `status.stable` false and it returns to true after completion."""
+        create_mesh(run_cli, "my-mesh", spec={"runtime": "3.1.1", "instances": 2})
+    
+        # Trigger migration
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+        assert_success(result)
+>       assert result.json["status"]["stable"] is False
+E       assert True is False
+
+.evaluation_tests/test_checkpoint_6.py:571: AssertionError
+____________________ test_multiple_runtime_errors_reported _____________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacda80>
+
+    @pytest.mark.error
+    def test_multiple_runtime_errors_reported(run_cli) -> None:
+        """RollingPatch applies both version-change constraints and returns multiple runtime errors."""
+        # RollingPatch with both constraints violated produces two errors on same field+type
+        create_mesh(
+            run_cli,
+            "my-mesh",
+            spec={
+                "runtime": "3.0.0",
+                "migration": {"strategy": "RollingPatch"},
+            },
+        )
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "3.1.1"},
+            },
+        )
+>       assert_error(result)
+
+.evaluation_tests/test_checkpoint_6.py:627: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 3,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": false,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 1,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "Scaling",
+E                 "status": "True",
+E                 "message": "Scaling from 2 to 3 instances"
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 3,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": false,\n    "instances": {\n      "ready": 2,\n      "starting": 1,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "Scaling",\n        "status": "True",\n        "message": "Scaling from 2 to 3 instances"\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 3, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': False, 'instances': {'ready': 2, 'starting': 1, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+_____________________ test_livemigration_regions_rejected ______________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacf380>
+
+    @pytest.mark.functionality
+    def test_livemigration_regions_rejected(run_cli) -> None:
+        """LiveMigration strategy is rejected when spec.regions is configured."""
+        result = run_cli(
+            ["mesh", "create"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {
+                    "regions": ["us-east", "eu-west"],
+                    "migration": {"strategy": "LiveMigration"},
+                },
+            },
+        )
+>       assert_error_contains(
+            result,
+            field="spec.migration.strategy",
+            error_type="invalid",
+            message_contains="multi-region topology",
+        )
+
+.evaluation_tests/test_checkpoint_6.py:652: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "duplicate",\n      "message...code=0, json={'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'my-mesh' already exists"}]})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "errors": [
+E             {
+E               "field": "metadata.name",
+E               "type": "duplicate",
+E               "message": "mesh 'my-mesh' already exists"
+E             }
+E           ]
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "duplicate",\n      "message": "mesh \'my-mesh\' already exists"\n    }\n  ]\n}\n', stderr='', returncode=0, json={'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'my-mesh' already exists"}]}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+_________________ test_rollingpatch_downgrade_combined_errors __________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacc4a0>
+
+    @pytest.mark.functionality
+    def test_rollingpatch_downgrade_combined_errors(run_cli) -> None:
+        """Downgrade under RollingPatch produces both downgrade and constraint errors."""
+        create_mesh(
+            run_cli,
+            "my-mesh",
+            spec={
+                "runtime": "4.0.0",
+                "migration": {"strategy": "RollingPatch"},
+            },
+        )
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "3.1.1"},
+            },
+        )
+>       assert_error(result)
+
+.evaluation_tests/test_checkpoint_6.py:679: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"...'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "apiVersion": "mesh.example.com/v1",
+E           "kind": "Mesh",
+E           "metadata": {
+E             "name": "my-mesh"
+E           },
+E           "spec": {
+E             "runtime": "4.0.0",
+E             "instances": 3,
+E             "access": {
+E               "authentication": {
+E                 "enabled": true,
+E                 "digestAlgorithm": "SHA-256"
+E               },
+E               "encryption": {
+E                 "source": "None",
+E                 "clientMode": "None"
+E               },
+E               "permissions": {
+E                 "enabled": false
+E               }
+E             },
+E             "network": {
+E               "replicationFactor": 2
+E             }
+E           },
+E           "status": {
+E             "state": "Running",
+E             "stable": false,
+E             "instances": {
+E               "ready": 2,
+E               "starting": 1,
+E               "stopped": 0
+E             },
+E             "conditions": [
+E               {
+E                 "type": "Healthy",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "PrechecksPassed",
+E                 "status": "True",
+E                 "message": ""
+E               },
+E               {
+E                 "type": "Scaling",
+E                 "status": "True",
+E                 "message": "Scaling from 2 to 3 instances"
+E               }
+E             ]
+E           }
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 3,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": false,\n    "instances": {\n      "ready": 2,\n      "starting": 1,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "Scaling",\n        "status": "True",\n        "message": "Scaling from 2 to 3 instances"\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 3, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': False, 'instances': {'ready': 2, 'starting': 1, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+______________________ test_livemigration_full_lifecycle _______________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacff60>
+
+    @pytest.mark.functionality
+    def test_livemigration_full_lifecycle(run_cli) -> None:
+        """LiveMigration can be driven through all stages to completion via mesh migrate."""
+        create_mesh(
+            run_cli,
+            "my-mesh",
+            spec={
+                "runtime": "3.1.1",
+                "migration": {"strategy": "LiveMigration"},
+            },
+        )
+    
+        # Start migration
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+        assert_success(result)
+>       assert find_condition(result.json, "Migration") is not None
+E       assert None is not None
+E        +  where None = find_condition({'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 3, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': False, 'instances': {'ready': 2, 'starting': 1, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}}, 'Migration')
+E        +    where {'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 3, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': False, 'instances': {'ready': 2, 'starting': 1, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}} = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 3,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": false,\n    "instances": {\n      "ready": 2,\n      "starting": 1,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "Scaling",\n        "status": "True",\n        "message": "Scaling from 2 to 3 instances"\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 3, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': False, 'instances': {'ready': 2, 'starting': 1, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}}).json
+
+.evaluation_tests/test_checkpoint_6.py:709: AssertionError
+____________________ test_migration_condition_empty_message ____________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96ea10360>
+
+    @pytest.mark.functionality
+    def test_migration_condition_empty_message(run_cli) -> None:
+        """Migration condition has an empty message string on migration start."""
+        create_mesh(run_cli, "my-mesh", spec={"runtime": "3.1.1"})
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={
+                "metadata": {"name": "my-mesh"},
+                "spec": {"runtime": "4.0.0"},
+            },
+        )
+        assert_success(result)
+        migration = find_condition(result.json, "Migration")
+>       assert migration is not None
+E       assert None is not None
+
+.evaluation_tests/test_checkpoint_6.py:755: AssertionError
+________________ test_regression_vault_crud_and_mesh_protection ________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eacf380>
+
+    @pytest.mark.functionality
+    def test_regression_vault_crud_and_mesh_protection(run_cli) -> None:
+        """Regression(CP3): Vault CRUD works and mesh delete is blocked by referencing vaults."""
+        create_mesh(run_cli, "reg-mesh")
+        create_vault(run_cli, "reg-vault", "reg-mesh")
+    
+        # Vault describe works
+        desc = run_cli(["vault", "describe", "reg-vault"])
+        assert_success(desc)
+        assert desc.json["spec"]["meshRef"] == "reg-mesh"
+    
+        # Mesh delete blocked by vault
+        result = run_cli(["mesh", "delete", "reg-mesh"])
+>       assert_error_contains(
+            result, field="metadata.name", error_type="conflict", message_contains="reg-vault"
+        )
+
+.evaluation_tests/test_checkpoint_6.py:777: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/conftest.py:323: in assert_error_contains
+    assert_error(result)
+.evaluation_tests/conftest.py:298: in assert_error
+    assert_exit_code(result, 1)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "conflict",\n      "message"...', 'type': 'conflict', 'message': "mesh 'reg-mesh' cannot be deleted because it is referenced by vaults: reg-vault"}]})
+expected = 1
+
+    def assert_exit_code(result: CLIResult, expected: int) -> None:
+>       assert result.returncode == expected, (
+            f"Expected exit code {expected}, got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit code 1, got 0.
+E         stdout:
+E         {
+E           "errors": [
+E             {
+E               "field": "metadata.name",
+E               "type": "conflict",
+E               "message": "mesh 'reg-mesh' cannot be deleted because it is referenced by vaults: reg-vault"
+E             }
+E           ]
+E         }
+E         
+E         stderr:
+E         
+E       assert 0 == 1
+E        +  where 0 = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "conflict",\n      "message": "mesh \'reg-mesh\' cannot be deleted because it is referenced by vaults: reg-vault"\n    }\n  ]\n}\n', stderr='', returncode=0, json={'errors': [{'field': 'metadata.name', 'type': 'conflict', 'message': "mesh 'reg-mesh' cannot be deleted because it is referenced by vaults: reg-vault"}]}).returncode
+
+.evaluation_tests/conftest.py:287: AssertionError
+__________ test_regression_conditions_and_stability_without_migration __________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96eb2bce0>
+
+    @pytest.mark.functionality
+    def test_regression_conditions_and_stability_without_migration(run_cli) -> None:
+        """Regression(CP2): Non-migrating mesh has correct conditions and stable=True."""
+        data = create_mesh(run_cli, "reg-mesh", spec={"instances": 3})
+    
+>       assert find_condition(data, "Healthy") is not None
+E       assert None is not None
+E        +  where None = find_condition({'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'reg-mesh' already exists"}]}, 'Healthy')
+
+.evaluation_tests/test_checkpoint_6.py:792: AssertionError
+_____________ test_regression_deep_merge_preserves_existing_fields _____________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96ea102c0>
+
+    @pytest.mark.functionality
+    def test_regression_deep_merge_preserves_existing_fields(run_cli) -> None:
+        """Regression(CP2): Update deep-merges and preserves omitted fields."""
+        create_mesh(run_cli, "reg-mesh", spec={"instances": 2, "runtime": "4.0.0"})
+    
+        result = run_cli(
+            ["mesh", "update"],
+            input_yaml={"metadata": {"name": "reg-mesh"}, "spec": {"instances": 3}},
+        )
+        assert_success(result)
+        assert result.json["spec"]["instances"] == 3
+>       assert result.json["spec"]["runtime"] == "4.0.0"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'runtime'
+
+.evaluation_tests/test_checkpoint_6.py:835: KeyError
+___________________ test_regression_stop_resume_and_scaling ____________________
+
+run_cli = <function run_cli.<locals>._run at 0x7ba96ea107c0>
+
+    @pytest.mark.functionality
+    def test_regression_stop_resume_and_scaling(run_cli) -> None:
+        """Regression(CP2): Stop sets GracefulShutdown; resume clears it and restores Running."""
+        create_mesh(run_cli, "reg-mesh", spec={"instances": 3})
+    
+        stop_result = stop_mesh(run_cli, "reg-mesh")
+        assert find_condition(stop_result.json, "GracefulShutdown") is not None
+        assert stop_result.json["status"]["state"] == "Stopped"
+>       assert stop_result.json["status"]["desiredInstancesOnResume"] == 3
+E       assert 1 == 3
+
+.evaluation_tests/test_checkpoint_6.py:848: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_6.py::test_fullstop_lifecycle - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_6.py::test_deprecated_runtime_warning - assert 'warnings' in {'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'old-mesh'}, 'spec': {'runtime': '3.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}
+ +  where {'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'old-mesh'}, 'spec': {'runtime': '3.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}} = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "old-mesh"\n  },\n  "spec": {\n    "runtime": "3.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'old-mesh'}, 'spec': {'runtime': '3.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).json
+FAILED .evaluation_tests/test_checkpoint_6.py::test_skipped_runtime_rejected - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "bad-mesh"
+    },
+    "spec": {
+      "runtime": "3.1.0",
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 1
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 1,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "bad-mesh"\n  },\n  "spec": {\n    "runtime": "3.1.0",\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 1\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 1,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'bad-mesh'}, 'spec': {'runtime': '3.1.0', 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 1}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 1, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_version_downgrade_forbidden - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 2,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 2,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_change_during_migration[runtime-change] - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 2,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 2,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_change_during_migration[strategy-change] - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 2,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 2,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_supported_catalog_versions[3.1.1] - KeyError: 'spec'
+FAILED .evaluation_tests/test_checkpoint_6.py::test_supported_catalog_versions[4.0.0] - KeyError: 'spec'
+FAILED .evaluation_tests/test_checkpoint_6.py::test_unknown_runtime_version - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "errors": [
+      {
+        "field": "metadata.name",
+        "type": "duplicate",
+        "message": "mesh 'my-mesh' already exists"
+      }
+    ]
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "duplicate",\n      "message": "mesh \'my-mesh\' already exists"\n    }\n  ]\n}\n', stderr='', returncode=0, json={'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'my-mesh' already exists"}]}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_warnings_not_with_errors - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "BAD"
+    },
+    "spec": {
+      "runtime": "3.0.0",
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 1
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 1,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "BAD"\n  },\n  "spec": {\n    "runtime": "3.0.0",\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 1\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 1,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'BAD'}, 'spec': {'runtime': '3.0.0', 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 1}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 1, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_deprecated_runtime_update_warning - AssertionError: assert '4.0.0' == '3.0.0'
+  
+  - 3.0.0
+  ? ^
+  + 4.0.0
+  ? ^
+FAILED .evaluation_tests/test_checkpoint_6.py::test_skipped_runtime_update_rejected - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 2,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 2,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_invalid_strategy_rejected - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "errors": [
+      {
+        "field": "metadata.name",
+        "type": "duplicate",
+        "message": "mesh 'my-mesh' already exists"
+      }
+    ]
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "duplicate",\n      "message": "mesh \'my-mesh\' already exists"\n    }\n  ]\n}\n', stderr='', returncode=0, json={'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'my-mesh' already exists"}]}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_rollingpatch_cross_minor_rejected - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 2,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 2,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_rollingpatch_major_below_4_rejected - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 2,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 2,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_rollingpatch_multiple_errors - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 2,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 2,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_livemigration_records_migration - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_6.py::test_migration_runtime_conflict - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 2,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 2,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_livemigration_advances_stage - KeyError: 'migration'
+FAILED .evaluation_tests/test_checkpoint_6.py::test_livemigration_rollback - AssertionError: assert '4.0.0' == '3.1.1'
+  
+  - 3.1.1
+  + 4.0.0
+FAILED .evaluation_tests/test_checkpoint_6.py::test_fullstop_no_rollback - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 2,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": true,
+      "instances": {
+        "ready": 2,
+        "starting": 0,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 2,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": true,\n    "instances": {\n      "ready": 2,\n      "starting": 0,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 2, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': True, 'instances': {'ready': 2, 'starting': 0, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_migrate_no_active_migration - AssertionError: Expected exit code 1, got 2.
+  stdout:
+  
+  stderr:
+  usage: python meshctl.py mesh [-h] {create,list,describe,delete,update} ...
+  python meshctl.py mesh: error: argument operation: invalid choice: 'migrate' (choose from create, list, describe, delete, update)
+  
+assert 2 == 1
+ +  where 2 = CLIResult(stdout='', stderr="usage: python meshctl.py mesh [-h] {create,list,describe,delete,update} ...\npython meshctl.py mesh: error: argument operation: invalid choice: 'migrate' (choose from create, list, describe, delete, update)\n", returncode=2, json=None).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_migrate_mesh_not_found - AssertionError: Expected exit code 1, got 2.
+  stdout:
+  
+  stderr:
+  usage: python meshctl.py mesh [-h] {create,list,describe,delete,update} ...
+  python meshctl.py mesh: error: argument operation: invalid choice: 'migrate' (choose from create, list, describe, delete, update)
+  
+assert 2 == 1
+ +  where 2 = CLIResult(stdout='', stderr="usage: python meshctl.py mesh [-h] {create,list,describe,delete,update} ...\npython meshctl.py mesh: error: argument operation: invalid choice: 'migrate' (choose from create, list, describe, delete, update)\n", returncode=2, json=None).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_migration_affects_stability - assert True is False
+FAILED .evaluation_tests/test_checkpoint_6.py::test_multiple_runtime_errors_reported - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 3,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": false,
+      "instances": {
+        "ready": 2,
+        "starting": 1,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "Scaling",
+          "status": "True",
+          "message": "Scaling from 2 to 3 instances"
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 3,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": false,\n    "instances": {\n      "ready": 2,\n      "starting": 1,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "Scaling",\n        "status": "True",\n        "message": "Scaling from 2 to 3 instances"\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 3, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': False, 'instances': {'ready': 2, 'starting': 1, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_livemigration_regions_rejected - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "errors": [
+      {
+        "field": "metadata.name",
+        "type": "duplicate",
+        "message": "mesh 'my-mesh' already exists"
+      }
+    ]
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "duplicate",\n      "message": "mesh \'my-mesh\' already exists"\n    }\n  ]\n}\n', stderr='', returncode=0, json={'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'my-mesh' already exists"}]}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_rollingpatch_downgrade_combined_errors - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "apiVersion": "mesh.example.com/v1",
+    "kind": "Mesh",
+    "metadata": {
+      "name": "my-mesh"
+    },
+    "spec": {
+      "runtime": "4.0.0",
+      "instances": 3,
+      "access": {
+        "authentication": {
+          "enabled": true,
+          "digestAlgorithm": "SHA-256"
+        },
+        "encryption": {
+          "source": "None",
+          "clientMode": "None"
+        },
+        "permissions": {
+          "enabled": false
+        }
+      },
+      "network": {
+        "replicationFactor": 2
+      }
+    },
+    "status": {
+      "state": "Running",
+      "stable": false,
+      "instances": {
+        "ready": 2,
+        "starting": 1,
+        "stopped": 0
+      },
+      "conditions": [
+        {
+          "type": "Healthy",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "PrechecksPassed",
+          "status": "True",
+          "message": ""
+        },
+        {
+          "type": "Scaling",
+          "status": "True",
+          "message": "Scaling from 2 to 3 instances"
+        }
+      ]
+    }
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 3,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": false,\n    "instances": {\n      "ready": 2,\n      "starting": 1,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "Scaling",\n        "status": "True",\n        "message": "Scaling from 2 to 3 instances"\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 3, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': False, 'instances': {'ready': 2, 'starting': 1, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_livemigration_full_lifecycle - assert None is not None
+ +  where None = find_condition({'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 3, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': False, 'instances': {'ready': 2, 'starting': 1, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}}, 'Migration')
+ +    where {'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 3, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': False, 'instances': {'ready': 2, 'starting': 1, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}} = CLIResult(stdout='{\n  "apiVersion": "mesh.example.com/v1",\n  "kind": "Mesh",\n  "metadata": {\n    "name": "my-mesh"\n  },\n  "spec": {\n    "runtime": "4.0.0",\n    "instances": 3,\n    "access": {\n      "authentication": {\n        "enabled": true,\n        "digestAlgorithm": "SHA-256"\n      },\n      "encryption": {\n        "source": "None",\n        "clientMode": "None"\n      },\n      "permissions": {\n        "enabled": false\n      }\n    },\n    "network": {\n      "replicationFactor": 2\n    }\n  },\n  "status": {\n    "state": "Running",\n    "stable": false,\n    "instances": {\n      "ready": 2,\n      "starting": 1,\n      "stopped": 0\n    },\n    "conditions": [\n      {\n        "type": "Healthy",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "PrechecksPassed",\n        "status": "True",\n        "message": ""\n      },\n      {\n        "type": "Scaling",\n        "status": "True",\n        "message": "Scaling from 2 to 3 instances"\n      }\n    ]\n  }\n}\n', stderr='', returncode=0, json={'apiVersion': 'mesh.example.com/v1', 'kind': 'Mesh', 'metadata': {'name': 'my-mesh'}, 'spec': {'runtime': '4.0.0', 'instances': 3, 'access': {'authentication': {'enabled': True, 'digestAlgorithm': 'SHA-256'}, 'encryption': {'source': 'None', 'clientMode': 'None'}, 'permissions': {'enabled': False}}, 'network': {'replicationFactor': 2}}, 'status': {'state': 'Running', 'stable': False, 'instances': {'ready': 2, 'starting': 1, 'stopped': 0}, 'conditions': [{'type': 'Healthy', 'status': 'True', 'message': ''}, {'type': 'PrechecksPassed', 'status': 'True', 'message': ''}, {'type': 'Scaling', 'status': 'True', 'message': 'Scaling from 2 to 3 instances'}]}}).json
+FAILED .evaluation_tests/test_checkpoint_6.py::test_migration_condition_empty_message - assert None is not None
+FAILED .evaluation_tests/test_checkpoint_6.py::test_regression_vault_crud_and_mesh_protection - AssertionError: Expected exit code 1, got 0.
+  stdout:
+  {
+    "errors": [
+      {
+        "field": "metadata.name",
+        "type": "conflict",
+        "message": "mesh 'reg-mesh' cannot be deleted because it is referenced by vaults: reg-vault"
+      }
+    ]
+  }
+  
+  stderr:
+  
+assert 0 == 1
+ +  where 0 = CLIResult(stdout='{\n  "errors": [\n    {\n      "field": "metadata.name",\n      "type": "conflict",\n      "message": "mesh \'reg-mesh\' cannot be deleted because it is referenced by vaults: reg-vault"\n    }\n  ]\n}\n', stderr='', returncode=0, json={'errors': [{'field': 'metadata.name', 'type': 'conflict', 'message': "mesh 'reg-mesh' cannot be deleted because it is referenced by vaults: reg-vault"}]}).returncode
+FAILED .evaluation_tests/test_checkpoint_6.py::test_regression_conditions_and_stability_without_migration - assert None is not None
+ +  where None = find_condition({'errors': [{'field': 'metadata.name', 'type': 'duplicate', 'message': "mesh 'reg-mesh' already exists"}]}, 'Healthy')
+FAILED .evaluation_tests/test_checkpoint_6.py::test_regression_deep_merge_preserves_existing_fields - KeyError: 'runtime'
+FAILED .evaluation_tests/test_checkpoint_6.py::test_regression_stop_resume_and_scaling - assert 1 == 3
+======================== 33 failed, 7 passed in 15.03s =========================

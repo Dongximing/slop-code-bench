@@ -1,0 +1,102 @@
+agent_dir: agent
+agent_tar: agent.tar.gz
+agent_type: claude_code
+agent_version: 2.0.51
+checkpoint_file: checkpoint.yaml
+compress_artifacts: false
+debug: false
+environment_file: environment.yaml
+image: slop-code:claude_code-2.0.51-python3.12
+inference_result_file: inference_result.json
+model_name: pangu
+pass_policy: any
+post_checkpoint_skill:
+  eval_after: true
+  prompt: "You will improve the code quality of the solution files in /workspace root.\n\
+    Do NOT touch files under /workspace/files/, /workspace/tests/, /workspace/venv/,\
+    \ or any subdirectories.\nDo NOT touch requirements.txt.\n\nFollow these 3 phases\
+    \ IN ORDER. Do not skip any phase.\n\nPHASE 1: AUDIT\nRun `ls /workspace/*.py`\
+    \ to identify solution files.\nRead each file end-to-end. For each file, produce\
+    \ a numbered list of findings.\nCategories (priority order):\nA. DEAD CODE - Unused\
+    \ imports, variables, unreachable branches, uncalled functions\nB. COMMENT SLOP\
+    \ - Restating comments, verbose docstrings, commented-out code\nC. STYLE - range(len(x))\u2192\
+    enumerate, if/else return\u2192return cond, elif after return, bare except\nD.\
+    \ DUPLICATION - 3+ identical blocks, copy-pasted logic\nE. STRUCTURAL (review\
+    \ only, very cautious) - Long condition chains, 80+ line functions\n\nPHASE 2:\
+    \ SAFETY CHECK\nFor EACH finding: \"Can this change produce different output for\
+    \ ANY input?\"\nDROP if: merging functions, removing checks, changing error messages/exit\
+    \ codes/output format,\nchanging operation order, changing defaults/signatures,\
+    \ changing data structures, not 100% certain, category E not trivially safe.\n\
+    \nPHASE 3: APPLY\nApply ONLY APPROVED changes. One edit at a time. Re-read after.\
+    \ Revert if wrong. Max 30 edits per file.\nA missed cleanup is acceptable. A broken\
+    \ test is not.\n"
+  run_on: all
+problem_file: problem.yaml
+prompt_file: prompt.txt
+run_info_file: run_info.yaml
+seed: 42
+skip_evaluation: false
+snapshot_dir: snapshot
+summary:
+  checkpoints:
+    checkpoint_1: ran
+    checkpoint_2: ran
+    checkpoint_3: ran
+    checkpoint_4: ran
+    checkpoint_5: error
+    checkpoint_6: skipped
+    checkpoint_7: skipped
+    checkpoint_8: skipped
+  duration_seconds: 16687.755207
+  ended: '2026-06-05T19:20:58.406855'
+  error_message: "Traceback (most recent call last):\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agent.py\"\
+    , line 413, in run_checkpoint\n    self.retry()\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agents/claude_code/agent.py\"\
+    , line 826, in retry\n    raise AgentError(message)\nslop_code.agent_runner.models.AgentError:\
+    \ Claude Code retry process had an error\n"
+  error_traceback: "Traceback (most recent call last):\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agent.py\"\
+    , line 413, in run_checkpoint\n    self.retry()\n  File \"/shared_workspace_mfs/ximing/slop-code-bench/src/slop_code/agent_runner/agents/claude_code/agent.py\"\
+    , line 826, in retry\n    raise AgentError(message)\nslop_code.agent_runner.models.AgentError:\
+    \ Claude Code retry process had an error\n"
+  error_type: AgentRunnerError
+  passed_policy: false
+  started: '2026-06-05T14:42:50.651648'
+  state: error
+  total_cost: 13.004958000000002
+  total_steps: 16
+  total_usage:
+    cost: 13.004958000000002
+    current_tokens:
+      cache_read: 0
+      cache_write: 0
+      input: 4179041
+      output: 31189
+      reasoning: 0
+    net_tokens:
+      cache_read: 0
+      cache_write: 0
+      input: 4179041
+      output: 31189
+      reasoning: 0
+    steps: 16
+template: 'Implement a program that 100% solves the specification. That is all you
+  need to do.
+
+  {% if not is_continuation -%}
+
+  Use a virtual environment and ensure that a `requirements.txt` is present with any
+  dependencies you need to solve the problem.
+
+  {% else -%}
+
+  Keep using the same virtual environment you started with, update `requirements.txt`
+  with any new dependencies you need.
+
+  {% endif -%}
+
+
+  Your task is:
+
+  {{ spec.strip() }}
+
+  '
+verbose: false

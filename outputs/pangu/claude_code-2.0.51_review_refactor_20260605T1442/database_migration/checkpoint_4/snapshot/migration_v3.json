@@ -1,0 +1,25 @@
+{
+  "version": 3,
+  "description": "Compute full_name from first and last",
+  "operations": [
+    {
+      "type": "add_column",
+      "table": "users",
+      "column": {
+        "name": "full_name",
+        "type": "TEXT",
+        "not_null": false
+      }
+    },
+    {
+      "type": "transform_data",
+      "table": "users",
+      "transformations": [
+        {
+          "column": "full_name",
+          "expression": "first_name || ' ' || last_name"
+        }
+      ]
+    }
+  ]
+}

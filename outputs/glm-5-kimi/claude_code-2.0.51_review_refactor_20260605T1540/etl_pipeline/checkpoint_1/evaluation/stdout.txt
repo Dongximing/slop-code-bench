@@ -1,0 +1,170 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/lhUUhtU5zNkYJCMT/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 41 items
+
+.evaluation_tests/test_checkpoint_1.py::test_rename_from_to PASSED       [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_trim_and_case PASSED        [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_drop_unknown_keys PASSED    [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_preserve_column_names_no_trimming PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_consistent_key_ordering PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_empty_pipeline_is_valid PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_empty_pipeline_ignores_metadata PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_rename_multiple_mapping PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_trimmed_ops_and_exprs PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::test_limit_zero_passthrough PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::test_rename_from_to_canonical PASSED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::test_full_pipeline_all_ops PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_dataset_empty_array PASSED  [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_map_and_filter_chain PASSED [ 34%]
+.evaluation_tests/test_checkpoint_1.py::test_rename_mixed_forms PASSED   [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_empty_select_columns PASSED [ 39%]
+.evaluation_tests/test_checkpoint_1.py::test_limit_n_not_integer PASSED  [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_unknown_op PASSED           [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_dataset_not_array PASSED    [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_dataset_missing PASSED      [ 48%]
+.evaluation_tests/test_checkpoint_1.py::test_dataset_row_not_object PASSED [ 51%]
+.evaluation_tests/test_checkpoint_1.py::test_rename_missing_column_error FAILED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_select_missing_after_filter PASSED [ 56%]
+.evaluation_tests/test_checkpoint_1.py::test_bad_expr_in_second_step PASSED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_select_duplicate_columns_error PASSED [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_filter_empty_where_error FAILED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_map_missing_as_error FAILED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::test_rename_mapping_empty_error PASSED [ 68%]
+.evaluation_tests/test_checkpoint_1.py::test_limit_negative_error PASSED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_pipeline_steps_not_array_error PASSED [ 73%]
+.evaluation_tests/test_checkpoint_1.py::test_unknown_op_aggregate_error PASSED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_malformed_step_missing_op PASSED [ 78%]
+.evaluation_tests/test_checkpoint_1.py::test_step_not_an_object PASSED   [ 80%]
+.evaluation_tests/test_checkpoint_1.py::test_map_missing_expr PASSED     [ 82%]
+.evaluation_tests/test_checkpoint_1.py::test_filter_missing_where PASSED [ 85%]
+.evaluation_tests/test_checkpoint_1.py::test_select_missing_columns PASSED [ 87%]
+.evaluation_tests/test_checkpoint_1.py::test_limit_missing_n PASSED      [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_rename_missing_both_forms PASSED [ 92%]
+.evaluation_tests/test_checkpoint_1.py::test_select_columns_not_array PASSED [ 95%]
+.evaluation_tests/test_checkpoint_1.py::test_map_as_whitespace_only PASSED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::test_map_expr_whitespace_only FAILED [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_rename_missing_column_error _______________________
+
+entrypoint_argv = ['uv', 'run', 'etl_pipeline.py']
+
+    @pytest.mark.error
+    def test_rename_missing_column_error(entrypoint_argv):
+        """Error: Rename references missing column."""
+        input_data = {
+            "pipeline": {"steps": [{"op": "rename", "mapping": {"cost": "price"}}]},
+            "dataset": [{"id": 1, "price": 10}],
+        }
+    
+        result = run_etl(entrypoint_argv, input_data)
+>       assert result.returncode == 1, "Expected command to fail"
+E       AssertionError: Expected command to fail
+E       assert 0 == 1
+E        +  where 0 = CompletedProcess(args=['uv', 'run', 'etl_pipeline.py'], returncode=0, stdout='{\n  "status": "ok",\n  "normalized": {\n    "steps": [\n      {\n        "op": "rename",\n        "mapping": {\n          "cost": "price"\n        }\n      }\n    ]\n  }\n}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:587: AssertionError
+________________________ test_filter_empty_where_error _________________________
+
+entrypoint_argv = ['uv', 'run', 'etl_pipeline.py']
+
+    @pytest.mark.error
+    def test_filter_empty_where_error(entrypoint_argv):
+        """Error: Filter with empty/whitespace where clause fails."""
+        input_data = {
+            "pipeline": {"steps": [{"op": "filter", "where": "   "}]},
+            "dataset": [],
+        }
+    
+        result = run_etl(entrypoint_argv, input_data)
+        assert result.returncode == 1, "Expected command to fail"
+    
+        output = json.loads(result.stdout)
+        assert output["status"] == "error"
+>       assert output["error_code"] == "SCHEMA_VALIDATION_FAILED"
+E       AssertionError: assert 'BAD_EXPR' == 'SCHEMA_VALIDATION_FAILED'
+E         
+E         - SCHEMA_VALIDATION_FAILED
+E         + BAD_EXPR
+
+.evaluation_tests/test_checkpoint_1.py:692: AssertionError
+__________________________ test_map_missing_as_error ___________________________
+
+entrypoint_argv = ['uv', 'run', 'etl_pipeline.py']
+
+    @pytest.mark.error
+    def test_map_missing_as_error(entrypoint_argv):
+        """Error: Map without 'as' field fails."""
+        input_data = {
+            "pipeline": {"steps": [{"op": "map", "expr": "price * 2"}]},
+            "dataset": [],
+        }
+    
+        result = run_etl(entrypoint_argv, input_data)
+        assert result.returncode == 1, "Expected command to fail"
+    
+        output = json.loads(result.stdout)
+        assert output["status"] == "error"
+        assert output["error_code"] == "SCHEMA_VALIDATION_FAILED"
+>       assert output["path"] == "pipeline.steps[0].as"
+E       AssertionError: assert 'pipeline.steps[0]' == 'pipeline.steps[0].as'
+E         
+E         - pipeline.steps[0].as
+E         ?                  ---
+E         + pipeline.steps[0]
+
+.evaluation_tests/test_checkpoint_1.py:710: AssertionError
+________________________ test_map_expr_whitespace_only _________________________
+
+entrypoint_argv = ['uv', 'run', 'etl_pipeline.py']
+
+    @pytest.mark.error
+    def test_map_expr_whitespace_only(entrypoint_argv):
+        """Error: Map with whitespace-only 'expr' field fails."""
+        input_data = {
+            "pipeline": {"steps": [{"op": "map", "as": "total", "expr": "   "}]},
+            "dataset": [],
+        }
+    
+        result = run_etl(entrypoint_argv, input_data)
+        assert result.returncode == 1, "Expected command to fail"
+    
+        output = json.loads(result.stdout)
+        assert output["status"] == "error"
+>       assert output["error_code"] == "SCHEMA_VALIDATION_FAILED"
+E       AssertionError: assert 'BAD_EXPR' == 'SCHEMA_VALIDATION_FAILED'
+E         
+E         - SCHEMA_VALIDATION_FAILED
+E         + BAD_EXPR
+
+.evaluation_tests/test_checkpoint_1.py:950: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_rename_missing_column_error - AssertionError: Expected command to fail
+assert 0 == 1
+ +  where 0 = CompletedProcess(args=['uv', 'run', 'etl_pipeline.py'], returncode=0, stdout='{\n  "status": "ok",\n  "normalized": {\n    "steps": [\n      {\n        "op": "rename",\n        "mapping": {\n          "cost": "price"\n        }\n      }\n    ]\n  }\n}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_filter_empty_where_error - AssertionError: assert 'BAD_EXPR' == 'SCHEMA_VALIDATION_FAILED'
+  
+  - SCHEMA_VALIDATION_FAILED
+  + BAD_EXPR
+FAILED .evaluation_tests/test_checkpoint_1.py::test_map_missing_as_error - AssertionError: assert 'pipeline.steps[0]' == 'pipeline.steps[0].as'
+  
+  - pipeline.steps[0].as
+  ?                  ---
+  + pipeline.steps[0]
+FAILED .evaluation_tests/test_checkpoint_1.py::test_map_expr_whitespace_only - AssertionError: assert 'BAD_EXPR' == 'SCHEMA_VALIDATION_FAILED'
+  
+  - SCHEMA_VALIDATION_FAILED
+  + BAD_EXPR
+========================= 4 failed, 37 passed in 4.14s =========================

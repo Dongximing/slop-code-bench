@@ -1,0 +1,26 @@
+{
+  "version": 4,
+  "description": "Migrate email to email_address",
+  "operations": [
+    {
+      "type": "add_column",
+      "table": "users",
+      "column": {
+        "name": "email_address",
+        "type": "TEXT",
+        "not_null": false
+      }
+    },
+    {
+      "type": "migrate_column_data",
+      "table": "users",
+      "from_column": "email",
+      "to_column": "email_address"
+    },
+    {
+      "type": "drop_column",
+      "table": "users",
+      "column": "email"
+    }
+  ]
+}

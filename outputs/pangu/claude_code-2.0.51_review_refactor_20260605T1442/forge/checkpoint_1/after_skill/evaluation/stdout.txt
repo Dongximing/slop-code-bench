@@ -1,0 +1,255 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/7X5uXx1w7hMQwCGY/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 40 items
+
+.evaluation_tests/test_checkpoint_1.py::test_create_blueprint_returns_persisted_resource PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_requirement_set_order_preserved_non_lexicographic PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_orders_by_created_at_name_uuid PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_name_tiebreak_when_created_at_collides PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_and_delete_single_uuid PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_delete_missing_uuid_returns_not_found PASSED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_invalid_json_input PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_unique_sorted_messages PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_deduplicates_messages_across_requirement_sets PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_duplicate_name_with_conflict PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_is_atomic_and_reports_sorted_unresolved PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_rejects_blank_csv_members_atomically PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_empty_returns_empty_array PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_unknown_top_level_keys PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_caller_supplied_uuid PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_boolean_resource_count PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_success_returns_deleted_count PASSED [ 42%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_duplicate_members_count_unique_deletions FAILED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_create_output_is_compact_sorted_json_without_trailing_newline PASSED [ 47%]
+.evaluation_tests/test_checkpoint_1.py::test_create_missing_required_fields_reports_sorted_unique_messages PASSED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_failure_is_atomic PASSED [ 52%]
+.evaluation_tests/test_checkpoint_1.py::test_create_ignores_caller_supplied_created_at PASSED [ 55%]
+.evaluation_tests/test_checkpoint_1.py::test_create_preserves_empty_capabilities_array FAILED [ 57%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_name_string FAILED [ 60%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_requirement_sets FAILED [ 62%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_set_missing_required_keys PASSED [ 65%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_object_json_payload PASSED [ 67%]
+.evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_top_level_and_nested_failures FAILED [ 70%]
+.evaluation_tests/test_checkpoint_1.py::test_create_generates_valid_uuid_v4_format PASSED [ 72%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_float_resource_count PASSED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_string_name_type PASSED [ 77%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_non_array_requirement_sets PASSED [ 80%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_requirement_sets_with_non_object_elements PASSED [ 82%]
+.evaluation_tests/test_checkpoint_1.py::test_delete_names_single_name_succeeds PASSED [ 85%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_list_uuid_tiebreak_when_created_at_and_name_collide PASSED [ 87%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_nonexistent_uuid_returns_not_found PASSED [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_unsupported_key_as_sole_violation PASSED [ 92%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_capabilities_with_non_string_elements PASSED [ 95%]
+.evaluation_tests/test_checkpoint_1.py::test_blueprint_get_returns_all_stored_fields PASSED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::test_create_rejects_multiple_unsupported_keys PASSED [100%]
+
+=================================== FAILURES ===================================
+__________ test_delete_names_duplicate_members_count_unique_deletions __________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_delete_names_duplicate_me0/data')
+
+    @pytest.mark.functionality
+    def test_delete_names_duplicate_members_count_unique_deletions(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        """Duplicate CSV members delete once and report the number of removed blueprints."""
+        create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="alpha",
+            requirement_sets=[{"resource_type": "CPU", "resource_count": 1}],
+        )
+    
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "delete", "--names", "alpha,alpha"],
+        )
+>       payload = unwrap_object(assert_success(result))
+                                ^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:445: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/forge.py', '--data-dir', '/tmp/pytest-of-ag..., in delete_by_names\n    uuid = self._name_to_uuid[name]\n           ~~~~~~~~~~~~~~~~~~^^^^^^\nKeyError: \'alpha\'\n')
+
+    def assert_success(
+        result: subprocess.CompletedProcess[str],
+    ) -> JSONValue:
+>       assert result.returncode == 0, (
+               ^^^^^^^^^^^^^^^^^^^^^^
+            f"expected success exit code; stderr={result.stderr!r} "
+            f"stdout={result.stdout!r}"
+        )
+E       AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 431, in <module>\n    main()\n  File "/workspace/forge.py", line 421, in main\n    cmd_delete_names(store, remaining[2])\n  File "/workspace/forge.py", line 365, in cmd_delete_names\n    count, unresolved = store.delete_by_names(names)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 198, in delete_by_names\n    uuid = self._name_to_uuid[name]\n           ~~~~~~~~~~~~~~~~~~^^^^^^\nKeyError: \'alpha\'\n' stdout=''
+
+.evaluation_tests/_helpers.py:131: AssertionError
+________________ test_create_preserves_empty_capabilities_array ________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_preserves_empty_ca0/data')
+
+    @pytest.mark.functionality
+    def test_create_preserves_empty_capabilities_array(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        created = create_blueprint(
+            entrypoint_argv,
+            data_dir,
+            name="empty-capabilities",
+            requirement_sets=[
+                {
+                    "resource_type": "GPU",
+                    "resource_count": 1,
+                    "capabilities": [],
+                },
+                {"resource_type": "NIC", "resource_count": 1},
+            ],
+        )
+        payload = unwrap_object(created)
+>       assert payload["requirement_sets"][0]["capabilities"] == []
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'capabilities'
+
+.evaluation_tests/test_checkpoint_1.py:551: KeyError
+____________________ test_create_rejects_empty_name_string _____________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_empty_name0/data')
+
+    @pytest.mark.error
+    def test_create_rejects_empty_name_string(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "",
+                "requirement_sets": [{"resource_type": "GPU", "resource_count": 1}],
+            },
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="name must be a non-empty string",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:568: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:183: in assert_error
+    assert_detail_contains(actual_detail, detail_contains)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = 'name must be non-empty', expected = 'name must be a non-empty string'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'name must be a non-empty string'; actual detail='name must be non-empty'
+
+.evaluation_tests/_helpers.py:141: AssertionError
+__________________ test_create_rejects_empty_requirement_sets __________________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_rejects_empty_requ0/data')
+
+    @pytest.mark.error
+    def test_create_rejects_empty_requirement_sets(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={"name": "empty-sets", "requirement_sets": []},
+        )
+>       assert_error(
+            result,
+            category="validation_error",
+            detail_contains="requirement_sets must be a non-empty array",
+        )
+
+.evaluation_tests/test_checkpoint_1.py:588: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/_helpers.py:183: in assert_error
+    assert_detail_contains(actual_detail, detail_contains)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = 'requirement_sets must be non-empty'
+expected = 'requirement_sets must be a non-empty array'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'requirement_sets must be a non-empty array'; actual detail='requirement_sets must be non-empty'
+
+.evaluation_tests/_helpers.py:141: AssertionError
+_______ test_create_validation_aggregates_top_level_and_nested_failures ________
+
+entrypoint_argv = ['uv', 'run', '--project', '/workspace', '/workspace/forge.py']
+data_dir = PosixPath('/tmp/pytest-of-agent/pytest-0/test_create_validation_aggrega1/data')
+
+    @pytest.mark.error
+    def test_create_validation_aggregates_top_level_and_nested_failures(
+        entrypoint_argv: list[str], data_dir: Path
+    ) -> None:
+        result = run_forge(
+            entrypoint_argv,
+            data_dir,
+            ["blueprint", "create"],
+            stdin_json={
+                "name": "",
+                "requirement_sets": [
+                    {
+                        "resource_type": 42,
+                        "resource_count": 0,
+                    }
+                ],
+            },
+        )
+        payload = assert_error(result, category="validation_error")
+        for expected in ("name", "resource_count", "resource_type"):
+>           assert_detail_contains(payload["detail"], expected)
+
+.evaluation_tests/test_checkpoint_1.py:652: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+detail = 'name must be non-empty', expected = 'resource_count'
+
+    def assert_detail_contains(detail: JSONValue, expected: str) -> None:
+        if _detail_contains(detail, expected):
+            return
+>       raise AssertionError(
+            f"expected detail to contain {expected!r}; actual detail={detail!r}"
+        )
+E       AssertionError: expected detail to contain 'resource_count'; actual detail='name must be non-empty'
+
+.evaluation_tests/_helpers.py:141: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_delete_names_duplicate_members_count_unique_deletions - AssertionError: expected success exit code; stderr='Traceback (most recent call last):\n  File "/workspace/forge.py", line 431, in <module>\n    main()\n  File "/workspace/forge.py", line 421, in main\n    cmd_delete_names(store, remaining[2])\n  File "/workspace/forge.py", line 365, in cmd_delete_names\n    count, unresolved = store.delete_by_names(names)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/forge.py", line 198, in delete_by_names\n    uuid = self._name_to_uuid[name]\n           ~~~~~~~~~~~~~~~~~~^^^^^^\nKeyError: \'alpha\'\n' stdout=''
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_preserves_empty_capabilities_array - KeyError: 'capabilities'
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_name_string - AssertionError: expected detail to contain 'name must be a non-empty string'; actual detail='name must be non-empty'
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_rejects_empty_requirement_sets - AssertionError: expected detail to contain 'requirement_sets must be a non-empty array'; actual detail='requirement_sets must be non-empty'
+FAILED .evaluation_tests/test_checkpoint_1.py::test_create_validation_aggregates_top_level_and_nested_failures - AssertionError: expected detail to contain 'resource_count'; actual detail='name must be non-empty'
+======================== 5 failed, 35 passed in 13.17s =========================

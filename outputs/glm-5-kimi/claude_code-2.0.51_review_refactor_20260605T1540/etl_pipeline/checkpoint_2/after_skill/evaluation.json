@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "problem_name": "etl_pipeline",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_2",
+  "checkpoint_version": 1,
+  "duration": 11.956564664840698,
+  "entrypoint": "uv run etl_pipeline.py",
+  "tests": {
+    "checkpoint_1-Regression": {
+      "passed": [
+        "test_bad_expr_in_second_step",
+        "test_consistent_key_ordering",
+        "test_dataset_empty_array",
+        "test_dataset_missing",
+        "test_dataset_not_array",
+        "test_dataset_row_not_object",
+        "test_drop_unknown_keys",
+        "test_empty_pipeline_ignores_metadata",
+        "test_empty_pipeline_is_valid",
+        "test_empty_select_columns",
+        "test_filter_missing_where",
+        "test_full_pipeline_all_ops",
+        "test_limit_missing_n",
+        "test_limit_n_not_integer",
+        "test_limit_negative_error",
+        "test_limit_zero_passthrough",
+        "test_malformed_step_missing_op",
+        "test_map_and_filter_chain",
+        "test_map_as_whitespace_only",
+        "test_map_missing_expr",
+        "test_pipeline_steps_not_array_error",
+        "test_preserve_column_names_no_trimming",
+        "test_rename_from_to",
+        "test_rename_from_to_canonical",
+        "test_rename_mapping_empty_error",
+        "test_rename_missing_both_forms",
+        "test_rename_mixed_forms",
+        "test_rename_multiple_mapping",
+        "test_select_columns_not_array",
+        "test_select_duplicate_columns_error",
+        "test_select_missing_after_filter",
+        "test_select_missing_columns",
+        "test_step_not_an_object",
+        "test_trim_and_case",
+        "test_trimmed_ops_and_exprs",
+        "test_unknown_op",
+        "test_unknown_op_aggregate_error"
+      ],
+      "failed": [
+        "test_filter_empty_where_error",
+        "test_map_expr_whitespace_only",
+        "test_map_missing_as_error",
+        "test_rename_missing_column_error"
+      ],
+      "skipped": []
+    },
+    "checkpoint_2-Error": {
+      "passed": [
+        "test_bad_expr_caret_operator",
+        "test_bad_expr_unsupported_operator",
+        "test_dataset_row_not_object",
+        "test_rename_missing_source_column",
+        "test_select_missing_column"
+      ],
+      "failed": [],
+      "skipped": []
+    },
+    "checkpoint_2-Functionality": {
+      "passed": [
+        "test_boolean_literal_in_expression",
+        "test_empty_dataset",
+        "test_empty_steps_passthrough",
+        "test_filter_matches_nothing",
+        "test_less_than_operators",
+        "test_less_than_or_equal_operator",
+        "test_limit_zero",
+        "test_not_equal_operator",
+        "test_or_operator",
+        "test_string_literal_in_expression",
+        "test_subtraction_operator"
+      ],
+      "failed": [],
+      "skipped": []
+    },
+    "checkpoint_2-Core": {
+      "passed": [
+        "test_comparison_with_null_false",
+        "test_default_mode_returns_normalized",
+        "test_division_by_zero_returns_null",
+        "test_logical_not_with_nonboolean",
+        "test_logical_ops_and_missing_field",
+        "test_map_filter_limit",
+        "test_map_overwrites_existing_field",
+        "test_missing_identifier_becomes_null",
+        "test_null_literal_in_expression",
+        "test_operator_precedence",
+        "test_parentheses_override_precedence",
+        "test_rename_collision_later_wins",
+        "test_rename_select_map_with_null",
+        "test_select_preserves_column_order",
+        "test_type_mismatch_comparison_false",
+        "test_unknown_top_level_keys_ignored"
+      ],
+      "failed": [],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 16,
+    "Functionality": 11,
+    "Regression": 37,
+    "Error": 5
+  },
+  "total_counts": {
+    "Core": 16,
+    "Functionality": 11,
+    "Regression": 41,
+    "Error": 5
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 73,
+  "test_collection_hash": "bd15df4b55f1f9c7521a9e8497076afc0fb67afc4488c6308e2b0e8dfa455abf",
+  "infrastructure_failure": false
+}

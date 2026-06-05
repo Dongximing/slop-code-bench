@@ -1,0 +1,1838 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/tehyBV-XGtK4a8Om/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 36 items
+
+.evaluation_tests/test_checkpoint_1.py::test_help_ignores_json_flag PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_version_plain_text PASSED   [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_version_json PASSED         [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_usage_error_no_args PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_usage_error_without_command PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_cli_unknown_command FAILED  [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_check_valid_circuit_reports_interface FAILED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_check_file_not_found FAILED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[bad_syntax-            input a b\n            output y\n            y = AND(a, b\n            ] FAILED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[literal_x-            input a\n            output y\n            y = X\n            ] FAILED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[brackets-            input a[0]\n            output y\n            y = a\n            ] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[declaration_after_assignment-            input a\n            output y\n            y = a\n            wire t1\n            t1 = a\n            -DeclarationAfterAssignmentError] FAILED [ 33%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[duplicate_name-            input a a\n            output y\n            y = a\n            -DuplicateNameError] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[undefined_name-            input a\n            output y\n            y = z\n            -UndefinedNameError] FAILED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[input_assignment-            input a\n            output y\n            y = a\n            a = 1\n            -InputAssignmentError] FAILED [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[multiple_assignment-            input a\n            output y\n            y = a\n            y = NOT(a)\n            -MultipleAssignmentError] FAILED [ 44%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[unassigned_signal-            input a\n            output y\n            -UnassignedSignalError] PASSED [ 47%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[duplicate_name_across_lines-            input a\n            input a\n            output y\n            y = a\n            -DuplicateNameError] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[unassigned_wire-            input a\n            output y\n            wire t1\n            y = a\n            -UnassignedSignalError] FAILED [ 52%]
+.evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[undeclared_lhs-            input a\n            output y\n            t1 = a\n            y = a\n            -UndefinedNameError] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_1.py::test_check_cycle_error_message FAILED [ 58%]
+.evaluation_tests/test_checkpoint_1.py::test_check_accepts_all_operators FAILED [ 61%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_not_too_many-a-NOT(a, a)] FAILED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_buf_too_many-a b-BUF(a, b)] FAILED [ 66%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_and_too_few-a-AND(a)] FAILED [ 69%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_or_too_few-a-OR(a)] FAILED [ 72%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_xor_too_few-a-XOR(a)] FAILED [ 75%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_nand_too_few-a-NAND(a)] FAILED [ 77%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_nor_too_few-a-NOR(a)] FAILED [ 80%]
+.evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_xnor_too_few-a-XNOR(a)] FAILED [ 83%]
+.evaluation_tests/test_checkpoint_1.py::test_check_identifiers_are_case_sensitive FAILED [ 86%]
+.evaluation_tests/test_checkpoint_1.py::test_check_majority_vote_circuit FAILED [ 88%]
+.evaluation_tests/test_checkpoint_1.py::test_check_parity_generator_circuit FAILED [ 91%]
+.evaluation_tests/test_checkpoint_1.py::test_check_comparator_2bit_circuit FAILED [ 94%]
+.evaluation_tests/test_checkpoint_1.py::test_check_decoder_circuit FAILED [ 97%]
+.evaluation_tests/test_checkpoint_1.py::test_check_shared_scalar_circuit FAILED [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_cli_unknown_command ___________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+
+    def test_cli_unknown_command(entrypoint_argv: list[str]) -> None:
+>       result, payload = run_json_command(entrypoint_argv, ["nonsense", "--json"])
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_1.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/helpers.py:49: in run_json_command
+    payload = parse_json_output(result.stdout)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/helpers.py:38: in parse_json_output
+    payload = json.loads(stdout.strip())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/json/decoder.py:338: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x737d334d71a0>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+/usr/local/lib/python3.12/json/decoder.py:356: JSONDecodeError
+__________________ test_check_valid_circuit_reports_interface __________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_valid_circuit_repor0')
+
+    def test_check_valid_circuit_reports_interface(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            "basic.circ",
+            """\
+            InPuT b a
+            OuTPuT y x
+            wIrE t1
+    
+            t1 = aNd(a, b)
+            x = NoT(t1)
+            y = BuF(t1)
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 3 == 0
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_valid_circuit_repor0/basic.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: T1", "file": "/tmp/pytest-of-agent/pytest-0/test_check_valid_circuit_repor0/basic.circ", "line": 2, "col": 11}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:119: AssertionError
+__________________________ test_check_file_not_found ___________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_file_not_found0')
+
+    def test_check_file_not_found(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        missing = tmp_path / "missing.circ"
+>       result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(missing), "--json"],
+        )
+
+.evaluation_tests/test_checkpoint_1.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/helpers.py:49: in run_json_command
+    payload = parse_json_output(result.stdout)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.evaluation_tests/helpers.py:38: in parse_json_output
+    payload = json.loads(stdout.strip())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/json/decoder.py:338: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.decoder.JSONDecoder object at 0x737d334d71a0>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+/usr/local/lib/python3.12/json/decoder.py:356: JSONDecodeError
+_ test_check_parse_errors_have_location[bad_syntax-            input a b\n            output y\n            y = AND(a, b\n            ] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l0')
+case_id = 'bad_syntax'
+content = '            input a b\n            output y\n            y = AND(a, b\n            '
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("case_id", "content"),
+        [
+            (
+                "bad_syntax",
+                """\
+                input a b
+                output y
+                y = AND(a, b
+                """,
+            ),
+            (
+                "literal_x",
+                """\
+                input a
+                output y
+                y = X
+                """,
+            ),
+            (
+                "brackets",
+                """\
+                input a[0]
+                output y
+                y = a
+                """,
+            ),
+        ],
+    )
+    def test_check_parse_errors_have_location(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        content: str,
+    ) -> None:
+        path = write_circ(tmp_path, f"{case_id}.circ", content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 2
+E       assert 3 == 2
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l0/bad_syntax.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: Y", "file": "/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l0/bad_syntax.circ", "line": 1, "col": 10}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:186: AssertionError
+_ test_check_parse_errors_have_location[literal_x-            input a\n            output y\n            y = X\n            ] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l1')
+case_id = 'literal_x'
+content = '            input a\n            output y\n            y = X\n            '
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("case_id", "content"),
+        [
+            (
+                "bad_syntax",
+                """\
+                input a b
+                output y
+                y = AND(a, b
+                """,
+            ),
+            (
+                "literal_x",
+                """\
+                input a
+                output y
+                y = X
+                """,
+            ),
+            (
+                "brackets",
+                """\
+                input a[0]
+                output y
+                y = a
+                """,
+            ),
+        ],
+    )
+    def test_check_parse_errors_have_location(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        content: str,
+    ) -> None:
+        path = write_circ(tmp_path, f"{case_id}.circ", content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 2
+E       assert 3 == 2
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l1/literal_x.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: Y", "file": "/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l1/literal_x.circ", "line": 1, "col": 8}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:186: AssertionError
+_ test_check_validation_errors[declaration_after_assignment-            input a\n            output y\n            y = a\n            wire t1\n            t1 = a\n            -DeclarationAfterAssignmentError] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_validation_errors_d0')
+case_id = 'declaration_after_assignment'
+content = '            input a\n            output y\n            y = a\n            wire t1\n            t1 = a\n            '
+error_type = 'DeclarationAfterAssignmentError'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("case_id", "content", "error_type"),
+        [
+            (
+                "declaration_after_assignment",
+                """\
+                input a
+                output y
+                y = a
+                wire t1
+                t1 = a
+                """,
+                "DeclarationAfterAssignmentError",
+            ),
+            (
+                "duplicate_name",
+                """\
+                input a a
+                output y
+                y = a
+                """,
+                "DuplicateNameError",
+            ),
+            (
+                "undefined_name",
+                """\
+                input a
+                output y
+                y = z
+                """,
+                "UndefinedNameError",
+            ),
+            (
+                "input_assignment",
+                """\
+                input a
+                output y
+                y = a
+                a = 1
+                """,
+                "InputAssignmentError",
+            ),
+            (
+                "multiple_assignment",
+                """\
+                input a
+                output y
+                y = a
+                y = NOT(a)
+                """,
+                "MultipleAssignmentError",
+            ),
+            (
+                "unassigned_signal",
+                """\
+                input a
+                output y
+                """,
+                "UnassignedSignalError",
+            ),
+            (
+                "duplicate_name_across_lines",
+                """\
+                input a
+                input a
+                output y
+                y = a
+                """,
+                "DuplicateNameError",
+            ),
+            (
+                "unassigned_wire",
+                """\
+                input a
+                output y
+                wire t1
+                y = a
+                """,
+                "UnassignedSignalError",
+            ),
+            (
+                "undeclared_lhs",
+                """\
+                input a
+                output y
+                t1 = a
+                y = a
+                """,
+                "UndefinedNameError",
+            ),
+        ],
+    )
+    def test_check_validation_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        content: str,
+        error_type: str,
+    ) -> None:
+        path = write_circ(tmp_path, f"{case_id}.circ", content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type=error_type,
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:310: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_validation_errors_d0/declaration_after_assignment.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+_ test_check_validation_errors[undefined_name-            input a\n            output y\n            y = z\n            -UndefinedNameError] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_validation_errors_u0')
+case_id = 'undefined_name'
+content = '            input a\n            output y\n            y = z\n            '
+error_type = 'UndefinedNameError'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("case_id", "content", "error_type"),
+        [
+            (
+                "declaration_after_assignment",
+                """\
+                input a
+                output y
+                y = a
+                wire t1
+                t1 = a
+                """,
+                "DeclarationAfterAssignmentError",
+            ),
+            (
+                "duplicate_name",
+                """\
+                input a a
+                output y
+                y = a
+                """,
+                "DuplicateNameError",
+            ),
+            (
+                "undefined_name",
+                """\
+                input a
+                output y
+                y = z
+                """,
+                "UndefinedNameError",
+            ),
+            (
+                "input_assignment",
+                """\
+                input a
+                output y
+                y = a
+                a = 1
+                """,
+                "InputAssignmentError",
+            ),
+            (
+                "multiple_assignment",
+                """\
+                input a
+                output y
+                y = a
+                y = NOT(a)
+                """,
+                "MultipleAssignmentError",
+            ),
+            (
+                "unassigned_signal",
+                """\
+                input a
+                output y
+                """,
+                "UnassignedSignalError",
+            ),
+            (
+                "duplicate_name_across_lines",
+                """\
+                input a
+                input a
+                output y
+                y = a
+                """,
+                "DuplicateNameError",
+            ),
+            (
+                "unassigned_wire",
+                """\
+                input a
+                output y
+                wire t1
+                y = a
+                """,
+                "UnassignedSignalError",
+            ),
+            (
+                "undeclared_lhs",
+                """\
+                input a
+                output y
+                t1 = a
+                y = a
+                """,
+                "UndefinedNameError",
+            ),
+        ],
+    )
+    def test_check_validation_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        content: str,
+        error_type: str,
+    ) -> None:
+        path = write_circ(tmp_path, f"{case_id}.circ", content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type=error_type,
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:310: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_validation_errors_u0/undefined_name.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+_ test_check_validation_errors[input_assignment-            input a\n            output y\n            y = a\n            a = 1\n            -InputAssignmentError] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_validation_errors_i0')
+case_id = 'input_assignment'
+content = '            input a\n            output y\n            y = a\n            a = 1\n            '
+error_type = 'InputAssignmentError'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("case_id", "content", "error_type"),
+        [
+            (
+                "declaration_after_assignment",
+                """\
+                input a
+                output y
+                y = a
+                wire t1
+                t1 = a
+                """,
+                "DeclarationAfterAssignmentError",
+            ),
+            (
+                "duplicate_name",
+                """\
+                input a a
+                output y
+                y = a
+                """,
+                "DuplicateNameError",
+            ),
+            (
+                "undefined_name",
+                """\
+                input a
+                output y
+                y = z
+                """,
+                "UndefinedNameError",
+            ),
+            (
+                "input_assignment",
+                """\
+                input a
+                output y
+                y = a
+                a = 1
+                """,
+                "InputAssignmentError",
+            ),
+            (
+                "multiple_assignment",
+                """\
+                input a
+                output y
+                y = a
+                y = NOT(a)
+                """,
+                "MultipleAssignmentError",
+            ),
+            (
+                "unassigned_signal",
+                """\
+                input a
+                output y
+                """,
+                "UnassignedSignalError",
+            ),
+            (
+                "duplicate_name_across_lines",
+                """\
+                input a
+                input a
+                output y
+                y = a
+                """,
+                "DuplicateNameError",
+            ),
+            (
+                "unassigned_wire",
+                """\
+                input a
+                output y
+                wire t1
+                y = a
+                """,
+                "UnassignedSignalError",
+            ),
+            (
+                "undeclared_lhs",
+                """\
+                input a
+                output y
+                t1 = a
+                y = a
+                """,
+                "UndefinedNameError",
+            ),
+        ],
+    )
+    def test_check_validation_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        content: str,
+        error_type: str,
+    ) -> None:
+        path = write_circ(tmp_path, f"{case_id}.circ", content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type=error_type,
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:310: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_validation_errors_i0/input_assignment.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+_ test_check_validation_errors[multiple_assignment-            input a\n            output y\n            y = a\n            y = NOT(a)\n            -MultipleAssignmentError] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_validation_errors_m0')
+case_id = 'multiple_assignment'
+content = '            input a\n            output y\n            y = a\n            y = NOT(a)\n            '
+error_type = 'MultipleAssignmentError'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("case_id", "content", "error_type"),
+        [
+            (
+                "declaration_after_assignment",
+                """\
+                input a
+                output y
+                y = a
+                wire t1
+                t1 = a
+                """,
+                "DeclarationAfterAssignmentError",
+            ),
+            (
+                "duplicate_name",
+                """\
+                input a a
+                output y
+                y = a
+                """,
+                "DuplicateNameError",
+            ),
+            (
+                "undefined_name",
+                """\
+                input a
+                output y
+                y = z
+                """,
+                "UndefinedNameError",
+            ),
+            (
+                "input_assignment",
+                """\
+                input a
+                output y
+                y = a
+                a = 1
+                """,
+                "InputAssignmentError",
+            ),
+            (
+                "multiple_assignment",
+                """\
+                input a
+                output y
+                y = a
+                y = NOT(a)
+                """,
+                "MultipleAssignmentError",
+            ),
+            (
+                "unassigned_signal",
+                """\
+                input a
+                output y
+                """,
+                "UnassignedSignalError",
+            ),
+            (
+                "duplicate_name_across_lines",
+                """\
+                input a
+                input a
+                output y
+                y = a
+                """,
+                "DuplicateNameError",
+            ),
+            (
+                "unassigned_wire",
+                """\
+                input a
+                output y
+                wire t1
+                y = a
+                """,
+                "UnassignedSignalError",
+            ),
+            (
+                "undeclared_lhs",
+                """\
+                input a
+                output y
+                t1 = a
+                y = a
+                """,
+                "UndefinedNameError",
+            ),
+        ],
+    )
+    def test_check_validation_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        content: str,
+        error_type: str,
+    ) -> None:
+        path = write_circ(tmp_path, f"{case_id}.circ", content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type=error_type,
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:310: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_validation_errors_m0/multiple_assignment.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+_ test_check_validation_errors[unassigned_wire-            input a\n            output y\n            wire t1\n            y = a\n            -UnassignedSignalError] _
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_validation_errors_u2')
+case_id = 'unassigned_wire'
+content = '            input a\n            output y\n            wire t1\n            y = a\n            '
+error_type = 'UnassignedSignalError'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        ("case_id", "content", "error_type"),
+        [
+            (
+                "declaration_after_assignment",
+                """\
+                input a
+                output y
+                y = a
+                wire t1
+                t1 = a
+                """,
+                "DeclarationAfterAssignmentError",
+            ),
+            (
+                "duplicate_name",
+                """\
+                input a a
+                output y
+                y = a
+                """,
+                "DuplicateNameError",
+            ),
+            (
+                "undefined_name",
+                """\
+                input a
+                output y
+                y = z
+                """,
+                "UndefinedNameError",
+            ),
+            (
+                "input_assignment",
+                """\
+                input a
+                output y
+                y = a
+                a = 1
+                """,
+                "InputAssignmentError",
+            ),
+            (
+                "multiple_assignment",
+                """\
+                input a
+                output y
+                y = a
+                y = NOT(a)
+                """,
+                "MultipleAssignmentError",
+            ),
+            (
+                "unassigned_signal",
+                """\
+                input a
+                output y
+                """,
+                "UnassignedSignalError",
+            ),
+            (
+                "duplicate_name_across_lines",
+                """\
+                input a
+                input a
+                output y
+                y = a
+                """,
+                "DuplicateNameError",
+            ),
+            (
+                "unassigned_wire",
+                """\
+                input a
+                output y
+                wire t1
+                y = a
+                """,
+                "UnassignedSignalError",
+            ),
+            (
+                "undeclared_lhs",
+                """\
+                input a
+                output y
+                t1 = a
+                y = a
+                """,
+                "UndefinedNameError",
+            ),
+        ],
+    )
+    def test_check_validation_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        content: str,
+        error_type: str,
+    ) -> None:
+        path = write_circ(tmp_path, f"{case_id}.circ", content)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type=error_type,
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:310: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 9, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_validation_errors_u2/unassigned_wire.circ', 'line': 2, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+________________________ test_check_cycle_error_message ________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_cycle_error_message0')
+
+    def test_check_cycle_error_message(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            "cycle.circ",
+            """\
+            input a
+            output y
+            wire t1 t2
+    
+            t1 = NOT(t2)
+            t2 = NOT(t1)
+            y = t1
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       error = assert_error_payload(
+            payload,
+            command="check",
+            error_type="CycleError",
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:340: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 9, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_cycle_error_message0/cycle.circ', 'line': 2, 'message': 'Duplicate name: T1', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+_______________________ test_check_accepts_all_operators _______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_accepts_all_operato0')
+
+    @pytest.mark.functionality
+    def test_check_accepts_all_operators(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        path = write_operator_circuit(tmp_path)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 3 == 0
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_accepts_all_operato0/operators.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: AND_ABC", "file": "/tmp/pytest-of-agent/pytest-0/test_check_accepts_all_operato0/operators.circ", "line": 1, "col": 12}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:366: AssertionError
+___________ test_check_arity_errors[arity_not_too_many-a-NOT(a, a)] ____________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_0')
+case_id = 'arity_not_too_many', inputs = 'a', expr = 'NOT(a, a)'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("case_id", "inputs", "expr"),
+        [
+            ("arity_not_too_many", "a", "NOT(a, a)"),
+            ("arity_buf_too_many", "a b", "BUF(a, b)"),
+            ("arity_and_too_few", "a", "AND(a)"),
+            ("arity_or_too_few", "a", "OR(a)"),
+            ("arity_xor_too_few", "a", "XOR(a)"),
+            ("arity_nand_too_few", "a", "NAND(a)"),
+            ("arity_nor_too_few", "a", "NOR(a)"),
+            ("arity_xnor_too_few", "a", "XNOR(a)"),
+        ],
+    )
+    def test_check_arity_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        inputs: str,
+        expr: str,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            f"{case_id}.circ",
+            f"""\
+            input {inputs}
+            output y
+            y = {expr}
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type="ArityError",
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:421: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_0/arity_not_too_many.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+__________ test_check_arity_errors[arity_buf_too_many-a b-BUF(a, b)] ___________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_1')
+case_id = 'arity_buf_too_many', inputs = 'a b', expr = 'BUF(a, b)'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("case_id", "inputs", "expr"),
+        [
+            ("arity_not_too_many", "a", "NOT(a, a)"),
+            ("arity_buf_too_many", "a b", "BUF(a, b)"),
+            ("arity_and_too_few", "a", "AND(a)"),
+            ("arity_or_too_few", "a", "OR(a)"),
+            ("arity_xor_too_few", "a", "XOR(a)"),
+            ("arity_nand_too_few", "a", "NAND(a)"),
+            ("arity_nor_too_few", "a", "NOR(a)"),
+            ("arity_xnor_too_few", "a", "XNOR(a)"),
+        ],
+    )
+    def test_check_arity_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        inputs: str,
+        expr: str,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            f"{case_id}.circ",
+            f"""\
+            input {inputs}
+            output y
+            y = {expr}
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type="ArityError",
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:421: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 10, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_1/arity_buf_too_many.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+_____________ test_check_arity_errors[arity_and_too_few-a-AND(a)] ______________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_2')
+case_id = 'arity_and_too_few', inputs = 'a', expr = 'AND(a)'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("case_id", "inputs", "expr"),
+        [
+            ("arity_not_too_many", "a", "NOT(a, a)"),
+            ("arity_buf_too_many", "a b", "BUF(a, b)"),
+            ("arity_and_too_few", "a", "AND(a)"),
+            ("arity_or_too_few", "a", "OR(a)"),
+            ("arity_xor_too_few", "a", "XOR(a)"),
+            ("arity_nand_too_few", "a", "NAND(a)"),
+            ("arity_nor_too_few", "a", "NOR(a)"),
+            ("arity_xnor_too_few", "a", "XNOR(a)"),
+        ],
+    )
+    def test_check_arity_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        inputs: str,
+        expr: str,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            f"{case_id}.circ",
+            f"""\
+            input {inputs}
+            output y
+            y = {expr}
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type="ArityError",
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:421: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_2/arity_and_too_few.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+______________ test_check_arity_errors[arity_or_too_few-a-OR(a)] _______________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_3')
+case_id = 'arity_or_too_few', inputs = 'a', expr = 'OR(a)'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("case_id", "inputs", "expr"),
+        [
+            ("arity_not_too_many", "a", "NOT(a, a)"),
+            ("arity_buf_too_many", "a b", "BUF(a, b)"),
+            ("arity_and_too_few", "a", "AND(a)"),
+            ("arity_or_too_few", "a", "OR(a)"),
+            ("arity_xor_too_few", "a", "XOR(a)"),
+            ("arity_nand_too_few", "a", "NAND(a)"),
+            ("arity_nor_too_few", "a", "NOR(a)"),
+            ("arity_xnor_too_few", "a", "XNOR(a)"),
+        ],
+    )
+    def test_check_arity_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        inputs: str,
+        expr: str,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            f"{case_id}.circ",
+            f"""\
+            input {inputs}
+            output y
+            y = {expr}
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type="ArityError",
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:421: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_3/arity_or_too_few.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+_____________ test_check_arity_errors[arity_xor_too_few-a-XOR(a)] ______________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_4')
+case_id = 'arity_xor_too_few', inputs = 'a', expr = 'XOR(a)'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("case_id", "inputs", "expr"),
+        [
+            ("arity_not_too_many", "a", "NOT(a, a)"),
+            ("arity_buf_too_many", "a b", "BUF(a, b)"),
+            ("arity_and_too_few", "a", "AND(a)"),
+            ("arity_or_too_few", "a", "OR(a)"),
+            ("arity_xor_too_few", "a", "XOR(a)"),
+            ("arity_nand_too_few", "a", "NAND(a)"),
+            ("arity_nor_too_few", "a", "NOR(a)"),
+            ("arity_xnor_too_few", "a", "XNOR(a)"),
+        ],
+    )
+    def test_check_arity_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        inputs: str,
+        expr: str,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            f"{case_id}.circ",
+            f"""\
+            input {inputs}
+            output y
+            y = {expr}
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type="ArityError",
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:421: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_4/arity_xor_too_few.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+____________ test_check_arity_errors[arity_nand_too_few-a-NAND(a)] _____________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_5')
+case_id = 'arity_nand_too_few', inputs = 'a', expr = 'NAND(a)'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("case_id", "inputs", "expr"),
+        [
+            ("arity_not_too_many", "a", "NOT(a, a)"),
+            ("arity_buf_too_many", "a b", "BUF(a, b)"),
+            ("arity_and_too_few", "a", "AND(a)"),
+            ("arity_or_too_few", "a", "OR(a)"),
+            ("arity_xor_too_few", "a", "XOR(a)"),
+            ("arity_nand_too_few", "a", "NAND(a)"),
+            ("arity_nor_too_few", "a", "NOR(a)"),
+            ("arity_xnor_too_few", "a", "XNOR(a)"),
+        ],
+    )
+    def test_check_arity_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        inputs: str,
+        expr: str,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            f"{case_id}.circ",
+            f"""\
+            input {inputs}
+            output y
+            y = {expr}
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type="ArityError",
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:421: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_5/arity_nand_too_few.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+_____________ test_check_arity_errors[arity_nor_too_few-a-NOR(a)] ______________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_6')
+case_id = 'arity_nor_too_few', inputs = 'a', expr = 'NOR(a)'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("case_id", "inputs", "expr"),
+        [
+            ("arity_not_too_many", "a", "NOT(a, a)"),
+            ("arity_buf_too_many", "a b", "BUF(a, b)"),
+            ("arity_and_too_few", "a", "AND(a)"),
+            ("arity_or_too_few", "a", "OR(a)"),
+            ("arity_xor_too_few", "a", "XOR(a)"),
+            ("arity_nand_too_few", "a", "NAND(a)"),
+            ("arity_nor_too_few", "a", "NOR(a)"),
+            ("arity_xnor_too_few", "a", "XNOR(a)"),
+        ],
+    )
+    def test_check_arity_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        inputs: str,
+        expr: str,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            f"{case_id}.circ",
+            f"""\
+            input {inputs}
+            output y
+            y = {expr}
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type="ArityError",
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:421: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_6/arity_nor_too_few.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+____________ test_check_arity_errors[arity_xnor_too_few-a-XNOR(a)] _____________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_7')
+case_id = 'arity_xnor_too_few', inputs = 'a', expr = 'XNOR(a)'
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        ("case_id", "inputs", "expr"),
+        [
+            ("arity_not_too_many", "a", "NOT(a, a)"),
+            ("arity_buf_too_many", "a b", "BUF(a, b)"),
+            ("arity_and_too_few", "a", "AND(a)"),
+            ("arity_or_too_few", "a", "OR(a)"),
+            ("arity_xor_too_few", "a", "XOR(a)"),
+            ("arity_nand_too_few", "a", "NAND(a)"),
+            ("arity_nor_too_few", "a", "NOR(a)"),
+            ("arity_xnor_too_few", "a", "XNOR(a)"),
+        ],
+    )
+    def test_check_arity_errors(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+        case_id: str,
+        inputs: str,
+        expr: str,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            f"{case_id}.circ",
+            f"""\
+            input {inputs}
+            output y
+            y = {expr}
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type="ArityError",
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:421: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_arity_errors_arity_7/arity_xnor_too_few.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+__________________ test_check_identifiers_are_case_sensitive ___________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_identifiers_are_cas0')
+
+    @pytest.mark.functionality
+    def test_check_identifiers_are_case_sensitive(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        path = write_circ(
+            tmp_path,
+            "case_sensitive.circ",
+            """\
+            input A
+            output y
+            y = a
+            """,
+        )
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+        assert result.returncode == 3
+>       assert_error_payload(
+            payload,
+            command="check",
+            error_type="UndefinedNameError",
+            exit_code=3,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:448: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'command': 'check', 'error': {'col': 8, 'file': '/tmp/pytest-of-agent/pytest-0/test_check_identifiers_are_cas0/case_sensitive.circ', 'line': 1, 'message': 'Duplicate name: Y', ...}, 'exit_code': 3, 'ok': False}
+
+    def assert_error_payload(
+        payload: dict[str, object],
+        *,
+        command: str,
+        error_type: str,
+        exit_code: int,
+    ) -> dict[str, object]:
+        assert payload.get("ok") is False
+        assert payload.get("command") == command
+        assert payload.get("exit_code") == exit_code
+        error = payload.get("error")
+        assert isinstance(error, dict)
+>       assert error.get("type") == error_type
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError
+
+.evaluation_tests/helpers.py:71: AssertionError
+_______________________ test_check_majority_vote_circuit _______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_majority_vote_circu0')
+
+    @pytest.mark.functionality
+    def test_check_majority_vote_circuit(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Test that majority vote circuit parses and validates correctly."""
+        from novel_circuits import MAJORITY_VOTE_CIRC
+    
+        path = write_circ(tmp_path, "majority.circ", MAJORITY_VOTE_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 3 == 0
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_majority_vote_circu0/majority.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: T1", "file": "/tmp/pytest-of-agent/pytest-0/test_check_majority_vote_circu0/majority.circ", "line": 2, "col": 9}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:476: AssertionError
+_____________________ test_check_parity_generator_circuit ______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_parity_generator_ci0')
+
+    @pytest.mark.functionality
+    def test_check_parity_generator_circuit(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Test that parity generator circuit parses and validates correctly."""
+        from novel_circuits import PARITY_CIRC
+    
+        path = write_circ(tmp_path, "parity.circ", PARITY_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 3 == 0
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_parity_generator_ci0/parity.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: T1", "file": "/tmp/pytest-of-agent/pytest-0/test_check_parity_generator_ci0/parity.circ", "line": 2, "col": 9}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:497: AssertionError
+______________________ test_check_comparator_2bit_circuit ______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_comparator_2bit_cir0')
+
+    @pytest.mark.functionality
+    def test_check_comparator_2bit_circuit(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Test that 2-bit comparator circuit parses and validates correctly."""
+        from novel_circuits import COMPARATOR_2BIT_CIRC
+    
+        path = write_circ(tmp_path, "cmp.circ", COMPARATOR_2BIT_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 3 == 0
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_comparator_2bit_cir0/cmp.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: EQ1", "file": "/tmp/pytest-of-agent/pytest-0/test_check_comparator_2bit_cir0/cmp.circ", "line": 2, "col": 16}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:517: AssertionError
+__________________________ test_check_decoder_circuit __________________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_decoder_circuit0')
+
+    @pytest.mark.functionality
+    def test_check_decoder_circuit(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Test that 1-to-2 decoder circuit parses and validates correctly."""
+        from novel_circuits import DECODER_CIRC
+    
+        path = write_circ(tmp_path, "dec.circ", DECODER_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 3 == 0
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_decoder_circuit0/dec.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: Y0", "file": "/tmp/pytest-of-agent/pytest-0/test_check_decoder_circuit0/dec.circ", "line": 1, "col": 13}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:537: AssertionError
+_______________________ test_check_shared_scalar_circuit _______________________
+
+entrypoint_argv = ['uv', 'run', 'circopt.py']
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_check_shared_scalar_circu0')
+
+    @pytest.mark.functionality
+    def test_check_shared_scalar_circuit(
+        entrypoint_argv: list[str],
+        tmp_path: Path,
+    ) -> None:
+        """Shared scalar circuit for cross-checkpoint coverage."""
+        from novel_circuits import SHARED_SCALAR_CIRC
+    
+        path = write_circ(tmp_path, "shared_scalar.circ", SHARED_SCALAR_CIRC)
+        result, payload = run_json_command(
+            entrypoint_argv,
+            ["check", str(path), "--json"],
+        )
+>       assert result.returncode == 0
+E       assert 3 == 0
+E        +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_shared_scalar_circu0/shared_scalar.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: T1", "file": "/tmp/pytest-of-agent/pytest-0/test_check_shared_scalar_circu0/shared_scalar.circ", "line": 2, "col": 32}}\n', stderr='').returncode
+
+.evaluation_tests/test_checkpoint_1.py:557: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_cli_unknown_command - json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_valid_circuit_reports_interface - assert 3 == 0
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_valid_circuit_repor0/basic.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: T1", "file": "/tmp/pytest-of-agent/pytest-0/test_check_valid_circuit_repor0/basic.circ", "line": 2, "col": 11}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_file_not_found - json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[bad_syntax-            input a b\n            output y\n            y = AND(a, b\n            ] - assert 3 == 2
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l0/bad_syntax.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: Y", "file": "/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l0/bad_syntax.circ", "line": 1, "col": 10}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_parse_errors_have_location[literal_x-            input a\n            output y\n            y = X\n            ] - assert 3 == 2
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l1/literal_x.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: Y", "file": "/tmp/pytest-of-agent/pytest-0/test_check_parse_errors_have_l1/literal_x.circ", "line": 1, "col": 8}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[declaration_after_assignment-            input a\n            output y\n            y = a\n            wire t1\n            t1 = a\n            -DeclarationAfterAssignmentError] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[undefined_name-            input a\n            output y\n            y = z\n            -UndefinedNameError] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[input_assignment-            input a\n            output y\n            y = a\n            a = 1\n            -InputAssignmentError] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[multiple_assignment-            input a\n            output y\n            y = a\n            y = NOT(a)\n            -MultipleAssignmentError] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_validation_errors[unassigned_wire-            input a\n            output y\n            wire t1\n            y = a\n            -UnassignedSignalError] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_cycle_error_message - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_accepts_all_operators - assert 3 == 0
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_accepts_all_operato0/operators.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: AND_ABC", "file": "/tmp/pytest-of-agent/pytest-0/test_check_accepts_all_operato0/operators.circ", "line": 1, "col": 12}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_not_too_many-a-NOT(a, a)] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_buf_too_many-a b-BUF(a, b)] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_and_too_few-a-AND(a)] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_or_too_few-a-OR(a)] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_xor_too_few-a-XOR(a)] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_nand_too_few-a-NAND(a)] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_nor_too_few-a-NOR(a)] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_arity_errors[arity_xnor_too_few-a-XNOR(a)] - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_identifiers_are_case_sensitive - AssertionError
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_majority_vote_circuit - assert 3 == 0
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_majority_vote_circu0/majority.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: T1", "file": "/tmp/pytest-of-agent/pytest-0/test_check_majority_vote_circu0/majority.circ", "line": 2, "col": 9}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_parity_generator_circuit - assert 3 == 0
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_parity_generator_ci0/parity.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: T1", "file": "/tmp/pytest-of-agent/pytest-0/test_check_parity_generator_ci0/parity.circ", "line": 2, "col": 9}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_comparator_2bit_circuit - assert 3 == 0
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_comparator_2bit_cir0/cmp.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: EQ1", "file": "/tmp/pytest-of-agent/pytest-0/test_check_comparator_2bit_cir0/cmp.circ", "line": 2, "col": 16}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_decoder_circuit - assert 3 == 0
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_decoder_circuit0/dec.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: Y0", "file": "/tmp/pytest-of-agent/pytest-0/test_check_decoder_circuit0/dec.circ", "line": 1, "col": 13}}\n', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_1.py::test_check_shared_scalar_circuit - assert 3 == 0
+ +  where 3 = CompletedProcess(args=['uv', 'run', 'circopt.py', 'check', '/tmp/pytest-of-agent/pytest-0/test_check_shared_scalar_circu0/shared_scalar.circ', '--json'], returncode=3, stdout='{"ok": false, "command": "check", "exit_code": 3, "error": {"type": "DuplicateNameError", "message": "Duplicate name: T1", "file": "/tmp/pytest-of-agent/pytest-0/test_check_shared_scalar_circu0/shared_scalar.circ", "line": 2, "col": 32}}\n', stderr='').returncode
+======================== 26 failed, 10 passed in 6.77s =========================

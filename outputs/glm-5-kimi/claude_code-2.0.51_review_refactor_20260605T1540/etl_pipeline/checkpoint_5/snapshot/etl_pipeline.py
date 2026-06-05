@@ -1,0 +1,1641 @@
+#!/usr/bin/env python3
+"""ETL Pipeline Parser - Validates and normalizes ETL pipeline specifications."""
+
+import argparse
+import json
+import sys
+import re
+from typing import Any, Dict, List, Optional, Tuple
+
+
+# Supported operations and their required fields
+SUPPORTED_OPS = {
+    "select": ["columns"],
+    "filter": ["where"],
+    "map": ["as", "expr"],
+    "rename": [],  # Special handling for from/to or mapping
+    "limit": ["n"],
+    "call": [],  # Special handling for name/params
+}
+
+# Valid definition name pattern
+DEF_NAME_PATTERN = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*$')
+
+
+class ETLError(Exception):
+    """Custom exception for ETL pipeline errors."""
+    def __init__(self, error_code: str, message: str, path: str):
+        self.error_code = error_code
+        self.message = f"ETL_ERROR: {message}"
+        self.path = path
+        super().__init__(self.message)
+
+
+def find_unsupported_operator(expr: str) -> Optional[str]:
+    """
+    Find unsupported operators in expression.
+    Returns the unsupported operator string if found, None otherwise.
+    """
+    # Check for ** (power operator - unsupported)
+    if '**' in expr:
+        return '**'
+
+    # Check for ^^ (power operator - unsupported)
+    if '^^' in expr:
+        return '^^'
+
+    # Check for %% (modulo operator - unsupported)
+    if '%%' in expr:
+        return '%%'
+
+    # Check for consecutive arithmetic operators (like ++, -- when not comparison)
+    match = re.search(r'[+\-*/]{2,}', expr)
+    if match:
+        op = match.group()
+        # Exclude valid two-char operators
+        if op not in ('>=', '<=', '==', '!=', '&&', '||'):
+            return op
+
+    return None
+
+
+def validate_expression(expr: str) -> tuple:
+    """
+    Basic validation of expression syntax.
+    Returns (is_valid, unsupported_op) tuple.
+    """
+    if not expr or expr.isspace():
+        return False, None
+
+    # Check for unsupported operators
+    unsupported = find_unsupported_operator(expr)
+    if unsupported:
+        return False, unsupported
+
+    # Check for consecutive logical operators
+    if re.search(r'\b(and|or|not)\s+(and|or|not)\b', expr, re.IGNORECASE):
+        return False, None
+
+    # Check for consecutive comparison operators
+    if re.search(r'(>=|<=|==|!=|>|<)\s*(>=|<=|==|!=|>|<)', expr):
+        return False, None
+
+    return True, None
+
+
+def normalize_step(step: Dict[str, Any], index: int, context: str = "pipeline", defs: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Normalize a single step object.
+
+    Args:
+        step: The step object to normalize
+        index: The index of the step in the steps array
+        context: Either "pipeline" or "defs[DefName]" for error path
+        defs: Available definitions for call step validation
+    """
+    if not isinstance(step, dict):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "step must be an object",
+            f"{context}.steps[{index}]"
+        )
+
+    # Get and normalize operation name
+    if "op" not in step:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "missing required field 'op'",
+            f"{context}.steps[{index}]"
+        )
+
+    op_raw = step.get("op")
+    if not isinstance(op_raw, str):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "op must be a string",
+            f"{context}.steps[{index}].op"
+        )
+
+    op = op_raw.strip().lower()
+
+    if not op:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "op cannot be empty or whitespace-only",
+            f"{context}.steps[{index}].op"
+        )
+
+    # Check if operation is supported
+    if op not in SUPPORTED_OPS:
+        raise ETLError(
+            "UNKNOWN_OP",
+            f"unsupported op '{op}'",
+            f"{context}.steps[{index}].op"
+        )
+
+    # Create normalized step with op first
+    normalized = {"op": op}
+
+    # Process based on operation type
+    if op == "select":
+        if "columns" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "missing required field 'columns'",
+                f"{context}.steps[{index}]"
+            )
+
+        columns = step["columns"]
+        if not isinstance(columns, list):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "columns must be an array",
+                f"{context}.steps[{index}].columns"
+            )
+
+        for i, col in enumerate(columns):
+            if not isinstance(col, str):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    f"column name must be a string",
+                    f"{context}.steps[{index}].columns[{i}]"
+                )
+
+        # Preserve column names exactly (spaces are significant)
+        normalized["columns"] = columns
+
+    elif op == "filter":
+        if "where" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "missing required field 'where'",
+                f"{context}.steps[{index}]"
+            )
+
+        where_raw = step["where"]
+        if not isinstance(where_raw, str):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "where must be a string",
+                f"{context}.steps[{index}].where"
+            )
+
+        where = where_raw.strip()
+        if not where:
+            raise ETLError(
+                "BAD_EXPR",
+                "where expression is empty or whitespace-only",
+                f"{context}.steps[{index}].where"
+            )
+
+        is_valid, unsupported = validate_expression(where)
+        if not is_valid:
+            if unsupported:
+                raise ETLError(
+                    "BAD_EXPR",
+                    f"unsupported operator '{unsupported}'",
+                    f"{context}.steps[{index}].where"
+                )
+            else:
+                raise ETLError(
+                    "BAD_EXPR",
+                    "invalid expression syntax",
+                    f"{context}.steps[{index}].where"
+                )
+
+        normalized["where"] = where
+
+    elif op == "map":
+        if "as" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "missing required field 'as'",
+                f"{context}.steps[{index}]"
+            )
+
+        if "expr" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "missing required field 'expr'",
+                f"{context}.steps[{index}]"
+            )
+
+        as_raw = step["as"]
+        if not isinstance(as_raw, str):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "as must be a string",
+                f"{context}.steps[{index}].as"
+            )
+
+        as_name = as_raw.strip()
+        if not as_name:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "as is empty or whitespace-only",
+                f"{context}.steps[{index}].as"
+            )
+
+        expr_raw = step["expr"]
+        if not isinstance(expr_raw, str):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "expr must be a string",
+                f"{context}.steps[{index}].expr"
+            )
+
+        expr = expr_raw.strip()
+        if not expr:
+            raise ETLError(
+                "BAD_EXPR",
+                "expr is empty or whitespace-only",
+                f"{context}.steps[{index}].expr"
+            )
+
+        is_valid, unsupported = validate_expression(expr)
+        if not is_valid:
+            if unsupported:
+                raise ETLError(
+                    "BAD_EXPR",
+                    f"unsupported operator '{unsupported}'",
+                    f"{context}.steps[{index}].expr"
+                )
+            else:
+                raise ETLError(
+                    "BAD_EXPR",
+                    "invalid expression syntax",
+                    f"{context}.steps[{index}].expr"
+                )
+
+        normalized["as"] = as_name
+        normalized["expr"] = expr
+
+    elif op == "rename":
+        # Check for from/to or mapping
+        has_from_to = "from" in step and "to" in step
+        has_mapping = "mapping" in step
+
+        if has_mapping:
+            mapping = step["mapping"]
+            if not isinstance(mapping, dict):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "mapping must be an object",
+                    f"{context}.steps[{index}].mapping"
+                )
+
+            normalized_mapping = {}
+            for key, value in mapping.items():
+                if not isinstance(key, str):
+                    raise ETLError(
+                        "SCHEMA_VALIDATION_FAILED",
+                        "mapping key must be a string",
+                        f"{context}.steps[{index}].mapping"
+                    )
+                if not isinstance(value, str):
+                    raise ETLError(
+                        "SCHEMA_VALIDATION_FAILED",
+                        "mapping value must be a string",
+                        f"{context}.steps[{index}].mapping[{key}]"
+                    )
+                # Preserve mapping keys/values exactly
+                normalized_mapping[key] = value
+
+            normalized["mapping"] = normalized_mapping
+
+        elif has_from_to:
+            from_raw = step["from"]
+            to_raw = step["to"]
+
+            if not isinstance(from_raw, str):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "from must be a string",
+                    f"{context}.steps[{index}].from"
+                )
+
+            if not isinstance(to_raw, str):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "to must be a string",
+                    f"{context}.steps[{index}].to"
+                )
+
+            from_name = from_raw.strip()
+            to_name = to_raw.strip()
+
+            if not from_name:
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "from is empty or whitespace-only",
+                    f"{context}.steps[{index}].from"
+                )
+
+            if not to_name:
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "to is empty or whitespace-only",
+                    f"{context}.steps[{index}].to"
+                )
+
+            # Convert from/to to mapping
+            normalized["mapping"] = {from_name: to_name}
+
+        else:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "rename requires either 'from' and 'to' fields or 'mapping' field",
+                f"{context}.steps[{index}]"
+            )
+
+    elif op == "limit":
+        if "n" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "missing required field 'n'",
+                f"{context}.steps[{index}]"
+            )
+
+        n = step["n"]
+        if not isinstance(n, int) or isinstance(n, bool):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "n must be an integer",
+                f"{context}.steps[{index}].n"
+            )
+
+        if n < 0:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "n must be >= 0",
+                f"{context}.steps[{index}].n"
+            )
+
+        normalized["n"] = n
+
+    elif op == "call":
+        # Validate name field
+        if "name" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "missing required field 'name'",
+                f"{context}.steps[{index}]"
+            )
+
+        name = step["name"]
+        if not isinstance(name, str):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "name must be a string",
+                f"{context}.steps[{index}].name"
+            )
+
+        if not DEF_NAME_PATTERN.match(name):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                f"invalid definition name '{name}'",
+                f"{context}.steps[{index}].name"
+            )
+
+        # Validate that definition exists (if defs provided)
+        if defs is not None and name not in defs:
+            raise ETLError(
+                "UNKNOWN_DEF",
+                f"definition '{name}' not found",
+                f"{context}.steps[{index}].name"
+            )
+
+        # Validate params field if present
+        if "params" in step:
+            params = step["params"]
+            if not isinstance(params, dict):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "params must be an object",
+                    f"{context}.steps[{index}].params"
+                )
+            # Validate params values are scalars or arrays
+            for key, value in params.items():
+                if not isinstance(key, str):
+                    raise ETLError(
+                        "SCHEMA_VALIDATION_FAILED",
+                        "param key must be a string",
+                        f"{context}.steps[{index}].params"
+                    )
+                if isinstance(value, dict):
+                    raise ETLError(
+                        "SCHEMA_VALIDATION_FAILED",
+                        f"param '{key}' cannot be a nested object",
+                        f"{context}.steps[{index}].params.{key}"
+                    )
+        else:
+            params = {}
+
+        normalized["name"] = name
+        normalized["params"] = params
+
+    # Sort remaining fields alphabetically (op is already first)
+    sorted_normalized = {"op": normalized["op"]}
+    for key in sorted(k for k in normalized.keys() if k != "op"):
+        sorted_normalized[key] = normalized[key]
+
+    return sorted_normalized
+
+
+def validate_def_steps(steps: List[Any], def_name: str, defs: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+    """Validate and normalize steps within a definition."""
+    if not isinstance(steps, list):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "steps must be an array",
+            f"defs[{def_name}].steps"
+        )
+
+    normalized_steps = []
+    for i, step in enumerate(steps):
+        if not isinstance(step, dict):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "step must be an object",
+                f"defs[{def_name}].steps[{i}]"
+            )
+        normalized_steps.append(normalize_step(step, i, f"defs[{def_name}]", defs))
+    return normalized_steps
+
+
+def parse_library_ref(ref: str, compose_index: int) -> Tuple[str, str]:
+    """Parse a library reference string 'ns:name' into (namespace, name).
+
+    Args:
+        ref: The reference string to parse
+        compose_index: The index in the compose array for error path
+
+    Returns:
+        Tuple of (namespace, name)
+
+    Raises:
+        ETLError: If the reference format is invalid
+    """
+    if ':' not in ref:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            f"invalid reference format '{ref}', expected 'ns:name'",
+            f"compose[{compose_index}].ref"
+        )
+
+    parts = ref.split(':', 1)
+    if len(parts) != 2:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            f"invalid reference format '{ref}', expected 'ns:name'",
+            f"compose[{compose_index}].ref"
+        )
+
+    namespace = parts[0]
+    name = parts[1]
+
+    if not namespace:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "namespace cannot be empty",
+            f"compose[{compose_index}].ref"
+        )
+
+    if not name:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "definition name cannot be empty",
+            f"compose[{compose_index}].ref"
+        )
+
+    return namespace, name
+
+
+def validate_library(library: Dict[str, Any]) -> Dict[str, Any]:
+    """Validate and normalize the library definitions.
+
+    Args:
+        library: The library object to validate
+
+    Returns:
+        Normalized library with validated definitions
+    """
+    if not isinstance(library, dict):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "library must be an object",
+            "library"
+        )
+
+    normalized_library = {}
+
+    for ns, ns_body in library.items():
+        if not isinstance(ns, str) or not ns:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "namespace must be a non-empty string",
+                "library"
+            )
+
+        if not isinstance(ns_body, dict):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                f"namespace body must be an object",
+                f"library[{ns}]"
+            )
+
+        if "defs" not in ns_body:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "missing required field 'defs'",
+                f"library[{ns}]"
+            )
+
+        defs = ns_body["defs"]
+        if not isinstance(defs, dict):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "defs must be an object",
+                f"library[{ns}].defs"
+            )
+
+        normalized_defs = {}
+        for def_name, def_body in defs.items():
+            if not isinstance(def_name, str) or not def_name:
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "definition name must be a non-empty string",
+                    f"library[{ns}].defs"
+                )
+
+            if not isinstance(def_body, dict):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "definition body must be an object",
+                    f"library[{ns}].defs[{def_name}]"
+                )
+
+            if "steps" not in def_body:
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "missing required field 'steps'",
+                    f"library[{ns}].defs[{def_name}].steps"
+                )
+
+            steps = def_body["steps"]
+            if not isinstance(steps, list):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "steps must be an array",
+                    f"library[{ns}].defs[{def_name}].steps"
+                )
+
+            # Validate each step in the library definition
+            normalized_steps = []
+            for i, step in enumerate(steps):
+                if not isinstance(step, dict):
+                    raise ETLError(
+                        "SCHEMA_VALIDATION_FAILED",
+                        "step must be an object",
+                        f"library[{ns}].defs[{def_name}].steps[{i}]"
+                    )
+                normalized_steps.append(normalize_step(step, i, f"library[{ns}].defs[{def_name}]"))
+
+            normalized_defs[def_name] = {"steps": normalized_steps}
+
+        normalized_library[ns] = {"defs": normalized_defs}
+
+    return normalized_library
+
+
+def validate_compose_item(item: Any, index: int, library: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], Optional[Dict[str, Any]]]:
+    """Validate a single compose item and return its normalized steps and params.
+
+    Args:
+        item: The compose item to validate (either a ref or inline steps)
+        index: The index in the compose array for error path
+        library: The validated library to resolve references
+
+    Returns:
+        Tuple of (List of normalized steps from this compose item, params dict or None)
+
+    Raises:
+        ETLError: If validation fails
+    """
+    if not isinstance(item, dict):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "compose item must be an object",
+            f"compose[{index}]"
+        )
+
+    has_ref = "ref" in item
+    has_steps = "steps" in item
+
+    if not has_ref and not has_steps:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "compose item must have either 'ref' or 'steps'",
+            f"compose[{index}]"
+        )
+
+    if has_ref and has_steps:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "compose item cannot have both 'ref' and 'steps'",
+            f"compose[{index}]"
+        )
+
+    params = None
+
+    if has_ref:
+        # Validate and resolve library reference
+        ref = item["ref"]
+        if not isinstance(ref, str):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ref must be a string",
+                f"compose[{index}].ref"
+            )
+
+        namespace, def_name = parse_library_ref(ref, index)
+
+        # Check if namespace exists
+        if namespace not in library:
+            raise ETLError(
+                "UNKNOWN_NAMESPACE",
+                f"namespace '{namespace}' not found in library",
+                f"compose[{index}].ref"
+            )
+
+        # Check if definition exists in namespace
+        if def_name not in library[namespace]["defs"]:
+            raise ETLError(
+                "UNKNOWN_LIB_REF",
+                f"definition '{def_name}' not found in namespace '{namespace}'",
+                f"compose[{index}].ref"
+            )
+
+        # Validate params if present
+        params = item.get("params")
+        if params is not None:
+            if not isinstance(params, dict):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "params must be an object",
+                    f"compose[{index}].params"
+                )
+        else:
+            params = {}  # Default empty params
+
+        # Return the steps from the library definition (copy to avoid mutation)
+        lib_def = library[namespace]["defs"][def_name]
+        steps_copy = []
+        for step in lib_def["steps"]:
+            step_copy = dict(step)
+            steps_copy.append(step_copy)
+        return steps_copy, params
+
+    else:
+        # Inline steps - no params
+        steps = item["steps"]
+        if not isinstance(steps, list):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "steps must be an array",
+                f"compose[{index}].steps"
+            )
+
+        normalized_steps = []
+        for i, step in enumerate(steps):
+            if not isinstance(step, dict):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "step must be an object",
+                    f"compose[{index}].steps[{i}]"
+                )
+            normalized_steps.append(normalize_step(step, i, f"compose[{index}]"))
+        return normalized_steps, None
+
+
+def validate_compose(compose: List[Any], library: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[Optional[Dict[str, Any]]]]:
+    """Validate the compose array and return the flattened steps and params list.
+
+    Args:
+        compose: The compose array to validate
+        library: The validated library to resolve references
+
+    Returns:
+        Tuple of (List of all normalized steps from compose, List of params for each compose item)
+    """
+    if not isinstance(compose, list):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "compose must be an array",
+            "compose"
+        )
+
+    all_steps = []
+    all_params = []
+
+    for i, item in enumerate(compose):
+        steps, params = validate_compose_item(item, i, library)
+        all_steps.extend(steps)
+        # params applies to all steps from this compose item
+        for _ in steps:
+            all_params.append(params)
+
+    return all_steps, all_params
+
+
+def validate_and_normalize(data: Dict[str, Any]) -> Dict[str, Any]:
+    """Validate and normalize the entire pipeline."""
+    # Check for compose field (checkpoint 5)
+    has_compose = "compose" in data
+    has_pipeline = "pipeline" in data
+
+    # Validate and process library if present
+    library = data.get("library", {})
+    normalized_library = {}
+    if library:
+        normalized_library = validate_library(library)
+
+    # Handle compose mode
+    if has_compose:
+        # compose and pipeline.steps are mutually exclusive
+        if has_pipeline:
+            pipeline = data["pipeline"]
+            if isinstance(pipeline, dict) and "steps" in pipeline:
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "compose and pipeline.steps are mutually exclusive",
+                    "compose"
+                )
+
+        # Validate dataset field
+        if "dataset" not in data:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "missing required field 'dataset'",
+                "dataset"
+            )
+
+        dataset = data["dataset"]
+        if not isinstance(dataset, list):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "dataset must be an array",
+                "dataset"
+            )
+
+        # Validate each dataset element is an object
+        for i, item in enumerate(dataset):
+            if not isinstance(item, dict):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    f"dataset[{i}] must be an object",
+                    f"dataset[{i}]"
+                )
+
+        # Validate compose
+        compose = data["compose"]
+        all_steps, all_params = validate_compose(compose, normalized_library)
+
+        return {
+            "steps": all_steps,
+            "library": normalized_library,
+            "compose_items": data["compose"],  # Keep original compose items for execution
+            "compose_params": all_params  # Params for each step
+        }
+
+    # Original pipeline mode (checkpoints 1-4)
+    # Check for pipeline field
+    if "pipeline" not in data:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "missing required field 'pipeline'",
+            "pipeline"
+        )
+
+    pipeline = data["pipeline"]
+    if not isinstance(pipeline, dict):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "pipeline must be an object",
+            "pipeline"
+        )
+
+    # Check for steps field
+    if "steps" not in pipeline:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "missing required field 'steps'",
+            "pipeline.steps"
+        )
+
+    steps = pipeline["steps"]
+    if not isinstance(steps, list):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "steps must be an array",
+            "pipeline.steps"
+        )
+
+    # Check for dataset field
+    if "dataset" not in data:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "missing required field 'dataset'",
+            "dataset"
+        )
+
+    dataset = data["dataset"]
+    if not isinstance(dataset, list):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "dataset must be an array",
+            "dataset"
+        )
+
+    # Validate each dataset element is an object
+    for i, item in enumerate(dataset):
+        if not isinstance(item, dict):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                f"dataset[{i}] must be an object",
+                f"dataset[{i}]"
+            )
+
+    # Validate defs if present
+    defs = data.get("defs", {})
+    normalized_defs = {}
+    if defs is not None and isinstance(defs, dict):
+        for def_name, def_body in defs.items():
+            if not isinstance(def_body, dict):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    f"definition body must be an object",
+                    f"defs[{def_name}]"
+                )
+            if "steps" not in def_body:
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "missing required field 'steps'",
+                    f"defs[{def_name}].steps"
+                )
+            normalized_defs[def_name] = {
+                "steps": validate_def_steps(def_body["steps"], def_name, defs)
+            }
+
+    # Normalize each step (pass defs for call step validation)
+    normalized_steps = []
+    for i, step in enumerate(steps):
+        normalized_steps.append(normalize_step(step, i, "pipeline", normalized_defs))
+
+    result = {"steps": normalized_steps}
+    if normalized_defs:
+        result["defs"] = normalized_defs
+    return result
+
+
+class Token:
+    """Represents a token in the expression language."""
+    def __init__(self, type_: str, value: Any, pos: int):
+        self.type = type_
+        self.value = value
+        self.pos = pos
+
+    def __repr__(self):
+        return f"Token({self.type}, {self.value!r}, {self.pos})"
+
+
+class ExpressionTokenizer:
+    """Tokenizer for the expression language."""
+
+    def __init__(self, expr: str):
+        self.expr = expr
+        self.pos = 0
+        self.tokens = []
+
+    def tokenize(self) -> List[Token]:
+        """Tokenize the expression string."""
+        while self.pos < len(self.expr):
+            self._skip_whitespace()
+            if self.pos >= len(self.expr):
+                break
+
+            char = self.expr[self.pos]
+
+            # String literals
+            if char == '"':
+                self.tokens.append(self._read_string())
+            # Numbers
+            elif char.isdigit() or (char == '-' and self.pos + 1 < len(self.expr) and self.expr[self.pos + 1].isdigit()):
+                self.tokens.append(self._read_number())
+            # Identifiers and keywords
+            elif char.isalpha() or char == '_':
+                self.tokens.append(self._read_identifier())
+            # Two-character operators
+            elif self.pos + 1 < len(self.expr) and self.expr[self.pos:self.pos+2] in ('>=', '<=', '==', '!=', '&&', '||'):
+                op = self.expr[self.pos:self.pos+2]
+                self.tokens.append(Token('OP', op, self.pos))
+                self.pos += 2
+            # Single-character operators and parentheses
+            elif char in '+-*/!><()':
+                self.tokens.append(Token('OP', char, self.pos))
+                self.pos += 1
+            # Dot for member access
+            elif char == '.':
+                self.tokens.append(Token('DOT', '.', self.pos))
+                self.pos += 1
+            # Unknown character
+            else:
+                raise ETLError("BAD_EXPR", f"unexpected character '{char}'", "")
+
+        return self.tokens
+
+    def _skip_whitespace(self):
+        while self.pos < len(self.expr) and self.expr[self.pos].isspace():
+            self.pos += 1
+
+    def _read_string(self) -> Token:
+        start = self.pos
+        self.pos += 1  # Skip opening quote
+        result = []
+
+        while self.pos < len(self.expr):
+            char = self.expr[self.pos]
+            if char == '"':
+                self.pos += 1  # Skip closing quote
+                return Token('STRING', ''.join(result), start)
+            if char == '\\':
+                self.pos += 1
+                if self.pos < len(self.expr):
+                    escaped = self.expr[self.pos]
+                    if escaped == 'n':
+                        result.append('\n')
+                    elif escaped == 't':
+                        result.append('\t')
+                    elif escaped == 'r':
+                        result.append('\r')
+                    elif escaped == '\\':
+                        result.append('\\')
+                    elif escaped == '"':
+                        result.append('"')
+                    else:
+                        result.append(escaped)
+                    self.pos += 1
+            else:
+                result.append(char)
+                self.pos += 1
+
+        raise ETLError("BAD_EXPR", "unterminated string", "")
+
+    def _read_number(self) -> Token:
+        start = self.pos
+        result = []
+
+        # Handle negative sign
+        if self.expr[self.pos] == '-':
+            result.append('-')
+            self.pos += 1
+
+        # Integer part
+        while self.pos < len(self.expr) and self.expr[self.pos].isdigit():
+            result.append(self.expr[self.pos])
+            self.pos += 1
+
+        # Decimal part
+        if self.pos < len(self.expr) and self.expr[self.pos] == '.':
+            result.append('.')
+            self.pos += 1
+            while self.pos < len(self.expr) and self.expr[self.pos].isdigit():
+                result.append(self.expr[self.pos])
+                self.pos += 1
+
+        num_str = ''.join(result)
+        return Token('NUMBER', float(num_str) if '.' in num_str else int(num_str), start)
+
+    def _read_identifier(self) -> Token:
+        start = self.pos
+        result = []
+
+        while self.pos < len(self.expr) and (self.expr[self.pos].isalnum() or self.expr[self.pos] == '_'):
+            result.append(self.expr[self.pos])
+            self.pos += 1
+
+        name = ''.join(result)
+
+        # Check for keywords
+        if name == 'true':
+            return Token('BOOL', True, start)
+        if name == 'false':
+            return Token('BOOL', False, start)
+        if name == 'null':
+            return Token('NULL', None, start)
+        return Token('IDENT', name, start)
+
+
+class ExpressionParser:
+    """Parser for the expression language with proper precedence."""
+
+    def __init__(self, tokens: List[Token]):
+        self.tokens = tokens
+        self.pos = 0
+
+    def parse(self):
+        """Parse the expression and return an AST."""
+        if not self.tokens:
+            raise ETLError("BAD_EXPR", "empty expression", "")
+        result = self._parse_or()
+        if self.pos < len(self.tokens):
+            raise ETLError("BAD_EXPR", f"unexpected token '{self.tokens[self.pos].value}'", "")
+        return result
+
+    def _current(self) -> Optional[Token]:
+        return self.tokens[self.pos] if self.pos < len(self.tokens) else None
+
+    def _advance(self):
+        self.pos += 1
+
+    def _parse_or(self):
+        """Parse || operator (lowest precedence)."""
+        left = self._parse_and()
+
+        while self._current() and self._current().type == 'OP' and self._current().value == '||':
+            op = self._current()
+            self._advance()
+            right = self._parse_and()
+            left = ('binop', op.value, left, right)
+
+        return left
+
+    def _parse_and(self):
+        """Parse && operator."""
+        left = self._parse_equality()
+
+        while self._current() and self._current().type == 'OP' and self._current().value == '&&':
+            op = self._current()
+            self._advance()
+            right = self._parse_equality()
+            left = ('binop', op.value, left, right)
+
+        return left
+
+    def _parse_equality(self):
+        """Parse == and != operators."""
+        left = self._parse_comparison()
+
+        while self._current() and self._current().type == 'OP' and self._current().value in ('==', '!='):
+            op = self._current()
+            self._advance()
+            right = self._parse_comparison()
+            left = ('binop', op.value, left, right)
+
+        return left
+
+    def _parse_comparison(self):
+        """Parse <, <=, >, >= operators."""
+        left = self._parse_additive()
+
+        while self._current() and self._current().type == 'OP' and self._current().value in ('<', '<=', '>', '>='):
+            op = self._current()
+            self._advance()
+            right = self._parse_additive()
+            left = ('binop', op.value, left, right)
+
+        return left
+
+    def _parse_additive(self):
+        """Parse + and - operators."""
+        left = self._parse_multiplicative()
+
+        while self._current() and self._current().type == 'OP' and self._current().value in ('+', '-'):
+            op = self._current()
+            self._advance()
+            right = self._parse_multiplicative()
+            left = ('binop', op.value, left, right)
+
+        return left
+
+    def _parse_multiplicative(self):
+        """Parse * and / operators."""
+        left = self._parse_unary()
+
+        while self._current() and self._current().type == 'OP' and self._current().value in ('*', '/'):
+            op = self._current()
+            self._advance()
+            right = self._parse_unary()
+            left = ('binop', op.value, left, right)
+
+        return left
+
+    def _parse_unary(self):
+        """Parse unary operators (!, -)."""
+        if self._current() and self._current().type == 'OP' and self._current().value in ('!', '-'):
+            op = self._current()
+            self._advance()
+            operand = self._parse_unary()
+            return ('unary', op.value, operand)
+
+        return self._parse_primary()
+
+    def _parse_primary(self):
+        """Parse primary expressions (literals, identifiers, parentheses, member access)."""
+        token = self._current()
+
+        if token is None:
+            raise ETLError("BAD_EXPR", "unexpected end of expression", "")
+
+        # Parenthesized expression
+        if token.type == 'OP' and token.value == '(':
+            self._advance()
+            expr = self._parse_or()
+            if not self._current() or self._current().type != 'OP' or self._current().value != ')':
+                raise ETLError("BAD_EXPR", "missing closing parenthesis", "")
+            self._advance()
+            return expr
+
+        # Literals
+        if token.type == 'NUMBER':
+            self._advance()
+            return ('literal', token.value)
+        if token.type == 'STRING':
+            self._advance()
+            return ('literal', token.value)
+        if token.type == 'BOOL':
+            self._advance()
+            return ('literal', token.value)
+        if token.type == 'NULL':
+            self._advance()
+            return ('literal', None)
+        if token.type == 'IDENT':
+            self._advance()
+            # Check for member access (e.g., params.key)
+            if self._current() and self._current().type == 'DOT':
+                self._advance()  # consume the dot
+                # Next must be an identifier
+                if not self._current() or self._current().type != 'IDENT':
+                    raise ETLError("BAD_EXPR", "expected identifier after '.'", "")
+                member = self._current().value
+                self._advance()
+                return ('member', token.value, member)
+            return ('ident', token.value)
+
+        raise ETLError("BAD_EXPR", f"unexpected token '{token.value}'", "")
+
+
+class ExpressionEvaluator:
+    """Evaluates an expression AST against a row context."""
+
+    def evaluate(self, ast, row: Dict[str, Any]) -> Any:
+        """Evaluate the expression AST with the given row context."""
+        if ast[0] == 'literal':
+            return ast[1]
+
+        elif ast[0] == 'ident':
+            name = ast[1]
+            return row.get(name)  # Missing identifiers return None
+
+        elif ast[0] == 'member':
+            obj_name = ast[1]
+            member_name = ast[2]
+            obj = row.get(obj_name)
+            if obj is None:
+                return None
+            if isinstance(obj, dict):
+                return obj.get(member_name)
+            return None
+
+        elif ast[0] == 'unary':
+            op = ast[1]
+            operand = self.evaluate(ast[2], row)
+
+            if op == '!':
+                if operand is None:
+                    return True
+                return not self._is_truthy(operand)
+            elif op == '-':
+                if operand is None:
+                    return None
+                if not isinstance(operand, (int, float)):
+                    return None
+                return -operand
+
+        elif ast[0] == 'binop':
+            op = ast[1]
+            left = self.evaluate(ast[2], row)
+            right = self.evaluate(ast[3], row)
+
+            return self._eval_binop(op, left, right)
+
+        raise ETLError("BAD_EXPR", f"unknown AST node type: {ast[0]}", "")
+
+    def _is_truthy(self, value: Any) -> bool:
+        """Determine if a value is truthy."""
+        if value is None:
+            return False
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, (int, float)):
+            return value != 0
+        if isinstance(value, str):
+            return len(value) > 0
+        return True
+
+    def _eval_binop(self, op: str, left: Any, right: Any) -> Any:
+        """Evaluate a binary operation."""
+
+        # Logical operators
+        if op == '&&':
+            if left is None or not self._is_truthy(left):
+                return False
+            return self._is_truthy(right)
+
+        if op == '||':
+            if left is not None and self._is_truthy(left):
+                return True
+            return self._is_truthy(right) if right is not None else False
+
+        # Arithmetic operators
+        if op in ('+', '-', '*', '/'):
+            if left is None or right is None:
+                return None
+
+            if not isinstance(left, (int, float)) or not isinstance(right, (int, float)):
+                return None
+
+            if op == '+':
+                return left + right
+            if op == '-':
+                return left - right
+            if op == '*':
+                return left * right
+            if op == '/':
+                if right == 0:
+                    return None
+                return left / right
+
+        # Comparison operators
+        if op in ('==', '!=', '<', '<=', '>', '>='):
+            return self._eval_comparison(op, left, right)
+
+        raise ETLError("BAD_EXPR", f"unsupported operator '{op}'", "")
+
+    def _eval_comparison(self, op: str, left: Any, right: Any) -> bool:
+        """Evaluate a comparison operation."""
+
+        # Null comparisons return false
+        if left is None or right is None:
+            return False
+
+        # Type mismatch returns false
+        if type(left) != type(right):
+            # Special case: int and float are compatible
+            if not (isinstance(left, (int, float)) and isinstance(right, (int, float))):
+                return False
+
+        # Equality
+        if op == '==':
+            return left == right
+        if op == '!=':
+            return left != right
+
+        # Ordering comparisons
+        if op in ('<', '<=', '>', '>='):
+            try:
+                if op == '<':
+                    return left < right
+                if op == '<=':
+                    return left <= right
+                if op == '>':
+                    return left > right
+                if op == '>=':
+                    return left >= right
+            except TypeError:
+                return False
+
+        return False
+
+
+def parse_and_evaluate_expression(expr: str, row: Dict[str, Any], path: str) -> Any:
+    """Parse and evaluate an expression with error handling."""
+    try:
+        tokenizer = ExpressionTokenizer(expr)
+        tokens = tokenizer.tokenize()
+        parser = ExpressionParser(tokens)
+        ast = parser.parse()
+        evaluator = ExpressionEvaluator()
+        return evaluator.evaluate(ast, row)
+    except ETLError:
+        raise
+    except Exception as e:
+        raise ETLError("BAD_EXPR", str(e), path)
+
+
+def execute_step(step: Dict[str, Any], dataset: List[Dict[str, Any]], step_index: int,
+                 defs: Optional[Dict[str, Any]] = None, call_stack: Optional[List[str]] = None,
+                 context: str = "pipeline", params: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+    """Execute a single pipeline step on the dataset.
+
+    Args:
+        step: The step to execute
+        dataset: The dataset to process
+        step_index: Index of the step for error messages
+        defs: Available definitions (for call operations)
+        call_stack: List of definition names currently being called (for recursion detection)
+        context: Either "pipeline" or "defs[DefName]" for error path
+        params: Optional params to inject into each row (for compose mode)
+    """
+    if defs is None:
+        defs = {}
+    if call_stack is None:
+        call_stack = []
+
+    # Inject params into dataset if provided (for compose mode)
+    if params is not None:
+        dataset = [{"params": params, **row} for row in dataset]
+
+    op = step["op"]
+
+    if op == "select":
+        result = execute_select(step, dataset, step_index)
+    elif op == "filter":
+        result = execute_filter(step, dataset, step_index)
+    elif op == "map":
+        result = execute_map(step, dataset, step_index)
+    elif op == "rename":
+        result = execute_rename(step, dataset, step_index)
+    elif op == "limit":
+        result = execute_limit(step, dataset, step_index)
+    elif op == "call":
+        result = execute_call(step, dataset, step_index, defs, call_stack, context)
+    else:
+        raise ETLError("EXECUTION_FAILED", f"unknown operation '{op}'", f"{context}.steps[{step_index}]")
+
+    # Remove params from result if it was injected
+    if params is not None:
+        result = [{k: v for k, v in row.items() if k != "params"} for row in result]
+
+    return result
+
+
+def execute_select(step: Dict[str, Any], dataset: List[Dict[str, Any]], step_index: int) -> List[Dict[str, Any]]:
+    """Execute a select operation."""
+    columns = step["columns"]
+    result = []
+
+    for row_idx, row in enumerate(dataset):
+        new_row = {}
+        for col_idx, col in enumerate(columns):
+            if col not in row:
+                raise ETLError(
+                    "MISSING_COLUMN",
+                    f"column '{col}' not found in row",
+                    f"pipeline.steps[{step_index}].columns[{col_idx}]"
+                )
+            new_row[col] = row[col]
+        result.append(new_row)
+
+    return result
+
+
+def execute_filter(step: Dict[str, Any], dataset: List[Dict[str, Any]], step_index: int) -> List[Dict[str, Any]]:
+    """Execute a filter operation."""
+    where = step["where"]
+    path = f"pipeline.steps[{step_index}].where"
+    result = []
+
+    for row in dataset:
+        try:
+            value = parse_and_evaluate_expression(where, row, path)
+            if value is True:
+                result.append(row.copy())
+        except ETLError:
+            raise
+
+    return result
+
+
+def execute_map(step: Dict[str, Any], dataset: List[Dict[str, Any]], step_index: int) -> List[Dict[str, Any]]:
+    """Execute a map operation."""
+    as_name = step["as"]
+    expr = step["expr"]
+    path = f"pipeline.steps[{step_index}].expr"
+    result = []
+
+    for row in dataset:
+        new_row = row.copy()
+        value = parse_and_evaluate_expression(expr, row, path)
+        new_row[as_name] = value
+        result.append(new_row)
+
+    return result
+
+
+def execute_rename(step: Dict[str, Any], dataset: List[Dict[str, Any]], step_index: int) -> List[Dict[str, Any]]:
+    """Execute a rename operation."""
+    mapping = step["mapping"]
+    result = []
+
+    for row in dataset:
+        new_row = row.copy()
+
+        # Apply mappings in iteration order
+        for src, dst in mapping.items():
+            if src not in new_row:
+                raise ETLError(
+                    "MISSING_COLUMN",
+                    f"column '{src}' not found in row",
+                    f"pipeline.steps[{step_index}].mapping.{src}"
+                )
+
+            value = new_row[src]
+            del new_row[src]
+            new_row[dst] = value
+
+        result.append(new_row)
+
+    return result
+
+
+def execute_limit(step: Dict[str, Any], dataset: List[Dict[str, Any]], step_index: int) -> List[Dict[str, Any]]:
+    """Execute a limit operation."""
+    n = step["n"]
+    return dataset[:n]
+
+
+def execute_call(step: Dict[str, Any], dataset: List[Dict[str, Any]], step_index: int,
+                 defs: Dict[str, Any], call_stack: List[str], context: str = "pipeline") -> List[Dict[str, Any]]:
+    """Execute a call operation.
+
+    Args:
+        step: The call step
+        dataset: The dataset to process
+        step_index: Index of the step for error messages
+        defs: Available definitions
+        call_stack: List of definition names currently being called (for recursion detection)
+        context: Either "pipeline" or "defs[DefName]" for error path
+    """
+    name = step["name"]
+    params = step.get("params", {})
+
+    # Check for recursion
+    if name in call_stack:
+        raise ETLError(
+            "RECURSION_FORBIDDEN",
+            f"recursive call to '{name}' detected",
+            f"{context}.steps[{step_index}].name"
+        )
+
+    # Get the definition
+    if name not in defs:
+        raise ETLError(
+            "UNKNOWN_DEF",
+            f"definition '{name}' not found",
+            f"{context}.steps[{step_index}].name"
+        )
+
+    def_body = defs[name]
+    def_steps = def_body["steps"]
+
+    # Add params to each row for the duration of the call
+    result = []
+    for row in dataset:
+        # Create a new row with params injected
+        new_row = row.copy()
+        new_row["params"] = params.copy()
+        result.append(new_row)
+
+    # Execute the definition's steps with the new call stack
+    new_call_stack = call_stack + [name]
+    def_context = f"defs[{name}]"
+    for i, def_step in enumerate(def_steps):
+        result = execute_step(def_step, result, i, defs, new_call_stack, def_context)
+
+    # Remove params from each row after the call
+    final_result = []
+    for row in result:
+        final_row = {k: v for k, v in row.items() if k != "params"}
+        final_result.append(final_row)
+
+    return final_result
+
+
+def execute_pipeline(steps: List[Dict[str, Any]], dataset: List[Dict[str, Any]],
+                     defs: Optional[Dict[str, Any]] = None,
+                     compose_params: Optional[List[Optional[Dict[str, Any]]]] = None) -> List[Dict[str, Any]]:
+    """Execute the entire pipeline.
+
+    Args:
+        steps: The steps to execute
+        dataset: The dataset to process
+        defs: Available definitions (for call operations)
+        compose_params: Optional list of params for each step (for compose mode)
+    """
+    if defs is None:
+        defs = {}
+    result = dataset
+
+    for i, step in enumerate(steps):
+        # Get params for this step if in compose mode
+        step_params = None
+        if compose_params is not None and i < len(compose_params):
+            step_params = compose_params[i]
+        result = execute_step(step, result, i, defs, [], "pipeline", step_params)
+
+    return result
+
+
+def main():
+    """Main entry point for the ETL pipeline parser."""
+    parser = argparse.ArgumentParser(description='ETL Pipeline Parser')
+    parser.add_argument('--execute', action='store_true', default=False,
+                        help='Execute the pipeline instead of just normalizing')
+    args = parser.parse_args()
+
+    try:
+        # Read JSON from STDIN
+        input_data = sys.stdin.read()
+        if not input_data.strip():
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "empty input",
+                ""
+            )
+
+        try:
+            data = json.loads(input_data)
+        except json.JSONDecodeError as e:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                f"invalid JSON: {str(e)}",
+                ""
+            )
+
+        if not isinstance(data, dict):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "input must be a JSON object",
+                ""
+            )
+
+        # Validate and normalize
+        normalized = validate_and_normalize(data)
+
+        if not args.execute:
+            # Normalization mode: return normalized steps
+            # For compose mode, return only the steps (not the params list)
+            output_normalized = {"steps": normalized["steps"]}
+            output = {
+                "status": "ok",
+                "normalized": output_normalized
+            }
+        else:
+            # Execute the pipeline
+            dataset = data.get("dataset", [])
+            defs = normalized.get("defs", {})
+
+            # Check if we're in compose mode
+            compose_params = normalized.get("compose_params")
+
+            result = execute_pipeline(normalized["steps"], dataset, defs, compose_params)
+
+            output = {
+                "status": "ok",
+                "data": result,
+                "metrics": {
+                    "rows_in": len(dataset),
+                    "rows_out": len(result)
+                }
+            }
+
+        print(json.dumps(output, indent=2))
+        sys.exit(0)
+
+    except ETLError as e:
+        # Output error response
+        output = {
+            "status": "error",
+            "error_code": e.error_code,
+            "message": e.message,
+            "path": e.path
+        }
+
+        print(json.dumps(output, indent=2))
+        sys.exit(1)
+
+    except Exception as e:
+        # Unexpected error
+        output = {
+            "status": "error",
+            "error_code": "SCHEMA_VALIDATION_FAILED",
+            "message": f"ETL_ERROR: unexpected error: {str(e)}",
+            "path": ""
+        }
+
+        print(json.dumps(output, indent=2))
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

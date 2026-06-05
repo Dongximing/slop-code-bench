@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "problem_name": "file_query_tool",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_5",
+  "checkpoint_version": 1,
+  "duration": 67.48418712615967,
+  "entrypoint": "uv run query_files.py",
+  "tests": {
+    "checkpoint_1-Regression": {
+      "passed": [
+        "test_checkpoint_1_core[basic]",
+        "test_checkpoint_1_core[groupby]",
+        "test_checkpoint_1_functionality[aggregates]",
+        "test_checkpoint_1_functionality[column_alias]",
+        "test_checkpoint_1_functionality[complex_boolean]",
+        "test_checkpoint_1_functionality[count_column]",
+        "test_checkpoint_1_functionality[having_clause]",
+        "test_checkpoint_1_functionality[integer_comparisons]",
+        "test_checkpoint_1_functionality[left_join]",
+        "test_checkpoint_1_functionality[like_patterns]",
+        "test_checkpoint_1_functionality[limit_offset]",
+        "test_checkpoint_1_functionality[not_operator]",
+        "test_checkpoint_1_functionality[null_handling]",
+        "test_checkpoint_1_functionality[order_by_multiple]",
+        "test_checkpoint_1_functionality[right_join]",
+        "test_checkpoint_1_functionality[table_alias]",
+        "test_checkpoint_1_functionality[where_clauses]"
+      ],
+      "failed": [
+        "test_checkpoint_1_core[join]",
+        "test_checkpoint_1_core[sorted_join]",
+        "test_checkpoint_1_functionality[join_with_aggregate]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_2-Regression": {
+      "passed": [
+        "test_checkpoint_2_core[users-csv_payments-csv]",
+        "test_checkpoint_2_core[users-json_payments-json]",
+        "test_checkpoint_2_core[users-jsonl_payments-csv]",
+        "test_checkpoint_2_core[users-parquet_payments-parquet]",
+        "test_checkpoint_2_core[users-tsv_payments-tsv]",
+        "test_checkpoint_2_edge_cases[cross_type_join]",
+        "test_checkpoint_2_edge_cases[json_null_values]",
+        "test_checkpoint_2_edge_cases[jsonl_with_nulls]",
+        "test_checkpoint_2_edge_cases[tsv_with_having]",
+        "test_checkpoint_2_order_edges[u1_then_u2]",
+        "test_checkpoint_2_order_edges[u2_then_u1]",
+        "test_checkpoint_2_split_data[split-csv-json]",
+        "test_checkpoint_2_split_data[split-csv-jsonl]",
+        "test_checkpoint_2_split_data[split-jsonl-json]"
+      ],
+      "failed": [
+        "test_checkpoint_2_core[users-csv-bz2_payments-csv-bz2]",
+        "test_checkpoint_2_core[users-csv-gz_payments-csv-gz]",
+        "test_checkpoint_2_core[users-csv_payments-csv-gz]",
+        "test_checkpoint_2_core[users-csv_payments-json-gz]",
+        "test_checkpoint_2_core[users-csv_payments-jsonl-gz]",
+        "test_checkpoint_2_core[users-csv_payments-tsv-gz]",
+        "test_checkpoint_2_core[users-json-bz2_payments-json-bz2]",
+        "test_checkpoint_2_core[users-json-gz_payments-json-gz]",
+        "test_checkpoint_2_core[users-jsonl-bz2_payments-csv]",
+        "test_checkpoint_2_core[users-jsonl-gz_payments-csv]",
+        "test_checkpoint_2_core[users-tsv-bz2_payments-csv]",
+        "test_checkpoint_2_core[users-tsv-gz_payments-csv]",
+        "test_checkpoint_2_edge_cases[deeply_nested_parquet]",
+        "test_checkpoint_2_edge_cases[nested_jsonl_like]",
+        "test_checkpoint_2_edge_cases[parquet_aggregate]",
+        "test_checkpoint_2_split_data[split-json-tsv]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_3-Regression": {
+      "passed": [
+        "test_checkpoint_3_functionality[empty_shards]"
+      ],
+      "failed": [
+        "test_checkpoint_3_core[basic]",
+        "test_checkpoint_3_core[multiple_sharded]",
+        "test_checkpoint_3_functionality[complex_glob_patterns]",
+        "test_checkpoint_3_functionality[large_dataset]",
+        "test_checkpoint_3_functionality[mixed_file_types]",
+        "test_checkpoint_3_functionality[multiple_sharded]",
+        "test_checkpoint_3_functionality[schema_validation]",
+        "test_checkpoint_3_functionality[single_sharded]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_4-Regression": {
+      "passed": [
+        "test_checkpoint_4_core[ranking_functions]"
+      ],
+      "failed": [
+        "test_checkpoint_4_core[mixed_aggregates]",
+        "test_checkpoint_4_core[running_total]",
+        "test_checkpoint_4_edge_cases[empty_partitions]",
+        "test_checkpoint_4_edge_cases[frame_clauses]",
+        "test_checkpoint_4_edge_cases[null_handling]",
+        "test_checkpoint_4_performance[large_dataset]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_5-Core": {
+      "passed": [
+        "test_checkpoint_5_core[ctes_with_windows]",
+        "test_checkpoint_5_core[derived_tables]",
+        "test_checkpoint_5_core[exists_subqueries]",
+        "test_checkpoint_5_core[high_earning_manager]",
+        "test_checkpoint_5_core[level]"
+      ],
+      "failed": [
+        "test_checkpoint_5_core[department_stats]",
+        "test_checkpoint_5_core[dept_net_salary]",
+        "test_checkpoint_5_core[people_earning_more]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_5-Functionality": {
+      "passed": [
+        "test_checkpoint_5_hidden[hierarchy]",
+        "test_checkpoint_5_hidden[high_earner_pct]",
+        "test_checkpoint_5_hidden[recursive_aggregation]"
+      ],
+      "failed": [
+        "test_checkpoint_5_hidden[correlated_subqueries]",
+        "test_checkpoint_5_hidden[nested_structures]",
+        "test_checkpoint_5_hidden[performance_test]",
+        "test_checkpoint_5_hidden[scalar_subqueries]"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 5,
+    "Functionality": 3,
+    "Regression": 33,
+    "Error": 0
+  },
+  "total_counts": {
+    "Core": 8,
+    "Functionality": 7,
+    "Regression": 66,
+    "Error": 0
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 81,
+  "test_collection_hash": "4197a7bb773a58af96a097d8a0c09c230991c6c9fe616f92c596ce5de1e10319",
+  "infrastructure_failure": false
+}

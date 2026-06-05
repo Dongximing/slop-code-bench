@@ -1,0 +1,648 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/-SU3IPcE99NNqDrO/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 30.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 67 items
+
+.evaluation_tests/test_checkpoint_1.py::test_help_prints_usage_and_subcommands PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::test_init_creates_exact_v3_catalog_no_backup PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_first_observation_initializes_entry_shape_across_categories PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_second_observation_updates_only_changed_fields PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_likes_null_semantics PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_marks_removed_and_restores_entries PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_orders_and_normalizes_datetimes PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_backup_is_prewrite_snapshot PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::test_no_subcommand_prints_usage_to_stderr PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::test_init_existing_directory_errors_without_modification PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_missing_vault_errors_with_name PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_invalid_vault_errors_with_name PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_fetch_failure_errors PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_missing_tracked_field FAILED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_with_wrong_field_type FAILED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_init_catalog_root_keys_are_exact PASSED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[title-Episode One] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[description-Episode Description] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[views-321] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[likes-45] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[preview-preview-hash] PASSED [ 31%]
+.evaluation_tests/test_checkpoint_1.py::test_first_sync_initializes_each_tracked_field_once[removed-False] PASSED [ 32%]
+.evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[episodes-shared] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[streams-shared] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_1.py::test_entries_land_only_in_matching_category[clips-shared] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_1.py::test_multiple_field_changes_append_only_changed_histories PASSED [ 38%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[None-100-2-100] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[100-None-2-None] PASSED [ 41%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_change_detection_variants[None-None-1-None] PASSED [ 43%]
+.evaluation_tests/test_checkpoint_1.py::test_likes_null_is_stored_as_json_null PASSED [ 44%]
+.evaluation_tests/test_checkpoint_1.py::test_reappearance_with_changed_title_updates_removed_and_title PASSED [ 46%]
+.evaluation_tests/test_checkpoint_1.py::test_ordering_is_per_category_independent PASSED [ 47%]
+.evaluation_tests/test_checkpoint_1.py::test_title_change_does_not_change_published_order PASSED [ 49%]
+.evaluation_tests/test_checkpoint_1.py::test_full_datetime_source_value_is_preserved PASSED [ 50%]
+.evaluation_tests/test_checkpoint_1.py::test_backup_after_first_sync_matches_post_init_catalog_bytes PASSED [ 52%]
+.evaluation_tests/test_checkpoint_1.py::test_backup_after_second_sync_matches_immediate_pre_sync_catalog_bytes PASSED [ 53%]
+.evaluation_tests/test_checkpoint_1.py::test_current_value_uses_latest_timestamp_not_json_key_order PASSED [ 55%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v1_to_v3_rewrites_catalog_shape PASSED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v2_to_v3_preserves_source_and_categories PASSED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v3_is_noop_without_backup_or_catalog_rewrite PASSED [ 59%]
+.evaluation_tests/test_checkpoint_2.py::test_sync_v1_auto_migrates_and_fetches_via_derived_source FAILED [ 61%]
+.evaluation_tests/test_checkpoint_2.py::test_sync_v2_auto_migrates_then_applies_v3_sync_rules PASSED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::test_missing_version_errors_without_modifying_catalog PASSED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_invalid_version_value_errors_are_version_related["3"] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_2.py::test_invalid_version_value_errors_are_version_related[2.5] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_2.py::test_invalid_version_value_errors_are_version_related[4] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_2.py::test_invalid_json_catalog_errors_without_modification PASSED [ 70%]
+.evaluation_tests/test_checkpoint_2.py::test_backup_write_failure_aborts_and_preserves_original_catalog FAILED [ 71%]
+.evaluation_tests/test_checkpoint_2.py::test_malformed_v1_entry_errors_without_migration FAILED [ 73%]
+.evaluation_tests/test_checkpoint_2.py::test_malformed_v2_entry_errors_without_migration FAILED [ 74%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v1_backup_is_json_equivalent_to_original PASSED [ 76%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v2_backup_is_json_equivalent_to_original PASSED [ 77%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v1_converts_epoch_history_keys_to_utc_iso PASSED [ 79%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v1_converts_multiple_history_keys_without_losing_values PASSED [ 80%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v1_epoch_zero_converts_to_1970_utc PASSED [ 82%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v1_large_epoch_converts_to_2030_utc PASSED [ 83%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v1_numeric_epoch_order_semantics_survive_9_vs_10 PASSED [ 85%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v1_adds_removed_history_for_all_entries PASSED [ 86%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v1_removed_timestamp_is_iso8601 PASSED [ 88%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_v2_preserves_existing_iso_history_keys PASSED [ 89%]
+.evaluation_tests/test_checkpoint_2.py::test_sync_v1_updates_existing_entry_after_auto_migration FAILED [ 91%]
+.evaluation_tests/test_checkpoint_2.py::test_sync_v1_adds_new_entries_in_v3_shape FAILED [ 92%]
+.evaluation_tests/test_checkpoint_2.py::test_sync_v1_backup_preserves_original_v1_bytes FAILED [ 94%]
+.evaluation_tests/test_checkpoint_2.py::test_sync_v2_preserves_non_episode_category_after_auto_migration PASSED [ 95%]
+.evaluation_tests/test_checkpoint_2.py::test_sync_v2_absent_entry_gets_removed_true_after_migration PASSED [ 97%]
+.evaluation_tests/test_checkpoint_2.py::test_migrate_second_run_on_migrated_catalog_is_noop PASSED [ 98%]
+.evaluation_tests/test_checkpoint_2.py::test_sync_second_run_after_v1_auto_migration_has_no_re_migration_artifacts FAILED [100%]
+
+=================================== FAILURES ===================================
+_____________ test_sync_rejects_source_entry_missing_tracked_field _____________
+
+cli = <function cli.<locals>._run at 0x7aec40af11c0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_rejects_source_entry0')
+mock_platform = MockPlatform(host='127.0.0.1', port=41215, url='http://127.0.0.1:41215', _metadata_body=b'{"episodes": [{"id": "ep1", ...rmanent_failures=set(), _transient_failures={}, _hits={'/': 1}, _lock=<unlocked _thread.lock object at 0x7aec40950cc0>)
+
+    @pytest.mark.error
+    def test_sync_rejects_source_entry_missing_tracked_field(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+        vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+        before_sync = (vault_path / "catalog.json").read_bytes()
+        invalid_entry = make_source_entry("ep1")
+        del invalid_entry["title"]
+        mock_platform.set_metadata_entries(episodes=[invalid_entry])
+    
+        result = cli(["sync", "myvault"], cwd=tmp_path)
+    
+>       assert_error(result, contains="Source metadata fetch failure")
+
+.evaluation_tests/test_checkpoint_1.py:453: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Missing required field: title\n')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        contains: str | None = None,
+    ) -> None:
+        assert result.returncode != 0, (
+            f"Expected non-zero exit but got 0.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+        assert result.stderr.strip(), "Expected error output on stderr"
+        if contains is not None:
+>           assert contains.lower() in result.stderr.lower(), (
+                f"Expected stderr to contain {contains!r}.\nstderr:\n{result.stderr}"
+            )
+E           AssertionError: Expected stderr to contain 'Source metadata fetch failure'.
+E             stderr:
+E             Error: Malformed source entry in episodes[0]: Missing required field: title
+E             
+E           assert 'source metadata fetch failure' in 'error: malformed source entry in episodes[0]: missing required field: title\n'
+E            +  where 'source metadata fetch failure' = <built-in method lower of str object at 0x7aec40dc2380>()
+E            +    where <built-in method lower of str object at 0x7aec40dc2380> = 'Source metadata fetch failure'.lower
+E            +  and   'error: malformed source entry in episodes[0]: missing required field: title\n' = <built-in method lower of str object at 0x7aec40a5ce30>()
+E            +    where <built-in method lower of str object at 0x7aec40a5ce30> = 'Error: Malformed source entry in episodes[0]: Missing required field: title\n'.lower
+E            +      where 'Error: Malformed source entry in episodes[0]: Missing required field: title\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Missing required field: title\n').stderr
+
+.evaluation_tests/conftest.py:920: AssertionError
+_____________ test_sync_rejects_source_entry_with_wrong_field_type _____________
+
+cli = <function cli.<locals>._run at 0x7aec40af1620>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_rejects_source_entry1')
+mock_platform = MockPlatform(host='127.0.0.1', port=52183, url='http://127.0.0.1:52183', _metadata_body=b'{"episodes": [{"id": "ep1", ...rmanent_failures=set(), _transient_failures={}, _hits={'/': 1}, _lock=<unlocked _thread.lock object at 0x7aec40b53bc0>)
+
+    @pytest.mark.error
+    def test_sync_rejects_source_entry_with_wrong_field_type(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+    ) -> None:
+        vault_path = _init_vault(cli, tmp_path, mock_platform.url)
+        before_sync = (vault_path / "catalog.json").read_bytes()
+        invalid_entry = make_source_entry("ep1")
+        invalid_entry["views"] = "100"
+        mock_platform.set_metadata_entries(episodes=[invalid_entry])
+    
+        result = cli(["sync", "myvault"], cwd=tmp_path)
+    
+>       assert_error(result, contains="Source metadata fetch failure")
+
+.evaluation_tests/test_checkpoint_1.py:472: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Field views must be int\n')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        contains: str | None = None,
+    ) -> None:
+        assert result.returncode != 0, (
+            f"Expected non-zero exit but got 0.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+        assert result.stderr.strip(), "Expected error output on stderr"
+        if contains is not None:
+>           assert contains.lower() in result.stderr.lower(), (
+                f"Expected stderr to contain {contains!r}.\nstderr:\n{result.stderr}"
+            )
+E           AssertionError: Expected stderr to contain 'Source metadata fetch failure'.
+E             stderr:
+E             Error: Malformed source entry in episodes[0]: Field views must be int
+E             
+E           assert 'source metadata fetch failure' in 'error: malformed source entry in episodes[0]: field views must be int\n'
+E            +  where 'source metadata fetch failure' = <built-in method lower of str object at 0x7aec40dc2380>()
+E            +    where <built-in method lower of str object at 0x7aec40dc2380> = 'Source metadata fetch failure'.lower
+E            +  and   'error: malformed source entry in episodes[0]: field views must be int\n' = <built-in method lower of str object at 0x7aec40b3eb10>()
+E            +    where <built-in method lower of str object at 0x7aec40b3eb10> = 'Error: Malformed source entry in episodes[0]: Field views must be int\n'.lower
+E            +      where 'Error: Malformed source entry in episodes[0]: Field views must be int\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Field views must be int\n').stderr
+
+.evaluation_tests/conftest.py:920: AssertionError
+__________ test_sync_v1_auto_migrates_and_fetches_via_derived_source ___________
+
+cli = <function cli.<locals>._run at 0x7aec40b90180>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_v1_auto_migrates_and0')
+mock_platform = MockPlatform(host='127.0.0.1', port=59819, url='http://127.0.0.1:59819', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x7aec40cd8040>)
+legacy_source_env = ({'MVVAULT_LEGACY_SOURCE_BASE_URL': 'http://127.0.0.1:59819', 'MVVAULT_LEGACY_SOURCE_LOG': '/tmp/pytest-of-agent/pytes...:/workspace'}, PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_v1_auto_migrates_and0/legacy_source_requests.jsonl'))
+
+    def test_sync_v1_auto_migrates_and_fetches_via_derived_source(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        legacy_source_env: tuple[dict[str, str], Path],
+    ) -> None:
+        env, request_log = legacy_source_env
+        vault = tmp_path / "myvault"
+        original = json.dumps(
+            make_v1_catalog("abc", entries=[_make_numeric_v1_entry("ep1")]),
+            indent=2,
+        ).encode("utf-8")
+        _write_catalog_bytes(vault, original)
+        mock_platform.set_metadata_entries(
+            episodes=[make_source_entry("ep1", title="Test Title")]
+        )
+    
+        result = cli(["sync", "myvault"], cwd=tmp_path, env=env)
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_2.py:213: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=...ample.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 1.
+E         stdout:
+E         
+E         stderr:
+E         Error: Failed to fetch source metadata: HTTPSConnectionPool(host='media.example.com', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host='media.example.com', port=443): Failed to resolve 'media.example.com' ([Errno -5] No address associated with hostname)"))
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Failed to fetch source metadata: HTTPSConnectionPool(host=\'media.example.com\', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host=\'media.example.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_______ test_backup_write_failure_aborts_and_preserves_original_catalog ________
+
+cli = <function cli.<locals>._run at 0x7aec40b91b20>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_backup_write_failure_abor0')
+vault_factory = <function vault_factory.<locals>._factory at 0x7aec40b91d00>
+
+    @pytest.mark.error
+    def test_backup_write_failure_aborts_and_preserves_original_catalog(
+        cli, tmp_path: Path, vault_factory
+    ) -> None:
+        vault = vault_factory("myvault")
+        original = json.dumps(
+            make_v1_catalog("bakfail", entries=[_make_numeric_v1_entry("ep1")]),
+            indent=2,
+        ).encode("utf-8")
+        _write_catalog_bytes(vault, original)
+        (vault / "catalog.bak").mkdir()
+    
+        result = cli(["migrate", "myvault"], cwd=tmp_path)
+>       assert_error(result)
+
+.evaluation_tests/test_checkpoint_2.py:327: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'migrate', 'myvault'], returncode=0, stdout='', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        contains: str | None = None,
+    ) -> None:
+>       assert result.returncode != 0, (
+            f"Expected non-zero exit but got 0.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected non-zero exit but got 0.
+E         stdout:
+E         
+E         stderr:
+E         
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'migrate', 'myvault'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/conftest.py:914: AssertionError
+_______________ test_malformed_v1_entry_errors_without_migration _______________
+
+cli = <function cli.<locals>._run at 0x7aec40b92020>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_malformed_v1_entry_errors0')
+vault_factory = <function vault_factory.<locals>._factory at 0x7aec40b91ee0>
+
+    @pytest.mark.error
+    def test_malformed_v1_entry_errors_without_migration(
+        cli, tmp_path: Path, vault_factory
+    ) -> None:
+        vault = vault_factory("myvault")
+        bad_entry = _make_numeric_v1_entry("ep1")
+        bad_entry.pop("id")
+        original = json.dumps(
+            make_v1_catalog("broken", entries=[bad_entry]),
+            indent=2,
+        ).encode("utf-8")
+        _write_catalog_bytes(vault, original)
+    
+        result = cli(["migrate", "myvault"], cwd=tmp_path)
+>       assert_error(result)
+
+.evaluation_tests/test_checkpoint_2.py:345: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'migrate', 'myvault'], returncode=0, stdout='', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        contains: str | None = None,
+    ) -> None:
+>       assert result.returncode != 0, (
+            f"Expected non-zero exit but got 0.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected non-zero exit but got 0.
+E         stdout:
+E         
+E         stderr:
+E         
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'migrate', 'myvault'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/conftest.py:914: AssertionError
+_______________ test_malformed_v2_entry_errors_without_migration _______________
+
+cli = <function cli.<locals>._run at 0x7aec40b920c0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_malformed_v2_entry_errors0')
+vault_factory = <function vault_factory.<locals>._factory at 0x7aec40b91a80>
+
+    @pytest.mark.error
+    def test_malformed_v2_entry_errors_without_migration(
+        cli, tmp_path: Path, vault_factory
+    ) -> None:
+        vault = vault_factory("myvault")
+        bad_entry = make_v2_entry("ep1")
+        bad_entry["title"] = "bare string"
+        original = json.dumps(
+            make_v2_catalog("https://example.com/source", episodes=[bad_entry]),
+            indent=2,
+        ).encode("utf-8")
+        _write_catalog_bytes(vault, original)
+    
+        result = cli(["migrate", "myvault"], cwd=tmp_path)
+>       assert_error(result)
+
+.evaluation_tests/test_checkpoint_2.py:363: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'migrate', 'myvault'], returncode=0, stdout='', stderr='')
+
+    def assert_error(
+        result: subprocess.CompletedProcess[str],
+        *,
+        contains: str | None = None,
+    ) -> None:
+>       assert result.returncode != 0, (
+            f"Expected non-zero exit but got 0.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected non-zero exit but got 0.
+E         stdout:
+E         
+E         stderr:
+E         
+E       assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'migrate', 'myvault'], returncode=0, stdout='', stderr='').returncode
+
+.evaluation_tests/conftest.py:914: AssertionError
+___________ test_sync_v1_updates_existing_entry_after_auto_migration ___________
+
+cli = <function cli.<locals>._run at 0x7aec40b92a20>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_v1_updates_existing_0')
+mock_platform = MockPlatform(host='127.0.0.1', port=42955, url='http://127.0.0.1:42955', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x7aec409746c0>)
+legacy_source_env = ({'MVVAULT_LEGACY_SOURCE_BASE_URL': 'http://127.0.0.1:42955', 'MVVAULT_LEGACY_SOURCE_LOG': '/tmp/pytest-of-agent/pytes...:/workspace'}, PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_v1_updates_existing_0/legacy_source_requests.jsonl'))
+
+    @pytest.mark.functionality
+    def test_sync_v1_updates_existing_entry_after_auto_migration(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        legacy_source_env: tuple[dict[str, str], Path],
+    ) -> None:
+        env, _ = legacy_source_env
+        vault = tmp_path / "myvault"
+        write_catalog(
+            vault,
+            make_v1_catalog(
+                "abc",
+                entries=[
+                    _make_numeric_v1_entry(
+                        "ep1",
+                        title_history={"1718444400": "Old Title"},
+                    )
+                ],
+            ),
+        )
+        mock_platform.set_metadata_entries(
+            episodes=[make_source_entry("ep1", title="New Title")]
+        )
+    
+        result = cli(["sync", "myvault"], cwd=tmp_path, env=env)
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_2.py:636: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=...ample.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 1.
+E         stdout:
+E         
+E         stderr:
+E         Error: Failed to fetch source metadata: HTTPSConnectionPool(host='media.example.com', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host='media.example.com', port=443): Failed to resolve 'media.example.com' ([Errno -5] No address associated with hostname)"))
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Failed to fetch source metadata: HTTPSConnectionPool(host=\'media.example.com\', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host=\'media.example.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+__________________ test_sync_v1_adds_new_entries_in_v3_shape ___________________
+
+cli = <function cli.<locals>._run at 0x7aec40b92ca0>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_v1_adds_new_entries_0')
+mock_platform = MockPlatform(host='127.0.0.1', port=46389, url='http://127.0.0.1:46389', _metadata_body=b'{"episodes": [{"id": "ep_new...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x7aec40b84d00>)
+legacy_source_env = ({'MVVAULT_LEGACY_SOURCE_BASE_URL': 'http://127.0.0.1:46389', 'MVVAULT_LEGACY_SOURCE_LOG': '/tmp/pytest-of-agent/pytes...:/workspace'}, PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_v1_adds_new_entries_0/legacy_source_requests.jsonl'))
+
+    @pytest.mark.functionality
+    def test_sync_v1_adds_new_entries_in_v3_shape(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        legacy_source_env: tuple[dict[str, str], Path],
+    ) -> None:
+        env, _ = legacy_source_env
+        vault = tmp_path / "myvault"
+        write_catalog(vault, make_v1_catalog("abc", entries=[]))
+        mock_platform.set_metadata_entries(
+            episodes=[make_source_entry("ep_new", title="Brand New")]
+        )
+    
+        result = cli(["sync", "myvault"], cwd=tmp_path, env=env)
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_2.py:661: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=...ample.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 1.
+E         stdout:
+E         
+E         stderr:
+E         Error: Failed to fetch source metadata: HTTPSConnectionPool(host='media.example.com', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host='media.example.com', port=443): Failed to resolve 'media.example.com' ([Errno -5] No address associated with hostname)"))
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Failed to fetch source metadata: HTTPSConnectionPool(host=\'media.example.com\', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host=\'media.example.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+_______________ test_sync_v1_backup_preserves_original_v1_bytes ________________
+
+cli = <function cli.<locals>._run at 0x7aec40b92840>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_v1_backup_preserves_0')
+mock_platform = MockPlatform(host='127.0.0.1', port=51189, url='http://127.0.0.1:51189', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x7aec40a06b80>)
+legacy_source_env = ({'MVVAULT_LEGACY_SOURCE_BASE_URL': 'http://127.0.0.1:51189', 'MVVAULT_LEGACY_SOURCE_LOG': '/tmp/pytest-of-agent/pytes...:/workspace'}, PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_v1_backup_preserves_0/legacy_source_requests.jsonl'))
+
+    @pytest.mark.functionality
+    def test_sync_v1_backup_preserves_original_v1_bytes(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        legacy_source_env: tuple[dict[str, str], Path],
+    ) -> None:
+        env, _ = legacy_source_env
+        vault = tmp_path / "myvault"
+        original = (
+            b'{\n  "version": 1,\n  "source_id": "abc",\n  "entries": []\n}\n'
+        )
+        _write_catalog_bytes(vault, original)
+        mock_platform.set_metadata_entries(
+            episodes=[make_source_entry("ep1", title="New Entry")]
+        )
+    
+        result = cli(["sync", "myvault"], cwd=tmp_path, env=env)
+>       assert_success(result)
+
+.evaluation_tests/test_checkpoint_2.py:687: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=...ample.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 1.
+E         stdout:
+E         
+E         stderr:
+E         Error: Failed to fetch source metadata: HTTPSConnectionPool(host='media.example.com', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host='media.example.com', port=443): Failed to resolve 'media.example.com' ([Errno -5] No address associated with hostname)"))
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Failed to fetch source metadata: HTTPSConnectionPool(host=\'media.example.com\', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host=\'media.example.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+__ test_sync_second_run_after_v1_auto_migration_has_no_re_migration_artifacts __
+
+cli = <function cli.<locals>._run at 0x7aec40b91f80>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_second_run_after_v1_0')
+mock_platform = MockPlatform(host='127.0.0.1', port=39787, url='http://127.0.0.1:39787', _metadata_body=b'{"episodes": [{"id": "ep1", ...e, _permanent_failures=set(), _transient_failures={}, _hits={}, _lock=<unlocked _thread.lock object at 0x7aec40ab3dc0>)
+legacy_source_env = ({'MVVAULT_LEGACY_SOURCE_BASE_URL': 'http://127.0.0.1:39787', 'MVVAULT_LEGACY_SOURCE_LOG': '/tmp/pytest-of-agent/pytes...:/workspace'}, PosixPath('/tmp/pytest-of-agent/pytest-0/test_sync_second_run_after_v1_0/legacy_source_requests.jsonl'))
+
+    @pytest.mark.functionality
+    def test_sync_second_run_after_v1_auto_migration_has_no_re_migration_artifacts(
+        cli,
+        tmp_path: Path,
+        mock_platform: MockPlatform,
+        legacy_source_env: tuple[dict[str, str], Path],
+    ) -> None:
+        env, _ = legacy_source_env
+        vault = tmp_path / "myvault"
+        write_catalog(
+            vault,
+            make_v1_catalog("abc", entries=[_make_numeric_v1_entry("ep1")]),
+        )
+        mock_platform.set_metadata_entries(
+            episodes=[make_source_entry("ep1", title="Test Title")]
+        )
+    
+        first = cli(["sync", "myvault"], cwd=tmp_path, env=env)
+>       assert_success(first)
+
+.evaluation_tests/test_checkpoint_2.py:776: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+result = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=...ample.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n')
+
+    def assert_success(result: subprocess.CompletedProcess[str]) -> None:
+>       assert result.returncode == 0, (
+            f"Expected exit 0 but got {result.returncode}.\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+E       AssertionError: Expected exit 0 but got 1.
+E         stdout:
+E         
+E         stderr:
+E         Error: Failed to fetch source metadata: HTTPSConnectionPool(host='media.example.com', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host='media.example.com', port=443): Failed to resolve 'media.example.com' ([Errno -5] No address associated with hostname)"))
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Failed to fetch source metadata: HTTPSConnectionPool(host=\'media.example.com\', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host=\'media.example.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n').returncode
+
+.evaluation_tests/conftest.py:903: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_missing_tracked_field - AssertionError: Expected stderr to contain 'Source metadata fetch failure'.
+  stderr:
+  Error: Malformed source entry in episodes[0]: Missing required field: title
+  
+assert 'source metadata fetch failure' in 'error: malformed source entry in episodes[0]: missing required field: title\n'
+ +  where 'source metadata fetch failure' = <built-in method lower of str object at 0x7aec40dc2380>()
+ +    where <built-in method lower of str object at 0x7aec40dc2380> = 'Source metadata fetch failure'.lower
+ +  and   'error: malformed source entry in episodes[0]: missing required field: title\n' = <built-in method lower of str object at 0x7aec40a5ce30>()
+ +    where <built-in method lower of str object at 0x7aec40a5ce30> = 'Error: Malformed source entry in episodes[0]: Missing required field: title\n'.lower
+ +      where 'Error: Malformed source entry in episodes[0]: Missing required field: title\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Missing required field: title\n').stderr
+FAILED .evaluation_tests/test_checkpoint_1.py::test_sync_rejects_source_entry_with_wrong_field_type - AssertionError: Expected stderr to contain 'Source metadata fetch failure'.
+  stderr:
+  Error: Malformed source entry in episodes[0]: Field views must be int
+  
+assert 'source metadata fetch failure' in 'error: malformed source entry in episodes[0]: field views must be int\n'
+ +  where 'source metadata fetch failure' = <built-in method lower of str object at 0x7aec40dc2380>()
+ +    where <built-in method lower of str object at 0x7aec40dc2380> = 'Source metadata fetch failure'.lower
+ +  and   'error: malformed source entry in episodes[0]: field views must be int\n' = <built-in method lower of str object at 0x7aec40b3eb10>()
+ +    where <built-in method lower of str object at 0x7aec40b3eb10> = 'Error: Malformed source entry in episodes[0]: Field views must be int\n'.lower
+ +      where 'Error: Malformed source entry in episodes[0]: Field views must be int\n' = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Malformed source entry in episodes[0]: Field views must be int\n').stderr
+FAILED .evaluation_tests/test_checkpoint_2.py::test_sync_v1_auto_migrates_and_fetches_via_derived_source - AssertionError: Expected exit 0 but got 1.
+  stdout:
+  
+  stderr:
+  Error: Failed to fetch source metadata: HTTPSConnectionPool(host='media.example.com', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host='media.example.com', port=443): Failed to resolve 'media.example.com' ([Errno -5] No address associated with hostname)"))
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Failed to fetch source metadata: HTTPSConnectionPool(host=\'media.example.com\', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host=\'media.example.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_backup_write_failure_aborts_and_preserves_original_catalog - AssertionError: Expected non-zero exit but got 0.
+  stdout:
+  
+  stderr:
+  
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'migrate', 'myvault'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_malformed_v1_entry_errors_without_migration - AssertionError: Expected non-zero exit but got 0.
+  stdout:
+  
+  stderr:
+  
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'migrate', 'myvault'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_malformed_v2_entry_errors_without_migration - AssertionError: Expected non-zero exit but got 0.
+  stdout:
+  
+  stderr:
+  
+assert 0 != 0
+ +  where 0 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'migrate', 'myvault'], returncode=0, stdout='', stderr='').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_sync_v1_updates_existing_entry_after_auto_migration - AssertionError: Expected exit 0 but got 1.
+  stdout:
+  
+  stderr:
+  Error: Failed to fetch source metadata: HTTPSConnectionPool(host='media.example.com', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host='media.example.com', port=443): Failed to resolve 'media.example.com' ([Errno -5] No address associated with hostname)"))
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Failed to fetch source metadata: HTTPSConnectionPool(host=\'media.example.com\', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host=\'media.example.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_sync_v1_adds_new_entries_in_v3_shape - AssertionError: Expected exit 0 but got 1.
+  stdout:
+  
+  stderr:
+  Error: Failed to fetch source metadata: HTTPSConnectionPool(host='media.example.com', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host='media.example.com', port=443): Failed to resolve 'media.example.com' ([Errno -5] No address associated with hostname)"))
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Failed to fetch source metadata: HTTPSConnectionPool(host=\'media.example.com\', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host=\'media.example.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_sync_v1_backup_preserves_original_v1_bytes - AssertionError: Expected exit 0 but got 1.
+  stdout:
+  
+  stderr:
+  Error: Failed to fetch source metadata: HTTPSConnectionPool(host='media.example.com', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host='media.example.com', port=443): Failed to resolve 'media.example.com' ([Errno -5] No address associated with hostname)"))
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Failed to fetch source metadata: HTTPSConnectionPool(host=\'media.example.com\', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host=\'media.example.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n').returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_sync_second_run_after_v1_auto_migration_has_no_re_migration_artifacts - AssertionError: Expected exit 0 but got 1.
+  stdout:
+  
+  stderr:
+  Error: Failed to fetch source metadata: HTTPSConnectionPool(host='media.example.com', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host='media.example.com', port=443): Failed to resolve 'media.example.com' ([Errno -5] No address associated with hostname)"))
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['uv', 'run', '--project', '/workspace', '/workspace/mvault.py', 'sync', 'myvault'], returncode=1, stdout='', stderr='Error: Failed to fetch source metadata: HTTPSConnectionPool(host=\'media.example.com\', port=443): Max retries exceeded with url: /channel/abc (Caused by NameResolutionError("HTTPSConnection(host=\'media.example.com\', port=443): Failed to resolve \'media.example.com\' ([Errno -5] No address associated with hostname)"))\n').returncode
+======================== 10 failed, 57 passed in 49.02s ========================

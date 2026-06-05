@@ -1,0 +1,2098 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/3oKPKTR3z6RpTqLB/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 174 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_convert_bad_params[missing-source] PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_convert_bad_params[invalid-url] PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unreachable_source PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_non_tabular_payload PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_success_returns_id PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_single_column_csv PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_query_envelope PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_order_preserved PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_default_limit_100 PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_charset_latin1 PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_autodetect_latin1 PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_upstream_500_to_404 PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_decimals_as_numbers PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_semicolon_delimiter PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_time_values_as_text PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unknown_route_404 PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_relative_endpoint PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[,] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[;] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[\t] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[name,emoji-alice,smile\nbob,wave\n] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[name,note-alice,naive\nbob,cafe\n] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[k,v-left,  space\nright,space  \n] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[id,text-1,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n] PASSED [ 13%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_query_stable PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_limit_exactly_100 PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_whitespace FAILED [ 15%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_negative_values_as_numbers PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_routes[/convert] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_routes[/not-found] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_dataset_query PASSED [ 17%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_options_preflight_cors[/convert] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_options_preflight_cors[/datasets/does-not-exist] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_same_url_same_id PASSED [ 19%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_different_urls_different_ids PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_empty_file_rejected PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_time_boundary_values_are_text PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_large_dataset_limit_order PASSED [ 21%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_id_from_url_not_charset PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_header_and_time_whitespace FAILED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_trailing_empty_line_excluded PASSED [ 23%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_extra_columns_trimmed PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_multiple_datasets_independent PASSED [ 24%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_unknown_dataset_404 PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_malformed_charset PASSED [ 25%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_convert_bad_url[bad-scheme] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_convert_bad_url[missing-scheme] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_header_only_rejected PASSED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_empty_source_parameter PASSED [ 28%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_upstream_403_to_404 PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_total_before_pagination PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_size_and_offset_apply PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_ascending_is_stable PASSED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_paginate PASSED [ 31%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_precedence PASSED [ 31%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_shape_objects_includes_rowid FAILED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_ignores_sort FAILED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_hide_removes_rowid PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_total_hide_removes_total PASSED [ 33%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_invalid_param_400[invalid_size] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_invalid_param_400[invalid_shape] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[1-1] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[2-2] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[5-5] PASSED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[20-5] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[0-Alice] PASSED [ 37%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[1-Bob] PASSED [ 38%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[4-Eve] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[10-None] PASSED [ 39%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[name] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[age] PASSED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[city] PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[name] PASSED [ 41%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[age] PASSED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[city] PASSED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_name_and_city_order_values PASSED [ 43%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params0] PASSED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params1] PASSED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params2] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_columns_exclude_rowid PASSED [ 45%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sorted_requests_stable PASSED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_hide_noop_lists PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_hide_noop_default PASSED [ 47%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_total_ignores_offset_size PASSED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_composed_controls PASSED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shapes_consistent_values PASSED [ 49%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_tie_stability PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_precedence_different_columns PASSED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_sequential_all_rows FAILED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_total_default_bare_request PASSED [ 51%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_at_dataset_length PASSED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_empty_toggle_value_400[_rowid] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_empty_toggle_value_400[_total] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_large_size_returns_all_rows PASSED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_unknown_sort_column_400 PASSED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort_desc] PASSED [ 55%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_rowid-show] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_rowid-false] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_total-show] PASSED [ 57%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_total-0] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_total_default_shape PASSED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_size=1&_size=2] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort=age&_sort=name] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_rowid=hide&_rowid=hide] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_offset=1&_offset=2] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_shape=lists&_shape=objects] PASSED [ 61%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort_desc=age&_sort_desc=name] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_total=hide&_total=hide] PASSED [ 62%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_rowid_list_or_default[params0] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_rowid_list_or_default[params1] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_both_params_400[_sort=age&_sort_desc=] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[shape] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[size] PASSED [ 65%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[offset] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[0] PASSED [ 66%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[-1] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[3.1] PASSED [ 67%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[abc] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[-1] PASSED [ 68%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[oops] PASSED [ 69%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[2.5] PASSED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_exact_filter FAILED [ 70%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_contains_filter FAILED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_less_filter FAILED [ 71%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_greater_strict FAILED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_multi_filter_and FAILED [ 72%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_same_col_filters_and FAILED [ 73%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_filter_sort_paginate FAILED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_original_header_filter FAILED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_rejects_non_numeric_value FAILED [ 75%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_total_post_filter FAILED [ 75%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_excludes_non_numeric_cell FAILED [ 76%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params0-3] FAILED [ 77%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params1-2] FAILED [ 77%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params2-2] FAILED [ 78%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params3-3] FAILED [ 78%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params4-1] FAILED [ 79%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params5-1] FAILED [ 79%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params0] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params1] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params2] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params3] PASSED [ 82%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_case_sensitive FAILED [ 82%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_bounds_strict FAILED [ 83%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[no_match] FAILED [ 83%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_case] FAILED [ 84%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_whitespace] FAILED [ 85%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[contains_whitespace] FAILED [ 85%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exposed_col_filter FAILED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_header_no_trim FAILED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_paginate_shape FAILED [ 87%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_scientific_notation FAILED [ 87%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_ties_stable FAILED [ 88%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_signed_bounds FAILED [ 89%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_string_cmp_numeric_cells FAILED [ 89%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_plain_param_ignored PASSED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_whitespace_value_match FAILED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_whitespace_value_match FAILED [ 91%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_like_cells_preserve_whitespace_for_string_filters FAILED [ 91%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_empty_value_matches_all PASSED [ 92%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_empty_value_matches_empty_cells FAILED [ 93%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_abc] FAILED [ 93%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_1,2] FAILED [ 94%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_none] FAILED [ 94%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_abc] FAILED [ 95%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_1,2] FAILED [ 95%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_none] FAILED [ 96%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_comparator_400 FAILED [ 97%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_column_400 FAILED [ 97%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_key_400 FAILED [ 98%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_identical_key_400 FAILED [ 98%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_must_match_header FAILED [ 99%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_case_mismatch_400 FAILED [100%]
+
+=================================== FAILURES ===================================
+_________________ TestFunctionality.test_preserves_whitespace __________________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x7a0533cdc080>
+client = <httpx.Client object at 0x7a0533cf4140>
+local_source_server = <conftest.SourceServer object at 0x7a0533cff380>
+
+    @pytest.mark.functionality
+    def test_preserves_whitespace(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Leading and trailing spaces in CSV field values are preserved."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/space_text.csv",
+            body=b"side,value\nleft,  space\nright,space  \n",
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+>       assert payload["rows"] == [["left", "  space"], ["right", "space  "]]
+E       AssertionError: assert [['left', 'space'], ['right', 'space']] == [['left', '  space'], ['right', 'space  ']]
+E         
+E         At index 0 diff: ['left', 'space'] != ['left', '  space']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'left',
+E         -         '  space',
+E         ?          --
+E         +         'space',
+E               ],
+E               [
+E                   'right',
+E         -         'space  ',
+E         ?               --
+E         +         'space',
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_1.py:439: AssertionError
+_________ TestFunctionality.test_preserves_header_and_time_whitespace __________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x7a0533e38a40>
+client = <httpx.Client object at 0x7a0533cf4140>
+local_source_server = <conftest.SourceServer object at 0x7a0533cf85c0>
+
+    @pytest.mark.functionality
+    def test_preserves_header_and_time_whitespace(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Headers and time-like text preserve significant surrounding whitespace."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/header_time_whitespace.csv",
+            body=(b" name ,time\nAlice, 08:30 \nBob,09:15\n"),
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+>       assert payload["columns"] == [" name ", "time"]
+E       AssertionError: assert ['name', 'time'] == [' name ', 'time']
+E         
+E         At index 0 diff: 'name' != ' name '
+E         
+E         Full diff:
+E           [
+E         -     ' name ',
+E         ?      -    -
+E         +     'name',
+E               'time',
+E           ]
+
+.evaluation_tests/test_checkpoint_1.py:626: AssertionError
+__________________ TestCore.test_shape_objects_includes_rowid __________________
+
+self = <test_checkpoint_2.TestCore object at 0x7a0533e05a90>
+client = <httpx.Client object at 0x7a0533cbfe90>
+cp2_dataset_id = '8ffe8d232aa2477c'
+
+    def test_shape_objects_includes_rowid(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """_shape=objects includes each row's source-file rowid."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_shape": "objects"})
+        )
+        first = payload["rows"][0]
+>       assert first["rowid"] == 2
+E       assert 1 == 2
+
+.evaluation_tests/test_checkpoint_2.py:126: AssertionError
+_______________________ TestCore.test_rowid_ignores_sort _______________________
+
+self = <test_checkpoint_2.TestCore object at 0x7a0533e07d40>
+client = <httpx.Client object at 0x7a0533cbfe90>
+cp2_dataset_id = '183cf7d86df945c4'
+
+    def test_rowid_ignores_sort(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Object rows report original source rowid values under sorted pagination."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp2_dataset_id,
+                params={"_shape": "objects", "_sort": "age", "_size": "2"},
+            )
+        )
+        assert payload["rows"][0]["name"] == "Bob"
+>       assert payload["rows"][0]["rowid"] == 3
+E       assert 1 == 3
+
+.evaluation_tests/test_checkpoint_2.py:143: AssertionError
+_______________ TestFunctionality.test_rowid_sequential_all_rows _______________
+
+self = <test_checkpoint_2.TestFunctionality object at 0x7a0533e0f4d0>
+client = <httpx.Client object at 0x7a0533cbfe90>
+cp2_dataset_id = '912c52b34f8606d1'
+
+    @pytest.mark.functionality
+    def test_rowid_sequential_all_rows(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Object-shaped rows have sequential 1-based rowid values for all rows."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_shape": "objects"})
+        )
+>       assert [row["rowid"] for row in payload["rows"]] == [2, 3, 4, 5, 6]
+E       assert [1, 2, 3, 4, 5] == [2, 3, 4, 5, 6]
+E         
+E         At index 0 diff: 1 != 2
+E         
+E         Full diff:
+E           [
+E         +     1,
+E               2,
+E               3,
+E               4,
+E               5,
+E         -     6,
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:486: AssertionError
+__________________________ TestCore.test_exact_filter __________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533d88aa0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '2ba19e2333794259'
+
+    def test_exact_filter(
+        self, client: httpx.Client, cp3_dataset_id: str
+    ) -> None:
+        """Exact comparator returns rows with exact column value matches."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"category__exact": "electronics"},
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:70: AssertionError
+________________________ TestCore.test_contains_filter _________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533d8a510>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'e04f102f08561612'
+
+    def test_contains_filter(
+        self, client: httpx.Client, cp3_dataset_id: str
+    ) -> None:
+        """Contains comparator matches rows by case-sensitive substring."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"Product Name__contains": "adget"},
+            )
+        )
+>       assert payload["total"] == 3
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:85: AssertionError
+__________________________ TestCore.test_less_filter ___________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533d88c50>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'd3b1de13473d0195'
+
+    def test_less_filter(
+        self, client: httpx.Client, cp3_dataset_id: str
+    ) -> None:
+        """Less comparator filters rows with numeric values below threshold."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client, cp3_dataset_id, params={"price__less": "10"}
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:96: AssertionError
+_________________________ TestCore.test_greater_strict _________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533d88620>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '64196d4507821445'
+
+    def test_greater_strict(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Greater comparator enforces strict greater-than numeric matching."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client, cp3_dataset_id, params={"price__greater": "9.99"}
+            )
+        )
+>       assert payload["total"] == 3
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:110: AssertionError
+________________________ TestCore.test_multi_filter_and ________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533d881a0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '2343b79fedfc4a6a'
+
+    @pytest.mark.functionality
+    def test_multi_filter_and(
+        self, client: httpx.Client, cp3_dataset_id: str
+    ) -> None:
+        """Multiple filters combine with logical AND."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={
+                    "category__exact": "tools",
+                    "price__less": "15",
+                },
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:129: AssertionError
+______________________ TestCore.test_same_col_filters_and ______________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533d8b800>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'e5d0e8ee44907d56'
+
+    @pytest.mark.functionality
+    def test_same_col_filters_and(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Multiple filters on one column are ANDed together."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"price__greater": "9", "price__less": "20"},
+            )
+        )
+>       assert payload["total"] == 3
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:146: AssertionError
+______________________ TestCore.test_filter_sort_paginate ______________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533d89b80>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'cb9970a9d72af833'
+
+    @pytest.mark.functionality
+    def test_filter_sort_paginate(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Filtering is applied before sorting and pagination."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={
+                    "price__greater": "9.99",
+                    "_sort": "price",
+                    "_size": "2",
+                },
+            )
+        )
+>       assert payload["total"] == 3
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:171: AssertionError
+_____________________ TestCore.test_original_header_filter _____________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533d8bb60>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '4aff135cbcfdcdd6'
+
+    def test_original_header_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Exact comparator matches a header containing spaces verbatim."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"Product Name__exact": "Widget A"},
+            )
+        )
+>       assert payload["total"] == 1
+E       assert 5 == 1
+
+.evaluation_tests/test_checkpoint_3.py:187: AssertionError
+___________________ TestCore.test_rejects_non_numeric_value ____________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533ccfc50>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '7992952990366418'
+
+    @pytest.mark.error
+    def test_rejects_non_numeric_value(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Non-numeric less comparator values return HTTP 400."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={"price__less": "cheap"},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:202: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______________________ TestCore.test_total_post_filter ________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533d91130>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'b9be766e9359b8b2'
+
+    @pytest.mark.functionality
+    def test_total_post_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """total reflects filtered row count before pagination."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"category__exact": "tools", "_size": "1"},
+            )
+        )
+>       assert payload["total"] == 3
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:218: AssertionError
+___________________ TestCore.test_excludes_non_numeric_cell ____________________
+
+self = <test_checkpoint_3.TestCore object at 0x7a0533d90650>
+client = <httpx.Client object at 0x7a0533cbdc70>
+local_source_server = <conftest.SourceServer object at 0x7a0533c43ad0>
+
+    @pytest.mark.functionality
+    def test_excludes_non_numeric_cell(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Numeric filters exclude rows with non-numeric stored values."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/mixed_numeric.csv",
+            b"name,value\na,10\nb,not-a-number\nc,5\n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"value__greater": "6"})
+        )
+>       assert [row[0] for row in payload["rows"]] == ["a"]
+E       AssertionError: assert ['a', 'b', 'c'] == ['a']
+E         
+E         Left contains 2 more items, first extra item: 'b'
+E         
+E         Full diff:
+E           [
+E               'a',
+E         +     'b',
+E         +     'c',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:237: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params0-3] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d89a90>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'ba96c594b18647cb', params = {'category__exact': 'tools'}
+expected_total = 3
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params1-2] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8b5f0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '9510d757235ecd0b', params = {'category__exact': 'electronics'}
+expected_total = 2
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params2-2] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8b680>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '42c03b37bfbd78f2'
+params = {'Product Name__contains': 'Widget'}, expected_total = 2
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params3-3] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8bb30>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'b65c6fc45149eef4'
+params = {'Product Name__contains': 'Gadget'}, expected_total = 3
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params4-1] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8b3b0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'b1e2e1f9ef279a71', params = {'price__greater': '20'}
+expected_total = 1
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 1
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params5-1] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d89100>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '0f95dd617a0057ca', params = {'price__less': '6'}
+expected_total = 1
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 1
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+________________ TestFunctionality.test_contains_case_sensitive ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d90920>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'ca77eda54c3fa0e2'
+
+    @pytest.mark.functionality
+    def test_contains_case_sensitive(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Contains comparison is case-sensitive for substring matches."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"Product Name__contains": "gadget"},
+            )
+        )
+>       assert payload["total"] == 0
+E       assert 5 == 0
+
+.evaluation_tests/test_checkpoint_3.py:316: AssertionError
+_________________ TestFunctionality.test_numeric_bounds_strict _________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8e750>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'c6131fdb41f74e0b'
+
+    @pytest.mark.functionality
+    def test_numeric_bounds_strict(
+        self, client: httpx.Client, cp3_dataset_id: str
+    ) -> None:
+        """Numeric bounds are strict and do not include equal values."""
+        greater = assert_ok_envelope(
+            dataset_request(
+                client, cp3_dataset_id, params={"price__greater": "10.00"}
+            )
+        )
+        less = assert_ok_envelope(
+            dataset_request(
+                client, cp3_dataset_id, params={"price__less": "10.00"}
+            )
+        )
+>       assert all(row[0] != "Gadget E" for row in greater["rows"])
+E       assert False
+E        +  where False = all(<generator object TestFunctionality.test_numeric_bounds_strict.<locals>.<genexpr> at 0x7a053362b5e0>)
+
+.evaluation_tests/test_checkpoint_3.py:333: AssertionError
+______________ TestFunctionality.test_zero_match_filter[no_match] ______________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8e0c0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '2d2e32e70dfd5392'
+params = {'Product Name__exact': 'No Match'}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params",
+        [
+            {"Product Name__exact": "No Match"},
+            {"Product Name__exact": "widget a"},
+            {"category__exact": "tools "},
+            {"Product Name__contains": "adget  "},
+        ],
+        ids=[
+            "no_match",
+            "exact_case",
+            "exact_whitespace",
+            "contains_whitespace",
+        ],
+    )
+    def test_zero_match_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+    ) -> None:
+        """Case and whitespace differences produce zero filter matches."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == 0
+E       assert 5 == 0
+
+.evaluation_tests/test_checkpoint_3.py:362: AssertionError
+_____________ TestFunctionality.test_zero_match_filter[exact_case] _____________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8eab0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'f68b3cd31c9f4428'
+params = {'Product Name__exact': 'widget a'}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params",
+        [
+            {"Product Name__exact": "No Match"},
+            {"Product Name__exact": "widget a"},
+            {"category__exact": "tools "},
+            {"Product Name__contains": "adget  "},
+        ],
+        ids=[
+            "no_match",
+            "exact_case",
+            "exact_whitespace",
+            "contains_whitespace",
+        ],
+    )
+    def test_zero_match_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+    ) -> None:
+        """Case and whitespace differences produce zero filter matches."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == 0
+E       assert 5 == 0
+
+.evaluation_tests/test_checkpoint_3.py:362: AssertionError
+__________ TestFunctionality.test_zero_match_filter[exact_whitespace] __________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8c3e0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '929d0ffd6c8c2e6a', params = {'category__exact': 'tools '}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params",
+        [
+            {"Product Name__exact": "No Match"},
+            {"Product Name__exact": "widget a"},
+            {"category__exact": "tools "},
+            {"Product Name__contains": "adget  "},
+        ],
+        ids=[
+            "no_match",
+            "exact_case",
+            "exact_whitespace",
+            "contains_whitespace",
+        ],
+    )
+    def test_zero_match_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+    ) -> None:
+        """Case and whitespace differences produce zero filter matches."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == 0
+E       assert 5 == 0
+
+.evaluation_tests/test_checkpoint_3.py:362: AssertionError
+________ TestFunctionality.test_zero_match_filter[contains_whitespace] _________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8c740>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'd797dca1db4bd579'
+params = {'Product Name__contains': 'adget  '}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params",
+        [
+            {"Product Name__exact": "No Match"},
+            {"Product Name__exact": "widget a"},
+            {"category__exact": "tools "},
+            {"Product Name__contains": "adget  "},
+        ],
+        ids=[
+            "no_match",
+            "exact_case",
+            "exact_whitespace",
+            "contains_whitespace",
+        ],
+    )
+    def test_zero_match_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+    ) -> None:
+        """Case and whitespace differences produce zero filter matches."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == 0
+E       assert 5 == 0
+
+.evaluation_tests/test_checkpoint_3.py:362: AssertionError
+__________________ TestFunctionality.test_exposed_col_filter ___________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8efc0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'fe3d912f1bf5adb4'
+
+    @pytest.mark.functionality
+    def test_exposed_col_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Filtering works using a column name from the dataset metadata."""
+        first_column_name = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id)
+        )["columns"][0]
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={f"{first_column_name}__exact": "Widget A"},
+            )
+        )
+>       assert payload["total"] == 1
+E       assert 5 == 1
+
+.evaluation_tests/test_checkpoint_3.py:382: AssertionError
+____________________ TestFunctionality.test_header_no_trim _____________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8c800>
+client = <httpx.Client object at 0x7a0533cbdc70>
+local_source_server = <conftest.SourceServer object at 0x7a0533de7a40>
+
+    @pytest.mark.functionality
+    def test_header_no_trim(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Header text is used exactly without trimming for filter names."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/spaced_header.csv",
+            b" Product Name ,price\nWidget A,10\nWidget B,20\n",
+        )
+    
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+>       assert payload["columns"] == [" Product Name ", "price"]
+E       AssertionError: assert ['Product Name', 'price'] == [' Product Name ', 'price']
+E         
+E         At index 0 diff: 'Product Name' != ' Product Name '
+E         
+E         Full diff:
+E           [
+E         -     ' Product Name ',
+E         ?      -            -
+E         +     'Product Name',
+E               'price',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:400: AssertionError
+______________ TestFunctionality.test_filter_sort_paginate_shape _______________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8cfb0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '250f18dc556ccbbe'
+
+    @pytest.mark.functionality
+    def test_filter_sort_paginate_shape(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Filtered sorted pages also honor object shape and visibility flags."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={
+                    "category__exact": "tools",
+                    "price__greater": "9",
+                    "_sort_desc": "price",
+                    "_offset": "1",
+                    "_size": "1",
+                    "_shape": "objects",
+                    "_rowid": "hide",
+                    "_total": "hide",
+                },
+            )
+        )
+        assert "total" not in payload
+        assert len(payload["rows"]) == 1
+        row = payload["rows"][0]
+        first_column = payload["columns"][0]
+>       assert row[first_column] == "Gadget E"
+E       AssertionError: assert 'Widget B' == 'Gadget E'
+E         
+E         - Gadget E
+E         + Widget B
+
+.evaluation_tests/test_checkpoint_3.py:438: AssertionError
+______________ TestFunctionality.test_numeric_scientific_notation ______________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8d670>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '8ad1159c27c286d1'
+
+    @pytest.mark.functionality
+    def test_numeric_scientific_notation(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Less comparator accepts scientific-notation numeric values."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client, cp3_dataset_id, params={"price__less": "1e1"}
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:454: AssertionError
+________________ TestFunctionality.test_filter_sort_ties_stable ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8db80>
+client = <httpx.Client object at 0x7a0533cbdc70>
+local_source_server = <conftest.SourceServer object at 0x7a0533e24b90>
+
+    @pytest.mark.functionality
+    def test_filter_sort_ties_stable(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Sorting retains source-file order for equal sort-key values."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/filter_tie.csv",
+            b"name,price,category\n"
+            b"first,10,tools\n"
+            b"second,10,tools\n"
+            b"third,9,tools\n"
+            b"fourth,10,other\n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"category__exact": "tools", "_sort": "price"},
+            )
+        )
+>       assert [row[0] for row in payload["rows"]] == [
+            "third",
+            "first",
+            "second",
+        ]
+E       AssertionError: assert ['third', 'first', 'second', 'fourth'] == ['third', 'first', 'second']
+E         
+E         Left contains one more item: 'fourth'
+E         
+E         Full diff:
+E           [
+E               'third',
+E               'first',
+E               'second',
+E         +     'fourth',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:481: AssertionError
+_________________ TestFunctionality.test_numeric_signed_bounds _________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8e360>
+client = <httpx.Client object at 0x7a0533cbdc70>
+local_source_server = <conftest.SourceServer object at 0x7a0533d0e4b0>
+
+    @pytest.mark.functionality
+    def test_numeric_signed_bounds(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Less/greater filters parse signed numeric values."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/signed_numeric.csv",
+            b"name,value\nneg,-1\nzero,0\npos,2\n",
+        )
+        less = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"value__less": "0"})
+        )
+        greater = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"value__greater": "-1"})
+        )
+>       assert [row[0] for row in less["rows"]] == ["neg"]
+E       AssertionError: assert ['neg', 'zero', 'pos'] == ['neg']
+E         
+E         Left contains 2 more items, first extra item: 'zero'
+E         
+E         Full diff:
+E           [
+E               'neg',
+E         +     'zero',
+E         +     'pos',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:506: AssertionError
+_______________ TestFunctionality.test_string_cmp_numeric_cells ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d889e0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+local_source_server = <conftest.SourceServer object at 0x7a0533c41460>
+
+    @pytest.mark.functionality
+    def test_string_cmp_numeric_cells(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Exact and contains comparators perform string matching on codes."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/numeric_text.csv",
+            b"code,label\n100,alpha\n101,beta\n210,gamma\n",
+        )
+        exact = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"code__exact": "100"})
+        )
+        contains = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"code__contains": "10"})
+        )
+>       assert [row[0] for row in exact["rows"]] == [100]
+E       assert [100, 101, 210] == [100]
+E         
+E         Left contains 2 more items, first extra item: 101
+E         
+E         Full diff:
+E           [
+E               100,
+E         +     101,
+E         +     210,
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:528: AssertionError
+_____________ TestFunctionality.test_exact_whitespace_value_match ______________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8d460>
+client = <httpx.Client object at 0x7a0533cbdc70>
+local_source_server = <conftest.SourceServer object at 0x7a0533c40050>
+
+    @pytest.mark.functionality
+    def test_exact_whitespace_value_match(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Exact comparator matches when filter value includes significant whitespace."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/ws_exact_pos.csv",
+            b"name,label\nAlpha, hello \nBeta,world\nGamma, hello \n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"label__exact": " hello "},
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 3 == 2
+
+.evaluation_tests/test_checkpoint_3.py:567: AssertionError
+____________ TestFunctionality.test_contains_whitespace_value_match ____________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8c2f0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+local_source_server = <conftest.SourceServer object at 0x7a0533cf6600>
+
+    @pytest.mark.functionality
+    def test_contains_whitespace_value_match(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Contains comparator matches when filter value includes significant whitespace."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/ws_contains_pos.csv",
+            b"name,label\nAlpha,hello\nBeta,hello world\nGamma,hello world\n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"label__contains": "o "},
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 3 == 2
+
+.evaluation_tests/test_checkpoint_3.py:590: AssertionError
+_ TestFunctionality.test_numeric_like_cells_preserve_whitespace_for_string_filters _
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8dc40>
+client = <httpx.Client object at 0x7a0533cbdc70>
+local_source_server = <conftest.SourceServer object at 0x7a0533c43680>
+
+    @pytest.mark.functionality
+    def test_numeric_like_cells_preserve_whitespace_for_string_filters(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """String filters preserve significant whitespace in textual cells."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/textual_whitespace.csv",
+            b"code,label\n A10 ,padded\nA10,plain\nB210,other\n",
+        )
+        exact = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"code__exact": " A10 "},
+            )
+        )
+        contains = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"code__contains": "10 "},
+            )
+        )
+>       assert [row[1] for row in exact["rows"]] == ["padded"]
+E       AssertionError: assert ['padded', 'plain', 'other'] == ['padded']
+E         
+E         Left contains 2 more items, first extra item: 'plain'
+E         
+E         Full diff:
+E           [
+E               'padded',
+E         +     'plain',
+E         +     'other',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:620: AssertionError
+_________ TestFunctionality.test_exact_empty_value_matches_empty_cells _________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7a0533d8ec30>
+client = <httpx.Client object at 0x7a0533cbdc70>
+local_source_server = <conftest.SourceServer object at 0x7a0533c87e30>
+
+    @pytest.mark.functionality
+    def test_exact_empty_value_matches_empty_cells(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Exact filter with empty value matches only rows with empty cell values."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/empty_exact.csv",
+            b"name,note\nAlpha,\nBeta,hello\nGamma,\n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"note__exact": ""},
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 3 == 2
+
+.evaluation_tests/test_checkpoint_3.py:659: AssertionError
+_____________ TestError.test_numeric_rejects_non_numeric[less_abc] _____________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d8f2c0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '2a992ca0c643efbd', op = 'less', value = 'abc'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_____________ TestError.test_numeric_rejects_non_numeric[less_1,2] _____________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d8f500>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'ea2089087fdcd71b', op = 'less', value = '1,2'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.1,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+____________ TestError.test_numeric_rejects_non_numeric[less_none] _____________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d8f770>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '5e85ec3d600c8133', op = 'less', value = 'none'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+___________ TestError.test_numeric_rejects_non_numeric[greater_abc] ____________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d8f830>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '0428d7eac4b0274b', op = 'greater', value = 'abc'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+___________ TestError.test_numeric_rejects_non_numeric[greater_1,2] ____________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d8f950>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'e9bdc312c6254e92', op = 'greater', value = '1,2'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.1,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+___________ TestError.test_numeric_rejects_non_numeric[greater_none] ___________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d8fa10>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '4f974977ff3f697f', op = 'greater', value = 'none'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+____________________ TestError.test_unknown_comparator_400 _____________________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d8fef0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '1a76f8e69e5df8d2'
+
+    @pytest.mark.error
+    def test_unknown_comparator_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Unknown filter comparator names return HTTP 400."""
+        response = dataset_request(
+            client, cp3_dataset_id, params={"price__lte": "10"}
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:709: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+______________________ TestError.test_unknown_column_400 _______________________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d1d0d0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '3404985c9fd97f52'
+
+    @pytest.mark.error
+    def test_unknown_column_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Unknown filter column names return HTTP 400."""
+        response = dataset_request(
+            client, cp3_dataset_id, params={"missing__exact": "x"}
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:721: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______________________ TestError.test_duplicate_key_400 _______________________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d1fb60>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'c621b0f9010aafc9'
+
+    @pytest.mark.error
+    def test_duplicate_key_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Duplicate filter keys in one request return HTTP 400."""
+        response = client.get(
+            f"/datasets/{cp3_dataset_id}"
+            "?category__exact=tools&category__exact=electronics"
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:734: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.1,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+__________________ TestError.test_duplicate_identical_key_400 __________________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d8fb30>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '8067801497ac2f73'
+
+    @pytest.mark.error
+    def test_duplicate_identical_key_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Repeated identical filter key returns HTTP 400."""
+        response = client.get(
+            f"/datasets/{cp3_dataset_id}"
+            "?category__exact=tools&category__exact=tools"
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:747: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+__________________ TestError.test_col_name_must_match_header ___________________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d8ea80>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = 'f96ab0800783005f'
+
+    @pytest.mark.error
+    def test_col_name_must_match_header(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Filter columns must exactly match source headers."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={"product name__exact": "Widget A"},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:761: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+__________________ TestError.test_col_name_case_mismatch_400 ___________________
+
+self = <test_checkpoint_3.TestError object at 0x7a0533d8e3f0>
+client = <httpx.Client object at 0x7a0533cbdc70>
+cp3_dataset_id = '29dc3bd13e20354b'
+
+    @pytest.mark.error
+    def test_col_name_case_mismatch_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Case-mismatched filter column names return HTTP 400."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={"Category__exact": "tools"},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_whitespace - AssertionError: assert [['left', 'space'], ['right', 'space']] == [['left', '  space'], ['right', 'space  ']]
+  
+  At index 0 diff: ['left', 'space'] != ['left', '  space']
+  
+  Full diff:
+    [
+        [
+            'left',
+  -         '  space',
+  ?          --
+  +         'space',
+        ],
+        [
+            'right',
+  -         'space  ',
+  ?               --
+  +         'space',
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_header_and_time_whitespace - AssertionError: assert ['name', 'time'] == [' name ', 'time']
+  
+  At index 0 diff: 'name' != ' name '
+  
+  Full diff:
+    [
+  -     ' name ',
+  ?      -    -
+  +     'name',
+        'time',
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_shape_objects_includes_rowid - assert 1 == 2
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_ignores_sort - assert 1 == 3
+FAILED .evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_sequential_all_rows - assert [1, 2, 3, 4, 5] == [2, 3, 4, 5, 6]
+  
+  At index 0 diff: 1 != 2
+  
+  Full diff:
+    [
+  +     1,
+        2,
+        3,
+        4,
+        5,
+  -     6,
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_exact_filter - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_contains_filter - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_less_filter - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_greater_strict - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_multi_filter_and - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_same_col_filters_and - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_filter_sort_paginate - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_original_header_filter - assert 5 == 1
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_rejects_non_numeric_value - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_total_post_filter - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_excludes_non_numeric_cell - AssertionError: assert ['a', 'b', 'c'] == ['a']
+  
+  Left contains 2 more items, first extra item: 'b'
+  
+  Full diff:
+    [
+        'a',
+  +     'b',
+  +     'c',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params0-3] - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params1-2] - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params2-2] - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params3-3] - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params4-1] - assert 5 == 1
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params5-1] - assert 5 == 1
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_case_sensitive - assert 5 == 0
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_bounds_strict - assert False
+ +  where False = all(<generator object TestFunctionality.test_numeric_bounds_strict.<locals>.<genexpr> at 0x7a053362b5e0>)
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[no_match] - assert 5 == 0
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_case] - assert 5 == 0
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_whitespace] - assert 5 == 0
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[contains_whitespace] - assert 5 == 0
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exposed_col_filter - assert 5 == 1
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_header_no_trim - AssertionError: assert ['Product Name', 'price'] == [' Product Name ', 'price']
+  
+  At index 0 diff: 'Product Name' != ' Product Name '
+  
+  Full diff:
+    [
+  -     ' Product Name ',
+  ?      -            -
+  +     'Product Name',
+        'price',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_paginate_shape - AssertionError: assert 'Widget B' == 'Gadget E'
+  
+  - Gadget E
+  + Widget B
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_scientific_notation - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_ties_stable - AssertionError: assert ['third', 'first', 'second', 'fourth'] == ['third', 'first', 'second']
+  
+  Left contains one more item: 'fourth'
+  
+  Full diff:
+    [
+        'third',
+        'first',
+        'second',
+  +     'fourth',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_signed_bounds - AssertionError: assert ['neg', 'zero', 'pos'] == ['neg']
+  
+  Left contains 2 more items, first extra item: 'zero'
+  
+  Full diff:
+    [
+        'neg',
+  +     'zero',
+  +     'pos',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_string_cmp_numeric_cells - assert [100, 101, 210] == [100]
+  
+  Left contains 2 more items, first extra item: 101
+  
+  Full diff:
+    [
+        100,
+  +     101,
+  +     210,
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_whitespace_value_match - assert 3 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_whitespace_value_match - assert 3 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_like_cells_preserve_whitespace_for_string_filters - AssertionError: assert ['padded', 'plain', 'other'] == ['padded']
+  
+  Left contains 2 more items, first extra item: 'plain'
+  
+  Full diff:
+    [
+        'padded',
+  +     'plain',
+  +     'other',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_empty_value_matches_empty_cells - assert 3 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_abc] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_1,2] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.1,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_none] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_abc] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_1,2] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.1,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_none] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_comparator_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_column_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_key_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.1,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_identical_key_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_must_match_header - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_case_mismatch_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+================== 51 failed, 123 passed in 84.05s (0:01:24) ===================

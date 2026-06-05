@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "problem_name": "metric_transform_lang",
+  "problem_version": 1,
+  "checkpoint_name": "checkpoint_1",
+  "checkpoint_version": 1,
+  "duration": 11.062848091125488,
+  "entrypoint": "uv run mtl.py",
+  "tests": {
+    "checkpoint_1-Functionality": {
+      "passed": [
+        "test_checkpoint_1_core_extended[06_group_by_file_out]",
+        "test_checkpoint_1_core_extended[25_filter_with_group_by]",
+        "test_checkpoint_1_hidden[20_null_aggregates]"
+      ],
+      "failed": [
+        "test_checkpoint_1_cli_format[21_custom_timezone]",
+        "test_checkpoint_1_cli_format[22_custom_timestamp_fmt]",
+        "test_checkpoint_1_cli_format[24_extra_csv_columns]",
+        "test_checkpoint_1_cli_format[28_comments_empty_lines]",
+        "test_checkpoint_1_core_extended[08_median_even_count]",
+        "test_checkpoint_1_core_extended[09_timestamp_transforms]",
+        "test_checkpoint_1_core_extended[10_round_function]",
+        "test_checkpoint_1_core_extended[11_group_by_multi_cols]",
+        "test_checkpoint_1_core_extended[27_apply_column_override]",
+        "test_checkpoint_1_core_extended[30_all_aggregates]",
+        "test_checkpoint_1_expressions[14_all_comparison_ops]",
+        "test_checkpoint_1_expressions[15_logical_operators]",
+        "test_checkpoint_1_expressions[16_in_operator]",
+        "test_checkpoint_1_expressions[17_column_comparison]",
+        "test_checkpoint_1_hidden[07_std_var_aggregates]",
+        "test_checkpoint_1_hidden[19_single_row]",
+        "test_checkpoint_1_hidden[26_apply_then_filter]",
+        "test_checkpoint_1_hidden[31_group_by_timestamp]",
+        "test_checkpoint_1_window_variants[04_window_and_group_by]",
+        "test_checkpoint_1_window_variants[12_window_10m]",
+        "test_checkpoint_1_window_variants[13_window_24h]",
+        "test_checkpoint_1_window_variants[29_window_7d]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Core": {
+      "passed": [
+        "test_checkpoint_1_core[02_group_by_category]"
+      ],
+      "failed": [
+        "test_checkpoint_1_core[01_all_rows_aggregates]",
+        "test_checkpoint_1_core[03_window_1h_counts]",
+        "test_checkpoint_1_core[05_filter_and_apply]"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Error": {
+      "passed": [
+        "test_checkpoint_1_error[01_dsl_syntax_error]",
+        "test_checkpoint_1_error[03_missing_csv_io_error]",
+        "test_checkpoint_1_error[04_multiple_group_by]",
+        "test_checkpoint_1_error[05_multiple_window]",
+        "test_checkpoint_1_error[06_no_aggregate]",
+        "test_checkpoint_1_error[08_invalid_window_duration]",
+        "test_checkpoint_1_error[09_len_on_number]",
+        "test_checkpoint_1_error[10_day_on_string]",
+        "test_checkpoint_1_error[11_string_number_comparison]",
+        "test_checkpoint_1_error[13_undefined_column]",
+        "test_checkpoint_1_error[15_missing_dsl_file]",
+        "test_checkpoint_1_error[17_zero_window_duration]"
+      ],
+      "failed": [
+        "test_checkpoint_1_error[02_type_error_numeric_on_string]",
+        "test_checkpoint_1_error[07_duplicate_aliases]",
+        "test_checkpoint_1_error[12_invalid_in_usage]",
+        "test_checkpoint_1_error[16_in_with_two_literals]",
+        "test_checkpoint_1_error[18_filter_non_boolean]"
+      ],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 1,
+    "Functionality": 3,
+    "Regression": 0,
+    "Error": 12
+  },
+  "total_counts": {
+    "Core": 4,
+    "Functionality": 25,
+    "Regression": 0,
+    "Error": 17
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 46,
+  "test_collection_hash": "7b650b1f702fb8925dd0838875941f325a4f9a13aa2f251faeaa22c1458615c2",
+  "infrastructure_failure": false
+}

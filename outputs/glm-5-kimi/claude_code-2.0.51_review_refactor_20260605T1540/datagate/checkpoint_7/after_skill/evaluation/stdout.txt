@@ -1,0 +1,2921 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/jE1EUVAOOCy-O3UI/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: anyio-4.13.0, json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 405 items
+
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_convert_bad_params[missing-source] PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_convert_bad_params[invalid-url] PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unreachable_source PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_non_tabular_payload PASSED [  0%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_success_returns_id PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_single_column_csv PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_query_envelope PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_order_preserved PASSED [  1%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_default_limit_100 PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_charset_latin1 PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_autodetect_latin1 PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_upstream_500_to_404 PASSED [  2%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_decimals_as_numbers PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_semicolon_delimiter PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_time_values_as_text PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestCore::test_unknown_route_404 PASSED [  3%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_relative_endpoint PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[,] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[;] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_common_delimiters[\t] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[name,emoji-alice,smile\nbob,wave\n] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[name,note-alice,naive\nbob,cafe\n] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[k,v-left,  space\nright,space  \n] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_ingest_varied_text_payloads[id,text-1,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n] PASSED [  5%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_query_stable PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_limit_exactly_100 PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_whitespace FAILED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_negative_values_as_numbers PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_routes[/convert] PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_routes[/not-found] PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_cors_on_dataset_query PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_options_preflight_cors[/convert] PASSED [  7%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_options_preflight_cors[/datasets/does-not-exist] PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_same_url_same_id PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_different_urls_different_ids PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_empty_file_rejected PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_time_boundary_values_are_text PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_large_dataset_limit_order PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_id_from_url_not_charset PASSED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_header_and_time_whitespace FAILED [  9%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_trailing_empty_line_excluded PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_extra_columns_trimmed PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_multiple_datasets_independent PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_unknown_dataset_404 PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_malformed_charset PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_convert_bad_url[bad-scheme] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_convert_bad_url[missing-scheme] PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_header_only_rejected PASSED [ 11%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_empty_source_parameter PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::TestError::test_upstream_403_to_404 PASSED [ 12%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_total_before_pagination PASSED [ 12%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_size_and_offset_apply PASSED [ 12%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_ascending_is_stable PASSED [ 13%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_paginate PASSED [ 13%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_sort_desc_precedence PASSED [ 13%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_shape_objects_includes_rowid FAILED [ 13%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_ignores_sort FAILED [ 14%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_hide_removes_rowid PASSED [ 14%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_total_hide_removes_total PASSED [ 14%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_invalid_param_400[invalid_size] PASSED [ 14%]
+.evaluation_tests/test_checkpoint_2.py::TestCore::test_invalid_param_400[invalid_shape] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[1-1] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[2-2] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[5-5] PASSED [ 15%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_size_variants[20-5] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[0-Alice] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[1-Bob] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[4-Eve] PASSED [ 16%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_variants[10-None] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[name] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[age] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_keys[city] PASSED [ 17%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[name] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[age] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_keys[city] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_name_and_city_order_values PASSED [ 18%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params0] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params1] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shape_and_visibility_combinations[params2] PASSED [ 19%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_columns_exclude_rowid PASSED [ 19%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sorted_requests_stable PASSED [ 20%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_hide_noop_lists PASSED [ 20%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_hide_noop_default PASSED [ 20%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_total_ignores_offset_size PASSED [ 20%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_composed_controls PASSED [ 20%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_shapes_consistent_values PASSED [ 21%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_tie_stability PASSED [ 21%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_sort_desc_precedence_different_columns PASSED [ 21%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_sequential_all_rows FAILED [ 21%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_total_default_bare_request PASSED [ 22%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_offset_at_dataset_length PASSED [ 22%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_empty_toggle_value_400[_rowid] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_empty_toggle_value_400[_total] PASSED [ 22%]
+.evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_large_size_returns_all_rows PASSED [ 23%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_unknown_sort_column_400 PASSED [ 23%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort] PASSED [ 23%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_value_400[_sort_desc] PASSED [ 23%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_rowid-show] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_rowid-false] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_total-show] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_visibility_invalid_value_400[_total-0] PASSED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_total_default_shape PASSED [ 25%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_size=1&_size=2] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort=age&_sort=name] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_rowid=hide&_rowid=hide] PASSED [ 25%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_offset=1&_offset=2] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_shape=lists&_shape=objects] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_sort_desc=age&_sort_desc=name] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_duplicate_control_params_400[_total=hide&_total=hide] PASSED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_rowid_list_or_default[params0] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_invalid_rowid_list_or_default[params1] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_sort_both_params_400[_sort=age&_sort_desc=] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[shape] PASSED [ 27%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[size] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_empty_param_value_400[offset] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[0] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[-1] PASSED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[3.1] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_size_values[abc] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[-1] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[oops] PASSED [ 29%]
+.evaluation_tests/test_checkpoint_2.py::TestError::test_bad_offset_values[2.5] PASSED [ 30%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_exact_filter FAILED [ 30%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_contains_filter FAILED [ 30%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_less_filter FAILED [ 30%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_greater_strict FAILED [ 31%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_multi_filter_and FAILED [ 31%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_same_col_filters_and FAILED [ 31%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_filter_sort_paginate FAILED [ 31%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_original_header_filter FAILED [ 32%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_rejects_non_numeric_value FAILED [ 32%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_total_post_filter FAILED [ 32%]
+.evaluation_tests/test_checkpoint_3.py::TestCore::test_excludes_non_numeric_cell FAILED [ 32%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params0-3] FAILED [ 33%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params1-2] FAILED [ 33%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params2-2] FAILED [ 33%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params3-3] FAILED [ 33%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params4-1] FAILED [ 34%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params5-1] FAILED [ 34%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params0] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params1] PASSED [ 34%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params2] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_control_compose[params3] PASSED [ 35%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_case_sensitive FAILED [ 35%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_bounds_strict FAILED [ 35%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[no_match] FAILED [ 36%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_case] FAILED [ 36%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_whitespace] FAILED [ 36%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[contains_whitespace] FAILED [ 36%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exposed_col_filter FAILED [ 37%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_header_no_trim FAILED [ 37%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_paginate_shape FAILED [ 37%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_scientific_notation FAILED [ 37%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_ties_stable FAILED [ 38%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_signed_bounds FAILED [ 38%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_string_cmp_numeric_cells FAILED [ 38%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_plain_param_ignored PASSED [ 38%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_whitespace_value_match FAILED [ 39%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_whitespace_value_match FAILED [ 39%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_like_cells_preserve_whitespace_for_string_filters FAILED [ 39%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_empty_value_matches_all PASSED [ 39%]
+.evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_empty_value_matches_empty_cells FAILED [ 40%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_abc] FAILED [ 40%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_1,2] FAILED [ 40%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_none] FAILED [ 40%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_abc] FAILED [ 40%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_1,2] FAILED [ 41%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_none] FAILED [ 41%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_comparator_400 FAILED [ 41%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_column_400 FAILED [ 41%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_key_400 FAILED [ 42%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_identical_key_400 FAILED [ 42%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_must_match_header FAILED [ 42%]
+.evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_case_mismatch_400 FAILED [ 42%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_csv_headers PASSED [ 43%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_content_disposition PASSED [ 43%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_rows PASSED [ 43%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_filter_sort_page PASSED [ 43%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_sort_without_filter PASSED [ 44%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_export_shape_controls PASSED [ 44%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_csv_charset_honored PASSED [ 44%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_file_field PASSED [ 44%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_attachment_field PASSED [ 45%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_missing_file_400 PASSED [ 45%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_same_content_deterministic PASSED [ 45%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_spreadsheet[xlsx] PASSED [ 45%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_spreadsheet[xls] PASSED [ 46%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_spreadsheet_query_controls PASSED [ 46%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_multisheet_first_only PASSED [ 46%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_multisheet_first_only PASSED [ 46%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_empty_first_sheet_rejected PASSED [ 47%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_xlsx_attachment PASSED [ 47%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_xls_attachment PASSED [ 47%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_spreadsheet_charset_ignored PASSED [ 47%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_csv_charset_honored PASSED [ 48%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_spreadsheet_invalid_charset_ignored[xlsx] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_spreadsheet_invalid_charset_ignored[xls] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_spreadsheet_invalid_charset_ignored[xlsx] PASSED [ 48%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_upload_spreadsheet_invalid_charset_ignored[xls] PASSED [ 49%]
+.evaluation_tests/test_checkpoint_4.py::TestCore::test_convert_unrecognized_format_400 PASSED [ 49%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_sort_desc_filter FAILED [ 49%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_special_csv_chars FAILED [ 49%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_empty_result_header FAILED [ 50%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_convert_parity PASSED [ 50%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_field_matrix[file] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_field_matrix[attachment] PASSED [ 50%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_xlsx_exportable PASSED [ 51%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_numeric_cells_preserved PASSED [ 51%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_charset_upload PASSED [ 51%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_convert_rejects_corrupt_spreadsheet[xlsx] PASSED [ 51%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_convert_rejects_corrupt_spreadsheet[xls] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_rejects_corrupt_spreadsheet[xlsx] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_rejects_corrupt_spreadsheet[xls] PASSED [ 52%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_header_only_first_sheet_rejected PASSED [ 52%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_support_matrix[xls] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_support_matrix[xlsx] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_diff_name_deterministic PASSED [ 53%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_upload_same_bytes_are_deterministic[same.xls-xls-application/vnd.ms-excel] PASSED [ 53%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_spreadsheet_upload_same_bytes_are_deterministic[same.xlsx-xlsx-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet] PASSED [ 54%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_unrecognized_format_400 PASSED [ 54%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_matches_query_params PASSED [ 54%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_uploaded_export_params PASSED [ 54%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_empty_file_400 PASSED [ 55%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_spreadsheet_column_order PASSED [ 55%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_field_name_interchangeable_deterministic PASSED [ 55%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_single_row PASSED [ 55%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_content_disposition_quoted_filename PASSED [ 56%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_header_only_csv PASSED [ 56%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_invalid_first_sheet_rejected[empty-first-sheet] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_upload_invalid_first_sheet_rejected[header-only-first-sheet] PASSED [ 56%]
+.evaluation_tests/test_checkpoint_4.py::TestError::test_export_unknown_dataset_404 PASSED [ 57%]
+.evaluation_tests/test_checkpoint_4.py::TestError::test_upload_invalid_body_400 PASSED [ 57%]
+.evaluation_tests/test_checkpoint_4.py::TestError::test_upload_json_rejected PASSED [ 57%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_cache_reuses_without_refetch PASSED [ 57%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_cached_serves_when_source_down PASSED [ 58%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_force_updates_dataset PASSED [ 58%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_cache_disabled_refetches PASSED [ 58%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_false_spellings_disable_cache[false] PASSED [ 58%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_false_spellings_disable_cache[0] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_false_spellings_disable_cache[no] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_false_spellings_disable_cache[off] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_true_spellings_enable_cache[true] PASSED [ 59%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_true_spellings_enable_cache[1] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_true_spellings_enable_cache[yes] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_true_spellings_enable_cache[on] PASSED [ 60%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_invalid_value_fails_startup PASSED [ 60%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_disabled_convert_replaces PASSED [ 60%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_response_shape_consistent PASSED [ 61%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_dataset_id_url_deterministic PASSED [ 61%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_force_failure_returns_404 PASSED [ 61%]
+.evaluation_tests/test_checkpoint_5.py::TestCore::test_failed_force_keeps_cached PASSED [ 61%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_variants_trigger_refresh[true] FAILED [ 62%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_variants_trigger_refresh[1] FAILED [ 62%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_variants_trigger_refresh[yes] FAILED [ 62%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_variants_trigger_refresh[on] FAILED [ 62%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_bare_param_triggers_refresh PASSED [ 63%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_disabled_force_no_extra_effect PASSED [ 63%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_no_force_after_refresh_updated PASSED [ 63%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_different_urls_get_different_ids[different-urls] PASSED [ 63%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_different_urls_get_different_ids[same-content-different-urls] PASSED [ 64%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_arbitrary_force_triggers_refresh FAILED [ 64%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_reingest_when_disabled PASSED [ 64%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_cache_hit_preserves_data PASSED [ 64%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_then_cache_source_down PASSED [ 65%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_unparseable_keeps_dataset PASSED [ 65%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_disabled_unparseable_returns_400 PASSED [ 65%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_whitespace_fails_startup PASSED [ 65%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_disabled_same_url_same_id PASSED [ 66%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_duplicate_force_disabled_400 PASSED [ 66%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_cache_isolation_across_sources PASSED [ 66%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_on_first_convert PASSED [ 66%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_forced_response_keys_match_fresh PASSED [ 67%]
+.evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_forced_error_keys_match_normal PASSED [ 67%]
+.evaluation_tests/test_checkpoint_5.py::TestError::test_disabled_source_failure_propagates PASSED [ 67%]
+.evaluation_tests/test_checkpoint_5.py::TestError::test_force_unreachable_stays_404 PASSED [ 67%]
+.evaluation_tests/test_checkpoint_5.py::TestError::test_duplicate_force_returns_400 PASSED [ 68%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_config_file_loaded PASSED [ 68%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_env_overrides_config PASSED [ 68%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_config_ignores_comments PASSED [ 68%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_missing_config_fails PASSED [ 69%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_invalid_config_values_fail PASSED [ 69%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_size_limit_equal_accepted PASSED [ 69%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_size_limit_exceeded_convert PASSED [ 69%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_size_limit_exceeded_upload PASSED [ 70%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_allowlist_rejects[no_referer] PASSED [ 70%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_allowlist_rejects[non_matching_referer] PASSED [ 70%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_allowlist_suffix_match_allows PASSED [ 70%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_allowlist_boundary_confusable_rejects PASSED [ 71%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_allowlist_blocks_upload_export PASSED [ 71%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_allowlist_case_insensitive PASSED [ 71%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_tls_convert_endpoint_https PASSED [ 71%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_tls_upload_endpoint_https PASSED [ 72%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_storage_dir_created PASSED [ 72%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_storage_dir_persists_restart PASSED [ 72%]
+.evaluation_tests/test_checkpoint_6.py::TestCore::test_default_storage_dir_used_when_unset PASSED [ 72%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_suffix_matrix[https://a.example.com/path] PASSED [ 73%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_suffix_matrix[https://deep.sub.example.com/app?q=1] PASSED [ 73%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_suffix_matrix[https://EXAMPLE.com/] PASSED [ 73%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_no_allowlist_allows_no_referer PASSED [ 73%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_inactive_allowlist_ignores_present_referer[env_overrides0-https://evil.com/path] PASSED [ 74%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_inactive_allowlist_ignores_present_referer[env_overrides1-not-a-valid-url] PASSED [ 74%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_inactive_allowlist_ignores_present_referer[env_overrides2-https://evil.com/path] PASSED [ 74%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_inactive_allowlist_ignores_present_referer[env_overrides3-not-a-valid-url] PASSED [ 74%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_secondary_suffix PASSED [ 75%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_config_whitespace_comments PASSED [ 75%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_invalid_cache_env_fails PASSED [ 75%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_true_env_spellings[true] PASSED [ 75%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_true_env_spellings[1] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_true_env_spellings[yes] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_true_env_spellings[on] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_true_env_spellings[ TRUE ] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_false_env_spellings[false] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_false_env_spellings[0] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_false_env_spellings[no] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_false_env_spellings[off] PASSED [ 77%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_false_env_spellings[ FALSE ] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_upload_size_limit_boundaries[0] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_upload_size_limit_boundaries[1] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_upload_size_limit_boundaries[2] PASSED [ 78%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_no_size_limit_no_cap PASSED [ 79%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_allows_upload PASSED [ 79%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_upload_relative_no_tls PASSED [ 79%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_allows_export PASSED [ 79%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_env_only_config PASSED [ 80%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_config_allowlist_key_value PASSED [ 80%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_config_allowlist_comma_split PASSED [ 80%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_host_variants[api.example.com] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_host_variants[api.example.com:443] PASSED [ 80%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_require_tls_host_variants[sub.domain.example.com] PASSED [ 81%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_before_convert PASSED [ 81%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_userinfo_port FAILED [ 81%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_empty_allowlist_disables PASSED [ 81%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_tls_and_allowlist PASSED [ 82%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_exact_hostname_match PASSED [ 82%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_http_scheme_referer PASSED [ 82%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_rejects_convert_with_wrong_referer PASSED [ 82%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_empty_referer_header PASSED [ 83%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_size_limit_zero_rejects_nonempty PASSED [ 83%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_config_dir_path_fails PASSED [ 83%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_storage_dir_via_config_file PASSED [ 83%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_trimmed_cache_enabled_true_values[ TRUE ] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_trimmed_cache_enabled_true_values[ YeS ] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_trimmed_cache_enabled_true_values[ On ] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_trimmed_cache_enabled_false_values[ FALSE ] PASSED [ 84%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_trimmed_cache_enabled_false_values[ No ] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_trimmed_cache_enabled_false_values[ OfF ] PASSED [ 85%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_config_max_source_size_enforced_upload PASSED [ 85%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_config_allowlist_allows_upload PASSED [ 85%]
+.evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_config_cache_false_disables_caching PASSED [ 86%]
+.evaluation_tests/test_checkpoint_6.py::TestError::test_invalid_env_fails[max_source_size_nan] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_6.py::TestError::test_invalid_env_fails[require_tls_invalid] PASSED [ 86%]
+.evaluation_tests/test_checkpoint_6.py::TestError::test_invalid_cache_config_fails PASSED [ 86%]
+.evaluation_tests/test_checkpoint_6.py::TestError::test_invalid_referer_forbidden PASSED [ 87%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_enrich_adds_metadata PASSED [ 87%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_summary_required_keys PASSED [ 87%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_column_detail_keys_match PASSED [ 87%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_column_detail_required_fields PASSED [ 88%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_column_detail_deterministic_counts PASSED [ 88%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_no_enrich_no_metadata PASSED [ 88%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_spreadsheet_enrich_no_column_details PASSED [ 88%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_enrich_preserves_base_fields PASSED [ 89%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_cache_upgrade_to_enriched PASSED [ 89%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_cache_upgrade_reingests PASSED [ 89%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_enriched_cache_source_down PASSED [ 89%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_force_removes_metadata PASSED [ 90%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_enrich_cache_disabled PASSED [ 90%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_upload_no_enrich_effect PASSED [ 90%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_plain_spreadsheet_no_metadata PASSED [ 90%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_spreadsheet_cache_upgrade_to_enriched PASSED [ 91%]
+.evaluation_tests/test_checkpoint_7.py::TestCore::test_export_unchanged_by_enrich PASSED [ 91%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_convert_response_no_metadata PASSED [ 91%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_non_yes_enrich_no_metadata[true] PASSED [ 91%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_non_yes_enrich_no_metadata[1] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_non_yes_enrich_no_metadata[on] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_non_yes_enrich_no_metadata[] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_non_yes_enrich_no_metadata[no] PASSED [ 92%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_non_yes_enrich_no_metadata[YES] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_non_exact_yes_no_metadata[yes ] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_non_exact_yes_no_metadata[ yes] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_non_exact_yes_no_metadata[yes\t] PASSED [ 93%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_duplicate_enrich_params_do_not_enable_metadata[yes-then-no] FAILED [ 94%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_duplicate_enrich_params_do_not_enable_metadata[no-then-yes] FAILED [ 94%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_query_controls_with_enrich[params0] PASSED [ 94%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_query_controls_with_enrich[params1] PASSED [ 94%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_query_controls_with_enrich[params2] PASSED [ 95%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_query_controls_with_enrich[params3] PASSED [ 95%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_query_controls_with_enrich[params4] PASSED [ 95%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_metadata_with_visibility_controls PASSED [ 95%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_column_detail_keys_exact_match PASSED [ 96%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_xls_enrich_summary[strict_route] PASSED [ 96%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_xls_enrich_summary[default_route] PASSED [ 96%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_force_enrich_recomputes PASSED [ 96%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_plain_ingest_ignores_enrich PASSED [ 97%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_upload_enrich_no_metadata PASSED [ 97%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_enriched_plain_isolation PASSED [ 97%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_repeated_enrich_stable PASSED [ 97%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_enriched_plain_query_parity PASSED [ 98%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_metadata_with_empty_rows FAILED [ 98%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_spreadsheet_controls_no_column_details PASSED [ 98%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_export_enriched_plain_identical PASSED [ 98%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_column_detail_type_labels PASSED [ 99%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_enrich_failure_preserves_metadata PASSED [ 99%]
+.evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_mixed_numeric_column_type PASSED [ 99%]
+.evaluation_tests/test_checkpoint_7.py::TestError::test_enrich_preserves_ingest_errors PASSED [ 99%]
+.evaluation_tests/test_checkpoint_7.py::TestError::test_enrich_unreachable_source PASSED [100%]
+
+=================================== FAILURES ===================================
+_________________ TestFunctionality.test_preserves_whitespace __________________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x7516edd88d70>
+client = <httpx.Client object at 0x7516ee96b350>
+local_source_server = <conftest.SourceServer object at 0x7516edb9f0b0>
+
+    @pytest.mark.functionality
+    def test_preserves_whitespace(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Leading and trailing spaces in CSV field values are preserved."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/space_text.csv",
+            body=b"side,value\nleft,  space\nright,space  \n",
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+>       assert payload["rows"] == [["left", "  space"], ["right", "space  "]]
+E       AssertionError: assert [['left', 'space'], ['right', 'space']] == [['left', '  space'], ['right', 'space  ']]
+E         
+E         At index 0 diff: ['left', 'space'] != ['left', '  space']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'left',
+E         -         '  space',
+E         ?          --
+E         +         'space',
+E               ],
+E               [
+E                   'right',
+E         -         'space  ',
+E         ?               --
+E         +         'space',
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_1.py:439: AssertionError
+_________ TestFunctionality.test_preserves_header_and_time_whitespace __________
+
+self = <test_checkpoint_1.TestFunctionality object at 0x7516edee9160>
+client = <httpx.Client object at 0x7516ee96b350>
+local_source_server = <conftest.SourceServer object at 0x7516edc07920>
+
+    @pytest.mark.functionality
+    def test_preserves_header_and_time_whitespace(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Headers and time-like text preserve significant surrounding whitespace."""
+        dataset_id = _ingest_source(
+            client,
+            local_source_server,
+            path="/header_time_whitespace.csv",
+            body=(b" name ,time\nAlice, 08:30 \nBob,09:15\n"),
+        )
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+>       assert payload["columns"] == [" name ", "time"]
+E       AssertionError: assert ['name', 'time'] == [' name ', 'time']
+E         
+E         At index 0 diff: 'name' != ' name '
+E         
+E         Full diff:
+E           [
+E         -     ' name ',
+E         ?      -    -
+E         +     'name',
+E               'time',
+E           ]
+
+.evaluation_tests/test_checkpoint_1.py:626: AssertionError
+__________________ TestCore.test_shape_objects_includes_rowid __________________
+
+self = <test_checkpoint_2.TestCore object at 0x7516edede390>
+client = <httpx.Client object at 0x7516edcf03b0>
+cp2_dataset_id = '7fceac7cb0d98017'
+
+    def test_shape_objects_includes_rowid(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """_shape=objects includes each row's source-file rowid."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_shape": "objects"})
+        )
+        first = payload["rows"][0]
+>       assert first["rowid"] == 2
+E       assert 1 == 2
+
+.evaluation_tests/test_checkpoint_2.py:126: AssertionError
+_______________________ TestCore.test_rowid_ignores_sort _______________________
+
+self = <test_checkpoint_2.TestCore object at 0x7516ededdfd0>
+client = <httpx.Client object at 0x7516edcf03b0>
+cp2_dataset_id = '2af28fe6e4fa856f'
+
+    def test_rowid_ignores_sort(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Object rows report original source rowid values under sorted pagination."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp2_dataset_id,
+                params={"_shape": "objects", "_sort": "age", "_size": "2"},
+            )
+        )
+        assert payload["rows"][0]["name"] == "Bob"
+>       assert payload["rows"][0]["rowid"] == 3
+E       assert 1 == 3
+
+.evaluation_tests/test_checkpoint_2.py:143: AssertionError
+_______________ TestFunctionality.test_rowid_sequential_all_rows _______________
+
+self = <test_checkpoint_2.TestFunctionality object at 0x7516edf4bc50>
+client = <httpx.Client object at 0x7516edcf03b0>
+cp2_dataset_id = '7ca004b96e80dd8a'
+
+    @pytest.mark.functionality
+    def test_rowid_sequential_all_rows(
+        self,
+        client: httpx.Client,
+        cp2_dataset_id: str,
+    ) -> None:
+        """Object-shaped rows have sequential 1-based rowid values for all rows."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp2_dataset_id, params={"_shape": "objects"})
+        )
+>       assert [row["rowid"] for row in payload["rows"]] == [2, 3, 4, 5, 6]
+E       assert [1, 2, 3, 4, 5] == [2, 3, 4, 5, 6]
+E         
+E         At index 0 diff: 1 != 2
+E         
+E         Full diff:
+E           [
+E         +     1,
+E               2,
+E               3,
+E               4,
+E               5,
+E         -     6,
+E           ]
+
+.evaluation_tests/test_checkpoint_2.py:486: AssertionError
+__________________________ TestCore.test_exact_filter __________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516edd7e1e0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'd0c4a2ce81d38e60'
+
+    def test_exact_filter(
+        self, client: httpx.Client, cp3_dataset_id: str
+    ) -> None:
+        """Exact comparator returns rows with exact column value matches."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"category__exact": "electronics"},
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:70: AssertionError
+________________________ TestCore.test_contains_filter _________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516edd7dd30>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '5db3b2ede519532b'
+
+    def test_contains_filter(
+        self, client: httpx.Client, cp3_dataset_id: str
+    ) -> None:
+        """Contains comparator matches rows by case-sensitive substring."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"Product Name__contains": "adget"},
+            )
+        )
+>       assert payload["total"] == 3
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:85: AssertionError
+__________________________ TestCore.test_less_filter ___________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516edd7d5b0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '6744b2dd7f1efb65'
+
+    def test_less_filter(
+        self, client: httpx.Client, cp3_dataset_id: str
+    ) -> None:
+        """Less comparator filters rows with numeric values below threshold."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client, cp3_dataset_id, params={"price__less": "10"}
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:96: AssertionError
+_________________________ TestCore.test_greater_strict _________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516edd7fa70>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '9d6bcc2bf39a4d0b'
+
+    def test_greater_strict(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Greater comparator enforces strict greater-than numeric matching."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client, cp3_dataset_id, params={"price__greater": "9.99"}
+            )
+        )
+>       assert payload["total"] == 3
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:110: AssertionError
+________________________ TestCore.test_multi_filter_and ________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516edd7c7a0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'c9db07bc01573fd8'
+
+    @pytest.mark.functionality
+    def test_multi_filter_and(
+        self, client: httpx.Client, cp3_dataset_id: str
+    ) -> None:
+        """Multiple filters combine with logical AND."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={
+                    "category__exact": "tools",
+                    "price__less": "15",
+                },
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:129: AssertionError
+______________________ TestCore.test_same_col_filters_and ______________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516edd7c380>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'e8955da55e4863b0'
+
+    @pytest.mark.functionality
+    def test_same_col_filters_and(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Multiple filters on one column are ANDed together."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"price__greater": "9", "price__less": "20"},
+            )
+        )
+>       assert payload["total"] == 3
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:146: AssertionError
+______________________ TestCore.test_filter_sort_paginate ______________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516edd7e300>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '71996c6ea598022a'
+
+    @pytest.mark.functionality
+    def test_filter_sort_paginate(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Filtering is applied before sorting and pagination."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={
+                    "price__greater": "9.99",
+                    "_sort": "price",
+                    "_size": "2",
+                },
+            )
+        )
+>       assert payload["total"] == 3
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:171: AssertionError
+_____________________ TestCore.test_original_header_filter _____________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516edd79460>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '6ae182f97cac31eb'
+
+    def test_original_header_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Exact comparator matches a header containing spaces verbatim."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"Product Name__exact": "Widget A"},
+            )
+        )
+>       assert payload["total"] == 1
+E       assert 5 == 1
+
+.evaluation_tests/test_checkpoint_3.py:187: AssertionError
+___________________ TestCore.test_rejects_non_numeric_value ____________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516ede38b60>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'f65528c3a6f1380b'
+
+    @pytest.mark.error
+    def test_rejects_non_numeric_value(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Non-numeric less comparator values return HTTP 400."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={"price__less": "cheap"},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:202: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______________________ TestCore.test_total_post_filter ________________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516ede386b0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '18deaff1daf92cf2'
+
+    @pytest.mark.functionality
+    def test_total_post_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """total reflects filtered row count before pagination."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"category__exact": "tools", "_size": "1"},
+            )
+        )
+>       assert payload["total"] == 3
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:218: AssertionError
+___________________ TestCore.test_excludes_non_numeric_cell ____________________
+
+self = <test_checkpoint_3.TestCore object at 0x7516ede38ce0>
+client = <httpx.Client object at 0x7516edc058e0>
+local_source_server = <conftest.SourceServer object at 0x7516ed85d310>
+
+    @pytest.mark.functionality
+    def test_excludes_non_numeric_cell(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Numeric filters exclude rows with non-numeric stored values."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/mixed_numeric.csv",
+            b"name,value\na,10\nb,not-a-number\nc,5\n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"value__greater": "6"})
+        )
+>       assert [row[0] for row in payload["rows"]] == ["a"]
+E       AssertionError: assert ['a', 'b', 'c'] == ['a']
+E         
+E         Left contains 2 more items, first extra item: 'b'
+E         
+E         Full diff:
+E           [
+E               'a',
+E         +     'b',
+E         +     'c',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:237: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params0-3] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516edd7c350>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '817519a188b38c67', params = {'category__exact': 'tools'}
+expected_total = 3
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params1-2] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516edd7c590>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '01c8837441e3e13d', params = {'category__exact': 'electronics'}
+expected_total = 2
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params2-2] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516edd7cb00>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'c326c43152482d6c'
+params = {'Product Name__contains': 'Widget'}, expected_total = 2
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params3-3] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516edd7c140>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '2ddae9a456ace52e'
+params = {'Product Name__contains': 'Gadget'}, expected_total = 3
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 3
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params4-1] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516edd7c2f0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'e7ec431368036839', params = {'price__greater': '20'}
+expected_total = 1
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 1
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+_______________ TestFunctionality.test_filter_matrix[params5-1] ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516edd7d460>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '838adb8a8368098f', params = {'price__less': '6'}
+expected_total = 1
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params,expected_total",
+        [
+            ({"category__exact": "tools"}, 3),
+            ({"category__exact": "electronics"}, 2),
+            ({"Product Name__contains": "Widget"}, 2),
+            ({"Product Name__contains": "Gadget"}, 3),
+            ({"price__greater": "20"}, 1),
+            ({"price__less": "6"}, 1),
+        ],
+    )
+    def test_filter_matrix(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+        expected_total: int,
+    ) -> None:
+        """Various valid column filters return expected matching totals."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == expected_total
+E       assert 5 == 1
+
+.evaluation_tests/test_checkpoint_3.py:264: AssertionError
+________________ TestFunctionality.test_contains_case_sensitive ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede392b0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '023e595e120c765a'
+
+    @pytest.mark.functionality
+    def test_contains_case_sensitive(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Contains comparison is case-sensitive for substring matches."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={"Product Name__contains": "gadget"},
+            )
+        )
+>       assert payload["total"] == 0
+E       assert 5 == 0
+
+.evaluation_tests/test_checkpoint_3.py:316: AssertionError
+_________________ TestFunctionality.test_numeric_bounds_strict _________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede36390>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'aeca42987f9730cd'
+
+    @pytest.mark.functionality
+    def test_numeric_bounds_strict(
+        self, client: httpx.Client, cp3_dataset_id: str
+    ) -> None:
+        """Numeric bounds are strict and do not include equal values."""
+        greater = assert_ok_envelope(
+            dataset_request(
+                client, cp3_dataset_id, params={"price__greater": "10.00"}
+            )
+        )
+        less = assert_ok_envelope(
+            dataset_request(
+                client, cp3_dataset_id, params={"price__less": "10.00"}
+            )
+        )
+>       assert all(row[0] != "Gadget E" for row in greater["rows"])
+E       assert False
+E        +  where False = all(<generator object TestFunctionality.test_numeric_bounds_strict.<locals>.<genexpr> at 0x7516ed830c70>)
+
+.evaluation_tests/test_checkpoint_3.py:333: AssertionError
+______________ TestFunctionality.test_zero_match_filter[no_match] ______________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede34740>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '72b8b4deb37b3636'
+params = {'Product Name__exact': 'No Match'}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params",
+        [
+            {"Product Name__exact": "No Match"},
+            {"Product Name__exact": "widget a"},
+            {"category__exact": "tools "},
+            {"Product Name__contains": "adget  "},
+        ],
+        ids=[
+            "no_match",
+            "exact_case",
+            "exact_whitespace",
+            "contains_whitespace",
+        ],
+    )
+    def test_zero_match_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+    ) -> None:
+        """Case and whitespace differences produce zero filter matches."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == 0
+E       assert 5 == 0
+
+.evaluation_tests/test_checkpoint_3.py:362: AssertionError
+_____________ TestFunctionality.test_zero_match_filter[exact_case] _____________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede34d70>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '97b1e1aa37b2b897'
+params = {'Product Name__exact': 'widget a'}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params",
+        [
+            {"Product Name__exact": "No Match"},
+            {"Product Name__exact": "widget a"},
+            {"category__exact": "tools "},
+            {"Product Name__contains": "adget  "},
+        ],
+        ids=[
+            "no_match",
+            "exact_case",
+            "exact_whitespace",
+            "contains_whitespace",
+        ],
+    )
+    def test_zero_match_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+    ) -> None:
+        """Case and whitespace differences produce zero filter matches."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == 0
+E       assert 5 == 0
+
+.evaluation_tests/test_checkpoint_3.py:362: AssertionError
+__________ TestFunctionality.test_zero_match_filter[exact_whitespace] __________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede358b0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '3aae50405b3e5046', params = {'category__exact': 'tools '}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params",
+        [
+            {"Product Name__exact": "No Match"},
+            {"Product Name__exact": "widget a"},
+            {"category__exact": "tools "},
+            {"Product Name__contains": "adget  "},
+        ],
+        ids=[
+            "no_match",
+            "exact_case",
+            "exact_whitespace",
+            "contains_whitespace",
+        ],
+    )
+    def test_zero_match_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+    ) -> None:
+        """Case and whitespace differences produce zero filter matches."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == 0
+E       assert 5 == 0
+
+.evaluation_tests/test_checkpoint_3.py:362: AssertionError
+________ TestFunctionality.test_zero_match_filter[contains_whitespace] _________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede36000>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'a4a20f477fd66526'
+params = {'Product Name__contains': 'adget  '}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "params",
+        [
+            {"Product Name__exact": "No Match"},
+            {"Product Name__exact": "widget a"},
+            {"category__exact": "tools "},
+            {"Product Name__contains": "adget  "},
+        ],
+        ids=[
+            "no_match",
+            "exact_case",
+            "exact_whitespace",
+            "contains_whitespace",
+        ],
+    )
+    def test_zero_match_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        params: dict[str, str],
+    ) -> None:
+        """Case and whitespace differences produce zero filter matches."""
+        payload = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id, params=params)
+        )
+>       assert payload["total"] == 0
+E       assert 5 == 0
+
+.evaluation_tests/test_checkpoint_3.py:362: AssertionError
+__________________ TestFunctionality.test_exposed_col_filter ___________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede34620>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'b0f6f6a82039b89e'
+
+    @pytest.mark.functionality
+    def test_exposed_col_filter(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Filtering works using a column name from the dataset metadata."""
+        first_column_name = assert_ok_envelope(
+            dataset_request(client, cp3_dataset_id)
+        )["columns"][0]
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={f"{first_column_name}__exact": "Widget A"},
+            )
+        )
+>       assert payload["total"] == 1
+E       assert 5 == 1
+
+.evaluation_tests/test_checkpoint_3.py:382: AssertionError
+____________________ TestFunctionality.test_header_no_trim _____________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede34f50>
+client = <httpx.Client object at 0x7516edc058e0>
+local_source_server = <conftest.SourceServer object at 0x7516edbb3dd0>
+
+    @pytest.mark.functionality
+    def test_header_no_trim(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Header text is used exactly without trimming for filter names."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/spaced_header.csv",
+            b" Product Name ,price\nWidget A,10\nWidget B,20\n",
+        )
+    
+        payload = assert_ok_envelope(dataset_request(client, dataset_id))
+>       assert payload["columns"] == [" Product Name ", "price"]
+E       AssertionError: assert ['Product Name', 'price'] == [' Product Name ', 'price']
+E         
+E         At index 0 diff: 'Product Name' != ' Product Name '
+E         
+E         Full diff:
+E           [
+E         -     ' Product Name ',
+E         ?      -            -
+E         +     'Product Name',
+E               'price',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:400: AssertionError
+______________ TestFunctionality.test_filter_sort_paginate_shape _______________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede356a0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'e2a466c49daca80d'
+
+    @pytest.mark.functionality
+    def test_filter_sort_paginate_shape(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Filtered sorted pages also honor object shape and visibility flags."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                cp3_dataset_id,
+                params={
+                    "category__exact": "tools",
+                    "price__greater": "9",
+                    "_sort_desc": "price",
+                    "_offset": "1",
+                    "_size": "1",
+                    "_shape": "objects",
+                    "_rowid": "hide",
+                    "_total": "hide",
+                },
+            )
+        )
+        assert "total" not in payload
+        assert len(payload["rows"]) == 1
+        row = payload["rows"][0]
+        first_column = payload["columns"][0]
+>       assert row[first_column] == "Gadget E"
+E       AssertionError: assert 'Widget B' == 'Gadget E'
+E         
+E         - Gadget E
+E         + Widget B
+
+.evaluation_tests/test_checkpoint_3.py:438: AssertionError
+______________ TestFunctionality.test_numeric_scientific_notation ______________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede35cd0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'da60a1c674f5ce94'
+
+    @pytest.mark.functionality
+    def test_numeric_scientific_notation(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Less comparator accepts scientific-notation numeric values."""
+        payload = assert_ok_envelope(
+            dataset_request(
+                client, cp3_dataset_id, params={"price__less": "1e1"}
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 5 == 2
+
+.evaluation_tests/test_checkpoint_3.py:454: AssertionError
+________________ TestFunctionality.test_filter_sort_ties_stable ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede361b0>
+client = <httpx.Client object at 0x7516edc058e0>
+local_source_server = <conftest.SourceServer object at 0x7516ed5ffce0>
+
+    @pytest.mark.functionality
+    def test_filter_sort_ties_stable(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Sorting retains source-file order for equal sort-key values."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/filter_tie.csv",
+            b"name,price,category\n"
+            b"first,10,tools\n"
+            b"second,10,tools\n"
+            b"third,9,tools\n"
+            b"fourth,10,other\n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"category__exact": "tools", "_sort": "price"},
+            )
+        )
+>       assert [row[0] for row in payload["rows"]] == [
+            "third",
+            "first",
+            "second",
+        ]
+E       AssertionError: assert ['third', 'first', 'second', 'fourth'] == ['third', 'first', 'second']
+E         
+E         Left contains one more item: 'fourth'
+E         
+E         Full diff:
+E           [
+E               'third',
+E               'first',
+E               'second',
+E         +     'fourth',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:481: AssertionError
+_________________ TestFunctionality.test_numeric_signed_bounds _________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede36900>
+client = <httpx.Client object at 0x7516edc058e0>
+local_source_server = <conftest.SourceServer object at 0x7516edca1430>
+
+    @pytest.mark.functionality
+    def test_numeric_signed_bounds(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Less/greater filters parse signed numeric values."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/signed_numeric.csv",
+            b"name,value\nneg,-1\nzero,0\npos,2\n",
+        )
+        less = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"value__less": "0"})
+        )
+        greater = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"value__greater": "-1"})
+        )
+>       assert [row[0] for row in less["rows"]] == ["neg"]
+E       AssertionError: assert ['neg', 'zero', 'pos'] == ['neg']
+E         
+E         Left contains 2 more items, first extra item: 'zero'
+E         
+E         Full diff:
+E           [
+E               'neg',
+E         +     'zero',
+E         +     'pos',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:506: AssertionError
+_______________ TestFunctionality.test_string_cmp_numeric_cells ________________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516edd7db50>
+client = <httpx.Client object at 0x7516edc058e0>
+local_source_server = <conftest.SourceServer object at 0x7516ed85f5f0>
+
+    @pytest.mark.functionality
+    def test_string_cmp_numeric_cells(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Exact and contains comparators perform string matching on codes."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/numeric_text.csv",
+            b"code,label\n100,alpha\n101,beta\n210,gamma\n",
+        )
+        exact = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"code__exact": "100"})
+        )
+        contains = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"code__contains": "10"})
+        )
+>       assert [row[0] for row in exact["rows"]] == [100]
+E       assert [100, 101, 210] == [100]
+E         
+E         Left contains 2 more items, first extra item: 101
+E         
+E         Full diff:
+E           [
+E               100,
+E         +     101,
+E         +     210,
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:528: AssertionError
+_____________ TestFunctionality.test_exact_whitespace_value_match ______________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede35820>
+client = <httpx.Client object at 0x7516edc058e0>
+local_source_server = <conftest.SourceServer object at 0x7516edc04860>
+
+    @pytest.mark.functionality
+    def test_exact_whitespace_value_match(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Exact comparator matches when filter value includes significant whitespace."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/ws_exact_pos.csv",
+            b"name,label\nAlpha, hello \nBeta,world\nGamma, hello \n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"label__exact": " hello "},
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 3 == 2
+
+.evaluation_tests/test_checkpoint_3.py:567: AssertionError
+____________ TestFunctionality.test_contains_whitespace_value_match ____________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede34980>
+client = <httpx.Client object at 0x7516edc058e0>
+local_source_server = <conftest.SourceServer object at 0x7516edbb3260>
+
+    @pytest.mark.functionality
+    def test_contains_whitespace_value_match(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Contains comparator matches when filter value includes significant whitespace."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/ws_contains_pos.csv",
+            b"name,label\nAlpha,hello\nBeta,hello world\nGamma,hello world\n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"label__contains": "o "},
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 3 == 2
+
+.evaluation_tests/test_checkpoint_3.py:590: AssertionError
+_ TestFunctionality.test_numeric_like_cells_preserve_whitespace_for_string_filters _
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede36750>
+client = <httpx.Client object at 0x7516edc058e0>
+local_source_server = <conftest.SourceServer object at 0x7516edc04140>
+
+    @pytest.mark.functionality
+    def test_numeric_like_cells_preserve_whitespace_for_string_filters(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """String filters preserve significant whitespace in textual cells."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/textual_whitespace.csv",
+            b"code,label\n A10 ,padded\nA10,plain\nB210,other\n",
+        )
+        exact = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"code__exact": " A10 "},
+            )
+        )
+        contains = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"code__contains": "10 "},
+            )
+        )
+>       assert [row[1] for row in exact["rows"]] == ["padded"]
+E       AssertionError: assert ['padded', 'plain', 'other'] == ['padded']
+E         
+E         Left contains 2 more items, first extra item: 'plain'
+E         
+E         Full diff:
+E           [
+E               'padded',
+E         +     'plain',
+E         +     'other',
+E           ]
+
+.evaluation_tests/test_checkpoint_3.py:620: AssertionError
+_________ TestFunctionality.test_exact_empty_value_matches_empty_cells _________
+
+self = <test_checkpoint_3.TestFunctionality object at 0x7516ede372c0>
+client = <httpx.Client object at 0x7516edc058e0>
+local_source_server = <conftest.SourceServer object at 0x7516ed63b410>
+
+    @pytest.mark.functionality
+    def test_exact_empty_value_matches_empty_cells(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Exact filter with empty value matches only rows with empty cell values."""
+        dataset_id = _load_dataset(
+            client,
+            local_source_server,
+            "/empty_exact.csv",
+            b"name,note\nAlpha,\nBeta,hello\nGamma,\n",
+        )
+        payload = assert_ok_envelope(
+            dataset_request(
+                client,
+                dataset_id,
+                params={"note__exact": ""},
+            )
+        )
+>       assert payload["total"] == 2
+E       assert 3 == 2
+
+.evaluation_tests/test_checkpoint_3.py:659: AssertionError
+_____________ TestError.test_numeric_rejects_non_numeric[less_abc] _____________
+
+self = <test_checkpoint_3.TestError object at 0x7516ede378c0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'cbb6feae51916860', op = 'less', value = 'abc'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_____________ TestError.test_numeric_rejects_non_numeric[less_1,2] _____________
+
+self = <test_checkpoint_3.TestError object at 0x7516ede37b00>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '915be696979f17c2', op = 'less', value = '1,2'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+____________ TestError.test_numeric_rejects_non_numeric[less_none] _____________
+
+self = <test_checkpoint_3.TestError object at 0x7516ede37d70>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '3440ddc250b12798', op = 'less', value = 'none'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+___________ TestError.test_numeric_rejects_non_numeric[greater_abc] ____________
+
+self = <test_checkpoint_3.TestError object at 0x7516ede37e30>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'b9bc712ffdddb1ae', op = 'greater', value = 'abc'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+___________ TestError.test_numeric_rejects_non_numeric[greater_1,2] ____________
+
+self = <test_checkpoint_3.TestError object at 0x7516ede37f50>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '2343b79fedfc4a6a', op = 'greater', value = '1,2'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+___________ TestError.test_numeric_rejects_non_numeric[greater_none] ___________
+
+self = <test_checkpoint_3.TestError object at 0x7516eddc07d0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'c064b50a67edaf75', op = 'greater', value = 'none'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize(
+        "op,value",
+        [
+            ("less", "abc"),
+            ("less", "1,2"),
+            ("less", "none"),
+            ("greater", "abc"),
+            ("greater", "1,2"),
+            ("greater", "none"),
+        ],
+        ids=[
+            "less_abc",
+            "less_1,2",
+            "less_none",
+            "greater_abc",
+            "greater_1,2",
+            "greater_none",
+        ],
+    )
+    def test_numeric_rejects_non_numeric(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+        op: str,
+        value: str,
+    ) -> None:
+        """Non-numeric less/greater values return standardized 400 errors."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={f"price__{op}": value},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:697: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+____________________ TestError.test_unknown_comparator_400 _____________________
+
+self = <test_checkpoint_3.TestError object at 0x7516eddc1e20>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '5c3b01f53a6a3e02'
+
+    @pytest.mark.error
+    def test_unknown_comparator_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Unknown filter comparator names return HTTP 400."""
+        response = dataset_request(
+            client, cp3_dataset_id, params={"price__lte": "10"}
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:709: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+______________________ TestError.test_unknown_column_400 _______________________
+
+self = <test_checkpoint_3.TestError object at 0x7516eddc0980>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '6c1254a8fe160675'
+
+    @pytest.mark.error
+    def test_unknown_column_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Unknown filter column names return HTTP 400."""
+        response = dataset_request(
+            client, cp3_dataset_id, params={"missing__exact": "x"}
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:721: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+_______________________ TestError.test_duplicate_key_400 _______________________
+
+self = <test_checkpoint_3.TestError object at 0x7516eddc3800>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = 'b81b88311ea62af6'
+
+    @pytest.mark.error
+    def test_duplicate_key_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Duplicate filter keys in one request return HTTP 400."""
+        response = client.get(
+            f"/datasets/{cp3_dataset_id}"
+            "?category__exact=tools&category__exact=electronics"
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:734: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+__________________ TestError.test_duplicate_identical_key_400 __________________
+
+self = <test_checkpoint_3.TestError object at 0x7516ede374a0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '3ce557e6da1c3e1a'
+
+    @pytest.mark.error
+    def test_duplicate_identical_key_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Repeated identical filter key returns HTTP 400."""
+        response = client.get(
+            f"/datasets/{cp3_dataset_id}"
+            "?category__exact=tools&category__exact=tools"
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:747: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+__________________ TestError.test_col_name_must_match_header ___________________
+
+self = <test_checkpoint_3.TestError object at 0x7516ede346e0>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '8bd69fc73b0f76a7'
+
+    @pytest.mark.error
+    def test_col_name_must_match_header(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Filter columns must exactly match source headers."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={"product name__exact": "Widget A"},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:761: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+__________________ TestError.test_col_name_case_mismatch_400 ___________________
+
+self = <test_checkpoint_3.TestError object at 0x7516ede35e80>
+client = <httpx.Client object at 0x7516edc058e0>
+cp3_dataset_id = '6537d21d3c6924e2'
+
+    @pytest.mark.error
+    def test_col_name_case_mismatch_400(
+        self,
+        client: httpx.Client,
+        cp3_dataset_id: str,
+    ) -> None:
+        """Case-mismatched filter column names return HTTP 400."""
+        response = dataset_request(
+            client,
+            cp3_dataset_id,
+            params={"Category__exact": "tools"},
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_3.py:775: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+________________ TestFunctionality.test_export_sort_desc_filter ________________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x7516eddc6ba0>
+client = <httpx.Client object at 0x7516edf4b6e0>
+cp4_csv_dataset_id = 'e000048102874daf'
+
+    @pytest.mark.functionality
+    def test_export_sort_desc_filter(
+        self,
+        client: httpx.Client,
+        cp4_csv_dataset_id: str,
+    ) -> None:
+        """CSV export honors descending sort and filter parameters."""
+        response = export_request(
+            client,
+            cp4_csv_dataset_id,
+            params={
+                "category__exact": "books",
+                "_sort_desc": "price",
+                "_size": "1",
+            },
+        )
+        _assert_export_headers(response, cp4_csv_dataset_id)
+        rows = parse_csv_response_bytes(response.content)
+>       assert rows == [
+            ["name", "price", "category"],
+            ["Hardcover", "12.99", "books"],
+        ]
+E       AssertionError: assert [['name', 'price', 'category'], ['Lamp', '18.0', 'home']] == [['name', 'price', 'category'], ['Hardcover', '12.99', 'books']]
+E         
+E         At index 1 diff: ['Lamp', '18.0', 'home'] != ['Hardcover', '12.99', 'books']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'name',
+E                   'price',
+E                   'category',
+E               ],
+E               [
+E         -         'Hardcover',
+E         +         'Lamp',
+E         -         '12.99',
+E         ?           ^ ^^
+E         +         '18.0',
+E         ?           ^ ^
+E         -         'books',
+E         ?          ^ ^^^
+E         +         'home',
+E         ?          ^ ^^
+E               ],
+E           ]
+
+.evaluation_tests/test_checkpoint_4.py:622: AssertionError
+_______________ TestFunctionality.test_export_special_csv_chars ________________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x7516eddc5a90>
+client = <httpx.Client object at 0x7516edf4b6e0>
+local_source_server = <conftest.SourceServer object at 0x7516ed4c45f0>
+
+    @pytest.mark.functionality
+    def test_export_special_csv_chars(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """CSV export correctly quotes commas and newlines in values."""
+        local_source_server.set_route(
+            "/quoted.csv",
+            body=(b'name,note\nalice,"line1,line2"\nbob,"one\nline"\n'),
+        )
+        dataset_id = extract_dataset_id(
+            assert_ok_envelope(
+                convert_request(client, local_source_server.url("/quoted.csv"))
+            )["endpoint"]
+        )
+        response = export_request(client, dataset_id)
+        rows = parse_csv_response_bytes(response.content)
+        assert rows[0] == ["name", "note"]
+        assert rows[1] == ["alice", "line1,line2"]
+>       assert rows[2] == ["bob", "one\nline"]
+E       AssertionError: assert ['bob', 'one'] == ['bob', 'one\nline']
+E         
+E         At index 1 diff: 'one' != 'one\nline'
+E         
+E         Full diff:
+E           [
+E               'bob',
+E         -     'one\n'
+E         ?         --
+E         +     'one',
+E         ?          +
+E         -     'line',
+E           ]
+
+.evaluation_tests/test_checkpoint_4.py:647: AssertionError
+______________ TestFunctionality.test_export_empty_result_header _______________
+
+self = <test_checkpoint_4.TestFunctionality object at 0x7516eddc4e30>
+client = <httpx.Client object at 0x7516edf4b6e0>
+cp4_csv_dataset_id = '93a7546b683bec27'
+
+    @pytest.mark.functionality
+    def test_export_empty_result_header(
+        self,
+        client: httpx.Client,
+        cp4_csv_dataset_id: str,
+    ) -> None:
+        """Export returns only header row when filter yields no records."""
+        response = export_request(
+            client,
+            cp4_csv_dataset_id,
+            params={"category__exact": "nope"},
+        )
+        rows = parse_csv_response_bytes(response.content)
+>       assert rows == [["name", "price", "category"]]
+E       AssertionError: assert [['name', 'price', 'category'], ['Paperback', '5.99', 'books'], ['Hardcover', '12.99', 'books'], ['Lamp', '18.0', 'home']] == [['name', 'price', 'category']]
+E         
+E         Left contains 3 more items, first extra item: ['Paperback', '5.99', 'books']
+E         
+E         Full diff:
+E           [
+E               [
+E                   'name',
+E                   'price',
+E                   'category',
+E               ],
+E         +     [
+E         +         'Paperback',
+E         +         '5.99',
+E         +         'books',
+E         +     ],
+E         +     [
+E         +         'Hardcover',
+E         +         '12.99',
+E         +         'books',
+E         +     ],
+E         +     [
+E         +         'Lamp',
+E         +         '18.0',
+E         +         'home',
+E         +     ],
+E           ]
+
+.evaluation_tests/test_checkpoint_4.py:662: AssertionError
+_________ TestFunctionality.test_force_variants_trigger_refresh[true] __________
+
+self = <test_checkpoint_5.TestFunctionality object at 0x7516edd9a570>
+client = <httpx.Client object at 0x7516edca26c0>
+local_source_server = <conftest.SourceServer object at 0x7516ed548830>
+force_value = 'true'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize("force_value", ["true", "1", "yes", "on"])
+    def test_force_variants_trigger_refresh(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        force_value: str,
+    ) -> None:
+        """Value-bearing `force` parameters are rejected with HTTP 400."""
+        path = f"/force_variant_{force_value}.csv"
+        source = local_source_server.url(path)
+        local_source_server.set_route(path, body=b"name,val\na,1\n")
+        response = convert_request(
+            client, source, params={"force": force_value}
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_5.py:291: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"endpoint":"/datasets/a2956efbb43f89af","ok":true}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+___________ TestFunctionality.test_force_variants_trigger_refresh[1] ___________
+
+self = <test_checkpoint_5.TestFunctionality object at 0x7516edd980b0>
+client = <httpx.Client object at 0x7516edca26c0>
+local_source_server = <conftest.SourceServer object at 0x7516ed54bec0>
+force_value = '1'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize("force_value", ["true", "1", "yes", "on"])
+    def test_force_variants_trigger_refresh(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        force_value: str,
+    ) -> None:
+        """Value-bearing `force` parameters are rejected with HTTP 400."""
+        path = f"/force_variant_{force_value}.csv"
+        source = local_source_server.url(path)
+        local_source_server.set_route(path, body=b"name,val\na,1\n")
+        response = convert_request(
+            client, source, params={"force": force_value}
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_5.py:291: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"endpoint":"/datasets/c72764f46660f736","ok":true}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+__________ TestFunctionality.test_force_variants_trigger_refresh[yes] __________
+
+self = <test_checkpoint_5.TestFunctionality object at 0x7516edd98530>
+client = <httpx.Client object at 0x7516edca26c0>
+local_source_server = <conftest.SourceServer object at 0x7516ed5480e0>
+force_value = 'yes'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize("force_value", ["true", "1", "yes", "on"])
+    def test_force_variants_trigger_refresh(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        force_value: str,
+    ) -> None:
+        """Value-bearing `force` parameters are rejected with HTTP 400."""
+        path = f"/force_variant_{force_value}.csv"
+        source = local_source_server.url(path)
+        local_source_server.set_route(path, body=b"name,val\na,1\n")
+        response = convert_request(
+            client, source, params={"force": force_value}
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_5.py:291: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"endpoint":"/datasets/4e7b113f7ee4d36a","ok":true}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+__________ TestFunctionality.test_force_variants_trigger_refresh[on] ___________
+
+self = <test_checkpoint_5.TestFunctionality object at 0x7516edd989b0>
+client = <httpx.Client object at 0x7516edca26c0>
+local_source_server = <conftest.SourceServer object at 0x7516ed569550>
+force_value = 'on'
+
+    @pytest.mark.error
+    @pytest.mark.parametrize("force_value", ["true", "1", "yes", "on"])
+    def test_force_variants_trigger_refresh(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        force_value: str,
+    ) -> None:
+        """Value-bearing `force` parameters are rejected with HTTP 400."""
+        path = f"/force_variant_{force_value}.csv"
+        source = local_source_server.url(path)
+        local_source_server.set_route(path, body=b"name,val\na,1\n")
+        response = convert_request(
+            client, source, params={"force": force_value}
+        )
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_5.py:291: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"endpoint":"/datasets/4a8ad299741e1626","ok":true}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+___________ TestFunctionality.test_arbitrary_force_triggers_refresh ____________
+
+self = <test_checkpoint_5.TestFunctionality object at 0x7516edd605f0>
+client = <httpx.Client object at 0x7516edca26c0>
+local_source_server = <conftest.SourceServer object at 0x7516ed568830>
+
+    @pytest.mark.error
+    def test_arbitrary_force_triggers_refresh(
+        self,
+        client: httpx.Client,
+        local_source_server,
+    ) -> None:
+        """Arbitrary value-bearing `force` parameters are rejected with HTTP 400."""
+        path = "/force_presence.csv"
+        source = local_source_server.url(path)
+        local_source_server.set_route(path, body=b"name,val\na,1\n")
+        response = convert_request(client, source, params={"force": "ignored"})
+>       assert_error_envelope(response, status_code=400)
+
+.evaluation_tests/test_checkpoint_5.py:396: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [200 OK]>
+
+    def assert_error_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"endpoint":"/datasets/74d6ef89d6e16469","ok":true}
+
+.evaluation_tests/_helpers.py:39: AssertionError
+________________ TestFunctionality.test_allowlist_userinfo_port ________________
+
+self = <test_checkpoint_6.TestFunctionality object at 0x7516edd9e600>
+service_factory = <function service_factory.<locals>._factory at 0x7516ed55b600>
+
+    @pytest.mark.functionality
+    def test_allowlist_userinfo_port(
+        self,
+        service_factory,
+    ) -> None:
+        """Allowlist accepts subdomain, userinfo, and port in Referer host parsing."""
+        with service_factory(
+            env_overrides={"ORIGIN_ALLOWLIST": "example.com"}
+        ) as handle:
+            with _http_client(handle.base_url) as client:
+                response = client.get(
+                    "/datasets/unknown",
+                    headers={"Referer": "https://u:p@Sub.Example.com:8443/path"},
+                )
+>               assert response.status_code != 403
+E               assert 403 != 403
+E                +  where 403 = <Response [403 FORBIDDEN]>.status_code
+
+.evaluation_tests/test_checkpoint_6.py:778: AssertionError
+_ TestFunctionality.test_duplicate_enrich_params_do_not_enable_metadata[yes-then-no] _
+
+self = <test_checkpoint_7.TestFunctionality object at 0x7516edd0b2c0>
+client = <httpx.Client object at 0x7516ed4fcc50>
+local_source_server = <conftest.SourceServer object at 0x7516ed7a7770>
+enrich_params = [('enrich', 'yes'), ('enrich', 'no')]
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "enrich_params",
+        [
+            [("enrich", "yes"), ("enrich", "no")],
+            [("enrich", "no"), ("enrich", "yes")],
+        ],
+        ids=["yes-then-no", "no-then-yes"],
+    )
+    def test_duplicate_enrich_params_do_not_enable_metadata(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        enrich_params: list[tuple[str, str]],
+    ) -> None:
+        """Duplicate enrich params do not enable enrichment metadata."""
+        path = f"/duplicate_enrich_{enrich_params[0][1]}_{enrich_params[1][1]}.csv"
+        local_source_server.set_route(path, body=b"name,val\na,1\n")
+        response = client.get(
+            "/convert",
+            params=[("source", local_source_server.url(path)), *enrich_params],
+        )
+>       dataset_id = extract_dataset_id(assert_ok_envelope(response)["endpoint"])
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_7.py:500: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"error":"Duplicate 'enrich' parameter","ok":false}
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_ TestFunctionality.test_duplicate_enrich_params_do_not_enable_metadata[no-then-yes] _
+
+self = <test_checkpoint_7.TestFunctionality object at 0x7516edd080e0>
+client = <httpx.Client object at 0x7516ed4fcc50>
+local_source_server = <conftest.SourceServer object at 0x7516ed733c50>
+enrich_params = [('enrich', 'no'), ('enrich', 'yes')]
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "enrich_params",
+        [
+            [("enrich", "yes"), ("enrich", "no")],
+            [("enrich", "no"), ("enrich", "yes")],
+        ],
+        ids=["yes-then-no", "no-then-yes"],
+    )
+    def test_duplicate_enrich_params_do_not_enable_metadata(
+        self,
+        client: httpx.Client,
+        local_source_server,
+        enrich_params: list[tuple[str, str]],
+    ) -> None:
+        """Duplicate enrich params do not enable enrichment metadata."""
+        path = f"/duplicate_enrich_{enrich_params[0][1]}_{enrich_params[1][1]}.csv"
+        local_source_server.set_route(path, body=b"name,val\na,1\n")
+        response = client.get(
+            "/convert",
+            params=[("source", local_source_server.url(path)), *enrich_params],
+        )
+>       dataset_id = extract_dataset_id(assert_ok_envelope(response)["endpoint"])
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.evaluation_tests/test_checkpoint_7.py:500: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+response = <Response [400 BAD REQUEST]>
+
+    def assert_ok_envelope(
+        response: httpx.Response,
+        *,
+        status_code: int = 200,
+    ) -> dict:
+>       assert response.status_code == status_code, response.text
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {"error":"Duplicate 'enrich' parameter","ok":false}
+
+.evaluation_tests/_helpers.py:27: AssertionError
+_______________ TestFunctionality.test_metadata_with_empty_rows ________________
+
+self = <test_checkpoint_7.TestFunctionality object at 0x7516edd0a420>
+client = <httpx.Client object at 0x7516ed4fcc50>
+cp7_csv_source = 'http://127.0.0.1:56949/enrich.csv'
+
+    @pytest.mark.functionality
+    def test_metadata_with_empty_rows(
+        self,
+        client: httpx.Client,
+        cp7_csv_source: str,
+    ) -> None:
+        """Empty-row enriched queries include dataset_summary and column_details."""
+        dataset_id, _ = _enriched_payload(client, cp7_csv_source)
+        payload = assert_ok_envelope(
+            dataset_request(client, dataset_id, params={"city__exact": "Nowhere"})
+        )
+>       assert payload["rows"] == []
+E       AssertionError: assert [['Alice', 30, 'Paris'], ['Bob', 25, 'Lyon'], ['Carol', 30, 'Paris']] == []
+E         
+E         Left contains 3 more items, first extra item: ['Alice', 30, 'Paris']
+E         
+E         Full diff:
+E         - []
+E         + [
+E         +     [
+E         +         'Alice',
+E         +         30,
+E         +         'Paris',
+E         +     ],
+E         +     [
+E         +         'Bob',
+E         +         25,
+E         +         'Lyon',
+E         +     ],
+E         +     [
+E         +         'Carol',
+E         +         30,
+E         +         'Paris',
+E         +     ],
+E         + ]
+
+.evaluation_tests/test_checkpoint_7.py:764: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_whitespace - AssertionError: assert [['left', 'space'], ['right', 'space']] == [['left', '  space'], ['right', 'space  ']]
+  
+  At index 0 diff: ['left', 'space'] != ['left', '  space']
+  
+  Full diff:
+    [
+        [
+            'left',
+  -         '  space',
+  ?          --
+  +         'space',
+        ],
+        [
+            'right',
+  -         'space  ',
+  ?               --
+  +         'space',
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_1.py::TestFunctionality::test_preserves_header_and_time_whitespace - AssertionError: assert ['name', 'time'] == [' name ', 'time']
+  
+  At index 0 diff: 'name' != ' name '
+  
+  Full diff:
+    [
+  -     ' name ',
+  ?      -    -
+  +     'name',
+        'time',
+    ]
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_shape_objects_includes_rowid - assert 1 == 2
+FAILED .evaluation_tests/test_checkpoint_2.py::TestCore::test_rowid_ignores_sort - assert 1 == 3
+FAILED .evaluation_tests/test_checkpoint_2.py::TestFunctionality::test_rowid_sequential_all_rows - assert [1, 2, 3, 4, 5] == [2, 3, 4, 5, 6]
+  
+  At index 0 diff: 1 != 2
+  
+  Full diff:
+    [
+  +     1,
+        2,
+        3,
+        4,
+        5,
+  -     6,
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_exact_filter - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_contains_filter - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_less_filter - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_greater_strict - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_multi_filter_and - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_same_col_filters_and - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_filter_sort_paginate - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_original_header_filter - assert 5 == 1
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_rejects_non_numeric_value - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_total_post_filter - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestCore::test_excludes_non_numeric_cell - AssertionError: assert ['a', 'b', 'c'] == ['a']
+  
+  Left contains 2 more items, first extra item: 'b'
+  
+  Full diff:
+    [
+        'a',
+  +     'b',
+  +     'c',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params0-3] - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params1-2] - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params2-2] - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params3-3] - assert 5 == 3
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params4-1] - assert 5 == 1
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_matrix[params5-1] - assert 5 == 1
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_case_sensitive - assert 5 == 0
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_bounds_strict - assert False
+ +  where False = all(<generator object TestFunctionality.test_numeric_bounds_strict.<locals>.<genexpr> at 0x7516ed830c70>)
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[no_match] - assert 5 == 0
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_case] - assert 5 == 0
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[exact_whitespace] - assert 5 == 0
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_zero_match_filter[contains_whitespace] - assert 5 == 0
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exposed_col_filter - assert 5 == 1
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_header_no_trim - AssertionError: assert ['Product Name', 'price'] == [' Product Name ', 'price']
+  
+  At index 0 diff: 'Product Name' != ' Product Name '
+  
+  Full diff:
+    [
+  -     ' Product Name ',
+  ?      -            -
+  +     'Product Name',
+        'price',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_paginate_shape - AssertionError: assert 'Widget B' == 'Gadget E'
+  
+  - Gadget E
+  + Widget B
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_scientific_notation - assert 5 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_filter_sort_ties_stable - AssertionError: assert ['third', 'first', 'second', 'fourth'] == ['third', 'first', 'second']
+  
+  Left contains one more item: 'fourth'
+  
+  Full diff:
+    [
+        'third',
+        'first',
+        'second',
+  +     'fourth',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_signed_bounds - AssertionError: assert ['neg', 'zero', 'pos'] == ['neg']
+  
+  Left contains 2 more items, first extra item: 'zero'
+  
+  Full diff:
+    [
+        'neg',
+  +     'zero',
+  +     'pos',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_string_cmp_numeric_cells - assert [100, 101, 210] == [100]
+  
+  Left contains 2 more items, first extra item: 101
+  
+  Full diff:
+    [
+        100,
+  +     101,
+  +     210,
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_whitespace_value_match - assert 3 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_contains_whitespace_value_match - assert 3 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_numeric_like_cells_preserve_whitespace_for_string_filters - AssertionError: assert ['padded', 'plain', 'other'] == ['padded']
+  
+  Left contains 2 more items, first extra item: 'plain'
+  
+  Full diff:
+    [
+        'padded',
+  +     'plain',
+  +     'other',
+    ]
+FAILED .evaluation_tests/test_checkpoint_3.py::TestFunctionality::test_exact_empty_value_matches_empty_cells - assert 3 == 2
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_abc] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_1,2] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[less_none] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_abc] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_1,2] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_numeric_rejects_non_numeric[greater_none] - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_comparator_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_unknown_column_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_key_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_duplicate_identical_key_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_must_match_header - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_3.py::TestError::test_col_name_case_mismatch_400 - AssertionError: {"columns":["Product Name","price","category","stock"],"ok":true,"query_ms":0.0,"rows":[["Widget A",9.99,"tools",150],["Widget B",15.5,"tools",80],["Gadget C",5.0,"electronics",200],["Gadget D",25.0,"electronics",30],["Gadget E",10.0,"tools",45]],"total":5}
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_sort_desc_filter - AssertionError: assert [['name', 'price', 'category'], ['Lamp', '18.0', 'home']] == [['name', 'price', 'category'], ['Hardcover', '12.99', 'books']]
+  
+  At index 1 diff: ['Lamp', '18.0', 'home'] != ['Hardcover', '12.99', 'books']
+  
+  Full diff:
+    [
+        [
+            'name',
+            'price',
+            'category',
+        ],
+        [
+  -         'Hardcover',
+  +         'Lamp',
+  -         '12.99',
+  ?           ^ ^^
+  +         '18.0',
+  ?           ^ ^
+  -         'books',
+  ?          ^ ^^^
+  +         'home',
+  ?          ^ ^^
+        ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_special_csv_chars - AssertionError: assert ['bob', 'one'] == ['bob', 'one\nline']
+  
+  At index 1 diff: 'one' != 'one\nline'
+  
+  Full diff:
+    [
+        'bob',
+  -     'one\n'
+  ?         --
+  +     'one',
+  ?          +
+  -     'line',
+    ]
+FAILED .evaluation_tests/test_checkpoint_4.py::TestFunctionality::test_export_empty_result_header - AssertionError: assert [['name', 'price', 'category'], ['Paperback', '5.99', 'books'], ['Hardcover', '12.99', 'books'], ['Lamp', '18.0', 'home']] == [['name', 'price', 'category']]
+  
+  Left contains 3 more items, first extra item: ['Paperback', '5.99', 'books']
+  
+  Full diff:
+    [
+        [
+            'name',
+            'price',
+            'category',
+        ],
+  +     [
+  +         'Paperback',
+  +         '5.99',
+  +         'books',
+  +     ],
+  +     [
+  +         'Hardcover',
+  +         '12.99',
+  +         'books',
+  +     ],
+  +     [
+  +         'Lamp',
+  +         '18.0',
+  +         'home',
+  +     ],
+    ]
+FAILED .evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_variants_trigger_refresh[true] - AssertionError: {"endpoint":"/datasets/a2956efbb43f89af","ok":true}
+FAILED .evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_variants_trigger_refresh[1] - AssertionError: {"endpoint":"/datasets/c72764f46660f736","ok":true}
+FAILED .evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_variants_trigger_refresh[yes] - AssertionError: {"endpoint":"/datasets/4e7b113f7ee4d36a","ok":true}
+FAILED .evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_force_variants_trigger_refresh[on] - AssertionError: {"endpoint":"/datasets/4a8ad299741e1626","ok":true}
+FAILED .evaluation_tests/test_checkpoint_5.py::TestFunctionality::test_arbitrary_force_triggers_refresh - AssertionError: {"endpoint":"/datasets/74d6ef89d6e16469","ok":true}
+FAILED .evaluation_tests/test_checkpoint_6.py::TestFunctionality::test_allowlist_userinfo_port - assert 403 != 403
+ +  where 403 = <Response [403 FORBIDDEN]>.status_code
+FAILED .evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_duplicate_enrich_params_do_not_enable_metadata[yes-then-no] - AssertionError: {"error":"Duplicate 'enrich' parameter","ok":false}
+FAILED .evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_duplicate_enrich_params_do_not_enable_metadata[no-then-yes] - AssertionError: {"error":"Duplicate 'enrich' parameter","ok":false}
+FAILED .evaluation_tests/test_checkpoint_7.py::TestFunctionality::test_metadata_with_empty_rows - AssertionError: assert [['Alice', 30, 'Paris'], ['Bob', 25, 'Lyon'], ['Carol', 30, 'Paris']] == []
+  
+  Left contains 3 more items, first extra item: ['Alice', 30, 'Paris']
+  
+  Full diff:
+  - []
+  + [
+  +     [
+  +         'Alice',
+  +         30,
+  +         'Paris',
+  +     ],
+  +     [
+  +         'Bob',
+  +         25,
+  +         'Lyon',
+  +     ],
+  +     [
+  +         'Carol',
+  +         30,
+  +         'Paris',
+  +     ],
+  + ]
+================== 63 failed, 342 passed in 228.64s (0:03:48) ==================
