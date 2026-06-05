@@ -1,0 +1,22 @@
+[
+  {
+    "id": "remove-returns",
+    "kind": "selector",
+    "languages": ["python"],
+    "selector": "return_statement",
+    "fix": {
+      "kind": "replace",
+      "template": "pass"
+    }
+  },
+  {
+    "id": "py-print-to-logger",
+    "kind": "pattern",
+    "languages": ["python"],
+    "pattern": "print($ARG)",
+    "fix": {
+      "kind": "replace",
+      "template": "logger.info($ARG)"
+    }
+  }
+]

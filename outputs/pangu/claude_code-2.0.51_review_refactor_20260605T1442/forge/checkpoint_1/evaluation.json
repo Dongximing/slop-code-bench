@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "problem_name": "forge",
+  "problem_version": 2,
+  "checkpoint_name": "checkpoint_1",
+  "checkpoint_version": 1,
+  "duration": 15.25196099281311,
+  "entrypoint": "uv run forge.py",
+  "tests": {
+    "checkpoint_1-Error": {
+      "passed": [
+        "test_blueprint_delete_missing_uuid_returns_not_found",
+        "test_blueprint_get_and_delete_single_uuid",
+        "test_create_missing_required_fields_reports_sorted_unique_messages",
+        "test_create_rejects_boolean_resource_count",
+        "test_create_rejects_duplicate_name_with_conflict",
+        "test_create_rejects_invalid_json_input",
+        "test_create_rejects_non_object_json_payload",
+        "test_create_rejects_requirement_set_missing_required_keys",
+        "test_create_validation_aggregates_unique_sorted_messages",
+        "test_create_validation_deduplicates_messages_across_requirement_sets",
+        "test_create_validation_failure_is_atomic",
+        "test_delete_names_is_atomic_and_reports_sorted_unresolved",
+        "test_delete_names_rejects_blank_csv_members_atomically"
+      ],
+      "failed": [
+        "test_create_rejects_empty_name_string",
+        "test_create_rejects_empty_requirement_sets",
+        "test_create_validation_aggregates_top_level_and_nested_failures"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Functionality": {
+      "passed": [
+        "test_blueprint_get_nonexistent_uuid_returns_not_found",
+        "test_blueprint_get_returns_all_stored_fields",
+        "test_blueprint_list_empty_returns_empty_array",
+        "test_blueprint_list_name_tiebreak_when_created_at_collides",
+        "test_blueprint_list_uuid_tiebreak_when_created_at_and_name_collide",
+        "test_create_generates_valid_uuid_v4_format",
+        "test_create_ignores_caller_supplied_created_at",
+        "test_create_ignores_caller_supplied_uuid",
+        "test_create_ignores_unknown_top_level_keys",
+        "test_create_output_is_compact_sorted_json_without_trailing_newline",
+        "test_create_rejects_capabilities_with_non_string_elements",
+        "test_create_rejects_float_resource_count",
+        "test_create_rejects_multiple_unsupported_keys",
+        "test_create_rejects_non_array_requirement_sets",
+        "test_create_rejects_non_string_name_type",
+        "test_create_rejects_requirement_sets_with_non_object_elements",
+        "test_create_rejects_unsupported_key_as_sole_violation",
+        "test_delete_names_single_name_succeeds",
+        "test_delete_names_success_returns_deleted_count"
+      ],
+      "failed": [
+        "test_create_preserves_empty_capabilities_array",
+        "test_delete_names_duplicate_members_count_unique_deletions"
+      ],
+      "skipped": []
+    },
+    "checkpoint_1-Core": {
+      "passed": [
+        "test_blueprint_list_orders_by_created_at_name_uuid",
+        "test_create_blueprint_returns_persisted_resource",
+        "test_requirement_set_order_preserved_non_lexicographic"
+      ],
+      "failed": [],
+      "skipped": []
+    }
+  },
+  "pass_counts": {
+    "Core": 3,
+    "Functionality": 19,
+    "Regression": 0,
+    "Error": 13
+  },
+  "total_counts": {
+    "Core": 3,
+    "Functionality": 21,
+    "Regression": 0,
+    "Error": 16
+  },
+  "pytest_exit_code": 1,
+  "pytest_collected": 40,
+  "test_collection_hash": "6d11f70b39513473a4e6fe500e150a3879af597cce531d9475388f2aa16c1a83",
+  "infrastructure_failure": false
+}

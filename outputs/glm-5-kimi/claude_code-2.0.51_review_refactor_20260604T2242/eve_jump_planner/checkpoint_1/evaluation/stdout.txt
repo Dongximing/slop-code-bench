@@ -1,0 +1,1188 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/S_i8j--rnnv014Wl/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 180.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 11 items
+
+.evaluation_tests/test_checkpoint_1.py::test_turnur_ahb[default] FAILED  [  9%]
+.evaluation_tests/test_checkpoint_1.py::test_turnur_isbra[default] PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_fatigue_caps[default] FAILED [ 27%]
+.evaluation_tests/test_checkpoint_1.py::test_jita_ama[default] FAILED    [ 36%]
+.evaluation_tests/test_checkpoint_1.py::test_jita_ama[reduction=0] FAILED [ 45%]
+.evaluation_tests/test_checkpoint_1.py::test_jita_ama[range=6] FAILED    [ 54%]
+.evaluation_tests/test_checkpoint_1.py::test_jita_serp_prime[default] FAILED [ 63%]
+.evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=90] FAILED [ 72%]
+.evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0] FAILED [ 81%]
+.evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0_fuel=5000] FAILED [ 90%]
+.evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[reduction=90] FAILED [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_turnur_ahb[default] ___________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Turnur III - Moon 18 - Freedom Extension Storage\nUNDOCK\nJUMP 3.07 LY: Egghelende (31K isotopes)...UMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 103K\n  Time Waiting: 00:02\n  Total LY: 10.22'}
+
+    @pytest.mark.parametrize("case", TURNUR_AHB["cases"], ids=["default"])
+    def test_turnur_ahb(entrypoint_argv, sde_dir, case):
+        """Core: Plan route from Turnur to Ahbazon."""
+>       run_and_check(
+            entrypoint_argv, sde_dir, TURNUR_AHB["start"], TURNUR_AHB["end"], case
+        )
+
+.evaluation_tests/test_checkpoint_1.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Turnur III - Moon 18 - Freedom Extension Storage'
+end = 'Ahbazon VI - Imperial Shipment Storage'
+case = {'expected': 'START: Turnur III - Moon 18 - Freedom Extension Storage\nUNDOCK\nJUMP 3.07 LY: Egghelende (31K isotopes)...UMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 103K\n  Time Waiting: 00:02\n  Total LY: 10.22'}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+>       assert result.stdout.strip() == case["expected"].strip()
+E       AssertionError: assert 'START: Turnur III - Moon 18 - Freedom Extension Storage\nUNDOCK\nJUMP 3.07 LY: Egghelende (31K isotopes)\nDOCK: Egghelende IV - Moon 1 - FedMart Warehouse\nUNDOCK\nJUMP 7.16 LY: Ahbazon (72K isotopes)\nDOCK: Ahbazon IV - Moon 1 - Imperial Shipment Storage\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:21\n  Isotopes Used: 103K\n  Time Waiting: 00:02\n  Total LY: 10.22' == 'START: Turnur III - Moon 18 - Freedom Extension Storage\nUNDOCK\nJUMP 3.07 LY: Egghelende (31K isotopes)\nDOCK: Egghelende IV - Moon 1 - FedMart Warehouse\nUNDOCK\nJUMP 7.16 LY: Ahbazon (72K isotopes)\nDOCK: Ahbazon VI - Imperial Shipment Storage\nSUMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 103K\n  Time Waiting: 00:02\n  Total LY: 10.22'
+E         
+E           START: Turnur III - Moon 18 - Freedom Extension Storage
+E           UNDOCK
+E           JUMP 3.07 LY: Egghelende (31K isotopes)
+E           DOCK: Egghelende IV - Moon 1 - FedMart Warehouse
+E           UNDOCK
+E           JUMP 7.16 LY: Ahbazon (72K isotopes)
+E         - DOCK: Ahbazon VI - Imperial Shipment Storage
+E         ?                -
+E         + DOCK: Ahbazon IV - Moon 1 - Imperial Shipment Storage
+E         ?               +   +++++++++
+E           SUMMARY:
+E         -   End Cooldown: 00:02
+E         ?                     ^
+E         +   End Cooldown: 00:03
+E         ?                     ^
+E             End Fatigue: 00:21
+E             Isotopes Used: 103K
+E             Time Waiting: 00:02
+E             Total LY: 10.22
+
+.evaluation_tests/test_checkpoint_1.py:44: AssertionError
+__________________________ test_fatigue_caps[default] __________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: 3-CE1R VIII - Moon 5 - Prosper Vault\nUNDOCK\nJUMP 8.11 LY: 2RV-06 (82K isotopes)\nDOCK: 2RV-06 V...UMMARY:\n  End Cooldown: 00:28\n  End Fatigue: 05:00\n  Isotopes Used: 877K\n  Time Waiting: 02:20\n  Total LY: 87.67'}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", FATIGUE_CAPS["cases"], ids=["default"])
+    def test_fatigue_caps(entrypoint_argv, sde_dir, case):
+        """Functionality: Long route that hits fatigue caps."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            FATIGUE_CAPS["start"],
+            FATIGUE_CAPS["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:172: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.evaluation_tests/test_checkpoint_1.py:42: in run_and_check
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/subprocess.py:550: in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/subprocess.py:1209: in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/subprocess.py:2116: in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Popen: returncode: -9 args: ['uv', 'run', 'did_he_say_jump.py', '--start', ...>
+endtime = 9828836.414967751, orig_timeout = 30, stdout_seq = [], stderr_seq = []
+skip_check_and_raise = False
+
+    def _check_timeout(self, endtime, orig_timeout, stdout_seq, stderr_seq,
+                       skip_check_and_raise=False):
+        """Convenience for checking if a timeout has expired."""
+        if endtime is None:
+            return
+        if skip_check_and_raise or _time() > endtime:
+>           raise TimeoutExpired(
+                    self.args, orig_timeout,
+                    output=b''.join(stdout_seq) if stdout_seq else None,
+                    stderr=b''.join(stderr_seq) if stderr_seq else None)
+E           subprocess.TimeoutExpired: Command '['uv', 'run', 'did_he_say_jump.py', '--start', '3-CE1R VIII - Moon 5 - Prosper Vault', '--end', 'B-G1LG VI - Moon 3 - True Power Mining Outpost', '--sde', '/workspace/.evaluation_tests/assets/sde_dir']' timed out after 30 seconds
+
+/usr/local/lib/python3.12/subprocess.py:1253: TimeoutExpired
+____________________________ test_jita_ama[default] ____________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDO...UMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:24\n  Isotopes Used: 128K\n  Time Waiting: 00:02\n  Total LY: 12.75'}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", JITA_AMA["cases"], ids=["default", "reduction=0", "range=6"]
+    )
+    def test_jita_ama(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Jita to Amamake."""
+>       run_and_check(
+            entrypoint_argv, sde_dir, JITA_AMA["start"], JITA_AMA["end"], case
+        )
+
+.evaluation_tests/test_checkpoint_1.py:245: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'
+end = 'Amamake VI - Moon 2 - Nurtura Food Packaging'
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDO...UMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:24\n  Isotopes Used: 128K\n  Time Waiting: 00:02\n  Total LY: 12.75'}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+>       assert result.stdout.strip() == case["expected"].strip()
+E       AssertionError: assert 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 6.83 LY: Traun (69K isotopes)\nDOCK: Traun X - Moon 14 - Joint Harvesting Mining Outpost\nUNDOCK\nJUMP 5.11 LY: Amamake (52K isotopes)\nDOCK: Amamake II - Brutor Tribe Bureau\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:23\n  Isotopes Used: 121K\n  Time Waiting: 00:02\n  Total LY: 11.95' == 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDOCK: Resbroko I - Moon 7 - Republic Fleet Assembly Plant\nUNDOCK\nJUMP 4.32 LY: Amamake (44K isotopes)\nDOCK: Amamake VI - Moon 2 - Nurtura Food Packaging\nSUMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:24\n  Isotopes Used: 128K\n  Time Waiting: 00:02\n  Total LY: 12.75'
+E         
+E           START: Jita IV - Moon 4 - Caldari Navy Assembly Plant
+E           UNDOCK
+E         - JUMP 8.43 LY: Resbroko (85K isotopes)
+E         - DOCK: Resbroko I - Moon 7 - Republic Fleet Assembly Plant
+E         + JUMP 6.83 LY: Traun (69K isotopes)
+E         + DOCK: Traun X - Moon 14 - Joint Harvesting Mining Outpost
+E           UNDOCK
+E         - JUMP 4.32 LY: Amamake (44K isotopes)
+E         ?      ^ ^^              ^^
+E         + JUMP 5.11 LY: Amamake (52K isotopes)
+E         ?      ^ ^^              ^^
+E         - DOCK: Amamake VI - Moon 2 - Nurtura Food Packaging
+E         + DOCK: Amamake II - Brutor Tribe Bureau
+E           SUMMARY:
+E         -   End Cooldown: 00:02
+E         ?                     ^
+E         +   End Cooldown: 00:03
+E         ?                     ^
+E         -   End Fatigue: 00:24
+E         ?                    ^
+E         +   End Fatigue: 00:23
+E         ?                    ^
+E         -   Isotopes Used: 128K
+E         ?                    ^
+E         +   Isotopes Used: 121K
+E         ?                    ^
+E             Time Waiting: 00:02
+E         -   Total LY: 12.75
+E         ?              ^ ^
+E         +   Total LY: 11.95
+E         ?              ^ ^
+
+.evaluation_tests/test_checkpoint_1.py:44: AssertionError
+__________________________ test_jita_ama[reduction=0] __________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDO...ooldown: 00:09\n  End Fatigue: 05:00\n  Isotopes Used: 128K\n  Time Waiting: 00:10\n  Total LY: 12.75', 'reduction': 0}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", JITA_AMA["cases"], ids=["default", "reduction=0", "range=6"]
+    )
+    def test_jita_ama(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Jita to Amamake."""
+>       run_and_check(
+            entrypoint_argv, sde_dir, JITA_AMA["start"], JITA_AMA["end"], case
+        )
+
+.evaluation_tests/test_checkpoint_1.py:245: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'
+end = 'Amamake VI - Moon 2 - Nurtura Food Packaging'
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDO...ooldown: 00:09\n  End Fatigue: 05:00\n  Isotopes Used: 128K\n  Time Waiting: 00:10\n  Total LY: 12.75', 'reduction': 0}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+>       assert result.stdout.strip() == case["expected"].strip()
+E       AssertionError: assert 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 2.07 LY: Unpas (21K isotopes)\nDOCK: Unpas IX - Moon 5 - Spacelane Patrol Logistic Support\nUNDOCK\nJUMP 10.00 LY: Amamake (100K isotopes)\nDOCK: Amamake II - Brutor Tribe Bureau\nSUMMARY:\n  End Cooldown: 00:30\n  End Fatigue: 05:00\n  Isotopes Used: 121K\n  Time Waiting: 00:04\n  Total LY: 12.07' == 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDOCK: Resbroko I - Moon 7 - Republic Fleet Assembly Plant\nUNDOCK\nJUMP 4.32 LY: Amamake (44K isotopes)\nDOCK: Amamake VI - Moon 2 - Nurtura Food Packaging\nSUMMARY:\n  End Cooldown: 00:09\n  End Fatigue: 05:00\n  Isotopes Used: 128K\n  Time Waiting: 00:10\n  Total LY: 12.75'
+E         
+E           START: Jita IV - Moon 4 - Caldari Navy Assembly Plant
+E           UNDOCK
+E         - JUMP 8.43 LY: Resbroko (85K isotopes)
+E         - DOCK: Resbroko I - Moon 7 - Republic Fleet Assembly Plant
+E         + JUMP 2.07 LY: Unpas (21K isotopes)
+E         + DOCK: Unpas IX - Moon 5 - Spacelane Patrol Logistic Support
+E           UNDOCK
+E         - JUMP 4.32 LY: Amamake (44K isotopes)
+E         ?      ^ ^^              ^^
+E         + JUMP 10.00 LY: Amamake (100K isotopes)
+E         ?      ^^ ^^              ^^^
+E         - DOCK: Amamake VI - Moon 2 - Nurtura Food Packaging
+E         + DOCK: Amamake II - Brutor Tribe Bureau
+E           SUMMARY:
+E         -   End Cooldown: 00:09
+E         ?                     -
+E         +   End Cooldown: 00:30
+E         ?                    +
+E             End Fatigue: 05:00
+E         -   Isotopes Used: 128K
+E         ?                    ^
+E         +   Isotopes Used: 121K
+E         ?                    ^
+E         -   Time Waiting: 00:10
+E         ?                    -
+E         +   Time Waiting: 00:04
+E         ?                     +
+E         -   Total LY: 12.75
+E         ?                 -
+E         +   Total LY: 12.07
+E         ?                +
+
+.evaluation_tests/test_checkpoint_1.py:44: AssertionError
+____________________________ test_jita_ama[range=6] ____________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 5.58 LY: Carrou (56K isotopes)\nDOCK...nd Cooldown: 00:02\n  End Fatigue: 00:28\n  Isotopes Used: 147K\n  Time Waiting: 00:03\n  Total LY: 14.62', 'range': 6}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case", JITA_AMA["cases"], ids=["default", "reduction=0", "range=6"]
+    )
+    def test_jita_ama(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Jita to Amamake."""
+>       run_and_check(
+            entrypoint_argv, sde_dir, JITA_AMA["start"], JITA_AMA["end"], case
+        )
+
+.evaluation_tests/test_checkpoint_1.py:245: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'
+end = 'Amamake VI - Moon 2 - Nurtura Food Packaging'
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 5.58 LY: Carrou (56K isotopes)\nDOCK...nd Cooldown: 00:02\n  End Fatigue: 00:28\n  Isotopes Used: 147K\n  Time Waiting: 00:03\n  Total LY: 14.62', 'range': 6}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+>       assert result.stdout.strip() == case["expected"].strip()
+E       AssertionError: assert 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 0.88 LY: Maurasi (9K isotopes)\nDOCK: Maurasi IX - Moon 12 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 6.00 LY: Traun (60K isotopes)\nDOCK: Traun X - Moon 14 - Joint Harvesting Mining Outpost\nUNDOCK\nJUMP 5.11 LY: Amamake (52K isotopes)\nDOCK: Amamake II - Brutor Tribe Bureau\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:22\n  Isotopes Used: 121K\n  Time Waiting: 00:04\n  Total LY: 12.00' == 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 5.58 LY: Carrou (56K isotopes)\nDOCK: Carrou III - Moon 7 - Federation Customs Logistic Support\nUNDOCK\nJUMP 4.65 LY: Auner (47K isotopes)\nDOCK: Auner V - Republic Fleet Logistic Support\nUNDOCK\nJUMP 4.40 LY: Amamake (45K isotopes)\nDOCK: Amamake VI - Moon 2 - Nurtura Food Packaging\nSUMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:28\n  Isotopes Used: 147K\n  Time Waiting: 00:03\n  Total LY: 14.62'
+E         
+E           START: Jita IV - Moon 4 - Caldari Navy Assembly Plant
+E           UNDOCK
+E         - JUMP 5.58 LY: Carrou (56K isotopes)
+E         ?      ^ -      ^  ^^^  ^^
+E         + JUMP 0.88 LY: Maurasi (9K isotopes)
+E         ?      ^  +     ^ + ^^^  ^
+E         - DOCK: Carrou III - Moon 7 - Federation Customs Logistic Support
+E         + DOCK: Maurasi IX - Moon 12 - Caldari Navy Assembly Plant
+E           UNDOCK
+E         - JUMP 4.65 LY: Auner (47K isotopes)
+E         ?      ^ ^^     ^  --  ^^
+E         + JUMP 6.00 LY: Traun (60K isotopes)
+E         ?      ^ ^^     ^^^    ^^
+E         - DOCK: Auner V - Republic Fleet Logistic Support
+E         + DOCK: Traun X - Moon 14 - Joint Harvesting Mining Outpost
+E           UNDOCK
+E         - JUMP 4.40 LY: Amamake (45K isotopes)
+E         ?      ^ ^^              -
+E         + JUMP 5.11 LY: Amamake (52K isotopes)
+E         ?      ^ ^^               +
+E         - DOCK: Amamake VI - Moon 2 - Nurtura Food Packaging
+E         + DOCK: Amamake II - Brutor Tribe Bureau
+E           SUMMARY:
+E         -   End Cooldown: 00:02
+E         ?                     ^
+E         +   End Cooldown: 00:03
+E         ?                     ^
+E         -   End Fatigue: 00:28
+E         ?                    ^
+E         +   End Fatigue: 00:22
+E         ?                    ^
+E         -   Isotopes Used: 147K
+E         ?                   ^^
+E         +   Isotopes Used: 121K
+E         ?                   ^^
+E         -   Time Waiting: 00:03
+E         ?                     ^
+E         +   Time Waiting: 00:04
+E         ?                     ^
+E         -   Total LY: 14.62
+E         ?              ^ ^^
+E         +   Total LY: 12.00
+E         ?              ^ ^^
+
+.evaluation_tests/test_checkpoint_1.py:44: AssertionError
+________________________ test_jita_serp_prime[default] _________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 9.48 LY: Yvangier (95K isotopes)\nDO...UMMARY:\n  End Cooldown: 00:11\n  End Fatigue: 03:10\n  Isotopes Used: 451K\n  Time Waiting: 00:13\n  Total LY: 45.08'}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case", JITA_SERP_PRIME["cases"], ids=["default"])
+    def test_jita_serp_prime(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Jita to Serpentis Prime."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            JITA_SERP_PRIME["start"],
+            JITA_SERP_PRIME["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Jita IV - Moon 4 - Caldari Navy Assembly Plant'
+end = 'Serpentis Prime II - Archangels Testing Facilities'
+case = {'expected': 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 9.48 LY: Yvangier (95K isotopes)\nDO...UMMARY:\n  End Cooldown: 00:11\n  End Fatigue: 03:10\n  Isotopes Used: 451K\n  Time Waiting: 00:13\n  Total LY: 45.08'}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+>       assert result.stdout.strip() == case["expected"].strip()
+E       AssertionError: assert 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 7.66 LY: Iivinen (77K isotopes)\nDOCK: Iivinen IV - Moon 8 - Rapid Assembly Factory\nUNDOCK\nJUMP 8.66 LY: Diaderi (87K isotopes)\nDOCK: Diaderi II - Amarr Navy Assembly Plant\nUNDOCK\nJUMP 9.99 LY: Van (100K isotopes)\nDOCK: Van III - Moon 1 - Amarr Constructions Warehouse\nUNDOCK\nJUMP 9.82 LY: Soza (99K isotopes)\nDOCK: Soza XII - Moon 14 - CBD Corporation Storage\nUNDOCK\nJUMP 9.97 LY: Serpentis Prime (100K isotopes)\nDOCK: Serpentis Prime II - Archangels Testing Facilities\nSUMMARY:\n  End Cooldown: 00:18\n  End Fatigue: 02:52\n  Isotopes Used: 463K\n  Time Waiting: 00:21\n  Total LY: 46.10' == 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 9.48 LY: Yvangier (95K isotopes)\nDOCK: Yvangier V - TransStellar Shipping Storage\nUNDOCK\nJUMP 9.48 LY: A-ZLHX (95K isotopes)\nDOCK: A-ZLHX VII - Moon 2 - Intaki Syndicate Bureau\nUNDOCK\nJUMP 9.03 LY: Shirshocin (91K isotopes)\nDOCK: Shirshocin III - Moon 2 - Amarr Constructions Warehouse\nUNDOCK\nJUMP 9.80 LY: Karan (99K isotopes)\nDOCK: Karan VIII - Royal Amarr Institute School\nUNDOCK\nJUMP 7.29 LY: Serpentis Prime (73K isotopes)\nDOCK: Serpentis Prime II - Archangels Testing Facilities\nSUMMARY:\n  End Cooldown: 00:11\n  End Fatigue: 03:10\n  Isotopes Used: 451K\n  Time Waiting: 00:13\n  Total LY: 45.08'
+E         
+E           START: Jita IV - Moon 4 - Caldari Navy Assembly Plant
+E           UNDOCK
+E         - JUMP 9.48 LY: Yvangier (95K isotopes)
+E         - DOCK: Yvangier V - TransStellar Shipping Storage
+E         + JUMP 7.66 LY: Iivinen (77K isotopes)
+E         + DOCK: Iivinen IV - Moon 8 - Rapid Assembly Factory
+E           UNDOCK
+E         - JUMP 9.48 LY: A-ZLHX (95K isotopes)
+E         - DOCK: A-ZLHX VII - Moon 2 - Intaki Syndicate Bureau
+E         + JUMP 8.66 LY: Diaderi (87K isotopes)
+E         + DOCK: Diaderi II - Amarr Navy Assembly Plant
+E           UNDOCK
+E         - JUMP 9.03 LY: Shirshocin (91K isotopes)
+E         ?        ^^     ^^^^^^^^^   -
+E         + JUMP 9.99 LY: Van (100K isotopes)
+E         ?        ^^     ^^    ++
+E         - DOCK: Shirshocin III - Moon 2 - Amarr Constructions Warehouse
+E         ?       ^^^^^^^^^             ^
+E         + DOCK: Van III - Moon 1 - Amarr Constructions Warehouse
+E         ?       ^^             ^
+E           UNDOCK
+E         - JUMP 9.80 LY: Karan (99K isotopes)
+E         ?         ^     ^ ---
+E         + JUMP 9.82 LY: Soza (99K isotopes)
+E         ?         ^     ^^^
+E         - DOCK: Karan VIII - Royal Amarr Institute School
+E         + DOCK: Soza XII - Moon 14 - CBD Corporation Storage
+E           UNDOCK
+E         - JUMP 7.29 LY: Serpentis Prime (73K isotopes)
+E         ?       ---                      ^^
+E         + JUMP 9.97 LY: Serpentis Prime (100K isotopes)
+E         ?      +++                       ^^^
+E           DOCK: Serpentis Prime II - Archangels Testing Facilities
+E           SUMMARY:
+E         -   End Cooldown: 00:11
+E         ?                     ^
+E         +   End Cooldown: 00:18
+E         ?                     ^
+E         -   End Fatigue: 03:10
+E         ?                 ^ ^^
+E         +   End Fatigue: 02:52
+E         ?                 ^ ^^
+E         -   Isotopes Used: 451K
+E         ?                   ^^
+E         +   Isotopes Used: 463K
+E         ?                   ^^
+E         -   Time Waiting: 00:13
+E         ?                     -
+E         +   Time Waiting: 00:21
+E         ?                    +
+E         -   Total LY: 45.08
+E         ?              ^  -
+E         +   Total LY: 46.10
+E         ?              ^ +
+
+.evaluation_tests/test_checkpoint_1.py:44: AssertionError
+___________________ test_mesy_siseide[range=5_reduction=90] ____________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fl...3\n  End Fatigue: 00:31\n  Isotopes Used: 164K\n  Time Waiting: 00:05\n  Total LY: 16.38', 'range': 5, 'reduction': 90}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        MESY_SISEIDE["cases"],
+        ids=[
+            "range=5_reduction=90",
+            "range=5_reduction=0",
+            "range=5_reduction=0_fuel=5000",
+            "reduction=90",
+        ],
+    )
+    def test_mesy_siseide(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Mesybier to Siseide with various params."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            MESY_SISEIDE["start"],
+            MESY_SISEIDE["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:402: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Mesybier II - TransStellar Shipping Storage'
+end = 'Siseide VIII - Expert Distribution Warehouse'
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fl...3\n  End Fatigue: 00:31\n  Isotopes Used: 164K\n  Time Waiting: 00:05\n  Total LY: 16.38', 'range': 5, 'reduction': 90}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+>       assert result.stdout.strip() == case["expected"].strip()
+E       AssertionError: assert 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 3.96 LY: Auberulle (40K isotopes)\nDOCK: Auberulle V - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.68 LY: Aymaerne (27K isotopes)\nDOCK: Aymaerne VI - Moon 10 - Aliastra Warehouse\nUNDOCK\nJUMP 4.26 LY: Siseide (43K isotopes)\nDOCK: Siseide VII - Expert Distribution Retail Center\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:21\n  Isotopes Used: 110K\n  Time Waiting: 00:04\n  Total LY: 10.90' == 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fliet III - Federal Defense Union Logistic Support\nUNDOCK\nJUMP 4.86 LY: Ignoitton (49K isotopes)\nDOCK: Ignoitton V - Moon 11 - Federal Freight Storage\nUNDOCK\nJUMP 4.58 LY: Auner (46K isotopes)\nDOCK: Auner V - Republic Fleet Logistic Support\nUNDOCK\nJUMP 4.20 LY: Siseide (43K isotopes)\nDOCK: Siseide VIII - Expert Distribution Warehouse\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:31\n  Isotopes Used: 164K\n  Time Waiting: 00:05\n  Total LY: 16.38'
+E         
+E           START: Mesybier II - TransStellar Shipping Storage
+E           UNDOCK
+E         - JUMP 2.73 LY: Fliet (28K isotopes)
+E         - DOCK: Fliet III - Federal Defense Union Logistic Support
+E         + JUMP 3.96 LY: Auberulle (40K isotopes)
+E         + DOCK: Auberulle V - TransStellar Shipping Storage
+E           UNDOCK
+E         - JUMP 4.86 LY: Ignoitton (49K isotopes)
+E         - DOCK: Ignoitton V - Moon 11 - Federal Freight Storage
+E         + JUMP 2.68 LY: Aymaerne (27K isotopes)
+E         + DOCK: Aymaerne VI - Moon 10 - Aliastra Warehouse
+E           UNDOCK
+E         - JUMP 4.58 LY: Auner (46K isotopes)
+E         - DOCK: Auner V - Republic Fleet Logistic Support
+E         - UNDOCK
+E         - JUMP 4.20 LY: Siseide (43K isotopes)
+E         ?         ^
+E         + JUMP 4.26 LY: Siseide (43K isotopes)
+E         ?         ^
+E         - DOCK: Siseide VIII - Expert Distribution Warehouse
+E         ?                  -                       ^  ------
+E         + DOCK: Siseide VII - Expert Distribution Retail Center
+E         ?                                         ^^^ ++++++++
+E           SUMMARY:
+E             End Cooldown: 00:03
+E         -   End Fatigue: 00:31
+E         ?                   ^
+E         +   End Fatigue: 00:21
+E         ?                   ^
+E         -   Isotopes Used: 164K
+E         ?                   ^^
+E         +   Isotopes Used: 110K
+E         ?                   ^^
+E         -   Time Waiting: 00:05
+E         ?                     ^
+E         +   Time Waiting: 00:04
+E         ?                     ^
+E         -   Total LY: 16.38
+E         ?              ^ ^^
+E         +   Total LY: 10.90
+E         ?              ^ ^^
+
+.evaluation_tests/test_checkpoint_1.py:44: AssertionError
+____________________ test_mesy_siseide[range=5_reduction=0] ____________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fl...29\n  End Fatigue: 05:00\n  Isotopes Used: 164K\n  Time Waiting: 00:27\n  Total LY: 16.38', 'range': 5, 'reduction': 0}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        MESY_SISEIDE["cases"],
+        ids=[
+            "range=5_reduction=90",
+            "range=5_reduction=0",
+            "range=5_reduction=0_fuel=5000",
+            "reduction=90",
+        ],
+    )
+    def test_mesy_siseide(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Mesybier to Siseide with various params."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            MESY_SISEIDE["start"],
+            MESY_SISEIDE["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:402: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Mesybier II - TransStellar Shipping Storage'
+end = 'Siseide VIII - Expert Distribution Warehouse'
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fl...29\n  End Fatigue: 05:00\n  Isotopes Used: 164K\n  Time Waiting: 00:27\n  Total LY: 16.38', 'range': 5, 'reduction': 0}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+>       assert result.stdout.strip() == case["expected"].strip()
+E       AssertionError: assert 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 1.62 LY: Yona (17K isotopes)\nDOCK: Yona II - Core Complexion Inc. Factory\nUNDOCK\nJUMP 4.72 LY: Ainaille (48K isotopes)\nDOCK: Ainaille VII - Moon 5 - Duvolle Laboratories Factory\nUNDOCK\nJUMP 4.93 LY: Siseide (50K isotopes)\nDOCK: Siseide VII - Expert Distribution Retail Center\nSUMMARY:\n  End Cooldown: 00:30\n  End Fatigue: 05:00\n  Isotopes Used: 115K\n  Time Waiting: 00:17\n  Total LY: 11.27' == 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fliet III - Federal Defense Union Logistic Support\nUNDOCK\nJUMP 4.86 LY: Ignoitton (49K isotopes)\nDOCK: Ignoitton V - Moon 11 - Federal Freight Storage\nUNDOCK\nJUMP 4.58 LY: Auner (46K isotopes)\nDOCK: Auner V - Republic Fleet Logistic Support\nUNDOCK\nJUMP 4.20 LY: Siseide (43K isotopes)\nDOCK: Siseide VIII - Expert Distribution Warehouse\nSUMMARY:\n  End Cooldown: 00:29\n  End Fatigue: 05:00\n  Isotopes Used: 164K\n  Time Waiting: 00:27\n  Total LY: 16.38'
+E         
+E           START: Mesybier II - TransStellar Shipping Storage
+E           UNDOCK
+E         - JUMP 2.73 LY: Fliet (28K isotopes)
+E         - DOCK: Fliet III - Federal Defense Union Logistic Support
+E         + JUMP 1.62 LY: Yona (17K isotopes)
+E         + DOCK: Yona II - Core Complexion Inc. Factory
+E           UNDOCK
+E         - JUMP 4.86 LY: Ignoitton (49K isotopes)
+E         ?        ^^     ^^ ^ ^^^^   ^
+E         + JUMP 4.72 LY: Ainaille (48K isotopes)
+E         ?        ^^     ^^ ^ ^^^   ^
+E         - DOCK: Ignoitton V - Moon 11 - Federal Freight Storage
+E         + DOCK: Ainaille VII - Moon 5 - Duvolle Laboratories Factory
+E           UNDOCK
+E         - JUMP 4.58 LY: Auner (46K isotopes)
+E         - DOCK: Auner V - Republic Fleet Logistic Support
+E         - UNDOCK
+E         - JUMP 4.20 LY: Siseide (43K isotopes)
+E         ?        ^^              ^^
+E         + JUMP 4.93 LY: Siseide (50K isotopes)
+E         ?        ^^              ^^
+E         - DOCK: Siseide VIII - Expert Distribution Warehouse
+E         ?                  -                       ^  ------
+E         + DOCK: Siseide VII - Expert Distribution Retail Center
+E         ?                                         ^^^ ++++++++
+E           SUMMARY:
+E         -   End Cooldown: 00:29
+E         ?                    ^^
+E         +   End Cooldown: 00:30
+E         ?                    ^^
+E             End Fatigue: 05:00
+E         -   Isotopes Used: 164K
+E         ?                   ^^
+E         +   Isotopes Used: 115K
+E         ?                   ^^
+E         -   Time Waiting: 00:27
+E         ?                    ^
+E         +   Time Waiting: 00:17
+E         ?                    ^
+E         -   Total LY: 16.38
+E         ?              ^ ^^
+E         +   Total LY: 11.27
+E         ?              ^ ^^
+
+.evaluation_tests/test_checkpoint_1.py:44: AssertionError
+_______________ test_mesy_siseide[range=5_reduction=0_fuel=5000] _______________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (14K isotopes)\nDOCK: Fl...igue: 05:00\n  Isotopes Used: 82K\n  Time Waiting: 00:27\n  Total LY: 16.38', 'fuel': 5000, 'range': 5, 'reduction': 0}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        MESY_SISEIDE["cases"],
+        ids=[
+            "range=5_reduction=90",
+            "range=5_reduction=0",
+            "range=5_reduction=0_fuel=5000",
+            "reduction=90",
+        ],
+    )
+    def test_mesy_siseide(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Mesybier to Siseide with various params."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            MESY_SISEIDE["start"],
+            MESY_SISEIDE["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:402: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Mesybier II - TransStellar Shipping Storage'
+end = 'Siseide VIII - Expert Distribution Warehouse'
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (14K isotopes)\nDOCK: Fl...igue: 05:00\n  Isotopes Used: 82K\n  Time Waiting: 00:27\n  Total LY: 16.38', 'fuel': 5000, 'range': 5, 'reduction': 0}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+>       assert result.stdout.strip() == case["expected"].strip()
+E       AssertionError: assert 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 1.62 LY: Yona (9K isotopes)\nDOCK: Yona II - Core Complexion Inc. Factory\nUNDOCK\nJUMP 4.72 LY: Ainaille (24K isotopes)\nDOCK: Ainaille VII - Moon 5 - Duvolle Laboratories Factory\nUNDOCK\nJUMP 4.93 LY: Siseide (25K isotopes)\nDOCK: Siseide VII - Expert Distribution Retail Center\nSUMMARY:\n  End Cooldown: 00:30\n  End Fatigue: 05:00\n  Isotopes Used: 58K\n  Time Waiting: 00:17\n  Total LY: 11.27' == 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (14K isotopes)\nDOCK: Fliet III - Federal Defense Union Logistic Support\nUNDOCK\nJUMP 4.86 LY: Ignoitton (25K isotopes)\nDOCK: Ignoitton V - Moon 11 - Federal Freight Storage\nUNDOCK\nJUMP 4.58 LY: Auner (23K isotopes)\nDOCK: Auner V - Republic Fleet Logistic Support\nUNDOCK\nJUMP 4.20 LY: Siseide (22K isotopes)\nDOCK: Siseide VIII - Expert Distribution Warehouse\nSUMMARY:\n  End Cooldown: 00:29\n  End Fatigue: 05:00\n  Isotopes Used: 82K\n  Time Waiting: 00:27\n  Total LY: 16.38'
+E         
+E           START: Mesybier II - TransStellar Shipping Storage
+E           UNDOCK
+E         - JUMP 2.73 LY: Fliet (14K isotopes)
+E         - DOCK: Fliet III - Federal Defense Union Logistic Support
+E         + JUMP 1.62 LY: Yona (9K isotopes)
+E         + DOCK: Yona II - Core Complexion Inc. Factory
+E           UNDOCK
+E         - JUMP 4.86 LY: Ignoitton (25K isotopes)
+E         ?        ^^     ^^ ^ ^^^^   ^
+E         + JUMP 4.72 LY: Ainaille (24K isotopes)
+E         ?        ^^     ^^ ^ ^^^   ^
+E         - DOCK: Ignoitton V - Moon 11 - Federal Freight Storage
+E         + DOCK: Ainaille VII - Moon 5 - Duvolle Laboratories Factory
+E           UNDOCK
+E         - JUMP 4.58 LY: Auner (23K isotopes)
+E         - DOCK: Auner V - Republic Fleet Logistic Support
+E         - UNDOCK
+E         - JUMP 4.20 LY: Siseide (22K isotopes)
+E         ?        ^^               ^
+E         + JUMP 4.93 LY: Siseide (25K isotopes)
+E         ?        ^^               ^
+E         - DOCK: Siseide VIII - Expert Distribution Warehouse
+E         ?                  -                       ^  ------
+E         + DOCK: Siseide VII - Expert Distribution Retail Center
+E         ?                                         ^^^ ++++++++
+E           SUMMARY:
+E         -   End Cooldown: 00:29
+E         ?                    ^^
+E         +   End Cooldown: 00:30
+E         ?                    ^^
+E             End Fatigue: 05:00
+E         -   Isotopes Used: 82K
+E         ?                   -
+E         +   Isotopes Used: 58K
+E         ?                  +
+E         -   Time Waiting: 00:27
+E         ?                    ^
+E         +   Time Waiting: 00:17
+E         ?                    ^
+E         -   Total LY: 16.38
+E         ?              ^ ^^
+E         +   Total LY: 11.27
+E         ?              ^ ^^
+
+.evaluation_tests/test_checkpoint_1.py:44: AssertionError
+_______________________ test_mesy_siseide[reduction=90] ________________________
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 9.27 LY: Vimeini (93K isotopes)\nDOCK: ...oldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 112K\n  Time Waiting: 00:02\n  Total LY: 11.13', 'reduction': 90}
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize(
+        "case",
+        MESY_SISEIDE["cases"],
+        ids=[
+            "range=5_reduction=90",
+            "range=5_reduction=0",
+            "range=5_reduction=0_fuel=5000",
+            "reduction=90",
+        ],
+    )
+    def test_mesy_siseide(entrypoint_argv, sde_dir, case):
+        """Functionality: Plan route from Mesybier to Siseide with various params."""
+>       run_and_check(
+            entrypoint_argv,
+            sde_dir,
+            MESY_SISEIDE["start"],
+            MESY_SISEIDE["end"],
+            case,
+        )
+
+.evaluation_tests/test_checkpoint_1.py:402: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+entrypoint_argv = ['uv', 'run', 'did_he_say_jump.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+start = 'Mesybier II - TransStellar Shipping Storage'
+end = 'Siseide VIII - Expert Distribution Warehouse'
+case = {'expected': 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 9.27 LY: Vimeini (93K isotopes)\nDOCK: ...oldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 112K\n  Time Waiting: 00:02\n  Total LY: 11.13', 'reduction': 90}
+
+    def run_and_check(entrypoint_argv, sde_dir, start, end, case):
+        """Run command and check output."""
+        cmd = build_command(
+            entrypoint_argv,
+            sde_dir,
+            start,
+            end,
+            **{k: v for k, v in case.items() if k != "expected"},
+        )
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+>       assert result.stdout.strip() == case["expected"].strip()
+E       AssertionError: assert 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 6.55 LY: Aymaerne (66K isotopes)\nDOCK: Aymaerne VI - Moon 10 - Aliastra Warehouse\nUNDOCK\nJUMP 4.26 LY: Siseide (43K isotopes)\nDOCK: Siseide VII - Expert Distribution Retail Center\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:22\n  Isotopes Used: 109K\n  Time Waiting: 00:02\n  Total LY: 10.81' == 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 9.27 LY: Vimeini (93K isotopes)\nDOCK: Vimeini VI - Moon 4 - TransStellar Shipping Storage\nUNDOCK\nJUMP 1.85 LY: Siseide (19K isotopes)\nDOCK: Siseide VIII - Expert Distribution Warehouse\nSUMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 112K\n  Time Waiting: 00:02\n  Total LY: 11.13'
+E         
+E           START: Mesybier II - TransStellar Shipping Storage
+E           UNDOCK
+E         - JUMP 9.27 LY: Vimeini (93K isotopes)
+E         - DOCK: Vimeini VI - Moon 4 - TransStellar Shipping Storage
+E         + JUMP 6.55 LY: Aymaerne (66K isotopes)
+E         + DOCK: Aymaerne VI - Moon 10 - Aliastra Warehouse
+E           UNDOCK
+E         - JUMP 1.85 LY: Siseide (19K isotopes)
+E         ?      ^ ^^              ^^
+E         + JUMP 4.26 LY: Siseide (43K isotopes)
+E         ?      ^ ^^              ^^
+E         - DOCK: Siseide VIII - Expert Distribution Warehouse
+E         ?                  -                       ^  ------
+E         + DOCK: Siseide VII - Expert Distribution Retail Center
+E         ?                                         ^^^ ++++++++
+E           SUMMARY:
+E         -   End Cooldown: 00:02
+E         ?                     ^
+E         +   End Cooldown: 00:03
+E         ?                     ^
+E         -   End Fatigue: 00:21
+E         ?                    ^
+E         +   End Fatigue: 00:22
+E         ?                    ^
+E         -   Isotopes Used: 112K
+E         ?                   ^^
+E         +   Isotopes Used: 109K
+E         ?                   ^^
+E             Time Waiting: 00:02
+E         -   Total LY: 11.13
+E         ?               ---
+E         +   Total LY: 10.81
+E         ?              +++
+
+.evaluation_tests/test_checkpoint_1.py:44: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_1.py::test_turnur_ahb[default] - AssertionError: assert 'START: Turnur III - Moon 18 - Freedom Extension Storage\nUNDOCK\nJUMP 3.07 LY: Egghelende (31K isotopes)\nDOCK: Egghelende IV - Moon 1 - FedMart Warehouse\nUNDOCK\nJUMP 7.16 LY: Ahbazon (72K isotopes)\nDOCK: Ahbazon IV - Moon 1 - Imperial Shipment Storage\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:21\n  Isotopes Used: 103K\n  Time Waiting: 00:02\n  Total LY: 10.22' == 'START: Turnur III - Moon 18 - Freedom Extension Storage\nUNDOCK\nJUMP 3.07 LY: Egghelende (31K isotopes)\nDOCK: Egghelende IV - Moon 1 - FedMart Warehouse\nUNDOCK\nJUMP 7.16 LY: Ahbazon (72K isotopes)\nDOCK: Ahbazon VI - Imperial Shipment Storage\nSUMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 103K\n  Time Waiting: 00:02\n  Total LY: 10.22'
+  
+    START: Turnur III - Moon 18 - Freedom Extension Storage
+    UNDOCK
+    JUMP 3.07 LY: Egghelende (31K isotopes)
+    DOCK: Egghelende IV - Moon 1 - FedMart Warehouse
+    UNDOCK
+    JUMP 7.16 LY: Ahbazon (72K isotopes)
+  - DOCK: Ahbazon VI - Imperial Shipment Storage
+  ?                -
+  + DOCK: Ahbazon IV - Moon 1 - Imperial Shipment Storage
+  ?               +   +++++++++
+    SUMMARY:
+  -   End Cooldown: 00:02
+  ?                     ^
+  +   End Cooldown: 00:03
+  ?                     ^
+      End Fatigue: 00:21
+      Isotopes Used: 103K
+      Time Waiting: 00:02
+      Total LY: 10.22
+FAILED .evaluation_tests/test_checkpoint_1.py::test_fatigue_caps[default] - subprocess.TimeoutExpired: Command '['uv', 'run', 'did_he_say_jump.py', '--start', '3-CE1R VIII - Moon 5 - Prosper Vault', '--end', 'B-G1LG VI - Moon 3 - True Power Mining Outpost', '--sde', '/workspace/.evaluation_tests/assets/sde_dir']' timed out after 30 seconds
+FAILED .evaluation_tests/test_checkpoint_1.py::test_jita_ama[default] - AssertionError: assert 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 6.83 LY: Traun (69K isotopes)\nDOCK: Traun X - Moon 14 - Joint Harvesting Mining Outpost\nUNDOCK\nJUMP 5.11 LY: Amamake (52K isotopes)\nDOCK: Amamake II - Brutor Tribe Bureau\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:23\n  Isotopes Used: 121K\n  Time Waiting: 00:02\n  Total LY: 11.95' == 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDOCK: Resbroko I - Moon 7 - Republic Fleet Assembly Plant\nUNDOCK\nJUMP 4.32 LY: Amamake (44K isotopes)\nDOCK: Amamake VI - Moon 2 - Nurtura Food Packaging\nSUMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:24\n  Isotopes Used: 128K\n  Time Waiting: 00:02\n  Total LY: 12.75'
+  
+    START: Jita IV - Moon 4 - Caldari Navy Assembly Plant
+    UNDOCK
+  - JUMP 8.43 LY: Resbroko (85K isotopes)
+  - DOCK: Resbroko I - Moon 7 - Republic Fleet Assembly Plant
+  + JUMP 6.83 LY: Traun (69K isotopes)
+  + DOCK: Traun X - Moon 14 - Joint Harvesting Mining Outpost
+    UNDOCK
+  - JUMP 4.32 LY: Amamake (44K isotopes)
+  ?      ^ ^^              ^^
+  + JUMP 5.11 LY: Amamake (52K isotopes)
+  ?      ^ ^^              ^^
+  - DOCK: Amamake VI - Moon 2 - Nurtura Food Packaging
+  + DOCK: Amamake II - Brutor Tribe Bureau
+    SUMMARY:
+  -   End Cooldown: 00:02
+  ?                     ^
+  +   End Cooldown: 00:03
+  ?                     ^
+  -   End Fatigue: 00:24
+  ?                    ^
+  +   End Fatigue: 00:23
+  ?                    ^
+  -   Isotopes Used: 128K
+  ?                    ^
+  +   Isotopes Used: 121K
+  ?                    ^
+      Time Waiting: 00:02
+  -   Total LY: 12.75
+  ?              ^ ^
+  +   Total LY: 11.95
+  ?              ^ ^
+FAILED .evaluation_tests/test_checkpoint_1.py::test_jita_ama[reduction=0] - AssertionError: assert 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 2.07 LY: Unpas (21K isotopes)\nDOCK: Unpas IX - Moon 5 - Spacelane Patrol Logistic Support\nUNDOCK\nJUMP 10.00 LY: Amamake (100K isotopes)\nDOCK: Amamake II - Brutor Tribe Bureau\nSUMMARY:\n  End Cooldown: 00:30\n  End Fatigue: 05:00\n  Isotopes Used: 121K\n  Time Waiting: 00:04\n  Total LY: 12.07' == 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 8.43 LY: Resbroko (85K isotopes)\nDOCK: Resbroko I - Moon 7 - Republic Fleet Assembly Plant\nUNDOCK\nJUMP 4.32 LY: Amamake (44K isotopes)\nDOCK: Amamake VI - Moon 2 - Nurtura Food Packaging\nSUMMARY:\n  End Cooldown: 00:09\n  End Fatigue: 05:00\n  Isotopes Used: 128K\n  Time Waiting: 00:10\n  Total LY: 12.75'
+  
+    START: Jita IV - Moon 4 - Caldari Navy Assembly Plant
+    UNDOCK
+  - JUMP 8.43 LY: Resbroko (85K isotopes)
+  - DOCK: Resbroko I - Moon 7 - Republic Fleet Assembly Plant
+  + JUMP 2.07 LY: Unpas (21K isotopes)
+  + DOCK: Unpas IX - Moon 5 - Spacelane Patrol Logistic Support
+    UNDOCK
+  - JUMP 4.32 LY: Amamake (44K isotopes)
+  ?      ^ ^^              ^^
+  + JUMP 10.00 LY: Amamake (100K isotopes)
+  ?      ^^ ^^              ^^^
+  - DOCK: Amamake VI - Moon 2 - Nurtura Food Packaging
+  + DOCK: Amamake II - Brutor Tribe Bureau
+    SUMMARY:
+  -   End Cooldown: 00:09
+  ?                     -
+  +   End Cooldown: 00:30
+  ?                    +
+      End Fatigue: 05:00
+  -   Isotopes Used: 128K
+  ?                    ^
+  +   Isotopes Used: 121K
+  ?                    ^
+  -   Time Waiting: 00:10
+  ?                    -
+  +   Time Waiting: 00:04
+  ?                     +
+  -   Total LY: 12.75
+  ?                 -
+  +   Total LY: 12.07
+  ?                +
+FAILED .evaluation_tests/test_checkpoint_1.py::test_jita_ama[range=6] - AssertionError: assert 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 0.88 LY: Maurasi (9K isotopes)\nDOCK: Maurasi IX - Moon 12 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 6.00 LY: Traun (60K isotopes)\nDOCK: Traun X - Moon 14 - Joint Harvesting Mining Outpost\nUNDOCK\nJUMP 5.11 LY: Amamake (52K isotopes)\nDOCK: Amamake II - Brutor Tribe Bureau\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:22\n  Isotopes Used: 121K\n  Time Waiting: 00:04\n  Total LY: 12.00' == 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 5.58 LY: Carrou (56K isotopes)\nDOCK: Carrou III - Moon 7 - Federation Customs Logistic Support\nUNDOCK\nJUMP 4.65 LY: Auner (47K isotopes)\nDOCK: Auner V - Republic Fleet Logistic Support\nUNDOCK\nJUMP 4.40 LY: Amamake (45K isotopes)\nDOCK: Amamake VI - Moon 2 - Nurtura Food Packaging\nSUMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:28\n  Isotopes Used: 147K\n  Time Waiting: 00:03\n  Total LY: 14.62'
+  
+    START: Jita IV - Moon 4 - Caldari Navy Assembly Plant
+    UNDOCK
+  - JUMP 5.58 LY: Carrou (56K isotopes)
+  ?      ^ -      ^  ^^^  ^^
+  + JUMP 0.88 LY: Maurasi (9K isotopes)
+  ?      ^  +     ^ + ^^^  ^
+  - DOCK: Carrou III - Moon 7 - Federation Customs Logistic Support
+  + DOCK: Maurasi IX - Moon 12 - Caldari Navy Assembly Plant
+    UNDOCK
+  - JUMP 4.65 LY: Auner (47K isotopes)
+  ?      ^ ^^     ^  --  ^^
+  + JUMP 6.00 LY: Traun (60K isotopes)
+  ?      ^ ^^     ^^^    ^^
+  - DOCK: Auner V - Republic Fleet Logistic Support
+  + DOCK: Traun X - Moon 14 - Joint Harvesting Mining Outpost
+    UNDOCK
+  - JUMP 4.40 LY: Amamake (45K isotopes)
+  ?      ^ ^^              -
+  + JUMP 5.11 LY: Amamake (52K isotopes)
+  ?      ^ ^^               +
+  - DOCK: Amamake VI - Moon 2 - Nurtura Food Packaging
+  + DOCK: Amamake II - Brutor Tribe Bureau
+    SUMMARY:
+  -   End Cooldown: 00:02
+  ?                     ^
+  +   End Cooldown: 00:03
+  ?                     ^
+  -   End Fatigue: 00:28
+  ?                    ^
+  +   End Fatigue: 00:22
+  ?                    ^
+  -   Isotopes Used: 147K
+  ?                   ^^
+  +   Isotopes Used: 121K
+  ?                   ^^
+  -   Time Waiting: 00:03
+  ?                     ^
+  +   Time Waiting: 00:04
+  ?                     ^
+  -   Total LY: 14.62
+  ?              ^ ^^
+  +   Total LY: 12.00
+  ?              ^ ^^
+FAILED .evaluation_tests/test_checkpoint_1.py::test_jita_serp_prime[default] - AssertionError: assert 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 7.66 LY: Iivinen (77K isotopes)\nDOCK: Iivinen IV - Moon 8 - Rapid Assembly Factory\nUNDOCK\nJUMP 8.66 LY: Diaderi (87K isotopes)\nDOCK: Diaderi II - Amarr Navy Assembly Plant\nUNDOCK\nJUMP 9.99 LY: Van (100K isotopes)\nDOCK: Van III - Moon 1 - Amarr Constructions Warehouse\nUNDOCK\nJUMP 9.82 LY: Soza (99K isotopes)\nDOCK: Soza XII - Moon 14 - CBD Corporation Storage\nUNDOCK\nJUMP 9.97 LY: Serpentis Prime (100K isotopes)\nDOCK: Serpentis Prime II - Archangels Testing Facilities\nSUMMARY:\n  End Cooldown: 00:18\n  End Fatigue: 02:52\n  Isotopes Used: 463K\n  Time Waiting: 00:21\n  Total LY: 46.10' == 'START: Jita IV - Moon 4 - Caldari Navy Assembly Plant\nUNDOCK\nJUMP 9.48 LY: Yvangier (95K isotopes)\nDOCK: Yvangier V - TransStellar Shipping Storage\nUNDOCK\nJUMP 9.48 LY: A-ZLHX (95K isotopes)\nDOCK: A-ZLHX VII - Moon 2 - Intaki Syndicate Bureau\nUNDOCK\nJUMP 9.03 LY: Shirshocin (91K isotopes)\nDOCK: Shirshocin III - Moon 2 - Amarr Constructions Warehouse\nUNDOCK\nJUMP 9.80 LY: Karan (99K isotopes)\nDOCK: Karan VIII - Royal Amarr Institute School\nUNDOCK\nJUMP 7.29 LY: Serpentis Prime (73K isotopes)\nDOCK: Serpentis Prime II - Archangels Testing Facilities\nSUMMARY:\n  End Cooldown: 00:11\n  End Fatigue: 03:10\n  Isotopes Used: 451K\n  Time Waiting: 00:13\n  Total LY: 45.08'
+  
+    START: Jita IV - Moon 4 - Caldari Navy Assembly Plant
+    UNDOCK
+  - JUMP 9.48 LY: Yvangier (95K isotopes)
+  - DOCK: Yvangier V - TransStellar Shipping Storage
+  + JUMP 7.66 LY: Iivinen (77K isotopes)
+  + DOCK: Iivinen IV - Moon 8 - Rapid Assembly Factory
+    UNDOCK
+  - JUMP 9.48 LY: A-ZLHX (95K isotopes)
+  - DOCK: A-ZLHX VII - Moon 2 - Intaki Syndicate Bureau
+  + JUMP 8.66 LY: Diaderi (87K isotopes)
+  + DOCK: Diaderi II - Amarr Navy Assembly Plant
+    UNDOCK
+  - JUMP 9.03 LY: Shirshocin (91K isotopes)
+  ?        ^^     ^^^^^^^^^   -
+  + JUMP 9.99 LY: Van (100K isotopes)
+  ?        ^^     ^^    ++
+  - DOCK: Shirshocin III - Moon 2 - Amarr Constructions Warehouse
+  ?       ^^^^^^^^^             ^
+  + DOCK: Van III - Moon 1 - Amarr Constructions Warehouse
+  ?       ^^             ^
+    UNDOCK
+  - JUMP 9.80 LY: Karan (99K isotopes)
+  ?         ^     ^ ---
+  + JUMP 9.82 LY: Soza (99K isotopes)
+  ?         ^     ^^^
+  - DOCK: Karan VIII - Royal Amarr Institute School
+  + DOCK: Soza XII - Moon 14 - CBD Corporation Storage
+    UNDOCK
+  - JUMP 7.29 LY: Serpentis Prime (73K isotopes)
+  ?       ---                      ^^
+  + JUMP 9.97 LY: Serpentis Prime (100K isotopes)
+  ?      +++                       ^^^
+    DOCK: Serpentis Prime II - Archangels Testing Facilities
+    SUMMARY:
+  -   End Cooldown: 00:11
+  ?                     ^
+  +   End Cooldown: 00:18
+  ?                     ^
+  -   End Fatigue: 03:10
+  ?                 ^ ^^
+  +   End Fatigue: 02:52
+  ?                 ^ ^^
+  -   Isotopes Used: 451K
+  ?                   ^^
+  +   Isotopes Used: 463K
+  ?                   ^^
+  -   Time Waiting: 00:13
+  ?                     -
+  +   Time Waiting: 00:21
+  ?                    +
+  -   Total LY: 45.08
+  ?              ^  -
+  +   Total LY: 46.10
+  ?              ^ +
+FAILED .evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=90] - AssertionError: assert 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 3.96 LY: Auberulle (40K isotopes)\nDOCK: Auberulle V - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.68 LY: Aymaerne (27K isotopes)\nDOCK: Aymaerne VI - Moon 10 - Aliastra Warehouse\nUNDOCK\nJUMP 4.26 LY: Siseide (43K isotopes)\nDOCK: Siseide VII - Expert Distribution Retail Center\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:21\n  Isotopes Used: 110K\n  Time Waiting: 00:04\n  Total LY: 10.90' == 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fliet III - Federal Defense Union Logistic Support\nUNDOCK\nJUMP 4.86 LY: Ignoitton (49K isotopes)\nDOCK: Ignoitton V - Moon 11 - Federal Freight Storage\nUNDOCK\nJUMP 4.58 LY: Auner (46K isotopes)\nDOCK: Auner V - Republic Fleet Logistic Support\nUNDOCK\nJUMP 4.20 LY: Siseide (43K isotopes)\nDOCK: Siseide VIII - Expert Distribution Warehouse\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:31\n  Isotopes Used: 164K\n  Time Waiting: 00:05\n  Total LY: 16.38'
+  
+    START: Mesybier II - TransStellar Shipping Storage
+    UNDOCK
+  - JUMP 2.73 LY: Fliet (28K isotopes)
+  - DOCK: Fliet III - Federal Defense Union Logistic Support
+  + JUMP 3.96 LY: Auberulle (40K isotopes)
+  + DOCK: Auberulle V - TransStellar Shipping Storage
+    UNDOCK
+  - JUMP 4.86 LY: Ignoitton (49K isotopes)
+  - DOCK: Ignoitton V - Moon 11 - Federal Freight Storage
+  + JUMP 2.68 LY: Aymaerne (27K isotopes)
+  + DOCK: Aymaerne VI - Moon 10 - Aliastra Warehouse
+    UNDOCK
+  - JUMP 4.58 LY: Auner (46K isotopes)
+  - DOCK: Auner V - Republic Fleet Logistic Support
+  - UNDOCK
+  - JUMP 4.20 LY: Siseide (43K isotopes)
+  ?         ^
+  + JUMP 4.26 LY: Siseide (43K isotopes)
+  ?         ^
+  - DOCK: Siseide VIII - Expert Distribution Warehouse
+  ?                  -                       ^  ------
+  + DOCK: Siseide VII - Expert Distribution Retail Center
+  ?                                         ^^^ ++++++++
+    SUMMARY:
+      End Cooldown: 00:03
+  -   End Fatigue: 00:31
+  ?                   ^
+  +   End Fatigue: 00:21
+  ?                   ^
+  -   Isotopes Used: 164K
+  ?                   ^^
+  +   Isotopes Used: 110K
+  ?                   ^^
+  -   Time Waiting: 00:05
+  ?                     ^
+  +   Time Waiting: 00:04
+  ?                     ^
+  -   Total LY: 16.38
+  ?              ^ ^^
+  +   Total LY: 10.90
+  ?              ^ ^^
+FAILED .evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0] - AssertionError: assert 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 1.62 LY: Yona (17K isotopes)\nDOCK: Yona II - Core Complexion Inc. Factory\nUNDOCK\nJUMP 4.72 LY: Ainaille (48K isotopes)\nDOCK: Ainaille VII - Moon 5 - Duvolle Laboratories Factory\nUNDOCK\nJUMP 4.93 LY: Siseide (50K isotopes)\nDOCK: Siseide VII - Expert Distribution Retail Center\nSUMMARY:\n  End Cooldown: 00:30\n  End Fatigue: 05:00\n  Isotopes Used: 115K\n  Time Waiting: 00:17\n  Total LY: 11.27' == 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (28K isotopes)\nDOCK: Fliet III - Federal Defense Union Logistic Support\nUNDOCK\nJUMP 4.86 LY: Ignoitton (49K isotopes)\nDOCK: Ignoitton V - Moon 11 - Federal Freight Storage\nUNDOCK\nJUMP 4.58 LY: Auner (46K isotopes)\nDOCK: Auner V - Republic Fleet Logistic Support\nUNDOCK\nJUMP 4.20 LY: Siseide (43K isotopes)\nDOCK: Siseide VIII - Expert Distribution Warehouse\nSUMMARY:\n  End Cooldown: 00:29\n  End Fatigue: 05:00\n  Isotopes Used: 164K\n  Time Waiting: 00:27\n  Total LY: 16.38'
+  
+    START: Mesybier II - TransStellar Shipping Storage
+    UNDOCK
+  - JUMP 2.73 LY: Fliet (28K isotopes)
+  - DOCK: Fliet III - Federal Defense Union Logistic Support
+  + JUMP 1.62 LY: Yona (17K isotopes)
+  + DOCK: Yona II - Core Complexion Inc. Factory
+    UNDOCK
+  - JUMP 4.86 LY: Ignoitton (49K isotopes)
+  ?        ^^     ^^ ^ ^^^^   ^
+  + JUMP 4.72 LY: Ainaille (48K isotopes)
+  ?        ^^     ^^ ^ ^^^   ^
+  - DOCK: Ignoitton V - Moon 11 - Federal Freight Storage
+  + DOCK: Ainaille VII - Moon 5 - Duvolle Laboratories Factory
+    UNDOCK
+  - JUMP 4.58 LY: Auner (46K isotopes)
+  - DOCK: Auner V - Republic Fleet Logistic Support
+  - UNDOCK
+  - JUMP 4.20 LY: Siseide (43K isotopes)
+  ?        ^^              ^^
+  + JUMP 4.93 LY: Siseide (50K isotopes)
+  ?        ^^              ^^
+  - DOCK: Siseide VIII - Expert Distribution Warehouse
+  ?                  -                       ^  ------
+  + DOCK: Siseide VII - Expert Distribution Retail Center
+  ?                                         ^^^ ++++++++
+    SUMMARY:
+  -   End Cooldown: 00:29
+  ?                    ^^
+  +   End Cooldown: 00:30
+  ?                    ^^
+      End Fatigue: 05:00
+  -   Isotopes Used: 164K
+  ?                   ^^
+  +   Isotopes Used: 115K
+  ?                   ^^
+  -   Time Waiting: 00:27
+  ?                    ^
+  +   Time Waiting: 00:17
+  ?                    ^
+  -   Total LY: 16.38
+  ?              ^ ^^
+  +   Total LY: 11.27
+  ?              ^ ^^
+FAILED .evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[range=5_reduction=0_fuel=5000] - AssertionError: assert 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 1.62 LY: Yona (9K isotopes)\nDOCK: Yona II - Core Complexion Inc. Factory\nUNDOCK\nJUMP 4.72 LY: Ainaille (24K isotopes)\nDOCK: Ainaille VII - Moon 5 - Duvolle Laboratories Factory\nUNDOCK\nJUMP 4.93 LY: Siseide (25K isotopes)\nDOCK: Siseide VII - Expert Distribution Retail Center\nSUMMARY:\n  End Cooldown: 00:30\n  End Fatigue: 05:00\n  Isotopes Used: 58K\n  Time Waiting: 00:17\n  Total LY: 11.27' == 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 2.73 LY: Fliet (14K isotopes)\nDOCK: Fliet III - Federal Defense Union Logistic Support\nUNDOCK\nJUMP 4.86 LY: Ignoitton (25K isotopes)\nDOCK: Ignoitton V - Moon 11 - Federal Freight Storage\nUNDOCK\nJUMP 4.58 LY: Auner (23K isotopes)\nDOCK: Auner V - Republic Fleet Logistic Support\nUNDOCK\nJUMP 4.20 LY: Siseide (22K isotopes)\nDOCK: Siseide VIII - Expert Distribution Warehouse\nSUMMARY:\n  End Cooldown: 00:29\n  End Fatigue: 05:00\n  Isotopes Used: 82K\n  Time Waiting: 00:27\n  Total LY: 16.38'
+  
+    START: Mesybier II - TransStellar Shipping Storage
+    UNDOCK
+  - JUMP 2.73 LY: Fliet (14K isotopes)
+  - DOCK: Fliet III - Federal Defense Union Logistic Support
+  + JUMP 1.62 LY: Yona (9K isotopes)
+  + DOCK: Yona II - Core Complexion Inc. Factory
+    UNDOCK
+  - JUMP 4.86 LY: Ignoitton (25K isotopes)
+  ?        ^^     ^^ ^ ^^^^   ^
+  + JUMP 4.72 LY: Ainaille (24K isotopes)
+  ?        ^^     ^^ ^ ^^^   ^
+  - DOCK: Ignoitton V - Moon 11 - Federal Freight Storage
+  + DOCK: Ainaille VII - Moon 5 - Duvolle Laboratories Factory
+    UNDOCK
+  - JUMP 4.58 LY: Auner (23K isotopes)
+  - DOCK: Auner V - Republic Fleet Logistic Support
+  - UNDOCK
+  - JUMP 4.20 LY: Siseide (22K isotopes)
+  ?        ^^               ^
+  + JUMP 4.93 LY: Siseide (25K isotopes)
+  ?        ^^               ^
+  - DOCK: Siseide VIII - Expert Distribution Warehouse
+  ?                  -                       ^  ------
+  + DOCK: Siseide VII - Expert Distribution Retail Center
+  ?                                         ^^^ ++++++++
+    SUMMARY:
+  -   End Cooldown: 00:29
+  ?                    ^^
+  +   End Cooldown: 00:30
+  ?                    ^^
+      End Fatigue: 05:00
+  -   Isotopes Used: 82K
+  ?                   -
+  +   Isotopes Used: 58K
+  ?                  +
+  -   Time Waiting: 00:27
+  ?                    ^
+  +   Time Waiting: 00:17
+  ?                    ^
+  -   Total LY: 16.38
+  ?              ^ ^^
+  +   Total LY: 11.27
+  ?              ^ ^^
+FAILED .evaluation_tests/test_checkpoint_1.py::test_mesy_siseide[reduction=90] - AssertionError: assert 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 6.55 LY: Aymaerne (66K isotopes)\nDOCK: Aymaerne VI - Moon 10 - Aliastra Warehouse\nUNDOCK\nJUMP 4.26 LY: Siseide (43K isotopes)\nDOCK: Siseide VII - Expert Distribution Retail Center\nSUMMARY:\n  End Cooldown: 00:03\n  End Fatigue: 00:22\n  Isotopes Used: 109K\n  Time Waiting: 00:02\n  Total LY: 10.81' == 'START: Mesybier II - TransStellar Shipping Storage\nUNDOCK\nJUMP 9.27 LY: Vimeini (93K isotopes)\nDOCK: Vimeini VI - Moon 4 - TransStellar Shipping Storage\nUNDOCK\nJUMP 1.85 LY: Siseide (19K isotopes)\nDOCK: Siseide VIII - Expert Distribution Warehouse\nSUMMARY:\n  End Cooldown: 00:02\n  End Fatigue: 00:21\n  Isotopes Used: 112K\n  Time Waiting: 00:02\n  Total LY: 11.13'
+  
+    START: Mesybier II - TransStellar Shipping Storage
+    UNDOCK
+  - JUMP 9.27 LY: Vimeini (93K isotopes)
+  - DOCK: Vimeini VI - Moon 4 - TransStellar Shipping Storage
+  + JUMP 6.55 LY: Aymaerne (66K isotopes)
+  + DOCK: Aymaerne VI - Moon 10 - Aliastra Warehouse
+    UNDOCK
+  - JUMP 1.85 LY: Siseide (19K isotopes)
+  ?      ^ ^^              ^^
+  + JUMP 4.26 LY: Siseide (43K isotopes)
+  ?      ^ ^^              ^^
+  - DOCK: Siseide VIII - Expert Distribution Warehouse
+  ?                  -                       ^  ------
+  + DOCK: Siseide VII - Expert Distribution Retail Center
+  ?                                         ^^^ ++++++++
+    SUMMARY:
+  -   End Cooldown: 00:02
+  ?                     ^
+  +   End Cooldown: 00:03
+  ?                     ^
+  -   End Fatigue: 00:21
+  ?                    ^
+  +   End Fatigue: 00:22
+  ?                    ^
+  -   Isotopes Used: 112K
+  ?                   ^^
+  +   Isotopes Used: 109K
+  ?                   ^^
+      Time Waiting: 00:02
+  -   Total LY: 11.13
+  ?               ---
+  +   Total LY: 10.81
+  ?              +++
+=================== 10 failed, 1 passed in 68.37s (0:01:08) ====================

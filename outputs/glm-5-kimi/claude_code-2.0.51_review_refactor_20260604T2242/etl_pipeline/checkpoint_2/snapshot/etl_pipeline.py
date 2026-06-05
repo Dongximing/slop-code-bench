@@ -1,0 +1,1064 @@
+#!/usr/bin/env python3
+"""ETL Pipeline Parser - Validates and normalizes ETL pipeline specifications."""
+
+import json
+import sys
+import re
+import argparse
+from typing import Any, Dict, Tuple, List, Optional
+
+
+class ETLError(Exception):
+    """Custom exception for ETL errors."""
+    def __init__(self, error_code: str, message: str, path: str):
+        self.error_code = error_code
+        self.message = message
+        self.path = path
+        super().__init__(message)
+
+
+def validate_json_structure(data: Any) -> None:
+    """Validate the basic JSON structure of the input."""
+    if not isinstance(data, dict):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: input must be a JSON object",
+            "root"
+        )
+
+    # Check required fields
+    if "pipeline" not in data:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: 'pipeline' field is required",
+            "pipeline"
+        )
+
+    if "dataset" not in data:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: 'dataset' field is required",
+            "dataset"
+        )
+
+    pipeline = data["pipeline"]
+    if not isinstance(pipeline, dict):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: 'pipeline' must be an object",
+            "pipeline"
+        )
+
+    if "steps" not in pipeline:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: 'steps' field is required in pipeline",
+            "pipeline.steps"
+        )
+
+    steps = pipeline["steps"]
+    if not isinstance(steps, list):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: 'steps' must be an array",
+            "pipeline.steps"
+        )
+
+    dataset = data["dataset"]
+    if not isinstance(dataset, list):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: 'dataset' must be an array",
+            "dataset"
+        )
+
+    # Validate dataset elements are objects
+    for i, item in enumerate(dataset):
+        if not isinstance(item, dict):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                f"ETL_ERROR: dataset[{i}] must be an object",
+                f"dataset[{i}]"
+            )
+
+
+def is_empty_after_trim(value: str) -> bool:
+    """Check if a string is empty or whitespace-only after trimming."""
+    return not value or not value.strip()
+
+
+# ============================================================================
+# Expression Tokenizer and Parser for ETL Execution
+# ============================================================================
+
+class Token:
+    """Represents a token in the expression."""
+    def __init__(self, type_: str, value: Any):
+        self.type = type_
+        self.value = value
+
+    def __repr__(self):
+        return f"Token({self.type}, {self.value!r})"
+
+
+class ExpressionTokenizer:
+    """Tokenizer for ETL expressions."""
+
+    KEYWORDS = {'true', 'false', 'null'}
+
+    def __init__(self, expr: str):
+        self.expr = expr
+        self.pos = 0
+        self.length = len(expr)
+
+    def tokenize(self) -> List[Token]:
+        """Tokenize the expression."""
+        tokens = []
+        while self.pos < self.length:
+            self._skip_whitespace()
+            if self.pos >= self.length:
+                break
+
+            char = self.expr[self.pos]
+
+            # Handle double-quoted strings
+            if char == '"':
+                tokens.append(self._read_string())
+                continue
+            # Handle numbers
+            if char.isdigit() or (char == '.' and self.pos + 1 < self.length and self.expr[self.pos + 1].isdigit()):
+                tokens.append(self._read_number())
+                continue
+            # Handle identifiers and keywords
+            if char.isalpha() or char == '_':
+                tokens.append(self._read_identifier())
+                continue
+
+            # Handle two-character operators
+            if self.pos + 1 < self.length:
+                two_char = self.expr[self.pos:self.pos + 2]
+                if two_char in ('==', '!=', '<=', '>=', '&&', '||'):
+                    tokens.append(Token(two_char, two_char))
+                    self.pos += 2
+                    continue
+                # Check for unsupported operators like **, ^^
+                if two_char == '**':
+                    raise ETLError('BAD_EXPR', "ETL_ERROR: unsupported operator '**'", '')
+                if two_char == '^^':
+                    raise ETLError('BAD_EXPR', "ETL_ERROR: unsupported operator '^'", '')
+                if two_char == '>>' or two_char == '<<':
+                    raise ETLError('BAD_EXPR', f"ETL_ERROR: unsupported operator '{two_char}'", '')
+
+            # Handle single-character operators
+            if char in '+-*/()':
+                tokens.append(Token(char, char))
+                self.pos += 1
+                continue
+            if char in '<>':
+                tokens.append(Token(char, char))
+                self.pos += 1
+                continue
+            if char == '=':
+                tokens.append(Token(char, char))
+                self.pos += 1
+                continue
+            if char == '!':
+                tokens.append(Token(char, char))
+                self.pos += 1
+                continue
+            if char == '&':
+                raise ETLError('BAD_EXPR', "ETL_ERROR: invalid operator '&'", '')
+            if char == '|':
+                raise ETLError('BAD_EXPR', "ETL_ERROR: invalid operator '|'", '')
+
+            raise ETLError('BAD_EXPR', f"ETL_ERROR: unexpected character '{char}'", '')
+
+        return tokens
+
+    def _skip_whitespace(self):
+        while self.pos < self.length and self.expr[self.pos].isspace():
+            self.pos += 1
+
+    def _read_string(self) -> Token:
+        """Read a double-quoted string."""
+        start = self.pos
+        self.pos += 1  # Skip opening quote
+        value = []
+        while self.pos < self.length:
+            char = self.expr[self.pos]
+            if char == '"':
+                self.pos += 1  # Skip closing quote
+                return Token('STRING', ''.join(value))
+            elif char == '\\':
+                self.pos += 1
+                if self.pos < self.length:
+                    escaped = self.expr[self.pos]
+                    if escaped == 'n':
+                        value.append('\n')
+                    elif escaped == 't':
+                        value.append('\t')
+                    elif escaped == '"':
+                        value.append('"')
+                    elif escaped == '\\':
+                        value.append('\\')
+                    else:
+                        value.append(escaped)
+                    self.pos += 1
+            else:
+                value.append(char)
+                self.pos += 1
+        raise ETLError('BAD_EXPR', "ETL_ERROR: unterminated string", '')
+
+    def _read_number(self) -> Token:
+        """Read a number (integer or float)."""
+        start = self.pos
+        has_dot = False
+        has_digit = False
+
+        while self.pos < self.length:
+            char = self.expr[self.pos]
+            if char.isdigit():
+                has_digit = True
+                self.pos += 1
+            elif char == '.' and not has_dot:
+                has_dot = True
+                self.pos += 1
+            else:
+                break
+
+        if not has_digit:
+            raise ETLError('BAD_EXPR', "ETL_ERROR: invalid number", '')
+
+        value_str = self.expr[start:self.pos]
+        if has_dot:
+            return Token('NUMBER', float(value_str))
+        else:
+            return Token('NUMBER', int(value_str))
+
+    def _read_identifier(self) -> Token:
+        """Read an identifier or keyword."""
+        start = self.pos
+        while self.pos < self.length and (self.expr[self.pos].isalnum() or self.expr[self.pos] == '_'):
+            self.pos += 1
+        value = self.expr[start:self.pos]
+
+        if value == 'true':
+            return Token('BOOL', True)
+        elif value == 'false':
+            return Token('BOOL', False)
+        elif value == 'null':
+            return Token('NULL', None)
+        else:
+            return Token('IDENT', value)
+
+
+class ExpressionParser:
+    """Parser for ETL expressions using recursive descent."""
+
+    def __init__(self, tokens: List[Token]):
+        self.tokens = tokens
+        self.pos = 0
+
+    def parse(self) -> 'ASTNode':
+        """Parse the expression and return an AST."""
+        if not self.tokens:
+            raise ETLError('BAD_EXPR', "ETL_ERROR: empty expression", '')
+        result = self._parse_or()
+        if self.pos < len(self.tokens):
+            raise ETLError('BAD_EXPR', f"ETL_ERROR: unexpected token", '')
+        return result
+
+    def _current(self) -> Optional[Token]:
+        if self.pos < len(self.tokens):
+            return self.tokens[self.pos]
+        return None
+
+    def _advance(self) -> Token:
+        token = self.tokens[self.pos]
+        self.pos += 1
+        return token
+
+    def _parse_or(self) -> 'ASTNode':
+        """Parse || operator (lowest precedence)."""
+        left = self._parse_and()
+        while self._current() and self._current().type == '||':
+            self._advance()
+            right = self._parse_and()
+            left = BinaryOpNode('||', left, right)
+        return left
+
+    def _parse_and(self) -> 'ASTNode':
+        """Parse && operator."""
+        left = self._parse_equality()
+        while self._current() and self._current().type == '&&':
+            self._advance()
+            right = self._parse_equality()
+            left = BinaryOpNode('&&', left, right)
+        return left
+
+    def _parse_equality(self) -> 'ASTNode':
+        """Parse == and != operators."""
+        left = self._parse_comparison()
+        while self._current() and self._current().type in ('==', '!='):
+            op = self._advance().type
+            right = self._parse_comparison()
+            left = BinaryOpNode(op, left, right)
+        return left
+
+    def _parse_comparison(self) -> 'ASTNode':
+        """Parse <, <=, >, >= operators."""
+        left = self._parse_additive()
+        while self._current() and self._current().type in ('<', '<=', '>', '>='):
+            op = self._advance().type
+            right = self._parse_additive()
+            left = BinaryOpNode(op, left, right)
+        return left
+
+    def _parse_additive(self) -> 'ASTNode':
+        """Parse + and - operators."""
+        left = self._parse_multiplicative()
+        while self._current() and self._current().type in ('+', '-'):
+            op = self._advance().type
+            right = self._parse_multiplicative()
+            left = BinaryOpNode(op, left, right)
+        return left
+
+    def _parse_multiplicative(self) -> 'ASTNode':
+        """Parse * and / operators."""
+        left = self._parse_unary()
+        while self._current() and self._current().type in ('*', '/'):
+            op = self._advance().type
+            right = self._parse_unary()
+            left = BinaryOpNode(op, left, right)
+        return left
+
+    def _parse_unary(self) -> 'ASTNode':
+        """Parse unary operators (!, -)."""
+        if self._current() and self._current().type == '!':
+            self._advance()
+            operand = self._parse_unary()
+            return UnaryOpNode('!', operand)
+        if self._current() and self._current().type == '-':
+            self._advance()
+            operand = self._parse_unary()
+            return UnaryOpNode('-', operand)
+        return self._parse_primary()
+
+    def _parse_primary(self) -> 'ASTNode':
+        """Parse primary expressions: literals, identifiers, parentheses."""
+        token = self._current()
+        if token is None:
+            raise ETLError('BAD_EXPR', "ETL_ERROR: unexpected end of expression", '')
+
+        if token.type == 'NUMBER':
+            self._advance()
+            return LiteralNode(token.value)
+        elif token.type == 'STRING':
+            self._advance()
+            return LiteralNode(token.value)
+        elif token.type == 'BOOL':
+            self._advance()
+            return LiteralNode(token.value)
+        elif token.type == 'NULL':
+            self._advance()
+            return LiteralNode(None)
+        elif token.type == 'IDENT':
+            self._advance()
+            return IdentifierNode(token.value)
+        elif token.type == '(':
+            self._advance()
+            expr = self._parse_or()
+            if not self._current() or self._current().type != ')':
+                raise ETLError('BAD_EXPR', "ETL_ERROR: missing closing parenthesis", '')
+            self._advance()
+            return expr
+        else:
+            raise ETLError('BAD_EXPR', f"ETL_ERROR: unexpected token '{token.value}'", '')
+
+
+# AST Nodes
+
+class ASTNode:
+    """Base class for AST nodes."""
+    pass
+
+
+class LiteralNode(ASTNode):
+    def __init__(self, value: Any):
+        self.value = value
+
+
+class IdentifierNode(ASTNode):
+    def __init__(self, name: str):
+        self.name = name
+
+
+class BinaryOpNode(ASTNode):
+    def __init__(self, op: str, left: ASTNode, right: ASTNode):
+        self.op = op
+        self.left = left
+        self.right = right
+
+
+class UnaryOpNode(ASTNode):
+    def __init__(self, op: str, operand: ASTNode):
+        self.op = op
+        self.operand = operand
+
+
+class ExpressionEvaluator:
+    """Evaluates an AST against a row context."""
+
+    def __init__(self, row: Dict[str, Any]):
+        self.row = row
+
+    def evaluate(self, node: ASTNode) -> Any:
+        """Evaluate the AST node and return the result."""
+        if isinstance(node, LiteralNode):
+            return node.value
+        elif isinstance(node, IdentifierNode):
+            return self.row.get(node.name)
+        elif isinstance(node, UnaryOpNode):
+            return self._eval_unary(node)
+        elif isinstance(node, BinaryOpNode):
+            return self._eval_binary(node)
+        else:
+            raise ETLError('EXECUTION_FAILED', "ETL_ERROR: unknown AST node type", '')
+
+    def _eval_unary(self, node: UnaryOpNode) -> Any:
+        """Evaluate unary operators."""
+        operand = self.evaluate(node.operand)
+
+        if node.op == '!':
+            if operand is None:
+                return True
+            return not self._to_bool(operand)
+        elif node.op == '-':
+            if operand is None:
+                return None
+            if not isinstance(operand, (int, float)):
+                return None
+            return -operand
+
+        raise ETLError('EXECUTION_FAILED', f"ETL_ERROR: unknown unary operator '{node.op}'", '')
+
+    def _eval_binary(self, node: BinaryOpNode) -> Any:
+        """Evaluate binary operators."""
+        left = self.evaluate(node.left)
+        right = self.evaluate(node.right)
+
+        op = node.op
+
+        # Logical operators
+        if op == '&&':
+            if not self._to_bool(left):
+                return False
+            return self._to_bool(right)
+        elif op == '||':
+            if self._to_bool(left):
+                return True
+            return self._to_bool(right)
+
+        # Arithmetic operators
+        if op in ('+', '-', '*', '/'):
+            if left is None or right is None:
+                return None
+            if not isinstance(left, (int, float)) or not isinstance(right, (int, float)):
+                return None
+            if op == '+':
+                return left + right
+            elif op == '-':
+                return left - right
+            elif op == '*':
+                return left * right
+            elif op == '/':
+                if right == 0:
+                    return None
+                return left / right
+
+        # Comparison operators
+        if op == '==':
+            if left is None or right is None:
+                return False
+            if type(left) != type(right):
+                return False
+            return left == right
+        elif op == '!=':
+            if left is None or right is None:
+                return False
+            if type(left) != type(right):
+                return False
+            return left != right
+        elif op in ('<', '<=', '>', '>='):
+            if left is None or right is None:
+                return False
+            # Allow comparison between int and float
+            if not isinstance(left, (int, float, str)) or not isinstance(right, (int, float, str)):
+                return False
+            # Check type compatibility: str can only compare with str, numbers with numbers
+            if isinstance(left, str) != isinstance(right, str):
+                return False
+            if op == '<':
+                return left < right
+            elif op == '<=':
+                return left <= right
+            elif op == '>':
+                return left > right
+            elif op == '>=':
+                return left >= right
+
+        raise ETLError('EXECUTION_FAILED', f"ETL_ERROR: unknown operator '{op}'", '')
+
+    def _to_bool(self, value: Any) -> bool:
+        """Convert a value to boolean for logical operations."""
+        if value is None:
+            return False
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, (int, float)):
+            return value != 0
+        if isinstance(value, str):
+            return len(value) > 0
+        return True
+
+
+def evaluate_expression(expr: str, row: Dict[str, Any], path: str) -> Any:
+    """Parse and evaluate an expression against a row."""
+    try:
+        tokenizer = ExpressionTokenizer(expr)
+        tokens = tokenizer.tokenize()
+        parser = ExpressionParser(tokens)
+        ast = parser.parse()
+        evaluator = ExpressionEvaluator(row)
+        return evaluator.evaluate(ast)
+    except ETLError:
+        raise
+    except Exception as e:
+        raise ETLError('BAD_EXPR', f"ETL_ERROR: invalid expression", path)
+
+
+def validate_expression(expr: str, path: str) -> None:
+    """Validate expression syntax for filter and map operations."""
+    if is_empty_after_trim(expr):
+        raise ETLError(
+            "BAD_EXPR",
+            "ETL_ERROR: expression cannot be empty",
+            path
+        )
+
+    expr = expr.strip()
+
+    # Use the expression parser to check for syntax errors
+    try:
+        tokenizer = ExpressionTokenizer(expr)
+        tokens = tokenizer.tokenize()
+        parser = ExpressionParser(tokens)
+        parser.parse()
+    except ETLError as e:
+        # Re-raise with proper path
+        raise ETLError(e.error_code, e.message, path)
+    except Exception as e:
+        raise ETLError("BAD_EXPR", f"ETL_ERROR: invalid expression syntax", path)
+
+
+def validate_step(step: Dict[str, Any], index: int) -> None:
+    """Validate a single step in the pipeline."""
+    path_prefix = f"pipeline.steps[{index}]"
+
+    if not isinstance(step, dict):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: step must be an object",
+            path_prefix
+        )
+
+    if "op" not in step:
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: 'op' field is required",
+            f"{path_prefix}.op"
+        )
+
+    op_value = step["op"]
+    if not isinstance(op_value, str):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: 'op' must be a string",
+            f"{path_prefix}.op"
+        )
+
+    if is_empty_after_trim(op_value):
+        raise ETLError(
+            "SCHEMA_VALIDATION_FAILED",
+            "ETL_ERROR: 'op' cannot be empty",
+            f"{path_prefix}.op"
+        )
+
+    op_normalized = op_value.strip().lower()
+
+    # Check for unknown operations
+    valid_ops = {"select", "filter", "map", "rename", "limit"}
+    if op_normalized not in valid_ops:
+        raise ETLError(
+            "UNKNOWN_OP",
+            f"ETL_ERROR: unsupported op '{op_normalized}'",
+            f"{path_prefix}.op"
+        )
+
+    # Validate operation-specific fields
+    if op_normalized == "select":
+        if "columns" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'columns' field is required for 'select' operation",
+                f"{path_prefix}.columns"
+            )
+        columns = step["columns"]
+        if not isinstance(columns, list):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'columns' must be an array",
+                f"{path_prefix}.columns"
+            )
+        for i, col in enumerate(columns):
+            if not isinstance(col, str):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    f"ETL_ERROR: column name must be a string",
+                    f"{path_prefix}.columns[{i}]"
+                )
+            if is_empty_after_trim(col):
+                raise ETLError(
+                    "MISSING_COLUMN",
+                    f"ETL_ERROR: column name cannot be empty",
+                    f"{path_prefix}.columns[{i}]"
+                )
+
+    elif op_normalized == "filter":
+        if "where" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'where' field is required for 'filter' operation",
+                f"{path_prefix}.where"
+            )
+        where = step["where"]
+        if not isinstance(where, str):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'where' must be a string",
+                f"{path_prefix}.where"
+            )
+        if is_empty_after_trim(where):
+            raise ETLError(
+                "BAD_EXPR",
+                "ETL_ERROR: 'where' expression cannot be empty",
+                f"{path_prefix}.where"
+            )
+        validate_expression(where, f"{path_prefix}.where")
+
+    elif op_normalized == "map":
+        if "as" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'as' field is required for 'map' operation",
+                f"{path_prefix}.as"
+            )
+        if "expr" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'expr' field is required for 'map' operation",
+                f"{path_prefix}.expr"
+            )
+
+        as_value = step["as"]
+        if not isinstance(as_value, str):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'as' must be a string",
+                f"{path_prefix}.as"
+            )
+        if is_empty_after_trim(as_value):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'as' cannot be empty",
+                f"{path_prefix}.as"
+            )
+
+        expr = step["expr"]
+        if not isinstance(expr, str):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'expr' must be a string",
+                f"{path_prefix}.expr"
+            )
+        if is_empty_after_trim(expr):
+            raise ETLError(
+                "BAD_EXPR",
+                "ETL_ERROR: 'expr' expression cannot be empty",
+                f"{path_prefix}.expr"
+            )
+        validate_expression(expr, f"{path_prefix}.expr")
+
+    elif op_normalized == "rename":
+        has_from_to = "from" in step and "to" in step
+        has_mapping = "mapping" in step
+
+        if not has_from_to and not has_mapping:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'rename' requires either 'from'/'to' or 'mapping'",
+                path_prefix
+            )
+
+        if has_from_to and has_mapping:
+            # Both present - we'll process from/to and ignore mapping or vice versa
+            # Based on the spec, let's check which one to use
+            # The spec says "requires either", so having both is ambiguous
+            # Let's prefer from/to conversion as shown in example
+            pass
+
+        if has_from_to:
+            from_value = step["from"]
+            to_value = step["to"]
+
+            if not isinstance(from_value, str):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "ETL_ERROR: 'from' must be a string",
+                    f"{path_prefix}.from"
+                )
+            if not isinstance(to_value, str):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "ETL_ERROR: 'to' must be a string",
+                    f"{path_prefix}.to"
+                )
+
+            if is_empty_after_trim(from_value):
+                raise ETLError(
+                    "MISSING_COLUMN",
+                    "ETL_ERROR: 'from' cannot be empty",
+                    f"{path_prefix}.from"
+                )
+            if is_empty_after_trim(to_value):
+                raise ETLError(
+                    "MISSING_COLUMN",
+                    "ETL_ERROR: 'to' cannot be empty",
+                    f"{path_prefix}.to"
+                )
+
+        if has_mapping and not has_from_to:
+            mapping = step["mapping"]
+            if not isinstance(mapping, dict):
+                raise ETLError(
+                    "SCHEMA_VALIDATION_FAILED",
+                    "ETL_ERROR: 'mapping' must be an object",
+                    f"{path_prefix}.mapping"
+                )
+            for key, value in mapping.items():
+                if not isinstance(key, str):
+                    raise ETLError(
+                        "SCHEMA_VALIDATION_FAILED",
+                        "ETL_ERROR: mapping key must be a string",
+                        f"{path_prefix}.mapping"
+                    )
+                if not isinstance(value, str):
+                    raise ETLError(
+                        "SCHEMA_VALIDATION_FAILED",
+                        "ETL_ERROR: mapping value must be a string",
+                        f"{path_prefix}.mapping"
+                    )
+
+    elif op_normalized == "limit":
+        if "n" not in step:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'n' field is required for 'limit' operation",
+                f"{path_prefix}.n"
+            )
+        n_value = step["n"]
+        if not isinstance(n_value, int):
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'n' must be an integer",
+                f"{path_prefix}.n"
+            )
+        if n_value < 0:
+            raise ETLError(
+                "SCHEMA_VALIDATION_FAILED",
+                "ETL_ERROR: 'n' must be >= 0",
+                f"{path_prefix}.n"
+            )
+
+
+def normalize_step(step: Dict[str, Any]) -> Dict[str, Any]:
+    """Normalize a single step according to the rules."""
+    result = {}
+
+    # Normalize op
+    op_value = step["op"].strip().lower()
+    result["op"] = op_value
+
+    # Process operation-specific fields
+    if op_value == "select":
+        columns = step.get("columns", [])
+        # Column names are preserved exactly (not trimmed)
+        result["columns"] = columns
+
+    elif op_value == "filter":
+        # Trim expression
+        where = step.get("where", "").strip()
+        result["where"] = where
+
+    elif op_value == "map":
+        # Trim expression and as field
+        expr = step.get("expr", "").strip()
+        as_value = step.get("as", "").strip()
+        result["as"] = as_value
+        result["expr"] = expr
+
+    elif op_value == "rename":
+        has_from_to = "from" in step and "to" in step
+        has_mapping = "mapping" in step
+
+        if has_from_to:
+            # Convert from/to to mapping
+            from_value = step["from"].strip()
+            to_value = step["to"].strip()
+            result["mapping"] = {from_value: to_value}
+        elif has_mapping:
+            # Preserve mapping keys/values exactly
+            mapping = step.get("mapping", {})
+            result["mapping"] = mapping
+
+    elif op_value == "limit":
+        n_value = step.get("n", 0)
+        result["n"] = n_value
+
+    # Sort keys: op first, then alphabetically
+    sorted_result = {"op": result["op"]}
+    for key in sorted(k for k in result.keys() if k != "op"):
+        sorted_result[key] = result[key]
+
+    return sorted_result
+
+
+def process_pipeline(input_data: str) -> Tuple[Dict[str, Any], int]:
+    """Process the ETL pipeline input and return result with exit code."""
+    try:
+        data = json.loads(input_data)
+    except json.JSONDecodeError as e:
+        return {
+            "status": "error",
+            "error_code": "SCHEMA_VALIDATION_FAILED",
+            "message": f"ETL_ERROR: invalid JSON: {str(e)}",
+            "path": "root"
+        }, 1
+
+    try:
+        # Validate structure
+        validate_json_structure(data)
+
+        steps = data["pipeline"]["steps"]
+
+        # Validate each step
+        for i, step in enumerate(steps):
+            validate_step(step, i)
+
+        # Normalize steps
+        normalized_steps = [normalize_step(step) for step in steps]
+
+        return {
+            "status": "ok",
+            "normalized": {
+                "steps": normalized_steps
+            }
+        }, 0
+
+    except ETLError as e:
+        return {
+            "status": "error",
+            "error_code": e.error_code,
+            "message": e.message,
+            "path": e.path
+        }, 1
+
+
+# ============================================================================
+# ETL Operation Executors
+# ============================================================================
+
+def execute_select(rows: List[Dict[str, Any]], step: Dict[str, Any], step_index: int) -> List[Dict[str, Any]]:
+    """Execute a select operation."""
+    columns = step["columns"]
+    result = []
+
+    for row_idx, row in enumerate(rows):
+        new_row = {}
+        for col_idx, col in enumerate(columns):
+            if col not in row:
+                raise ETLError(
+                    "MISSING_COLUMN",
+                    f"ETL_ERROR: column '{col}' not found in row",
+                    f"pipeline.steps[{step_index}].columns[{col_idx}]"
+                )
+            new_row[col] = row[col]
+        result.append(new_row)
+
+    return result
+
+
+def execute_filter(rows: List[Dict[str, Any]], step: Dict[str, Any], step_index: int) -> List[Dict[str, Any]]:
+    """Execute a filter operation."""
+    where_expr = step["where"]
+    path = f"pipeline.steps[{step_index}].where"
+    result = []
+
+    for row in rows:
+        try:
+            condition = evaluate_expression(where_expr, row, path)
+            # Treat null/false as false (null is falsy)
+            if condition is True:
+                result.append(row)
+        except ETLError:
+            raise
+        except Exception:
+            # If evaluation fails, row is filtered out
+            pass
+
+    return result
+
+
+def execute_map(rows: List[Dict[str, Any]], step: Dict[str, Any], step_index: int) -> List[Dict[str, Any]]:
+    """Execute a map operation."""
+    expr = step["expr"]
+    as_field = step["as"]
+    path = f"pipeline.steps[{step_index}].expr"
+    result = []
+
+    for row in rows:
+        new_row = dict(row)  # Make a copy
+        try:
+            value = evaluate_expression(expr, row, path)
+            new_row[as_field] = value
+        except ETLError:
+            raise
+        except Exception as e:
+            raise ETLError('EXECUTION_FAILED', f"ETL_ERROR: expression evaluation failed", path)
+        result.append(new_row)
+
+    return result
+
+
+def execute_rename(rows: List[Dict[str, Any]], step: Dict[str, Any], step_index: int) -> List[Dict[str, Any]]:
+    """Execute a rename operation."""
+    mapping = step.get("mapping", {})
+    result = []
+
+    for row_idx, row in enumerate(rows):
+        new_row = dict(row)
+        for src, tgt in mapping.items():
+            if src not in new_row:
+                # Find which mapping key this is
+                for key_idx, key in enumerate(mapping.keys()):
+                    if key == src:
+                        raise ETLError(
+                            "MISSING_COLUMN",
+                            f"ETL_ERROR: column '{src}' not found in row",
+                            f"pipeline.steps[{step_index}].mapping.{src}"
+                        )
+            # Move value from src to tgt
+            new_row[tgt] = new_row.pop(src)
+        result.append(new_row)
+
+    return result
+
+
+def execute_limit(rows: List[Dict[str, Any]], step: Dict[str, Any], step_index: int) -> List[Dict[str, Any]]:
+    """Execute a limit operation."""
+    n = step["n"]
+    return rows[:n]
+
+
+def execute_pipeline(data: Dict[str, Any]) -> Tuple[Dict[str, Any], int]:
+    """Execute the ETL pipeline and return results with metrics."""
+    try:
+        # Validate structure first
+        validate_json_structure(data)
+
+        steps = data["pipeline"]["steps"]
+        rows = data["dataset"]
+        rows_in = len(rows)
+
+        # Validate each step
+        for i, step in enumerate(steps):
+            validate_step(step, i)
+
+        # Execute each step
+        for i, step in enumerate(steps):
+            op = step["op"].strip().lower()
+
+            # Normalize the step first
+            normalized = normalize_step(step)
+
+            if op == "select":
+                rows = execute_select(rows, normalized, i)
+            elif op == "filter":
+                rows = execute_filter(rows, normalized, i)
+            elif op == "map":
+                rows = execute_map(rows, normalized, i)
+            elif op == "rename":
+                rows = execute_rename(rows, normalized, i)
+            elif op == "limit":
+                rows = execute_limit(rows, normalized, i)
+
+        rows_out = len(rows)
+
+        return {
+            "status": "ok",
+            "data": rows,
+            "metrics": {
+                "rows_in": rows_in,
+                "rows_out": rows_out
+            }
+        }, 0
+
+    except ETLError as e:
+        return {
+            "status": "error",
+            "error_code": e.error_code,
+            "message": e.message,
+            "path": e.path
+        }, 1
+
+
+def main():
+    """Main entry point."""
+    parser = argparse.ArgumentParser(description='ETL Pipeline Processor')
+    parser.add_argument('--execute', action='store_true', default=False,
+                        help='Execute the pipeline (default: false, returns normalized)')
+    args = parser.parse_args()
+
+    input_data = sys.stdin.read()
+
+    if args.execute:
+        try:
+            data = json.loads(input_data)
+            result, exit_code = execute_pipeline(data)
+        except json.JSONDecodeError as e:
+            result = {
+                "status": "error",
+                "error_code": "SCHEMA_VALIDATION_FAILED",
+                "message": f"ETL_ERROR: invalid JSON: {str(e)}",
+                "path": "root"
+            }
+            exit_code = 1
+    else:
+        result, exit_code = process_pipeline(input_data)
+
+    print(json.dumps(result))
+    sys.exit(exit_code)
+
+
+if __name__ == "__main__":
+    main()

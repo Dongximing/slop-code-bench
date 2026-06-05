@@ -1,0 +1,24 @@
+version: "1"
+schema: "module"
+
+os:
+  name: macos
+  package_manager: brew
+  packages:
+    - zebra
+    - alpha
+    - beta
+  applications:
+    - zulu-app
+    - alpha-app
+    - beta-app
+
+actions:
+  - type: link
+    source: file3
+    destination: ~/file3
+  - type: copy
+    source: file1
+    destination: ~/file1
+  - type: run
+    source: script.sh

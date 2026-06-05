@@ -1,0 +1,865 @@
+
+
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /tmp/uv-cache/archive-v0/AAg9yxFxEEHqGc82/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-49-generic-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'json-ctrf': '0.5.0', 'json-report': '1.5.0', 'metadata': '3.1.1', 'timeout': '2.4.0'}}
+rootdir: /workspace
+configfile: pytest.ini
+plugins: json-ctrf-0.5.0, json-report-1.5.0, metadata-3.1.1, timeout-2.4.0
+timeout: 180.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 50 items
+
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[naga] PASSED    [  2%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[barrage_l] PASSED [  4%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_core[fernite_carbide] PASSED [  6%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[athanor] PASSED [  8%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[azariel] PASSED [ 10%]
+.evaluation_tests/test_checkpoint_1.py::test_recipe_functionality[proteus] PASSED [ 12%]
+.evaluation_tests/test_checkpoint_1.py::test_materials_sorted_case_insensitive PASSED [ 14%]
+.evaluation_tests/test_checkpoint_1.py::test_run_time_rounds_up PASSED   [ 16%]
+.evaluation_tests/test_checkpoint_1.py::test_buildable_column_accuracy PASSED [ 18%]
+.evaluation_tests/test_checkpoint_1.py::test_unpublished_item_error PASSED [ 20%]
+.evaluation_tests/test_checkpoint_1.py::test_case_sensitive_item_name PASSED [ 22%]
+.evaluation_tests/test_checkpoint_1.py::test_nonexistent_item_error PASSED [ 24%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-1] FAILED [ 26%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-2] FAILED [ 28%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-3] FAILED [ 30%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-4] FAILED [ 32%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-5] FAILED [ 34%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-1] FAILED [ 36%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-5] FAILED [ 38%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-1] FAILED [ 40%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-5] FAILED [ 42%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[redeemer-1] FAILED [ 44%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[jackdaw-5] FAILED [ 46%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[tengu-5] FAILED [ 48%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[valravn-5] FAILED [ 50%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_functionality[subsystem-5] FAILED [ 52%]
+.evaluation_tests/test_checkpoint_2.py::test_default_skill_is_five FAILED [ 54%]
+.evaluation_tests/test_checkpoint_2.py::test_tech_iii_accepts_blueprint_input FAILED [ 56%]
+.evaluation_tests/test_checkpoint_2.py::test_invention_time_rounds_up FAILED [ 58%]
+.evaluation_tests/test_checkpoint_2.py::test_probability_clamps_to_one FAILED [ 60%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_zero PASSED     [ 62%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_six PASSED      [ 64%]
+.evaluation_tests/test_checkpoint_2.py::test_skill_level_negative PASSED [ 66%]
+.evaluation_tests/test_checkpoint_3.py::test_naga_core[me10] PASSED      [ 68%]
+.evaluation_tests/test_checkpoint_3.py::test_naga_core[me5] PASSED       [ 70%]
+.evaluation_tests/test_checkpoint_3.py::test_naga_core[te20] PASSED      [ 72%]
+.evaluation_tests/test_checkpoint_3.py::test_naga_core[me5_waste] PASSED [ 74%]
+.evaluation_tests/test_checkpoint_3.py::test_naga_core[me10_te20] PASSED [ 76%]
+.evaluation_tests/test_checkpoint_3.py::test_fernite_carbide_te10 PASSED [ 78%]
+.evaluation_tests/test_checkpoint_3.py::test_proteus_me5_waste FAILED    [ 80%]
+.evaluation_tests/test_checkpoint_3.py::test_ark_me5_waste FAILED        [ 82%]
+.evaluation_tests/test_checkpoint_3.py::test_reaction_ignores_me PASSED  [ 84%]
+.evaluation_tests/test_checkpoint_3.py::test_te_rounds_at_seconds_level PASSED [ 86%]
+.evaluation_tests/test_checkpoint_3.py::test_me10_with_display_waste FAILED [ 88%]
+.evaluation_tests/test_checkpoint_3.py::test_reaction_with_display_waste PASSED [ 90%]
+.evaluation_tests/test_checkpoint_3.py::test_me_negative PASSED          [ 92%]
+.evaluation_tests/test_checkpoint_3.py::test_me_eleven PASSED            [ 94%]
+.evaluation_tests/test_checkpoint_3.py::test_te_negative PASSED          [ 96%]
+.evaluation_tests/test_checkpoint_3.py::test_te_odd PASSED               [ 98%]
+.evaluation_tests/test_checkpoint_3.py::test_te_twentytwo PASSED         [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_invention_core[barrage_l-1] _______________________
+
+case_name = 'barrage_l', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+_______________________ test_invention_core[barrage_l-2] _______________________
+
+case_name = 'barrage_l', skill_level = 2
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '2'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+_______________________ test_invention_core[barrage_l-3] _______________________
+
+case_name = 'barrage_l', skill_level = 3
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '3'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+_______________________ test_invention_core[barrage_l-4] _______________________
+
+case_name = 'barrage_l', skill_level = 4
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '4'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+_______________________ test_invention_core[barrage_l-5] _______________________
+
+case_name = 'barrage_l', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+________________________ test_invention_core[proteus-1] ________________________
+
+case_name = 'proteus', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+________________________ test_invention_core[proteus-5] ________________________
+
+case_name = 'proteus', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.parametrize("case_name,skill_level", CORE_CASES)
+    def test_invention_core(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Core: Invention tests with skill level variations."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:65: AssertionError
+__________________ test_invention_functionality[dual_giga-1] ___________________
+
+case_name = 'dual_giga', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Dual Giga Pulse Laser II', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+__________________ test_invention_functionality[dual_giga-5] ___________________
+
+case_name = 'dual_giga', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Dual Giga Pulse Laser II', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+___________________ test_invention_functionality[redeemer-1] ___________________
+
+case_name = 'redeemer', skill_level = 1
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Redeemer', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+___________________ test_invention_functionality[jackdaw-5] ____________________
+
+case_name = 'jackdaw', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Jackdaw', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+____________________ test_invention_functionality[tengu-5] _____________________
+
+case_name = 'tengu', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Tengu', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+___________________ test_invention_functionality[valravn-5] ____________________
+
+case_name = 'valravn', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Valravn', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+__________________ test_invention_functionality[subsystem-5] ___________________
+
+case_name = 'subsystem', skill_level = 5
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    @pytest.mark.parametrize("case_name,skill_level", FUNCTIONALITY_CASES)
+    def test_invention_functionality(case_name, skill_level, entrypoint_argv, sde_dir):
+        """Functionality: Extended invention tests."""
+        case = load_json_case(2, case_name)
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            str(skill_level),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus Defensive - Covert Reconfiguration', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:100: AssertionError
+__________________________ test_default_skill_is_five __________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_default_skill_is_five(entrypoint_argv, sde_dir):
+        """Functionality: Missing --skill defaults to level 5."""
+        case = load_json_case(2, "barrage_l")
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            case["item_name"],
+            "--sde",
+            str(sde_dir),
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:117: AssertionError
+____________________ test_tech_iii_accepts_blueprint_input _____________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_tech_iii_accepts_blueprint_input(entrypoint_argv, sde_dir):
+        """Functionality: Tech III blueprint names resolve to the product."""
+        case = load_json_case(2, "proteus")
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            "Proteus Blueprint",
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            "5",
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:136: AssertionError
+________________________ test_invention_time_rounds_up _________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_invention_time_rounds_up(entrypoint_argv, sde_dir):
+        """Functionality: Invention time rounds up to whole minutes."""
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            "Entosis Link II Blueprint",
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            "5",
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Entosis Link II Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:154: AssertionError
+________________________ test_probability_clamps_to_one ________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_probability_clamps_to_one(entrypoint_argv, sde_dir):
+        """Functionality: Probabilities clamp to 100%."""
+        result = run_command(
+            entrypoint_argv,
+            "invention",
+            "Dual Giga Beam Laser II Blueprint",
+            "--sde",
+            str(sde_dir),
+            "--skill",
+            "5",
+        )
+>       assert result.returncode == 0, f"Command failed: {result.stderr}"
+E       AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+E                            [--time-efficiency TE] [--display-waste]
+E                            {recipe} name
+E         industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Dual Giga Beam Laser II Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+
+.evaluation_tests/test_checkpoint_2.py:173: AssertionError
+____________________________ test_proteus_me5_waste ____________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_proteus_me5_waste(entrypoint_argv, sde_dir):
+        """Functionality: Proteus Tech III ship with ME=5 and waste display."""
+        data = load_json_case(3, "proteus")
+        case = next(c for c in data["cases"] if c["case_id"] == "me5_waste")
+    
+        result = run_command(
+            entrypoint_argv,
+            "recipe",
+            data["item_name"],
+            "-me",
+            "5",
+            "-waste",
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_3.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Manufacturing', 'group': 'Ship > Strategic Cruiser', 'item': 'Proteus (29988)', 'market_group': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', ...}
+expected = {'activity': 'Manufacturing', 'group': 'Ship > Strategic Cruiser', 'item': 'Proteus (29988)', 'market_group': 'Ships > Cruisers > Advanced Cruisers > Strategic Cruisers > Gallente', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['materials']['Metallofullerene Plating']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['R.A.M.- Starship Tech']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['Superconducting Magnetometric Amplifier']['Waste']": {'new_value': 1, 'old_value': 0}}}
+E       assert not {'values_changed': {"root['materials']['Metallofullerene Plating']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['R.A.M.- Starship Tech']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['Superconducting Magnetometric Amplifier']['Waste']": {'new_value': 1, 'old_value': 0}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+______________________________ test_ark_me5_waste ______________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_ark_me5_waste(entrypoint_argv, sde_dir):
+        """Functionality: Ark Jump Freighter with ME=5 and waste display."""
+        data = load_json_case(3, "ark")
+        case = next(c for c in data["cases"] if c["case_id"] == "me5_waste")
+    
+        result = run_command(
+            entrypoint_argv,
+            "recipe",
+            data["item_name"],
+            "--material-efficiency",
+            "5",
+            "-waste",
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+>       assert_dict_equal(actual, case["expected"])
+
+.evaluation_tests/test_checkpoint_3.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actual = {'activity': 'Manufacturing', 'group': 'Ship > Jump Freighter', 'item': 'Ark (28850)', 'market_group': 'Ships > Capital Ships > Jump Freighters > Amarr', ...}
+expected = {'activity': 'Manufacturing', 'group': 'Ship > Jump Freighter', 'item': 'Ark (28850)', 'market_group': 'Ships > Capital Ships > Jump Freighters > Amarr', ...}
+msg = '', tolerance = 0.02
+
+    def assert_dict_equal(actual, expected, msg="", tolerance=0.02):
+        """Assert dicts are equal using deepdiff for better error messages.
+    
+        Args:
+            actual: The actual result dict
+            expected: The expected result dict
+            msg: Optional message for assertion failure
+            tolerance: Tolerance for numeric comparisons (default 0.02)
+        """
+        diff = DeepDiff(
+            actual,
+            expected,
+            ignore_order=True,
+            math_epsilon=tolerance,
+            ignore_numeric_type_changes=True,
+        )
+>       assert not diff, f"{msg}\nDiff: {diff}"
+E       AssertionError: 
+E         Diff: {'values_changed': {"root['materials']['Capital Antimatter Reactor Unit']['Waste']": {'new_value': 39, 'old_value': 38}, "root['materials']['Capital Fusion Thruster']['Waste']": {'new_value': 32, 'old_value': 31}, "root['materials']['Capital Jump Drive']['Waste']": {'new_value': 2, 'old_value': 1}, "root['materials']['Capital Linear Shield Emitter']['Waste']": {'new_value': 34, 'old_value': 33}, "root['materials']['Capital Nanoelectrical Microprocessor']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Capital Tesseract Capacitor Unit']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Construction Blocks']['Waste']": {'new_value': 113, 'old_value': 112}, "root['materials']['Morphite']['Waste']": {'new_value': 188, 'old_value': 187}}}
+E       assert not {'values_changed': {"root['materials']['Capital Antimatter Reactor Unit']['Waste']": {'new_value': 39, 'old_value': 38}, "root['materials']['Capital Fusion Thruster']['Waste']": {'new_value': 32, 'old_value': 31}, "root['materials']['Capital Jump Drive']['Waste']": {'new_value': 2, 'old_value': 1}, "root['materials']['Capital Linear Shield Emitter']['Waste']": {'new_value': 34, 'old_value': 33}, "root['materials']['Capital Nanoelectrical Microprocessor']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Capital Tesseract Capacitor Unit']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Construction Blocks']['Waste']": {'new_value': 113, 'old_value': 112}, "root['materials']['Morphite']['Waste']": {'new_value': 188, 'old_value': 187}}}
+
+.evaluation_tests/conftest.py:342: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  deepdiff.diff:diff.py:305 math_epsilon in conjunction with ignore_order=True is only used for flat object comparisons. Custom math_epsilon will not have an effect when comparing nested objects.
+_________________________ test_me10_with_display_waste _________________________
+
+entrypoint_argv = ['uv', 'run', 'industry.py']
+sde_dir = PosixPath('/workspace/.evaluation_tests/assets/sde_dir')
+
+    @pytest.mark.functionality
+    def test_me10_with_display_waste(entrypoint_argv, sde_dir):
+        """Functionality: ME=10 with --display-waste should show all zeros."""
+        result = run_command(
+            entrypoint_argv,
+            "recipe",
+            "Naga",
+            "-me",
+            "10",
+            "--display-waste",
+            "--sde",
+            str(sde_dir),
+        )
+        assert result.returncode == 0, f"Command failed: {result.stderr}"
+        actual = parse_item_output(result.stdout)
+        # All waste values should be 0 at ME=10
+        for material_name, material_data in actual["materials"].items():
+            assert "Waste" in material_data, f"Missing Waste column for {material_name}"
+>           assert material_data["Waste"] == 0, f"Expected waste=0 for {material_name} at ME=10"
+E           AssertionError: Expected waste=0 for Isogen at ME=10
+E           assert 2600 == 0
+
+.evaluation_tests/test_checkpoint_3.py:178: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: .scbench/pytest-report.json
+=========================== short test summary info ============================
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-1] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-2] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '2'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-3] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '3'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-4] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '4'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[barrage_l-5] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-1] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_core[proteus-5] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-1] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Dual Giga Pulse Laser II', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[dual_giga-5] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Dual Giga Pulse Laser II', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[redeemer-1] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Redeemer', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '1'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[jackdaw-5] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Jackdaw', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[tengu-5] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Tengu', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[valravn-5] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Valravn', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_functionality[subsystem-5] - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus Defensive - Covert Reconfiguration', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_default_skill_is_five - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Barrage L Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_tech_iii_accepts_blueprint_input - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Proteus Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_invention_time_rounds_up - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Entosis Link II Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_2.py::test_probability_clamps_to_one - AssertionError: Command failed: usage: industry.py [-h] --sde SDE [--material-efficiency ME]
+                     [--time-efficiency TE] [--display-waste]
+                     {recipe} name
+  industry.py: error: argument command: invalid choice: 'invention' (choose from recipe)
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['uv', 'run', 'industry.py', 'invention', 'Dual Giga Beam Laser II Blueprint', '--sde', '/workspace/.evaluation_tests/assets/sde_dir', '--skill', '5'], returncode=2, stdout='', stderr="usage: industry.py [-h] --sde SDE [--material-efficiency ME]\n                   [--time-efficiency TE] [--display-waste]\n                   {recipe} name\nindustry.py: error: argument command: invalid choice: 'invention' (choose from recipe)\n").returncode
+FAILED .evaluation_tests/test_checkpoint_3.py::test_proteus_me5_waste - AssertionError: 
+  Diff: {'values_changed': {"root['materials']['Metallofullerene Plating']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['R.A.M.- Starship Tech']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['Superconducting Magnetometric Amplifier']['Waste']": {'new_value': 1, 'old_value': 0}}}
+assert not {'values_changed': {"root['materials']['Metallofullerene Plating']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['R.A.M.- Starship Tech']['Waste']": {'new_value': 1, 'old_value': 0}, "root['materials']['Superconducting Magnetometric Amplifier']['Waste']": {'new_value': 1, 'old_value': 0}}}
+FAILED .evaluation_tests/test_checkpoint_3.py::test_ark_me5_waste - AssertionError: 
+  Diff: {'values_changed': {"root['materials']['Capital Antimatter Reactor Unit']['Waste']": {'new_value': 39, 'old_value': 38}, "root['materials']['Capital Fusion Thruster']['Waste']": {'new_value': 32, 'old_value': 31}, "root['materials']['Capital Jump Drive']['Waste']": {'new_value': 2, 'old_value': 1}, "root['materials']['Capital Linear Shield Emitter']['Waste']": {'new_value': 34, 'old_value': 33}, "root['materials']['Capital Nanoelectrical Microprocessor']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Capital Tesseract Capacitor Unit']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Construction Blocks']['Waste']": {'new_value': 113, 'old_value': 112}, "root['materials']['Morphite']['Waste']": {'new_value': 188, 'old_value': 187}}}
+assert not {'values_changed': {"root['materials']['Capital Antimatter Reactor Unit']['Waste']": {'new_value': 39, 'old_value': 38}, "root['materials']['Capital Fusion Thruster']['Waste']": {'new_value': 32, 'old_value': 31}, "root['materials']['Capital Jump Drive']['Waste']": {'new_value': 2, 'old_value': 1}, "root['materials']['Capital Linear Shield Emitter']['Waste']": {'new_value': 34, 'old_value': 33}, "root['materials']['Capital Nanoelectrical Microprocessor']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Capital Tesseract Capacitor Unit']['Waste']": {'new_value': 53, 'old_value': 52}, "root['materials']['Construction Blocks']['Waste']": {'new_value': 113, 'old_value': 112}, "root['materials']['Morphite']['Waste']": {'new_value': 188, 'old_value': 187}}}
+FAILED .evaluation_tests/test_checkpoint_3.py::test_me10_with_display_waste - AssertionError: Expected waste=0 for Isogen at ME=10
+assert 2600 == 0
+======================== 21 failed, 29 passed in 27.55s ========================

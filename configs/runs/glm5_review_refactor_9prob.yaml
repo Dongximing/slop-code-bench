@@ -1,0 +1,47 @@
+agent: claude_code_kimi
+environment: docker-python3.12-uv
+prompt: just-solve
+save_template: "${model.name}/${agent.type}-${agent.version}_review_refactor_${now:%Y%m%dT%H%M}"
+
+model:
+  provider: zhipu
+  name: glm-5-kimi
+
+post_checkpoint_skill:
+  prompt: |
+    You will improve the code quality of the solution files in /workspace root.
+    Do NOT touch files under /workspace/files/, /workspace/tests/, /workspace/venv/, or any subdirectories.
+    Do NOT touch requirements.txt.
+
+    Follow these 3 phases IN ORDER. Do not skip any phase.
+
+    PHASE 1: AUDIT
+    Run `ls /workspace/*.py` to identify solution files.
+    Read each file end-to-end. For each file, produce a numbered list of findings.
+    Categories (priority order):
+    A. DEAD CODE - Unused imports, variables, unreachable branches, uncalled functions
+    B. COMMENT SLOP - Restating comments, verbose docstrings, commented-out code
+    C. STYLE - range(len(x))→enumerate, if/else return→return cond, elif after return, bare except
+    D. DUPLICATION - 3+ identical blocks, copy-pasted logic
+    E. STRUCTURAL (review only, very cautious) - Long condition chains, 80+ line functions
+
+    PHASE 2: SAFETY CHECK
+    For EACH finding: "Can this change produce different output for ANY input?"
+    DROP if: merging functions, removing checks, changing error messages/exit codes/output format,
+    changing operation order, changing defaults/signatures, changing data structures, not 100% certain, category E not trivially safe.
+
+    PHASE 3: APPLY
+    Apply ONLY APPROVED changes. One edit at a time. Re-read after. Revert if wrong. Max 30 edits per file.
+    A missed cleanup is acceptable. A broken test is not.
+  run_on: all
+  eval_after: true
+
+problems:
+  - code_search
+  - database_migration
+  - datagate
+  - env_manager
+  - etl_pipeline
+  - eve_industry
+  - eve_jump_planner
+  - eve_route_planner

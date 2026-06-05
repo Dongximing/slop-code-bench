@@ -1,0 +1,22 @@
+version: "1"
+schema: "module"
+os:
+  name: macos
+  package_manager: brew
+  packages:
+    - coreutils
+    - git
+  applications:
+    - firefox
+actions:
+  - type: link
+    source: gitconfig
+    destination: ~/.gitconfig
+    hidden: false
+  - type: copy
+    source: gitignore_global
+    destination: ~/.gitignore_global
+    hidden: true
+  - type: run
+    source: setup.sh
+    elevated: true
