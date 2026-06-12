@@ -4,6 +4,21 @@
 
 33 problems, 175 checkpoints. Comparing Pangu Base (no skill) vs Pangu With Cleanup Skill (review-then-refactor).
 
+## Key Findings
+
+1. **Skill run passes +65% more cumulative core tests than baseline**: Base 284 → Skill 468 (+184) across 33 problems
+2. **24 out of 33 problems improved** with skill, 5 worsened, 4 unchanged
+3. **Skill is safe (Before→After)**: 90% of checkpoints unchanged. 7 improved, 9 worsened
+4. **Biggest gains**: datagate +30, circuit_eval +22, xjq +18, code_search +15, pwd_manager +15, file_query_tool +13
+5. **Biggest losses**: env_manager -3, etl_pipeline -2, eve_market_tools -2, meshctl -2, rejector -1
+6. **Mean Δ/CP across 33 problems: +0.97** — on average, each checkpoint gains ~1 additional core test with the cleanup skill
+
+## Core Pass Rate by Progress Phase
+
+![Core Pass Count by Progress Phase](pangu-33prob-progress-phases.png)
+
+![Core Pass Rate by Progress Phase (Percentage)](pangu-33prob-progress-phases-pct.png)
+
 ## Charts
 
 ![Cumulative Core per Problem](pangu-33prob-core-summary.png)
@@ -11,10 +26,6 @@
 ![Cumulative Core Step Charts](pangu-33prob-core-cumulative.png)
 
 ![Before→After Skill Effect](pangu-33prob-before-after-delta.png)
-
-![Core Pass Rate by Progress Phase](pangu-33prob-progress-phases.png)
-
-![Core Pass Rate by Progress Phase (Percentage)](pangu-33prob-progress-phases-pct.png)
 
 ## Aggregate
 
@@ -92,15 +103,6 @@
 | textdrop | 0 | 7 | 🟢 +7 | 6/6 | +1.17 |
 | trajectory_api | 3 | 5 | 🟢 +2 | 5/5 | +0.40 |
 | xjq | 45 | 63 | 🟢 +18 | 5/5 | +3.60 |
-
-## Key Findings
-
-1. **Skill run passes +65% more cumulative core tests than baseline**: Base 284 → Skill 468 (+184) across 33 problems
-2. **24 out of 33 problems improved** with skill, 5 worsened, 4 unchanged
-3. **Skill is safe (Before→After)**: 90% of checkpoints unchanged. 7 improved, 9 worsened
-4. **Biggest gains**: datagate +30, circuit_eval +22, xjq +18, code_search +15, pwd_manager +15, file_query_tool +13
-5. **Biggest losses**: env_manager -3, etl_pipeline -2, eve_market_tools -2, meshctl -2, rejector -1
-6. **Mean Δ/CP across 33 problems: +0.97** — on average, each checkpoint gains ~1 additional core test with the cleanup skill
 
 ---
 
