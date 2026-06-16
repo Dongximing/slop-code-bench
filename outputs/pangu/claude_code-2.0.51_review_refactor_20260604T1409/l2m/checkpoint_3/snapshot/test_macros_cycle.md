@@ -1,6 +1,0 @@
-
-
-## Cycle Test
-
-\a
-

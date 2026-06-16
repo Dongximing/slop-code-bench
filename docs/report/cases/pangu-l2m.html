@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slop Analysis: l2m</title>
+<style>
+:root {
+    --bg:#0d1117; --panel:#161b22; --border:#30363d; --fg:#c9d1d9; --muted:#8b949e;
+    --add-bg:#0f2d1a; --add-fg:#7ee787; --del-bg:#3d1418; --del-fg:#ffa198;
+    --hunk:#1f6feb; --good:#2ea043; --bad:#da3633; --flat:#6e7681;
+}
+* { box-sizing:border-box; }
+body { margin:0; font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--fg); }
+header { padding:20px 24px; border-bottom:1px solid var(--border); background:var(--panel); }
+header h1 { margin:0 0 4px; font-size:20px; }
+header p { margin:0; color:var(--muted); font-size:13px; }
+.container { padding:16px 24px 60px; }
+.overview { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin:16px 0; }
+.stat { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.stat .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.stat .value { font-size:24px; font-weight:700; margin-top:4px; }
+.stat .value.good { color:var(--good); }
+.stat .value.bad { color:var(--bad); }
+.stat .value.flat { color:var(--muted); }
+.checkpoint { background:var(--panel); border:1px solid var(--border); border-radius:8px; margin:20px 0; overflow:hidden; }
+.cp-header { padding:14px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.cp-title { font-size:16px; font-weight:700; }
+.badge { font-size:11px; padding:2px 8px; border-radius:10px; background:#21262d; color:var(--fg); border:1px solid var(--border); }
+.badge.good { background:rgba(46,160,67,.18); color:var(--add-fg); border-color:var(--good); }
+.badge.bad { background:rgba(218,54,51,.18); color:var(--del-fg); border-color:var(--bad); }
+.badge.flat { color:var(--muted); }
+.cp-body { padding:16px; }
+.summary { border:1px solid var(--border); border-radius:8px; background:var(--bg); padding:14px 16px; margin-bottom:16px; }
+.summary h3 { margin:0 0 8px; font-size:14px; }
+.sumtbl { width:100%; font-size:12px; border-collapse:collapse; }
+.sumtbl th, .sumtbl td { text-align:left; padding:4px 10px; border-bottom:1px solid var(--border); }
+.sumtbl th { color:var(--muted); font-weight:600; }
+td.good { color:var(--add-fg); }
+td.bad { color:var(--del-fg); }
+td.flat { color:var(--muted); }
+details.card { border:1px solid var(--border); border-radius:8px; margin-bottom:8px; background:var(--bg); overflow:hidden; }
+details.card > summary { cursor:pointer; padding:10px 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; list-style:none; }
+details.card > summary::-webkit-details-marker { display:none; }
+details.card > summary:hover { background:#11161d; }
+.sev { flex:none; min-width:36px; text-align:center; font-weight:700; font-size:14px; color:#fff;
+        background:linear-gradient(135deg,#da3633,#9e1c1c); padding:5px 7px; border-radius:6px; }
+.sev.low { background:linear-gradient(135deg,#bb8009,#7a5300); }
+.sev.ok { background:linear-gradient(135deg,#2ea043,#196c2e); }
+.title code { font-size:13px; color:#79c0ff; }
+.meta { color:var(--muted); font-size:12px; }
+.detail { border-top:1px solid var(--border); padding:12px; }
+.pattbl { width:100%; max-width:500px; font-size:12px; margin:0 0 12px; border-collapse:collapse; }
+.pattbl th, .pattbl td { text-align:left; padding:3px 10px; border-bottom:1px solid var(--border); }
+.pattbl th { color:var(--muted); font-weight:600; }
+.diff { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px;
+         background:#010409; border:1px solid var(--border); border-radius:6px; overflow:auto; max-height:520px; }
+.dl { white-space:pre; padding:0 10px; }
+.dl.add { background:var(--add-bg); color:var(--add-fg); }
+.dl.del { background:var(--del-bg); color:var(--del-fg); }
+.dl.hunk { color:var(--hunk); background:#0d1117; }
+.dl.ctx { color:var(--fg); }
+.no-change { color:var(--muted); font-style:italic; padding:15px; text-align:center; }
+.file-section { margin:12px 0; }
+.file-header { background:#343a40; color:white; padding:6px 12px; font-family:monospace; font-size:12px; border-radius:6px 6px 0 0; }
+</style>
+</head>
+<body>
+<header>
+<h1>Slop Analysis: l2m</h1>
+<p>Function-level AST analysis. <b>before</b> = <code>snapshot/</code> · <b>after</b> = <code>after_skill/snapshot/</code>. Severity = cyclomatic complexity.</p>
+</header>
+<div class="container">
+
+<div class="overview">
+<div class="stat"><div class="label">Checkpoints</div><div class="value">5</div></div>
+<div class="stat"><div class="label">Functions Tracked</div><div class="value">67</div></div>
+<div class="stat"><div class="label">Functions Changed</div><div class="value">10</div></div>
+<div class="stat"><div class="label">Net Test Δ</div><div class="value flat">+0</div></div>
+<div class="stat"><div class="label">Net LOC Δ</div><div class="value good">-12</div></div>
+</div>
+
+<div class="summary"><h3>Pattern impact across all matched functions</h3>
+<table class="sumtbl"><thead><tr><th>pattern</th><th class="good">↓ improved</th><th class="bad">↑ regressed</th><th>unchanged</th><th>net Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td class="good">2</td><td class="bad">0</td><td class="flat">65</td><td class="good">-2</td></tr>
+<tr><td>branches</td><td class="good">2</td><td class="bad">0</td><td class="flat">65</td><td class="good">-2</td></tr>
+<tr><td>nesting depth</td><td class="good">3</td><td class="bad">0</td><td class="flat">64</td><td class="good">-3</td></tr>
+<tr><td>comparisons</td><td class="good">2</td><td class="bad">0</td><td class="flat">65</td><td class="good">-2</td></tr>
+<tr><td>exception handlers</td><td class="good">0</td><td class="bad">0</td><td class="flat">67</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td class="good">3</td><td class="bad">0</td><td class="flat">64</td><td class="good">-3</td></tr>
+<tr><td>expressions</td><td class="good">3</td><td class="bad">3</td><td class="flat">61</td><td class="good">-8</td></tr>
+</tbody></table></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_1 ⚪</span>
+<span class="badge flat">Tests: 35/52 → 35/52 (+0)</span>
+<span class="badge good">LOC: 177 → 176 (-1)</span>
+<span class="badge flat">Functions: 10 tracked, 1 changed</span>
+<span class="badge good">Comments: 26→25 (-1)</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (1)</h3>
+<details class="card"><summary>
+<span class="sev low">10</span>
+<span class="title"><code>remove_comments</code></span>
+<span class="meta">l2m.py</span>
+<span class="badge flat">CC 10→10 (+0)</span>
+<span class="badge">sloc: 26→26</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>7</td><td>7</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>5</td><td>5</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>8</td><td>8</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>10</td><td>10</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>27</td><td>27</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -3,7 +3,6 @@</div><div class="dl ctx">     lines = text.split(&#x27;\n&#x27;)
+</div><div class="dl ctx">     result = []
+</div><div class="dl ctx">     for line in lines:
+</div><div class="dl del">-        # Find first unescaped %
+</div><div class="dl ctx">         i = 0
+</div><div class="dl ctx">         comment_start = -1
+</div><div class="dl ctx">         while i &lt; len(line):
+</div></div>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">l2m.py</div>
+<div class="diff"><div class="dl hunk">@@ -11,7 +11,6 @@</div><div class="dl ctx">     lines = text.split(&#x27;\n&#x27;)
+</div><div class="dl ctx">     result = []
+</div><div class="dl ctx">     for line in lines:
+</div><div class="dl del">-        # Find first unescaped %
+</div><div class="dl ctx">         i = 0
+</div><div class="dl ctx">         comment_start = -1
+</div><div class="dl ctx">         while i &lt; len(line):
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_2 ⚪</span>
+<span class="badge flat">Tests: 0/20 → 0/20 (+0)</span>
+<span class="badge flat">LOC: 434 → 434 (+0)</span>
+<span class="badge flat">Functions: 0 tracked, 0 changed</span>
+<span class="badge flat">Skill: TodoWrite:1</span>
+</div>
+<div class="cp-body">
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_3 ⚪</span>
+<span class="badge flat">Tests: 25/49 → 25/49 (+0)</span>
+<span class="badge good">LOC: 556 → 552 (-4)</span>
+<span class="badge flat">Functions: 28 tracked, 2 changed</span>
+<span class="badge good">Lint: 65→64 (-1)</span>
+<span class="badge flat">Skill: TodoWrite:2</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (2)</h3>
+<details class="card"><summary>
+<span class="sev ok">2</span>
+<span class="title"><code>strip_lines</code></span>
+<span class="meta">l2m.py</span>
+<span class="badge flat">CC 2→2 (+0)</span>
+<span class="badge">sloc: 7→3</span>
+<span class="badge good">nesting depth: 1→0 (-1)</span>
+<span class="badge good">statements: 2→1 (-1)</span>
+<span class="badge good">expressions: 8→7 (-1)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>1</td><td>0</td><td class="good">-1</td></tr>
+<tr><td>comparisons</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>2</td><td>1</td><td class="good">-1</td></tr>
+<tr><td>expressions</td><td>8</td><td>7</td><td class="good">-1</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -1,7 +1,3 @@</div><div class="dl ctx"> def strip_lines(text: str) -&gt; str:
+</div><div class="dl ctx">     &quot;&quot;&quot;Strip leading/trailing whitespace from each line&quot;&quot;&quot;
+</div><div class="dl del">-    lines = text.split(&#x27;\n&#x27;)
+</div><div class="dl del">-    result = []
+</div><div class="dl del">-    for line in lines:
+</div><div class="dl del">-        result.append(line.strip())
+</div><div class="dl del">-    return &#x27;\n&#x27;.join(result)
+</div><div class="dl add">+    return &#x27;\n&#x27;.join(line.strip() for line in text.split(&#x27;\n&#x27;))
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">1</span>
+<span class="title"><code>convert_display_math</code></span>
+<span class="meta">l2m.py</span>
+<span class="badge flat">CC 1→1 (+0)</span>
+<span class="badge">sloc: 6→6</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>9</td><td>9</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -1,5 +1,5 @@</div><div class="dl ctx"> def convert_display_math(text: str) -&gt; str:
+</div><div class="dl del">-    &quot;&quot;&quot;Convert \displayMath to $$...$$&quot;&quot;&quot;
+</div><div class="dl add">+    r&quot;&quot;&quot;Convert \displayMath to $$...$$&quot;&quot;&quot;
+</div><div class="dl ctx">     pattern = re.compile(r&#x27;\\\[(.*?)\\\]&#x27;, re.DOTALL)
+</div><div class="dl ctx">     def repl(match):
+</div><div class="dl ctx">         return &quot;\n\n$$\n&quot; + match.group(1) + &quot;\n\n$$\n&quot;
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (2)</h3>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>convert_list_environment</code></span>
+<span class="meta">l2m.py — CC 16, 45 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>7</td></tr>
+<tr><td>branches</td><td>9</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>10</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>12</td></tr>
+<tr><td>expressions</td><td>46</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">10</span>
+<span class="title"><code>remove_comments</code></span>
+<span class="meta">l2m.py — CC 10, 26 sloc, depth 5</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>4</td></tr>
+<tr><td>branches</td><td>7</td></tr>
+<tr><td>nesting depth</td><td>5</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>10</td></tr>
+<tr><td>expressions</td><td>27</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">l2m.py</div>
+<div class="diff"><div class="dl hunk">@@ -49,11 +49,7 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx"> def strip_lines(text: str) -&gt; str:
+</div><div class="dl ctx">     &quot;&quot;&quot;Strip leading/trailing whitespace from each line&quot;&quot;&quot;
+</div><div class="dl del">-    lines = text.split(&#x27;\n&#x27;)
+</div><div class="dl del">-    result = []
+</div><div class="dl del">-    for line in lines:
+</div><div class="dl del">-        result.append(line.strip())
+</div><div class="dl del">-    return &#x27;\n&#x27;.join(result)
+</div><div class="dl add">+    return &#x27;\n&#x27;.join(line.strip() for line in text.split(&#x27;\n&#x27;))
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> def extract_macros(text: str) -&gt; Dict[str, str]:
+</div><div class="dl hunk">@@ -121,7 +117,7 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> def convert_display_math(text: str) -&gt; str:
+</div><div class="dl del">-    &quot;&quot;&quot;Convert \displayMath to $$...$$&quot;&quot;&quot;
+</div><div class="dl add">+    r&quot;&quot;&quot;Convert \displayMath to $$...$$&quot;&quot;&quot;
+</div><div class="dl ctx">     pattern = re.compile(r&#x27;\\\[(.*?)\\\]&#x27;, re.DOTALL)
+</div><div class="dl ctx">     def repl(match):
+</div><div class="dl ctx">         return &quot;\n\n$$\n&quot; + match.group(1) + &quot;\n\n$$\n&quot;
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_4 ⚪</span>
+<span class="badge flat">Tests: 28/84 → 28/84 (+0)</span>
+<span class="badge good">LOC: 659 → 650 (-9)</span>
+<span class="badge flat">Functions: 29 tracked, 7 changed</span>
+<span class="badge good">CC: 128→126 (-2)</span>
+<span class="badge good">Comments: 60→57 (-3)</span>
+<span class="badge flat">Skill: TodoWrite:2</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (7)</h3>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>convert_list_environment</code></span>
+<span class="meta">l2m.py</span>
+<span class="badge flat">CC 16→16 (+0)</span>
+<span class="badge">sloc: 45→45</span>
+<span class="badge bad">expressions: 46→47 (+1)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>7</td><td>7</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>9</td><td>9</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>10</td><td>10</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>12</td><td>12</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>46</td><td>47</td><td class="bad">+1</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -13,7 +13,7 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx">     content_start = begin_match.end()
+</div><div class="dl ctx">     end_pos = find_matching_end(text, content_start, env_type)
+</div><div class="dl del">-    if end_pos is None:
+</div><div class="dl add">+    if end_pos == -1:
+</div><div class="dl ctx">         return &quot;&quot;
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     env_content = text[content_start:end_pos]
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>convert_admonitions</code></span>
+<span class="meta">l2m.py</span>
+<span class="badge flat">CC 12→12 (+0)</span>
+<span class="badge">sloc: 56→53</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>8</td><td>8</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>11</td><td>11</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>6</td><td>6</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>11</td><td>11</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>67</td><td>67</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -1,9 +1,5 @@</div><div class="dl ctx"> def convert_admonitions(text: str, docusaurus_mode: bool = False, mkdocs_mode: bool = False) -&gt; str:
+</div><div class="dl del">-    &quot;&quot;&quot;Convert all recognized admonition environments in the text.
+</div><div class="dl del">-
+</div><div class="dl del">-    Recognized environments are converted, unknown environments pass through unchanged
+</div><div class="dl del">-    (including their nested content).
+</div><div class="dl del">-    &quot;&quot;&quot;
+</div><div class="dl add">+    &quot;&quot;&quot;Convert all recognized admonition environments in the text.&quot;&quot;&quot;
+</div><div class="dl ctx">     result_parts = []
+</div><div class="dl ctx">     i = 0
+</div><div class="dl ctx"> 
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">7</span>
+<span class="title"><code>_process_nested_enumerate</code></span>
+<span class="meta">l2m.py</span>
+<span class="badge flat">CC 7→7 (+0)</span>
+<span class="badge">sloc: 38→38</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>6</td><td>6</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>9</td><td>9</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>50</td><td>50</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -8,10 +8,10 @@</div><div class="dl ctx">     depth = 0  # We only allow one level of nesting
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     while True:
+</div><div class="dl del">-        # Search for begin enumerate in remaining text
+</div><div class="dl add">+
+</div><div class="dl ctx">         begin_match = re.search(r&#x27;\begin\{enumerate\}(?:\[[^\]]*\])?&#x27;, remaining)
+</div><div class="dl ctx">         if not begin_match:
+</div><div class="dl del">-            # No more nested enumerates, add remaining text as is
+</div><div class="dl add">+
+</div><div class="dl ctx">             result_parts.append(remaining)
+</div><div class="dl ctx">             break
+</div><div class="dl ctx"> 
+</div><div class="dl hunk">@@ -41,7 +41,6 @@</div><div class="dl ctx">             print(&quot;Error: unsupported enumerate options&quot;, file=sys.stderr)
+</div><div class="dl ctx">             sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-        # Convert the inner enumerate with parent number
+</div><div class="dl ctx">         inner_md = convert_list_environment(env_content, &#x27;enumerate&#x27;, parent_num, start_offset)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">         # Add preceding text
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">4</span>
+<span class="title"><code>_convert_all_enumerates</code></span>
+<span class="meta">l2m.py</span>
+<span class="badge flat">CC 4→4 (+0)</span>
+<span class="badge">sloc: 21→21</span>
+<span class="badge bad">expressions: 27→28 (+1)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>6</td><td>6</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>27</td><td>28</td><td class="bad">+1</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -9,7 +9,7 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx">     start_pos = begin_match.start()
+</div><div class="dl ctx">     end_pos = find_matching_end(text, begin_match.end(), &#x27;enumerate&#x27;)
+</div><div class="dl del">-    if end_pos is None:
+</div><div class="dl add">+    if end_pos == -1:
+</div><div class="dl ctx">         return &quot;&quot;, text
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     env_content = text[begin_match.end():end_pos]
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">3</span>
+<span class="title"><code>_convert_all_itemizes</code></span>
+<span class="meta">l2m.py</span>
+<span class="badge flat">CC 3→3 (+0)</span>
+<span class="badge">sloc: 15→15</span>
+<span class="badge bad">expressions: 22→23 (+1)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>5</td><td>5</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>22</td><td>23</td><td class="bad">+1</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -9,7 +9,7 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx">     start_pos = begin_match.start()
+</div><div class="dl ctx">     end_pos = find_matching_end(text, begin_match.end(), &#x27;itemize&#x27;)
+</div><div class="dl del">-    if end_pos is None:
+</div><div class="dl add">+    if end_pos == -1:
+</div><div class="dl ctx">         return &quot;&quot;, text
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     env_content = text[begin_match.end():end_pos - len(&#x27;\\end{itemize}&#x27;)]
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">2</span>
+<span class="title"><code>replace_parbox</code></span>
+<span class="meta">l2m.py</span>
+<span class="badge good">CC 2→1 (-1)</span>
+<span class="badge">sloc: 6→2</span>
+<span class="badge good">if-statements: 1→0 (-1)</span>
+<span class="badge good">branches: 1→0 (-1)</span>
+<span class="badge good">nesting depth: 1→0 (-1)</span>
+<span class="badge good">comparisons: 1→0 (-1)</span>
+<span class="badge good">statements: 2→1 (-1)</span>
+<span class="badge good">expressions: 7→2 (-5)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>1</td><td>0</td><td class="good">-1</td></tr>
+<tr><td>branches</td><td>1</td><td>0</td><td class="good">-1</td></tr>
+<tr><td>nesting depth</td><td>1</td><td>0</td><td class="good">-1</td></tr>
+<tr><td>comparisons</td><td>1</td><td>0</td><td class="good">-1</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>2</td><td>1</td><td class="good">-1</td></tr>
+<tr><td>expressions</td><td>7</td><td>2</td><td class="good">-5</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -1,6 +1,2 @@</div><div class="dl ctx">     def replace_parbox(m):
+</div><div class="dl del">-        content = m.group(2)
+</div><div class="dl del">-        if content is None:
+</div><div class="dl del">-            print(&quot;Error: malformed parbox command&quot;, file=sys.stderr)
+</div><div class="dl del">-            sys.exit(1)
+</div><div class="dl del">-        return content
+</div><div class="dl add">+        return m.group(2)
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">2</span>
+<span class="title"><code>unwrap_environments</code></span>
+<span class="meta">l2m.py</span>
+<span class="badge good">CC 2→1 (-1)</span>
+<span class="badge">sloc: 14→10</span>
+<span class="badge good">if-statements: 1→0 (-1)</span>
+<span class="badge good">branches: 1→0 (-1)</span>
+<span class="badge good">nesting depth: 1→0 (-1)</span>
+<span class="badge good">comparisons: 1→0 (-1)</span>
+<span class="badge good">statements: 3→2 (-1)</span>
+<span class="badge good">expressions: 21→16 (-5)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>1</td><td>0</td><td class="good">-1</td></tr>
+<tr><td>branches</td><td>1</td><td>0</td><td class="good">-1</td></tr>
+<tr><td>nesting depth</td><td>1</td><td>0</td><td class="good">-1</td></tr>
+<tr><td>comparisons</td><td>1</td><td>0</td><td class="good">-1</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>3</td><td>2</td><td class="good">-1</td></tr>
+<tr><td>expressions</td><td>21</td><td>16</td><td class="good">-5</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -14,10 +14,6 @@</div><div class="dl ctx">     pattern = re.compile(r&#x27;\\parbox\{([^}]+)\}\{((?:[^{}]|\{[^{}]*\})*)\}&#x27;)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     def replace_parbox(m):
+</div><div class="dl del">-        content = m.group(2)
+</div><div class="dl del">-        if content is None:
+</div><div class="dl del">-            print(&quot;Error: malformed parbox command&quot;, file=sys.stderr)
+</div><div class="dl del">-            sys.exit(1)
+</div><div class="dl del">-        return content
+</div><div class="dl add">+        return m.group(2)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     return pattern.sub(replace_parbox, text)
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (1)</h3>
+<details class="card"><summary>
+<span class="sev low">10</span>
+<span class="title"><code>remove_comments</code></span>
+<span class="meta">l2m.py — CC 10, 26 sloc, depth 5</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>4</td></tr>
+<tr><td>branches</td><td>7</td></tr>
+<tr><td>nesting depth</td><td>5</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>10</td></tr>
+<tr><td>expressions</td><td>27</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">l2m.py</div>
+<div class="diff"><div class="dl hunk">@@ -154,11 +154,7 @@</div><div class="dl ctx">     pattern = re.compile(r&#x27;\\parbox\{([^}]+)\}\{((?:[^{}]|\{[^{}]*\})*)\}&#x27;)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     def replace_parbox(m):
+</div><div class="dl del">-        content = m.group(2)
+</div><div class="dl del">-        if content is None:
+</div><div class="dl del">-            print(&quot;Error: malformed parbox command&quot;, file=sys.stderr)
+</div><div class="dl del">-            sys.exit(1)
+</div><div class="dl del">-        return content
+</div><div class="dl add">+        return m.group(2)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     return pattern.sub(replace_parbox, text)
+</div><div class="dl ctx"> 
+</div><div class="dl hunk">@@ -266,7 +262,7 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx">     content_start = begin_match.end()
+</div><div class="dl ctx">     end_pos = find_matching_end(text, content_start, env_type)
+</div><div class="dl del">-    if end_pos is None:
+</div><div class="dl add">+    if end_pos == -1:
+</div><div class="dl ctx">         return &quot;&quot;
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     env_content = text[content_start:end_pos]
+</div><div class="dl hunk">@@ -329,10 +325,10 @@</div><div class="dl ctx">     depth = 0  # We only allow one level of nesting
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     while True:
+</div><div class="dl del">-        # Search for begin enumerate in remaining text
+</div><div class="dl add">+
+</div><div class="dl ctx">         begin_match = re.search(r&#x27;\begin\{enumerate\}(?:\[[^\]]*\])?&#x27;, remaining)
+</div><div class="dl ctx">         if not begin_match:
+</div><div class="dl del">-            # No more nested enumerates, add remaining text as is
+</div><div class="dl add">+
+</div><div class="dl ctx">             result_parts.append(remaining)
+</div><div class="dl ctx">             break
+</div><div class="dl ctx"> 
+</div><div class="dl hunk">@@ -362,7 +358,6 @@</div><div class="dl ctx">             print(&quot;Error: unsupported enumerate options&quot;, file=sys.stderr)
+</div><div class="dl ctx">             sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-        # Convert the inner enumerate with parent number
+</div><div class="dl ctx">         inner_md = convert_list_environment(env_content, &#x27;enumerate&#x27;, parent_num, start_offset)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">         # Add preceding text
+</div><div class="dl hunk">@@ -445,7 +440,7 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx">     start_pos = begin_match.start()
+</div><div class="dl ctx">     end_pos = find_matching_end(text, begin_match.end(), &#x27;enumerate&#x27;)
+</div><div class="dl del">-    if end_pos is None:
+</div><div class="dl add">+    if end_pos == -1:
+</div><div class="dl ctx">         return &quot;&quot;, text
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     env_content = text[begin_match.end():end_pos]
+</div><div class="dl hunk">@@ -474,7 +469,7 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx">     start_pos = begin_match.start()
+</div><div class="dl ctx">     end_pos = find_matching_end(text, begin_match.end(), &#x27;itemize&#x27;)
+</div><div class="dl del">-    if end_pos is None:
+</div><div class="dl add">+    if end_pos == -1:
+</div><div class="dl ctx">         return &quot;&quot;, text
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     env_content = text[begin_match.end():end_pos - len(&#x27;\\end{itemize}&#x27;)]
+</div><div class="dl hunk">@@ -504,11 +499,7 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> def convert_admonitions(text: str, docusaurus_mode: bool = False, mkdocs_mode: bool = False) -&gt; str:
+</div><div class="dl del">-    &quot;&quot;&quot;Convert all recognized admonition environments in the text.
+</div><div class="dl del">-
+</div><div class="dl del">-    Recognized environments are converted, unknown environments pass through unchanged
+</div><div class="dl del">-    (including their nested content).
+</div><div class="dl del">-    &quot;&quot;&quot;
+</div><div class="dl add">+    &quot;&quot;&quot;Convert all recognized admonition environments in the text.&quot;&quot;&quot;
+</div><div class="dl ctx">     result_parts = []
+</div><div class="dl ctx">     i = 0
+</div><div class="dl ctx"> 
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_5 ⚪</span>
+<span class="badge flat">Tests: 0/64 → 0/64 (+0)</span>
+<span class="badge flat">LOC: 751 → 753 (+2)</span>
+<span class="badge flat">Functions: 0 tracked, 0 changed</span>
+</div>
+<div class="cp-body">
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">l2m.py</div>
+<div class="diff"><div class="dl hunk">@@ -27,7 +27,7 @@</div><div class="dl ctx">                     if backslash_count % 2 == 1:
+</div><div class="dl ctx">                         i += 1
+</div><div class="dl ctx">                         continue
+</div><div class="dl del">-                # Found first unfected %
+</div><div class="dl add">+                # Found first unescaped %
+</div><div class="dl ctx">                 comment_start = i
+</div><div class="dl ctx">                 break
+</div><div class="dl ctx">             i += 1
+</div><div class="dl hunk">@@ -282,14 +282,15 @@</div><div class="dl ctx">     items = extract_items(env_content, env_type)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     result_lines = []
+</div><div class="dl del">-    for i, (item_content, _) in enumerate(items):
+</div><div class="dl add">+    for item_num, (item_content, _) in enumerate(items, start=current_num):
+</div><div class="dl ctx">         processed_content = item_content
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">         # Handle any nested environments within this item
+</div><div class="dl ctx">         # Check for nested enumerate (one level max)
+</div><div class="dl ctx">         if env_type != &#x27;itemize&#x27; and r&#x27;\begin{enumerate}&#x27; in processed_content:
+</div><div class="dl del">-            # Process nested enumerate recursively
+</div><div class="dl del">-            processed_content = _process_nested_enumerate(processed_content, current_num)
+</div><div class="dl add">+            # Process nested enumerate recursively, passing the current item number
+</div><div class="dl add">+            # (or the parent enumerate number if nested)
+</div><div class="dl add">+            processed_content = _process_nested_enumerate(processed_content, item_num)
+</div><div class="dl ctx">         # Check for nested itemize
+</div><div class="dl ctx">         if r&#x27;\begin{itemize}&#x27; in processed_content and env_type != &#x27;enumerate&#x27;:
+</div><div class="dl ctx">             processed_content = _process_nested_itemize(processed_content)
+</div><div class="dl hunk">@@ -298,20 +299,21 @@</div><div class="dl ctx">         if env_type == &#x27;enumerate&#x27;:
+</div><div class="dl ctx">             if parent_num is not None:
+</div><div class="dl ctx">                 # Nested enumerate: **P.x)**
+</div><div class="dl del">-                label = f&quot;**{parent_num}.{number_to_letter(current_num)})**&quot;
+</div><div class="dl add">+                label = f&quot;**{parent_num}.{number_to_letter(item_num)})**&quot;
+</div><div class="dl ctx">             else:
+</div><div class="dl ctx">                 # Top-level enumerate: **N.**
+</div><div class="dl del">-                label = f&quot;**{current_num}.**&quot;
+</div><div class="dl add">+                label = f&quot;**{item_num}.**&quot;
+</div><div class="dl ctx">             line = f&quot;{label} {processed_content}&quot; if processed_content else label
+</div><div class="dl add">+            # Add blank line between consecutive items
+</div><div class="dl add">+            if item_num &lt; len(items) + current_num - 1:
+</div><div class="dl add">+                line += &#x27;\n\n&#x27;
+</div><div class="dl ctx">         else:  # itemize
+</div><div class="dl ctx">             line = f&quot;-   {processed_content}&quot; if processed_content else &quot;-&quot;
+</div><div class="dl del">-
+</div><div class="dl del">-        # Add blank line between consecutive items
+</div><div class="dl del">-        if i &lt; len(items) - 1:
+</div><div class="dl del">-            line += &#x27;\n\n&#x27;
+</div><div class="dl add">+            # Add blank line between consecutive items
+</div><div class="dl add">+            if item_num &lt; len(items) + current_num - 1:
+</div><div class="dl add">+                line += &#x27;\n\n&#x27;
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">         result_lines.append(line)
+</div><div class="dl del">-        current_num += 1
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     return &#x27;&#x27;.join(result_lines)
+</div><div class="dl ctx"> 
+</div><div class="dl hunk">@@ -499,7 +501,7 @@</div><div class="dl ctx"> # Theorem-like environments that support optional [Title]
+</div><div class="dl ctx"> _THM_LIKE_ENVS = {&#x27;definition&#x27;, &#x27;definitions&#x27;, &#x27;propriete&#x27;, &#x27;proprietes&#x27;,
+</div><div class="dl ctx">                    &#x27;theoreme&#x27;, &#x27;theorem&#x27;, &#x27;exercice&#x27;, &#x27;exemple&#x27;, &#x27;exemples&#x27;,
+</div><div class="dl del">-                   &#x27;remarque&#x27;, &#x27;remarques&#x27;, &#x27;propriete&#x27;, &#x27;proprietes&#x27;}
+</div><div class="dl add">+                   &#x27;remarque&#x27;, &#x27;remarques&#x27;}
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> # Global exercice counter
+</div><div class="dl ctx"> _exercice_counter = 0
+</div></div>
+</div>
+</div></div>
+</div></body></html>

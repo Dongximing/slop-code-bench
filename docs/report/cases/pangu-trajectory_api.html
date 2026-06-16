@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slop Analysis: trajectory_api</title>
+<style>
+:root {
+    --bg:#0d1117; --panel:#161b22; --border:#30363d; --fg:#c9d1d9; --muted:#8b949e;
+    --add-bg:#0f2d1a; --add-fg:#7ee787; --del-bg:#3d1418; --del-fg:#ffa198;
+    --hunk:#1f6feb; --good:#2ea043; --bad:#da3633; --flat:#6e7681;
+}
+* { box-sizing:border-box; }
+body { margin:0; font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--fg); }
+header { padding:20px 24px; border-bottom:1px solid var(--border); background:var(--panel); }
+header h1 { margin:0 0 4px; font-size:20px; }
+header p { margin:0; color:var(--muted); font-size:13px; }
+.container { padding:16px 24px 60px; }
+.overview { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin:16px 0; }
+.stat { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.stat .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.stat .value { font-size:24px; font-weight:700; margin-top:4px; }
+.stat .value.good { color:var(--good); }
+.stat .value.bad { color:var(--bad); }
+.stat .value.flat { color:var(--muted); }
+.checkpoint { background:var(--panel); border:1px solid var(--border); border-radius:8px; margin:20px 0; overflow:hidden; }
+.cp-header { padding:14px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.cp-title { font-size:16px; font-weight:700; }
+.badge { font-size:11px; padding:2px 8px; border-radius:10px; background:#21262d; color:var(--fg); border:1px solid var(--border); }
+.badge.good { background:rgba(46,160,67,.18); color:var(--add-fg); border-color:var(--good); }
+.badge.bad { background:rgba(218,54,51,.18); color:var(--del-fg); border-color:var(--bad); }
+.badge.flat { color:var(--muted); }
+.cp-body { padding:16px; }
+.summary { border:1px solid var(--border); border-radius:8px; background:var(--bg); padding:14px 16px; margin-bottom:16px; }
+.summary h3 { margin:0 0 8px; font-size:14px; }
+.sumtbl { width:100%; font-size:12px; border-collapse:collapse; }
+.sumtbl th, .sumtbl td { text-align:left; padding:4px 10px; border-bottom:1px solid var(--border); }
+.sumtbl th { color:var(--muted); font-weight:600; }
+td.good { color:var(--add-fg); }
+td.bad { color:var(--del-fg); }
+td.flat { color:var(--muted); }
+details.card { border:1px solid var(--border); border-radius:8px; margin-bottom:8px; background:var(--bg); overflow:hidden; }
+details.card > summary { cursor:pointer; padding:10px 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; list-style:none; }
+details.card > summary::-webkit-details-marker { display:none; }
+details.card > summary:hover { background:#11161d; }
+.sev { flex:none; min-width:36px; text-align:center; font-weight:700; font-size:14px; color:#fff;
+        background:linear-gradient(135deg,#da3633,#9e1c1c); padding:5px 7px; border-radius:6px; }
+.sev.low { background:linear-gradient(135deg,#bb8009,#7a5300); }
+.sev.ok { background:linear-gradient(135deg,#2ea043,#196c2e); }
+.title code { font-size:13px; color:#79c0ff; }
+.meta { color:var(--muted); font-size:12px; }
+.detail { border-top:1px solid var(--border); padding:12px; }
+.pattbl { width:100%; max-width:500px; font-size:12px; margin:0 0 12px; border-collapse:collapse; }
+.pattbl th, .pattbl td { text-align:left; padding:3px 10px; border-bottom:1px solid var(--border); }
+.pattbl th { color:var(--muted); font-weight:600; }
+.diff { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px;
+         background:#010409; border:1px solid var(--border); border-radius:6px; overflow:auto; max-height:520px; }
+.dl { white-space:pre; padding:0 10px; }
+.dl.add { background:var(--add-bg); color:var(--add-fg); }
+.dl.del { background:var(--del-bg); color:var(--del-fg); }
+.dl.hunk { color:var(--hunk); background:#0d1117; }
+.dl.ctx { color:var(--fg); }
+.no-change { color:var(--muted); font-style:italic; padding:15px; text-align:center; }
+.file-section { margin:12px 0; }
+.file-header { background:#343a40; color:white; padding:6px 12px; font-family:monospace; font-size:12px; border-radius:6px 6px 0 0; }
+</style>
+</head>
+<body>
+<header>
+<h1>Slop Analysis: trajectory_api</h1>
+<p>Function-level AST analysis. <b>before</b> = <code>snapshot/</code> · <b>after</b> = <code>after_skill/snapshot/</code>. Severity = cyclomatic complexity.</p>
+</header>
+<div class="container">
+
+<div class="overview">
+<div class="stat"><div class="label">Checkpoints</div><div class="value">5</div></div>
+<div class="stat"><div class="label">Functions Tracked</div><div class="value">139</div></div>
+<div class="stat"><div class="label">Functions Changed</div><div class="value">8</div></div>
+<div class="stat"><div class="label">Net Test Δ</div><div class="value bad">-1</div></div>
+<div class="stat"><div class="label">Net LOC Δ</div><div class="value good">-12</div></div>
+</div>
+
+<div class="summary"><h3>Pattern impact across all matched functions</h3>
+<table class="sumtbl"><thead><tr><th>pattern</th><th class="good">↓ improved</th><th class="bad">↑ regressed</th><th>unchanged</th><th>net Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td class="good">1</td><td class="bad">0</td><td class="flat">138</td><td class="good">-1</td></tr>
+<tr><td>branches</td><td class="good">1</td><td class="bad">0</td><td class="flat">138</td><td class="good">-1</td></tr>
+<tr><td>nesting depth</td><td class="good">0</td><td class="bad">1</td><td class="flat">138</td><td class="bad">+1</td></tr>
+<tr><td>comparisons</td><td class="good">1</td><td class="bad">0</td><td class="flat">138</td><td class="good">-1</td></tr>
+<tr><td>exception handlers</td><td class="good">0</td><td class="bad">0</td><td class="flat">139</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td class="good">1</td><td class="bad">1</td><td class="flat">137</td><td class="bad">+1</td></tr>
+<tr><td>expressions</td><td class="good">1</td><td class="bad">2</td><td class="flat">136</td><td class="flat">+0</td></tr>
+</tbody></table></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_1 🔴</span>
+<span class="badge bad">Tests: 52/64 → 51/64 (-1)</span>
+<span class="badge flat">LOC: 695 → 695 (+0)</span>
+<span class="badge flat">Functions: 23 tracked, 2 changed</span>
+<span class="badge good">Lint: 98→93 (-5)</span>
+<span class="badge flat">Skill: TodoWrite:1</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (2)</h3>
+<details class="card"><summary>
+<span class="sev ok">3</span>
+<span class="title"><code>parse_iso8601</code></span>
+<span class="meta">trajectory_api.py</span>
+<span class="badge flat">CC 3→3 (+0)</span>
+<span class="badge">sloc: 8→8</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>5</td><td>5</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>7</td><td>7</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -4,5 +4,5 @@</div><div class="dl ctx">         return None
+</div><div class="dl ctx">     try:
+</div><div class="dl ctx">         return datetime.fromisoformat(date_str.replace(&#x27;Z&#x27;, &#x27;+00:00&#x27;)).replace(tzinfo=timezone.utc)
+</div><div class="dl del">-    except:
+</div><div class="dl add">+    except ValueError:
+</div><div class="dl ctx">         return None
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">2</span>
+<span class="title"><code>decode_cursor</code></span>
+<span class="meta">trajectory_api.py</span>
+<span class="badge flat">CC 2→2 (+0)</span>
+<span class="badge">sloc: 8→8</span>
+<span class="badge bad">expressions: 10→12 (+2)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>10</td><td>12</td><td class="bad">+2</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -4,5 +4,5 @@</div><div class="dl ctx">         data = base64.urlsafe_b64decode(cursor.encode()).decode()
+</div><div class="dl ctx">         parsed = json.loads(data)
+</div><div class="dl ctx">         return parsed.get(&quot;offset&quot;, 0)
+</div><div class="dl del">-    except:
+</div><div class="dl add">+    except (binascii.Error, UnicodeDecodeError, json.JSONDecodeError):
+</div><div class="dl ctx">         return None
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (4)</h3>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>get_reports</code></span>
+<span class="meta">trajectory_api.py — CC 27, 81 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>14</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>21</td></tr>
+<tr><td>expressions</td><td>115</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>validate_step</code></span>
+<span class="meta">trajectory_api.py — CC 22, 49 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>15</td></tr>
+<tr><td>branches</td><td>18</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>12</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>32</td></tr>
+<tr><td>expressions</td><td>56</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">17</span>
+<span class="title"><code>list_trajectories</code></span>
+<span class="meta">trajectory_api.py — CC 17, 57 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>15</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>9</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>19</td></tr>
+<tr><td>expressions</td><td>82</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>matches_filters</code></span>
+<span class="meta">trajectory_api.py — CC 12, 16 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>6</td></tr>
+<tr><td>branches</td><td>7</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>7</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>12</td></tr>
+<tr><td>expressions</td><td>24</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">trajectory_api.py</div>
+<div class="diff"><div class="dl hunk">@@ -5,12 +5,12 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx"> import argparse
+</div><div class="dl ctx"> import base64
+</div><div class="dl add">+import binascii
+</div><div class="dl ctx"> import json
+</div><div class="dl ctx"> import re
+</div><div class="dl ctx"> import uuid
+</div><div class="dl ctx"> from datetime import datetime, timezone
+</div><div class="dl del">-from functools import wraps
+</div><div class="dl del">-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+</div><div class="dl add">+from typing import Any, Dict, List, Optional, Tuple, Union
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> from flask import Flask, request, jsonify, make_response
+</div><div class="dl ctx"> 
+</div><div class="dl hunk">@@ -291,7 +291,7 @@</div><div class="dl ctx">         data = base64.urlsafe_b64decode(cursor.encode()).decode()
+</div><div class="dl ctx">         parsed = json.loads(data)
+</div><div class="dl ctx">         return parsed.get(&quot;offset&quot;, 0)
+</div><div class="dl del">-    except:
+</div><div class="dl add">+    except (binascii.Error, UnicodeDecodeError, json.JSONDecodeError):
+</div><div class="dl ctx">         return None
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl hunk">@@ -301,7 +301,7 @@</div><div class="dl ctx">         return None
+</div><div class="dl ctx">     try:
+</div><div class="dl ctx">         return datetime.fromisoformat(date_str.replace(&#x27;Z&#x27;, &#x27;+00:00&#x27;)).replace(tzinfo=timezone.utc)
+</div><div class="dl del">-    except:
+</div><div class="dl add">+    except ValueError:
+</div><div class="dl ctx">         return None
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_2 ⚪</span>
+<span class="badge flat">Tests: 77/146 → 77/146 (+0)</span>
+<span class="badge flat">LOC: 939 → 940 (+1)</span>
+<span class="badge flat">Functions: 27 tracked, 1 changed</span>
+<span class="badge good">CC: 208→207 (-1)</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (1)</h3>
+<details class="card"><summary>
+<span class="sev ok">4</span>
+<span class="title"><code>get_running_totals</code></span>
+<span class="meta">trajectory_api.py</span>
+<span class="badge good">CC 4→3 (-1)</span>
+<span class="badge">sloc: 17→19</span>
+<span class="badge good">comparisons: 2→1 (-1)</span>
+<span class="badge good">expressions: 10→7 (-3)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>2</td><td>1</td><td class="good">-1</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>10</td><td>7</td><td class="good">-3</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -5,11 +5,12 @@</div><div class="dl ctx">     cumulative_cost = 0.0
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     for i, step in enumerate(trajectory):
+</div><div class="dl del">-        role_type = &quot;assistant&quot; if step[&quot;role&quot;] == &quot;assistant&quot; else &quot;other&quot;
+</div><div class="dl del">-
+</div><div class="dl ctx">         if step[&quot;role&quot;] == &quot;assistant&quot;:
+</div><div class="dl add">+            role_type = &quot;assistant&quot;
+</div><div class="dl ctx">             cumulative_output_tokens = step[&quot;output_tokens&quot;]
+</div><div class="dl ctx">             cumulative_cost = step[&quot;cost&quot;]
+</div><div class="dl add">+        else:
+</div><div class="dl add">+            role_type = &quot;other&quot;
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">         running_totals.append({
+</div><div class="dl ctx">             &quot;step_index&quot;: i,
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (7)</h3>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>get_reports</code></span>
+<span class="meta">trajectory_api.py — CC 27, 81 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>14</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>21</td></tr>
+<tr><td>expressions</td><td>115</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>validate_step</code></span>
+<span class="meta">trajectory_api.py — CC 23, 58 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>16</td></tr>
+<tr><td>branches</td><td>19</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>13</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>33</td></tr>
+<tr><td>expressions</td><td>57</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">19</span>
+<span class="title"><code>append_steps</code></span>
+<span class="meta">trajectory_api.py — CC 19, 53 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>14</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>10</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>76</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">19</span>
+<span class="title"><code>list_trajectories</code></span>
+<span class="meta">trajectory_api.py — CC 19, 64 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>22</td></tr>
+<tr><td>expressions</td><td>92</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>finalize_trajectory</code></span>
+<span class="meta">trajectory_api.py — CC 16, 50 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>11</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>22</td></tr>
+<tr><td>expressions</td><td>63</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">14</span>
+<span class="title"><code>matches_filters</code></span>
+<span class="meta">trajectory_api.py — CC 14, 18 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>7</td></tr>
+<tr><td>branches</td><td>8</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>9</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>14</td></tr>
+<tr><td>expressions</td><td>30</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>validate_trajectory_document</code></span>
+<span class="meta">trajectory_api.py — CC 12, 31 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>8</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>4</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>18</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">trajectory_api.py</div>
+<div class="diff"><div class="dl hunk">@@ -293,11 +293,12 @@</div><div class="dl ctx">     cumulative_cost = 0.0
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     for i, step in enumerate(trajectory):
+</div><div class="dl del">-        role_type = &quot;assistant&quot; if step[&quot;role&quot;] == &quot;assistant&quot; else &quot;other&quot;
+</div><div class="dl del">-
+</div><div class="dl ctx">         if step[&quot;role&quot;] == &quot;assistant&quot;:
+</div><div class="dl add">+            role_type = &quot;assistant&quot;
+</div><div class="dl ctx">             cumulative_output_tokens = step[&quot;output_tokens&quot;]
+</div><div class="dl ctx">             cumulative_cost = step[&quot;cost&quot;]
+</div><div class="dl add">+        else:
+</div><div class="dl add">+            role_type = &quot;other&quot;
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">         running_totals.append({
+</div><div class="dl ctx">             &quot;step_index&quot;: i,
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_3 ⚪</span>
+<span class="badge flat">Tests: 140/256 → 140/256 (+0)</span>
+<span class="badge good">LOC: 1172 → 1166 (-6)</span>
+<span class="badge flat">Functions: 28 tracked, 3 changed</span>
+<span class="badge good">Comments: 123→121 (-2)</span>
+<span class="badge good">Lint: 136→133 (-3)</span>
+<span class="badge flat">Skill: Grep:2, TodoWrite:1</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (3)</h3>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>validate_step</code></span>
+<span class="meta">trajectory_api.py</span>
+<span class="badge flat">CC 23→23 (+0)</span>
+<span class="badge">sloc: 58→55</span>
+<span class="badge good">if-statements: 16→15 (-1)</span>
+<span class="badge good">branches: 19→18 (-1)</span>
+<span class="badge good">statements: 33→32 (-1)</span>
+<span class="badge bad">expressions: 57→58 (+1)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>16</td><td>15</td><td class="good">-1</td></tr>
+<tr><td>branches</td><td>19</td><td>18</td><td class="good">-1</td></tr>
+<tr><td>nesting depth</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>13</td><td>13</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>33</td><td>32</td><td class="good">-1</td></tr>
+<tr><td>expressions</td><td>57</td><td>58</td><td class="bad">+1</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -7,10 +7,7 @@</div><div class="dl ctx">         prev_assistant_totals: List of cumulative totals from previous assistant steps
+</div><div class="dl ctx">         field_path_prefix: Prefix for error field paths (e.g., &quot;steps&quot; or &quot;trajectory&quot;)
+</div><div class="dl ctx">     &quot;&quot;&quot;
+</div><div class="dl del">-    if field_path_prefix == &quot;steps&quot;:
+</div><div class="dl del">-        step_path = f&quot;steps[{index}]&quot;
+</div><div class="dl del">-    else:
+</div><div class="dl del">-        step_path = f&quot;trajectory[{index}]&quot;
+</div><div class="dl add">+    step_path = f&quot;steps[{index}]&quot; if field_path_prefix == &quot;steps&quot; else f&quot;trajectory[{index}]&quot;
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Validate required fields
+</div><div class="dl ctx">     for field in [&quot;role&quot;, &quot;content&quot;, &quot;input_tokens&quot;, &quot;output_tokens&quot;, &quot;cost&quot;]:
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>validate_trajectory_document</code></span>
+<span class="meta">trajectory_api.py</span>
+<span class="badge flat">CC 12→12 (+0)</span>
+<span class="badge">sloc: 31→30</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>8</td><td>8</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>10</td><td>10</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>18</td><td>18</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>18</td><td>18</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -1,15 +1,13 @@</div><div class="dl del">-def validate_trajectory_document(data: Dict[str, Any], is_update: bool = False, for_finalize: bool = False) -&gt; Tuple[Optional[Dict], Optional[Tuple]]:
+</div><div class="dl add">+def validate_trajectory_document(data: Dict[str, Any], is_update: bool = False) -&gt; Tuple[Optional[Dict], Optional[Tuple]]:
+</div><div class="dl ctx">     &quot;&quot;&quot;Validate the complete trajectory document.
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     Args:
+</div><div class="dl ctx">         data: The trajectory data to validate
+</div><div class="dl ctx">         is_update: If True, this is an append operation
+</div><div class="dl del">-        for_finalize: If True, this is a finalize operation (enforce assistant constraint)
+</div><div class="dl ctx">     &quot;&quot;&quot;
+</div><div class="dl ctx">     required_fields = [&quot;date&quot;, &quot;trajectory&quot;, &quot;task&quot;, &quot;environment&quot;, &quot;model&quot;, &quot;framework&quot;, &quot;metrics&quot;]
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    # status is optional on create, defaults to &quot;finalized&quot; (backwards compatible)
+</div><div class="dl del">-    # But if provided, must be valid
+</div><div class="dl add">+    # If status provided, validate it
+</div><div class="dl ctx">     if &quot;status&quot; in data:
+</div><div class="dl ctx">         status = data[&quot;status&quot;]
+</div><div class="dl ctx">         if status not in VALID_STATUSES:
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">7</span>
+<span class="title"><code>create_trajectory</code></span>
+<span class="meta">trajectory_api.py</span>
+<span class="badge flat">CC 7→7 (+0)</span>
+<span class="badge">sloc: 56→56</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>5</td><td>5</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>11</td><td>11</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>49</td><td>49</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -24,7 +24,6 @@</div><div class="dl ctx">         return error
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Determine status
+</div><div class="dl del">-    # Default to &quot;finalized&quot; for backwards compatibility
+</div><div class="dl ctx">     status = data.get(&quot;status&quot;, &quot;finalized&quot;)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Generate ID
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (6)</h3>
+<details class="card"><summary>
+<span class="sev ">39</span>
+<span class="title"><code>fork_trajectory</code></span>
+<span class="meta">trajectory_api.py — CC 39, 134 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>29</td></tr>
+<tr><td>branches</td><td>34</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>21</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>55</td></tr>
+<tr><td>expressions</td><td>145</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>get_reports</code></span>
+<span class="meta">trajectory_api.py — CC 27, 81 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>14</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>21</td></tr>
+<tr><td>expressions</td><td>115</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>list_trajectories</code></span>
+<span class="meta">trajectory_api.py — CC 23, 77 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>15</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>4</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>109</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">21</span>
+<span class="title"><code>matches_filters</code></span>
+<span class="meta">trajectory_api.py — CC 21, 29 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>13</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>22</td></tr>
+<tr><td>expressions</td><td>46</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">19</span>
+<span class="title"><code>append_steps</code></span>
+<span class="meta">trajectory_api.py — CC 19, 53 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>14</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>10</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>76</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>finalize_trajectory</code></span>
+<span class="meta">trajectory_api.py — CC 16, 50 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>11</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>22</td></tr>
+<tr><td>expressions</td><td>63</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">trajectory_api.py</div>
+<div class="diff"><div class="dl hunk">@@ -119,10 +119,7 @@</div><div class="dl ctx">         prev_assistant_totals: List of cumulative totals from previous assistant steps
+</div><div class="dl ctx">         field_path_prefix: Prefix for error field paths (e.g., &quot;steps&quot; or &quot;trajectory&quot;)
+</div><div class="dl ctx">     &quot;&quot;&quot;
+</div><div class="dl del">-    if field_path_prefix == &quot;steps&quot;:
+</div><div class="dl del">-        step_path = f&quot;steps[{index}]&quot;
+</div><div class="dl del">-    else:
+</div><div class="dl del">-        step_path = f&quot;trajectory[{index}]&quot;
+</div><div class="dl add">+    step_path = f&quot;steps[{index}]&quot; if field_path_prefix == &quot;steps&quot; else f&quot;trajectory[{index}]&quot;
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Validate required fields
+</div><div class="dl ctx">     for field in [&quot;role&quot;, &quot;content&quot;, &quot;input_tokens&quot;, &quot;output_tokens&quot;, &quot;cost&quot;]:
+</div><div class="dl hunk">@@ -221,18 +218,16 @@</div><div class="dl ctx">     return trajectory, None
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl del">-def validate_trajectory_document(data: Dict[str, Any], is_update: bool = False, for_finalize: bool = False) -&gt; Tuple[Optional[Dict], Optional[Tuple]]:
+</div><div class="dl add">+def validate_trajectory_document(data: Dict[str, Any], is_update: bool = False) -&gt; Tuple[Optional[Dict], Optional[Tuple]]:
+</div><div class="dl ctx">     &quot;&quot;&quot;Validate the complete trajectory document.
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     Args:
+</div><div class="dl ctx">         data: The trajectory data to validate
+</div><div class="dl ctx">         is_update: If True, this is an append operation
+</div><div class="dl del">-        for_finalize: If True, this is a finalize operation (enforce assistant constraint)
+</div><div class="dl ctx">     &quot;&quot;&quot;
+</div><div class="dl ctx">     required_fields = [&quot;date&quot;, &quot;trajectory&quot;, &quot;task&quot;, &quot;environment&quot;, &quot;model&quot;, &quot;framework&quot;, &quot;metrics&quot;]
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    # status is optional on create, defaults to &quot;finalized&quot; (backwards compatible)
+</div><div class="dl del">-    # But if provided, must be valid
+</div><div class="dl add">+    # If status provided, validate it
+</div><div class="dl ctx">     if &quot;status&quot; in data:
+</div><div class="dl ctx">         status = data[&quot;status&quot;]
+</div><div class="dl ctx">         if status not in VALID_STATUSES:
+</div><div class="dl hunk">@@ -470,7 +465,6 @@</div><div class="dl ctx">         return error
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Determine status
+</div><div class="dl del">-    # Default to &quot;finalized&quot; for backwards compatibility
+</div><div class="dl ctx">     status = data.get(&quot;status&quot;, &quot;finalized&quot;)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Generate ID
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_4 ⚪</span>
+<span class="badge flat">Tests: 141/355 → 141/355 (+0)</span>
+<span class="badge good">LOC: 1181 → 1174 (-7)</span>
+<span class="badge flat">Functions: 28 tracked, 0 changed</span>
+<span class="badge good">Comments: 126→122 (-4)</span>
+<span class="badge good">Lint: 143→137 (-6)</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (8)</h3>
+<details class="card"><summary>
+<span class="sev ">39</span>
+<span class="title"><code>fork_trajectory</code></span>
+<span class="meta">trajectory_api.py — CC 39, 134 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>29</td></tr>
+<tr><td>branches</td><td>34</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>21</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>55</td></tr>
+<tr><td>expressions</td><td>145</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>get_reports</code></span>
+<span class="meta">trajectory_api.py — CC 27, 81 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>14</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>21</td></tr>
+<tr><td>expressions</td><td>115</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>list_trajectories</code></span>
+<span class="meta">trajectory_api.py — CC 23, 77 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>15</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>4</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>109</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>validate_step</code></span>
+<span class="meta">trajectory_api.py — CC 23, 55 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>15</td></tr>
+<tr><td>branches</td><td>18</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>13</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>32</td></tr>
+<tr><td>expressions</td><td>58</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">21</span>
+<span class="title"><code>matches_filters</code></span>
+<span class="meta">trajectory_api.py — CC 21, 29 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>13</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>22</td></tr>
+<tr><td>expressions</td><td>46</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">19</span>
+<span class="title"><code>append_steps</code></span>
+<span class="meta">trajectory_api.py — CC 19, 53 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>14</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>10</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>76</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>finalize_trajectory</code></span>
+<span class="meta">trajectory_api.py — CC 16, 50 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>11</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>22</td></tr>
+<tr><td>expressions</td><td>63</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>validate_trajectory_document</code></span>
+<span class="meta">trajectory_api.py — CC 12, 30 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>8</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>4</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>18</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">trajectory_api.py</div>
+<div class="diff"><div class="dl hunk">@@ -14,9 +14,6 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx"> from flask import Flask, request, jsonify, make_response
+</div><div class="dl ctx"> 
+</div><div class="dl del">-# For EBNF parsing
+</div><div class="dl del">-import hashlib
+</div><div class="dl del">-import sys
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> # Try to import lark for EBNF parsing, fall back to regex if not available
+</div><div class="dl ctx"> try:
+</div><div class="dl hunk">@@ -29,10 +26,6 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx"> # In-memory storage
+</div><div class="dl ctx"> trajectories_db: Dict[str, Dict[str, Any]] = {}
+</div><div class="dl del">-
+</div><div class="dl del">-# Environment grammar storage
+</div><div class="dl del">-environments_db: Dict[str, Dict[int, Dict[str, Any]]] = {}  # name -&gt; {version -&gt; grammar_info}
+</div><div class="dl del">-environment_active: Dict[str, int] = {}  # name -&gt; active_version
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> # Valid roles
+</div><div class="dl ctx"> VALID_ROLES = {&quot;user&quot;, &quot;system&quot;, &quot;assistant&quot;, &quot;environment&quot;}
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_5 ⚪</span>
+<span class="badge flat">Tests: 141/373 → 141/373 (+0)</span>
+<span class="badge flat">LOC: 1374 → 1374 (+0)</span>
+<span class="badge flat">Functions: 33 tracked, 2 changed</span>
+<span class="badge good">Lint: 179→178 (-1)</span>
+<span class="badge flat">Skill: TodoWrite:2</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (2)</h3>
+<details class="card"><summary>
+<span class="sev ok">4</span>
+<span class="title"><code>get_bucket_start</code></span>
+<span class="meta">trajectory_api.py</span>
+<span class="badge flat">CC 4→4 (+0)</span>
+<span class="badge">sloc: 12→12</span>
+<span class="badge bad">statements: 5→7 (+2)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>5</td><td>7</td><td class="bad">+2</td></tr>
+<tr><td>expressions</td><td>16</td><td>16</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -2,13 +2,13 @@</div><div class="dl ctx">     &quot;&quot;&quot;Get the bucket start time for a datetime based on window.&quot;&quot;&quot;
+</div><div class="dl ctx">     if window == &quot;day&quot;:
+</div><div class="dl ctx">         return dt.replace(hour=0, minute=0, second=0, microsecond=0)
+</div><div class="dl del">-    elif window == &quot;week&quot;:
+</div><div class="dl add">+    if window == &quot;week&quot;:
+</div><div class="dl ctx">         # ISO week: Monday as start of week
+</div><div class="dl ctx">         iso_cal = dt.isocalendar()
+</div><div class="dl ctx">         year, week = iso_cal[0], iso_cal[1]
+</div><div class="dl ctx">         # Find Monday of that week
+</div><div class="dl ctx">         bucket = datetime.fromisocalendar(year, week, 1).replace(tzinfo=timezone.utc)
+</div><div class="dl ctx">         return bucket
+</div><div class="dl del">-    elif window == &quot;month&quot;:
+</div><div class="dl add">+    if window == &quot;month&quot;:
+</div><div class="dl ctx">         return dt.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+</div><div class="dl ctx">     return dt
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">3</span>
+<span class="title"><code>parse_iso8601</code></span>
+<span class="meta">trajectory_api.py</span>
+<span class="badge flat">CC 3→3 (+0)</span>
+<span class="badge">sloc: 8→8</span>
+<span class="badge bad">nesting depth: 1→2 (+1)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>1</td><td>2</td><td class="bad">+1</td></tr>
+<tr><td>comparisons</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>5</td><td>5</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>7</td><td>7</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -1,8 +1,8 @@</div><div class="dl ctx"> def parse_iso8601(date_str: str) -&gt; Optional[datetime]:
+</div><div class="dl ctx">     &quot;&quot;&quot;Parse ISO-8601 UTC string to datetime.&quot;&quot;&quot;
+</div><div class="dl del">-    if not date_str:
+</div><div class="dl del">-        return None
+</div><div class="dl del">-    try:
+</div><div class="dl del">-        return datetime.fromisoformat(date_str.replace(&#x27;Z&#x27;, &#x27;+00:00&#x27;)).replace(tzinfo=timezone.utc)
+</div><div class="dl del">-    except ValueError:
+</div><div class="dl del">-        return None
+</div><div class="dl add">+    if date_str:
+</div><div class="dl add">+        try:
+</div><div class="dl add">+            return datetime.fromisoformat(date_str.replace(&#x27;Z&#x27;, &#x27;+00:00&#x27;)).replace(tzinfo=timezone.utc)
+</div><div class="dl add">+        except ValueError:
+</div><div class="dl add">+            return None
+</div><div class="dl add">+    return None
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (10)</h3>
+<details class="card"><summary>
+<span class="sev ">39</span>
+<span class="title"><code>fork_trajectory</code></span>
+<span class="meta">trajectory_api.py — CC 39, 134 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>29</td></tr>
+<tr><td>branches</td><td>34</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>21</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>55</td></tr>
+<tr><td>expressions</td><td>145</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>get_reports</code></span>
+<span class="meta">trajectory_api.py — CC 27, 81 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>14</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>21</td></tr>
+<tr><td>expressions</td><td>115</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">24</span>
+<span class="title"><code>validate_manifest</code></span>
+<span class="meta">trajectory_api.py — CC 24, 44 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>17</td></tr>
+<tr><td>branches</td><td>19</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>13</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>36</td></tr>
+<tr><td>expressions</td><td>52</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>list_trajectories</code></span>
+<span class="meta">trajectory_api.py — CC 23, 77 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>15</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>4</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>109</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>validate_step</code></span>
+<span class="meta">trajectory_api.py — CC 23, 55 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>15</td></tr>
+<tr><td>branches</td><td>18</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>13</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>32</td></tr>
+<tr><td>expressions</td><td>58</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">21</span>
+<span class="title"><code>matches_filters</code></span>
+<span class="meta">trajectory_api.py — CC 21, 29 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>13</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>22</td></tr>
+<tr><td>expressions</td><td>46</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">19</span>
+<span class="title"><code>append_steps</code></span>
+<span class="meta">trajectory_api.py — CC 19, 53 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>14</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>10</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>76</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>finalize_trajectory</code></span>
+<span class="meta">trajectory_api.py — CC 16, 50 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>11</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>22</td></tr>
+<tr><td>expressions</td><td>63</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>validate_zip_archive</code></span>
+<span class="meta">trajectory_api.py — CC 16, 45 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>15</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>5</td></tr>
+<tr><td>exception handlers</td><td>8</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>47</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>validate_trajectory_document</code></span>
+<span class="meta">trajectory_api.py — CC 12, 30 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>8</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>4</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>18</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">trajectory_api.py</div>
+<div class="diff"><div class="dl hunk">@@ -559,12 +559,12 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx"> def parse_iso8601(date_str: str) -&gt; Optional[datetime]:
+</div><div class="dl ctx">     &quot;&quot;&quot;Parse ISO-8601 UTC string to datetime.&quot;&quot;&quot;
+</div><div class="dl del">-    if not date_str:
+</div><div class="dl del">-        return None
+</div><div class="dl del">-    try:
+</div><div class="dl del">-        return datetime.fromisoformat(date_str.replace(&#x27;Z&#x27;, &#x27;+00:00&#x27;)).replace(tzinfo=timezone.utc)
+</div><div class="dl del">-    except ValueError:
+</div><div class="dl del">-        return None
+</div><div class="dl add">+    if date_str:
+</div><div class="dl add">+        try:
+</div><div class="dl add">+            return datetime.fromisoformat(date_str.replace(&#x27;Z&#x27;, &#x27;+00:00&#x27;)).replace(tzinfo=timezone.utc)
+</div><div class="dl add">+        except ValueError:
+</div><div class="dl add">+            return None
+</div><div class="dl add">+    return None
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> def matches_query(obj: Dict, query: str) -&gt; bool:
+</div><div class="dl hunk">@@ -634,14 +634,14 @@</div><div class="dl ctx">     &quot;&quot;&quot;Get the bucket start time for a datetime based on window.&quot;&quot;&quot;
+</div><div class="dl ctx">     if window == &quot;day&quot;:
+</div><div class="dl ctx">         return dt.replace(hour=0, minute=0, second=0, microsecond=0)
+</div><div class="dl del">-    elif window == &quot;week&quot;:
+</div><div class="dl add">+    if window == &quot;week&quot;:
+</div><div class="dl ctx">         # ISO week: Monday as start of week
+</div><div class="dl ctx">         iso_cal = dt.isocalendar()
+</div><div class="dl ctx">         year, week = iso_cal[0], iso_cal[1]
+</div><div class="dl ctx">         # Find Monday of that week
+</div><div class="dl ctx">         bucket = datetime.fromisocalendar(year, week, 1).replace(tzinfo=timezone.utc)
+</div><div class="dl ctx">         return bucket
+</div><div class="dl del">-    elif window == &quot;month&quot;:
+</div><div class="dl add">+    if window == &quot;month&quot;:
+</div><div class="dl ctx">         return dt.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+</div><div class="dl ctx">     return dt
+</div><div class="dl ctx"> 
+</div></div>
+</div>
+</div></div>
+</div></body></html>

@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slop Analysis: cfgpipe</title>
+<style>
+:root {
+    --bg:#0d1117; --panel:#161b22; --border:#30363d; --fg:#c9d1d9; --muted:#8b949e;
+    --add-bg:#0f2d1a; --add-fg:#7ee787; --del-bg:#3d1418; --del-fg:#ffa198;
+    --hunk:#1f6feb; --good:#2ea043; --bad:#da3633; --flat:#6e7681;
+}
+* { box-sizing:border-box; }
+body { margin:0; font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--fg); }
+header { padding:20px 24px; border-bottom:1px solid var(--border); background:var(--panel); }
+header h1 { margin:0 0 4px; font-size:20px; }
+header p { margin:0; color:var(--muted); font-size:13px; }
+.container { padding:16px 24px 60px; }
+.overview { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin:16px 0; }
+.stat { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.stat .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.stat .value { font-size:24px; font-weight:700; margin-top:4px; }
+.stat .value.good { color:var(--good); }
+.stat .value.bad { color:var(--bad); }
+.stat .value.flat { color:var(--muted); }
+.checkpoint { background:var(--panel); border:1px solid var(--border); border-radius:8px; margin:20px 0; overflow:hidden; }
+.cp-header { padding:14px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.cp-title { font-size:16px; font-weight:700; }
+.badge { font-size:11px; padding:2px 8px; border-radius:10px; background:#21262d; color:var(--fg); border:1px solid var(--border); }
+.badge.good { background:rgba(46,160,67,.18); color:var(--add-fg); border-color:var(--good); }
+.badge.bad { background:rgba(218,54,51,.18); color:var(--del-fg); border-color:var(--bad); }
+.badge.flat { color:var(--muted); }
+.cp-body { padding:16px; }
+.summary { border:1px solid var(--border); border-radius:8px; background:var(--bg); padding:14px 16px; margin-bottom:16px; }
+.summary h3 { margin:0 0 8px; font-size:14px; }
+.sumtbl { width:100%; font-size:12px; border-collapse:collapse; }
+.sumtbl th, .sumtbl td { text-align:left; padding:4px 10px; border-bottom:1px solid var(--border); }
+.sumtbl th { color:var(--muted); font-weight:600; }
+td.good { color:var(--add-fg); }
+td.bad { color:var(--del-fg); }
+td.flat { color:var(--muted); }
+details.card { border:1px solid var(--border); border-radius:8px; margin-bottom:8px; background:var(--bg); overflow:hidden; }
+details.card > summary { cursor:pointer; padding:10px 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; list-style:none; }
+details.card > summary::-webkit-details-marker { display:none; }
+details.card > summary:hover { background:#11161d; }
+.sev { flex:none; min-width:36px; text-align:center; font-weight:700; font-size:14px; color:#fff;
+        background:linear-gradient(135deg,#da3633,#9e1c1c); padding:5px 7px; border-radius:6px; }
+.sev.low { background:linear-gradient(135deg,#bb8009,#7a5300); }
+.sev.ok { background:linear-gradient(135deg,#2ea043,#196c2e); }
+.title code { font-size:13px; color:#79c0ff; }
+.meta { color:var(--muted); font-size:12px; }
+.detail { border-top:1px solid var(--border); padding:12px; }
+.pattbl { width:100%; max-width:500px; font-size:12px; margin:0 0 12px; border-collapse:collapse; }
+.pattbl th, .pattbl td { text-align:left; padding:3px 10px; border-bottom:1px solid var(--border); }
+.pattbl th { color:var(--muted); font-weight:600; }
+.diff { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px;
+         background:#010409; border:1px solid var(--border); border-radius:6px; overflow:auto; max-height:520px; }
+.dl { white-space:pre; padding:0 10px; }
+.dl.add { background:var(--add-bg); color:var(--add-fg); }
+.dl.del { background:var(--del-bg); color:var(--del-fg); }
+.dl.hunk { color:var(--hunk); background:#0d1117; }
+.dl.ctx { color:var(--fg); }
+.no-change { color:var(--muted); font-style:italic; padding:15px; text-align:center; }
+.file-section { margin:12px 0; }
+.file-header { background:#343a40; color:white; padding:6px 12px; font-family:monospace; font-size:12px; border-radius:6px 6px 0 0; }
+</style>
+</head>
+<body>
+<header>
+<h1>Slop Analysis: cfgpipe</h1>
+<p>Function-level AST analysis. <b>before</b> = <code>snapshot/</code> · <b>after</b> = <code>after_skill/snapshot/</code>. Severity = cyclomatic complexity.</p>
+</header>
+<div class="container">
+
+<div class="overview">
+<div class="stat"><div class="label">Checkpoints</div><div class="value">6</div></div>
+<div class="stat"><div class="label">Functions Tracked</div><div class="value">74</div></div>
+<div class="stat"><div class="label">Functions Changed</div><div class="value">10</div></div>
+<div class="stat"><div class="label">Net Test Δ</div><div class="value flat">+0</div></div>
+<div class="stat"><div class="label">Net LOC Δ</div><div class="value good">-58</div></div>
+</div>
+
+<div class="summary"><h3>Pattern impact across all matched functions</h3>
+<table class="sumtbl"><thead><tr><th>pattern</th><th class="good">↓ improved</th><th class="bad">↑ regressed</th><th>unchanged</th><th>net Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td class="good">3</td><td class="bad">0</td><td class="flat">68</td><td class="good">-5</td></tr>
+<tr><td>branches</td><td class="good">3</td><td class="bad">0</td><td class="flat">68</td><td class="good">-5</td></tr>
+<tr><td>nesting depth</td><td class="good">0</td><td class="bad">0</td><td class="flat">71</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td class="good">2</td><td class="bad">0</td><td class="flat">69</td><td class="good">-2</td></tr>
+<tr><td>exception handlers</td><td class="good">0</td><td class="bad">0</td><td class="flat">71</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td class="good">3</td><td class="bad">0</td><td class="flat">68</td><td class="good">-8</td></tr>
+<tr><td>expressions</td><td class="good">2</td><td class="bad">1</td><td class="flat">68</td><td class="good">-7</td></tr>
+</tbody></table></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_1 ⚪</span>
+<span class="badge flat">Tests: 21/37 → 21/37 (+0)</span>
+<span class="badge good">LOC: 245 → 238 (-7)</span>
+<span class="badge flat">Functions: 6 tracked, 1 changed</span>
+<span class="badge good">Comments: 23→16 (-7)</span>
+<span class="badge flat">Skill: TodoWrite:1</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (1)</h3>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>parse_type</code></span>
+<span class="meta">cfgpipe.py</span>
+<span class="badge flat">CC 12→12 (+0)</span>
+<span class="badge">sloc: 42→42</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>7</td><td>7</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>9</td><td>9</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>9</td><td>9</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>16</td><td>16</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>32</td><td>32</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -15,7 +15,6 @@</div><div class="dl ctx">             raise ValueError(
+</div><div class="dl ctx">                 f&quot;Parameter &#x27;{param_name}&#x27;: cannot parse &#x27;{value}&#x27; as integer&quot;
+</div><div class="dl ctx">             )
+</div><div class="dl del">-        # Check for scientific notation (not allowed)
+</div><div class="dl ctx">         if &#x27;e&#x27; in value.lower() or &#x27;E&#x27; in value:
+</div><div class="dl ctx">             raise ValueError(
+</div><div class="dl ctx">                 f&quot;Parameter &#x27;{param_name}&#x27;: scientific notation not allowed for integers&quot;
+</div><div class="dl hunk">@@ -25,16 +24,11 @@</div><div class="dl ctx">     elif expected_type == &#x27;float&#x27;:
+</div><div class="dl ctx">         value = value.strip()
+</div><div class="dl ctx">         try:
+</div><div class="dl del">-            # Try to parse as float
+</div><div class="dl ctx">             fval = float(value)
+</div><div class="dl del">-            # Check it&#x27;s not in scientific notation (contain &#x27;e&#x27; or &#x27;E&#x27;)
+</div><div class="dl ctx">             if &#x27;e&#x27; in value.lower() or &#x27;E&#x27; in value:
+</div><div class="dl ctx">                 raise ValueError(
+</div><div class="dl ctx">                     f&quot;Parameter &#x27;{param_name}&#x27;: scientific notation not allowed&quot;
+</div><div class="dl ctx">                 )
+</div><div class="dl del">-            # Re-encode to ensure canonical representation
+</div><div class="dl del">-            # Python&#x27;s str(float) may use scientific notation for large/small values
+</div><div class="dl del">-            # But we need to avoid that. We&#x27;ll just check the original doesn&#x27;t have &#x27;e&#x27;
+</div><div class="dl ctx">             return str(fval)
+</div><div class="dl ctx">         except ValueError:
+</div><div class="dl ctx">             raise ValueError(
+</div><div class="dl hunk">@@ -50,5 +44,4 @@</div><div class="dl ctx">                 f&quot;Parameter &#x27;{param_name}&#x27;: boolean must be &#x27;true&#x27; or &#x27;false&#x27;, got &#x27;{value}&#x27;&quot;
+</div><div class="dl ctx">             )
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    # Should never reach here
+</div><div class="dl ctx">     raise ValueError(f&quot;Parameter &#x27;{param_name}&#x27;: unknown type &#x27;{expected_type}&#x27;&quot;)
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (1)</h3>
+<details class="card"><summary>
+<span class="sev low">10</span>
+<span class="title"><code>resolve_parameter</code></span>
+<span class="meta">cfgpipe.py — CC 10, 39 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>7</td></tr>
+<tr><td>branches</td><td>8</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>15</td></tr>
+<tr><td>expressions</td><td>28</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">cfgpipe.py</div>
+<div class="diff"><div class="dl hunk">@@ -96,7 +96,6 @@</div><div class="dl ctx">             raise ValueError(
+</div><div class="dl ctx">                 f&quot;Parameter &#x27;{param_name}&#x27;: cannot parse &#x27;{value}&#x27; as integer&quot;
+</div><div class="dl ctx">             )
+</div><div class="dl del">-        # Check for scientific notation (not allowed)
+</div><div class="dl ctx">         if &#x27;e&#x27; in value.lower() or &#x27;E&#x27; in value:
+</div><div class="dl ctx">             raise ValueError(
+</div><div class="dl ctx">                 f&quot;Parameter &#x27;{param_name}&#x27;: scientific notation not allowed for integers&quot;
+</div><div class="dl hunk">@@ -106,16 +105,11 @@</div><div class="dl ctx">     elif expected_type == &#x27;float&#x27;:
+</div><div class="dl ctx">         value = value.strip()
+</div><div class="dl ctx">         try:
+</div><div class="dl del">-            # Try to parse as float
+</div><div class="dl ctx">             fval = float(value)
+</div><div class="dl del">-            # Check it&#x27;s not in scientific notation (contain &#x27;e&#x27; or &#x27;E&#x27;)
+</div><div class="dl ctx">             if &#x27;e&#x27; in value.lower() or &#x27;E&#x27; in value:
+</div><div class="dl ctx">                 raise ValueError(
+</div><div class="dl ctx">                     f&quot;Parameter &#x27;{param_name}&#x27;: scientific notation not allowed&quot;
+</div><div class="dl ctx">                 )
+</div><div class="dl del">-            # Re-encode to ensure canonical representation
+</div><div class="dl del">-            # Python&#x27;s str(float) may use scientific notation for large/small values
+</div><div class="dl del">-            # But we need to avoid that. We&#x27;ll just check the original doesn&#x27;t have &#x27;e&#x27;
+</div><div class="dl ctx">             return str(fval)
+</div><div class="dl ctx">         except ValueError:
+</div><div class="dl ctx">             raise ValueError(
+</div><div class="dl hunk">@@ -131,7 +125,6 @@</div><div class="dl ctx">                 f&quot;Parameter &#x27;{param_name}&#x27;: boolean must be &#x27;true&#x27; or &#x27;false&#x27;, got &#x27;{value}&#x27;&quot;
+</div><div class="dl ctx">             )
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    # Should never reach here
+</div><div class="dl ctx">     raise ValueError(f&quot;Parameter &#x27;{param_name}&#x27;: unknown type &#x27;{expected_type}&#x27;&quot;)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_2 ⚪</span>
+<span class="badge flat">Tests: 64/68 → 64/68 (+0)</span>
+<span class="badge good">LOC: 419 → 418 (-1)</span>
+<span class="badge flat">Functions: 7 tracked, 1 changed</span>
+<span class="badge good">Comments: 30→29 (-1)</span>
+<span class="badge good">Lint: 98→97 (-1)</span>
+<span class="badge flat">Skill: Edit:1</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (1)</h3>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>resolve_parameter</code></span>
+<span class="meta">cfgpipe.py</span>
+<span class="badge flat">CC 16→16 (+0)</span>
+<span class="badge">sloc: 49→49</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td><td>10</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>13</td><td>13</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>9</td><td>9</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>18</td><td>18</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>52</td><td>52</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -44,7 +44,6 @@</div><div class="dl ctx">         if pstore_value is not None:
+</div><div class="dl ctx">             candidates.append((&#x27;primary-store&#x27;, pstore_value))
+</div><div class="dl ctx">         # If missing key, fall through to next source
+</div><div class="dl del">-    # Debug: print(f&quot;DEBUG {param_name}: primary_store_url={primary_store_url}, pstore_key={param_spec.get(&#x27;primary-store&#x27;)}, value={pstore_value if &#x27;pstore_value&#x27; in locals() else &#x27;not_fetched&#x27;}&quot;)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Arg is highest priority
+</div><div class="dl ctx">     if &#x27;arg&#x27; in param_spec:
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (4)</h3>
+<details class="card"><summary>
+<span class="sev ">20</span>
+<span class="title"><code>main</code></span>
+<span class="meta">cfgpipe.py — CC 20, 71 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>11</td></tr>
+<tr><td>branches</td><td>19</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>7</td></tr>
+<tr><td>statements</td><td>16</td></tr>
+<tr><td>expressions</td><td>88</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">14</span>
+<span class="title"><code>validate_schema</code></span>
+<span class="meta">cfgpipe.py — CC 14, 37 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>9</td></tr>
+<tr><td>branches</td><td>12</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>19</td></tr>
+<tr><td>expressions</td><td>35</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>fetch_from_primary_store</code></span>
+<span class="meta">cfgpipe.py — CC 12, 67 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>7</td></tr>
+<tr><td>branches</td><td>11</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>5</td></tr>
+<tr><td>exception handlers</td><td>8</td></tr>
+<tr><td>statements</td><td>23</td></tr>
+<tr><td>expressions</td><td>46</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>parse_type</code></span>
+<span class="meta">cfgpipe.py — CC 12, 42 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>7</td></tr>
+<tr><td>branches</td><td>9</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>9</td></tr>
+<tr><td>exception handlers</td><td>4</td></tr>
+<tr><td>statements</td><td>16</td></tr>
+<tr><td>expressions</td><td>32</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">cfgpipe.py</div>
+<div class="diff"><div class="dl hunk">@@ -296,7 +296,6 @@</div><div class="dl ctx">         if pstore_value is not None:
+</div><div class="dl ctx">             candidates.append((&#x27;primary-store&#x27;, pstore_value))
+</div><div class="dl ctx">         # If missing key, fall through to next source
+</div><div class="dl del">-    # Debug: print(f&quot;DEBUG {param_name}: primary_store_url={primary_store_url}, pstore_key={param_spec.get(&#x27;primary-store&#x27;)}, value={pstore_value if &#x27;pstore_value&#x27; in locals() else &#x27;not_fetched&#x27;}&quot;)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Arg is highest priority
+</div><div class="dl ctx">     if &#x27;arg&#x27; in param_spec:
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_3 ⚪</span>
+<span class="badge flat">Tests: 99/107 → 99/107 (+0)</span>
+<span class="badge good">LOC: 479 → 476 (-3)</span>
+<span class="badge flat">Functions: 12 tracked, 4 changed</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (4)</h3>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>walk_schema</code></span>
+<span class="meta">cfgpipe.py</span>
+<span class="badge flat">CC 23→23 (+0)</span>
+<span class="badge">sloc: 64→62</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>13</td><td>13</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>18</td><td>18</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>5</td><td>5</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>8</td><td>8</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>28</td><td>28</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>52</td><td>52</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -2,10 +2,7 @@</div><div class="dl ctx">     schema: dict[str, Any],
+</div><div class="dl ctx">     path: str = &quot;&quot;
+</div><div class="dl ctx"> ) -&gt; list[tuple[str, dict[str, Any]]]:
+</div><div class="dl del">-    &quot;&quot;&quot;Walk a nested schema and yield (full_path, param_spec) for all parameters.
+</div><div class="dl del">-
+</div><div class="dl del">-    Also performs schema validation on-the-fly.
+</div><div class="dl del">-    &quot;&quot;&quot;
+</div><div class="dl add">+    &quot;&quot;&quot;Walk a nested schema and yield (full_path, param_spec) for all parameters.&quot;&quot;&quot;
+</div><div class="dl ctx">     if not isinstance(schema, dict):
+</div><div class="dl ctx">         raise ValidationError(f&quot;Schema must be a non-empty object at &#x27;{path}&#x27;&quot;)
+</div><div class="dl ctx"> 
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>resolve_parameter</code></span>
+<span class="meta">cfgpipe.py</span>
+<span class="badge flat">CC 16→16 (+0)</span>
+<span class="badge">sloc: 50→51</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td><td>10</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>13</td><td>13</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>9</td><td>9</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>18</td><td>18</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>52</td><td>52</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -43,17 +43,18 @@</div><div class="dl ctx">         if arg_name in arg_values:
+</div><div class="dl ctx">             candidates.append((&#x27;arg&#x27;, arg_values[arg_name]))
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    for i, (source, value) in enumerate(candidates):
+</div><div class="dl add">+    parsed_candidates = []
+</div><div class="dl add">+    for source, value in candidates:
+</div><div class="dl ctx">         try:
+</div><div class="dl ctx">             parsed_val = parse_type(value, param_type, full_path)
+</div><div class="dl del">-            candidates[i] = (source, parsed_val)
+</div><div class="dl add">+            parsed_candidates.append((source, parsed_val))
+</div><div class="dl ctx">         except ValueError as e:
+</div><div class="dl ctx">             raise ValueError(
+</div><div class="dl ctx">                 f&quot;Parameter &#x27;{full_path}&#x27;: {source} source parse error: &quot;
+</div><div class="dl ctx">                 f&quot;{str(e).removeprefix(f&#x27;Parameter \&quot;{full_path}\&quot;: &#x27;)}&quot;
+</div><div class="dl ctx">             )
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    if candidates:
+</div><div class="dl del">-        return candidates[-1][1]
+</div><div class="dl add">+    if parsed_candidates:
+</div><div class="dl add">+        return parsed_candidates[-1][1]
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     return None
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">4</span>
+<span class="title"><code>build_output</code></span>
+<span class="meta">cfgpipe.py</span>
+<span class="badge flat">CC 4→4 (+0)</span>
+<span class="badge">sloc: 24→23</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>13</td><td>13</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -14,7 +14,6 @@</div><div class="dl ctx">     output = {}
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     def insert(path: str, value: str):
+</div><div class="dl del">-        &quot;&quot;&quot;Insert a value at the given dotted path.&quot;&quot;&quot;
+</div><div class="dl ctx">         parts = path.split(&#x27;.&#x27;)
+</div><div class="dl ctx">         current = output
+</div><div class="dl ctx">         for part in parts[:-1]:
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">3</span>
+<span class="title"><code>insert</code></span>
+<span class="meta">cfgpipe.py</span>
+<span class="badge flat">CC 3→3 (+0)</span>
+<span class="badge">sloc: 9→8</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>10</td><td>10</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -1,5 +1,4 @@</div><div class="dl ctx">     def insert(path: str, value: str):
+</div><div class="dl del">-        &quot;&quot;&quot;Insert a value at the given dotted path.&quot;&quot;&quot;
+</div><div class="dl ctx">         parts = path.split(&#x27;.&#x27;)
+</div><div class="dl ctx">         current = output
+</div><div class="dl ctx">         for part in parts[:-1]:
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (4)</h3>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>main</code></span>
+<span class="meta">cfgpipe.py — CC 22, 75 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>7</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>91</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">18</span>
+<span class="title"><code>walk</code></span>
+<span class="meta">cfgpipe.py — CC 18, 41 sloc, depth 5</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>5</td></tr>
+<tr><td>comparisons</td><td>7</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>43</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">13</span>
+<span class="title"><code>parse_type</code></span>
+<span class="meta">cfgpipe.py — CC 13, 44 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>8</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>10</td></tr>
+<tr><td>exception handlers</td><td>4</td></tr>
+<tr><td>statements</td><td>17</td></tr>
+<tr><td>expressions</td><td>34</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">11</span>
+<span class="title"><code>fetch_from_primary_store</code></span>
+<span class="meta">cfgpipe.py — CC 11, 56 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>6</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>4</td></tr>
+<tr><td>exception handlers</td><td>8</td></tr>
+<tr><td>statements</td><td>21</td></tr>
+<tr><td>expressions</td><td>45</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">cfgpipe.py</div>
+<div class="diff"><div class="dl hunk">@@ -112,10 +112,7 @@</div><div class="dl ctx">     schema: dict[str, Any],
+</div><div class="dl ctx">     path: str = &quot;&quot;
+</div><div class="dl ctx"> ) -&gt; list[tuple[str, dict[str, Any]]]:
+</div><div class="dl del">-    &quot;&quot;&quot;Walk a nested schema and yield (full_path, param_spec) for all parameters.
+</div><div class="dl del">-
+</div><div class="dl del">-    Also performs schema validation on-the-fly.
+</div><div class="dl del">-    &quot;&quot;&quot;
+</div><div class="dl add">+    &quot;&quot;&quot;Walk a nested schema and yield (full_path, param_spec) for all parameters.&quot;&quot;&quot;
+</div><div class="dl ctx">     if not isinstance(schema, dict):
+</div><div class="dl ctx">         raise ValidationError(f&quot;Schema must be a non-empty object at &#x27;{path}&#x27;&quot;)
+</div><div class="dl ctx"> 
+</div><div class="dl hunk">@@ -334,18 +331,19 @@</div><div class="dl ctx">         if arg_name in arg_values:
+</div><div class="dl ctx">             candidates.append((&#x27;arg&#x27;, arg_values[arg_name]))
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    for i, (source, value) in enumerate(candidates):
+</div><div class="dl add">+    parsed_candidates = []
+</div><div class="dl add">+    for source, value in candidates:
+</div><div class="dl ctx">         try:
+</div><div class="dl ctx">             parsed_val = parse_type(value, param_type, full_path)
+</div><div class="dl del">-            candidates[i] = (source, parsed_val)
+</div><div class="dl add">+            parsed_candidates.append((source, parsed_val))
+</div><div class="dl ctx">         except ValueError as e:
+</div><div class="dl ctx">             raise ValueError(
+</div><div class="dl ctx">                 f&quot;Parameter &#x27;{full_path}&#x27;: {source} source parse error: &quot;
+</div><div class="dl ctx">                 f&quot;{str(e).removeprefix(f&#x27;Parameter \&quot;{full_path}\&quot;: &#x27;)}&quot;
+</div><div class="dl ctx">             )
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    if candidates:
+</div><div class="dl del">-        return candidates[-1][1]
+</div><div class="dl add">+    if parsed_candidates:
+</div><div class="dl add">+        return parsed_candidates[-1][1]
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     return None
+</div><div class="dl ctx"> 
+</div><div class="dl hunk">@@ -366,7 +364,6 @@</div><div class="dl ctx">     output = {}
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     def insert(path: str, value: str):
+</div><div class="dl del">-        &quot;&quot;&quot;Insert a value at the given dotted path.&quot;&quot;&quot;
+</div><div class="dl ctx">         parts = path.split(&#x27;.&#x27;)
+</div><div class="dl ctx">         current = output
+</div><div class="dl ctx">         for part in parts[:-1]:
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_4 ⚪</span>
+<span class="badge flat">Tests: 101/137 → 101/137 (+0)</span>
+<span class="badge flat">LOC: 476 → 476 (+0)</span>
+<span class="badge flat">Functions: 12 tracked, 0 changed</span>
+<span class="badge flat">Skill: TodoWrite:1</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (6)</h3>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>walk_schema</code></span>
+<span class="meta">cfgpipe.py — CC 23, 62 sloc, depth 5</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>13</td></tr>
+<tr><td>branches</td><td>18</td></tr>
+<tr><td>nesting depth</td><td>5</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>52</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>main</code></span>
+<span class="meta">cfgpipe.py — CC 22, 75 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>7</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>91</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">18</span>
+<span class="title"><code>walk</code></span>
+<span class="meta">cfgpipe.py — CC 18, 41 sloc, depth 5</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>5</td></tr>
+<tr><td>comparisons</td><td>7</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>43</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>resolve_parameter</code></span>
+<span class="meta">cfgpipe.py — CC 16, 51 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>9</td></tr>
+<tr><td>exception handlers</td><td>4</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>52</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">13</span>
+<span class="title"><code>parse_type</code></span>
+<span class="meta">cfgpipe.py — CC 13, 44 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>8</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>10</td></tr>
+<tr><td>exception handlers</td><td>4</td></tr>
+<tr><td>statements</td><td>17</td></tr>
+<tr><td>expressions</td><td>34</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">11</span>
+<span class="title"><code>fetch_from_primary_store</code></span>
+<span class="meta">cfgpipe.py — CC 11, 56 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>6</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>4</td></tr>
+<tr><td>exception handlers</td><td>8</td></tr>
+<tr><td>statements</td><td>21</td></tr>
+<tr><td>expressions</td><td>45</td></tr>
+</tbody></table>
+</div></details>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_5 ⚪</span>
+<span class="badge flat">Tests: 135/187 → 135/187 (+0)</span>
+<span class="badge good">LOC: 668 → 625 (-43)</span>
+<span class="badge flat">Functions: 18 tracked, 2 changed</span>
+<span class="badge good">CC: 167→154 (-13)</span>
+<span class="badge good">Comments: 28→24 (-4)</span>
+<span class="badge good">Lint: 161→152 (-9)</span>
+<span class="badge flat">Skill: TodoWrite:1</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (2)</h3>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>walk_schema</code></span>
+<span class="meta">cfgpipe.py</span>
+<span class="badge good">CC 23→20 (-3)</span>
+<span class="badge">sloc: 62→58</span>
+<span class="badge good">if-statements: 13→11 (-2)</span>
+<span class="badge good">branches: 18→16 (-2)</span>
+<span class="badge good">comparisons: 8→7 (-1)</span>
+<span class="badge good">statements: 28→25 (-3)</span>
+<span class="badge good">expressions: 52→48 (-4)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>13</td><td>11</td><td class="good">-2</td></tr>
+<tr><td>branches</td><td>18</td><td>16</td><td class="good">-2</td></tr>
+<tr><td>nesting depth</td><td>5</td><td>5</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>8</td><td>7</td><td class="good">-1</td></tr>
+<tr><td>exception handlers</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>28</td><td>25</td><td class="good">-3</td></tr>
+<tr><td>expressions</td><td>52</td><td>48</td><td class="good">-4</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -54,15 +54,10 @@</div><div class="dl ctx">             else:
+</div><div class="dl ctx">                 # Invalid: should be either a param (dict with &#x27;type&#x27;) or a group (dict without)
+</div><div class="dl ctx">                 if isinstance(value, (list, tuple, int, float, bool, str)):
+</div><div class="dl del">-                    if &#x27;type&#x27; in value if isinstance(value, dict) else False:
+</div><div class="dl del">-                        pass
+</div><div class="dl del">-                    else:
+</div><div class="dl del">-                        # Check if it looks like a value type
+</div><div class="dl del">-                        if not isinstance(value, dict):
+</div><div class="dl del">-                            raise ValidationError(
+</div><div class="dl del">-                                f&quot;Entry &#x27;{full_path}&#x27;: must be an object (parameter or group), &quot;
+</div><div class="dl del">-                                f&quot;got {type(value).__name__}&quot;
+</div><div class="dl del">-                            )
+</div><div class="dl add">+                    raise ValidationError(
+</div><div class="dl add">+                        f&quot;Entry &#x27;{full_path}&#x27;: must be an object (parameter or group), &quot;
+</div><div class="dl add">+                        f&quot;got {type(value).__name__}&quot;
+</div><div class="dl add">+                    )
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     try:
+</div><div class="dl ctx">         walk(schema, &quot;&quot;)
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">18</span>
+<span class="title"><code>walk</code></span>
+<span class="meta">cfgpipe.py</span>
+<span class="badge good">CC 18→15 (-3)</span>
+<span class="badge">sloc: 41→37</span>
+<span class="badge good">if-statements: 10→8 (-2)</span>
+<span class="badge good">branches: 13→11 (-2)</span>
+<span class="badge good">comparisons: 7→6 (-1)</span>
+<span class="badge good">statements: 18→15 (-3)</span>
+<span class="badge good">expressions: 43→39 (-4)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td><td>8</td><td class="good">-2</td></tr>
+<tr><td>branches</td><td>13</td><td>11</td><td class="good">-2</td></tr>
+<tr><td>nesting depth</td><td>5</td><td>5</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>7</td><td>6</td><td class="good">-1</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>18</td><td>15</td><td class="good">-3</td></tr>
+<tr><td>expressions</td><td>43</td><td>39</td><td class="good">-4</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -40,12 +40,7 @@</div><div class="dl ctx">             else:
+</div><div class="dl ctx">                 # Invalid: should be either a param (dict with &#x27;type&#x27;) or a group (dict without)
+</div><div class="dl ctx">                 if isinstance(value, (list, tuple, int, float, bool, str)):
+</div><div class="dl del">-                    if &#x27;type&#x27; in value if isinstance(value, dict) else False:
+</div><div class="dl del">-                        pass
+</div><div class="dl del">-                    else:
+</div><div class="dl del">-                        # Check if it looks like a value type
+</div><div class="dl del">-                        if not isinstance(value, dict):
+</div><div class="dl del">-                            raise ValidationError(
+</div><div class="dl del">-                                f&quot;Entry &#x27;{full_path}&#x27;: must be an object (parameter or group), &quot;
+</div><div class="dl del">-                                f&quot;got {type(value).__name__}&quot;
+</div><div class="dl del">-                            )
+</div><div class="dl add">+                    raise ValidationError(
+</div><div class="dl add">+                        f&quot;Entry &#x27;{full_path}&#x27;: must be an object (parameter or group), &quot;
+</div><div class="dl add">+                        f&quot;got {type(value).__name__}&quot;
+</div><div class="dl add">+                    )
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (6)</h3>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>main</code></span>
+<span class="meta">cfgpipe.py — CC 22, 78 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>7</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>94</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>parse_type</code></span>
+<span class="meta">cfgpipe.py — CC 22, 72 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>16</td></tr>
+<tr><td>branches</td><td>19</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>17</td></tr>
+<tr><td>exception handlers</td><td>4</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>54</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">16</span>
+<span class="title"><code>resolve_parameter</code></span>
+<span class="meta">cfgpipe.py — CC 16, 51 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>9</td></tr>
+<tr><td>exception handlers</td><td>4</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>52</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>parse_duration</code></span>
+<span class="meta">cfgpipe.py — CC 12, 40 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>11</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>14</td></tr>
+<tr><td>expressions</td><td>40</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">11</span>
+<span class="title"><code>fetch_from_primary_store</code></span>
+<span class="meta">cfgpipe.py — CC 11, 56 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>6</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>4</td></tr>
+<tr><td>exception handlers</td><td>8</td></tr>
+<tr><td>statements</td><td>21</td></tr>
+<tr><td>expressions</td><td>45</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">11</span>
+<span class="title"><code>to_string_representation</code></span>
+<span class="meta">cfgpipe.py — CC 11, 23 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>9</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>7</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>13</td></tr>
+<tr><td>expressions</td><td>26</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">cfgpipe.py</div>
+<div class="diff"><div class="dl hunk">@@ -125,46 +125,8 @@</div><div class="dl ctx">     return value
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl del">-def parse_map(value: str) -&gt; str:
+</div><div class="dl del">-    &quot;&quot;&quot;Parse a key:value map into a deterministic string representation.
+</div><div class="dl del">-
+</div><div class="dl del">-    Comma-separated key:value pairs, splitting on first colon.
+</div><div class="dl del">-    Returns a comma-separated string with pairs sorted by key.
+</div><div class="dl del">-    &quot;&quot;&quot;
+</div><div class="dl del">-    value = value.strip()
+</div><div class="dl del">-    if not value:
+</div><div class="dl del">-        return &#x27;&#x27;
+</div><div class="dl del">-
+</div><div class="dl del">-    pairs = value.split(&#x27;,&#x27;)
+</div><div class="dl del">-    parsed = {}
+</div><div class="dl del">-    for pair in pairs:
+</div><div class="dl del">-        if &#x27;:&#x27; not in pair:
+</div><div class="dl del">-            raise ValueError(f&quot;cannot parse &#x27;{value}&#x27; as map: pair &#x27;{pair}&#x27; has no colon&quot;)
+</div><div class="dl del">-        key, _, val = pair.partition(&#x27;:&#x27;)
+</div><div class="dl del">-        # Key is before the first colon, val is the rest
+</div><div class="dl del">-        parsed[key] = val
+</div><div class="dl del">-
+</div><div class="dl del">-    # Sort by key and build deterministic representation
+</div><div class="dl del">-    sorted_items = sorted(parsed.items(), key=lambda x: x[0])
+</div><div class="dl del">-    return &#x27;,&#x27;.join(f&quot;{key}:{val}&quot; for key, val in sorted_items)
+</div><div class="dl del">-
+</div><div class="dl del">-
+</div><div class="dl del">-def parse_list(value: str) -&gt; str:
+</div><div class="dl del">-    &quot;&quot;&quot;Parse a comma-separated list of strings.
+</div><div class="dl del">-
+</div><div class="dl del">-    Preserves insertion order (the original order).
+</div><div class="dl del">-    Returns a comma-separated string (same as input, but may be useful for validation).
+</div><div class="dl del">-    &quot;&quot;&quot;
+</div><div class="dl del">-    value = value.strip()
+</div><div class="dl del">-    return value  # Insertion order preserved as input string
+</div><div class="dl del">-
+</div><div class="dl del">-
+</div><div class="dl del">-def parse_redacted(value: str) -&gt; str:
+</div><div class="dl del">-    &quot;&quot;&quot;Parse a redacted value.
+</div><div class="dl del">-
+</div><div class="dl del">-    Accepts any input, returns the value as-is (stored for later masking).
+</div><div class="dl del">-    &quot;&quot;&quot;
+</div><div class="dl del">-    return value
+</div><div class="dl add">+
+</div><div class="dl add">+
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> def parse_type(value: str, expected_type: str, full_path: str) -&gt; Any:
+</div><div class="dl hunk">@@ -311,15 +273,10 @@</div><div class="dl ctx">             else:
+</div><div class="dl ctx">                 # Invalid: should be either a param (dict with &#x27;type&#x27;) or a group (dict without)
+</div><div class="dl ctx">                 if isinstance(value, (list, tuple, int, float, bool, str)):
+</div><div class="dl del">-                    if &#x27;type&#x27; in value if isinstance(value, dict) else False:
+</div><div class="dl del">-                        pass
+</div><div class="dl del">-                    else:
+</div><div class="dl del">-                        # Check if it looks like a value type
+</div><div class="dl del">-                        if not isinstance(value, dict):
+</div><div class="dl del">-                            raise ValidationError(
+</div><div class="dl del">-                                f&quot;Entry &#x27;{full_path}&#x27;: must be an object (parameter or group), &quot;
+</div><div class="dl del">-                                f&quot;got {type(value).__name__}&quot;
+</div><div class="dl del">-                            )
+</div><div class="dl add">+                    raise ValidationError(
+</div><div class="dl add">+                        f&quot;Entry &#x27;{full_path}&#x27;: must be an object (parameter or group), &quot;
+</div><div class="dl add">+                        f&quot;got {type(value).__name__}&quot;
+</div><div class="dl add">+                    )
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     try:
+</div><div class="dl ctx">         walk(schema, &quot;&quot;)
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_6 ⚪</span>
+<span class="badge flat">Tests: 117/216 → 117/216 (+0)</span>
+<span class="badge good">LOC: 974 → 970 (-4)</span>
+<span class="badge flat">Functions: 19 tracked, 2 changed</span>
+<span class="badge good">Lint: 182→181 (-1)</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (2)</h3>
+<details class="card"><summary>
+<span class="sev low">19</span>
+<span class="title"><code>resolve_parameter</code></span>
+<span class="meta">cfgpipe.py</span>
+<span class="badge flat">CC 19→19 (+0)</span>
+<span class="badge">sloc: 64→62</span>
+<span class="badge good">if-statements: 12→11 (-1)</span>
+<span class="badge good">branches: 15→14 (-1)</span>
+<span class="badge good">statements: 20→18 (-2)</span>
+<span class="badge bad">expressions: 63→64 (+1)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td><td>11</td><td class="good">-1</td></tr>
+<tr><td>branches</td><td>15</td><td>14</td><td class="good">-1</td></tr>
+<tr><td>nesting depth</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>12</td><td>12</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>20</td><td>18</td><td class="good">-2</td></tr>
+<tr><td>expressions</td><td>63</td><td>64</td><td class="bad">+1</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -68,7 +68,4 @@</div><div class="dl ctx">                 f&quot;{str(e).removeprefix(f&#x27;Parameter \&quot;{full_path}\&quot;: &#x27;)}&quot;
+</div><div class="dl ctx">             )
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    if parsed_candidates:
+</div><div class="dl del">-        return parsed_candidates[-1][1]
+</div><div class="dl del">-
+</div><div class="dl del">-    return None
+</div><div class="dl add">+    return parsed_candidates[-1][1] if parsed_candidates else None
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">14</span>
+<span class="title"><code>parse_cli_args</code></span>
+<span class="meta">cfgpipe.py</span>
+<span class="badge flat">CC 14→14 (+0)</span>
+<span class="badge">sloc: 56→55</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td><td>12</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>13</td><td>13</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>13</td><td>13</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>14</td><td>14</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>53</td><td>53</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -56,9 +56,8 @@</div><div class="dl ctx">             name_part, value = arg.split(&#x27;=&#x27;, 1)
+</div><div class="dl ctx">             name = name_part.lstrip(&#x27;-&#x27;)
+</div><div class="dl ctx">             result[name] = value
+</div><div class="dl del">-            i += 1
+</div><div class="dl ctx">         else:
+</div><div class="dl ctx">             # Positional argument (like schema file) - skip, handled by main()
+</div><div class="dl ctx">             pass
+</div><div class="dl del">-            i += 1
+</div><div class="dl add">+        i += 1
+</div><div class="dl ctx">     return result, store_config
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (8)</h3>
+<details class="card"><summary>
+<span class="sev ">32</span>
+<span class="title"><code>watch_mode</code></span>
+<span class="meta">cfgpipe.py — CC 32, 124 sloc, depth 11</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>16</td></tr>
+<tr><td>branches</td><td>30</td></tr>
+<tr><td>nesting depth</td><td>11</td></tr>
+<tr><td>comparisons</td><td>12</td></tr>
+<tr><td>exception handlers</td><td>10</td></tr>
+<tr><td>statements</td><td>35</td></tr>
+<tr><td>expressions</td><td>121</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">26</span>
+<span class="title"><code>main</code></span>
+<span class="meta">cfgpipe.py — CC 26, 102 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>14</td></tr>
+<tr><td>branches</td><td>24</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>12</td></tr>
+<tr><td>exception handlers</td><td>7</td></tr>
+<tr><td>statements</td><td>22</td></tr>
+<tr><td>expressions</td><td>119</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>parse_type</code></span>
+<span class="meta">cfgpipe.py — CC 22, 72 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>16</td></tr>
+<tr><td>branches</td><td>19</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>17</td></tr>
+<tr><td>exception handlers</td><td>4</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>54</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>walk_schema</code></span>
+<span class="meta">cfgpipe.py — CC 22, 64 sloc, depth 5</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>13</td></tr>
+<tr><td>branches</td><td>18</td></tr>
+<tr><td>nesting depth</td><td>5</td></tr>
+<tr><td>comparisons</td><td>9</td></tr>
+<tr><td>exception handlers</td><td>2</td></tr>
+<tr><td>statements</td><td>27</td></tr>
+<tr><td>expressions</td><td>55</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">17</span>
+<span class="title"><code>walk</code></span>
+<span class="meta">cfgpipe.py — CC 17, 42 sloc, depth 5</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>5</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>17</td></tr>
+<tr><td>expressions</td><td>46</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>parse_duration</code></span>
+<span class="meta">cfgpipe.py — CC 12, 40 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>11</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>14</td></tr>
+<tr><td>expressions</td><td>40</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">11</span>
+<span class="title"><code>fetch_from_primary_store</code></span>
+<span class="meta">cfgpipe.py — CC 11, 58 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>6</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>4</td></tr>
+<tr><td>exception handlers</td><td>8</td></tr>
+<tr><td>statements</td><td>21</td></tr>
+<tr><td>expressions</td><td>47</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">11</span>
+<span class="title"><code>to_string_representation</code></span>
+<span class="meta">cfgpipe.py — CC 11, 23 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>9</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>7</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>13</td></tr>
+<tr><td>expressions</td><td>26</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">cfgpipe.py</div>
+<div class="diff"><div class="dl hunk">@@ -70,11 +70,10 @@</div><div class="dl ctx">             name_part, value = arg.split(&#x27;=&#x27;, 1)
+</div><div class="dl ctx">             name = name_part.lstrip(&#x27;-&#x27;)
+</div><div class="dl ctx">             result[name] = value
+</div><div class="dl del">-            i += 1
+</div><div class="dl ctx">         else:
+</div><div class="dl ctx">             # Positional argument (like schema file) - skip, handled by main()
+</div><div class="dl ctx">             pass
+</div><div class="dl del">-            i += 1
+</div><div class="dl add">+        i += 1
+</div><div class="dl ctx">     return result, store_config
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl hunk">@@ -593,10 +592,7 @@</div><div class="dl ctx">                 f&quot;{str(e).removeprefix(f&#x27;Parameter \&quot;{full_path}\&quot;: &#x27;)}&quot;
+</div><div class="dl ctx">             )
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    if parsed_candidates:
+</div><div class="dl del">-        return parsed_candidates[-1][1]
+</div><div class="dl del">-
+</div><div class="dl del">-    return None
+</div><div class="dl add">+    return parsed_candidates[-1][1] if parsed_candidates else None
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> def to_string_representation(value: Any, value_type: str) -&gt; str:
+</div></div>
+</div>
+</div></div>
+</div></body></html>

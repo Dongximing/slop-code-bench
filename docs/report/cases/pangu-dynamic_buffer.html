@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slop Analysis: dynamic_buffer</title>
+<style>
+:root {
+    --bg:#0d1117; --panel:#161b22; --border:#30363d; --fg:#c9d1d9; --muted:#8b949e;
+    --add-bg:#0f2d1a; --add-fg:#7ee787; --del-bg:#3d1418; --del-fg:#ffa198;
+    --hunk:#1f6feb; --good:#2ea043; --bad:#da3633; --flat:#6e7681;
+}
+* { box-sizing:border-box; }
+body { margin:0; font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--fg); }
+header { padding:20px 24px; border-bottom:1px solid var(--border); background:var(--panel); }
+header h1 { margin:0 0 4px; font-size:20px; }
+header p { margin:0; color:var(--muted); font-size:13px; }
+.container { padding:16px 24px 60px; }
+.overview { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin:16px 0; }
+.stat { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.stat .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.stat .value { font-size:24px; font-weight:700; margin-top:4px; }
+.stat .value.good { color:var(--good); }
+.stat .value.bad { color:var(--bad); }
+.stat .value.flat { color:var(--muted); }
+.checkpoint { background:var(--panel); border:1px solid var(--border); border-radius:8px; margin:20px 0; overflow:hidden; }
+.cp-header { padding:14px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.cp-title { font-size:16px; font-weight:700; }
+.badge { font-size:11px; padding:2px 8px; border-radius:10px; background:#21262d; color:var(--fg); border:1px solid var(--border); }
+.badge.good { background:rgba(46,160,67,.18); color:var(--add-fg); border-color:var(--good); }
+.badge.bad { background:rgba(218,54,51,.18); color:var(--del-fg); border-color:var(--bad); }
+.badge.flat { color:var(--muted); }
+.cp-body { padding:16px; }
+.summary { border:1px solid var(--border); border-radius:8px; background:var(--bg); padding:14px 16px; margin-bottom:16px; }
+.summary h3 { margin:0 0 8px; font-size:14px; }
+.sumtbl { width:100%; font-size:12px; border-collapse:collapse; }
+.sumtbl th, .sumtbl td { text-align:left; padding:4px 10px; border-bottom:1px solid var(--border); }
+.sumtbl th { color:var(--muted); font-weight:600; }
+td.good { color:var(--add-fg); }
+td.bad { color:var(--del-fg); }
+td.flat { color:var(--muted); }
+details.card { border:1px solid var(--border); border-radius:8px; margin-bottom:8px; background:var(--bg); overflow:hidden; }
+details.card > summary { cursor:pointer; padding:10px 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; list-style:none; }
+details.card > summary::-webkit-details-marker { display:none; }
+details.card > summary:hover { background:#11161d; }
+.sev { flex:none; min-width:36px; text-align:center; font-weight:700; font-size:14px; color:#fff;
+        background:linear-gradient(135deg,#da3633,#9e1c1c); padding:5px 7px; border-radius:6px; }
+.sev.low { background:linear-gradient(135deg,#bb8009,#7a5300); }
+.sev.ok { background:linear-gradient(135deg,#2ea043,#196c2e); }
+.title code { font-size:13px; color:#79c0ff; }
+.meta { color:var(--muted); font-size:12px; }
+.detail { border-top:1px solid var(--border); padding:12px; }
+.pattbl { width:100%; max-width:500px; font-size:12px; margin:0 0 12px; border-collapse:collapse; }
+.pattbl th, .pattbl td { text-align:left; padding:3px 10px; border-bottom:1px solid var(--border); }
+.pattbl th { color:var(--muted); font-weight:600; }
+.diff { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px;
+         background:#010409; border:1px solid var(--border); border-radius:6px; overflow:auto; max-height:520px; }
+.dl { white-space:pre; padding:0 10px; }
+.dl.add { background:var(--add-bg); color:var(--add-fg); }
+.dl.del { background:var(--del-bg); color:var(--del-fg); }
+.dl.hunk { color:var(--hunk); background:#0d1117; }
+.dl.ctx { color:var(--fg); }
+.no-change { color:var(--muted); font-style:italic; padding:15px; text-align:center; }
+.file-section { margin:12px 0; }
+.file-header { background:#343a40; color:white; padding:6px 12px; font-family:monospace; font-size:12px; border-radius:6px 6px 0 0; }
+</style>
+</head>
+<body>
+<header>
+<h1>Slop Analysis: dynamic_buffer</h1>
+<p>Function-level AST analysis. <b>before</b> = <code>snapshot/</code> · <b>after</b> = <code>after_skill/snapshot/</code>. Severity = cyclomatic complexity.</p>
+</header>
+<div class="container">
+
+<div class="overview">
+<div class="stat"><div class="label">Checkpoints</div><div class="value">4</div></div>
+<div class="stat"><div class="label">Functions Tracked</div><div class="value">279</div></div>
+<div class="stat"><div class="label">Functions Changed</div><div class="value">2</div></div>
+<div class="stat"><div class="label">Net Test Δ</div><div class="value flat">+0</div></div>
+<div class="stat"><div class="label">Net LOC Δ</div><div class="value good">-19</div></div>
+</div>
+
+<div class="summary"><h3>Pattern impact across all matched functions</h3>
+<table class="sumtbl"><thead><tr><th>pattern</th><th class="good">↓ improved</th><th class="bad">↑ regressed</th><th>unchanged</th><th>net Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td class="good">2</td><td class="bad">0</td><td class="flat">277</td><td class="good">-4</td></tr>
+<tr><td>branches</td><td class="good">2</td><td class="bad">0</td><td class="flat">277</td><td class="good">-5</td></tr>
+<tr><td>nesting depth</td><td class="good">1</td><td class="bad">1</td><td class="flat">277</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td class="good">2</td><td class="bad">0</td><td class="flat">277</td><td class="good">-8</td></tr>
+<tr><td>exception handlers</td><td class="good">0</td><td class="bad">0</td><td class="flat">279</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td class="good">2</td><td class="bad">0</td><td class="flat">277</td><td class="good">-5</td></tr>
+<tr><td>expressions</td><td class="good">2</td><td class="bad">0</td><td class="flat">277</td><td class="good">-40</td></tr>
+</tbody></table></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_1 ⚪</span>
+<span class="badge flat">Tests: 0/30 → 0/30 (+0)</span>
+<span class="badge flat">LOC: 0 → 0 (+0)</span>
+<span class="badge flat">Functions: 27 tracked, 0 changed</span>
+<span class="badge good">Lint: 202→201 (-1)</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (9)</h3>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>_test_combinations</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 27, 49 sloc, depth 9</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>14</td></tr>
+<tr><td>branches</td><td>20</td></tr>
+<tr><td>nesting depth</td><td>9</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>23</td></tr>
+<tr><td>expressions</td><td>75</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>_verify_string_op</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 23, 39 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>14</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>16</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>60</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">21</span>
+<span class="title"><code>_infer_column_transforms</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 21, 82 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>14</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>19</td></tr>
+<tr><td>expressions</td><td>38</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">13</span>
+<span class="title"><code>_generate_python_row_transform</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 13, 34 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>11</td></tr>
+<tr><td>branches</td><td>12</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>4</td></tr>
+<tr><td>expressions</td><td>85</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>_generate_javascript_row_transform</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 12, 31 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>11</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>10</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>4</td></tr>
+<tr><td>expressions</td><td>79</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">12</span>
+<span class="title"><code>read_sample_data</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 12, 33 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>6</td></tr>
+<tr><td>branches</td><td>11</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>4</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>14</td></tr>
+<tr><td>expressions</td><td>34</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">11</span>
+<span class="title"><code>_infer_linear_transform</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 11, 29 sloc, depth 5</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>5</td></tr>
+<tr><td>branches</td><td>8</td></tr>
+<tr><td>nesting depth</td><td>5</td></tr>
+<tr><td>comparisons</td><td>5</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>11</td></tr>
+<tr><td>expressions</td><td>36</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">10</span>
+<span class="title"><code>_format_value_for_code</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 10, 20 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>7</td></tr>
+<tr><td>branches</td><td>7</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>3</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>11</td></tr>
+<tr><td>expressions</td><td>16</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">10</span>
+<span class="title"><code>_infer_filters</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 10, 27 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>5</td></tr>
+<tr><td>branches</td><td>8</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>5</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>10</td></tr>
+<tr><td>expressions</td><td>32</td></tr>
+</tbody></table>
+</div></details>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_2 ⚪</span>
+<span class="badge flat">Tests: 0/50 → 0/50 (+0)</span>
+<span class="badge flat">LOC: 219 → 219 (+0)</span>
+<span class="badge flat">Functions: 38 tracked, 0 changed</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (14)</h3>
+<details class="card"><summary>
+<span class="sev ">28</span>
+<span class="title"><code>_infer_column_and_stateful_transforms</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 28, 105 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>20</td></tr>
+<tr><td>branches</td><td>23</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>59</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>_test_combinations</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 27, 49 sloc, depth 9</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>14</td></tr>
+<tr><td>branches</td><td>20</td></tr>
+<tr><td>nesting depth</td><td>9</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>23</td></tr>
+<tr><td>expressions</td><td>75</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">25</span>
+<span class="title"><code>_infer_state_machine_transform</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 25, 64 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>13</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>25</td></tr>
+<tr><td>expressions</td><td>68</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>_verify_string_op</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 23, 39 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>14</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>16</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>60</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>_generate_python_row_transform</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 22, 43 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>15</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>6</td></tr>
+<tr><td>expressions</td><td>122</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>_infer_prefix_transform</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 22, 64 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>9</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>25</td></tr>
+<tr><td>expressions</td><td>60</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">20</span>
+<span class="title"><code>_infer_sliding_window_transform</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 20, 53 sloc, depth 6</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>10</td></tr>
+<tr><td>branches</td><td>16</td></tr>
+<tr><td>nesting depth</td><td>6</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>21</td></tr>
+<tr><td>expressions</td><td>65</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">14</span>
+<span class="title"><code>_generate_stateful_init_code</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 14, 27 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>5</td></tr>
+<tr><td>branches</td><td>8</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>5</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>9</td></tr>
+<tr><td>expressions</td><td>45</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">14</span>
+<span class="title"><code>_infer_filters_and_neighbors</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 14, 36 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>7</td></tr>
+<tr><td>branches</td><td>12</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>5</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>12</td></tr>
+<tr><td>expressions</td><td>44</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev low">13</span>
+<span class="title"><code>_infer_duplicate_run_filter</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 13, 33 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>6</td></tr>
+<tr><td>branches</td><td>10</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>5</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>10</td></tr>
+<tr><td>expressions</td><td>35</td></tr>
+</tbody></table>
+</div></details>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_3 ⚪</span>
+<span class="badge flat">Tests: 0/104 → 0/104 (+0)</span>
+<span class="badge flat">LOC: 2963 → 2963 (+0)</span>
+<span class="badge flat">Functions: 107 tracked, 0 changed</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (40)</h3>
+<details class="card"><summary>
+<span class="sev ">28</span>
+<span class="title"><code>_infer_column_and_stateful_transforms</code></span>
+<span class="meta">dynamic_buffer.py — CC 28, 105 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>20</td></tr>
+<tr><td>branches</td><td>23</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>59</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">28</span>
+<span class="title"><code>_infer_column_and_stateful_transforms</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 28, 105 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>20</td></tr>
+<tr><td>branches</td><td>23</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>59</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>_test_combinations</code></span>
+<span class="meta">dynamic_buffer.py — CC 27, 49 sloc, depth 9</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>14</td></tr>
+<tr><td>branches</td><td>20</td></tr>
+<tr><td>nesting depth</td><td>9</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>23</td></tr>
+<tr><td>expressions</td><td>75</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>_test_combinations</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 27, 49 sloc, depth 9</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>14</td></tr>
+<tr><td>branches</td><td>20</td></tr>
+<tr><td>nesting depth</td><td>9</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>23</td></tr>
+<tr><td>expressions</td><td>75</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">25</span>
+<span class="title"><code>_infer_state_machine_transform</code></span>
+<span class="meta">dynamic_buffer.py — CC 25, 64 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>13</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>25</td></tr>
+<tr><td>expressions</td><td>68</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">25</span>
+<span class="title"><code>_infer_state_machine_transform</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 25, 64 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>13</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>25</td></tr>
+<tr><td>expressions</td><td>68</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>_verify_string_op</code></span>
+<span class="meta">dynamic_buffer.py — CC 23, 39 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>14</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>16</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>60</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>_verify_string_op</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 23, 39 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>14</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>16</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>60</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>_format_value_for_code</code></span>
+<span class="meta">dynamic_buffer.py — CC 22, 46 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>18</td></tr>
+<tr><td>branches</td><td>18</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>24</td></tr>
+<tr><td>expressions</td><td>37</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>_generate_python_row_transform</code></span>
+<span class="meta">dynamic_buffer.py — CC 22, 43 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>15</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>6</td></tr>
+<tr><td>expressions</td><td>122</td></tr>
+</tbody></table>
+</div></details>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_4 ⚪</span>
+<span class="badge flat">Tests: 0/172 → 0/172 (+0)</span>
+<span class="badge good">LOC: 2995 → 2976 (-19)</span>
+<span class="badge flat">Functions: 107 tracked, 2 changed</span>
+<span class="badge good">CC: 954→941 (-13)</span>
+<span class="badge good">Comments: 289→288 (-1)</span>
+<span class="badge good">Lint: 815→811 (-4)</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (2)</h3>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>_verify_string_op</code></span>
+<span class="meta">dynamic_buffer.py</span>
+<span class="badge good">CC 23→14 (-9)</span>
+<span class="badge">sloc: 39→27</span>
+<span class="badge good">if-statements: 12→9 (-3)</span>
+<span class="badge good">branches: 14→10 (-4)</span>
+<span class="badge bad">nesting depth: 3→4 (+1)</span>
+<span class="badge good">comparisons: 16→10 (-6)</span>
+<span class="badge good">statements: 18→14 (-4)</span>
+<span class="badge good">expressions: 60→31 (-29)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td><td>9</td><td class="good">-3</td></tr>
+<tr><td>branches</td><td>14</td><td>10</td><td class="good">-4</td></tr>
+<tr><td>nesting depth</td><td>3</td><td>4</td><td class="bad">+1</td></tr>
+<tr><td>comparisons</td><td>16</td><td>10</td><td class="good">-6</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>18</td><td>14</td><td class="good">-4</td></tr>
+<tr><td>expressions</td><td>60</td><td>31</td><td class="good">-29</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -12,36 +12,19 @@</div><div class="dl ctx">             in_val = input_rows[idx].get(in_col)
+</div><div class="dl ctx">             out_val = output_rows[kept_indices.index(idx)].get(out_col)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-            if not isinstance(in_val, str) or not isinstance(out_val, str):
+</div><div class="dl del">-                return False
+</div><div class="dl del">-
+</div><div class="dl del">-            if op == &#x27;lower&#x27; and in_val.lower() != out_val:
+</div><div class="dl del">-                return False
+</div><div class="dl del">-            elif op == &#x27;upper&#x27; and in_val.upper() != out_val:
+</div><div class="dl del">-                return False
+</div><div class="dl del">-            elif op == &#x27;trim&#x27; and in_val.strip() != out_val:
+</div><div class="dl del">-                return False
+</div><div class="dl del">-
+</div><div class="dl del">-    # Check all rows match the transformation
+</div><div class="dl del">-    for idx in kept_indices:
+</div><div class="dl del">-        if idx &lt; len(input_rows) and idx &lt; len(output_rows):
+</div><div class="dl del">-            in_val = input_rows[idx].get(in_col)
+</div><div class="dl del">-            out_val = output_rows[kept_indices.index(idx)].get(out_col)
+</div><div class="dl del">-
+</div><div class="dl ctx">             if in_val is None and out_val is None:
+</div><div class="dl ctx">                 continue
+</div><div class="dl ctx">             if not isinstance(in_val, str) or not isinstance(out_val, str):
+</div><div class="dl ctx">                 return False
+</div><div class="dl ctx"> 
+</div><div class="dl del">-            transformed = None
+</div><div class="dl ctx">             if op == &#x27;lower&#x27;:
+</div><div class="dl del">-                transformed = in_val.lower()
+</div><div class="dl add">+                if in_val.lower() != out_val:
+</div><div class="dl add">+                    return False
+</div><div class="dl ctx">             elif op == &#x27;upper&#x27;:
+</div><div class="dl del">-                transformed = in_val.upper()
+</div><div class="dl add">+                if in_val.upper() != out_val:
+</div><div class="dl add">+                    return False
+</div><div class="dl ctx">             elif op == &#x27;trim&#x27;:
+</div><div class="dl del">-                transformed = in_val.strip()
+</div><div class="dl del">-
+</div><div class="dl del">-            if transformed != out_val:
+</div><div class="dl del">-                return False
+</div><div class="dl add">+                if in_val.strip() != out_val:
+</div><div class="dl add">+                    return False
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     return True
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">9</span>
+<span class="title"><code>_verify_identity</code></span>
+<span class="meta">dynamic_buffer.py</span>
+<span class="badge good">CC 9→5 (-4)</span>
+<span class="badge">sloc: 20→18</span>
+<span class="badge good">if-statements: 4→3 (-1)</span>
+<span class="badge good">branches: 5→4 (-1)</span>
+<span class="badge good">nesting depth: 4→3 (-1)</span>
+<span class="badge good">comparisons: 5→3 (-2)</span>
+<span class="badge good">statements: 8→7 (-1)</span>
+<span class="badge good">expressions: 24→13 (-11)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>4</td><td>3</td><td class="good">-1</td></tr>
+<tr><td>branches</td><td>5</td><td>4</td><td class="good">-1</td></tr>
+<tr><td>nesting depth</td><td>4</td><td>3</td><td class="good">-1</td></tr>
+<tr><td>comparisons</td><td>5</td><td>3</td><td class="good">-2</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>8</td><td>7</td><td class="good">-1</td></tr>
+<tr><td>expressions</td><td>24</td><td>13</td><td class="good">-11</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -10,11 +10,9 @@</div><div class="dl ctx">         if idx &gt;= len(input_rows):
+</div><div class="dl ctx">             return False
+</div><div class="dl ctx">         in_val = input_rows[idx].get(in_col)
+</div><div class="dl del">-        out_val = output_rows[kept_indices.index(idx) if idx in kept_indices else -1].get(out_col) if kept_indices else None
+</div><div class="dl del">-        if kept_indices and idx in kept_indices:
+</div><div class="dl del">-            out_idx = kept_indices.index(idx)
+</div><div class="dl del">-            if out_idx &lt; len(output_rows):
+</div><div class="dl del">-                out_val = output_rows[out_idx].get(out_col)
+</div><div class="dl del">-                if in_val != out_val:
+</div><div class="dl del">-                    return False
+</div><div class="dl add">+        out_idx = kept_indices.index(idx)
+</div><div class="dl add">+        if out_idx &lt; len(output_rows):
+</div><div class="dl add">+            out_val = output_rows[out_idx].get(out_col)
+</div><div class="dl add">+            if in_val != out_val:
+</div><div class="dl add">+                return False
+</div><div class="dl ctx">     return True
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (39)</h3>
+<details class="card"><summary>
+<span class="sev ">28</span>
+<span class="title"><code>_infer_column_and_stateful_transforms</code></span>
+<span class="meta">dynamic_buffer.py — CC 28, 105 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>20</td></tr>
+<tr><td>branches</td><td>23</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>59</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">28</span>
+<span class="title"><code>_infer_column_and_stateful_transforms</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 28, 105 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>20</td></tr>
+<tr><td>branches</td><td>23</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>28</td></tr>
+<tr><td>expressions</td><td>59</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>_test_combinations</code></span>
+<span class="meta">dynamic_buffer.py — CC 27, 49 sloc, depth 9</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>14</td></tr>
+<tr><td>branches</td><td>20</td></tr>
+<tr><td>nesting depth</td><td>9</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>23</td></tr>
+<tr><td>expressions</td><td>75</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">27</span>
+<span class="title"><code>_test_combinations</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 27, 49 sloc, depth 9</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>14</td></tr>
+<tr><td>branches</td><td>20</td></tr>
+<tr><td>nesting depth</td><td>9</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>23</td></tr>
+<tr><td>expressions</td><td>75</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">25</span>
+<span class="title"><code>_infer_state_machine_transform</code></span>
+<span class="meta">dynamic_buffer.py — CC 25, 64 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>13</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>25</td></tr>
+<tr><td>expressions</td><td>68</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">25</span>
+<span class="title"><code>_infer_state_machine_transform</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 25, 64 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>13</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>11</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>25</td></tr>
+<tr><td>expressions</td><td>68</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">23</span>
+<span class="title"><code>_verify_string_op</code></span>
+<span class="meta">dynamic_buffer_gen/dynamic_buffer.py — CC 23, 39 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>14</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>16</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>18</td></tr>
+<tr><td>expressions</td><td>60</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>_format_value_for_code</code></span>
+<span class="meta">dynamic_buffer.py — CC 22, 46 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>18</td></tr>
+<tr><td>branches</td><td>18</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>8</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>24</td></tr>
+<tr><td>expressions</td><td>37</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>_generate_python_row_transform</code></span>
+<span class="meta">dynamic_buffer.py — CC 22, 43 sloc, depth 2</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>15</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>2</td></tr>
+<tr><td>comparisons</td><td>15</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>6</td></tr>
+<tr><td>expressions</td><td>122</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">22</span>
+<span class="title"><code>_infer_prefix_transform</code></span>
+<span class="meta">dynamic_buffer.py — CC 22, 64 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>12</td></tr>
+<tr><td>branches</td><td>17</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>9</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>25</td></tr>
+<tr><td>expressions</td><td>60</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">dynamic_buffer.py</div>
+<div class="diff"><div class="dl hunk">@@ -851,13 +851,11 @@</div><div class="dl ctx">         if idx &gt;= len(input_rows):
+</div><div class="dl ctx">             return False
+</div><div class="dl ctx">         in_val = input_rows[idx].get(in_col)
+</div><div class="dl del">-        out_val = output_rows[kept_indices.index(idx) if idx in kept_indices else -1].get(out_col) if kept_indices else None
+</div><div class="dl del">-        if kept_indices and idx in kept_indices:
+</div><div class="dl del">-            out_idx = kept_indices.index(idx)
+</div><div class="dl del">-            if out_idx &lt; len(output_rows):
+</div><div class="dl del">-                out_val = output_rows[out_idx].get(out_col)
+</div><div class="dl del">-                if in_val != out_val:
+</div><div class="dl del">-                    return False
+</div><div class="dl add">+        out_idx = kept_indices.index(idx)
+</div><div class="dl add">+        if out_idx &lt; len(output_rows):
+</div><div class="dl add">+            out_val = output_rows[out_idx].get(out_col)
+</div><div class="dl add">+            if in_val != out_val:
+</div><div class="dl add">+                return False
+</div><div class="dl ctx">     return True
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl hunk">@@ -966,37 +964,20 @@</div><div class="dl ctx">             in_val = input_rows[idx].get(in_col)
+</div><div class="dl ctx">             out_val = output_rows[kept_indices.index(idx)].get(out_col)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-            if not isinstance(in_val, str) or not isinstance(out_val, str):
+</div><div class="dl del">-                return False
+</div><div class="dl del">-
+</div><div class="dl del">-            if op == &#x27;lower&#x27; and in_val.lower() != out_val:
+</div><div class="dl del">-                return False
+</div><div class="dl del">-            elif op == &#x27;upper&#x27; and in_val.upper() != out_val:
+</div><div class="dl del">-                return False
+</div><div class="dl del">-            elif op == &#x27;trim&#x27; and in_val.strip() != out_val:
+</div><div class="dl del">-                return False
+</div><div class="dl del">-
+</div><div class="dl del">-    # Check all rows match the transformation
+</div><div class="dl del">-    for idx in kept_indices:
+</div><div class="dl del">-        if idx &lt; len(input_rows) and idx &lt; len(output_rows):
+</div><div class="dl del">-            in_val = input_rows[idx].get(in_col)
+</div><div class="dl del">-            out_val = output_rows[kept_indices.index(idx)].get(out_col)
+</div><div class="dl del">-
+</div><div class="dl ctx">             if in_val is None and out_val is None:
+</div><div class="dl ctx">                 continue
+</div><div class="dl ctx">             if not isinstance(in_val, str) or not isinstance(out_val, str):
+</div><div class="dl ctx">                 return False
+</div><div class="dl ctx"> 
+</div><div class="dl del">-            transformed = None
+</div><div class="dl ctx">             if op == &#x27;lower&#x27;:
+</div><div class="dl del">-                transformed = in_val.lower()
+</div><div class="dl add">+                if in_val.lower() != out_val:
+</div><div class="dl add">+                    return False
+</div><div class="dl ctx">             elif op == &#x27;upper&#x27;:
+</div><div class="dl del">-                transformed = in_val.upper()
+</div><div class="dl add">+                if in_val.upper() != out_val:
+</div><div class="dl add">+                    return False
+</div><div class="dl ctx">             elif op == &#x27;trim&#x27;:
+</div><div class="dl del">-                transformed = in_val.strip()
+</div><div class="dl del">-
+</div><div class="dl del">-            if transformed != out_val:
+</div><div class="dl del">-                return False
+</div><div class="dl add">+                if in_val.strip() != out_val:
+</div><div class="dl add">+                    return False
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     return True
+</div><div class="dl ctx"> 
+</div></div>
+</div>
+</div></div>
+</div></body></html>

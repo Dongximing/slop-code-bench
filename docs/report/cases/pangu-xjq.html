@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slop Analysis: xjq</title>
+<style>
+:root {
+    --bg:#0d1117; --panel:#161b22; --border:#30363d; --fg:#c9d1d9; --muted:#8b949e;
+    --add-bg:#0f2d1a; --add-fg:#7ee787; --del-bg:#3d1418; --del-fg:#ffa198;
+    --hunk:#1f6feb; --good:#2ea043; --bad:#da3633; --flat:#6e7681;
+}
+* { box-sizing:border-box; }
+body { margin:0; font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--fg); }
+header { padding:20px 24px; border-bottom:1px solid var(--border); background:var(--panel); }
+header h1 { margin:0 0 4px; font-size:20px; }
+header p { margin:0; color:var(--muted); font-size:13px; }
+.container { padding:16px 24px 60px; }
+.overview { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin:16px 0; }
+.stat { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.stat .label { color:var(--muted); font-size:12px; text-transform:uppercase; }
+.stat .value { font-size:24px; font-weight:700; margin-top:4px; }
+.stat .value.good { color:var(--good); }
+.stat .value.bad { color:var(--bad); }
+.stat .value.flat { color:var(--muted); }
+.checkpoint { background:var(--panel); border:1px solid var(--border); border-radius:8px; margin:20px 0; overflow:hidden; }
+.cp-header { padding:14px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.cp-title { font-size:16px; font-weight:700; }
+.badge { font-size:11px; padding:2px 8px; border-radius:10px; background:#21262d; color:var(--fg); border:1px solid var(--border); }
+.badge.good { background:rgba(46,160,67,.18); color:var(--add-fg); border-color:var(--good); }
+.badge.bad { background:rgba(218,54,51,.18); color:var(--del-fg); border-color:var(--bad); }
+.badge.flat { color:var(--muted); }
+.cp-body { padding:16px; }
+.summary { border:1px solid var(--border); border-radius:8px; background:var(--bg); padding:14px 16px; margin-bottom:16px; }
+.summary h3 { margin:0 0 8px; font-size:14px; }
+.sumtbl { width:100%; font-size:12px; border-collapse:collapse; }
+.sumtbl th, .sumtbl td { text-align:left; padding:4px 10px; border-bottom:1px solid var(--border); }
+.sumtbl th { color:var(--muted); font-weight:600; }
+td.good { color:var(--add-fg); }
+td.bad { color:var(--del-fg); }
+td.flat { color:var(--muted); }
+details.card { border:1px solid var(--border); border-radius:8px; margin-bottom:8px; background:var(--bg); overflow:hidden; }
+details.card > summary { cursor:pointer; padding:10px 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; list-style:none; }
+details.card > summary::-webkit-details-marker { display:none; }
+details.card > summary:hover { background:#11161d; }
+.sev { flex:none; min-width:36px; text-align:center; font-weight:700; font-size:14px; color:#fff;
+        background:linear-gradient(135deg,#da3633,#9e1c1c); padding:5px 7px; border-radius:6px; }
+.sev.low { background:linear-gradient(135deg,#bb8009,#7a5300); }
+.sev.ok { background:linear-gradient(135deg,#2ea043,#196c2e); }
+.title code { font-size:13px; color:#79c0ff; }
+.meta { color:var(--muted); font-size:12px; }
+.detail { border-top:1px solid var(--border); padding:12px; }
+.pattbl { width:100%; max-width:500px; font-size:12px; margin:0 0 12px; border-collapse:collapse; }
+.pattbl th, .pattbl td { text-align:left; padding:3px 10px; border-bottom:1px solid var(--border); }
+.pattbl th { color:var(--muted); font-weight:600; }
+.diff { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px;
+         background:#010409; border:1px solid var(--border); border-radius:6px; overflow:auto; max-height:520px; }
+.dl { white-space:pre; padding:0 10px; }
+.dl.add { background:var(--add-bg); color:var(--add-fg); }
+.dl.del { background:var(--del-bg); color:var(--del-fg); }
+.dl.hunk { color:var(--hunk); background:#0d1117; }
+.dl.ctx { color:var(--fg); }
+.no-change { color:var(--muted); font-style:italic; padding:15px; text-align:center; }
+.file-section { margin:12px 0; }
+.file-header { background:#343a40; color:white; padding:6px 12px; font-family:monospace; font-size:12px; border-radius:6px 6px 0 0; }
+</style>
+</head>
+<body>
+<header>
+<h1>Slop Analysis: xjq</h1>
+<p>Function-level AST analysis. <b>before</b> = <code>snapshot/</code> · <b>after</b> = <code>after_skill/snapshot/</code>. Severity = cyclomatic complexity.</p>
+</header>
+<div class="container">
+
+<div class="overview">
+<div class="stat"><div class="label">Checkpoints</div><div class="value">5</div></div>
+<div class="stat"><div class="label">Functions Tracked</div><div class="value">21</div></div>
+<div class="stat"><div class="label">Functions Changed</div><div class="value">4</div></div>
+<div class="stat"><div class="label">Net Test Δ</div><div class="value bad">-7</div></div>
+<div class="stat"><div class="label">Net LOC Δ</div><div class="value good">-56</div></div>
+</div>
+
+<div class="summary"><h3>Pattern impact across all matched functions</h3>
+<table class="sumtbl"><thead><tr><th>pattern</th><th class="good">↓ improved</th><th class="bad">↑ regressed</th><th>unchanged</th><th>net Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td class="good">1</td><td class="bad">0</td><td class="flat">20</td><td class="good">-4</td></tr>
+<tr><td>branches</td><td class="good">2</td><td class="bad">0</td><td class="flat">19</td><td class="good">-9</td></tr>
+<tr><td>nesting depth</td><td class="good">1</td><td class="bad">0</td><td class="flat">20</td><td class="good">-3</td></tr>
+<tr><td>comparisons</td><td class="good">0</td><td class="bad">0</td><td class="flat">21</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td class="good">1</td><td class="bad">0</td><td class="flat">20</td><td class="good">-1</td></tr>
+<tr><td>statements</td><td class="good">1</td><td class="bad">0</td><td class="flat">20</td><td class="good">-8</td></tr>
+<tr><td>expressions</td><td class="good">2</td><td class="bad">0</td><td class="flat">19</td><td class="good">-37</td></tr>
+</tbody></table></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_1 ⚪</span>
+<span class="badge flat">Tests: 23/23 → 23/23 (+0)</span>
+<span class="badge flat">LOC: 81 → 81 (+0)</span>
+<span class="badge flat">Functions: 1 tracked, 0 changed</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (1)</h3>
+<details class="card"><summary>
+<span class="sev low">14</span>
+<span class="title"><code>main</code></span>
+<span class="meta">xjq.py — CC 14, 49 sloc, depth 3</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>6</td></tr>
+<tr><td>branches</td><td>13</td></tr>
+<tr><td>nesting depth</td><td>3</td></tr>
+<tr><td>comparisons</td><td>0</td></tr>
+<tr><td>exception handlers</td><td>8</td></tr>
+<tr><td>statements</td><td>10</td></tr>
+<tr><td>expressions</td><td>79</td></tr>
+</tbody></table>
+</div></details>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_2 🔴</span>
+<span class="badge bad">Tests: 39/51 → 32/51 (-7)</span>
+<span class="badge good">LOC: 227 → 184 (-43)</span>
+<span class="badge flat">Functions: 1 tracked, 1 changed</span>
+<span class="badge good">CC: 46→42 (-4)</span>
+<span class="badge good">Comments: 49→12 (-37)</span>
+<span class="badge good">Lint: 15→14 (-1)</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (1)</h3>
+<details class="card"><summary>
+<span class="sev ">46</span>
+<span class="title"><code>main</code></span>
+<span class="meta">xjq.py</span>
+<span class="badge good">CC 46→36 (-10)</span>
+<span class="badge">sloc: 140→119</span>
+<span class="badge good">if-statements: 21→17 (-4)</span>
+<span class="badge good">branches: 42→34 (-8)</span>
+<span class="badge good">nesting depth: 7→4 (-3)</span>
+<span class="badge good">statements: 36→28 (-8)</span>
+<span class="badge good">expressions: 214→181 (-33)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>21</td><td>17</td><td class="good">-4</td></tr>
+<tr><td>branches</td><td>42</td><td>34</td><td class="good">-8</td></tr>
+<tr><td>nesting depth</td><td>7</td><td>4</td><td class="good">-3</td></tr>
+<tr><td>comparisons</td><td>5</td><td>5</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>13</td><td>13</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>36</td><td>28</td><td class="good">-8</td></tr>
+<tr><td>expressions</td><td>214</td><td>181</td><td class="good">-33</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -32,68 +32,39 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Handle CSS mode
+</div><div class="dl ctx">     if args.css:
+</div><div class="dl del">-        # Check for ::text pseudo-element in the query
+</div><div class="dl ctx">         if &#x27;::text&#x27; in args.query:
+</div><div class="dl del">-            # Handle ::text pseudo-element
+</div><div class="dl del">-            # Validate comma-separated selectors: all must use same ::text mode
+</div><div class="dl ctx">             selectors = [s.strip() for s in args.query.split(&#x27;,&#x27;)]
+</div><div class="dl ctx">             modes = set()
+</div><div class="dl ctx">             for sel in selectors:
+</div><div class="dl ctx">                 if &#x27;::text&#x27; not in sel:
+</div><div class="dl del">-                    # Selector without ::text is invalid in ::text query
+</div><div class="dl ctx">                     print(&quot;Error: invalid CSS selector&quot;, file=sys.stderr)
+</div><div class="dl ctx">                     sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-                # Determine if direct or descendant
+</div><div class="dl del">-                # selector::text (ends with ::text, no space before ::text)
+</div><div class="dl del">-                # selector ::text (has space before ::text)
+</div><div class="dl del">-                # We need to check if there&#x27;s a space immediately before ::text
+</div><div class="dl ctx">                 stripped = sel.strip()
+</div><div class="dl del">-                # Find the position of ::text
+</div><div class="dl ctx">                 text_pos = stripped.rfind(&#x27;::text&#x27;)
+</div><div class="dl ctx">                 if text_pos &lt;= 0:
+</div><div class="dl ctx">                     print(&quot;Error: invalid CSS selector&quot;, file=sys.stderr)
+</div><div class="dl ctx">                     sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-                # Check if there&#x27;s a space immediately before ::text
+</div><div class="dl ctx">                 if stripped[text_pos - 1].isspace():
+</div><div class="dl ctx">                     modes.add(&#x27;descendant&#x27;)
+</div><div class="dl ctx">                 elif stripped.endswith(&#x27;::text&#x27;):
+</div><div class="dl ctx">                     modes.add(&#x27;direct&#x27;)
+</div><div class="dl ctx">                 else:
+</div><div class="dl del">-                    # Has something after ::text, it&#x27;s descendant
+</div><div class="dl ctx">                     modes.add(&#x27;descendant&#x27;)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">             if len(modes) &gt; 1:
+</div><div class="dl del">-                # Mixing direct and descendant modes
+</div><div class="dl ctx">                 print(&quot;Error: invalid CSS selector&quot;, file=sys.stderr)
+</div><div class="dl ctx">                 sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-            # All selectors have the same mode
+</div><div class="dl ctx">             is_descendant = list(modes)[0] == &#x27;descendant&#x27;
+</div><div class="dl ctx"> 
+</div><div class="dl del">-            # Check flags - if query already extracts text, flags are no-op
+</div><div class="dl del">-            # But the spec says &quot;--text&quot; and &quot;--text-all&quot; are no-op modifiers
+</div><div class="dl del">-            # when query already extracts text, so we should respect the query&#x27;s ::text mode
+</div><div class="dl del">-            # unless both flags are present (in which case --text-all wins, but this is a no-op case anyway)
+</div><div class="dl del">-            # Actually, re-reading: &quot;no-op modifiers&quot; means they don&#x27;t change the behavior at all
+</div><div class="dl del">-
+</div><div class="dl del">-            # Execute CSS selectors and extract text
+</div><div class="dl ctx">             output_lines = []
+</div><div class="dl ctx">             for sel in selectors:
+</div><div class="dl del">-                # Extract the base selector by removing ::text
+</div><div class="dl ctx">                 if is_descendant:
+</div><div class="dl del">-                    # For descendant mode, remove whitespace before ::text and ::text itself
+</div><div class="dl del">-                    # Find last occurrence of whitespace before ::text
+</div><div class="dl ctx">                     base_sel = sel[:sel.rfind(&#x27;::text&#x27;)].strip()
+</div><div class="dl ctx">                 else:
+</div><div class="dl del">-                    # For direct mode, just remove ::text from end
+</div><div class="dl del">-                    base_sel = sel[:-5].strip()  # Remove &#x27;::text&#x27;
+</div><div class="dl del">-
+</div><div class="dl del">-                # Extract the base selector by removing ::text
+</div><div class="dl del">-                # sel.rfind(&#x27;::text&#x27;) gives the starting index of ::text
+</div><div class="dl del">-                text_idx = sel.rfind(&#x27;::text&#x27;)
+</div><div class="dl del">-                base_sel = sel[:text_idx].strip()
+</div><div class="dl add">+                    base_sel = sel[:-5].strip()
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">                 try:
+</div><div class="dl ctx">                     css_sel = CSSSelector(base_sel)
+</div><div class="dl hunk">@@ -102,19 +73,7 @@</div><div class="dl ctx">                     print(f&quot;Error: invalid CSS selector {e}&quot;, file=sys.stderr)
+</div><div class="dl ctx">                     sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-                for elem in elements:
+</div><div class="dl del">-                    if is_descendant:
+</div><div class="dl del">-                        # Descendant text extraction - all text nodes, one per line
+</div><div class="dl del">-                        # Collect all text from element and its descendants
+</div><div class="dl del">-                        for text in elem.itertext():
+</div><div class="dl del">-                            stripped = &#x27; &#x27;.join(text.split())
+</div><div class="dl del">-                            if stripped:
+</div><div class="dl del">-                                output_lines.append(stripped)
+</div><div class="dl del">-                    else:
+</div><div class="dl del">-                        # Direct text extraction - only direct text
+</div><div class="dl del">-                        text = elem.text or &#x27;&#x27;
+</div><div class="dl del">-                        stripped = &#x27; &#x27;.join(text.split())
+</div><div class="dl del">-                        output_lines.append(stripped)
+</div><div class="dl add">+                output_lines.extend(extract_text_lines(elements, is_descendant))
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">             # Output results
+</div><div class="dl ctx">             for line in output_lines:
+</div><div class="dl hunk">@@ -142,20 +101,7 @@</div><div class="dl ctx">                 sys.exit(0)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">             if use_text:
+</div><div class="dl del">-                # Extract text using --text or --text-all flags
+</div><div class="dl del">-                output_lines = []
+</div><div class="dl del">-                for elem in elements:
+</div><div class="dl del">-                    if use_descendant:
+</div><div class="dl del">-                        # Descendant text extraction - all text nodes, one per line
+</div><div class="dl del">-                        for text in elem.itertext():
+</div><div class="dl del">-                            stripped = &#x27; &#x27;.join(text.split())
+</div><div class="dl del">-                            if stripped:
+</div><div class="dl del">-                                output_lines.append(stripped)
+</div><div class="dl del">-                    else:
+</div><div class="dl del">-                        # Direct text extraction - only direct text
+</div><div class="dl del">-                        text = elem.text or &#x27;&#x27;
+</div><div class="dl del">-                        stripped = &#x27; &#x27;.join(text.split())
+</div><div class="dl del">-                        output_lines.append(stripped)
+</div><div class="dl add">+                output_lines = extract_text_lines(elements, use_descendant)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">                 for line in output_lines:
+</div><div class="dl ctx">                     print(line)
+</div><div class="dl hunk">@@ -185,24 +131,19 @@</div><div class="dl ctx">     if not results:
+</div><div class="dl ctx">         sys.exit(0)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    # Process results
+</div><div class="dl ctx">     output_lines = []
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     for result in results:
+</div><div class="dl ctx">         if isinstance(result, (str, bytes)):
+</div><div class="dl del">-            # Text or bytes result: strip and collapse whitespace
+</div><div class="dl ctx">             if isinstance(result, bytes):
+</div><div class="dl ctx">                 result = result.decode(&#x27;utf-8&#x27;)
+</div><div class="dl ctx">             text = &#x27; &#x27;.join(result.split())
+</div><div class="dl ctx">             output_lines.append(text)
+</div><div class="dl ctx">         elif isinstance(result, etree._Element):
+</div><div class="dl del">-            # XML node result: pretty-print and output only first node
+</div><div class="dl ctx">             xml_str = etree.tostring(result, pretty_print=True, encoding=&#x27;unicode&#x27;).strip()
+</div><div class="dl ctx">             output_lines.append(xml_str)
+</div><div class="dl del">-            # Only output first XML node
+</div><div class="dl ctx">             break
+</div><div class="dl ctx">         elif hasattr(result, &#x27;__str__&#x27;):
+</div><div class="dl del">-            # Other types (attributes, etc.) - convert to string
+</div><div class="dl ctx">             text = &#x27; &#x27;.join(str(result).split())
+</div><div class="dl ctx">             output_lines.append(text)
+</div><div class="dl ctx"> 
+</div></div>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">xjq.py</div>
+<div class="diff"><div class="dl hunk">@@ -6,6 +6,22 @@</div><div class="dl ctx"> import re
+</div><div class="dl ctx"> from lxml import etree
+</div><div class="dl ctx"> from lxml.cssselect import CSSSelector, SelectorError
+</div><div class="dl add">+
+</div><div class="dl add">+
+</div><div class="dl add">+def extract_text_lines(elements, descendant):
+</div><div class="dl add">+    &quot;&quot;&quot;Extract text from elements, returning list of stripped text lines.&quot;&quot;&quot;
+</div><div class="dl add">+    lines = []
+</div><div class="dl add">+    for elem in elements:
+</div><div class="dl add">+        if descendant:
+</div><div class="dl add">+            for text in elem.itertext():
+</div><div class="dl add">+                stripped = &#x27; &#x27;.join(text.split())
+</div><div class="dl add">+                if stripped:
+</div><div class="dl add">+                    lines.append(stripped)
+</div><div class="dl add">+        else:
+</div><div class="dl add">+            text = elem.text or &#x27;&#x27;
+</div><div class="dl add">+            stripped = &#x27; &#x27;.join(text.split())
+</div><div class="dl add">+            lines.append(stripped)
+</div><div class="dl add">+    return lines
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> 
+</div><div class="dl ctx"> def main():
+</div><div class="dl hunk">@@ -42,68 +58,39 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Handle CSS mode
+</div><div class="dl ctx">     if args.css:
+</div><div class="dl del">-        # Check for ::text pseudo-element in the query
+</div><div class="dl ctx">         if &#x27;::text&#x27; in args.query:
+</div><div class="dl del">-            # Handle ::text pseudo-element
+</div><div class="dl del">-            # Validate comma-separated selectors: all must use same ::text mode
+</div><div class="dl ctx">             selectors = [s.strip() for s in args.query.split(&#x27;,&#x27;)]
+</div><div class="dl ctx">             modes = set()
+</div><div class="dl ctx">             for sel in selectors:
+</div><div class="dl ctx">                 if &#x27;::text&#x27; not in sel:
+</div><div class="dl del">-                    # Selector without ::text is invalid in ::text query
+</div><div class="dl ctx">                     print(&quot;Error: invalid CSS selector&quot;, file=sys.stderr)
+</div><div class="dl ctx">                     sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-                # Determine if direct or descendant
+</div><div class="dl del">-                # selector::text (ends with ::text, no space before ::text)
+</div><div class="dl del">-                # selector ::text (has space before ::text)
+</div><div class="dl del">-                # We need to check if there&#x27;s a space immediately before ::text
+</div><div class="dl ctx">                 stripped = sel.strip()
+</div><div class="dl del">-                # Find the position of ::text
+</div><div class="dl ctx">                 text_pos = stripped.rfind(&#x27;::text&#x27;)
+</div><div class="dl ctx">                 if text_pos &lt;= 0:
+</div><div class="dl ctx">                     print(&quot;Error: invalid CSS selector&quot;, file=sys.stderr)
+</div><div class="dl ctx">                     sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-                # Check if there&#x27;s a space immediately before ::text
+</div><div class="dl ctx">                 if stripped[text_pos - 1].isspace():
+</div><div class="dl ctx">                     modes.add(&#x27;descendant&#x27;)
+</div><div class="dl ctx">                 elif stripped.endswith(&#x27;::text&#x27;):
+</div><div class="dl ctx">                     modes.add(&#x27;direct&#x27;)
+</div><div class="dl ctx">                 else:
+</div><div class="dl del">-                    # Has something after ::text, it&#x27;s descendant
+</div><div class="dl ctx">                     modes.add(&#x27;descendant&#x27;)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">             if len(modes) &gt; 1:
+</div><div class="dl del">-                # Mixing direct and descendant modes
+</div><div class="dl ctx">                 print(&quot;Error: invalid CSS selector&quot;, file=sys.stderr)
+</div><div class="dl ctx">                 sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-            # All selectors have the same mode
+</div><div class="dl ctx">             is_descendant = list(modes)[0] == &#x27;descendant&#x27;
+</div><div class="dl ctx"> 
+</div><div class="dl del">-            # Check flags - if query already extracts text, flags are no-op
+</div><div class="dl del">-            # But the spec says &quot;--text&quot; and &quot;--text-all&quot; are no-op modifiers
+</div><div class="dl del">-            # when query already extracts text, so we should respect the query&#x27;s ::text mode
+</div><div class="dl del">-            # unless both flags are present (in which case --text-all wins, but this is a no-op case anyway)
+</div><div class="dl del">-            # Actually, re-reading: &quot;no-op modifiers&quot; means they don&#x27;t change the behavior at all
+</div><div class="dl del">-
+</div><div class="dl del">-            # Execute CSS selectors and extract text
+</div><div class="dl ctx">             output_lines = []
+</div><div class="dl ctx">             for sel in selectors:
+</div><div class="dl del">-                # Extract the base selector by removing ::text
+</div><div class="dl ctx">                 if is_descendant:
+</div><div class="dl del">-                    # For descendant mode, remove whitespace before ::text and ::text itself
+</div><div class="dl del">-                    # Find last occurrence of whitespace before ::text
+</div><div class="dl ctx">                     base_sel = sel[:sel.rfind(&#x27;::text&#x27;)].strip()
+</div><div class="dl ctx">                 else:
+</div><div class="dl del">-                    # For direct mode, just remove ::text from end
+</div><div class="dl del">-                    base_sel = sel[:-5].strip()  # Remove &#x27;::text&#x27;
+</div><div class="dl del">-
+</div><div class="dl del">-                # Extract the base selector by removing ::text
+</div><div class="dl del">-                # sel.rfind(&#x27;::text&#x27;) gives the starting index of ::text
+</div><div class="dl del">-                text_idx = sel.rfind(&#x27;::text&#x27;)
+</div><div class="dl del">-                base_sel = sel[:text_idx].strip()
+</div><div class="dl add">+                    base_sel = sel[:-5].strip()
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">                 try:
+</div><div class="dl ctx">                     css_sel = CSSSelector(base_sel)
+</div><div class="dl hunk">@@ -112,19 +99,7 @@</div><div class="dl ctx">                     print(f&quot;Error: invalid CSS selector {e}&quot;, file=sys.stderr)
+</div><div class="dl ctx">                     sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-                for elem in elements:
+</div><div class="dl del">-                    if is_descendant:
+</div><div class="dl del">-                        # Descendant text extraction - all text nodes, one per line
+</div><div class="dl del">-                        # Collect all text from element and its descendants
+</div><div class="dl del">-                        for text in elem.itertext():
+</div><div class="dl del">-                            stripped = &#x27; &#x27;.join(text.split())
+</div><div class="dl del">-                            if stripped:
+</div><div class="dl del">-                                output_lines.append(stripped)
+</div><div class="dl del">-                    else:
+</div><div class="dl del">-                        # Direct text extraction - only direct text
+</div><div class="dl del">-                        text = elem.text or &#x27;&#x27;
+</div><div class="dl del">-                        stripped = &#x27; &#x27;.join(text.split())
+</div><div class="dl del">-                        output_lines.append(stripped)
+</div><div class="dl add">+                output_lines.extend(extract_text_lines(elements, is_descendant))
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">             # Output results
+</div><div class="dl ctx">             for line in output_lines:
+</div><div class="dl hunk">@@ -152,20 +127,7 @@</div><div class="dl ctx">                 sys.exit(0)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">             if use_text:
+</div><div class="dl del">-                # Extract text using --text or --text-all flags
+</div><div class="dl del">-                output_lines = []
+</div><div class="dl del">-                for elem in elements:
+</div><div class="dl del">-                    if use_descendant:
+</div><div class="dl del">-                        # Descendant text extraction - all text nodes, one per line
+</div><div class="dl del">-                        for text in elem.itertext():
+</div><div class="dl del">-                            stripped = &#x27; &#x27;.join(text.split())
+</div><div class="dl del">-                            if stripped:
+</div><div class="dl del">-                                output_lines.append(stripped)
+</div><div class="dl del">-                    else:
+</div><div class="dl del">-                        # Direct text extraction - only direct text
+</div><div class="dl del">-                        text = elem.text or &#x27;&#x27;
+</div><div class="dl del">-                        stripped = &#x27; &#x27;.join(text.split())
+</div><div class="dl del">-                        output_lines.append(stripped)
+</div><div class="dl add">+                output_lines = extract_text_lines(elements, use_descendant)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">                 for line in output_lines:
+</div><div class="dl ctx">                     print(line)
+</div><div class="dl hunk">@@ -195,24 +157,19 @@</div><div class="dl ctx">     if not results:
+</div><div class="dl ctx">         sys.exit(0)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-    # Process results
+</div><div class="dl ctx">     output_lines = []
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     for result in results:
+</div><div class="dl ctx">         if isinstance(result, (str, bytes)):
+</div><div class="dl del">-            # Text or bytes result: strip and collapse whitespace
+</div><div class="dl ctx">             if isinstance(result, bytes):
+</div><div class="dl ctx">                 result = result.decode(&#x27;utf-8&#x27;)
+</div><div class="dl ctx">             text = &#x27; &#x27;.join(result.split())
+</div><div class="dl ctx">             output_lines.append(text)
+</div><div class="dl ctx">         elif isinstance(result, etree._Element):
+</div><div class="dl del">-            # XML node result: pretty-print and output only first node
+</div><div class="dl ctx">             xml_str = etree.tostring(result, pretty_print=True, encoding=&#x27;unicode&#x27;).strip()
+</div><div class="dl ctx">             output_lines.append(xml_str)
+</div><div class="dl del">-            # Only output first XML node
+</div><div class="dl ctx">             break
+</div><div class="dl ctx">         elif hasattr(result, &#x27;__str__&#x27;):
+</div><div class="dl del">-            # Other types (attributes, etc.) - convert to string
+</div><div class="dl ctx">             text = &#x27; &#x27;.join(str(result).split())
+</div><div class="dl ctx">             output_lines.append(text)
+</div><div class="dl ctx"> 
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_3 ⚪</span>
+<span class="badge flat">Tests: 64/96 → 64/96 (+0)</span>
+<span class="badge good">LOC: 334 → 330 (-4)</span>
+<span class="badge flat">Functions: 5 tracked, 1 changed</span>
+<span class="badge good">Comments: 38→34 (-4)</span>
+<span class="badge flat">Skill: TodoWrite:1</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (1)</h3>
+<details class="card"><summary>
+<span class="sev ok">7</span>
+<span class="title"><code>is_valid_xml_name</code></span>
+<span class="meta">xjq.py</span>
+<span class="badge flat">CC 7→7 (+0)</span>
+<span class="badge">sloc: 10→10</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>2</td><td>2</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>8</td><td>8</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>11</td><td>11</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -2,10 +2,6 @@</div><div class="dl ctx">     &quot;&quot;&quot;Check if a string is a valid XML element name.&quot;&quot;&quot;
+</div><div class="dl ctx">     if not name:
+</div><div class="dl ctx">         return False
+</div><div class="dl del">-    # XML 1.0 specification for element names
+</div><div class="dl del">-    # NameStartChar should be &#x27;:&#x27; or [A-Z] or &#x27;_&#x27; or [a-z] or &#x27;\u00C0&#x27;-\u00D6&#x27; or &#x27;\u00D8&#x27;-\u00F6&#x27; or &#x27;\u00F8&#x27;-\u02FF&#x27; or &#x27;\u0370&#x27;-\u037D&#x27; or &#x27;\u037F&#x27;-\u1FFF&#x27; or &#x27;\u200C&#x27;-\u200D&#x27; or &#x27;\u2070&#x27;-\u218F&#x27; or &#x27;\u2C00&#x27;-\u2FEF&#x27; or &#x27;\u3001&#x27;-\uD7FF&#x27; or &#x27;\uF900&#x27;-\uFDCF&#x27; or &#x27;\uFDF0&#x27;-\uFFFD&#x27;
+</div><div class="dl del">-    # NameChar can be NameStartChar or &#x27;-&#x27; or &#x27;.&#x27; or &#x27;0&#x27;-&#x27;9&#x27; or &#x27;\u00B7&#x27; or &#x27;\u0300&#x27;-\u036F&#x27; or &#x27;\u203F&#x27;-\u2040&#x27;
+</div><div class="dl del">-    # For simplicity, we&#x27;ll use a regex that matches the basic rules
+</div><div class="dl ctx">     # XML element names must start with a letter, underscore, or colon
+</div><div class="dl ctx">     # Subsequent characters can be letters, digits, hyphens, underscores, or periods
+</div><div class="dl ctx">     if not (name[0].isalpha() or name[0] in &#x27;_:&#x27;):
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (2)</h3>
+<details class="card"><summary>
+<span class="sev ">39</span>
+<span class="title"><code>main</code></span>
+<span class="meta">xjq.py — CC 39, 127 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>18</td></tr>
+<tr><td>branches</td><td>37</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>16</td></tr>
+<tr><td>statements</td><td>31</td></tr>
+<tr><td>expressions</td><td>183</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">24</span>
+<span class="title"><code>json_to_xml_element</code></span>
+<span class="meta">xjq.py — CC 24, 69 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>18</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>3</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>11</td></tr>
+<tr><td>expressions</td><td>106</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">xjq.py</div>
+<div class="diff"><div class="dl hunk">@@ -30,10 +30,6 @@</div><div class="dl ctx">     &quot;&quot;&quot;Check if a string is a valid XML element name.&quot;&quot;&quot;
+</div><div class="dl ctx">     if not name:
+</div><div class="dl ctx">         return False
+</div><div class="dl del">-    # XML 1.0 specification for element names
+</div><div class="dl del">-    # NameStartChar should be &#x27;:&#x27; or [A-Z] or &#x27;_&#x27; or [a-z] or &#x27;\u00C0&#x27;-\u00D6&#x27; or &#x27;\u00D8&#x27;-\u00F6&#x27; or &#x27;\u00F8&#x27;-\u02FF&#x27; or &#x27;\u0370&#x27;-\u037D&#x27; or &#x27;\u037F&#x27;-\u1FFF&#x27; or &#x27;\u200C&#x27;-\u200D&#x27; or &#x27;\u2070&#x27;-\u218F&#x27; or &#x27;\u2C00&#x27;-\u2FEF&#x27; or &#x27;\u3001&#x27;-\uD7FF&#x27; or &#x27;\uF900&#x27;-\uFDCF&#x27; or &#x27;\uFDF0&#x27;-\uFFFD&#x27;
+</div><div class="dl del">-    # NameChar can be NameStartChar or &#x27;-&#x27; or &#x27;.&#x27; or &#x27;0&#x27;-&#x27;9&#x27; or &#x27;\u00B7&#x27; or &#x27;\u0300&#x27;-\u036F&#x27; or &#x27;\u203F&#x27;-\u2040&#x27;
+</div><div class="dl del">-    # For simplicity, we&#x27;ll use a regex that matches the basic rules
+</div><div class="dl ctx">     # XML element names must start with a letter, underscore, or colon
+</div><div class="dl ctx">     # Subsequent characters can be letters, digits, hyphens, underscores, or periods
+</div><div class="dl ctx">     if not (name[0].isalpha() or name[0] in &#x27;_:&#x27;):
+</div></div>
+</div>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_4 ⚪</span>
+<span class="badge flat">Tests: 85/122 → 85/122 (+0)</span>
+<span class="badge flat">LOC: 372 → 372 (+0)</span>
+<span class="badge flat">Functions: 6 tracked, 0 changed</span>
+<span class="badge flat">Skill: TodoWrite:1</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (2)</h3>
+<details class="card"><summary>
+<span class="sev ">50</span>
+<span class="title"><code>main</code></span>
+<span class="meta">xjq.py — CC 50, 156 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>24</td></tr>
+<tr><td>branches</td><td>46</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>6</td></tr>
+<tr><td>exception handlers</td><td>20</td></tr>
+<tr><td>statements</td><td>40</td></tr>
+<tr><td>expressions</td><td>216</td></tr>
+</tbody></table>
+</div></details>
+<details class="card"><summary>
+<span class="sev ">24</span>
+<span class="title"><code>json_to_xml_element</code></span>
+<span class="meta">xjq.py — CC 24, 69 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>18</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>3</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>11</td></tr>
+<tr><td>expressions</td><td>106</td></tr>
+</tbody></table>
+</div></details>
+</div></div>
+<div class="checkpoint">
+<div class="cp-header">
+<span class="cp-title">checkpoint_5 ⚪</span>
+<span class="badge flat">Tests: 132/167 → 132/167 (+0)</span>
+<span class="badge good">LOC: 524 → 515 (-9)</span>
+<span class="badge flat">Functions: 8 tracked, 2 changed</span>
+<span class="badge good">CC: 148→147 (-1)</span>
+<span class="badge good">Comments: 82→76 (-6)</span>
+<span class="badge good">Lint: 48→47 (-1)</span>
+<span class="badge flat">Skill: TodoWrite:2, Edit:1</span>
+</div>
+<div class="cp-body">
+<h3 style="color:var(--add-fg)">✅ Functions addressed by skill (2)</h3>
+<details class="card"><summary>
+<span class="sev ">92</span>
+<span class="title"><code>main</code></span>
+<span class="meta">xjq.py</span>
+<span class="badge good">CC 92→91 (-1)</span>
+<span class="badge">sloc: 236→233</span>
+<span class="badge good">branches: 77→76 (-1)</span>
+<span class="badge good">exception handlers: 20→19 (-1)</span>
+<span class="badge good">expressions: 328→324 (-4)</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>42</td><td>42</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>77</td><td>76</td><td class="good">-1</td></tr>
+<tr><td>nesting depth</td><td>8</td><td>8</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>10</td><td>10</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>20</td><td>19</td><td class="good">-1</td></tr>
+<tr><td>statements</td><td>64</td><td>64</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>328</td><td>324</td><td class="good">-4</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -59,9 +59,6 @@</div><div class="dl ctx">     except etree.XMLSyntaxError as e:
+</div><div class="dl ctx">         print(f&quot;Error: xml/parse {e}&quot;, file=sys.stderr)
+</div><div class="dl ctx">         sys.exit(1)
+</div><div class="dl del">-    except Exception as e:
+</div><div class="dl del">-        print(f&quot;Error: xml/parse {e}&quot;, file=sys.stderr)
+</div><div class="dl del">-        sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Helper to output XML with compact option
+</div><div class="dl ctx">     def output_xml_elem(elem):
+</div><div class="dl hunk">@@ -124,7 +121,6 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx">         else:
+</div><div class="dl ctx">             # Normal CSS mode (no ::text)
+</div><div class="dl del">-            # Determine if we should extract text based on flags
+</div><div class="dl ctx">             use_text = args.text or args.text_all
+</div><div class="dl ctx">             if use_text:
+</div><div class="dl ctx">                 use_descendant = args.text_all  # --text-all wins if both
+</div><div class="dl hunk">@@ -142,12 +138,9 @@</div><div class="dl ctx">             if not elements:
+</div><div class="dl ctx">                 sys.exit(0)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-            # Apply --first: only first element
+</div><div class="dl ctx">             if args.first:
+</div><div class="dl ctx">                 elements = [elements[0]]
+</div><div class="dl del">-                # Also limit to one result for text extraction
+</div><div class="dl ctx">                 if use_text:
+</div><div class="dl del">-                    # We&#x27;ll handle this below
+</div><div class="dl ctx">                     pass
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">             if use_text:
+</div></div>
+</div></details>
+<details class="card"><summary>
+<span class="sev ok">8</span>
+<span class="title"><code>elements_to_json_dict</code></span>
+<span class="meta">xjq.py</span>
+<span class="badge flat">CC 8→8 (+0)</span>
+<span class="badge">sloc: 14→14</span>
+</summary>
+<div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>before</th><th>after</th><th>Δ</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>branches</td><td>4</td><td>4</td><td class="flat">+0</td></tr>
+<tr><td>nesting depth</td><td>3</td><td>3</td><td class="flat">+0</td></tr>
+<tr><td>comparisons</td><td>1</td><td>1</td><td class="flat">+0</td></tr>
+<tr><td>exception handlers</td><td>0</td><td>0</td><td class="flat">+0</td></tr>
+<tr><td>statements</td><td>5</td><td>5</td><td class="flat">+0</td></tr>
+<tr><td>expressions</td><td>18</td><td>18</td><td class="flat">+0</td></tr>
+</tbody></table>
+<div class="diff"><div class="dl hunk">@@ -1,12 +1,10 @@</div><div class="dl ctx"> def elements_to_json_dict(elements, use_first=False):
+</div><div class="dl ctx">     &quot;&quot;&quot;Convert elements to JSON array of objects {tag_name: immediate_text_content}.&quot;&quot;&quot;
+</div><div class="dl ctx">     results = []
+</div><div class="dl del">-    # If --first is set, limit to first element
+</div><div class="dl ctx">     if use_first and elements:
+</div><div class="dl ctx">         elements = [elements[0]]
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     for elem in elements:
+</div><div class="dl del">-        # Only elements that have a tag (skip text nodes, etc.)
+</div><div class="dl ctx">         if hasattr(elem, &#x27;tag&#x27;) and elem.tag is not None:
+</div><div class="dl ctx">             # Get immediate text content only (exclude descendant text)
+</div><div class="dl ctx">             immediate_text = elem.text or &#x27;&#x27;
+</div></div>
+</div></details>
+<h3 style="color:var(--del-fg)">⚠️ High-complexity functions NOT addressed (1)</h3>
+<details class="card"><summary>
+<span class="sev ">24</span>
+<span class="title"><code>json_to_xml_element</code></span>
+<span class="meta">xjq.py — CC 24, 69 sloc, depth 4</span>
+<span class="badge flat">unchanged</span>
+</summary><div class="detail">
+<table class="pattbl"><thead><tr><th>pattern</th><th>value</th></tr></thead><tbody>
+<tr><td>if-statements</td><td>18</td></tr>
+<tr><td>branches</td><td>21</td></tr>
+<tr><td>nesting depth</td><td>4</td></tr>
+<tr><td>comparisons</td><td>3</td></tr>
+<tr><td>exception handlers</td><td>0</td></tr>
+<tr><td>statements</td><td>11</td></tr>
+<tr><td>expressions</td><td>106</td></tr>
+</tbody></table>
+</div></details>
+<h3>File-level diffs</h3>
+<div class="file-section">
+<div class="file-header">xjq.py</div>
+<div class="diff"><div class="dl hunk">@@ -29,12 +29,10 @@</div><div class="dl ctx"> def elements_to_json_dict(elements, use_first=False):
+</div><div class="dl ctx">     &quot;&quot;&quot;Convert elements to JSON array of objects {tag_name: immediate_text_content}.&quot;&quot;&quot;
+</div><div class="dl ctx">     results = []
+</div><div class="dl del">-    # If --first is set, limit to first element
+</div><div class="dl ctx">     if use_first and elements:
+</div><div class="dl ctx">         elements = [elements[0]]
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     for elem in elements:
+</div><div class="dl del">-        # Only elements that have a tag (skip text nodes, etc.)
+</div><div class="dl ctx">         if hasattr(elem, &#x27;tag&#x27;) and elem.tag is not None:
+</div><div class="dl ctx">             # Get immediate text content only (exclude descendant text)
+</div><div class="dl ctx">             immediate_text = elem.text or &#x27;&#x27;
+</div><div class="dl hunk">@@ -248,9 +246,6 @@</div><div class="dl ctx">     except etree.XMLSyntaxError as e:
+</div><div class="dl ctx">         print(f&quot;Error: xml/parse {e}&quot;, file=sys.stderr)
+</div><div class="dl ctx">         sys.exit(1)
+</div><div class="dl del">-    except Exception as e:
+</div><div class="dl del">-        print(f&quot;Error: xml/parse {e}&quot;, file=sys.stderr)
+</div><div class="dl del">-        sys.exit(1)
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">     # Helper to output XML with compact option
+</div><div class="dl ctx">     def output_xml_elem(elem):
+</div><div class="dl hunk">@@ -313,7 +308,6 @@</div><div class="dl ctx"> 
+</div><div class="dl ctx">         else:
+</div><div class="dl ctx">             # Normal CSS mode (no ::text)
+</div><div class="dl del">-            # Determine if we should extract text based on flags
+</div><div class="dl ctx">             use_text = args.text or args.text_all
+</div><div class="dl ctx">             if use_text:
+</div><div class="dl ctx">                 use_descendant = args.text_all  # --text-all wins if both
+</div><div class="dl hunk">@@ -331,12 +325,9 @@</div><div class="dl ctx">             if not elements:
+</div><div class="dl ctx">                 sys.exit(0)
+</div><div class="dl ctx"> 
+</div><div class="dl del">-            # Apply --first: only first element
+</div><div class="dl ctx">             if args.first:
+</div><div class="dl ctx">                 elements = [elements[0]]
+</div><div class="dl del">-                # Also limit to one result for text extraction
+</div><div class="dl ctx">                 if use_text:
+</div><div class="dl del">-                    # We&#x27;ll handle this below
+</div><div class="dl ctx">                     pass
+</div><div class="dl ctx"> 
+</div><div class="dl ctx">             if use_text:
+</div></div>
+</div>
+</div></div>
+</div></body></html>
